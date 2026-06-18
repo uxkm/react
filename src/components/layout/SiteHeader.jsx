@@ -10,11 +10,13 @@ import useSitemapDepth3Masonry from '../../hooks/useSitemapDepth3Masonry.js'
 import { registerHeaderLayerCloseHandler } from '../../utils/headerLayerController.js'
 import { lockHeaderLayerDom, unlockHeaderLayerDom } from '../../utils/headerLayerDom.js'
 import {
+  bindGoogleCseAutocompletePosition,
   bindGoogleCseClearHandler,
   bindGoogleCseSearchHandlers,
   clearGoogleCseSearchResults,
   ensureGoogleCseSearch,
   GCSE_CONTAINER_ID,
+  hideGoogleCseAutocomplete,
   renderGoogleCseSearch,
   runGoogleCseSearch,
   scrollSearchLayerToResults,
@@ -51,6 +53,7 @@ function SiteHeader({ isMainPage, topMenus }) {
     if (prev === 'search') {
       setSearchAfter(true)
       clearGoogleCseSearchResults()
+      hideGoogleCseAutocomplete()
       searchAreaRef.current?.removeAttribute('data-search-handlers-bound')
       searchAreaRef.current?.removeAttribute('data-clear-handlers-bound')
       searchAreaRef.current?.removeAttribute('data-user-search-pending')
@@ -191,6 +194,27 @@ function SiteHeader({ isMainPage, topMenus }) {
     })
 
     return () => observer.disconnect()
+  }, [searchOpen])
+
+  useEffect(() => {
+    if (!searchOpen) return undefined
+
+    const ac = new AbortController()
+    let n = 0
+    const pollId = window.setInterval(() => {
+      n += 1
+      const root = searchAreaRef.current
+      if (root && bindGoogleCseAutocompletePosition(root, { signal: ac.signal })) {
+        window.clearInterval(pollId)
+      }
+      if (n > 150) window.clearInterval(pollId)
+    }, 120)
+
+    return () => {
+      ac.abort()
+      window.clearInterval(pollId)
+      hideGoogleCseAutocomplete()
+    }
   }, [searchOpen])
 
   const toggleSearch = () => {

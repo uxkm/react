@@ -180,3 +180,90 @@ export function scrollSearchLayerToResults(searchRoot) {
     behavior: 'smooth',
   })
 }
+
+const AUTOCOMPLETE_LAYER_SELECTOR = 'table.gssb_c, .gssb_c'
+
+function getGoogleCseAutocompleteLayers() {
+  if (typeof document === 'undefined') return []
+  return document.querySelectorAll(AUTOCOMPLETE_LAYER_SELECTOR)
+}
+
+/** Google CSE 자동완성 레이어 숨김 (검색 레이어 닫을 때) */
+export function hideGoogleCseAutocomplete() {
+  for (const layer of getGoogleCseAutocompleteLayers()) {
+    layer.style.setProperty('display', 'none', 'important')
+  }
+}
+
+/**
+ * Google CSE 자동완성(.gssb_c)은 body에 붙으며 offset 계산이
+ * fixed/transform 검색 레이어 안의 입력과 어긋날 수 있어 viewport 기준으로 재배치한다.
+ */
+export function repositionGoogleCseAutocomplete(searchRoot) {
+  const input = searchRoot?.querySelector('input.gsc-input')
+  if (!input) return
+
+  const rect = input.getBoundingClientRect()
+  if (rect.width <= 0 && rect.height <= 0) return
+
+  const top = Math.round(rect.bottom)
+  const left = Math.round(rect.left)
+  const width = Math.round(rect.width)
+
+  for (const layer of getGoogleCseAutocompleteLayers()) {
+    const computed = window.getComputedStyle(layer)
+    if (computed.display === 'none' || computed.visibility === 'hidden') continue
+
+    layer.style.setProperty('position', 'fixed', 'important')
+    layer.style.setProperty('top', `${top}px`, 'important')
+    layer.style.setProperty('left', `${left}px`, 'important')
+    layer.style.setProperty('width', `${width}px`, 'important')
+  }
+}
+
+export function bindGoogleCseAutocompletePosition(searchRoot, { signal } = {}) {
+  if (!searchRoot) return false
+
+  const input = searchRoot.querySelector('input.gsc-input')
+  if (!input) return false
+
+  const scheduleReposition = () => {
+    window.requestAnimationFrame(() => repositionGoogleCseAutocomplete(searchRoot))
+  }
+
+  const on = (target, type, handler, options) => {
+    target.addEventListener(type, handler, options)
+    signal?.addEventListener('abort', () => target.removeEventListener(type, handler, options))
+  }
+
+  on(input, 'focus', scheduleReposition)
+  on(input, 'input', scheduleReposition)
+  on(input, 'keydown', scheduleReposition)
+  on(searchRoot, 'scroll', scheduleReposition, { passive: true })
+  on(window, 'resize', scheduleReposition)
+
+  const inner = searchRoot.querySelector('.inner')
+  if (inner) {
+    on(inner, 'transitionend', scheduleReposition)
+  }
+
+  const bodyObserver = new MutationObserver((mutations) => {
+    const autocompleteAdded = mutations.some((mutation) =>
+      [...mutation.addedNodes].some(
+        (node) =>
+          node.nodeType === 1 &&
+          (node.matches?.(AUTOCOMPLETE_LAYER_SELECTOR) ||
+            node.querySelector?.(AUTOCOMPLETE_LAYER_SELECTOR)),
+      ),
+    )
+    if (autocompleteAdded) scheduleReposition()
+  })
+  bodyObserver.observe(document.body, { childList: true })
+  signal?.addEventListener('abort', () => bodyObserver.disconnect())
+
+  const openTimer = window.setTimeout(scheduleReposition, 450)
+  signal?.addEventListener('abort', () => window.clearTimeout(openTimer))
+
+  scheduleReposition()
+  return true
+}
