@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<title>[img] 반응형 이미지 (srcset 활용)</title>
+		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+		<style>
+			*, html, body {
+				margin:0; padding:0;
+			}
+			img {
+        height: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<p>
+			브라우저 크기를 조정하고 새로고침 하세요.
+		</p>
+		<img src="default.jpg"
+				 srcset="/_assets/images/dog-small.jpg 480w,
+				  			 /_assets/images/dog-medium.jpg 1024w,
+				  			 /_assets/images/dog-large.jpg 1920w"
+				 sizes="(max-width: 600px) 480px,
+				 				(max-width: 1200px) 1024px,
+				 				1920px"
+				 loading="lazy"
+				 alt="디바이스에 따라 다른 이미지 로드">
+	</body>
+</html>

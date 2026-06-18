@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>aria-grabbed 상태 올바른 예시 | 드래그 앤 드롭 속성 (WAI-ARIA)</title>
+		<style>
+			* {box-sizing:border-box;}
+      html {
+        background-color: #f0f0f0;
+      }
+      #draggable-item {
+        width: 200px;
+				margin: 15px auto 0;
+        padding: 15px;
+        background-color: #4a90e2;
+        color: white;
+        border-radius: 8px;
+        text-align: center;
+        cursor: grab;
+        transition: background-color 0.3s ease;
+      }
+      #draggable-item:active {
+        cursor: grabbing;
+        background-color: #357ab7;
+      }
+      #dropzone {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 220px;
+        height: 120px;
+        margin: 20px auto 0;
+				padding: 0 15px;
+        background-color: #e1e1e1;
+        border: 2px dashed #ccc;
+        border-radius: 8px;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+      }
+      #dropzone.drag-over {
+				background-color: #d1f7c4;
+        border-color: #8bd179;
+      }
+      #dropzone p {
+        font-size: 16px;
+        color: #333;
+      }
+		</style>
+	</head>
+	<body>
+		<div id="draggable-item" draggable="true" aria-label="드래그 가능한 항목">
+			이 항목을 드래그하세요.
+		</div>
+
+		<div id="dropzone" aria-label="드롭 가능한 영역" ondragover="event.preventDefault()">
+			<p>여기에 드롭하세요.</p>
+		</div>
+
+		<script>
+			const draggableItem = document.getElementById('draggable-item');
+			const dropzone = document.getElementById('dropzone');
+
+			draggableItem.addEventListener('dragstart', () => {
+				draggableItem.setAttribute('aria-grabbed', 'true');
+				draggableItem.style.opacity = '0.5'; // 드래그 중 아이템 반투명
+			});
+
+			draggableItem.addEventListener('dragend', () => {
+				draggableItem.setAttribute('aria-grabbed', 'false');
+				draggableItem.style.opacity = '1'; // 드래그 끝난 후 다시 불투명
+			});
+
+			dropzone.addEventListener('dragover', (event) => {
+				event.preventDefault();
+				dropzone.classList.add('drag-over'); // 드래그 중일 때 시각적 피드백
+			});
+
+			dropzone.addEventListener('dragleave', () => {
+				dropzone.classList.remove('drag-over'); // 드래그가 영역을 벗어날 때
+			});
+
+			dropzone.addEventListener('drop', (event) => {
+				event.preventDefault();
+				dropzone.classList.remove('drag-over');
+				dropzone.innerHTML = '<p>아이템이 성공적으로 드롭되었습니다!</p>';
+				console.log('Item dropped');
+			});
+		</script>
+	</body>
+</html>

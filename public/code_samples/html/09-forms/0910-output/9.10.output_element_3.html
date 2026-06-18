@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[output] number, range 타입과 연계하여 출력</title>
+	</head>
+	<body>
+		<p>
+			<b>number 입력값을 출력</b><br />
+			<span class="info">(input number 타입과 연계)</span>
+		</p>
+		<div class="box numberInput-container">
+			<label for="numberInput">숫자 입력: </label>
+			<input type="number" id="numberInput" value="0" oninput="output2.value = numberInput.value">
+			<output id="output2">0</output>
+		</div>
+		<hr>
+
+		<p>
+			<b>range 입력값을 출력</b><br />
+			<span class="info">(input range 타입과 연계)</span>
+		</p>
+		<div class="box rangeInput-container">
+			<label for="rangeInput">볼륨: </label>
+			<input type="range" id="rangeInput" min="0" max="100" value="50" oninput="output1.value = rangeInput.value">
+			<output id="output1">50</output>
+		</div>
+
+		<style>
+			*, html, body {vertical-align:top;}
+			body {padding-top:5px;}
+			hr {margin:15px 0;}
+			p {margin:0;}
+			.info {font-size:16px; color:#1e73ff;}
+
+			label, input, output {margin-top:8px;}
+			label {
+				display:inline-block;
+				line-height: 26px;
+			}
+			input {
+				width: 150px;
+				height: 26px;
+				margin-right: 2px;
+				padding: 0 5px;
+				box-sizing: border-box;
+			}
+			output {
+				display: inline-block;
+				min-width: 26px;
+				height: 26px;
+        padding: 0 6px;
+				line-height: 26px;
+				text-align: center;
+				border: 1px solid #1e73ff;
+				box-shadow: 0 0 0 1px inset #1e73ff;
+				border-radius: 3px;
+				box-sizing: border-box;
+			}
+		</style>
+	</body>
+</html>

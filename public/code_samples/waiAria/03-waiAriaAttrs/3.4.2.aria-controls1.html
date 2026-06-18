@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>aria-controls 속성 - 드롭다운 메뉴에서의 사용 예시 | 드래그 앤 드롭 속성 (WAI-ARIA)</title>
+		<style>
+      #menu-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      #menu-button:hover {
+        background-color: #45a049;
+      }
+      #dropdown-menu {
+        position: absolute;
+        margin-top: 5px;
+        list-style-type: none;
+        padding: 0;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        width: 180px;
+        z-index: 100;
+      }
+      #dropdown-menu li {
+        margin: 0;
+      }
+      #dropdown-menu a {
+        display: block;
+        padding: 10px 15px;
+        color: #333;
+        text-decoration: none;
+        font-size: 16px;
+        transition: background-color 0.2s;
+      }
+      #dropdown-menu a:hover {
+        background-color: #f1f1f1;
+        color: #000;
+      }
+      #dropdown-menu[hidden] {
+        display: none;
+      }
+		</style>
+	</head>
+	<body>
+		<button aria-controls="dropdown-menu" aria-expanded="false" id="menu-button">
+			메뉴 열기
+		</button>
+		<ul id="dropdown-menu" hidden>
+			<li><a href="#" tabindex="0">항목 1</a></li>
+			<li><a href="#" tabindex="0">항목 2</a></li>
+			<li><a href="#" tabindex="0">항목 3</a></li>
+		</ul>
+
+		<script>
+			const button = document.getElementById('menu-button');
+			const menu = document.getElementById('dropdown-menu');
+			const menuItems = menu.querySelectorAll('a');
+
+			button.addEventListener('click', () => {
+				const expanded = button.getAttribute('aria-expanded') === 'true';
+				button.setAttribute('aria-expanded', !expanded);
+				menu.hidden = expanded;
+
+				if (!expanded) {
+					menuItems[0].focus(); // 첫 번째 항목에 포커스 설정
+				} else {
+					button.focus(); // 버튼으로 포커스 반환
+				}
+			});
+
+			// ESC 키로 메뉴 닫기
+			menu.addEventListener('keydown', (event) => {
+				if (event.key === 'Escape') {
+					menu.hidden = true;
+					button.setAttribute('aria-expanded', 'false');
+					button.focus();
+				}
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>하이브리드 방식의 예시 : 깜박거림의 사용 제한</title>
+		<style>
+      .fading {
+        animation: fadeInOut 3s infinite;
+      }
+      .blinking {
+        animation: blink 0.5s infinite; /* 초당 2회 깜박임 */
+      }
+      @keyframes fadeInOut {
+        0%, 100% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+      @keyframes blink {
+        0%, 100% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+		</style>
+	</head>
+	<body>
+		<div class="blinking">[잘못된 예시] 깜박임 빈도가 높아 사용자가 불편을 느낄 수 있습니다.</div>
+		<hr>
+		<div class="fading">[올바른 예시] 이 텍스트는 깜박이지 않고 천천히 사라집니다.</div>
+	</body>
+</html>

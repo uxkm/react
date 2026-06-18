@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>스타일링 및 따옴표 변경</title>
+		<style>
+      q {
+        font-style: italic;
+				font-weight: bold;
+        color: #ff5a77;
+        quotes: "‘" "’";
+      }
+      q::before {
+        content: open-quote;
+      }
+      q::after {
+        content: close-quote;
+      }
+		</style>
+	</head>
+	<body>
+		<p>
+			그녀는 <q>단순함이 최고의 정교함이다</q>라고 말했다.
+		</p>
+	</body>
+</html>

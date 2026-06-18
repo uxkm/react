@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>상태가 있는 아코디언 버튼 예시 | 독립형 위젯 역할(WAI-ARIA)</title>
+	</head>
+	<body>
+		<button type="button" aria-expanded="false" aria-controls="accordion1" onclick="toggleAccordion(this)">
+			Section 1
+		</button>
+		<div id="accordion1" style="display: none;">
+			<p>...Section 1 content...</p>
+		</div>
+
+		<script>
+			function toggleAccordion(button) {
+				var expanded = button.getAttribute('aria-expanded') === 'true';
+				button.setAttribute('aria-expanded', !expanded);
+				document.getElementById(button.getAttribute('aria-controls')).style.display = expanded ? 'none' : 'block';
+			}
+		</script>
+	</body>
+</html>

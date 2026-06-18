@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+		<meta name="format-detection" content="telephone=no, address=no, email=no, date=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>UXKM CSS :has() Pseudo-class - 이미지가 있는 카드</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				padding: 0 20px;
+				line-height: 1.6;
+			}
+			h2 {
+				color: #333;
+				margin-bottom: 15px;
+			}
+
+			/* 예시 1: 이미지가 있는 카드에만 스타일 적용 */
+			.card:has(img) {
+				border: 2px solid blue;
+				padding: 20px;
+				background-color: #f0f8ff;
+			}
+
+			.card {
+				margin: 10px 0;
+				padding: 15px;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+			}
+
+			.card img {
+				max-width: 100%;
+				height: auto;
+				border-radius: 4px;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>:has() 선택자 - 이미지가 있는 카드에만 스타일 적용</h2>
+		<p>이미지가 있는 카드만 파란 테두리와 배경색이 적용됩니다.</p>
+
+		<div class="card">
+			<h3>카드 제목 1</h3>
+			<p>이 카드는 이미지가 없어서 기본 스타일입니다.</p>
+		</div>
+		<div class="card">
+			<h3>카드 제목 2</h3>
+			<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='100'%3E%3Crect fill='%230066cc' width='200' height='100'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white'%3E이미지%3C/text%3E%3C/svg%3E" alt="예제 이미지">
+			<p>이 카드는 이미지가 있어서 파란 테두리와 배경색이 적용됩니다.</p>
+		</div>
+		<div class="card">
+			<h3>카드 제목 3</h3>
+			<p>이 카드도 이미지가 없어서 기본 스타일입니다.</p>
+		</div>
+	</body>
+</html>

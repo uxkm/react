@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[input] disabled 속성</title>
+	</head>
+	<body>
+		<b>type="text"</b><br />
+		<input type="text" value="홍길동" disabled>
+		<hr>
+
+		<b>type="radio"</b><br />
+		<label><input type="radio" name="gender" value="male" disabled> 남성</label>
+		<label><input type="radio" name="gender" value="female" disabled> 여성</label>
+		<hr>
+
+		<b>type="range"</b><br />
+		<input type="range" value="50" min="0" max="100" disabled>
+		<hr>
+
+		<b>type="datetime-local"</b><br />
+		<input type="datetime-local" value="2025-03-13T10:30" disabled>
+
+		<style>
+			hr {margin:15px 0;}
+			input {margin:10px 0 0;}
+		</style>
+	</body>
+</html>

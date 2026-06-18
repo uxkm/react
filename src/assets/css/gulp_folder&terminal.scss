@@ -1,0 +1,27 @@
+@charset "utf-8";
+@use "_font";
+@use "_variable";
+@use "_mixin";
+@use "_color";
+
+.gulp_window_cmd_key {
+	padding:0 2px;
+	color:color.$blue;
+	&:before {
+		$icon_size: 14px;
+		display:inline-block; vertical-align:top;
+		width:$icon_size; height:$icon_size; margin:7px 0 0 0;
+		@include mixin.icon_window($size: $icon_size, $color: '1e73ff');
+		content:"";
+	}
+}
+@media(max-width:variable.$screen-sm-max) {
+	.gulp_window_cmd_key {
+		color:color.$blue;
+		&:before {
+			$icon_size: 13px;
+			width:$icon_size; height:$icon_size; margin:5px 0 0 0;
+			@include mixin.icon_window($size: $icon_size, $color: '1e73ff');
+		}
+	}
+}

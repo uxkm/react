@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[색에 무관한 콘텐츠 인식] 미준수 사례</title>
+		<style>
+			.required {
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<p>
+			필수 항목은 <span class="required">빨간색</span>으로 표시됩니다.
+		</p>
+		<form>
+			<label for="name" class="required">이름</label>
+			<input type="text" id="name" name="name" required><br />
+
+			<label for="email" class="required">이메일</label>
+			<input type="email" id="email" name="email" required><br />
+
+			<label for="tel">전화번호</label>
+			<input type="tel" id="tel" name="phone">
+		</form>
+	</body>
+</html>

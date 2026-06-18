@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+		<title>[textarea] 실시간 상담 채팅</title>
+		<style>
+			body {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+				margin: 0;
+				background-color: #eee;
+			}
+      body, textarea {
+        font-family: Arial, sans-serif;
+			}
+
+			/* chat-container */
+			.chat-container {
+				overflow: hidden;
+				display: flex;
+				flex-direction: column;
+				width: calc(100% - 30px);
+				max-width: 350px;
+				height: calc(100% - 40px);
+				background-color: white;
+				border-radius: 15px;
+				outline: 2px solid rgba(0, 33, 86, .5);
+			}
+
+			/* chat-header */
+			.chat-container .chat-header {
+				padding: 15px;
+				font-weight: bold;
+				text-align: center;
+				background-color: #c3daff;
+			}
+
+			/* chat-box */
+			.chat-container .chat-box {
+				overflow-y: auto;
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				padding: 15px;
+			}
+			.chat-container .message {
+				position: relative;
+				max-width: 70%;
+				margin-bottom: 8px;
+				padding: 11px;
+				border-radius: 5px;
+				word-wrap: break-word;
+        white-space: pre-line;
+			}
+
+			/* received */
+			.chat-container .received-box {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				position: relative;
+				padding-left: 47px;
+				text-align: left;
+			}
+			.chat-container .received-box:before {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 36px;
+				height: 36px;
+				background-image: url('/_assets/images/received_thumb.png');
+				background-repeat: no-repeat;
+				background-size: 100% auto;
+				background-position: center bottom;
+				border-radius: 10px;
+				content: "";
+			}
+			.chat-container .received-name {
+				margin: 0 0 8px;
+				line-height: 14px;
+				font-size: 14px;
+				color: #666;
+			}
+			.chat-container .received {
+				background-color: #eee;
+			}
+			.chat-container .received-name + .received:after {
+				position: absolute;
+				left: -8px;
+				top: 5px;
+				border-top: 8px solid #eee;
+				border-left: 8px solid transparent;
+				content: "";
+			}
+
+			/* sent */
+			.chat-container .sent {
+				align-self: flex-end;
+				text-align: right;
+				background-color: #dcf8c6;
+			}
+			.chat-container .sent:after {
+				position: absolute;
+				right: -8px;
+				top: 5px;
+				border-top: 8px solid #dcf8c6;
+				border-right: 8px solid transparent;
+				content: "";
+			}
+
+			/* chat-input */
+			.chat-container .chat-input {
+				display: flex;
+				padding: 10px;
+				background: #fff;
+				border-top: 1px solid #ddd;
+			}
+			.chat-container textarea {
+				flex: 1;
+				overflow-y: auto;
+				height: 40px;
+				max-height: 130px;
+				padding: 8px 10px;
+				line-height: 22px;
+				font-size: 14px;
+				border: 1px solid #ccc;
+				border-radius: 8px;
+				box-sizing: border-box;
+				resize: none;
+			}
+			.chat-container .send-btn {
+				width: 40px;
+				height: 40px;
+				margin-left: 10px;
+				background-color: #ccc;
+				font-size: 16px;
+				font-weight: bold;
+				color: #fff;
+				border: none;
+				border-radius: 50%;
+				cursor: pointer;
+				transition: background-color .15s;
+			}
+			.chat-container .send-btn.active {
+				background-color: #1e73ff;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="chat-container">
+			<div class="chat-header"><i class="fa-solid fa-comment-dots"></i> 실시간 상담</div>
+			<div class="chat-box" id="chat-box">
+				<div class="received-box">
+					<p class="received-name">상담원</p>
+					<div class="message received">안녕하세요!</div>
+					<div class="message received">무엇을 도와드릴까요?</div>
+				</div>
+			</div>
+			<div class="chat-input">
+				<textarea id="chat-input" rows="1" placeholder="메시지를 입력하세요..."></textarea>
+				<button class="send-btn" id="send-btn"><i class="fa-solid fa-arrow-up"></i></button>
+			</div>
+		</div>
+
+		<script>
+			const chatBox = document.getElementById("chat-box");
+			const chatInput = document.getElementById("chat-input");
+			const sendBtn = document.getElementById("send-btn");
+
+			function sendMessage() {
+				const messageText = chatInput.value.trim();
+				if (messageText === "") return;
+
+				const message = document.createElement("div");
+				message.classList.add("message", "sent");
+				message.textContent = messageText;
+				chatBox.appendChild(message);
+
+				chatBox.scrollTop = chatBox.scrollHeight; // 스크롤 자동 이동
+				chatInput.value = "";
+				chatInput.style.height = "auto"; // 높이 초기화
+
+				sendBtn.classList.remove("active"); // 버튼 클릭 후 active 클래스 제거
+			}
+
+			sendBtn.addEventListener("click", (event) => {
+				// 값이 없으면 클릭을 막음
+				if (chatInput.value.trim() === "") {
+					event.preventDefault();
+				} else {
+					sendMessage();
+				}
+			});
+
+			chatInput.addEventListener("keypress", (event) => {
+				if (event.key === "Enter" && !event.shiftKey) {
+					event.preventDefault();
+					sendMessage();
+				}
+			});
+
+			chatInput.addEventListener("input", () => {
+				const lineHeight = parseInt(getComputedStyle(chatInput).lineHeight, 10);
+				const padding = parseInt(getComputedStyle(chatInput).padding, 10) * 2;
+				const borderWidth = parseInt(getComputedStyle(chatInput).borderWidth, 10) * 2;
+
+				chatInput.style.height = "auto"; // 초기화
+				const lines = Math.floor(chatInput.scrollHeight / lineHeight); // 실제 표시되는 줄 수 계산
+				chatInput.style.height = Math.min(lines * lineHeight, 80) + padding + borderWidth + "px"; // 최대 높이 제한 (80px)
+
+				// 값이 있을 때만 sendBtn에 active 클래스 추가, 값이 없으면 제거
+				if (chatInput.value.trim() !== "") {
+					sendBtn.classList.add("active");
+				} else {
+					sendBtn.classList.remove("active");
+				}
+			});
+		</script>
+	</body>
+</html>

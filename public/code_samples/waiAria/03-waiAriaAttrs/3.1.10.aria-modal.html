@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>기본 모달 대화 상자 예시 | 라이브 영역 역할 (WAI-ARIA)</title>
+		<style>
+
+		</style>
+	</head>
+	<body>
+		<button id="openModal">Open Modal</button>
+
+		<div id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" style="display:none;">
+			<h2 id="modalTitle">Modal Title</h2>
+			<p>This is a modal dialog.</p>
+			<button id="closeModal">Close</button>
+		</div>
+
+		<script>
+			document.getElementById('openModal').addEventListener('click', function() {
+				var modal = document.getElementById('modal');
+				modal.style.display = 'block';
+				modal.querySelector('button').focus();
+			});
+
+			document.getElementById('closeModal').addEventListener('click', function() {
+				var modal = document.getElementById('modal');
+				modal.style.display = 'none';
+				document.getElementById('openModal').focus();
+			});
+
+			document.addEventListener('keydown', function(event) {
+				var modal = document.getElementById('modal');
+				if (event.key === 'Escape' && modal.style.display === 'block') {
+					modal.style.display = 'none';
+					document.getElementById('openModal').focus();
+				}
+			});
+		</script>
+	</body>
+</html>

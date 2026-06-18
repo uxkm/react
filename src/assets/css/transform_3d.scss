@@ -1,0 +1,45 @@
+@charset "utf-8";
+@use "_font";
+@use "_variable";
+@use "_mixin";
+@use "_color";
+
+// transform - 3D
+.ie_no .css_transform_3d .content_area > header {
+	position:relative;
+	transform-origin:0 50%;
+	transform:perspective(300px) rotateZ(-8deg) rotateY(20deg) skewX(30deg) translate(15px, -20px);
+
+	$shadow_color:#ccc;
+	#content_title {
+		height:34px; line-height:88%;
+		font-size:70px; font-weight:900; letter-spacing:-3px;
+		text-shadow:
+				-1px 1px 0 rgba($shadow_color, 1),
+				-2.5px 2px 0 rgba($shadow_color, 1),
+				-4px 3px 0 rgba($shadow_color, 1),
+				-5.5px 4px 0 rgba($shadow_color, 1),
+				-7px 5px 0 rgba($shadow_color, 1),
+				-8.5px 6px 0 rgba($shadow_color, 1),
+				-10px 7px 0 rgba($shadow_color, 1),
+				-11.5px 8px 0 rgba($shadow_color, 1),
+				-13px 9px 0 rgba($shadow_color, 1);
+
+		&:before {display:block;}
+	}
+	.last_update {
+		transform:translate(250px, 102px) scale(1.7, 1.7);
+		color:#666;
+	}
+	.page_path {opacity:0;}
+}
+@media(max-width:variable.$screen-md-max){
+	.ie_no .css_transform_3d .content_area > header {
+		transform:unset;
+		#content_title {display:none;}
+		.last_update {
+			transform:translate(0, 0) scale(1, 1);
+			color:#888;
+		}
+	}
+}

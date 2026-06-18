@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[input] accesskey 속성</title>
+	</head>
+	<body>
+		<b>type="text"</b><br />
+		<input type="text" accesskey="n" placeholder="단축키 N을 사용하여 포커스를 이동">
+		<hr>
+
+		<b>type="radio"</b><br />
+		<label><input type="radio" name="gender" value="male" accesskey="m"> 남성</label>
+		<label><input type="radio" name="gender" value="female" accesskey="f"> 여성</label>
+		<hr>
+
+		<b>type="file"</b><br />
+		<input type="range" accesskey="r" value="50" min="0" max="100">
+		<hr>
+
+		<b>type="datetime-local"</b><br />
+		<input type="datetime-local" accesskey="d">
+
+		<style>
+			hr {margin:15px 0;}
+			input {margin:10px 0 0;}
+		</style>
+	</body>
+</html>

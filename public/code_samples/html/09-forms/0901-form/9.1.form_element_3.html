@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[form] JavaScript로 유효성 검사</title>
+	</head>
+	<body>
+		<form onsubmit="return validateForm()" autocomplete="off">
+			<input type="text" id="username" name="username" required>
+			<button type="submit">제출</button>
+		</form>
+
+		<script>
+      function validateForm() {
+        const username = document.getElementById('username').value;
+        if (username === '') {
+          alert('이름을 입력하세요!');
+          return false;
+        }
+        return true;
+      }
+		</script>
+	</body>
+</html>

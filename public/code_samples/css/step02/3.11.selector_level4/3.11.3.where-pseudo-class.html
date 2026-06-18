@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+		<meta name="format-detection" content="telephone=no, address=no, email=no, date=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>UXKM CSS :where() Pseudo-class</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				padding: 0 20px;
+				line-height: 1.6;
+			}
+			h1 {
+				color: #333;
+				margin-bottom: 30px;
+			}
+			.example {
+				margin-bottom: 40px;
+				padding: 20px;
+				border: 1px solid #ddd;
+				border-radius: 8px;
+			}
+			.example h2 {
+				margin-top: 0;
+				color: #0066cc;
+			}
+
+			/* 예시 1: 프레임워크 기본 스타일 (우선순위 0) */
+			:where(header, main, footer) p {
+				color: blue;
+				font-size: 14px;
+			}
+
+			/* 나중에 쉽게 덮어쓸 수 있음 */
+			main p {
+				color: red; /* 이 스타일이 적용됨 (우선순위가 더 높음) */
+				font-weight: bold;
+			}
+
+			header {
+				background-color: #f0f0f0;
+				padding: 15px;
+				margin-bottom: 20px;
+			}
+
+			main {
+				background-color: #fff;
+				padding: 15px;
+				margin-bottom: 20px;
+			}
+
+			footer {
+				background-color: #f0f0f0;
+				padding: 15px;
+			}
+
+			/* 예시 2: 리셋 스타일 작성 시 유용 */
+			:where(ul, ol) {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+
+			/* 특정 ul은 나중에 쉽게 재정의 가능 */
+			.nav ul {
+				list-style: disc; /* 이 스타일이 적용됨 */
+				padding-left: 20px;
+			}
+
+			.nav {
+				background-color: #f9f9f9;
+				padding: 15px;
+				margin-top: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>:where() 선택자 예제</h1>
+
+		<div class="example">
+			<h2>예시 1: 프레임워크 기본 스타일과 재정의</h2>
+			<header>
+				<p>헤더의 문단 (파란색 - :where() 스타일 적용)</p>
+			</header>
+			<main>
+				<p>본문의 문단 (빨간색, 굵게 - main p 스타일로 재정의됨)</p>
+			</main>
+			<footer>
+				<p>푸터의 문단 (파란색 - :where() 스타일 적용)</p>
+			</footer>
+			<p>:where()는 우선순위가 0이므로 나중에 작성한 스타일로 쉽게 덮어쓸 수 있습니다.</p>
+		</div>
+
+		<div class="example">
+			<h2>예시 2: 리셋 스타일과 재정의</h2>
+			<ul>
+				<li>일반 ul 리스트 (리스트 스타일 없음)</li>
+				<li>:where()로 리셋된 스타일</li>
+			</ul>
+			<div class="nav">
+				<ul>
+					<li>네비게이션 ul 리스트 (disc 스타일 적용됨)</li>
+					<li>.nav ul로 재정의된 스타일</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>

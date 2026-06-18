@@ -1,0 +1,21 @@
+@charset "utf-8";
+@use "_variable";
+
+.browser_figure {
+	display:flex;
+	justify-content: center;
+
+	figure:first-child {
+		margin-right:15px;
+	}
+}
+@media(max-width:variable.$screen-lg-max){
+	.browser_figure {
+		display:block;
+
+		figure:first-child {
+			margin-right:0;
+			margin-bottom:30px;
+		}
+	}
+}

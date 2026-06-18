@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>인라인 아이콘 사용</title>
+	<script src="https://kit.fontawesome.com/aa9523779e.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<strong>텍스트에 아이콘 사용</strong>
+	<p><span class="fa-solid fa-sun"></span> 맑음</p>
+	<p><span class="fa-solid fa-cloud"></span> 흐림</p>
+	<p><span class="fa-solid fa-umbrella"></span> 비</p>
+	<hr />
+	<strong>아이콘 버튼</strong>
+	<button href="https://example.com">
+		<span class="fa-solid fa-circle-info"></span>
+		<span class="sound-only">도움말</span>
+	</button>
+
+	<style>
+    button {
+			cursor: pointer;
+			font-size: 20px;
+		}
+    .sound-only {
+      position: absolute;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      height: 1px;
+      width: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      border: 0;
+    }
+	</style>
+</body>
+</html>

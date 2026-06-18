@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>다중 선택 가능한 체크박스 메뉴 예시 | 복합형 위젯 역할(WAI-ARIA)</title>
+		<style>
+			[role="menu"] {
+				background-color: #f9f9f9;
+				border: 1px solid #ddd;
+				padding: 10px;
+				width: 200px;
+				border-radius: 5px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			}
+			[role="menuitemcheckbox"] {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 10px;
+				cursor: pointer;
+				font-size: 14px;
+				color: #333;
+				border-bottom: 1px solid #eee;
+			}
+			[role="menuitemcheckbox"]:last-child {
+				border-bottom: none;
+			}
+			[role="menuitemcheckbox"]:hover, [role="menuitemcheckbox"]:focus {
+				background-color: #eee;
+				outline: none;
+			}
+			.checkbox-indicator {
+				width: 16px;
+				height: 16px;
+				border: 2px solid #007BFF;
+				border-radius: 4px;
+				display: inline-block;
+				margin-right: 10px;
+				position: relative;
+			}
+			[aria-checked="true"] .checkbox-indicator::after {
+				content: '✔';
+				font-size: 12px;
+				color: white;
+				position: absolute;
+				top: -2px;
+				left: 2px;
+				background-color: #007BFF;
+				border-radius: 2px;
+				padding: 1px 3px;
+			}
+			[aria-checked="false"] .checkbox-indicator::after {
+				content: '';
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 메뉴와 체크박스 항목 -->
+		<div role="menu">
+			<div role="menuitemcheckbox" aria-checked="false" tabindex="0">
+				<span>Enable notifications</span>
+				<span class="checkbox-indicator"></span>
+			</div>
+			<div role="menuitemcheckbox" aria-checked="false" tabindex="0">
+				<span>Enable dark mode</span>
+				<span class="checkbox-indicator"></span>
+			</div>
+			<div role="menuitemcheckbox" aria-checked="true" tabindex="0">
+				<span>Enable auto-update</span>
+				<span class="checkbox-indicator"></span>
+			</div>
+		</div>
+
+		<script>
+			document.querySelectorAll('[role="menuitemcheckbox"]').forEach(item => {
+				item.addEventListener('click', () => {
+					const isChecked = item.getAttribute('aria-checked') === 'true';
+					item.setAttribute('aria-checked', !isChecked);
+				});
+			});
+		</script>
+	</body>
+</html>

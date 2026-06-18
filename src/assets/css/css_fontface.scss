@@ -1,0 +1,34 @@
+@charset "utf-8";
+@use "_font";
+@use "_variable";
+@use "_mixin";
+@use "_color";
+
+// 독립체
+@font-face {
+	font-family: 'Dokrip';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Dokrip.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+// HS겨울눈꽃체
+@font-face {
+	font-family: 'HSGyoulnoonkot';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/HSGyoulnoonkot.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+// @font-face
+.css_fontface {
+	h1, h2, h3, h4 {
+		// font-family: 'Yeon Sung', cursive;
+		// font-family: 'Poor Story', cursive;
+		// font-family: 'Gamja Flower', cursive;
+		// font-family: 'Jua', sans-serif;
+
+		font-family: 'Dokrip', cursive;
+		// font-family: 'HSGyoulnoonkot', cursive;
+	}
+	h1:after {content:"(독립체)";}
+}

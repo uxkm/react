@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>논리적 프로퍼티 예제</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			padding: 2rem;
+			background: #f5f5f5;
+		}
+
+		.demo-container {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 2rem;
+			margin-top: 2rem;
+		}
+
+		.demo-section {
+			background: white;
+			padding: 1.5rem;
+			border-radius: 8px;
+			box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		}
+
+		.demo-section h3 {
+			margin-top: 0;
+			margin-bottom: 1rem;
+			color: #333;
+		}
+
+		/* 물리적 프로퍼티 사용 */
+		.physical-card {
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			color: white;
+			padding: 1.5rem;
+			border-radius: 8px;
+			margin-bottom: 1rem;
+		}
+
+		.physical-card h4 {
+			margin-top: 0;
+			margin-bottom: 0.5rem;
+		}
+
+		.physical-card p {
+			margin: 0;
+			opacity: 0.9;
+		}
+
+		/* 논리적 프로퍼티 사용 */
+		.logical-card {
+			background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+			color: white;
+			padding-block: 1.5rem;  /* padding-top, padding-bottom */
+			padding-inline: 1.5rem; /* padding-left, padding-right */
+			border-radius: 8px;
+			margin-block-end: 1rem;  /* margin-bottom */
+		}
+
+		.logical-card h4 {
+			margin-block-start: 0;  /* margin-top */
+			margin-block-end: 0.5rem; /* margin-bottom */
+		}
+
+		.logical-card p {
+			margin: 0;
+			opacity: 0.9;
+		}
+
+		/* RTL 예제 */
+		.rtl-demo {
+			direction: rtl;
+			background: #e8f5e9;
+			padding: 1rem;
+			border-radius: 8px;
+			margin-top: 1rem;
+		}
+
+		.rtl-box {
+			background: #4caf50;
+			color: white;
+			padding-inline-start: 2rem;  /* RTL에서는 오른쪽에 패딩 */
+			padding-inline-end: 1rem;    /* RTL에서는 왼쪽에 패딩 */
+			margin-inline-start: 1rem;   /* RTL에서는 오른쪽에 마진 */
+			border-radius: 4px;
+		}
+
+		/* 크기 논리적 프로퍼티 */
+		.size-demo {
+			background: #fff3e0;
+			padding: 1rem;
+			border-radius: 8px;
+			margin-top: 1rem;
+		}
+
+		.size-box {
+			background: #ff9800;
+			color: white;
+			inline-size: 200px;  /* width */
+			block-size: 100px;   /* height */
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 4px;
+			margin-block-start: 1rem;
+		}
+
+		.code-label {
+			font-size: 0.9rem;
+			color: #666;
+			margin-bottom: 0.5rem;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<h1>논리적 프로퍼티 예제</h1>
+	<p>물리적 프로퍼티와 논리적 프로퍼티의 차이를 확인할 수 있습니다.</p>
+
+	<div class="demo-container">
+		<!-- 물리적 프로퍼티 -->
+		<div class="demo-section">
+			<h3>물리적 프로퍼티 (Physical Properties)</h3>
+			<div class="code-label">padding: 1.5rem; (top, right, bottom, left)</div>
+			<div class="physical-card">
+				<h4>물리적 프로퍼티 카드</h4>
+				<p>left, right, top, bottom을 사용합니다.</p>
+			</div>
+		</div>
+
+		<!-- 논리적 프로퍼티 -->
+		<div class="demo-section">
+			<h3>논리적 프로퍼티 (Logical Properties)</h3>
+			<div class="code-label">padding-block: 1.5rem; padding-inline: 1.5rem;</div>
+			<div class="logical-card">
+				<h4>논리적 프로퍼티 카드</h4>
+				<p>block-start, block-end, inline-start, inline-end를 사용합니다.</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- RTL 예제 -->
+	<div class="demo-section" style="margin-top: 2rem;">
+		<h3>RTL (Right-to-Left) 지원</h3>
+		<p>논리적 프로퍼티를 사용하면 RTL 언어에서도 자동으로 적응합니다.</p>
+		<div class="rtl-demo">
+			<div class="code-label">direction: rtl; padding-inline-start: 2rem;</div>
+			<div class="rtl-box">
+				RTL 텍스트에서도 논리적 프로퍼티가 올바르게 작동합니다.
+			</div>
+		</div>
+	</div>
+
+	<!-- 크기 논리적 프로퍼티 -->
+	<div class="demo-section" style="margin-top: 2rem;">
+		<h3>크기 논리적 프로퍼티</h3>
+		<div class="size-demo">
+			<div class="code-label">inline-size: 200px; block-size: 100px;</div>
+			<div class="size-box">
+				inline-size × block-size
+			</div>
+		</div>
+	</div>
+
+	<script>
+		// 설명 추가
+		const cards = document.querySelectorAll('.physical-card, .logical-card');
+		cards.forEach(card => {
+			card.addEventListener('mouseenter', function() {
+				this.style.transform = 'scale(1.02)';
+				this.style.transition = 'transform 0.2s';
+			});
+			card.addEventListener('mouseleave', function() {
+				this.style.transform = 'scale(1)';
+			});
+		});
+	</script>
+</body>
+</html>

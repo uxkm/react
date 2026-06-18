@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[type="range"] 슬라이더 입력 필드</title>
+		<style>
+			hr {margin:15px 0;}
+			input {margin:10px 0 0;}
+			p {margin:0;}
+			.range-container {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				margin-top: 10px;
+			}
+			.range-container input {margin:0;}
+		</style>
+	</head>
+	<body>
+		<p>기본 슬라이더(최소값, 최대값 설정)</p>
+		<input type="range" name="brightness" min="0" max="100">
+		<hr>
+
+		<p>증가 단위(step) 지정</p>
+		<input type="range" name="temperature" min="0" max="50" step="5">
+		<hr>
+
+		<p>실시간 값 표시가 가능한 Range 슬라이더</p>
+		<div class="range-container">
+			<input type="range" id="volume" min="0" max="100" step="5" value="50" oninput="updateValue(this.value)">
+			<span class="range-value" id="volumeValue">50</span>
+		</div>
+		<script>
+			function updateValue(value) {
+				document.getElementById('volumeValue').textContent = value;
+			}
+		</script>
+		<hr>
+
+		<p>커스텀 Range 슬라이더</p>
+		<div class="slider-custom">
+			<input type="range" id="customSlider" class="slider" step="10" min="0" max="100" value="50">
+			<span id="customValue" class="slider-value">50</span>
+		</div>
+		<style>
+			:root {
+				--custom-range-track-height: 12px;
+				--custom-range-track-background: #ddd;
+				--custom-range-thumb-size: 36px;
+				--custom-range-thumb-background: #4eb31b;
+				--custom-range-active-background: #349102;
+			}
+			.slider-custom {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				width: 240px;
+				margin-top: 10px;
+			}
+			.slider-custom .slider {
+				width: 100%;
+				height: var(--custom-range-track-height);
+				margin: 0;
+				background-color: var(--custom-range-track-background);
+				border-radius: 5px;
+				outline: none;
+				transition: background 0.3s;
+				-webkit-appearance: none;
+			}
+			.slider-custom .slider::-webkit-slider-thumb {
+				width: var(--custom-range-thumb-size);
+				height: var(--custom-range-thumb-size);
+				background-color: #fff;
+				border: 12px solid var(--custom-range-thumb-background);
+				border-radius: 50%;
+				appearance: none;
+				cursor: pointer;
+				-webkit-appearance: none;
+			}
+      .slider-custom .slider:active::-webkit-slider-thumb {
+        border-color: var(--custom-range-active-background);
+      }
+			.slider-custom .slider::-moz-range-thumb {
+				width: var(--custom-range-thumb-size);
+				height: var(--custom-range-thumb-size);
+				background-color: #fff;
+				border: 12px solid var(--custom-range-thumb-background);
+				border-radius: 50%;
+				cursor: pointer;
+			}
+			.slider-custom .slider-value {
+				font-size: 16px;
+				font-weight: bold;
+				min-width: 40px;
+			}
+		</style>
+		<script>
+      document.querySelectorAll(".slider-custom").forEach((sliderContainer) => {
+        const customSlider = sliderContainer.querySelector(".slider");
+        const customValue = sliderContainer.querySelector(".slider-value");
+
+        function updateSliderBackground(slider, isActive = false) {
+          const styles = getComputedStyle(document.documentElement);
+          const trackColor = styles.getPropertyValue('--custom-range-track-background').trim();
+          const thumbColor = isActive
+            ? styles.getPropertyValue('--custom-range-active-background').trim()
+            : styles.getPropertyValue('--custom-range-thumb-background').trim();
+          const min = slider.min;
+          const max = slider.max;
+          const value = slider.value;
+          const percentage = ((value - min) / (max - min)) * 100;
+          slider.style.background = `linear-gradient(to right, ${thumbColor} ${percentage}%, ${trackColor} ${percentage}%)`;
+        }
+
+        // 초기 배경 설정
+        updateSliderBackground(customSlider);
+
+        // 슬라이더의 값이 변경될 때마다 실행
+        customSlider.addEventListener("input", function () {
+          customValue.textContent = this.value;
+          updateSliderBackground(this, customSlider.matches(":active"));
+        });
+
+        // 클릭 시 배경을 active 상태로 변경
+        customSlider.addEventListener("mousedown", function () {
+          updateSliderBackground(this, true);
+        });
+
+        // 클릭이 끝나면 기본 배경으로 변경
+        customSlider.addEventListener("mouseup", function () {
+          updateSliderBackground(this, false);
+        });
+
+        /*customSlider.addEventListener("mouseleave", function () {
+          updateSliderBackground(this, false);
+        });*/
+      });
+		</script>
+
+
+	</body>
+</html>

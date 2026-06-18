@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>ol [type]</title>
+</head>
+<body>
+	<ol>
+		<li>프로그래밍 언어
+			<ol>
+				<li>Python</li>
+				<li>JavaScript</li>
+				<li>Java</li>
+			</ol>
+		</li>
+		<li>웹 기술
+			<ol>
+				<li>HTML</li>
+				<li>CSS</li>
+			</ol>
+		</li>
+	</ol>
+
+	<style>
+    ol, li {
+			list-style: none;
+		}
+    ol {
+      counter-reset: list-counter; /* 리스트 카운터 초기화 */
+    }
+    ol > li {
+      counter-increment: list-counter; /* 카운터 증가 */
+    }
+    ol > li::before {
+      content: counter(list-counter) ". "; /* 카운터 번호 표시 */
+      font-weight: bold;
+    }
+    li > ol {
+      counter-reset: sublist-counter; /* 하위 리스트 카운터 초기화 */
+    }
+    li > ol > li {
+      counter-increment: sublist-counter; /* 하위 카운터 증가 */
+    }
+    li > ol > li::before {
+      content: counter(list-counter) "." counter(sublist-counter) ". "; /* 부모 카운터와 하위 카운터 결합 */
+      font-weight: bold;
+    }
+	</style>
+</body>
+</html>

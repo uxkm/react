@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[select] 완전한 커스텀 드롭다운(Select 요소 대체)</title>
+		<style>
+			hr {margin:20px 0;}
+		</style>
+	</head>
+	<body>
+		<p>커스텀 드롭다운</p>
+		<div class="custom-dropdown" role="combobox" aria-expanded="false" tabindex="0">
+			<div class="selected-option" aria-haspopup="listbox">색상 선택</div>
+			<ul class="options" role="listbox">
+				<li role="option" data-value="red" aria-selected="false" tabindex="0">빨강</li>
+				<li role="option" data-value="blue" aria-selected="false" tabindex="0">파랑</li>
+				<li role="option" data-value="green" aria-selected="false" tabindex="0">초록</li>
+			</ul>
+		</div>
+
+		<div class="custom-dropdown" role="combobox" aria-expanded="false" tabindex="0">
+			<div class="selected-option" aria-haspopup="listbox">도시 선택</div>
+			<ul class="options" role="listbox">
+				<li role="option" data-value="seoul" aria-selected="false" tabindex="0">서울</li>
+				<li role="option" data-value="busan" aria-selected="false" tabindex="0">부산</li>
+				<li role="option" data-value="daejeon" aria-selected="false" tabindex="0">대전</li>
+				<li role="option" data-value="incheon" aria-selected="false" tabindex="0">인천</li>
+			</ul>
+		</div>
+		<hr>
+
+		<p>
+			<b>커스텀 드롭다운(selected)</b><br />
+			aria-selected를 true로 변경하면, select 요소의 selected 속성과 동일하게 작동합니다.
+		</p>
+		<div class="custom-dropdown" role="combobox" aria-expanded="false" tabindex="0">
+			<div class="selected-option" aria-haspopup="listbox">색상 선택</div>
+			<ul class="options" role="listbox">
+				<li role="option" data-value="red" aria-selected="false" tabindex="0">빨강</li>
+				<li role="option" data-value="blue" aria-selected="true" tabindex="0">파랑</li>
+				<li role="option" data-value="green" aria-selected="false" tabindex="0">초록</li>
+			</ul>
+		</div>
+
+		<div class="custom-dropdown" role="combobox" aria-expanded="false" tabindex="0">
+			<div class="selected-option" aria-haspopup="listbox">도시 선택</div>
+			<ul class="options" role="listbox">
+				<li role="option" data-value="seoul" aria-selected="false" tabindex="0">서울</li>
+				<li role="option" data-value="busan" aria-selected="false" tabindex="0">부산</li>
+				<li role="option" data-value="daejeon" aria-selected="true" tabindex="0">대전</li>
+				<li role="option" data-value="incheon" aria-selected="false" tabindex="0">인천</li>
+			</ul>
+		</div>
+
+		<style>
+			:root {
+				--custom-dropdown-width: 200px;
+				--custom-dropdown-selected-height: 46px;
+				--custom-dropdown-side-padding: 12px;
+				--custom-dropdown-active-color: #1e73ff;
+				--custom-dropdown-background-color: #f5f5f5;
+				--custom-dropdown-border-color: #aaa;
+				--custom-dropdown-border-radius: 5px;
+				--custom-dropdown-arrow-width: 7px;
+			}
+			.custom-dropdown {
+				display: inline-block;
+				position: relative;
+				width: var(--custom-dropdown-width);
+				font-size: 16px;
+				color: #222;
+				cursor: pointer;
+			}
+			.custom-dropdown .selected-option {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				height: var(--custom-dropdown-selected-height);
+				padding: 0 calc(var(--custom-dropdown-selected-height) + var(--custom-dropdown-side-padding)) 0 var(--custom-dropdown-side-padding);
+				background-color: var(--custom-dropdown-background-color);
+				border: 1px solid var(--custom-dropdown-border-color);
+				border-radius: var(--custom-dropdown-border-radius);
+				box-sizing: border-box;
+				cursor: pointer;
+			}
+			.custom-dropdown .selected-option:before {
+				position: absolute;
+				right: var(--custom-dropdown-selected-height);
+				top: 50%;
+				transform: translateY(-50%);
+				width: 1px;
+				height: calc(var(--custom-dropdown-selected-height) - 20px);
+				background-color: var(--custom-dropdown-border-color);
+				opacity: .75;
+				content: "";
+			}
+			.custom-dropdown .selected-option:after {
+				position: absolute;
+				right: calc( (var(--custom-dropdown-selected-height)/2) - (var(--custom-dropdown-arrow-width)/2) - 1px );
+				top: 50%;
+				transform: translateY(-50%);
+				border-top: var(--custom-dropdown-arrow-width) solid var(--custom-dropdown-border-color);
+				border-left: calc(var(--custom-dropdown-arrow-width) - 1px) solid transparent;
+				border-right: calc(var(--custom-dropdown-arrow-width) - 1px) solid transparent;
+				content: "";
+			}
+			.custom-dropdown.active .selected-option {
+				border-color: var(--custom-dropdown-active-color);
+				outline: 1px solid var(--custom-dropdown-active-color);
+			}
+			.custom-dropdown.active .selected-option:after {
+				border-top: 0;
+				border-bottom: var(--custom-dropdown-arrow-width) solid var(--custom-dropdown-active-color);
+			}
+			.custom-dropdown .options {
+				display: none;
+				overflow: hidden;
+				position: absolute;
+				left: 0;
+				top: calc(var(--custom-dropdown-selected-height) + 5px);
+				z-index: 10;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+				background-color: white;
+				border: 1px solid var(--custom-dropdown-border-color);
+				box-shadow: 1px 1px 7px 0 rgba(0,0,0,.2);
+				border-radius: var(--custom-dropdown-border-radius);
+				box-sizing: border-box;
+				list-style: none;
+			}
+			.custom-dropdown .options li {
+				display: flex;
+				align-items: center;
+				position: relative;
+				height: var(--custom-dropdown-selected-height);
+				padding: 0 var(--custom-dropdown-side-padding);
+				color: #666 ;
+				cursor: pointer;
+			}
+			.custom-dropdown .options li[aria-selected="true"] {
+				padding-left: 32px;
+				font-weight: bold;
+				color: #222;
+				background-size: 14px auto;
+				background-repeat: no-repeat;
+				background-position: var(--custom-dropdown-side-padding) center;
+				background-image: url("data:image/svg+xml,%3Csvg width='401' height='401' viewBox='0 0 401 401' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M391.621 73.3801C404.126 85.887 404.126 106.198 391.621 118.705L182.743 327.62C170.239 340.127 149.931 340.127 137.426 327.62L9.37851 199.55C-3.12617 187.043 -3.12617 166.732 9.37851 154.225C21.8832 141.718 42.1908 141.718 54.6955 154.225L160.135 259.583L346.405 73.3801C358.909 60.8733 379.217 60.8733 391.722 73.3801H391.621Z' fill='%23222222'/%3E%3C/svg%3E%0A");
+			}
+			.custom-dropdown .options li:not(:first-child) {
+				padding-top: 1px;
+			}
+			.custom-dropdown .options li:not(:first-child):before {
+				position: absolute;
+				left: var(--custom-dropdown-side-padding);
+				right: var(--custom-dropdown-side-padding);
+				top: 0;
+				height: 1px;
+				background-color: rgba(0,0,0,.1);
+				content: "";
+			}
+			.custom-dropdown .options li:hover,
+			.custom-dropdown .options li:focus {
+				outline: none;
+			}
+			.custom-dropdown .options li:hover:after,
+			.custom-dropdown .options li:focus:after {
+				position: absolute;
+				left: 0;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				z-index: -1;
+				background-color: #eee;
+				content: "";
+			}
+			.custom-dropdown .options li:not(:last-child):hover:after,
+			.custom-dropdown .options li:not(:last-child):focus:after {
+				bottom: -1px;
+			}
+			.custom-dropdown.active .options {
+				display: block;
+			}
+		</style>
+
+		<script>
+			document.querySelectorAll(".custom-dropdown").forEach((dropdown) => {
+				const selectedOption = dropdown.querySelector(".selected-option");
+				const options = dropdown.querySelector(".options");
+				const optionItems = options.querySelectorAll("li");
+
+				// 페이지가 로드될 때, aria-selected="true"인 옵션을 찾아서 선택된 옵션으로 설정
+				const selectedItem = Array.from(optionItems).find(option => option.getAttribute("aria-selected") === "true");
+				if (selectedItem) {
+					selectedOption.textContent = selectedItem.textContent; // 선택된 옵션의 텍스트 설정
+				}
+
+				function closeDropdown() {
+					dropdown.classList.remove("active");
+					dropdown.setAttribute("aria-expanded", "false");
+				}
+
+				selectedOption.addEventListener("click", () => {
+					const isOpen = dropdown.classList.contains("active");
+					document.querySelectorAll(".custom-dropdown").forEach((d) => d.classList.remove("active"));
+					dropdown.classList.toggle("active", !isOpen);
+					dropdown.setAttribute("aria-expanded", !isOpen ? "true" : "false");
+				});
+
+				optionItems.forEach((option) => {
+					option.addEventListener("click", (event) => {
+						// 선택한 옵션의 텍스트를 설정
+						selectedOption.textContent = event.target.textContent;
+						selectedOption.setAttribute("aria-live", "polite");
+
+						// 모든 옵션에서 aria-selected="true" 제거 후 선택한 옵션에 추가
+						optionItems.forEach((item) => item.setAttribute("aria-selected", "false"));
+						event.target.setAttribute("aria-selected", "true");
+
+						closeDropdown();
+					});
+
+					option.addEventListener("keydown", (event) => {
+						if (event.key === "Enter" || event.key === " ") {
+							event.preventDefault();
+
+							selectedOption.textContent = event.target.textContent;
+							selectedOption.setAttribute("aria-live", "polite");
+
+							optionItems.forEach((item) => item.setAttribute("aria-selected", "false"));
+							event.target.setAttribute("aria-selected", "true");
+
+							setTimeout(() => {
+								dropdown.classList.remove("active");
+								dropdown.setAttribute("aria-expanded", "false");
+								dropdown.focus();
+							}, 10);
+						}
+					});
+				});
+
+				dropdown.addEventListener("keydown", (event) => {
+					const isOpen = dropdown.classList.contains("active");
+					const currentIndex = Array.from(optionItems).indexOf(document.activeElement);
+
+					if (event.key === "Enter" || event.key === " ") {
+						dropdown.classList.toggle("active");
+						dropdown.setAttribute("aria-expanded", !isOpen ? "true" : "false");
+					} else if (event.key === "ArrowDown") {
+						event.preventDefault();
+						if (!isOpen) {
+							dropdown.classList.add("active");
+							dropdown.setAttribute("aria-expanded", "true");
+						} else if (currentIndex < optionItems.length - 1) {
+							optionItems[currentIndex + 1].focus();
+						}
+					} else if (event.key === "ArrowUp") {
+						event.preventDefault();
+						if (currentIndex > 0) {
+							optionItems[currentIndex - 1].focus();
+						}
+					} else if (event.key === "Escape") {
+						closeDropdown();
+					}
+				});
+
+				dropdown.addEventListener("focusout", (event) => {
+					// 1ms 지연 후 포커스가 dropdown 내부에 남아있는지 확인
+					setTimeout(() => {
+						if (!dropdown.contains(document.activeElement)) {
+							closeDropdown(); // ⬅️ 포커스 벗어났을 경우 options 닫기
+						}
+					}, 1);
+				});
+
+				document.addEventListener("click", (event) => {
+					if (!dropdown.contains(event.target)) {
+						closeDropdown();
+					}
+				});
+			});
+		</script>
+
+	</body>
+</html>
+

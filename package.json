@@ -1,0 +1,49 @@
+{
+  "name": "react-app",
+  "private": true,
+  "version": "0.0.0",
+  "packageManager": "pnpm@10.15.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "node scripts/optimize-images.mjs && vite build && node scripts/postbuild-github-pages.mjs",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "db:migrate": "node scripts/apply-supabase-migrations.mjs",
+    "db:fix-spam": "node scripts/run-supabase-sql.mjs supabase/fix_comment_spam_hardening.sql",
+    "db:fix-comments-rpc": "node scripts/run-supabase-sql.mjs supabase/fix_comment_rpc_consolidate.sql",
+    "functions:deploy:comments": "node scripts/deploy-post-comment.mjs",
+    "test:comments-api": "node scripts/test-comments-api.mjs"
+  },
+  "dependencies": {
+    "@codemirror/lang-css": "^6.3.1",
+    "@codemirror/lang-html": "^6.4.11",
+    "@codemirror/lang-javascript": "^6.2.5",
+    "@lezer/highlight": "^1.2.3",
+    "@supabase/supabase-js": "^2.108.2",
+    "@uiw/codemirror-themes": "^4.25.9",
+    "@uiw/react-codemirror": "^4.25.9",
+    "focus-trap-react": "^12.0.1",
+    "highlight.js": "^11.11.1",
+    "masonry-layout": "^4.2.2",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "react-router-dom": "^7.15.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "esbuild": "^0.28.0",
+    "eslint": "^10.2.1",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.5.0",
+    "pg": "^8.21.0",
+    "playwright": "1.52.0",
+    "sass": "^1.99.0",
+    "sharp": "^0.34.5",
+    "vite": "^8.0.10"
+  }
+}

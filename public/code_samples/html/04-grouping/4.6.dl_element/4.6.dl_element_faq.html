@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>FAQ</title>
+	<style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+    }
+    .faq-container {
+      padding: 20px;
+    }
+    h1 {
+			margin-top: 0;
+      text-align: center;
+      color: #333;
+    }
+    dl {
+      margin: 0;
+    }
+    dt {
+      position: relative;
+      margin: 0;
+      padding: 10px 0;
+      font-size: 18px;
+      font-weight: bold;
+      color: #007BFF;
+			border-bottom: 1px solid #ddd;
+      cursor: pointer;
+    }
+    dt:after {
+			position: absolute; right: 0; top: 50%;
+			transform: translateY(-50%);
+			border-left: 5px solid transparent;
+			border-right: 5px solid transparent;
+			border-top: 6px solid #ccc;
+			content: "";
+		}
+    dd {
+      display: none;
+			position: relative;
+			z-index: 1;
+      margin: -1px 0 0 0;
+			padding: 12px 15px 18px 22px;
+      font-size: 16px;
+      color: #555;
+			background-color: #f3f3f3;
+      border-bottom: 1px solid #ddd;
+    }
+    dt:hover, .active {
+      color: #0056b3;
+    }
+    .active:after {
+			border-top: 0;
+      border-bottom: 6px solid #0056b3;
+		}
+    .active + dd {
+      display: block;
+    }
+		@media(max-width:550px){
+      .faq-container {
+        padding: 15px;
+      }
+      h1 {
+				font-size:20px;
+      }
+      dt {
+        font-size: 15px;
+      }
+      dd {
+        padding: 10px 10px 16px 18px;
+        font-size: 14px;
+      }
+		}
+	</style>
+</head>
+<body>
+
+<div class="faq-container">
+	<h1>자주 묻는 질문(FAQ)</h1>
+	<dl>
+		<dt onclick="toggleAnswer(this)">1. 웹 접근성이 무엇인가요?</dt>
+		<dd>웹 접근성은 장애를 가진 사람들이 웹을 사용하기 쉽게 만드는 것입니다. 예를 들어, 화면 판독기 사용자가 웹 콘텐츠를 이해할 수 있도록 하는 것입니다.</dd>
+
+		<dt onclick="toggleAnswer(this)">2. ARIA란 무엇인가요?</dt>
+		<dd>ARIA(Accessible Rich Internet Applications)는 웹 애플리케이션에서 접근성을 개선하기 위한 기술 규격입니다. 이를 통해 동적 콘텐츠와 복잡한 사용자 인터페이스 요소들이 보조 기술에서 잘 처리될 수 있도록 도와줍니다.</dd>
+
+		<dt onclick="toggleAnswer(this)">3. WCAG는 무엇을 의미하나요?</dt>
+		<dd>WCAG(Web Content Accessibility Guidelines)는 웹 콘텐츠 접근성 지침으로, 모든 사람이 웹을 사용할 수 있도록 도와주는 가이드라인입니다.</dd>
+	</dl>
+</div>
+
+<script>
+  function toggleAnswer(clickedDt) {
+    // 모든 dt 요소에서 active 클래스 제거 및 dd 숨기기
+    document.querySelectorAll('dt').forEach(dt => dt.classList.remove('active'));
+    document.querySelectorAll('dd').forEach(dd => dd.style.display = 'none');
+
+    // 현재 클릭된 dt에 active 클래스 추가 및 관련 dd 표시
+    clickedDt.classList.add('active');
+    const nextDd = clickedDt.nextElementSibling;
+    if (nextDd && nextDd.tagName === 'DD') {
+      nextDd.style.display = 'block';
+    }
+  }
+</script>
+
+</body>
+</html>

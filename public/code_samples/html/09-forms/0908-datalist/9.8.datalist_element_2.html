@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[datalist] 일반 텍스트, 검색창, 전화번호, 이메일 자동완성</title>
+		<style>
+			body {padding-top:5px;}
+			hr {margin:15px 0;}
+			p {margin:0 0 10px;}
+			input {
+				width: 150px;
+				padding: 10px;
+				font-size: 16px;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+			}
+			.info {font-size:16px; color:#1e73ff;}
+		</style>
+	</head>
+	<body>
+		<p>
+			<b>일반 텍스트 자동완성</b><br />
+			<span class="info">(input text 타입과 연계)</span>
+		</p>
+		<div class="regions-container">
+			<label for="region">지역 선택:</label>
+			<input type="text" list="regions" id="region" name="region" placeholder="시·도를 선택하세요">
+			<datalist id="regions">
+				<option value="서울특별시">
+				<option value="부산광역시">
+				<option value="대구광역시">
+				<option value="인천광역시">
+				<option value="광주광역시">
+				<option value="대전광역시">
+				<option value="울산광역시">
+				<option value="세종특별자치시">
+				<option value="경기도">
+				<option value="강원도">
+				<option value="충청북도">
+				<option value="충청남도">
+				<option value="전라북도">
+				<option value="전라남도">
+				<option value="경상북도">
+				<option value="경상남도">
+				<option value="제주특별자치도">
+			</datalist>
+		</div>
+		<hr>
+
+		<p>
+			<b>검색창 자동완성 예제</b><br />
+			<span class="info">(input search 타입과 연계 / JavaScript 활용)</span>
+		</p>
+		<div class="autocomplete-container">
+			<input type="search" id="searchInput" class="autocomplete-input" placeholder="검색어 입력...">
+			<div id="autocompleteList" class="autocomplete-list"></div>
+		</div>
+		<style>
+			.autocomplete-container {
+				position: relative;
+				width: 100%;
+				max-width: 280px;
+			}
+			.autocomplete-input {
+				width: 100%;
+				padding: 10px;
+				font-size: 16px;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+			}
+			.autocomplete-list {
+				position: absolute;
+				width: 100%;
+				border: 1px solid #ccc;
+				border-top: none;
+				background: white;
+				max-height: 200px;
+				overflow-y: auto;
+				display: none;
+				z-index: 1000;
+			}
+			.autocomplete-list div {
+				padding: 10px;
+				cursor: pointer;
+			}
+			.autocomplete-list div:hover {
+				background: #f0f0f0;
+			}
+		</style>
+		<script>
+			const searchInput = document.getElementById("searchInput");
+			const autocompleteList = document.getElementById("autocompleteList");
+
+			// 자동완성 데이터 목록
+			const suggestions = [
+				"사과", "바나나", "오렌지", "딸기", "포도",
+				"수박", "참외", "복숭아", "자두", "블루베리"
+			];
+
+			// 입력할 때 자동완성 리스트 업데이트
+			searchInput.addEventListener("input", function () {
+				const query = this.value.toLowerCase();
+				autocompleteList.innerHTML = "";
+
+				if (!query) {
+					autocompleteList.style.display = "none";
+					return;
+				}
+
+				const filteredSuggestions = suggestions.filter(item => item.includes(query));
+
+				if (filteredSuggestions.length === 0) {
+					autocompleteList.style.display = "none";
+					return;
+				}
+
+				filteredSuggestions.forEach(item => {
+					const suggestionItem = document.createElement("div");
+					suggestionItem.textContent = item;
+					suggestionItem.addEventListener("click", function () {
+						searchInput.value = item;
+						autocompleteList.style.display = "none";
+					});
+					autocompleteList.appendChild(suggestionItem);
+				});
+
+				autocompleteList.style.display = "block";
+			});
+
+			// 자동완성 목록 바깥 클릭 시 닫기
+			document.addEventListener("click", function (event) {
+				if (!searchInput.contains(event.target) && !autocompleteList.contains(event.target)) {
+					autocompleteList.style.display = "none";
+				}
+			});
+		</script>
+		<hr>
+
+		<p>
+			<b>전화번호 자동완성 예제</b><br />
+			<span class="info">(input tel 타입과 연계)</span>
+		</p>
+		<div class="phone-container">
+			<label for="phone">전화번호 입력:</label>
+			<input type="tel" list="phone-options" id="phone" class="phone-input" placeholder="전화번호 입력...">
+			<datalist id="phone-options">
+				<option value="010-1234-5678">
+				<option value="010-2345-6789">
+				<option value="010-3456-7890">
+				<option value="02-123-4567">
+				<option value="031-987-6543">
+				<option value="051-456-7890">
+			</datalist>
+		</div>
+	</body>
+</html>

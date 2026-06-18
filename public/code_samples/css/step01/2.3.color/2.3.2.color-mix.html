@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>color-mix() 함수 예제</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			padding: 0 2rem;
+			background: #f5f5f5;
+			margin: 0;
+		}
+
+		.color-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+			gap: 1rem;
+			margin-top: 1rem;
+		}
+
+		.color-box {
+			height: 120px;
+			border-radius: 8px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: white;
+			font-weight: bold;
+			text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+			font-size: 0.9rem;
+			text-align: center;
+		}
+
+		/* color-mix() 예제 */
+		.mix-1 { background-color: color-mix(in srgb, red 50%, blue 50%); }
+		.mix-2 { background-color: color-mix(in srgb, red 70%, blue 30%); }
+		.mix-3 { background-color: color-mix(in srgb, red 30%, blue 70%); }
+		.mix-4 { background-color: color-mix(in lch, red 50%, blue 50%); }
+		.mix-5 { background-color: color-mix(in srgb, red 50%, transparent 50%); }
+		.mix-6 { background-color: color-mix(in srgb, #667eea 40%, white 60%); }
+		.mix-7 { background-color: color-mix(in srgb, #667eea 60%, black 40%); }
+		.mix-8 { background-color: color-mix(in srgb, green 50%, yellow 50%); }
+
+		.label {
+			font-size: 0.85rem;
+			margin-top: 0.5rem;
+			color: #666;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<h1>color-mix() 함수 예제</h1>
+	<p>두 색상을 지정된 비율로 혼합한 결과입니다.</p>
+
+	<div class="color-grid">
+		<div>
+			<div class="color-box mix-1">50:50</div>
+			<div class="label">red + blue (srgb)</div>
+		</div>
+		<div>
+			<div class="color-box mix-2">70:30</div>
+			<div class="label">red 70% + blue 30%</div>
+		</div>
+		<div>
+			<div class="color-box mix-3">30:70</div>
+			<div class="label">red 30% + blue 70%</div>
+		</div>
+		<div>
+			<div class="color-box mix-4">lch 혼합</div>
+			<div class="label">red + blue (lch)</div>
+		</div>
+		<div>
+			<div class="color-box mix-5">투명도</div>
+			<div class="label">red + transparent</div>
+		</div>
+		<div>
+			<div class="color-box mix-6">밝기 증가</div>
+			<div class="label">색상 + white</div>
+		</div>
+		<div>
+			<div class="color-box mix-7">밝기 감소</div>
+			<div class="label">색상 + black</div>
+		</div>
+		<div>
+			<div class="color-box mix-8">다른 색상</div>
+			<div class="label">green + yellow</div>
+		</div>
+	</div>
+</body>
+</html>

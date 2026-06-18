@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[video] JavaScript를 활용한 비디오 제어</title>
+		<style>
+			video {
+				border-radius: 10px;
+			}
+      .controls {
+        display: flex;
+        align-items: center;
+				gap: 10px;
+				margin-top: 6px;
+      }
+      .controls button { border:1px solid #ddd;
+				cursor: pointer;
+				width: 40px;
+				height: 40px;
+				font-size: 0;
+				text-indent: -9999px;
+				background-color: transparent;
+				border-radius: 5px;
+			}
+      .playPauseBtn {
+        background-size: 40% auto;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: url('/_assets/images/icon/video-play-solid.svg');
+      }
+      .playPauseBtn.play {
+        background-image: url('/_assets/images/icon/video-play-solid.svg');
+      }
+      .playPauseBtn.pause {
+        background-image: url('/_assets/images/icon/video-pause-solid.svg');
+      }
+      .muteBtn {
+        background-size: auto 55%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: url('/_assets/images/icon/video-volume-xmark-solid.svg');
+      }
+      .muteBtn.muted {
+        background-image: url('/_assets/images/icon/video-volume-high-solid.svg');
+      }
+      .muteBtn.unmuted {
+        background-image: url('/_assets/images/icon/video-volume-xmark-solid.svg');
+      }
+		</style>
+	</head>
+	<body>
+		<video id="myVideo" width="70%"
+					 src="/_assets/images/mr.chu_video.mp4"
+					 poster="/_assets/images/mr.chu_video_cover.jpg"
+					 preload="metadata">
+			브라우저가 비디오 태그를 지원하지 않습니다.
+		</video>
+
+		<div class="controls">
+			<!-- 재생/일시 정지 토글 버튼 -->
+			<button id="playPauseBtn" class="playPauseBtn" onclick="togglePlayPause()">재생/일시 정지</button>
+
+			<!-- 볼륨 조절 -->
+			<div class="volume">
+				<label for="volumeControl">볼륨:</label>
+				<input type="range" id="volumeControl" min="0" max="1" step="0.1" value="0.1" onchange="changeVolume(event)">
+			</div>
+
+			<!-- 음소거 토글 버튼 -->
+			<button id="muteBtn" class="muteBtn" onclick="toggleMute()">음소거</button>
+		</div>
+
+		<script>
+      const video = document.getElementById("myVideo");
+      const playPauseBtn = document.getElementById("playPauseBtn");
+      const muteBtn = document.getElementById("muteBtn");
+      video.volume = 0.1; // 볼륨을 10%로 설정
+
+      // 재생/일시 정지 토글 함수
+      function togglePlayPause() {
+        if (video.paused) {
+          video.play();  // 비디오 재생
+          playPauseBtn.classList.remove('play');  // 'play' 클래스 제거
+          playPauseBtn.classList.add('pause');  // 'pause' 클래스 추가
+        } else {
+          video.pause(); // 비디오 일시 정지
+          playPauseBtn.classList.remove('pause');  // 'pause' 클래스 제거
+          playPauseBtn.classList.add('play');  // 'play' 클래스 추가
+        }
+      }
+
+      // 볼륨 조절 함수
+      function changeVolume(event) {
+        video.volume = event.target.value; // 볼륨을 지정된 값으로 설정
+      }
+
+      // 음소거 토글 함수
+      function toggleMute() {
+        video.muted = !video.muted; // 음소거 상태를 반전시킴
+        if (video.muted) {
+          muteBtn.classList.remove('unmuted');  // 'unmuted' 클래스 제거
+          muteBtn.classList.add('muted');  // 'muted' 클래스 추가
+        } else {
+          muteBtn.classList.remove('muted');  // 'muted' 클래스 제거
+          muteBtn.classList.add('unmuted');  // 'unmuted' 클래스 추가
+        }
+      }
+		</script>
+	</body>
+</html>

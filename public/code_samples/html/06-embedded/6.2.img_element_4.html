@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<title>[img] 비율 유지 + 꽉 차게</title>
+		<style>
+      *, html, body {
+        margin: 0; padding: 0;
+      }
+      html, body {
+				width: 100%;
+				height: 100%;
+			}
+      .image-container {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* 이미지의 비율 유지 + 꽉 차게 */
+      }
+		</style>
+	</head>
+	<body>
+		<div class="image-container">
+			<img src="/_assets/images/dog-image1.jpg" loading="lazy" alt="귀여운 강아지">
+		</div>
+	</body>
+</html>

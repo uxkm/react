@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[output] 실시간 글자 수 카운터</title>
+	</head>
+	<body>
+		<p>
+			<b>실시간 글자 수 카운터</b>
+		</p>
+		<div class="textarea-container">
+			<textarea id="textInput" maxlength="100" oninput="output.value = textInput.value.length" placeholder="100 글자 이하로 입력하세요."></textarea><br />
+			<p class="output">
+				<output id="output">0</output>/100
+			</p>
+		</div>
+
+		<style>
+			*, html, body {vertical-align:top;}
+			body {padding-top:5px;}
+			p {margin:0 0 10px;}
+
+			textarea {
+				width: 100%;
+				max-width: 300px;
+				height: 100px;
+				padding: 10px;
+				font-size: 16px;
+				box-sizing: border-box;
+			}
+			.output {
+				margin-top: 10px;
+				color: #1e73ff;
+			}
+			.output output {
+				font-weight: 800;
+			}
+		</style>
+	</body>
+</html>

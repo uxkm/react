@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[textarea] 최소/최대 글자 입력 제한</title>
+		<style>
+			body {padding-top:5px;}
+			hr {margin:15px 0;}
+			p {margin:0 0 10px;}
+			.info {font-size:16px; color:#1e73ff;}
+
+			textarea {
+				width:calc(100% - 10px); max-width:400px;
+				height: 55px;
+			}
+
+			.text-form {
+				display: flex;
+				gap: 5px;
+				width: 100%;
+				max-width: 400px;
+			}
+			.text-form textarea {
+				width: calc(100% - 70px);
+			}
+			.text-form button {
+				width: 65px;
+			}
+		</style>
+	</head>
+	<body>
+		<p>
+			<b>최소 글자 수 제한</b><br />
+			<span class="info">minlength 속성 적용</span>
+		</p>
+		<form class="text-form">
+			<textarea name="message" minlength="10" placeholder="10글자 이상 작성하세요." required></textarea>
+			<button>제출</button>
+		</form>
+		<hr>
+
+		<p>
+			<b>최대 글자 수 제한</b><br />
+			<span class="info">
+				maxlength 속성 적용<br />
+				(maxlength에 지정된 길이 이상 입력할 수 없습니다.)
+			</span>
+		</p>
+		<textarea name="message" maxlength="15" placeholder="15글자 이하로 작성하세요." required></textarea>
+		<hr>
+
+		<p>
+			<b>최소/최대 글자 수 제한(혼합 사용)</b><br />
+			<span class="info">minlength, maxlength 속성 적용</span>
+		</p>
+		<form class="text-form">
+			<textarea name="message" minlength="10" maxlength="20" placeholder="10글자 이상, 20글자 이하로 작성하세요." required></textarea>
+			<button>제출</button>
+		</form>
+	</body>
+</html>

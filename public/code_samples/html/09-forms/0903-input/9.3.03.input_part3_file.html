@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[type="file"] 파일 업로드</title>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+		<style>
+      hr {margin:15px 0;}
+      input {margin:10px 0 0;}
+      p {margin:0;}
+		</style>
+	</head>
+	<body>
+		<p>기본 파일 업로드</p>
+		<input type="file" name="upload">
+		<hr>
+
+		<p>여러 파일 업로드 가능</p>
+		<input type="file" name="documents" multiple>
+		<hr>
+
+		<p>특정 확장자만 허용(.png, .jpg)</p>
+		<input type="file" name="image" accept="image/png, image/jpeg">
+		<hr>
+
+		<p>(커스텀) 기본적인 커스텀</p>
+		<label class="custom-file-upload">
+			<input type="file" class="custom-file-input">
+			<span class="file-name">파일을 선택하세요</span>
+			<button type="button" class="upload-btn">파일 선택</button>
+		</label>
+		<style>
+      .custom-file-upload {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+				position: relative;
+				margin-top: 10px;
+        padding: 10px 10px 10px 17px;
+        background-color: #f9f9f9;
+        border: 2px solid #ddd;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      .custom-file-input {
+				position: absolute;
+				left: 0;
+				top: 0;
+				opacity: 0;
+      }
+      .file-name {
+        flex-grow: 1;
+				display: flex;
+				align-items: center;
+				gap: 10px;
+        font-size: 16px;
+        color: #888;
+      }
+			.file-name.active {
+				color: #333;
+			}
+      .upload-btn {
+        background-color: #4eb31b;
+        padding: 8px 12px;
+        font-size: 14px;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .upload-btn:hover {
+        background-color: #349102;
+      }
+		</style>
+		<script>
+      const customFileInput = document.querySelector(".custom-file-input");
+      const uploadBtn = document.querySelector(".upload-btn");
+      const fileNameDisplay = document.querySelector(".file-name");
+
+      // 버튼 클릭 시 파일 선택창 열기
+      uploadBtn.addEventListener("click", function () {
+        customFileInput.click();
+      });
+
+      // 파일 선택 시 파일명 표시
+      customFileInput.addEventListener("change", function () {
+        const fileName = this.files.length > 0 ? this.files[0].name : "파일을 선택하세요";
+
+        // 아이콘 추가 (파일이 선택된 경우만)
+        if (this.files.length > 0) {
+          fileNameDisplay.classList.add('active');
+          fileNameDisplay.innerHTML = `<i class="fa-solid fa-file-lines"></i> ${fileName}`;
+        } else {
+          fileNameDisplay.classList.remove('active');
+          fileNameDisplay.textContent = fileName; // 기본 텍스트 유지
+        }
+      });
+		</script>
+		<hr>
+
+		<p>(커스텀) 드레그 파일 업로드</p>
+		<div class="file-drop-zone">
+			<input type="file" class="drop-file-input" hidden>
+			<p>
+				파일을 여기에 끌어다 놓거나 <span class="browse-btn">클릭</span>하여 선택하세요.
+			</p>
+		</div>
+		<style>
+      .file-drop-zone {
+        width: 100%;
+        max-width: 400px;
+				margin-top: 10px;
+        padding: 20px;
+        text-align: center;
+        color: #666;
+        background-color: #f9f9f9;
+        border: 2px dashed #aaa;
+        border-radius: 8px;
+				box-sizing: border-box;
+        cursor: pointer;
+        transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+      }
+      .file-drop-zone:hover {
+        border-color: #4eb31b;
+      }
+      .file-drop-zone.active {
+        background-color: #eaffea;
+        border-color: #4eb31b;
+      }
+      .file-drop-zone .browse-btn {
+        font-weight: bold;
+        color: #4eb31b;
+        cursor: pointer;
+      }
+			.file-drop-zone .upload-file {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #333;
+			}
+		</style>
+		<script>
+      const dropZone = document.querySelector(".file-drop-zone");
+      const dropFileInput = document.querySelector(".drop-file-input");
+
+      dropZone.addEventListener("click", () => dropFileInput.click());
+
+      dropZone.addEventListener("dragover", (event) => {
+        event.preventDefault();
+        dropZone.classList.add("active");
+      });
+
+      dropZone.addEventListener("dragleave", () => {
+        dropZone.classList.remove("active");
+      });
+
+      dropZone.addEventListener("drop", (event) => {
+        event.preventDefault();
+        dropZone.classList.remove("active");
+
+        if (event.dataTransfer.files.length > 0) {
+          dropFileInput.files = event.dataTransfer.files;
+          dropZone.innerHTML = `<p class="upload-file"><i class="fa-solid fa-file-lines"></i> ${event.dataTransfer.files[0].name}</p>`;
+        }
+      });
+
+      dropFileInput.addEventListener("change", function () {
+        if (this.files.length > 0) {
+          dropZone.innerHTML = `<p class="upload-file"><i class="fa-solid fa-file-lines"></i> ${this.files[0].name} 클릭</p>`;
+        }
+      });
+		</script>
+	</body>
+</html>

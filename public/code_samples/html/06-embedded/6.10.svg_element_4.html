@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[svg] 로고 애니메이션</title>
+	</head>
+	<body>
+		<div class="logo_wrap">
+			<div class='logo'>
+				<div class='logo_inner'>
+					<div class='logo_simple'>로고</div>
+					<div class='logo_default'>애니메이션</div>
+					<div class='logo_line'>
+						<svg width='399' height='381' viewBox='0 0 399 381' fill='none' xmlns='http://www.w3.org/2000/svg'>
+							<path
+								class='v_box_left'
+								d='M110.695 23.3801L232.92 167.464L138.251 247.547L16.1298 103.184L110.695 23.3801Z'
+								stroke='white'
+								strokeWidth='1'
+							/>
+							<path
+								class='v_box_right'
+								d='M143.089 163.25L292.093 19.2067L378.238 108.251L229.319 252.359L143.089 163.25Z'
+								stroke='white'
+								strokeWidth='1'
+							/>
+
+							<rect class='box_left' x='1' y='64' width='124' height='253' stroke='white' strokeWidth='1' />
+							<rect class='box_right' x='274' y='64' width='124' height='253' stroke='white' strokeWidth='1' />
+
+							<circle class='circle_left_bottom' cx='63' cy='318' r='62' stroke='white' strokeWidth='1' />
+							<circle class='circle_right_bottom' cx='336' cy='318' r='62' stroke='white' strokeWidth='1' />
+							<circle class='circle_left_top' cx='63' cy='63' r='62' stroke='white' strokeWidth='1' />
+							<circle class='circle_right_top' cx='336' cy='63' r='62' stroke='white' strokeWidth='1' />
+
+							<circle class='circle_center' cx='186' cy='208' r='62' stroke='white' strokeWidth='1' />
+							<circle
+								class='small_circle_top'
+								cx='186.249'
+								cy='163.952'
+								r='30.5'
+								stroke='white'
+								strokeWidth='1'
+							/>
+							<circle
+								class='small_circle_right'
+								cx='251.21'
+								cy='188.733'
+								r='30.5'
+								stroke='white'
+								strokeWidth='1'
+							/>
+						</svg>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<style>
+			*, html, body {
+				margin: 0; padding: 0;
+			}
+			html {
+				overflow: hidden;
+				background-color: #324c75;
+			}
+			html, body {
+				height: 100%;
+			}
+
+			/* logo ---------------------------------- */
+			.logo_wrap {
+				position: relative;
+				width: 100%;
+				height: 100%;
+			}
+			.logo_wrap:before {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background-image: url('/_assets/images/svg_ani_bg.png');
+				background-position: center;
+				background-size: auto 100%;
+				content: "";
+			}
+			.logo {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				width: 220px;
+			}
+			.logo .logo_inner {
+				width: 100%;
+				padding-top: 95.652%;
+			}
+			.logo .logo_simple,
+			.logo .logo_default,
+			.logo .logo_line {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+			}
+			.logo .logo_simple {
+				/* opacity: 0.75; */
+				font-size: 0;
+				text-indent: -9999px;
+				background-image: url('/_assets/images/svg_ani_logo_simple_emblem.svg'); /* 변수 값을 실제 경로로 변경 */
+				background-size: 100% auto;
+			}
+			.logo .logo_default {
+				opacity: 0;
+				font-size: 0;
+				text-indent: -9999px;
+				background-image: url('/_assets/images/svg_ani_logo_default_emblem.svg'); /* 변수 값을 실제 경로로 변경 */
+				background-size: 100% auto;
+			}
+			.logo .logo_line {
+				left: auto;
+				right: 0;
+			}
+
+			.logo .logo_line svg {
+				width: 100%;
+				height: auto;
+			}
+			@keyframes opacity_0_1 {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			.logo_line {
+				animation: opacity_0_1 0s 1.5s linear both, opacity_0_1 1.2s 6.5s linear reverse both;
+			}
+
+			@keyframes logo_wrap_scale {
+				0% {
+					transform: scale(1.3, 1.3);
+				}
+				100% {
+					transform: scale(1, 1);
+				}
+			}
+			.logo_wrap:before {
+				animation: logo_wrap_scale 10s ease-in-out both, opacity_0_1 1s linear both;
+			}
+
+			@keyframes logo_simple {
+				0% {
+					opacity: 0;
+				}
+				35% {
+					opacity: 0;
+				}
+				70% {
+					opacity: 0.7;
+				}
+				80% {
+					opacity: 0.7;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			.logo_simple {
+				animation: logo_simple 9s linear both;
+			}
+
+			@keyframes logo_default {
+				0% {
+					opacity: 0;
+				}
+				70% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			.logo_default {
+				animation: logo_default 9s linear both;
+			}
+
+			/* logo box ---------------------------------- */
+
+			@keyframes logo_line_visible_v_box_left {
+				100% {
+					stroke-dasharray: 754;
+					stroke-dashoffset: 0;
+				}
+			}
+
+			@keyframes logo_line_opacity_v_box_left {
+				0% {
+					opacity: 0;
+				}
+				40% {
+					opacity: 1;
+				}
+			}
+
+			.v_box_left {
+				stroke-dasharray: 450;
+				stroke-dashoffset: 754;
+				animation: logo_line_visible_v_box_left 3s 1.5s ease-out both, logo_line_opacity_v_box_left 3s 1.5s ease-out both;
+			}
+
+			@keyframes logo_line_visible_v_box_right {
+				100% {
+					stroke-dasharray: 754;
+					stroke-dashoffset: 0;
+				}
+			}
+
+			@keyframes logo_line_opacity_v_box_right {
+				0% {
+					opacity: 0;
+				}
+				40% {
+					opacity: 1;
+				}
+			}
+
+			html:not(.ios) .v_box_right {
+				stroke-dasharray: 250;
+				stroke-dashoffset: -754;
+				animation: logo_line_visible_v_box_right 2.5s 2s ease-out both, logo_line_opacity_v_box_right 2.5s 2s ease-out both;
+			}
+
+			html.ios .v_box_right {
+				stroke-dasharray: 250;
+				stroke-dashoffset: 754;
+				animation: logo_line_visible_v_box_right 2.5s 2s ease-out both, logo_line_opacity_v_box_right 2.5s 2s ease-out both;
+			}
+
+			@keyframes logo_line_visible_box_left {
+				100% {
+					stroke-dasharray: 754;
+					stroke-dashoffset: 0;
+				}
+			}
+
+			@keyframes logo_line_opacity_box_left {
+				0% {
+					opacity: 0;
+				}
+				40% {
+					opacity: 1;
+				}
+			}
+
+			.box_left {
+				stroke-dasharray: 350;
+				stroke-dashoffset: 754;
+				animation: logo_line_visible_box_left 4s 1.5s ease-out both, logo_line_opacity_box_left 4s 1.5s ease-out both;
+			}
+
+			html:not(.ios) .box_right {
+				stroke-dasharray: 354;
+				stroke-dashoffset: -754;
+				animation: logo_line_visible_box_left 3s 2.5s ease-out both, logo_line_opacity_box_left 3s 2.5s ease-out both;
+			}
+
+			html.ios .box_right {
+				stroke-dasharray: 754;
+				stroke-dashoffset: 754;
+				animation: logo_line_visible_box_left 2.5s 1.5s ease-out both, logo_line_opacity_box_left 2.5s 1.5s ease-out both;
+			}
+
+			/* logo circle ---------------------------------- */
+
+			@keyframes logo_line_visible_circle_left_top {
+				100% {
+					stroke-dasharray: 389;
+					stroke-dashoffset: 0;
+				}
+			}
+
+			@keyframes logo_line_opacity_circle_left_top {
+				0% {
+					opacity: 1;
+				}
+				40% {
+					opacity: 1;
+				}
+			}
+
+			.circle_left_top {
+				stroke-dasharray: 389;
+				stroke-dashoffset: 389;
+				animation: logo_line_visible_circle_left_top 3s 1.5s ease-out both, logo_line_opacity_circle_left_top 3s 1.5s ease-out both;
+			}
+
+			@keyframes logo_line_visible_circle_left_bottom {
+				100% {
+					stroke-dasharray: 389;
+					stroke-dashoffset: 0;
+				}
+			}
+
+			@keyframes logo_line_opacity_circle_left_bottom {
+				0% {
+					opacity: 1;
+				}
+				40% {
+					opacity: 1;
+				}
+			}
+
+			html:not(.ios) .circle_left_bottom {
+				stroke-dasharray: 389;
+				stroke-dashoffset: -389;
+				animation: logo_line_visible_circle_left_bottom 3s 2s ease-out both,
+				logo_line_opacity_circle_left_bottom 3s 2s ease-out both;
+			}
+
+			html.ios .circle_left_bottom {
+				stroke-dasharray: 389;
+				stroke-dashoffset: 389;
+				animation: logo_line_visible_circle_left_bottom 3s 2s ease-out both,
+				logo_line_opacity_circle_left_bottom 3s 2s ease-out both;
+			}
+
+			@keyframes logo_line_visible_circle_right_top {
+				100% {
+					stroke-dasharray: 389;
+					stroke-dashoffset: 0;
+				}
+			}
+
+			@keyframes logo_line_opacity_circle_right_top {
+				0% {
+					opacity: 1;
+				}
+				40% {
+					opacity: 1;
+				}
+			}
+
+			html:not(.ios) .circle_right_top {
+				stroke-dasharray: 389;
+				stroke-dashoffset: -389;
+				animation: logo_line_visible_circle_right_top 5s 1.5s ease-out both,
+				logo_line_opacity_circle_right_top 5s 1.5s ease-out both;
+			}
+
+			@keyframes logo_line_visible_circle_right_top_ios {
+				100% {
+					stroke-dasharray: 389;
+					stroke-dashoffset: 0;
+				}
+			}
+
+			@keyframes logo_line_opacity_circle_right_top_ios {
+				0% {
+					opacity: 0;
+				}
+				40% {
+					opacity: 1;
+				}
+			}
+
+			html.ios .circle_right_top {
+				stroke-dasharray: 200;
+				stroke-dashoffset: 389;
+				animation: logo_line_visible_circle_right_top_ios 5s 1.5s ease-out both,
+				logo_line_opacity_circle_right_top_ios 5s 1.5s ease-out both;
+			}
+
+			@keyframes logo_line_visible_circle_right_bottom {
+				100% {
+					stroke-dasharray: 389;
+					stroke-dashoffset: 0;
+				}
+			}
+
+			@keyframes logo_line_opacity_circle_right_bottom {
+				0% {
+					opacity: 1;
+				}
+				40% {
+					opacity: 1;
+				}
+			}
+
+			.circle_right_bottom {
+				stroke-dasharray: 389;
+				stroke-dashoffset: 389;
+				animation: logo_line_visible_circle_right_bottom 2.5s 1.5s ease-out both, logo_line_opacity_circle_right_bottom 2.5s 1.5s ease-out both;
+			}
+
+			@keyframes logo_line_visible_circle_center {
+				100% {
+					stroke-dasharray: 389;
+					stroke-dashoffset: 0;
+				}
+			}
+
+			@keyframes logo_line_opacity_circle_center {
+				0% {
+					opacity: 0;
+				}
+				40% {
+					opacity: 1;
+				}
+			}
+
+			.circle_center {
+				stroke-dasharray: 100;
+				stroke-dashoffset: 389;
+				animation: logo_line_visible_circle_center 4s 1.5s ease-out both,
+				logo_line_opacity_circle_center 4s 1.5s ease-out both;
+			}
+
+			/* logo small circle ---------------------------------- */
+
+			@keyframes logo_line_visible_small_circle_top {
+				100% {
+					stroke-dasharray: 192;
+					stroke-dashoffset: 0;
+				}
+			}
+
+			@keyframes logo_line_opacity_small_circle_top {
+				0% {
+					opacity: 1;
+				}
+				40% {
+					opacity: 1;
+				}
+			}
+
+			html:not(.ios) .small_circle_top {
+				stroke-dasharray: 192;
+				stroke-dashoffset: -192;
+				animation: logo_line_visible_small_circle_top 2.8s 2.7s ease-out both, logo_line_opacity_small_circle_top 2.8s 2.7s ease-out both;
+			}
+
+			html.ios .small_circle_top {
+				stroke-dasharray: 192;
+				stroke-dashoffset: 192;
+				animation: logo_line_visible_small_circle_top 4s 2.5s ease-out both, logo_line_opacity_small_circle_top 4s 2.5s ease-out both;
+			}
+
+			@keyframes logo_line_visible_small_circle_right {
+				100% {
+					stroke-dasharray: 192;
+					stroke-dashoffset: 0;
+				}
+			}
+
+			@keyframes logo_line_opacity_small_circle_right {
+				0% {
+					opacity: 1;
+				}
+				40% {
+					opacity: 1;
+				}
+			}
+
+			html:not(.ios) .small_circle_right {
+				stroke-dasharray: 192;
+				stroke-dashoffset: -192;
+				animation: logo_line_visible_small_circle_right 2.5s 1.5s ease-out both, logo_line_opacity_small_circle_right 2.5s 1.5s ease-out both;
+			}
+
+			html.ios .small_circle_right {
+				stroke-dasharray: 192;
+				stroke-dashoffset: 192;
+				animation: logo_line_visible_small_circle_right 2.5s 1.5s ease-out both, logo_line_opacity_small_circle_right 2.5s 1.5s ease-out both;
+			}
+		</style>
+
+		<script>
+			// svg path 길이 계산 (결과값의 올림 필요 / 평상시 주석)
+			// const myPath = document.querySelector('.small_circle_top');
+			// const length = myPath.getTotalLength();
+			// ll(length);
+		</script>
+	</body>
+</html>

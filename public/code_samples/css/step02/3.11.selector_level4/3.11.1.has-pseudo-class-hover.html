@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+		<meta name="format-detection" content="telephone=no, address=no, email=no, date=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>UXKM CSS :has() Pseudo-class - 호버된 버튼이 있는 카드</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				padding: 0 20px;
+				line-height: 1.6;
+			}
+			h2 {
+				color: #333;
+				margin-bottom: 15px;
+			}
+
+			/* 예시 3: 호버된 버튼이 있는 카드 스타일 변경 */
+			.card:has(button:hover) {
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+				transform: translateY(-2px);
+				transition: all 0.3s;
+			}
+
+			.card {
+				margin: 15px 0;
+				padding: 20px;
+				border: 1px solid #ddd;
+				border-radius: 8px;
+				background-color: #fff;
+			}
+
+			button {
+				padding: 10px 20px;
+				background-color: #0066cc;
+				color: white;
+				border: none;
+				border-radius: 4px;
+				cursor: pointer;
+				font-size: 14px;
+			}
+
+			button:hover {
+				background-color: #0052a3;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>:has() 선택자 - 호버된 버튼이 있는 카드 스타일 변경</h2>
+		<p>버튼에 마우스를 올리면 카드 전체에 그림자 효과와 위로 살짝 올라가는 애니메이션이 적용됩니다.</p>
+
+		<div class="card">
+			<h3>카드 제목 1</h3>
+			<p>이 카드의 버튼에 마우스를 올려보세요.</p>
+			<button>버튼 1</button>
+		</div>
+		<div class="card">
+			<h3>카드 제목 2</h3>
+			<p>버튼에 호버하면 카드가 위로 올라가고 그림자가 생깁니다.</p>
+			<button>버튼 2</button>
+		</div>
+		<div class="card">
+			<h3>카드 제목 3</h3>
+			<p>각 카드의 버튼을 호버해보세요.</p>
+			<button>버튼 3</button>
+		</div>
+	</body>
+</html>

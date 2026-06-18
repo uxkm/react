@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[td] 대학 성적표</title>
+	</head>
+	<body>
+		<h2>직원 근무 일정표</h2>
+		<table>
+			<caption>2024년 3월 직원 근무 일정</caption>
+			<thead>
+				<tr>
+					<th rowspan="2" id="dept">부서</th>
+					<th rowspan="2" id="name">이름</th>
+					<th colspan="5" id="week">근무 요일</th>
+				</tr>
+				<tr>
+					<th headers="week" id="mon">월</th>
+					<th headers="week" id="tue">화</th>
+					<th headers="week" id="wed">수</th>
+					<th headers="week" id="thu">목</th>
+					<th headers="week" id="fri">금</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th rowspan="2" headers="dept" id="dept1">영업부</th>
+					<th headers="dept1 name" id="emp1">박민수</th>
+					<td headers="emp1 week mon">출근</td>
+					<td headers="emp1 week tue">출근</td>
+					<td headers="emp1 week wed">휴가</td>
+					<td headers="emp1 week thu">출근</td>
+					<td headers="emp1 week fri">출근</td>
+				</tr>
+				<tr>
+					<th headers="dept1 name" id="emp2">송지현</th>
+					<td headers="emp2 week mon">출근</td>
+					<td headers="emp2 week tue">출근</td>
+					<td headers="emp2 week wed">출근</td>
+					<td headers="emp2 week thu">출장</td>
+					<td headers="emp2 week fri">출근</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<style>
+      table {
+        width: 100%;
+        min-width: 400px;
+        border-collapse: collapse;
+      }
+      th, td {
+        border: 1px solid #bbb;
+        padding: 8px;
+      }
+      th {
+        background-color: #eee;
+      }
+		</style>
+	</body>
+</html>

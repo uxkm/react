@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>lch() 색상 함수 예제</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			padding: 0 2rem;
+			background: #f5f5f5;
+			margin: 0;
+		}
+
+		.color-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+			gap: 1rem;
+			margin-top: 1rem;
+		}
+
+		.color-box {
+			height: 120px;
+			border-radius: 8px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: white;
+			font-weight: bold;
+			text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+			font-size: 0.9rem;
+			text-align: center;
+		}
+
+		/* lch() 예제 */
+		.lch-1 { background-color: lch(60% 50 0); }
+		.lch-2 { background-color: lch(40% 30 240); }
+		.lch-3 { background-color: lch(80% 40 90); }
+		.lch-4 { background-color: lch(50% 0 0); }
+		.lch-5 { background-color: lch(70% 60 120); }
+		.lch-6 { background-color: lch(30% 20 300); }
+
+		.label {
+			font-size: 0.85rem;
+			margin-top: 0.5rem;
+			color: #666;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<h1>lch() 색상 함수 예제</h1>
+	<p>명도, 채도, 색조를 사용한 색상 표현입니다.</p>
+
+	<div class="color-grid">
+		<div>
+			<div class="color-box lch-1">lch(60% 50 0)</div>
+			<div class="label">밝은 빨강</div>
+		</div>
+		<div>
+			<div class="color-box lch-2">lch(40% 30 240)</div>
+			<div class="label">어두운 파랑</div>
+		</div>
+		<div>
+			<div class="color-box lch-3">lch(80% 40 90)</div>
+			<div class="label">밝은 노랑</div>
+		</div>
+		<div>
+			<div class="color-box lch-4">lch(50% 0 0)</div>
+			<div class="label">회색</div>
+		</div>
+		<div>
+			<div class="color-box lch-5">lch(70% 60 120)</div>
+			<div class="label">밝은 초록</div>
+		</div>
+		<div>
+			<div class="color-box lch-6">lch(30% 20 300)</div>
+			<div class="label">어두운 자주</div>
+		</div>
+	</div>
+</body>
+</html>

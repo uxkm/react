@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[output] checkbox, radio, file 타입과 연계하여 출력</title>
+	</head>
+	<body>
+		<p>
+			<b>checkbox 선택 여부 출력</b><br />
+			<span class="info">(input checkbox 타입과 연계)</span>
+		</p>
+		<div class="box checkInput-container">
+			<input type="checkbox" id="checkInput" onclick="output7.value = this.checked ? '선택됨' : '선택 안됨'">
+			<label for="checkInput">동의</label>
+			<output id="output7">선택 안됨</output>
+		</div>
+		<hr>
+
+		<p>
+			<b>radio 선택값을 출력</b><br />
+			<span class="info">(input radio 타입과 연계)</span>
+		</p>
+		<div class="box radioInput-container">
+			<label>성별 선택: </label>
+			<input type="radio" name="gender" id="male" value="남성" onclick="output6.value = this.value">
+			<label for="male">남성</label>
+			<input type="radio" name="gender" id="female" value="여성" onclick="output6.value = this.value">
+			<label for="female">여성</label>
+			<output id="output6"></output>
+		</div>
+		<hr>
+
+		<p>
+			<b>file 입력값을 출력</b><br />
+			<span class="info">(input file 타입과 연계)</span>
+		</p>
+		<div class="box fileInput-container">
+			<label for="fileInput">파일 선택: </label>
+			<input type="file" id="fileInput" onchange="output8.value = this.files[0] ? this.files[0].name : '파일 없음'">
+			<output id="output8">파일 없음</output>
+		</div>
+
+		<style>
+			*, html, body {vertical-align:top;}
+			body {padding-top:5px;}
+			hr {margin:15px 0;}
+			p {margin:0;}
+			.info {font-size:16px; color:#1e73ff;}
+			.checkInput-container output,
+			.radioInput-container output {margin-left:10px;}
+
+			label, input, output {margin-top: 8px;}
+			label {
+				display:inline-block;
+				line-height: 26px;
+			}
+			input:not([type="checkbox"]):not([type="radio"]) {
+				width: 150px;
+				height: 26px;
+				margin-right: 2px;
+				padding: 0 5px;
+				box-sizing: border-box;
+			}
+			input[type="checkbox"],
+			input[type="radio"] {
+				vertical-align: top;
+				margin-top: 13px;
+			}
+			output {
+				display: inline-block;
+				min-width: 26px;
+				height: 26px;
+        padding: 0 6px;
+				line-height: 26px;
+				text-align: center;
+				border: 1px solid #1e73ff;
+				box-shadow: 0 0 0 1px inset #1e73ff;
+				border-radius: 3px;
+				box-sizing: border-box;
+			}
+		</style>
+	</body>
+</html>

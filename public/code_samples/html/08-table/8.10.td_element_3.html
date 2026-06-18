@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[td] 대학 성적표</title>
+	</head>
+	<body>
+		<h2>병원 진료 일정표</h2>
+		<table>
+			<caption>2024년 병원 진료 일정</caption>
+			<thead>
+				<tr>
+					<th rowspan="2" id="dept">진료과목</th>
+					<th rowspan="2" id="doctor">의사</th>
+					<th colspan="5" id="days">진료 가능 요일</th>
+				</tr>
+				<tr>
+					<th headers="days" id="mon">월</th>
+					<th headers="days" id="tue">화</th>
+					<th headers="days" id="wed">수</th>
+					<th headers="days" id="thu">목</th>
+					<th headers="days" id="fri">금</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th rowspan="2" headers="dept" id="dent">치과</th>
+					<th headers="dent doctor" id="dr1">김철수</th>
+					<td headers="dr1 days mon">⭕</td>
+					<td headers="dr1 days tue">⭕</td>
+					<td headers="dr1 days wed">❌</td>
+					<td headers="dr1 days thu">⭕</td>
+					<td headers="dr1 days fri">⭕</td>
+				</tr>
+				<tr>
+					<th headers="dent doctor" id="dr2">이영희</th>
+					<td headers="dr2 days mon">⭕</td>
+					<td headers="dr2 days tue">❌</td>
+					<td headers="dr2 days wed">⭕</td>
+					<td headers="dr2 days thu">⭕</td>
+					<td headers="dr2 days fri">❌</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<style>
+      table {
+        width: 100%;
+        min-width: 400px;
+        border-collapse: collapse;
+      }
+      th, td {
+        border: 1px solid #bbb;
+        padding: 8px;
+      }
+      th {
+        background-color: #eee;
+      }
+		</style>
+	</body>
+</html>

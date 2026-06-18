@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>드롭다운 메뉴 예시 | 복합형 위젯 역할(WAI-ARIA)</title>
+		<style>
+			button {
+				background-color: #007BFF;
+				color: white;
+				border: none;
+				padding: 10px 20px;
+				font-size: 16px;
+				cursor: pointer;
+				border-radius: 4px;
+				margin-bottom: 10px;
+			}
+			button:focus {
+				outline: 2px solid #0056b3;
+			}
+			[role="menu"] {
+				background-color: #f9f9f9;
+				border: 1px solid #ddd;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				border-radius: 4px;
+				position: absolute;
+				width: 200px;
+				z-index: 1000;
+				display: none;
+			}
+			[role="menu"][hidden] {
+				display: none;
+			}
+			[role="menuitem"] {
+				padding: 10px;
+				cursor: pointer;
+				font-size: 16px;
+			}
+			[role="menuitem"]:hover {
+				background-color: #007BFF;
+				color: white;
+			}
+			[role="menuitem"]:focus {
+				outline: 2px solid #007BFF;
+				background-color: #e9ecef;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 버튼과 메뉴 -->
+		<button aria-haspopup="true" aria-expanded="false" aria-controls="menu1">Options</button>
+		<div role="menu" id="menu1" hidden>
+			<div role="menuitem" tabindex="-1">Profile</div>
+			<div role="menuitem" tabindex="-1">Settings</div>
+			<div role="menuitem" tabindex="-1">Log out</div>
+		</div>
+
+		<script>
+			const button = document.querySelector('[aria-haspopup="true"]');
+			const menu = document.getElementById('menu1');
+
+			// 버튼 클릭 시 메뉴 표시/숨김 토글
+			button.addEventListener('click', () => {
+				const expanded = button.getAttribute('aria-expanded') === 'true';
+				button.setAttribute('aria-expanded', !expanded);
+
+				// 메뉴의 display 속성을 토글하여 숨기거나 보여줌
+				if (expanded) {
+					menu.style.display = 'none';  // 메뉴 숨김
+				} else {
+					menu.style.display = 'block';  // 메뉴 표시
+				}
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[type="tel"] 검색 입력 필드</title>
+	</head>
+	<body>
+		<p>기본 전화번호 입력 필드</p>
+		<input type="tel" name="phone" placeholder="전화번호 입력">
+		<hr>
+
+		<p>정규 표현식 검증</p>
+		<form>
+			<input type="tel" name="userphone" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" size="22" autocomplete="false"
+						 placeholder="000-0000-0000 형식 입력" title="000-0000-0000 형식 입력" required>
+			<input type="submit" value="Send">
+		</form>
+		<hr>
+
+		<p>자동완성 비활성화</p>
+		<input type="tel" name="contact" autocomplete="off" placeholder="연락처 입력">
+
+		<style>
+      hr {margin:15px 0;}
+      input {margin:10px 0 0;}
+			p {margin:0;}
+		</style>
+	</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>잘못된 예시 : 오동작 방지 없이 문자 단축키 사용</title>
+	</head>
+	<body>
+		<input type="text" placeholder="텍스트를 입력하세요.">
+
+		<script>
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'a') {
+          alert('"a" 키를 눌렀습니다!');
+        }
+      });
+		</script>
+	</body>
+</html>

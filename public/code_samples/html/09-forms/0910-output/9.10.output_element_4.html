@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[output] date, time 타입과 연계하여 출력</title>
+	</head>
+	<body>
+		<p>
+			<b>date 입력값을 출력</b><br />
+			<span class="info">(input date 타입과 연계)</span>
+		</p>
+		<div class="box dateInput-container">
+			<label for="dateInput">날짜 선택: </label>
+			<input type="date" id="dateInput" oninput="output4.value = dateInput.value">
+			<output id="output4"></output>
+		</div>
+		<hr>
+
+		<p>
+			<b>time 입력값을 출력</b><br />
+			<span class="info">(input time 타입과 연계)</span>
+		</p>
+		<div class="box timeInput-container">
+			<label for="timeInput">시간 선택: </label>
+			<input type="time" id="timeInput" oninput="output9.value = timeInput.value">
+			<output id="output9"></output>
+		</div>
+
+		<style>
+			*, html, body {vertical-align:top;}
+			body {padding-top:5px;}
+			hr {margin:15px 0;}
+			p {margin:0;}
+			.info {font-size:16px; color:#1e73ff;}
+
+			label, input, output {margin-top: 8px;}
+			label {
+				display:inline-block;
+				line-height: 26px;
+			}
+			input {
+				width: 150px;
+				height: 26px;
+				margin-right: 2px;
+				padding: 0 5px;
+				box-sizing: border-box;
+			}
+			output {
+				display: inline-block;
+				min-width: 26px;
+				height: 26px;
+        padding: 0 6px;
+				line-height: 26px;
+				text-align: center;
+				border: 1px solid #1e73ff;
+				box-shadow: 0 0 0 1px inset #1e73ff;
+				border-radius: 3px;
+				box-sizing: border-box;
+			}
+		</style>
+	</body>
+</html>

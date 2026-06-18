@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>aria-live 키패드 응용 예시 | 라이브 영역 속성 (WAI-ARIA)</title>
+		<style>
+      .keypad {
+        width: 220px;
+        margin: 10px auto;
+        text-align: center;
+        background-color: #f7f7f7;
+        padding: 20px;
+				border: 1px solid #ddd;
+        border-radius: 10px;
+      }
+      .keynumber {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-bottom: 20px; /* 숫자 버튼과 기능 버튼 간 간격 추가 */
+      }
+      .keynumber button {
+        width: 60px;
+        height: 40px;
+        font-size: 18px;
+        background-color: #4a90e2;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .keynumber button:hover {
+        background-color: #357ab7;
+      }
+      .function-buttons {
+        display: flex;
+        justify-content: space-between; /* 기능 버튼들을 한 줄에 나란히 배치 */
+        gap: 10px;
+      }
+      .function-buttons button {
+        flex: 1; /* 모든 기능 버튼이 같은 넓이를 차지하게 함 */
+        height: 40px;
+        font-size: 16px;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .clear {
+        background-color: #e74c3c;
+      }
+      .clear:hover {
+        background-color: #b41c0c;
+			}
+      .rearr {
+        background-color: #f1c40f;
+      }
+      .rearr:hover {
+        background-color: #cda400;
+      }
+      .confirm {
+        background-color: #2ecc71;
+      }
+      .confirm:hover {
+        background-color: #00a546;
+      }
+      .message {
+        visibility: hidden; /* 처음에는 메시지를 숨김 */
+        min-height: 24px;
+        margin-top: 20px;
+				padding: 5px;
+        font-size: 16px;
+        color: #333;
+				background-color: #fff;
+				border: 1px solid #ddd;
+				border-radius: 5px;
+      }
+		</style>
+	</head>
+	<body>
+		<div class="keypad">
+			<div class="keynumber">
+				<!-- 숫자 버튼 -->
+				<button type="button" class="number">0</button>
+				<button type="button" class="number">1</button>
+				<button type="button" class="number">2</button>
+				<button type="button" class="number">3</button>
+				<button type="button" class="number">4</button>
+				<button type="button" class="number">5</button>
+				<button type="button" class="number">6</button>
+				<button type="button" class="number">7</button>
+				<button type="button" class="number">8</button>
+				<button type="button" class="number">9</button>
+			</div>
+
+			<div class="function-buttons">
+				<!-- 기능 버튼 -->
+				<button type="button" class="clear number">지우기</button>
+				<button type="button" class="rearr number">재배열</button>
+				<button type="button" class="confirm number">확인</button>
+			</div>
+
+			<p class="message" aria-live="assertive"></p>
+		</div>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				const numbers = document.querySelectorAll('.number');
+				const messageBox = document.querySelector('.message');
+				let inputCount = 0;
+
+				function updateVoiceMessage(text) {
+					messageBox.textContent = text;
+					messageBox.style.visibility = 'visible'; // 메시지 박스를 보이게 함
+				}
+
+				function clearInput() {
+					inputCount = 0;
+					updateVoiceMessage("입력이 초기화되었습니다.");
+				}
+
+				function confirmInput() {
+					updateVoiceMessage("입력이 확인되었습니다.");
+				}
+
+				numbers.forEach(button => {
+					button.addEventListener('click', function() {
+						if (this.classList.contains('clear')) {
+							clearInput();
+						} else if (this.classList.contains('rearr')) {
+							updateVoiceMessage("재배열 기능은 아직 구현되지 않았습니다.");
+						} else if (this.classList.contains('confirm')) {
+							confirmInput();
+						} else {
+							if (inputCount < 7) {
+								inputCount++;
+								updateVoiceMessage(`총 7자리 중 ${inputCount}번째 입력`);
+							} else {
+								updateVoiceMessage("최대 입력 개수에 도달했습니다.");
+							}
+						}
+					});
+				});
+			});
+		</script>
+	</body>
+</html>

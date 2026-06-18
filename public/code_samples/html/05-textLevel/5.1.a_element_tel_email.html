@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mobile and Email Links</title>
+</head>
+<body>
+	<!-- 전화번호 링크 -->
+	<a href="tel:01012345678" class="button phone-button">
+		Call Us: 010-1234-5678
+	</a>
+
+	<!-- 이메일 링크 -->
+	<a href="mailto:example@example.com" class="button email-button">
+		Email Us: example@example.com
+	</a>
+
+	<style>
+    /* 공통 버튼 스타일 */
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      text-align: center;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    /* 전화 버튼 스타일 */
+    .phone-button {
+      background-color: #4caf50; /* 초록색 */
+      color: white;
+      border: 2px solid #388e3c;
+    }
+    .phone-button:hover {
+      background-color: #45a049;
+      border-color: #2e7d32;
+    }
+
+    /* 이메일 버튼 스타일 */
+    .email-button {
+			margin-top: 15px;
+      background-color: #2196f3; /* 파란색 */
+      color: white;
+      border: 2px solid #1976d2;
+    }
+    .email-button:hover {
+      background-color: #1e88e5;
+      border-color: #1565c0;
+    }
+	</style>
+</body>
+</html>

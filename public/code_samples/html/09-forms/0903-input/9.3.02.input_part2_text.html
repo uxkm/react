@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[type="text"] 일반 텍스트 입력 필드</title>
+	</head>
+	<body>
+		<p>기본 텍스트 입력 필드</p>
+		<input type="text" name="username" placeholder="사용자 이름을 입력하세요">
+		<hr>
+
+		<p>최대 문자 수 제한</p>
+		<input type="text" name="nickname" maxlength="10" placeholder="최대 10자 입력 가능">
+		<hr>
+
+		<p>가로 사이즈 조정</p>
+		<input type="text" name="nickname" size="25" placeholder="size의 값을 변경해 보세요">
+		<hr>
+
+		<p>정규 표현식 패턴 적용</p>
+		<form>
+			<input type="password" id="complexpass" name="complexpass"
+						 pattern="[a-zA-Z0-9]{5,10}"
+						 title="영문자와 숫자로 5~10자 입력" required>
+			<input type="submit" value="Send">
+		</form>
+
+		<style>
+      hr {margin:15px 0;}
+      input {margin:10px 0 0;}
+			p {margin:0;}
+		</style>
+	</body>
+</html>

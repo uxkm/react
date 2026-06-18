@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[output] text, password 타입과 연계하여 출력</title>
+	</head>
+	<body>
+		<p>
+			<b>text 입력값을 출력</b><br />
+			<span class="info">(input text 타입과 연계)</span>
+		</p>
+		<div class="box textInput-container">
+			<label for="textInput">이름 입력: </label>
+			<input type="text" id="textInput" oninput="output5.value = textInput.value">
+			<output id="output5"></output>
+		</div>
+		<hr>
+
+		<p>
+			<b>password 입력값 길이를 출력</b><br />
+			<span class="info">(input password 타입과 연계)</span>
+		</p>
+		<div class="box passwordInput-container">
+			<label for="passwordInput">비밀번호: </label>
+			<input type="password" id="passwordInput" oninput="output10.value = passwordInput.value.length + '자 입력됨'">
+			<output id="output10">0자 입력됨</output>
+		</div>
+
+		<style>
+			*, html, body {vertical-align:top;}
+			body {padding-top:5px;}
+			hr {margin:15px 0;}
+			p {margin:0;}
+			.info {font-size:16px; color:#1e73ff;}
+
+			label, input, output {margin-top:8px;}
+			label {
+				display:inline-block;
+				line-height: 26px;
+			}
+			input {
+				width: 150px;
+				height: 26px;
+				margin-right: 2px;
+				padding: 0 5px;
+				box-sizing: border-box;
+			}
+			output {
+				display: inline-block;
+				min-width: 26px;
+				height: 26px;
+				padding: 0 6px;
+				line-height: 26px;
+				text-align: center;
+				border: 1px solid #1e73ff;
+				box-shadow: 0 0 0 1px inset #1e73ff;
+				border-radius: 3px;
+				box-sizing: border-box;
+			}
+		</style>
+	</body>
+</html>

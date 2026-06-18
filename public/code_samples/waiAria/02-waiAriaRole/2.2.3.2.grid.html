@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>대화형 그리드 예시</title>
+		<style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th, td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: left;
+      }
+      th {
+        cursor: pointer;
+      }
+      th.sorted-asc::after {
+        content: " 🔼";
+      }
+      th.sorted-desc::after {
+        content: " 🔽";
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      tr:hover {
+        background-color: #ddd;
+      }
+		</style>
+	</head>
+	<body>
+		<table id="grid">
+			<thead>
+			<tr>
+				<th onclick="sortTable(0)">Name</th>
+				<th onclick="sortTable(1)">Age</th>
+				<th onclick="sortTable(2)">Country</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>John Doe</td>
+				<td>35</td>
+				<td>USA</td>
+			</tr>
+			<tr>
+				<td>Anna Smith</td>
+				<td>28</td>
+				<td>UK</td>
+			</tr>
+			<tr>
+				<td>Peter Jones</td>
+				<td>42</td>
+				<td>Canada</td>
+			</tr>
+			<tr>
+				<td>Maria Rodriguez</td>
+				<td>30</td>
+				<td>Spain</td>
+			</tr>
+			</tbody>
+		</table>
+
+		<script>
+			function sortTable(columnIndex) {
+				const table = document.getElementById('grid');
+				const rows = Array.from(table.rows).slice(1);
+				const isSorted = table.querySelectorAll('th')[columnIndex].classList.contains('sorted-asc');
+				const direction = isSorted ? 'desc' : 'asc';
+
+				rows.sort((rowA, rowB) => {
+					const cellA = rowA.cells[columnIndex].textContent.trim();
+					const cellB = rowB.cells[columnIndex].textContent.trim();
+
+					if (direction === 'asc') {
+						return cellA.localeCompare(cellB, undefined, {numeric: true});
+					} else {
+						return cellB.localeCompare(cellA, undefined, {numeric: true});
+					}
+				});
+
+				rows.forEach(row => table.querySelector('tbody').appendChild(row));
+
+				// Update sort indicators
+				table.querySelectorAll('th').forEach(th => th.classList.remove('sorted-asc', 'sorted-desc'));
+				table.querySelectorAll('th')[columnIndex].classList.add(direction === 'asc' ? 'sorted-asc' : 'sorted-desc');
+			}
+		</script>
+	</body>
+</html>

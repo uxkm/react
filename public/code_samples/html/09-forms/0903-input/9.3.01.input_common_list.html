@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[input] value 속성</title>
+	</head>
+	<body>
+		<b>텍스트 입력 (자동완성 목록)</b><br />
+		<label for="city">도시 선택:</label>
+		<input type="text" id="city" name="city" list="city-list">
+		<datalist id="city-list">
+			<option value="서울">
+			<option value="부산">
+			<option value="대구">
+			<option value="인천">
+			<option value="광주">
+		</datalist>
+		<hr>
+
+		<b>숫자 입력 (권장 범위 제공)</b><br />
+		<label for="age">나이 선택:</label>
+		<input type="number" id="age" name="age" list="age-list">
+		<datalist id="age-list">
+			<option value="10">
+			<option value="20">
+			<option value="30">
+			<option value="40">
+			<option value="50">
+		</datalist>
+		<hr>
+
+		<b>색상 선택 (추천 색상 제공)</b><br />
+		<label for="color">색상 선택:</label>
+		<input type="color" id="color" name="color" list="color-list">
+		<datalist id="color-list">
+			<option value="#ff0000">
+			<option value="#00ff00">
+			<option value="#0000ff">
+			<option value="#ffff00">
+			<option value="#ff00ff">
+		</datalist>
+		<hr>
+
+		<b>이메일 선택 예제 (email 타입)</b><br />
+		<label for="email">이메일을 선택하거나 입력하세요:</label>
+		<input type="email" id="email" name="email" list="emailList">
+		<datalist id="emailList">
+			<option value="gmail.com">
+			<option value="yahoo.com">
+			<option value="outlook.com">
+			<option value="naver.com">
+			<option value="daum.net">
+		</datalist>
+
+		<style>
+			hr {margin:15px 0;}
+			input {margin:10px 0 0;}
+		</style>
+	</body>
+</html>

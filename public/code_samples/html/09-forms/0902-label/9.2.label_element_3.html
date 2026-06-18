@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[label] 라디오 버튼과 label 연결</title>
+	</head>
+	<body>
+		<h2>명시적 방식</h2>
+		<input type="radio" id="male" name="fruit1" value="apple">
+		<label for="male">사과</label>
+		<input type="radio" id="female" name="fruit1" value="banana">
+		<label for="female">바나나</label>
+		<hr>
+
+		<h2>암묵적 방식</h2>
+		<label>
+			<input type="radio" name="fruit2" value="apple">
+			사과
+		</label>
+		<label>
+			<input type="radio" name="fruit2" value="banana">
+			바나나
+		</label>
+	</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[output] 두 숫자의 합을 실시간으로 표시</title>
+	</head>
+	<body>
+		<p>
+			<b>두 숫자의 합을 실시간으로 표시</b>
+		</p>
+		<form oninput="result.value = parseInt(num1.value) + parseInt(num2.value)">
+			<input type="number" id="num1" value="0"> <span>+</span>
+			<input type="number" id="num2" value="0"> <span>=</span>
+			<output name="result" for="num1 num2">0</output>
+		</form>
+
+		<style>
+			*, html, body {vertical-align:top;}
+			body {padding-top:5px;}
+			hr {margin:15px 0;}
+			p {margin:0;}
+			span {display:inline-block; margin-top:11px;}
+
+			input, output {margin-top: 8px;}
+			label {
+				display:inline-block;
+				line-height: 26px;
+			}
+			input {
+				width: 50px;
+				height: 26px;
+				margin-right: 2px;
+				padding: 0 5px;
+				box-sizing: border-box;
+			}
+			output {
+				display: inline-block;
+				min-width: 26px;
+				height: 26px;
+        padding: 0 6px;
+				line-height: 26px;
+				text-align: center;
+				border: 1px solid #1e73ff;
+				box-shadow: 0 0 0 1px inset #1e73ff;
+				border-radius: 3px;
+				box-sizing: border-box;
+			}
+		</style>
+	</body>
+</html>

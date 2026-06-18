@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>드롭다운 메뉴가 포함된 menubar 예시 | 복합형 위젯 역할(WAI-ARIA)</title>
+		<style>
+			[role="menubar"] {
+				background-color: #f1f1f1;
+				display: flex;
+				padding: 10px;
+				border-bottom: 2px solid #ddd;
+			}
+			[role="menuitem"] {
+				margin-right: 20px;
+				padding: 8px 15px;
+				font-size: 16px;
+				cursor: pointer;
+				color: #333;
+				background-color: #fff;
+				border: 1px solid #ddd;
+				border-radius: 4px;
+			}
+			[aria-expanded="true"] {
+				background-color: #007BFF;
+				color: white;
+			}
+			[role="menu"] {
+				position: absolute;
+				background-color: #fff;
+				border: 1px solid #ddd;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				padding: 10px;
+				width: 150px;
+			}
+			[role="menuitem"] {
+				padding: 8px 10px;
+				color: #333;
+				cursor: pointer;
+				font-size: 14px;
+				border-radius: 3px;
+			}
+			[role="menuitem"]:hover, [role="menuitem"]:focus {
+				background-color: #007BFF;
+				color: white;
+			}
+			[role="menu"][hidden] {
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Menubar 및 서브 메뉴 -->
+		<nav role="menubar">
+			<div role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="0">File</div>
+			<div role="menu" hidden>
+				<div role="menuitem" tabindex="-1">New</div>
+				<div role="menuitem" tabindex="-1">Open</div>
+				<div role="menuitem" tabindex="-1">Save</div>
+			</div>
+			<div role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="0">Edit</div>
+			<div role="menu" hidden>
+				<div role="menuitem" tabindex="-1">Cut</div>
+				<div role="menuitem" tabindex="-1">Copy</div>
+				<div role="menuitem" tabindex="-1">Paste</div>
+			</div>
+		</nav>
+
+		<script>
+			const menubarItems = document.querySelectorAll('[role="menuitem"]');
+
+			menubarItems.forEach(item => {
+				item.addEventListener('click', () => {
+					const expanded = item.getAttribute('aria-expanded') === 'true';
+
+					// 모든 메뉴 닫기
+					menubarItems.forEach(otherItem => {
+						otherItem.setAttribute('aria-expanded', 'false');
+						const otherMenu = otherItem.nextElementSibling;
+						if (otherMenu && otherMenu.getAttribute('role') === 'menu') {
+							otherMenu.hidden = true;
+						}
+					});
+
+					// 클릭한 메뉴의 상태 변경
+					if (!expanded) {
+						item.setAttribute('aria-expanded', 'true');
+						const menu = item.nextElementSibling;
+						if (menu && menu.getAttribute('role') === 'menu') {
+							const rect = item.getBoundingClientRect();
+							menu.style.left = `${rect.left}px`;
+							menu.style.top = `${rect.bottom}px`;
+							menu.hidden = false;
+						}
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

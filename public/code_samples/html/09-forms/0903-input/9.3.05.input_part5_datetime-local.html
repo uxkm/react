@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[type="datetime-local"] 날짜와 시간 선택 필드</title>
+		<style>
+			hr {margin:15px 0;}
+			input {margin:10px 0 0;}
+			p {margin:0;}
+		</style>
+	</head>
+	<body>
+		<p>기본 날짜 및 시간 선택</p>
+		<input type="datetime-local" name="appointment">
+		<hr>
+
+		<p>최소값, 최대값 설정(2025년 내에서만 날짜 선택)</p>
+		<input type="datetime-local" name="meeting" min="2025-01-01T08:00" max="2025-12-31T18:00">
+		<hr>
+
+		<p>
+			30분 단위 증가(step) 설정<br />
+			30분 단위 외 시간 선택 후 제출 버튼 클릭 시 안내 튭팁 제공
+		</p>
+		<form>
+			<input type="datetime-local" name="session" step="1800" required>
+			<input type="submit" value="제출">
+		</form>
+		<hr>
+
+		<p>커스텀 날짜 선택 필드</p>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+		<div class="custom-date-container">
+			<input type="datetime-local" id="customDateInput" class="custom-date-input" />
+			<button type="button" id="calendarIconButton" class="calendar-icon-btn">
+				<i class="fa-solid fa-calendar-day"></i>
+			️</button>
+		</div>
+		<style>
+      :root {
+        --custom-date-input-height: 46px;
+        --custom-date-background-color: #eee;
+        --custom-date-border-color: #ccc;
+        --custom-date-focus-border-color: #007bff;
+        --custom-date-font-size: 16px;
+      }
+      .custom-date-container {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+        margin-top: 10px;
+        background-color: var(--custom-date-background-color);
+        border: 1px solid var(--custom-date-border-color);
+        border-radius: 6px;
+      }
+      .custom-date-container.input-active,
+      .custom-date-container.button-active  {
+        border-color: var(--custom-date-focus-border-color);
+        outline: 1px solid var(--custom-date-focus-border-color);
+      }
+      .custom-date-input {
+        height: var(--custom-date-input-height);
+        margin:0;
+        padding: 0 var(--custom-date-input-height) 0 13px;
+        font-size: var(--custom-date-font-size);
+        color: #333;
+        border: 0;
+        outline: none;
+        background-color: transparent;
+      }
+      .custom-date-input::-webkit-calendar-picker-indicator {
+        display: none;
+      }
+      .calendar-icon-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: calc(var(--custom-date-input-height) + 6px);
+        height: 100%;
+        font-size: 20px;
+        color: #666;
+        background-color: transparent;
+        border: 0;
+        cursor: pointer;
+      }
+      .custom-date-container.button-active .calendar-icon-btn {
+        color: var(--custom-date-focus-border-color);
+      }
+		</style>
+		<script>
+      document.querySelectorAll(".custom-date-container").forEach((customDateContainer) => {
+        const customDateInput = customDateContainer.querySelector(".custom-date-input");
+        const calendarIconButton = customDateContainer.querySelector(".calendar-icon-btn");
+
+				// 클릭 시 날짜 선택 창을 열도록 설정
+				calendarIconButton.addEventListener("click", function () {
+					// input[type="date"] 필드 클릭
+					customDateInput.showPicker();  // 사용자가 날짜를 선택할 수 있는 날짜 선택기를 엽니다.
+					customDateContainer.classList.add("button-active");  // 날짜 선택 UI가 열리면 active 클래스 추가
+				});
+
+				// input에 포커스가 되었을 때 active 클래스 추가
+				customDateInput.addEventListener("focus", function() {
+					customDateContainer.classList.add("input-active");
+					// .custom-date-container에 .button-active가 있다면 .button-active 삭제
+					if (customDateContainer.classList.contains("button-active")) {
+						customDateContainer.classList.remove("button-active");
+					}
+				});
+
+				// 다른 곳 클릭 시 날짜 선택 UI가 숨겨지면 active 클래스 제거
+				document.addEventListener("click", function(event) {
+					// 클릭한 요소가 .custom-date-container 내부에 있지 않거나, .calendar-icon-btn이 아닌 경우
+					if (!customDateContainer.contains(event.target) && event.target !== calendarIconButton) {
+						customDateContainer.classList.remove("input-active", "button-active");
+					}
+				});
+      });
+		</script>
+	</body>
+</html>

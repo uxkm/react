@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>잘못된 예시 : 동작기반 기능만 제공하는 경우</title>
+	</head>
+	<body>
+		<form onsubmit="return validateForm()">
+			<label for="nickname">Email:</label>
+			<input type="text" id="nickname" name="nickname" aria-describedby="nickname-help" placeholder="닉네임을 입력해 주세요.">
+			<p id="nickname-help">닉네임을 입력해 주세요. 닉네임은 2자 이상 10자 이하이어야 합니다.</p>
+			<br><br>
+			<input type="submit" value="Submit">
+			<p id="error-message" aria-live="assertive" style="color: red;"></p>
+		</form>
+
+		<script>
+			function validateForm() {
+				const nickname = document.getElementById('nickname').value;
+				const errorMessage = document.getElementById('error-message');
+				const nicknameInput = document.getElementById('nickname');
+
+        // 명확한 오류 메시지를 표시하고 해당 입력 필드에 포커스
+        if(nickname === "") {
+          errorMessage.textContent = "닉네임을 입력해 주세요.";
+          nicknameInput.focus();
+          return false;
+        }
+        else if (nickname.length < 2 || nickname.length > 10) {
+          errorMessage.textContent = "닉네임은 2자 이상 10자 이하이어야 합니다.";
+          nicknameInput.focus();
+          return false;
+        }
+
+				// 입력필드에 올바른 값이 있다면 이전의 오류 메시지를 삭제 후 제출 확인
+				errorMessage.textContent = "";
+				return confirm("제출하시겠습니까?");
+			}
+		</script>
+	</body>
+</html>

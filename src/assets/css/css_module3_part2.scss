@@ -1,0 +1,17 @@
+@charset "utf-8";
+@use "_font";
+@use "_variable";
+@use "_mixin";
+@use "_color";
+
+// CSS3 Module part-2 [3.6.5. CSS3 gradient]
+.css_gradiant_note {
+	color:#fff;
+	border:0;
+	background: #1e73ff;
+	background: -webkit-linear-gradient(to right, #1e73ff, green);
+	background: -moz-linear-gradient(to right, #1e73ff, green);
+	background: -o-linear-gradient(to right, #1e73ff, green);
+	background: linear-gradient(to right, #1e73ff, green);
+	border-radius:7px;
+}

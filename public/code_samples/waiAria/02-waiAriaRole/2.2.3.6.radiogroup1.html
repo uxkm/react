@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>동적 선택이 가능한 radiogroup 예시 | 복합형 위젯 역할(WAI-ARIA)</title>
+		<style>
+			[role="radiogroup"] {
+				display: flex;
+				flex-direction: column;
+				margin: 20px 0;
+			}
+			[role="radio"] {
+				position: relative;
+				padding: 10px;
+				margin: 5px 0;
+				cursor: pointer;
+				background-color: #f1f1f1;
+				border: 1px solid #ddd;
+				border-radius: 4px;
+				user-select: none;
+			}
+			[role="radio"]::before {
+				content: "";
+				display: inline-block;
+				width: 20px;
+				height: 20px;
+				border: 2px solid #ddd;
+				border-radius: 50%;
+				margin-right: 10px;
+				box-sizing: border-box;
+				background-color: white;
+			}
+			[aria-checked="true"]::before {
+				background-color: #007BFF;
+				border-color: #007BFF;
+				box-shadow: inset 0 0 0 4px white;
+			}
+			[aria-checked="true"] {
+				background-color: #007BFF;
+				color: white;
+			}
+			[role="radio"]:not([aria-checked="true"]):hover {
+				background-color: #e0e0e0;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Radiogroup 정의 -->
+		<div id="radioGroupLabel">Choose an option:</div>
+		<div role="radiogroup" aria-labelledby="radioGroupLabel">
+			<div role="radio" tabindex="0" aria-checked="false">Option 1</div>
+			<div role="radio" tabindex="0" aria-checked="false">Option 2</div>
+			<div role="radio" tabindex="0" aria-checked="false">Option 3</div>
+		</div>
+
+		<script>
+			const radios = document.querySelectorAll('[role="radio"]');
+
+			radios.forEach(radio => {
+				radio.addEventListener('click', () => {
+					// 모든 라디오 버튼을 선택 해제
+					radios.forEach(r => r.setAttribute('aria-checked', 'false'));
+
+					// 클릭한 라디오 버튼을 선택
+					radio.setAttribute('aria-checked', 'true');
+				});
+
+				// 키보드 접근성을 위해 Enter 또는 Space 키로 선택 가능
+				radio.addEventListener('keydown', event => {
+					if (event.key === 'Enter' || event.key === ' ') {
+						event.preventDefault();
+						radios.forEach(r => r.setAttribute('aria-checked', 'false'));
+						radio.setAttribute('aria-checked', 'true');
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

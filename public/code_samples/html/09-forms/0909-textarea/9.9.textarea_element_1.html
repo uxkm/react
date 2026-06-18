@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[textarea] 기본 텍스트 영역</title>
+		<style>
+			body {padding-top:5px;}
+			hr {margin:15px 0;}
+			p {margin:0 0 10px;}
+			.info {font-size:16px; color:#1e73ff;}
+
+			textarea {
+				width:calc(100% - 10px); max-width:400px;
+				height: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<p>
+			<b>기본 텍스트 영역</b><br />
+			<span class="info">placeholder 속성 적용</span>
+		</p>
+		<textarea name="message" placeholder="내용을 입력하세요."></textarea>
+		<hr>
+
+		<p>
+			<b>읽기 전용 텍스트 영역</b><br />
+			<span class="info">readonly 속성 적용</span>
+		</p>
+		<textarea name="message" readonly>읽기 전용 텍스트 영역입니다. 내용을 수정할 수 없습니다.</textarea>
+		<hr>
+
+		<p>
+			<b>비활성 텍스트 영역</b><br />
+			<span class="info">disabled 속성 적용</span>
+		</p>
+		<textarea name="message" placeholder="비활성된 텍스트 영역 입니다." disabled></textarea>
+		<hr>
+
+		<p>
+			<b>필수 입력 텍스트 영역</b><br />
+			<span class="info">required 속성 적용</span>
+		</p>
+		<form class="text-form">
+			<textarea name="message" placeholder="(필수 입력) 내용을 입력하세요." required></textarea>
+			<button>제출</button>
+		</form>
+		<style>
+			.text-form {
+				display: flex;
+				gap: 5px;
+				width: 100%;
+				max-width: 400px;
+			}
+			.text-form textarea {
+				width: calc(100% - 70px);
+			}
+			.text-form button {
+				width: 65px;
+			}
+		</style>
+	</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[input] required 속성</title>
+	</head>
+	<body>
+		<b>type="text"</b><br />
+		<form>
+			<input type="text" required placeholder="이름을 입력하세요">
+			<input type="submit" value="제출">
+		</form>
+		<hr>
+
+		<b>type="radio"</b><br />
+		<form>
+			<label><input type="radio" name="gender" value="male" required> 남성</label>
+			<label><input type="radio" name="gender" value="female" required> 여성</label>
+			<input type="submit" value="제출">
+		</form>
+		<hr>
+
+		<b>type="file"</b><br />
+		<form>
+			<input type="file" required>
+			<input type="submit" value="제출">
+		</form>
+		<hr>
+
+		<b>type="datetime-local"</b><br />
+		<form>
+			<input type="datetime-local" required>
+			<input type="submit" value="제출">
+		</form>
+
+		<style>
+			hr {margin:15px 0;}
+			input {margin:10px 0 0;}
+		</style>
+	</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>잘못된 예시 : 동작기반 기능만 제공하는 경우</title>
+	</head>
+	<body>
+		<p>Shake your device to trigger an action.</p>
+
+		<script>
+			if (typeof DeviceMotionEvent.requestPermission === 'function') {
+				// 권한 요청
+				DeviceMotionEvent.requestPermission()
+					.then(permissionState => {
+						if (permissionState === 'granted') {
+							// 권한이 허용된 경우에만 이벤트 리스너 추가
+							window.addEventListener('devicemotion', function(event) {
+								if (event.acceleration.x > 2) {
+									alert('Motion detected!');
+								}
+							});
+						} else {
+							console.log('Permission not granted for device motion');
+						}
+					})
+					.catch(console.error);
+			} else {
+				// 권한 요청이 필요 없는 경우 (iOS 12 이하 또는 Android 등)
+				window.addEventListener('devicemotion', function(event) {
+					if (event.acceleration.x > 2) {
+						alert('Motion detected!');
+					}
+				});
+			}
+		</script>
+	</body>
+</html>

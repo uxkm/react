@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>툴팁을 통해 추가 정보 제공</title>
+</head>
+<body>
+	<p>
+		<b>블랙홀</b>은
+		<span class="tooltip">사건의 지평선<span class="tooltiptext">블랙홀의 경계로, 한 번 들어가면 빛조차 빠져나올 수 없는 지점입니다. 사건의 지평선 안쪽에서는 모든 정보가 외부로 전달될 수 없습니다.</span></span>,
+		<span class="tooltip">특이점<span class="tooltiptext">블랙홀 중심의 점으로, 이론적으로는 질량이 무한대로 밀집되어 있는 공간입니다. 현재의 물리 법칙으로는 이 특이점을 정확하게 설명하기 어렵습니다.</span></span>으로 구성되어 있습니다.
+	</p>
+
+	<style>
+    .tooltip {
+      display: inline-block;
+      position: relative;
+      border-bottom: 1px dotted black; /* 툴팁이 있는 텍스트에 점선 표시 */
+    }
+
+    .tooltiptext {
+      visibility: hidden;
+      position: absolute;
+      z-index: 1;
+      top: 150%;
+      left: 50%;
+			transform: translate(-50%, 0);
+      width: 160px;
+      padding: 10px 12px;
+			line-height: 140%;
+			font-size: 14px;
+      text-align: center;
+      color: white;
+			word-break: keep-all;
+      background-color: black;
+      border-radius: 6px;
+    }
+    .tooltiptext:before {
+			position: absolute;
+			left: 50%;
+			top: 0;
+      transform: translate(-50%, -100%);
+			border-bottom: 6px solid black;
+			border-left: 6px solid transparent;
+			border-right: 6px solid transparent;
+			content: "";
+		}
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+    }
+	</style>
+</body>
+</html>

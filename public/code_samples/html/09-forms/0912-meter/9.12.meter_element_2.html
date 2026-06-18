@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[meter] 임계값 활용 예제</title>
+	</head>
+	<body>
+		<p>
+			<label for="battery-low">🔴 배터리 부족 (15%)</label>
+			<meter id="battery-low" min="0" max="100" low="20" high="50" optimum="100" value="15"></meter>
+		</p>
+
+		<p>
+			<label for="battery-warning">🟡 배터리 주의 (30%)</label>
+			<meter id="battery-warning" min="0" max="100" low="20" high="50" optimum="100" value="30"></meter>
+		</p>
+
+		<p>
+			<label for="battery-good">🟢 배터리 정상 (90%)</label>
+			<meter id="battery-good" min="0" max="100" low="20" high="50" optimum="100" value="90"></meter>
+		</p>
+
+		<style>
+			*, html, body {vertical-align:top;}
+		</style>
+	</body>
+</html>

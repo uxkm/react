@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>텍스트 링크에 추가 문맥 제공</title>
+</head>
+<body>
+	<a href="https://example.com">
+		자세히 보기
+		<span class="sound-only">제품 정보 페이지로 이동합니다.</span>
+	</a>
+
+	<style>
+    .sound-only {
+      position: absolute;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      height: 1px;
+      width: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      border: 0;
+    }
+	</style>
+</body>
+</html>

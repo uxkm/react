@@ -1,0 +1,19 @@
+function FolderCommonReference({ sectionTitle = "" }) {
+  return (
+    <>
+      <footer className="reference_box">
+      	<strong className="tit">{sectionTitle} 참조</strong>
+      	<ul className="link_lst">
+      		<li className="reference"><a href="https://www.w3.org/Style/CSS/learning" target="_blank" className="fas">W3C CSS 자습서</a></li>
+      		<li className="reference"><a href="https://ko.wikipedia.org/wiki/%EC%A2%85%EC%86%8D%ED%98%95_%EC%8B%9C%ED%8A%B8" target="_blank" className="fas">CSS 위키백과</a></li>
+      		<li className="reference"><a href="https://www.w3.org/TR/html401/present/styles.html#h-14.2.2" target="_blank" className="fas">W3C Style 선언</a></li>
+      		<li className="reference"><a href="https://www.w3.org/TR/2018/CR-css-cascade-4-20180828/" target="_blank" className="fas">CSS Cascading and Inheritance Level 4</a></li>
+      		<li className="reference"><a href="https://www.w3.org/TR/CSS21/propidx.html" target="_blank" className="fas">CSS 2.1 명세의 속성 요약 테이블</a></li>
+      		<li className="reference"><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance" target="_blank" className="fas">MDN 캐스케이드와 상속</a></li>
+      	</ul>
+      </footer>
+    </>
+  )
+}
+
+export default FolderCommonReference

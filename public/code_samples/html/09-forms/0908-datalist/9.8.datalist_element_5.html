@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[datalist] 날짜 및 시간 선택 자동 완성</title>
+		<style>
+			body {padding-top:5px;}
+			hr {margin:15px 0;}
+			p {margin:0 0 10px;}
+			input {
+				width: 100%;
+				max-width: 170px;
+				height: 32px;
+				padding: 0 10px;
+				font-size: 16px;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+			}
+			.info {font-size:16px; color:#1e73ff;}
+		</style>
+	</head>
+	<body>
+		<p>
+			<b>자주 선택하는 날짜 제공 (날짜 선택)</b><br />
+			<span class="info">(input date 타입과 연계)</span>
+		</p>
+		<div class="date-container">
+			<input type="date" id="date" name="date" list="date-list">
+			<datalist id="date-list">
+				<option value="2024-01-01">신년</option>
+				<option value="2024-12-25">크리스마스</option>
+				<option value="2024-07-04">독립기념일</option>
+			</datalist>
+		</div>
+		<hr>
+
+		<p>
+			<b>특정 월 제공 (월 선택)</b><br />
+			<span class="info">(input month 타입과 연계)</span>
+		</p>
+		<div class="month-container">
+			<input type="month" id="month" name="month" list="month-list">
+			<datalist id="month-list">
+				<option value="2024-01">1월 (새해)</option>
+				<option value="2024-06">6월 (여름 시작)</option>
+				<option value="2024-12">12월 (연말)</option>
+			</datalist>
+		</div>
+		<hr>
+
+		<p>
+			<b>중요한 주 제공 (주 선택)</b><br />
+			<span class="info">(input week 타입과 연계)</span>
+		</p>
+		<div class="week-container">
+			<input type="week" id="week" name="week" list="week-list">
+			<datalist id="week-list">
+				<option value="2024-W01">새해 첫 주</option>
+				<option value="2024-W25">여름 휴가 시즌</option>
+				<option value="2024-W52">연말 마지막 주</option>
+			</datalist>
+		</div>
+		<hr>
+
+		<p>
+			<b>중요한 일정 제공 (날짜 & 시간 선택)</b><br />
+			<span class="info">(input datetime-local 타입과 연계)</span>
+		</p>
+		<div class="datetime-container">
+			<input type="datetime-local" id="datetime" name="datetime" list="datetime-list" style="width:100%; max-width: 280px;">
+			<datalist id="datetime-list">
+				<option value="2024-01-01T00:00">새해 카운트다운</option>
+				<option value="2024-03-04T00:00">교성님 생일</option>
+				<option value="2024-12-24T18:00">크리스마스 이브</option>
+			</datalist>
+		</div>
+		<hr>
+
+		<p>
+			<b>자주 사용하는 시간 제공 (시간 선택)</b><br />
+			<span class="info">(input time 타입과 연계)</span>
+		</p>
+		<div class="time-container">
+			<input type="time" id="time" name="time" list="time-list">
+			<datalist id="time-list">
+				<option value="08:00">출근 시간</option>
+				<option value="12:00">점심 시간</option>
+				<option value="17:00">퇴근 시간</option>
+			</datalist>
+		</div>
+	</body>
+</html>

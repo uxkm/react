@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[caption] 하단에 위치한 제목 및 CSS로 스타일 조정</title>
+	</head>
+	<body>
+		<table>
+			<caption>[2025년 월별 매출]</caption>
+			<tr>
+				<th>월</th>
+				<th>매출액</th>
+			</tr>
+			<tr>
+				<td>1월</td>
+				<td>500만원</td>
+			</tr>
+		</table>
+
+		<style>
+			caption {
+				font-weight: bold;
+				color: #1e73ff;
+				text-align: left;
+				caption-side: bottom;
+			}
+
+			table {
+				width: 100%;
+				border-collapse: collapse;
+			}
+			th, td {
+				border: 1px solid #bbb;
+				padding: 8px;
+			}
+			th {
+				background-color: #eee;
+			}
+		</style>
+	</body>
+</html>

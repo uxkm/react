@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>div 레이아웃 관리</title>
+		<style>
+			div {padding: 10px;}
+			.header,
+      .footer {background-color: #ddd;}
+			.container {
+				display: flex;
+				flex-direction: row;
+				gap: 10px;
+				height: 200px;
+				padding: 10px 0;
+			}
+			.content {
+				order: 2;
+				flex: 1;
+				border: 1px solid #ddd;
+			}
+			.sidebar {
+				order: 1;
+        width: 65px;
+        background-color: #eee;
+			}
+			@media(max-width: 480px){
+        .container {
+          display: block;
+          height: auto;
+          padding: 10px 0;
+        }
+        .content {
+          height: 150px;
+        }
+        .sidebar {
+          width: auto;
+					margin-top: 10px;
+          background-color: #eee;
+        }
+			}
+		</style>
+	</head>
+	<body>
+		<div class="header">헤더 영역</div>
+		<div class="container">
+			<div class="content">본문 영역</div>
+			<div class="sidebar">사이드바 영역</div>
+		</div>
+		<div class="footer">푸터 영역</div>
+	</body>
+</html>

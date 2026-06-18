@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>컨텍스트 메뉴 예시 | 복합형 위젯 역할(WAI-ARIA)</title>
+		<style>
+			#contextMenu {
+				background-color: #fff;
+				border: 1px solid #ddd;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				width: 150px;
+				border-radius: 5px;
+				z-index: 1000;
+				display: none; /* hidden 대신 기본적으로 숨겨진 상태 */
+			}
+			[role="menuitem"] {
+				padding: 10px;
+				font-size: 14px;
+				color: #333;
+				cursor: pointer;
+				border-bottom: 1px solid #eee;
+			}
+			[role="menuitem"]:last-child {
+				border-bottom: none;
+			}
+			[role="menuitem"]:hover, [role="menuitem"]:focus {
+				background-color: #007BFF;
+				color: white;
+				outline: none;
+			}
+			[role="menuitem"]:focus {
+				outline: 2px solid #007BFF;
+			}
+		</style>
+	</head>
+	<body>
+		<p>이 화면에서 마우스 우클릭 해보세요.</p>
+
+		<!-- 컨텍스트 메뉴 -->
+		<div id="contextMenu" role="menu" hidden style="position: absolute;">
+			<div role="menuitem" tabindex="-1">Copy</div>
+			<div role="menuitem" tabindex="-1">Paste</div>
+			<div role="menuitem" tabindex="-1">Delete</div>
+		</div>
+
+		<script>
+			document.addEventListener('contextmenu', event => {
+				event.preventDefault();
+				const menu = document.getElementById('contextMenu');
+				menu.style.left = `${event.pageX}px`;
+				menu.style.top = `${event.pageY}px`;
+				menu.style.display = 'block';  // 메뉴 표시
+			});
+
+			document.addEventListener('click', () => {
+				document.getElementById('contextMenu').style.display = 'none';  // 메뉴 숨김
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[form] fieldset 및 legend를 사용한 그룹화</title>
+	</head>
+	<body>
+		<form method="post" enctype="application/x-www-form-urlencoded" action="https://pizza.example.com/order.cgi">
+			<p><label>고객 이름: <input name="custname" required></label></p>
+			<p><label>전화번호: <input type="tel" name="custtel"></label></p>
+			<p><label>이메일 주소: <input type="email" name="custemail"></label></p>
+			<fieldset>
+				<legend>피자 사이즈</legend>
+				<p><label> <input type="radio" name="size" required value="medium">Medium</label></p>
+				<p><label> <input type="radio" name="size" required value="large">Large</label></p>
+			</fieldset>
+			<fieldset>
+				<legend>피자 토핑</legend>
+				<p><label> <input type="checkbox" name="topping" value="bacon">베이컨</label></p>
+				<p><label> <input type="checkbox" name="topping" value="cheese">추가 치즈</label></p>
+				<p><label> <input type="checkbox" name="topping" value="onion">양파</label></p>
+				<p><label> <input type="checkbox" name="topping" value="mushroom">버섯</label></p>
+			</fieldset>
+			<p><label>선호하는 배달 시간: <input type="time" min="11:00" max="21:00" step="900" name="delivery" required></label></p>
+			<p><label>배달 요청 사항: <textarea name="comments" maxlength="1000"></textarea></label></p>
+			<p><button>주문 제출</button></p>
+		</form>
+	</body>
+</html>

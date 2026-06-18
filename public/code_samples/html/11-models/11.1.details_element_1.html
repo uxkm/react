@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+	<html lang="ko">
+	<head>
+		<title>기본적인 사용 예제</title>
+	</head>
+	<body>
+		<p><b>기본 사용 예제</b></p>
+		<details>
+			<summary>자세한 설명</summary>
+			<p>
+				이 내용은 기본적으로 숨겨져 있으며, 클릭하면 보입니다.
+			</p>
+		</details>
+		<hr>
+
+		<p><b>summary 생략 예제</b></p>
+		<details>
+			<p>
+				이 내용은 기본적으로 숨겨져 있으며, 클릭하면 보입니다.
+			</p>
+		</details>
+		<hr>
+
+		<p><b>open 속성 사용 예제</b></p>
+		<details open>
+			<summary>기본적으로 펼쳐진 상태</summary>
+			<p>이 내용은 기본적으로 보이며, 클릭하면 접힙니다.</p>
+		</details>
+
+		<style>
+			*, html, body {vertical-align:top;}
+			body {padding-top:5px;}
+			hr {margin:15px 0;}
+			p {margin:0 0 10px;}
+		</style>
+	</body>
+</html>

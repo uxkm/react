@@ -1,0 +1,49 @@
+@charset "utf-8";
+
+// bg url
+$bg-url: '/images';
+$bg-icon: $bg-url + '/icon';
+$bg-browser: $bg-url + '/browser_logos';
+
+// media size
+$screen-xxxxs: 320px;
+$screen-xxxs: 340px;
+$screen-xxs: 360px;
+$screen-xs: 540px;
+$screen-sm: 620px;
+$screen-sm-min: 768px;
+$screen-sm-max: 767px;
+$screen-md-min: 992px;
+$screen-md-max: 993px;
+$screen-lg-min: 1200px;
+$screen-lg-max: 1201px;
+$screen-max-max: 1301px;
+
+// layout size
+$hdHeight: 110px;
+$hdHeightMb: 60px;
+$pc_padding: 50px;
+$mb_padding: 10px;
+$conWidth: 1580px + ($pc_padding * 2);
+$mb_footer_height: 171px;	//모바일버전의 푸터 height가 늘어날 경우 반드시 수정
+
+// line-height size
+$line-height:26px;
+//$line-height-mb:22px;
+$line-height-mb:24px;
+
+// size
+$size_sm: 5px;
+$size_s: 10px;
+$size_ms: 15px;
+$size_m: 20px;
+$size_ml: 25px;
+$size_l: 30px;
+$size_xl: 40px;
+$size_xxl: 60px;
+
+$desktop_indent: 25px;
+$desktop_indent_small: $desktop_indent - 10px;
+$mobile_indent: 8px;
+
+

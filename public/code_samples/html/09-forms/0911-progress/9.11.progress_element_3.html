@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[progress] 파일 업로드 진행률 시뮬레이션</title>
+	</head>
+	<body>
+		<div class="progress-container">
+			<label for="fileUpload">파일 업로드:</label>
+			<input type="file" id="fileUpload">
+			<div class="uploadProgress">
+				<progress id="uploadProgress" value="0" max="100"></progress>
+				<output id="uploadCount"></output>
+			</div>
+			<button type="button" class="reset" onclick="reset()">초기화</button>
+		</div>
+		<script>
+			const fileUpload = document.getElementById("fileUpload");
+			const uploadCount = document.getElementById("uploadCount");
+			let progress = document.getElementById("uploadProgress");
+
+			fileUpload.addEventListener("change", function () {
+				progress.value = 0;
+
+				let interval = setInterval(() => {
+					if (progress.value < 100) {
+						progress.value += 1;
+						uploadCount.value = progress.value + '%';
+						uploadCount.classList.add('active');
+					} else {
+						clearInterval(interval);
+					}
+				}, 10);
+			});
+
+			function reset(){
+				progress.value = '0';
+				uploadCount.value = '0';
+				uploadCount.classList.remove('active');
+				fileUpload.value = '';
+			}
+		</script>
+
+		<style>
+			*, html, body {vertical-align:top;}
+			body {padding-top:5px;}
+			label {
+				font-size: 16px;
+				font-weight: bold;
+			}
+			input[type="file"] {
+				display: block;
+				margin-top: 5px;
+				margin-bottom: 10px;
+			}
+			progress {
+				overflow: hidden;
+				width: calc(100% - 10px);
+				height: 26px;
+				border: 2px solid #4caf50;
+				border-radius: 5px;
+				box-sizing: content-box;
+				appearance: none;
+			}
+			progress::-webkit-progress-bar {
+				background-color: #f3f3f3;
+			}
+			progress::-webkit-progress-value {
+				background-color: #4caf50;
+			}
+			.uploadProgress {
+				position: relative;
+			}
+			.uploadProgress output {
+				display: none;
+				position: absolute;
+				left: 10px;
+				top: 0;
+				line-height: 30px;
+				font-weight: 800;
+				color: #fff;
+			}
+			.uploadProgress output.active {
+				display: block;
+			}
+			.reset {
+				margin-top: 20px;
+				color: red;
+			}
+		</style>
+	</body>
+</html>

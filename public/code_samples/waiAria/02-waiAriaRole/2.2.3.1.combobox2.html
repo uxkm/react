@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>자동 완성 기능이 포함된 combobox 예시 | 복합형 위젯 역할(WAI-ARIA)</title>
+	</head>
+	<body>
+		<label for="combo3">과일을 선택하세요:</label>
+		<input id="combo3" type="text" role="combobox" aria-expanded="false" aria-controls="listbox3" aria-autocomplete="list" aria-haspopup="listbox">
+		<ul id="listbox3" role="listbox" hidden>
+			<li role="option">사과</li>
+			<li role="option">바나나</li>
+			<li role="option">딸기</li>
+			<li role="option">수박</li>
+			<li role="option">파인애플</li>
+			<li role="option">복숭아</li>
+			<li role="option">귤</li>
+			<li role="option">포도</li>
+			<li role="option">오렌지</li>
+			<li role="option">용과</li>
+			<li role="option">망고</li>
+		</ul>
+
+		<script>
+			const combo3 = document.getElementById('combo3');
+			const listbox3 = document.getElementById('listbox3');
+
+			combo3.addEventListener('input', function() {
+				const filter = combo3.value.toLowerCase();
+				const options = listbox3.querySelectorAll('[role="option"]');
+				let hasVisibleOption = false;
+				options.forEach(option => {
+					if (option.textContent.toLowerCase().startsWith(filter)) {
+						option.hidden = false;
+						hasVisibleOption = true;
+					} else {
+						option.hidden = true;
+					}
+				});
+				listbox3.hidden = !hasVisibleOption;
+				combo3.setAttribute('aria-expanded', hasVisibleOption ? 'true' : 'false');
+			});
+
+			listbox3.addEventListener('click', function(event) {
+				if (event.target.getAttribute('role') === 'option') {
+					combo3.value = event.target.textContent;
+					combo3.setAttribute('aria-expanded', 'false');
+					listbox3.hidden = true;
+				}
+			});
+		</script>
+	</body>
+</html>

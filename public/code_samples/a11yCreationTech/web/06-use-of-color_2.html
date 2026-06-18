@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[색에 무관한 콘텐츠 인식] 준수 사례</title>
+		<style>
+			.required {
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<p>
+			필수 항목은 <span class="required">*</span> 표시로 구분됩니다.
+		</p>
+		<form>
+			<label for="name"><span class="required">*</span>이름</label>
+			<input type="text" id="name" name="name" aria-required="true" required><br />
+
+			<label for="email"><span class="required">*</span>이메일</label>
+			<input type="email" id="email" name="email" aria-required="true" required><br />
+
+			<label for="tel">전화번호</label>
+			<input type="tel" id="tel" name="phone">
+		</form>
+	</body>
+</html>

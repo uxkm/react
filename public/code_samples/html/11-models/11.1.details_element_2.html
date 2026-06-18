@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>FAQ (CSS 스타일 적용)</title>
+		<style>
+			*, html, body {
+				margin: 0;
+				padding: 0;
+			}
+			:root {
+				--faq-default-color: #444;
+				--faq-active-color: #1e73ff;
+        --faq-padding: 15px;
+				--faq-arrow-size: 5px;
+			}
+			body {
+				padding: 15px;
+				font-family: Arial, sans-serif;
+			}
+			h2 {
+				padding: 0 0 var(--faq-padding);
+				text-align: center;
+			}
+			details {
+				margin-top: 10px;
+				line-height: 22px;
+				border-radius: 5px;
+				background-color: #eee;
+			}
+			summary {
+				position: relative;
+				padding: var(--faq-padding) calc(var(--faq-padding)*2 + 5px);
+				color: var(--faq-default-color);
+        list-style: none;
+				cursor: pointer;
+			}
+      summary:before {
+				position: absolute;
+				left: var(--faq-padding);
+				top: var(--faq-padding);
+				font-weight: bold;
+				content: "Q.";
+			}
+      summary:after {
+				position: absolute;
+				right: calc(var(--faq-padding) + 2px);
+				top: 50%;
+				transform: translateY(-50%);
+				border-top: calc(var(--faq-arrow-size) + 2px) solid var(--faq-default-color);
+				border-left: var(--faq-arrow-size) solid transparent;
+				border-right: var(--faq-arrow-size) solid transparent;
+				content: "";
+			}
+      details p {
+				position: relative;
+        padding: var(--faq-padding);
+				padding-left: calc(var(--faq-padding)*2 + 5px);
+				color: var(--faq-default-color);
+			}
+      summary:before,
+      details p:before {
+        position: absolute;
+        left: var(--faq-padding);
+        top: var(--faq-padding);
+        font-weight: bold;
+			}
+      summary:before {
+        content: "Q.";
+      }
+      details p:before {
+        content: "A.";
+      }
+      details p:after {
+				position: absolute;
+				left: var(--faq-padding);
+				right: var(--faq-padding);
+				top: -1px;
+				height: 1px;
+				background-color: rgba(0,0,0,.1);
+				content: "";
+			}
+      details[open] {
+				background-color: rgba(30,115,255,.1);
+			}
+      details[open] summary {
+				font-weight: bold;
+				color: var(--faq-active-color);
+			}
+			details[open] summary:after {
+				border-top: 0;
+				border-bottom: calc(var(--faq-arrow-size) + 2px) solid var(--faq-active-color);
+			}
+		</style>
+	</head>
+	<body>
+		<h2>자주 묻는 질문 (FAQ)</h2>
+
+		<details>
+			<summary>상품 주문은 어떻게 하나요?</summary>
+			<p>상품을 선택하고 장바구니에 담은 후, 결제 페이지에서 배송지 및 결제 정보를 입력하면 주문이 완료됩니다.</p>
+		</details>
+
+		<details>
+			<summary>배송은 얼마나 걸리나요?</summary>
+			<p>일반 배송은 약 3~5일 정도 소요되며, 빠른 배송 옵션을 선택할 경우 1~2일 내에 배송됩니다.</p>
+		</details>
+
+		<details>
+			<summary>교환 및 반품 정책은 어떻게 되나요?</summary>
+			<p>상품 수령 후 7일 이내에 교환 및 반품 요청을 할 수 있습니다. 상품이 손상되지 않고 사용되지 않은 상태에서만 가능합니다.</p>
+		</details>
+
+		<details>
+			<summary>결제 방법은 무엇이 있나요?</summary>
+			<p>결제 방법으로는 신용카드, 계좌이체, 카카오페이, 페이팔 등이 있습니다. 각 결제 방법에 대한 자세한 정보는 결제 페이지에서 확인할 수 있습니다.</p>
+		</details>
+
+		<details>
+			<summary>회원 가입 없이도 구매할 수 있나요?</summary>
+			<p>네, 회원 가입 없이도 구매는 가능합니다. 비회원으로 주문할 경우, 주문 완료 후 이메일로 주문 내역을 받게 됩니다.</p>
+		</details>
+	</body>
+</html>

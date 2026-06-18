@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>하이브리드 방식의 예시 : 누르기 동작 지원</title>
+		<style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+      }
+      .button {
+        background-color: #007AFF;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        font-size: 16px;
+        border-radius: 5px;
+        margin: 16px;
+        cursor: pointer;
+        border: none;
+        transition: background-color 0.3s ease;
+      }
+      .button:active {
+        background-color: #005BB5; /* 시각적 피드백 */
+        transform: scale(0.98); /* 버튼이 눌린 효과 */
+      }
+		</style>
+	</head>
+	<body>
+		<button class="button" aria-label="제출 버튼">제출</button>
+	</body>
+</html>

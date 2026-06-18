@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>하이브리드 방식의 예시 : 응답 시간 조절</title>
+		<style>
+      .dialog {
+				display:none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        background-color: #fff;
+				border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        z-index: 1000;
+      }
+      .dialog.active {
+        display: block;
+      }
+		</style>
+	</head>
+	<body>
+		<p>남은 시간: <span id="countdown">5</span>초</p>
+		<div id="timeoutDialog" class="dialog">
+			<p>세션이 만료됩니다. 시간을 연장하시겠습니까?</p>
+			<button id="extendTime">예</button>
+			<button id="endSession">아니요</button>
+		</div>
+
+		<script>
+      let countdownInterval;
+      let countdownTime = 5;
+
+      function startCountdown() {
+        countdownTime = 5;
+        document.getElementById('countdown').textContent = countdownTime;
+
+        countdownInterval = setInterval(function() {
+          countdownTime--;
+          document.getElementById('countdown').textContent = countdownTime;
+
+          if (countdownTime <= 0) {
+            clearInterval(countdownInterval);
+            // 타임아웃 시 다이얼로그 활성화
+            document.getElementById('timeoutDialog').classList.add('active');
+          }
+        }, 1000); // 1초 간격으로 카운트다운
+      }
+
+      document.getElementById('extendTime').addEventListener('click', function() {
+        // 세션 연장 로직
+        document.getElementById('timeoutDialog').classList.remove('active');
+        clearInterval(countdownInterval); // 현재 카운트다운 정지
+        startCountdown(); // 새로운 카운트다운 시작
+      });
+
+      document.getElementById('endSession').addEventListener('click', function() {
+        // 세션 종료 로직
+        clearInterval(countdownInterval); // 카운트다운 정지
+        alert('세션이 종료되었습니다.');
+      });
+
+      // 처음에 5초 카운트다운 시작
+      startCountdown();
+		</script>
+	</body>
+</html>

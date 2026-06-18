@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[button] 구조적인 버튼 예제</title>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+		<style>
+			body {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				gap: 15px;
+				padding: 20px;
+			}
+
+			/* 1. 두 줄 텍스트 버튼 */
+			.btn-multiline {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				padding: 12px 20px;
+				font-size: 16px;
+				color: white;
+				background-color: #007bff;
+				border: none;
+				border-radius: 6px;
+				cursor: pointer;
+				transition: background 0.3s;
+				text-align: center;
+			}
+			.btn-multiline .subtext {
+				font-size: 12px;
+				opacity: 0.8;
+			}
+			.btn-multiline:hover {
+				background-color: #0056b3;
+			}
+
+			/* 2. 버튼 내 그리드 레이아웃 */
+			.btn-grid {
+				display: grid;
+				grid-template-columns: 1fr auto;
+				align-items: center;
+				padding: 12px 20px;
+				font-size: 16px;
+				color: white;
+				background-color: #28a745;
+				border: none;
+				border-radius: 6px;
+				cursor: pointer;
+				transition: background 0.3s;
+				width: 200px;
+			}
+			.btn-grid .right {
+				font-weight: bold;
+				font-size: 14px;
+				background: rgba(255, 255, 255, 0.2);
+				padding: 4px 8px;
+				border-radius: 4px;
+			}
+			.btn-grid:hover {
+				background-color: #218838;
+			}
+
+			/* 3. 버튼 내 가로 정렬 텍스트 */
+			.btn-horizontal {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 12px 20px;
+				font-size: 16px;
+				color: white;
+				background-color: #ff9800;
+				border: none;
+				border-radius: 6px;
+				cursor: pointer;
+				transition: background 0.3s;
+				width: 250px;
+			}
+			.btn-horizontal .left {
+				font-weight: bold;
+			}
+			.btn-horizontal:hover {
+				background-color: #e68900;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 1. 두 줄 텍스트 버튼 -->
+		<button type="button" class="btn-multiline">
+			<span>주문하기</span>
+			<span class="subtext">빠른 배송 가능</span>
+		</button>
+
+		<!-- 2. 버튼 내 그리드 레이아웃 -->
+		<button type="button" class="btn-grid">
+			<span>프로모션 적용</span>
+			<span class="right">-10%</span>
+		</button>
+
+		<!-- 3. 버튼 내 가로 정렬 텍스트 -->
+		<button type="button" class="btn-horizontal">
+			<span class="left">멤버십 가입</span>
+			<span class="right">30일 무료</span>
+		</button>
+	</body>
+</html>

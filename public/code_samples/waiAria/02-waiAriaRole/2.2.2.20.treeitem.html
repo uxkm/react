@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>동적 확장/축소 가능한 treeitem 예시 | 독립형 위젯 역할(WAI-ARIA)</title>
+		<style>
+      [role="tree"] {
+				max-width: 200px;
+			}
+			[role="tree"] > [role="treeitem"] {
+				position: relative;
+				padding: 4px 0;
+				border-bottom: 1px solid #222;
+				cursor: pointer;
+			}
+      [role="tree"] > [role="treeitem"]:first-child:after {
+				position: absolute; right: 0; top: 12px;
+				border-top: 6px solid #222;
+				border-left: 5px solid transparent;
+				border-right: 5px solid transparent;
+				content: "";
+			}
+      [role="tree"] > [role="treeitem"][aria-expanded="true"]:first-child:after {
+				transform: rotate(180deg);
+			}
+			[role="group"] {
+				margin-top: 4px;
+				padding: 6px 10px;
+				background-color: #eee;
+			}
+      [role="group"] [role="treeitem"]:before {
+				content: "- ";
+			}
+		</style>
+	</head>
+	<body>
+		<div role="tree" id="myTree">
+			<div role="treeitem" aria-expanded="false" tabindex="0">Item 1
+				<div role="group" hidden>
+					<div role="treeitem">Sub-item 1</div>
+					<div role="treeitem">Sub-item 2</div>
+				</div>
+			</div>
+			<div role="treeitem" aria-expanded="false" tabindex="-1">Item 2</div>
+		</div>
+
+		<script>
+			const tree = document.getElementById('myTree');
+			tree.addEventListener('click', function(event) {
+				const treeitem = event.target.closest('[role="treeitem"]');
+				if (treeitem) {
+					const expanded = treeitem.getAttribute('aria-expanded') === 'true';
+					treeitem.setAttribute('aria-expanded', !expanded);
+					const group = treeitem.querySelector('[role="group"]');
+					if (group) {
+						group.hidden = expanded;
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

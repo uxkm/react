@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>잘못된 예시 : 포인터 입력 취소 기능이 없는 경우</title>
+	</head>
+	<body>
+		<div id="deleteItem" style="padding:50px; background-color:#eee;">삭제할 아이템</div>
+		<button id="deleteButton" style="margin-top:10px;">삭제하기</button>
+
+		<script>
+			document.getElementById('deleteButton').addEventListener('click', function() {
+				alert('아이템을 삭제합니다');
+				document.getElementById('deleteItem').remove();
+			});
+		</script>
+	</body>
+</html>

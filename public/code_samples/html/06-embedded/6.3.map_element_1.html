@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>[map] 반응형 세계 지도 이미지맵</title>
+		<style>
+			.map-container {
+				max-width: 900px;
+				margin: 0 auto;
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-image: url("/_assets/images/world-map-image.svg");
+			}
+      .map-image {
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+        background-position: center top;
+			}
+      .map-container img {
+				width: 100%;
+				height: auto;
+			}
+
+			/* asia */
+      .asia:hover img {
+        opacity: 0;
+      }
+      .asia:hover .map-image {
+        background-image: url("/_assets/images/world-map-asia.svg");
+      }
+
+      /* oceania */
+      .oceania:hover img {
+        opacity: 0;
+      }
+      .oceania:hover .map-image {
+        background-image: url("/_assets/images/world-map-oceania.svg");
+      }
+
+      /* africa */
+      .africa:hover img {
+        opacity: 0;
+      }
+      .africa:hover .map-image {
+        background-image: url("/_assets/images/world-map-africa.svg");
+      }
+
+      /* europe */
+      .europe:hover img {
+        opacity: 0;
+      }
+      .europe:hover .map-image {
+        background-image: url("/_assets/images/world-map-europe.svg");
+      }
+
+      /* north_america */
+      .north_america:hover img {
+        opacity: 0;
+      }
+      .north_america:hover .map-image {
+        background-image: url("/_assets/images/world-map-north_america.svg");
+      }
+
+      /* south_america */
+      .south_america:hover img {
+        opacity: 0;
+      }
+      .south_america:hover .map-image {
+        background-image: url("/_assets/images/world-map-south_america.svg");
+      }
+		</style>
+	</head>
+	<body>
+		<div class="map-container">
+			<!-- 세계 지도 이미지 -->
+			<div class="map-image">
+				<img id="world-map" src="/_assets/images/world-map-image.svg" loading="lazy" usemap="#worldmap" alt="세계 지도">
+			</div>
+
+			<!-- 이미지 맵 -->
+			<map name="worldmap">
+				<area target="_blank" alt="아시아" title="아시아" href="https://en.wikipedia.org/wiki/Asia" rel="noopener noreferrer"
+							coords="400,32,416,32,422,22,441,23,464,10,506,5,550,21,582,26,612,21,659,29,677,29,699,36,688,37,675,37,671,41,653,43,656,50,649,53,642,54,639,67,632,77,614,93,608,101,609,112,604,121,595,124,596,119,605,110,604,95,604,73,609,95,622,82,633,69,633,61,636,50,628,50,612,59,602,60,590,71,595,73,593,95,582,106,588,121,583,127,579,118,573,109,560,108,564,120,577,135,571,153,558,159,542,164,556,183,545,193,535,181,535,193,544,208,557,209,564,210,574,196,579,199,575,226,579,217,595,212,593,200,590,187,581,185,584,168,586,176,596,186,597,192,596,204,588,222,589,231,582,225,579,234,568,224,560,223,560,233,570,238,556,239,547,235,523,204,544,215,547,227,555,215,535,206,526,193,526,168,519,173,506,154,484,175,485,188,476,193,464,156,459,159,448,146,432,145,415,139,404,131,396,130,410,143,422,144,428,150,416,159,391,168,386,156,372,131,376,118,356,117,355,105,363,103,365,95,380,96,379,85,388,74,366,55,376,42,366,29"
+							data-area="asia"
+							shape="poly">
+				<area target="_blank" alt="오세아니아" title="오세아니아" href="https://en.wikipedia.org/wiki/Oceania" rel="noopener noreferrer"
+							coords="553,313,588,307,594,317,602,320,607,338,622,322,626,316,647,336,645,344,656,343,664,336,672,331,684,326,678,311,674,322,654,336,628,313,641,294,634,283,628,273,629,262,623,251,637,252,637,240,625,231,608,231,597,227,616,245,618,261,599,254,594,264,590,260,552,285"
+							data-area="oceania"
+							shape="poly">
+				<area target="_blank" alt="아프리카" title="아프리카" href="https://en.wikipedia.org/wiki/Africa" rel="noopener noreferrer"
+							coords="318,110,283,113,256,146,259,186,283,194,316,188,319,215,328,234,319,247,336,290,357,291,369,274,394,268,407,236,386,238,384,212,410,172,391,176,366,134,371,132,372,128,359,127,348,122,337,125,319,118"
+							data-area="africa"
+							shape="poly">
+				<area target="_blank" alt="유럽" title="유럽" href="https://en.wikipedia.org/wiki/Europe" rel="noopener noreferrer"
+							coords="358,10,332,10,338,18,331,30,311,45,284,61,276,89,277,104,285,109,314,87,333,105,334,95,324,85,337,92,346,111,349,96,357,94,362,80,379,90,378,85,388,74,366,56,376,42,367,29,358,26"
+							data-area="europe"
+							shape="poly">
+				<area target="_blank" alt="북아메리카" title="북아메리카" href="https://en.wikipedia.org/wiki/North_America" rel="noopener noreferrer"
+							coords="43,29,1,56,52,55,52,88,36,108,48,146,50,132,60,147,121,187,99,148,116,146,131,155,142,155,124,146,108,141,86,149,80,129,111,123,122,136,124,120,164,85,194,75,179,46,192,36,185,21,195,13,205,14,216,22,212,39,222,54,236,35,267,24,283,6,224,0,209,9,194,0,169,6,174,14,166,18,153,16,150,26,126,20,102,21,119,30"
+							data-area="north_america"
+							shape="poly">
+				<area target="_blank" alt="남아메리카" title="남아메리카" href="https://en.wikipedia.org/wiki/South_America" rel="noopener noreferrer"
+							coords="176,186,158,182,120,186,113,209,131,245,141,253,141,284,140,313,176,343,166,328,166,303,188,286,191,268,206,256,217,217,183,203"
+							data-area="south_america"
+							shape="poly">
+			</map>
+		</div>
+
+		<script>
+			// 원본 이미지 크기 (예제에서는 700px 기준)
+			const originalWidth = 700;
+			const worldMap = document.getElementById("world-map");
+			const areas = document.querySelectorAll("map area");
+
+			// 기존 coords 값을 저장
+			const originalCoords = Array.from(areas).map(area => area.coords.split(",").map(Number));
+
+			function resizeMap() {
+				const currentWidth = worldMap.clientWidth; // 현재 이미지 너비
+				const scaleFactor = currentWidth / originalWidth; // 크기 비율
+
+				areas.forEach((area, index) => {
+					const newCoords = originalCoords[index].map(coord => Math.round(coord * scaleFactor));
+					area.coords = newCoords.join(",");
+				});
+			}
+
+			// 창 크기 조절 시 업데이트
+			window.addEventListener("resize", resizeMap);
+			window.addEventListener("load", resizeMap);
+
+			// 마우스 호버
+			document.addEventListener("DOMContentLoaded", () => {
+				const mapContainer = document.querySelector(".map-container");
+				const areas = document.querySelectorAll("map area");
+
+				areas.forEach(area => {
+					area.addEventListener("mouseenter", () => {
+						const areaType = area.getAttribute("data-area");
+						if (areaType) {
+							mapContainer.classList.add(areaType);
+						}
+					});
+
+					area.addEventListener("mouseleave", () => {
+						const areaType = area.getAttribute("data-area");
+						if (areaType) {
+							mapContainer.classList.remove(areaType);
+						}
+					});
+				});
+			});
+		</script>
+	</body>
+</html>

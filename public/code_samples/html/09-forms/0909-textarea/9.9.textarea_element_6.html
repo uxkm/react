@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+		<title>[textarea] 채팅에 사용되는 textarea</title>
+		<style>
+      :root {
+        --font-family:  "Pretendard Variable", Pretendard, -apple-system, system-ui, Roboto, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", sans-serif;
+        --color-black: #2B2B2B;
+        --color-gray: #555;
+        --color-light-gray: #9FA1A2;
+        --color-blue: #4C7FF7;
+        --send-width: 40px;
+        --message-max-width: 75%;
+      }
+
+      *, html, body {
+        margin: 0; padding: 0; vertical-align: top; box-sizing: border-box;
+        font-family: var(--font-family);
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #eee;
+      }
+      body, textarea {
+        font-family: var(--font-family);
+      }
+
+      /* chat-wrap */
+      .chat-wrap {
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 375px;
+        height: 100%;
+        background-color: #fff;
+      }
+
+      /* chat-header */
+      .chat-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 16px;
+      }
+      .chat-header .my {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .chat-header .image {
+        overflow: hidden;
+        border-radius: 100%;
+      }
+      .chat-header .name {
+        line-height: 100%;
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--color-black);
+      }
+      .chat-header .address {
+        margin-top: 6px;
+				height: 14px;
+        line-height: 14px;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--color-gray);
+      }
+      .chat-header .control {
+        display: flex;
+				min-width: 84px;
+      }
+      .chat-header .control button {
+        position: relative;
+        width: 42px;
+        height: 46px;
+        font-size: 0;
+        text-indent: -9999px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: transparent;
+        border: 0;
+        cursor: pointer;
+      }
+      .chat-header .btn-search {
+        background-image: url('/_assets/images/chat/icon_magnifying_glass.svg');
+      }
+      .chat-header .btn-close {
+        background-image: url('/_assets/images/chat/icon_chat_close.svg');
+      }
+
+      /* chat-container */
+      .chat-container {
+        overflow-y: auto;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+        background-color: #E7F4FF;
+      }
+      .chat-container .date_separator {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: -10px;
+      }
+      .chat-container .date_separator i {
+        line-height: 26px;
+        padding: 0 14px;
+        font-size: 12px;
+        font-style: normal;
+        color: #fff;
+        background-color: #4F5561;
+        border-radius: 20px;
+      }
+
+      .chat-container .received-box,
+      .chat-container .send-box {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        max-width: var(--message-max-width);
+      }
+      .chat-container .received-box {
+        align-self: flex-start;
+        align-items: flex-start;
+        padding-left: 38px;
+      }
+      .chat-container .send-box {
+        align-self: flex-end;
+        align-items: flex-end;
+        text-align: right;
+      }
+
+      .chat-container .message {
+        position: relative;
+        min-width: 43px;
+        padding: 13px 16px;
+        line-height: 22px;
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--color-gray);
+        background-color: #fff;
+        border-radius: 20px;
+      }
+      .chat-container .message:not(:first-child) {
+        margin-top: 6px;
+      }
+      .chat-container .received-box .message {
+        border-top-left-radius: 0;
+      }
+      .chat-container .send-box .message {
+        border-top-right-radius: 0;
+        font-weight: 400;
+        color: #fff;
+        background-color: var(--color-blue);
+      }
+
+      .chat-container .content {
+        word-break: break-all;
+        white-space: pre-line;
+      }
+      .chat-container .date {
+        position: absolute; bottom: 1px;
+        line-height: 100%;
+        font-size: 12px;
+        color: var(--color-light-gray);
+        white-space: pre;
+      }
+      .chat-container .received-box .date { left: calc(100% + 8px); }
+      .chat-container .send-box .date { right: calc(100% + 8px); }
+
+      .chat-container .received-image {
+        overflow: hidden;
+        position: absolute; left: 0; top: 0;
+        border-radius: 100%;
+      }
+      .chat-container .received-name {
+        padding-bottom: 2px;
+        font-weight: 600;
+        font-size: 14px;
+        color: var(--color-black);
+      }
+
+      /* chat-input */
+      .chat-input {
+        display: flex;
+        gap: 16px;
+        padding: 8px 16px;
+      }
+      .chat-input .textarea-box {
+        flex: 1;
+        position: relative;
+      }
+      .chat-input textarea {
+        overflow-y: auto;
+        width: 100%; height: var(--send-width);
+        max-height: 130px;
+        padding: 8px 40px 8px 16px;
+        line-height: 24px;
+        font-size: 16px;
+        background-color: #F4F4F4;
+        border: 0;
+        border-radius: 6px;
+        resize: none;
+      }
+      .chat-input .reset-btn {
+        display: none;
+        position: absolute; right: 0; top: 0;
+        width: var(--send-width); height: var(--send-width);
+        font-size: 0;
+        text-indent: -9999px;
+        border: 0;
+        background-color: transparent;
+        cursor: pointer;
+      }
+      .chat-input .reset-btn i {
+        position: absolute;
+        left: 50%; top: 50%;
+        transform: translate(-50%, -50%);
+        width: 18px; height: 18px;
+        background-color: #D5D5D5;
+        border-radius:100%;
+      }
+      .chat-input .reset-btn i:before,
+      .chat-input .reset-btn i:after {
+        position: absolute; left: 50%; top: 50%;
+        width: 2px; height: 10px;
+        background-color: #fff;
+        content: "";
+      }
+      .chat-input .reset-btn i:before {transform: translate(-50%, -50%) rotate(45deg);}
+      .chat-input .reset-btn i:after {transform: translate(-50%, -50%) rotate(-45deg);}
+      .chat-input .reset-btn.active {
+        display: block;
+      }
+      .chat-input .send-btn {
+        width: var(--send-width); height: var(--send-width);
+        font-size: 0;
+        text-indent: -9999px;
+        background-color: #D2D2D2;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image: url('/_assets/images/chat/icon_send.svg');
+        border: 0;
+        border-radius: 100%;
+        cursor: pointer;
+        transition: background-color .1s;
+      }
+      .chat-input .send-btn.active {
+        background-color: var(--color-blue);
+      }
+		</style>
+	</head>
+	<body>
+		<div class="chat-wrap">
+			<div class="chat-header">
+				<div class="my">
+					<p class="image"><img src="/_assets/images/chat/man.png" width="48" height="48"></p>
+					<div class="data">
+						<p class="name">양관식</p>
+						<p class="address">무쇠, 양선장</p>
+					</div>
+				</div>
+				<div class="control">
+					<button type="button" class="btn-search">페이지 내 검색</button>
+					<button type="button" class="btn-close">체팅 닫기</button>
+				</div>
+			</div>
+			<!-- // chat-header -->
+
+			<div class="chat-container" id="chat-content">
+				<p class="date_separator"><i>1965년 3월 26일 금요일</i></p>
+				<!-- // 날짜 구분 -->
+
+				<div class="received-box">
+					<p class="received-image"><img src="/_assets/images/chat/woman.png" width="32" height="32"></p>
+					<p class="received-name">오애순</p>
+					<div class="message">
+						<p class="content">천지에 오애순 반긴다는 건 양관식밖에 없으니까 ㅜㅜ 그니까.. 씨</p>
+						<p class="date">00분전</p>
+					</div>
+					<div class="message">
+						<p class="content">내가 왜.. 내가 섬놈한테 왜 ㅜㅜ</p>
+						<p class="date">00분전</p>
+					</div>
+				</div>
+				<!-- // 받은 메시지 -->
+
+				<div class="send-box">
+					<div class="message">
+						<p class="content">이것은 소리없는 아우성! 저 푸른 해원을 향하여 흔드는 영원한 노스탤지어의 손수건!</p>
+						<p class="date">00분전</p>
+					</div>
+				</div>
+				<!-- // 보낸 메시지 -->
+			</div>
+			<!-- // chat-container -->
+
+			<div class="chat-input">
+				<div class="textarea-box">
+					<textarea class="chat-textarea" id="chat-input" rows="1" placeholder="문자 좀 써줍써..."></textarea>
+					<button type="button" class="reset-btn"><i>메시지 내용 지우기</i></button>
+				</div>
+				<button class="send-btn">전송</button>
+			</div>
+		</div>
+
+		<script>
+			const chatBox = document.getElementById("chat-content");
+			const chatInput = document.querySelector(".chat-textarea");
+			const sendBtn = document.querySelector(".send-btn");
+			const resetBtn = document.querySelector(".reset-btn");
+
+			function sendMessage() {
+				const messageText = chatInput.value.trim();
+				if (messageText === "") return;
+
+				// send-box 생성
+				const sendBox = document.createElement("div");
+				sendBox.classList.add("send-box");
+
+				// message 생성
+				const message = document.createElement("div");
+				message.classList.add("message");
+
+				// content <p> 생성
+				const content = document.createElement("p");
+				content.classList.add("content");
+				content.textContent = messageText;
+
+				// date <p> 생성 (여기선 예시로 '방금 전'으로 고정)
+				const date = document.createElement("p");
+				date.classList.add("date");
+				date.textContent = "방금 전";
+
+				// 요소 조립
+				message.appendChild(content);
+				message.appendChild(date);
+				sendBox.appendChild(message);
+				chatBox.appendChild(sendBox);
+
+				// 스크롤 이동 및 입력 초기화
+				chatBox.scrollTop = chatBox.scrollHeight;
+				chatInput.value = "";
+				chatInput.style.height = "auto";
+				sendBtn.classList.remove("active");
+				resetBtn.classList.remove("active");
+			}
+
+			resetBtn.addEventListener("click", () => {
+				chatInput.value = "";
+				chatInput.style.height = "auto";
+				sendBtn.classList.remove("active");
+				resetBtn.classList.remove("active");
+			});
+
+			sendBtn.addEventListener("click", (event) => {
+				// 값이 없으면 클릭을 막음
+				if (chatInput.value.trim() === "") {
+					event.preventDefault();
+				} else {
+					sendMessage();
+				}
+			});
+
+			chatInput.addEventListener("keypress", (event) => {
+				if (event.key === "Enter" && !event.shiftKey) {
+					event.preventDefault();
+					sendMessage();
+				}
+			});
+
+			chatInput.addEventListener("input", () => {
+				const lineHeight = parseInt(getComputedStyle(chatInput).lineHeight, 10);
+				const padding = parseInt(getComputedStyle(chatInput).padding, 10) * 2;
+				const borderWidth = parseInt(getComputedStyle(chatInput).borderWidth, 10) * 2;
+
+				chatInput.style.height = "auto"; // 초기화
+				const lines = Math.floor(chatInput.scrollHeight / lineHeight); // 실제 표시되는 줄 수 계산
+				chatInput.style.height = Math.min(lines * lineHeight, 80) + padding + borderWidth + "px"; // 최대 높이 제한 (80px)
+
+				// 값이 있을 때만 sendBtn에 active 클래스 추가, 값이 없으면 제거
+				if (chatInput.value.trim() !== "") {
+					sendBtn.classList.add("active");
+					resetBtn.classList.add("active");
+				} else {
+					sendBtn.classList.remove("active");
+					resetBtn.classList.remove("active");
+				}
+			});
+		</script>
+	</body>
+</html>

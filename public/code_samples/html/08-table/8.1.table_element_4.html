@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>펜션 객실 예약 테이블</title>
+	<style>
+		table {
+			width: 100%;
+			min-width: 300px;
+			border-collapse: collapse;
+		}
+		th, td {
+			padding: 10px;
+			border: 1px solid #bbb;
+		}
+		th {
+			/*background-color: #4CAF50;*/
+			/*color: white;*/
+		}
+		thead th {
+			background-color: #eee;
+		}
+		tbody th {
+			color: #1e73ff;
+		}
+		.available {
+			color: green;
+			font-weight: bold;
+		}
+		.unavailable {
+			color: red;
+			font-weight: bold;
+		}
+		tr:hover {
+			background-color: #f9f9f9;
+		}
+		caption {
+			font-size: 1.5em;
+			margin: 10px;
+		}
+	</style>
+</head>
+<body>
+	<table aria-label="펜션 객실 예약 테이블">
+		<caption>펜션 객실 예약 가능 여부</caption>
+		<thead>
+			<tr>
+				<th id="room-type" rowspan="2" scope="col">객실 유형</th>
+				<th id="capacity" rowspan="2" scope="col">수용 인원</th>
+				<th id="price" colspan="2" scope="col">요금</th>
+				<th id="availability" rowspan="2" scope="col">예약 가능 여부</th>
+			</tr>
+			<tr>
+				<th id="one_night" scope="col">1박</th>
+				<th id="two_night" scope="col">2박</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th id="room1" headers="room-type" scope="row">스탠다드룸</th>
+				<td headers="room1 capacity">2명</td>
+				<td headers="room1 price one_night">₩100,000</td>
+				<td headers="room1 price two_night">₩200,000</td>
+				<td headers="room1 availability" class="available">예약 가능</td>
+			</tr>
+			<tr>
+				<th id="room2" headers="room-type" scope="row">디럭스룸</th>
+				<td headers="room2 capacity">4명</td>
+				<td headers="room2 price one_night">₩150,000</td>
+				<td headers="room2 price two_night">₩300,000</td>
+				<td headers="room2 availability" class="unavailable">예약 불가</td>
+			</tr>
+			<tr>
+				<th id="room3" headers="room-type" scope="row">패밀리 스위트</th>
+				<td headers="room3 capacity">6명</td>
+				<td headers="room3 price one_night">₩250,000</td>
+				<td headers="room3 price two_night">₩500,000</td>
+				<td headers="room3 availability" class="available">예약 가능</td>
+			</tr>
+		</tbody>
+	</table>
+	</body>
+</html>

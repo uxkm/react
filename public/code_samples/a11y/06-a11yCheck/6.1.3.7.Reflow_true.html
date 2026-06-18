@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>올바른 예시 1 : 반복 입력 정보</title>
+	</head>
+	<body>
+		<form id="shippingForm" onsubmit="return validateForm()">
+			<label for="address">배송 주소:</label>
+			<input type="text" id="address" name="address" autocomplete="shipping street-address">
+			<p id="address-help" style="color:red;"></p>
+
+			<label>
+				<input type="checkbox" id="sameAddress" onclick="copyAddress()"> 청구 주소가 배송 주소와 동일합니다
+			</label>
+			<br>
+
+			<label for="billingAddress">청구 주소:</label>
+			<input type="text" id="billingAddress" name="billingAddress" autocomplete="billing street-address">
+			<br>
+
+			<button type="submit">제출</button>
+		</form>
+
+		<script>
+			function copyAddress() {
+				const addressInput = document.getElementById('address');
+				const billingAddressInput = document.getElementById('billingAddress');
+				const addressHelp = document.getElementById('address-help');
+
+				if (document.getElementById('sameAddress').checked) {
+					if (addressInput.value.trim() === '') {
+						addressHelp.textContent = '배송 주소를 입력해 주세요';
+						billingAddressInput.value = '';
+						addressInput.focus();
+					} else {
+						addressHelp.textContent = '';
+						billingAddressInput.value = addressInput.value;
+					}
+				} else {
+					addressHelp.textContent = '';
+					billingAddressInput.value = '';
+				}
+			}
+
+			function validateForm() {
+				const addressInput = document.getElementById('address').value;
+				const sameAddressChecked = document.getElementById('sameAddress').checked;
+
+				if (sameAddressChecked && addressInput.trim() === '') {
+					alert('배송 주소를 입력해 주세요');
+					return false;
+				}
+				return false;
+			}
+		</script>
+	</body>
+</html>

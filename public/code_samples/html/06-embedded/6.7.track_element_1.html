@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[track] 여러 언어 자막 제공 및 기본 자막 지정</title>
+		<style>
+      video {
+				width: 100%;
+				max-width: 300px;
+			}
+		</style>
+	</head>
+	<body>
+		<video preload="metadata" controls>
+			<source src="/_assets/images/media/friday.mp4" type="video/mp4">
+			<track src="/_assets/images/media/friday_ko.vtt" kind="subtitles" srclang="ko" default />
+			<track src="/_assets/images/media/friday_en.vtt" kind="subtitles" srclang="en" />
+			<track src="/_assets/images/media/friday_fr.vtt" kind="subtitles" srclang="fr" />
+			브라우저가 비디오 태그를 지원하지 않습니다.
+		</video>
+	</body>
+</html>

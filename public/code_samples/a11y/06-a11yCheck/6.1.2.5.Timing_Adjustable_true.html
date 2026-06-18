@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>올바른 예시 : 시간제한을 조절할 수 있는 경우</title>
+	</head>
+	<body>
+		<h1>Quiz</h1>
+		<p id="time">남은 시간 : 30초</p>
+		<label for="userInput">2 + 2 = </label>
+		<input type="text" id="userInput" name="userInput" placeholder="정답을 입력하세요.">
+		<button type="submit" id="checkButton">정답 확인</button>
+		<div style="margin-top:10px;">
+			<button onclick="extendTime()">시간 연장</button>
+			<button onclick="pauseTimer()">타이머 정지</button>
+			<button onclick="resumeTimer()">타이머 시작</button>
+		</div>
+		<p id="timeoutMessage" style="display:none; margin-top:10px; color:red;">시간이 초과되었습니다.</p>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				let timeLeft = 30;
+				let timer = null;
+				let isPaused = false;
+
+				const timerElement = document.getElementById('time');
+				const checkButton = document.getElementById('checkButton');
+				const timeoutMessage = document.getElementById('timeoutMessage');
+				const userInput = document.getElementById('userInput');
+
+				// Function to start the timer
+				function startTimer() {
+					if (timer) {
+						clearInterval(timer);
+					}
+
+					timer = setInterval(function() {
+						if (!isPaused) {
+							timerElement.textContent = '남은 시간 : ' + timeLeft + '초';
+							timeLeft--;
+
+							if (timeLeft < 0) {
+								clearInterval(timer);
+								timer = null;
+								timeoutMessage.style.display = 'block';  // Show timeout message
+								userInput.disabled = true;               // Disable input field
+							}
+						}
+					}, 1000);
+				}
+
+				// Function to check user input
+				function checkInput(event) {
+					event.preventDefault();  // Prevent the default form submission behavior
+
+					const userInputValue = userInput.value;
+					if (userInputValue !== '4') {
+						alert('틀렸습니다!');
+					} else {
+						alert('정답입니다!');
+					}
+				}
+
+				// Function to extend the time
+				window.extendTime = function() {
+					if (timer !== null) {
+						timeLeft += 10; // Extend time by 10 seconds
+					} else {
+						timeLeft = 30; // Reset time to 30 seconds if timer is not running
+						startTimer();
+					}
+				};
+
+				// Function to pause the timer
+				window.pauseTimer = function() {
+					isPaused = true;
+				};
+
+				// Function to resume the timer
+				window.resumeTimer = function() {
+					isPaused = false;
+				};
+
+				// Initialize the timer
+				startTimer();
+
+				// Attach event listener to the button
+				if (checkButton) {
+					checkButton.addEventListener('click', checkInput);
+				} else {
+					console.error('Element with id "checkButton" not found.');
+				}
+			});
+		</script>
+	</body>
+</html>

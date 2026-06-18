@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>하이브리드 앱 예시 (HTML/JavaScript) : 알림 기능</title>
+	</head>
+	<body>
+	<button onclick="sendNotification()">알림 보내기</button>
+
+	<script>
+    function sendNotification() {
+      // 화면 표시 (브라우저 알림)
+      if (Notification.permission === "granted") {
+        const notification = new Notification("새 메시지", {
+          body: "새로운 메시지가 도착했습니다.",
+          icon: "notification_icon.png"
+        });
+      } else if (Notification.permission !== "denied") {
+        // 권한이 부여되지 않은 경우, 권한 요청
+        Notification.requestPermission().then(permission => {
+          if (permission === "granted") {
+            const notification = new Notification("새 메시지", {
+              body: "새로운 메시지가 도착했습니다.",
+              icon: "notification_icon.png"
+            });
+          }
+        });
+      }
+
+      // 소리 알림
+      const audio = new Audio('/_code_samples/a11y/06-a11yCheck/6.2.1.6.piano_notification.mp3');
+      audio.play();
+
+      // 진동 알림 (모바일 기기에서 작동)
+      if (navigator.vibrate) {
+        navigator.vibrate([500, 1000, 500]); // 진동 패턴 설정
+      }
+    }
+	</script>
+	</body>
+</html>

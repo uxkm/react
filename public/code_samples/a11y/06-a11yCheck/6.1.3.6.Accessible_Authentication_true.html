@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>올바른 예시 1 : 다양한 인증 방법 제공</title>
+	</head>
+	<body>
+		<form id="authForm">
+			<label for="username">사용자 이름:</label>
+			<input type="text" id="username" name="username">
+
+			<label for="password">비밀번호:</label>
+			<input type="password" id="password" name="password">
+
+			<p>원하시면, 대체 인증 방법을 사용할 수 있습니다:</p>
+			<button type="button" onclick="sendOtp()">내 핸드폰으로 OTP 보내기</button>
+
+			<label for="otp" class="visually-hidden">받은 OTP를 입력하세요:</label>
+			<input type="text" id="otp" name="otp">
+
+			<button type="submit">제출</button>
+		</form>
+
+		<script>
+			function sendOtp() {
+				// OTP 전송 시뮬레이션
+				alert('등록된 전화번호로 OTP가 전송되었습니다.');
+			}
+		</script>
+	</body>
+</html>

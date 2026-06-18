@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[table] <thead>, <tbody>, <tfoot>을 활용한 테이블 그룹화</title>
+	</head>
+	<body>
+		<h2 style="color: red;">비권장 방식(table 속성 사용)</h2>
+		<table width="100%" border="1">
+			<thead>
+				<tr>
+					<th>상품명</th>
+					<th>가격</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>노트북</td>
+					<td>1,500,000원</td>
+				</tr>
+				<tr>
+					<td>스마트폰</td>
+					<td>1,000,000원</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td>총합</td>
+					<td>2,500,000원</td>
+				</tr>
+			</tfoot>
+		</table>
+		<hr>
+
+		<h2 style="color: green;">권장 방식(CSS 사용)</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>상품명</th>
+					<th>가격</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>노트북</td>
+					<td>1,500,000원</td>
+				</tr>
+				<tr>
+					<td>스마트폰</td>
+					<td>1,000,000원</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td>총합</td>
+					<td>2,500,000원</td>
+				</tr>
+			</tfoot>
+		</table>
+
+		<style>
+			h2 {font-size: 16px;}
+			hr {
+				margin: 20px 0;
+				border-top: 1px dashed #bbb;
+			}
+			.table {
+				width: 100%;
+				border-collapse: collapse;
+			}
+			.table th, .table td {
+				border: 1px solid #bbb;
+				padding: 8px;
+			}
+			.table th {
+				background-color: #eee;
+			}
+		</style>
+	</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>동적 확장/축소 가능한 treegrid 예시 | 복합형 위젯 역할(WAI-ARIA)</title>
+		<style>
+			.treegrid {
+				width: 100%;
+				border: 1px solid #ddd;
+				padding: 10px;
+			}
+			.treegrid-header,
+			.treegrid-row {
+				display: flex;
+				padding: 10px;
+				border-bottom: 1px solid #ddd;
+			}
+			.treegrid-cell {
+				flex: 1;
+				padding: 5px;
+			}
+			.expandable {
+				cursor: pointer;
+				user-select: none;
+			}
+			.treegrid-row[data-expanded="false"] .treegrid-cell:first-child::before {
+				content: "▶"; /* 확장되지 않은 경우 */
+				margin-right: 5px;
+			}
+			.treegrid-row[data-expanded="true"] .treegrid-cell:first-child::before {
+				content: "▼"; /* 확장된 경우 */
+				margin-right: 5px;
+			}
+			.hidden-row {
+				display: none;
+			}
+			.treegrid-level-1 .treegrid-cell:first-child {
+				padding-left: 20px;
+			}
+			.treegrid-level-2 .treegrid-cell:first-child {
+				padding-left: 40px;
+			}
+			.treegrid-level-3 .treegrid-cell:first-child {
+				padding-left: 60px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- TreeGrid Header -->
+		<div class="treegrid" role="treegrid" aria-label="Expandable TreeGrid">
+			<div class="treegrid-header" role="row">
+				<div class="treegrid-cell" role="columnheader">Name</div>
+				<div class="treegrid-cell" role="columnheader">Size</div>
+				<div class="treegrid-cell" role="columnheader">Type</div>
+			</div>
+
+			<!-- TreeGrid Rows -->
+			<div class="treegrid-row expandable" role="row" data-expanded="false" aria-expanded="false" tabindex="0">
+				<div class="treegrid-cell" role="gridcell" aria-label="Folder 1">Folder 1</div>
+				<div class="treegrid-cell" role="gridcell">--</div>
+				<div class="treegrid-cell" role="gridcell">Folder</div>
+			</div>
+
+			<!-- Level 1 children under Folder 1 -->
+			<div class="treegrid-row treegrid-level-1 hidden-row" role="row" tabindex="-1">
+				<div class="treegrid-cell" role="gridcell" aria-label="File 1.1">File 1.1</div>
+				<div class="treegrid-cell" role="gridcell">15 KB</div>
+				<div class="treegrid-cell" role="gridcell">Text File</div>
+			</div>
+
+			<div class="treegrid-row treegrid-level-1 hidden-row" role="row" tabindex="-1">
+				<div class="treegrid-cell" role="gridcell" aria-label="File 1.2">File 1.2</div>
+				<div class="treegrid-cell" role="gridcell">20 KB</div>
+				<div class="treegrid-cell" role="gridcell">Image File</div>
+			</div>
+
+			<div class="treegrid-row expandable" role="row" data-expanded="false" aria-expanded="false" tabindex="0">
+				<div class="treegrid-cell" role="gridcell" aria-label="Folder 2">Folder 2</div>
+				<div class="treegrid-cell" role="gridcell">--</div>
+				<div class="treegrid-cell" role="gridcell">Folder</div>
+			</div>
+
+			<!-- Level 1 children under Folder 2 -->
+			<div class="treegrid-row treegrid-level-1 hidden-row" role="row" tabindex="-1">
+				<div class="treegrid-cell" role="gridcell" aria-label="File 2.1">File 2.1</div>
+				<div class="treegrid-cell" role="gridcell">10 KB</div>
+				<div class="treegrid-cell" role="gridcell">PDF</div>
+			</div>
+
+			<!-- Level 2 children under File 2.1 -->
+			<div class="treegrid-row treegrid-level-2 hidden-row" role="row" tabindex="-1">
+				<div class="treegrid-cell" role="gridcell" aria-label="File 2.1.1">File 2.1.1</div>
+				<div class="treegrid-cell" role="gridcell">8 KB</div>
+				<div class="treegrid-cell" role="gridcell">Text File</div>
+			</div>
+		</div>
+
+		<script>
+			// TreeGrid 확장/축소 동작
+			document.querySelectorAll('.expandable').forEach(item => {
+				item.addEventListener('click', () => {
+					const isExpanded = item.getAttribute('data-expanded') === 'true';
+					item.setAttribute('data-expanded', !isExpanded);
+					item.setAttribute('aria-expanded', !isExpanded);
+
+					// 바로 다음에 있는 자식 레벨 숨김/표시
+					let nextSibling = item.nextElementSibling;
+					while (nextSibling && nextSibling.classList.contains('treegrid-level-1')) {
+						if (isExpanded) {
+							nextSibling.classList.add('hidden-row');  // 축소 시 숨김
+							nextSibling.setAttribute('tabindex', '-1');
+						} else {
+							nextSibling.classList.remove('hidden-row');  // 확장 시 표시
+							nextSibling.setAttribute('tabindex', '0');
+						}
+						nextSibling = nextSibling.nextElementSibling;
+					}
+				});
+
+				// 키보드로 확장/축소 제어 가능
+				item.addEventListener('keydown', (event) => {
+					if (event.key === 'Enter' || event.key === ' ') {
+						event.preventDefault();
+						item.click();
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+		<meta name="format-detection" content="telephone=no, address=no, email=no, date=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>UXKM CSS :is() Pseudo-class</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				padding: 0 20px;
+				line-height: 1.6;
+			}
+			h1 {
+				color: #333;
+				margin-bottom: 30px;
+			}
+			.example {
+				margin-bottom: 40px;
+				padding: 20px;
+				border: 1px solid #ddd;
+				border-radius: 8px;
+			}
+			.example h2 {
+				margin-top: 0;
+				color: #0066cc;
+			}
+
+			/* 예시 1: 여러 섹션의 p 태그에 공통 스타일 적용 */
+			:is(header, main, footer) p {
+				color: blue;
+				line-height: 1.6;
+				margin: 10px 0;
+			}
+
+			header {
+				background-color: #f0f0f0;
+				padding: 15px;
+				margin-bottom: 20px;
+			}
+
+			main {
+				background-color: #fff;
+				padding: 15px;
+				margin-bottom: 20px;
+			}
+
+			footer {
+				background-color: #f0f0f0;
+				padding: 15px;
+			}
+
+			/* 예시 2: 여러 버튼 타입에 공통 스타일 적용 */
+			:is(button, .btn, [role="button"]) {
+				padding: 10px 20px;
+				border-radius: 4px;
+				cursor: pointer;
+				border: none;
+				background-color: #0066cc;
+				color: white;
+				margin: 5px;
+			}
+
+			:is(button, .btn, [role="button"]):hover {
+				background-color: #0052a3;
+			}
+
+			/* 예시 3: 다양한 헤딩 태그에 공통 스타일 적용 */
+			:is(h1, h2, h3, h4, h5, h6) {
+				margin-top: 1em;
+				font-weight: bold;
+				color: #333;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>:is() 선택자 예제</h1>
+
+		<div class="example">
+			<h2>예시 1: 여러 섹션의 p 태그에 공통 스타일 적용</h2>
+			<header>
+				<p>헤더의 문단 (파란색)</p>
+			</header>
+			<main>
+				<p>본문의 문단 (파란색)</p>
+			</main>
+			<footer>
+				<p>푸터의 문단 (파란색)</p>
+			</footer>
+		</div>
+
+		<div class="example">
+			<h2>예시 2: 여러 버튼 타입에 공통 스타일 적용</h2>
+			<button>일반 버튼</button>
+			<button class="btn">클래스 버튼</button>
+			<span role="button">역할 버튼</span>
+			<p>위 세 가지 버튼 모두 같은 스타일이 적용됩니다.</p>
+		</div>
+
+		<div class="example">
+			<h2>예시 3: 다양한 헤딩 태그에 공통 스타일 적용</h2>
+			<h1>제목 1</h1>
+			<h2>제목 2</h2>
+			<h3>제목 3</h3>
+			<h4>제목 4</h4>
+			<p>모든 헤딩 태그에 공통 스타일이 적용됩니다.</p>
+		</div>
+	</body>
+</html>

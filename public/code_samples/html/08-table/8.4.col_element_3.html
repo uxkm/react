@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[col] CSS로 스타일링 제어</title>
+	</head>
+	<body>
+		<table>
+			<colgroup>
+				<col class="col-1">
+				<col span="2" class="col-2">
+			</colgroup>
+			<tr>
+				<th>이름</th>
+				<th>나이</th>
+				<th>직업</th>
+			</tr>
+			<tr>
+				<td>홍길동</td>
+				<td>30</td>
+				<td>개발자</td>
+			</tr>
+			<tr>
+				<td>임꺽정</td>
+				<td>43</td>
+				<td>기획자</td>
+			</tr>
+		</table>
+
+		<style>
+			table {
+				width: 100%;
+				table-layout: fixed;
+				border-collapse: collapse;
+			}
+			th, td {
+				border: 1px solid #bbb;
+				padding: 8px;
+			}
+			.col-1 {
+				width:40%;
+				background-color: #d4f0f9;
+				border: 2px solid #1e73ff;
+			}
+			.col-2 {
+				width:30%;
+				background-color: #deffde;
+			}
+		</style>
+	</body>
+</html>

@@ -1,0 +1,288 @@
+@charset "utf-8";
+
+.page_comments {
+  &__notice {
+    color: #5c6773;
+    font-size: 14px;
+  }
+
+  &__status {
+    color: #5c6773;
+    font-size: 14px;
+
+    &--error {
+      color: #c0392b;
+    }
+
+    &--success {
+      color: #0a58ca;
+    }
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    padding: 16px 18px;
+    border: 1px solid #d8dee9;
+    border-radius: 8px;
+  }
+
+  &__reply_btn,
+  &__delete_btn {
+    margin-top: 10px;
+    padding: 0;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  &__actions_inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  &__reply_btn {
+    color: #0a58ca;
+
+    &:hover {
+      color: #084298;
+      text-decoration: underline;
+    }
+  }
+
+  &__delete_btn {
+    color: #c0392b;
+
+    &:hover:not(:disabled) {
+      text-decoration: underline;
+    }
+
+    &:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+  }
+
+  &__badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #684200;
+    background: #fff3cd;
+  }
+
+  &__replies {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 14px 0 0;
+    padding: 0 0 0 16px;
+    border-left: 2px solid #d8dee9;
+    list-style: none;
+  }
+
+  &__help {
+    margin: 0;
+    font-size: 13px;
+    color: #677079;
+  }
+
+  &__delete_form {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed #d8dee9;
+  }
+
+  &__reply_target {
+    margin: 0 0 10px;
+    font-size: 13px;
+    color: #677079;
+  }
+
+  &__reply_actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  &__cancel {
+    padding: 10px 14px;
+    border: 1px solid #c8d0dc;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #2c3345;
+    background: #fff;
+
+    &:hover {
+      background: #f3f5f8;
+    }
+  }
+
+  &__textarea--reply {
+    min-height: 88px;
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px 12px;
+    margin-bottom: 8px;
+  }
+
+  &__author {
+    font-size: 15px;
+    color: #1a1f36;
+  }
+
+  &__date {
+    font-size: 13px;
+    color: #677079;
+  }
+
+  &__body {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #2c3345;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  &__form_title {
+    font-size: 18px;
+    color: #1a1f36;
+  }
+
+  &__form_desc {
+    font-size: 14px;
+    color: #677079;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__password_group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__password_row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  &__label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3345;
+  }
+
+  &__textarea_wrap {
+    position: relative;
+  }
+
+  &__counter {
+    position: absolute;
+    right: 12px;
+    bottom: 10px;
+    font-size: 12px;
+    line-height: 1;
+    color: #677079;
+    pointer-events: none;
+    user-select: none;
+
+    &--near {
+      color: #c0392b;
+      font-weight: 600;
+    }
+  }
+
+  &__input,
+  &__textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #c8d0dc;
+    border-radius: 6px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #1a1f36;
+    background: #fff;
+
+    &:focus {
+      outline: 2px solid #0a58ca;
+      outline-offset: 1px;
+      border-color: #0a58ca;
+    }
+
+    &:disabled {
+      background: #f3f5f8;
+      cursor: not-allowed;
+    }
+  }
+
+  &__textarea {
+    resize: vertical;
+    min-height: 120px;
+    padding-bottom: 30px;
+  }
+
+  &__honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  &__turnstile {
+    margin-top: 16px;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  &__submit {
+    min-width: 120px;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    background: #0a58ca;
+
+    &:hover:not(:disabled) {
+      background: #084298;
+    }
+
+    &:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    &--danger {
+      background: #c0392b;
+
+      &:hover:not(:disabled) {
+        background: #a93226;
+      }
+    }
+  }
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>aria-errormessage 속성 기본 오류 메시지 예시 | 라이브 영역 역할 (WAI-ARIA)</title>
+		<style>
+      form {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
+      }
+
+      /* 입력 필드 스타일 */
+      input[type="text"],
+      input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
+      }
+
+      /* 입력 필드 포커스 스타일 */
+      input[type="text"]:focus,
+      input[type="email"]:focus {
+        border-color: #4a90e2;
+        outline: none;
+      }
+
+      /* 오류가 있을 때 입력 필드 스타일 */
+      input[aria-invalid="true"] {
+        border-color: red;
+        background-color: #ffe6e6;
+      }
+
+      /* 오류 메시지 스타일 */
+      .error {
+        color: red;
+        font-size: 14px;
+        margin-top: -10px;
+        margin-bottom: 10px;
+        display: none;
+      }
+
+      /* 제출 버튼 스타일 */
+      button[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        background-color: #4a90e2;
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button[type="submit"]:hover {
+        background-color: #357ab7;
+      }
+		</style>
+	</head>
+	<body>
+		<form id="userForm" novalidate>
+			<!-- Username field -->
+			<label for="username">Username:</label>
+			<input type="text" id="username" aria-errormessage="usernameError" aria-invalid="false" required>
+			<div id="usernameError" class="error">이름을 입력해 주세요.</div>
+			<br><br>
+
+			<!-- Email field -->
+			<label for="email">Email:</label>
+			<input type="email" id="email" aria-errormessage="emailError" aria-invalid="false" required>
+			<div id="emailError" class="error">유효한 이메일 주소를 입력해 주세요.</div>
+			<br><br>
+
+			<button type="submit">제출하기</button>
+		</form>
+
+		<script>
+			document.getElementById('userForm').addEventListener('submit', function(event) {
+				event.preventDefault();  // 폼 제출 방지
+				let hasError = false;
+
+				// Username validation
+				const usernameInput = document.getElementById('username');
+				const usernameError = document.getElementById('usernameError');
+				if (usernameInput.value.trim() === "") {
+					usernameInput.setAttribute('aria-invalid', 'true');
+					usernameError.style.display = 'block';
+					if (!hasError) {
+						usernameInput.focus();
+						hasError = true;
+					}
+				} else {
+					usernameInput.setAttribute('aria-invalid', 'false');
+					usernameError.style.display = 'none';
+				}
+
+				// Email validation
+				const emailInput = document.getElementById('email');
+				const emailError = document.getElementById('emailError');
+				const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+				if (!emailPattern.test(emailInput.value.trim())) {
+					emailInput.setAttribute('aria-invalid', 'true');
+					emailError.style.display = 'block';
+					if (!hasError) {
+						emailInput.focus();
+						hasError = true;
+					}
+				} else {
+					emailInput.setAttribute('aria-invalid', 'false');
+					emailError.style.display = 'none';
+				}
+
+				// 폼 제출 성공 시 알림
+				if (!hasError) {
+					alert('성공적으로 제출되었습니다!!');
+				}
+			});
+		</script>
+	</body>
+</html>

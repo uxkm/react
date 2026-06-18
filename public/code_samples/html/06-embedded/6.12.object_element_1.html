@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[object] PDF 파일 삽입 및 미리보기</title>
+	</head>
+	<body>
+		<object id="pdfViewer" data="/_assets/images/a11y/한국형 웹 콘텐츠 접근성 지침 2.1.pdf"
+						type="application/pdf" width="800" height="600">
+			브라우저가 PDF 뷰어를 지원하지 않습니다.
+			<a id="downloadLink" href="/_assets/images/a11y/한국형 웹 콘텐츠 접근성 지침 2.1.pdf" download>
+				PDF 다운로드
+			</a>
+		</object>
+		<div class="btnBox">
+			<button type="button" onclick="togglePDF()">한국형 웹 콘텐츠 접근성 지침 2.2 보기</button>
+		</div>
+
+		<script>
+			let currentPDF = 1; // 현재 PDF 상태
+
+			function togglePDF() {
+				const pdfViewer = document.getElementById("pdfViewer");
+				const downloadLink = document.getElementById("downloadLink");
+				const button = document.querySelector(".btnBox button");
+
+				const pdf1 = "/_assets/images/a11y/한국형 웹 콘텐츠 접근성 지침 2.1.pdf";
+				const pdf2 = "/_assets/images/a11y/한국형 웹 콘텐츠 접근성 지침 2.2-2.pdf";
+
+				if (currentPDF === 1) {
+					pdfViewer.data = pdf2;
+					downloadLink.href = pdf2;
+					button.textContent = "한국형 웹 콘텐츠 접근성 지침 2.1 보기";
+					currentPDF = 2;
+				} else {
+					pdfViewer.data = pdf1;
+					downloadLink.href = pdf1;
+					button.textContent = "한국형 웹 콘텐츠 접근성 지침 2.2 보기";
+					currentPDF = 1;
+				}
+			}
+		</script>
+
+		<style>
+      :root {
+        --border-width: 2px;
+        --btnBox-height: 70px;
+      }
+      *, html, body {margin: 0; padding: 0; vertical-align: top;}
+      html, body {height: 100%;}
+      object {width: 100%; height: calc(100% - var(--btnBox-height)); border-bottom: var(--border-width) solid #000;}
+      .btnBox {
+        display: flex; align-items: center; justify-content: center;
+        height: calc(var(--btnBox-height) - var(--border-width));
+      }
+      .btnBox button {
+        cursor: pointer;
+        height: 46px; padding: 0 15px;
+        font-size: 16px; font-weight: 600; color: #fff;
+        background-color: #1e73ff; border: 0; border-radius: 5px;
+      }
+		</style>
+	</body>
+</html>

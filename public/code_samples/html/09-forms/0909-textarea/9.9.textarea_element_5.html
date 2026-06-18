@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+		<title>[textarea] 실시간 상담 채팅</title>
+		<style>
+			*, html, body {
+				margin: 0; padding: 0; vertical-align: top;
+			}
+			body {
+				padding: 10px;
+			}
+			.textarea-container {
+				display: flex;
+				gap: 6px;
+			}
+			.textarea {
+				position: relative;
+			}
+			.textarea textarea {
+				width: 200px;
+				height: 65px;
+				padding: 8px;
+				line-height: 22px;
+				box-sizing: border-box;
+			}
+			.textarea .counter {
+				position: absolute;
+				left: 0;
+				bottom: -25px;
+				line-height: 22px;
+				font-size: 13px;
+				color: #666;
+				background-color: rgba(255,255,255,.5);
+			}
+			.textarea-container button {
+				width: 60px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="textarea-container">
+			<div class="textarea">
+				<textarea id="message" maxlength="100" placeholder="내용을 입력하세요." required></textarea>
+				<div id="char-count" class="counter">0/100</div>
+			</div>
+			<button type="submit">제출</button>
+		</div>
+
+		<script>
+			const textarea = document.getElementById("message");
+			const charCount = document.getElementById("char-count");
+
+			textarea.addEventListener("input", () => {
+				const currentLength = textarea.value.length;
+				const maxLength = textarea.maxLength;
+				charCount.textContent = `${currentLength}/${maxLength}`;
+			});
+		</script>
+	</body>
+</html>

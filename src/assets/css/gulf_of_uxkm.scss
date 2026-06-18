@@ -1,0 +1,123 @@
+@charset "utf-8";
+@use "_font";
+@use "_variable";
+@use "_mixin";
+@use "_color";
+
+// UXKM의 걸프
+.nicolas_page {
+	.in_box {
+		display:flex;
+		.img {
+			$img_width: 210px;
+			position:relative;
+			width:$img_width; margin-right:25px;
+			text-align:center;
+			.nicolas {
+				width:$img_width;
+			}
+			.logo {
+				position:absolute; right:10px; top:10px;
+			}
+			span {
+				display:block;
+				margin-top:10px;
+				line-height:20px;
+			}
+		}
+		.txt {
+			padding-bottom:30px;
+		}
+	}
+}
+.htmlcss_link {
+	display:flex;
+	gap:10px;
+	margin-top:10px;
+
+	a {
+		display:inline-flex;
+		align-items: center;
+		height:40px; padding:0 13px;
+		font-size:14px; font-weight:500;
+		border:1px solid transparent;
+		border-radius:4px;
+		transition:background-color .15s, color .15s, border-color .15s;
+		&:before {
+			display:block;
+			vertical-align: top;
+			margin-top:2px; margin-right:5px;
+			font-size:20px;
+			@include font.font-icon2;
+		}
+
+		&:hover {
+			background-color:#f9f9f9;
+		}
+	}
+	.html {
+		color:color.$darkOrange;
+		border-color:color.$darkOrange;
+		&:before {
+			content:"\f13b";
+		}
+		&:hover {
+			color:#fff;
+			background-color: color.$darkOrange;
+		}
+	}
+	.css {
+		color:color.$skyBlue;
+		border-color:color.$skyBlue;
+		&:before {
+			content:"\f38b";
+		}
+		&:hover {
+			color:#fff;
+			background-color: color.$skyBlue;
+		}
+	}
+}
+@media(max-width:variable.$screen-sm-max) {
+	.nicolas_page {
+		.in_box {
+			flex-direction:column;
+			.img {
+				order:2;
+				margin-right:0;
+			}
+			.txt {
+				order:1;
+				padding-bottom:25px;
+			}
+		}
+	}
+	.htmlcss_link {
+		gap:8px;
+
+		a {
+			height:40px; padding:0 13px;
+			font-size:13px;
+			&:before {
+				margin-top:2px; margin-right:5px;
+				font-size:18px;
+			}
+
+			&:hover {
+				background-color:transparent;
+			}
+		}
+		.html {
+			&:hover {
+				color:color.$darkOrange;
+				background-color: #fff;
+			}
+		}
+		.css {
+			&:hover {
+				color:color.$skyBlue;
+				background-color: #fff;
+			}
+		}
+	}
+}

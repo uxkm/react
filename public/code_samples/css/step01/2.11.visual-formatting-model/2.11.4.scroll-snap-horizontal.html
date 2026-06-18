@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>스크롤 스냅 - 가로 스크롤 예제</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			padding: 0 2rem;
+			background: #f5f5f5;
+			margin: 0;
+		}
+
+		/* 가로 스크롤 캐러셀 */
+		.horizontal-scroll {
+			display: flex;
+			overflow-x: auto;
+			scroll-snap-type: x mandatory;
+			scroll-padding: 1rem;
+			gap: 1rem;
+			padding: 1rem;
+			background: #f9f9f9;
+			border-radius: 8px;
+			-webkit-overflow-scrolling: touch;
+		}
+
+		.horizontal-scroll::-webkit-scrollbar {
+			height: 8px;
+		}
+
+		.horizontal-scroll::-webkit-scrollbar-track {
+			background: #e0e0e0;
+			border-radius: 4px;
+		}
+
+		.horizontal-scroll::-webkit-scrollbar-thumb {
+			background: #667eea;
+			border-radius: 4px;
+		}
+
+		.card {
+			flex: 0 0 300px;
+			height: 200px;
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			border-radius: 8px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: white;
+			font-size: 1.5rem;
+			font-weight: bold;
+			scroll-snap-align: start;
+			scroll-snap-stop: always;
+		}
+	</style>
+</head>
+<body>
+	<h1>가로 스크롤 캐러셀</h1>
+	<p>가로로 스크롤하면 각 카드가 시작 지점에 자동으로 정렬됩니다.</p>
+
+	<div class="horizontal-scroll">
+		<div class="card">카드 1</div>
+		<div class="card">카드 2</div>
+		<div class="card">카드 3</div>
+		<div class="card">카드 4</div>
+		<div class="card">카드 5</div>
+		<div class="card">카드 6</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[select] 여러 개 선택할 수 있는 리스트 박스 (multiple)</title>
+	</head>
+	<body>
+		<p>multiple 목록</p>
+		<label for="hobbies1">취미 선택:</label>
+		<select name="hobbies1" id="hobbies1" multiple size="4">
+			<option value="reading">독서</option>
+			<option value="sports">운동</option>
+			<option value="music">음악</option>
+			<option value="travel">여행</option>
+		</select>
+		<hr>
+
+		<p>기본 선택값 설정 (selected 속성 사용)</p>
+		<label for="hobbies2">취미 선택:</label>
+		<select name="hobbies2" id="hobbies2" multiple size="4">
+			<option value="reading">독서</option>
+			<option value="sports" selected>운동</option>
+			<option value="music">음악</option>
+			<option value="travel" selected>여행</option>
+		</select>
+
+		<style>
+			hr {margin:15px 0;}
+			select {width:100px; margin:10px 0 0;}
+			p {margin:0;}
+		</style>
+	</body>
+</html>

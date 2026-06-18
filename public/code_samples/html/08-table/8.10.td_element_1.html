@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[td] 대학 성적표</title>
+	</head>
+	<body>
+		<table>
+			<caption>2024학년도 1학기 성적표</caption>
+			<thead>
+				<tr>
+					<th rowspan="2" id="student">학생명</th>
+					<th colspan="2" id="math" abbr="수학">수학</th>
+					<th colspan="2" id="science" abbr="과학">과학</th>
+					<th rowspan="2" id="total">총점</th>
+				</tr>
+				<tr>
+					<th headers="math" id="math-mid">중간</th>
+					<th headers="math" id="math-final">기말</th>
+					<th headers="science" id="science-mid">중간</th>
+					<th headers="science" id="science-final">기말</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th headers="student" id="stu1">김철수</th>
+					<td headers="stu1 math math-mid">85</td>
+					<td headers="stu1 math math-final">90</td>
+					<td headers="stu1 science science-mid">88</td>
+					<td headers="stu1 science science-final">92</td>
+					<td headers="stu1 total">355</td>
+				</tr>
+				<tr>
+					<th headers="student" id="stu2">이영희</th>
+					<td headers="stu2 math math-mid">78</td>
+					<td headers="stu2 math math-final">85</td>
+					<td headers="stu2 science science-mid">92</td>
+					<td headers="stu2 science science-final">89</td>
+					<td headers="stu2 total">344</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<style>
+      table {
+        width: 100%;
+        min-width: 400px;
+        border-collapse: collapse;
+      }
+      th, td {
+        border: 1px solid #bbb;
+        padding: 8px;
+      }
+      th {
+        background-color: #eee;
+      }
+		</style>
+	</body>
+</html>

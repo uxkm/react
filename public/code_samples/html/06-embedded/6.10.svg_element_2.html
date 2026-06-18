@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[svg] JavaScript로 동적 SVG 조작</title>
+	</head>
+	<body>
+		<p>버튼 클릭 시 원(circle) 색 변경</p>
+		<svg width="100" height="100">
+			<circle id="myCircle" cx="50" cy="50" r="50" fill="blue"/>
+		</svg>
+		<br>
+		<button onclick="changeColor()">색 변경</button>
+
+		<script>
+			function changeColor() {
+				let circle = document.getElementById("myCircle");
+				let newColor = circle.getAttribute("fill") === "blue" ? "red" : "blue";
+				circle.setAttribute("fill", newColor);
+			}
+		</script>
+		<hr>
+
+		<p>마우스를 올리면 사각형 크기 변경</p>
+		<svg width="150" height="150">
+			<rect id="myRect" x="0" y="0" width="100" height="100" fill="green"/>
+		</svg>
+
+		<script>
+			let rect = document.getElementById("myRect");
+
+			rect.addEventListener("mouseenter", () => {
+				rect.setAttribute("width", "150");
+				rect.setAttribute("height", "150");
+			});
+
+			rect.addEventListener("mouseleave", () => {
+				rect.setAttribute("width", "100");
+				rect.setAttribute("height", "100");
+			});
+		</script>
+	</body>
+</html>

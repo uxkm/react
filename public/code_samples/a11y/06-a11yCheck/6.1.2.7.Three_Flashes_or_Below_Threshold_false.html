@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>잘못된 예시 : 초당 3~50회 주기로 깜빡이는 콘텐츠</title>
+		<style>
+			@keyframes blink {
+				0%, 100% { opacity: 1; }
+				50% { opacity: 0; }
+			}
+			.blink {
+				animation: blink 0.1s infinite;
+			}
+		</style>
+	</head>
+	<body>
+		<p class="blink">이 콘텐츠는 빠르게 깜박입니다.</p>
+	</body>
+</html>

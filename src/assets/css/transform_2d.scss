@@ -1,0 +1,40 @@
+@charset "utf-8";
+@use "_font";
+@use "_variable";
+@use "_mixin";
+@use "_color";
+
+// transform - 2D
+.css_transform_2d {
+	h1 .part_name:before {display:none;}
+
+	#content_title span.t_blue {
+		display:inline-block;
+		height:34px; line-height:33px; padding:0 5px;
+		color:#fff !important; font-weight:800;
+		transform:rotate(20deg) translate(-21px, -1px);
+		background:color.$blue; border-radius:3px;
+	}
+
+	.scale_hover {
+		$width:150px;
+		position:relative;
+		width:$width; height:100px; margin:8px 0 5px;
+		&:after {
+			position:absolute; left:$width + 10px; top:0;
+			font-size:14px; color:color.$blue; word-break:keep-all; white-space:pre;
+			content:"◀ 마우스를 올려보세요.";
+			opacity:.8;
+		}
+		i {
+			display:block; position:relative; overflow:hidden;
+			width:$width; height:100px;
+		}
+		img {
+			position:absolute; left:50%; top:50%; transform:translate(-50%, -50%);
+			width:130%; height:auto;
+			transition:all .4s;
+		}
+		&:hover img {transform:translate(-50%, -50%) scale(1.2, 1.2);}
+	}
+}

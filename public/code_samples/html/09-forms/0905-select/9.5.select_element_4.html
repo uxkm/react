@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[select] CSS 스타일링 적용</title>
+		<style>
+			hr {margin:20px 0;}
+			select {margin:10px 0 0;}
+		</style>
+	</head>
+	<body>
+		<label for="select1">음식 선택:</label>
+		<div class="custom-select1">
+			<select id="select1">
+				<option>비빔밥</option>
+				<option>김치찌개</option>
+				<option>불고기</option>
+			</select>
+		</div>
+		<style>
+			.custom-select1 {
+				display: inline-block;
+				position: relative;
+			}
+			.custom-select1 select {
+				width: 200px;
+				height: 46px;
+				padding: 0 10px;
+				font-size: 16px;
+				background-color: #f9f9f9;
+				border: 2px solid #4eb31b;
+				border-radius: 8px;
+				appearance: none;
+				cursor: pointer;
+			}
+			.custom-select1::after {
+				position: absolute;
+				top: 50%;
+				right: 13px;
+				border-top: 7px solid #4eb31b;
+				border-left: 6px solid transparent;
+				border-right: 6px solid transparent;
+				content: "";
+			}
+		</style>
+		<hr>
+
+		<label for="select2">음식 선택:</label>
+		<div class="custom-select2">
+			<select id="select2">
+				<option>비빔밥</option>
+				<option>김치찌개</option>
+				<option>불고기</option>
+			</select>
+		</div>
+		<style>
+			.custom-select2 {
+				display: inline-block;
+				position: relative;
+			}
+			.custom-select2 select {
+				width: 200px;
+				height: 46px;
+				padding: 0;
+				font-size: 16px;
+				background-color: transparent;
+				border: 0;
+				border-bottom: 2px solid #4eb31b;
+				appearance: none;
+				cursor: pointer;
+			}
+			.custom-select2::after {
+				position: absolute;
+				top: 50%;
+				right: 0;
+				border-top: 7px solid #4eb31b;
+				border-left: 6px solid transparent;
+				border-right: 6px solid transparent;
+				content: "";
+			}
+		</style>
+		<hr>
+
+		<label for="multi-box-select">음식 선택: </label>
+		<div class="multi-box1">
+			<select id="multi-box-select" multiple>
+				<option>비빔밥</option>
+				<option>김치찌개</option>
+				<option>불고기</option>
+				<option>된장찌개</option>
+				<option>떡볶이</option>
+			</select>
+		</div>
+		<style>
+			.multi-box1 {
+				/*overflow: hidden;*/
+				display: inline-block;
+				position: relative;
+				padding: 0;
+				background-color: #f9f9f9;
+				border: 2px solid #4eb31b;
+				border-radius: 8px;
+			}
+			.multi-box1 select {
+				overflow: hidden;
+				width: 200px;
+				height: 180px;
+				margin: 0;
+				padding: 10px;
+				font-size: 16px;
+				background-color: transparent;
+				border: 0;
+				border-radius: 6px;
+				appearance: none;
+				cursor: pointer;
+			}
+			.multi-box1 select:focus {
+				outline: 2px solid blue;
+			}
+			.multi-box1 option {
+				height: 32px;
+				padding: 3px 5px 0;
+				line-height: 32px;
+				border-radius: 4px;
+				box-sizing: border-box;
+			}
+		</style>
+	</body>
+</html>

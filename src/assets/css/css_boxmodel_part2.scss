@@ -1,0 +1,41 @@
+@charset "utf-8";
+@use "_font";
+@use "_variable";
+@use "_mixin";
+@use "_color";
+
+// 박스 모델 속성 part-2 [box-sizing 테스트]
+.box_model_iframe {height:761px;}
+$scroll-width:17px;
+// side menu open
+@media(max-width:#{1444px + $scroll-width}){
+	html:not(.side_close) .box_model_iframe {height:747px;}
+}
+@media(max-width:#{1217px + $scroll-width}){
+	html:not(.side_close) .box_model_iframe {height:577px;}
+}
+@media(max-width:variable.$screen-md-max){
+	html:not(.side_close) .box_model_iframe {height:747px;}
+}
+@media(max-width:#{917px + $scroll-width}){
+	html:not(.side_close) .box_model_iframe {height:577px;}
+}
+@media(max-width:408px){
+	html:not(.side_close) .box_model_iframe {height:603px;}
+}
+// side menu close
+@media(max-width:#{1213px + $scroll-width}){
+	html.side_close .box_model_iframe {height:747px;}
+}
+@media(max-width:#{988px + $scroll-width}){
+	html.side_close .box_model_iframe {height:577px;}
+}
+@media(max-width:variable.$screen-md-max){
+	html.side_close .box_model_iframe {height:747px;}
+}
+@media(max-width:#{917px + $scroll-width}){
+	html.side_close .box_model_iframe {height:577px;}
+}
+@media(max-width:408px){
+	html.side_close .box_model_iframe {height:603px;}
+}

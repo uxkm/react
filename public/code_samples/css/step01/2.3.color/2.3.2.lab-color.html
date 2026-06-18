@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>lab() 색상 함수 예제</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			padding: 0 2rem;
+			background: #f5f5f5;
+			margin: 0;
+		}
+
+		.color-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+			gap: 1rem;
+			margin-top: 1rem;
+		}
+
+		.color-box {
+			height: 120px;
+			border-radius: 8px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: white;
+			font-weight: bold;
+			text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+			font-size: 0.9rem;
+			text-align: center;
+		}
+
+		/* lab() 예제 */
+		.lab-1 { background-color: lab(60% 50 0); }
+		.lab-2 { background-color: lab(40% -50 0); }
+		.lab-3 { background-color: lab(80% 0 50); }
+		.lab-4 { background-color: lab(50% 0 0); }
+		.lab-5 { background-color: lab(70% 0 -50); }
+		.lab-6 { background-color: lab(30% 50 50); }
+
+		.label {
+			font-size: 0.85rem;
+			margin-top: 0.5rem;
+			color: #666;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<h1>lab() 색상 함수 예제</h1>
+	<p>CIE Lab 색 공간을 사용한 색상 표현입니다.</p>
+
+	<div class="color-grid">
+		<div>
+			<div class="color-box lab-1">lab(60% 50 0)</div>
+			<div class="label">밝은 빨강</div>
+		</div>
+		<div>
+			<div class="color-box lab-2">lab(40% -50 0)</div>
+			<div class="label">어두운 청록</div>
+		</div>
+		<div>
+			<div class="color-box lab-3">lab(80% 0 50)</div>
+			<div class="label">밝은 노랑</div>
+		</div>
+		<div>
+			<div class="color-box lab-4">lab(50% 0 0)</div>
+			<div class="label">회색</div>
+		</div>
+		<div>
+			<div class="color-box lab-5">lab(70% 0 -50)</div>
+			<div class="label">밝은 파랑</div>
+		</div>
+		<div>
+			<div class="color-box lab-6">lab(30% 50 50)</div>
+			<div class="label">어두운 주황</div>
+		</div>
+	</div>
+</body>
+</html>

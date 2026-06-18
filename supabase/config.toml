@@ -1,0 +1,5 @@
+# Supabase CLI (Edge Function 배포·link)
+project_id = "vfouzkmevuvaxosowmkx"
+
+[functions.post-comment]
+verify_jwt = false

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[tbody] colspan, rowspan을 활용한 테이블</title>
+		<style>
+			table {
+				width: 100%;
+				min-width: 500px;
+				border-collapse: collapse;
+				text-align: center;
+			}
+			th, td {
+				border: 1px solid #ccc;
+				padding: 10px;
+			}
+			thead {
+				background-color: #f4f4f4;
+			}
+			tfoot {
+				background-color: #e8e8e8;
+				font-weight: bold;
+			}
+		</style>
+	</head>
+	<body>
+		<table>
+			<thead>
+				<tr>
+					<th rowspan="2">번호</th>
+					<th rowspan="2">이름</th>
+					<th colspan="2">연락처</th>
+					<th rowspan="2">직업</th>
+				</tr>
+				<tr>
+					<th>전화번호</th>
+					<th>이메일</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td rowspan="2">1</td>
+					<td rowspan="2">홍길동</td>
+					<td>010-1234-5678</td>
+					<td rowspan="2">hong@example.com</td>
+					<td rowspan="2">개발자</td>
+				</tr>
+				<tr>
+					<td>02-9876-5432</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>이순신</td>
+					<td>010-1111-2222</td>
+					<td>lee@example.com</td>
+					<td>군인</td>
+				</tr>
+				<tr>
+					<td rowspan="2">3</td>
+					<td rowspan="2">신사임당</td>
+					<td>010-3333-4444</td>
+					<td rowspan="2">shin@example.com</td>
+					<td rowspan="2">예술가</td>
+				</tr>
+				<tr>
+					<td>031-5555-6666</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="5">총 3명의 데이터</td>
+				</tr>
+			</tfoot>
+		</table>
+	</body>
+</html>

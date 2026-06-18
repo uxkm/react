@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Internal Links</title>
+</head>
+<body>
+	<!-- 헤더 -->
+	<header>
+		<h1>My Website</h1>
+		<nav>
+			<ul>
+				<li><a href="#section1">Section 1</a></li>
+				<li><a href="#section2">Section 2</a></li>
+				<li><a href="#section3">Section 3</a></li>
+				<li><a href="#section4">Section 4</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<!-- 섹션 1 -->
+	<section id="section1">
+		<h2>Section 1</h2>
+		<p>This is the content for Section 1. Internal links make navigation simple and effective within a single page.</p>
+	</section>
+
+	<!-- 섹션 2 -->
+	<section id="section2">
+		<h2>Section 2</h2>
+		<p>Welcome to Section 2. With a sticky header, you can access links even while scrolling.</p>
+	</section>
+
+	<!-- 섹션 3 -->
+	<section id="section3">
+		<h2>Section 3</h2>
+		<p>Here is Section 3. Consistent design ensures that users can easily navigate through the page.</p>
+	</section>
+
+	<!-- 섹션 4 -->
+	<section id="section4">
+		<h2>Section 4</h2>
+		<p>You have reached Section 4. Use internal links for quick access to other sections.</p>
+	</section>
+
+	<!-- 푸터 -->
+	<footer>
+		<p>© 2025 My Website. All rights reserved.</p>
+	</footer>
+
+
+
+	<style>
+    /* 기본 스타일 초기화 */
+    body, h1, h2, p, ul, li {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+    /* 헤더 스타일 */
+    header {
+      position: fixed;
+      right: 10px;
+      top: 10px;
+      z-index: 1000;
+      padding: 15px;
+      background-color: rgba(255,255,255,.75);
+      border-radius: 10px;
+      box-shadow:0 0 10px rgba(0,0,0,.1);
+    }
+    header h1 {
+      font-size:16px;
+      color: #222;
+    }
+    header nav ul {
+      list-style: none;
+      margin-top: 6px;
+    }
+    header nav ul li a {
+      display:block;
+      padding: 5px;
+      font-size:15px;
+      text-decoration: none;
+      font-weight: bold;
+      color:#444;
+      border-radius:5px;
+    }
+    header nav ul li a:hover {
+      background: rgba(0,0,0,.1);
+    }
+    /* 섹션 스타일 */
+    section {
+      height:calc(100vh - 150px);
+      padding: 4rem 2rem;
+      border-bottom: 1px solid #ddd;
+    }
+    section:nth-child(odd) {
+      background-color: #f9f9f9;
+    }
+    section:nth-child(even) {
+      background-color: #e9e9e9;
+    }
+    section h2 {
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    section p {
+      max-width: 600px;
+      color: #666;
+    }
+    /* 푸터 스타일 */
+    footer {
+      margin-top: 1rem;
+      padding: 1rem;
+      text-align: center;
+      color: white;
+      background-color: #333;
+    }
+	</style>
+
+</body>
+</html>

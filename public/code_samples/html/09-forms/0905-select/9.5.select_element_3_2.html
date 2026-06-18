@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[select] 옵션 그룹(optgroup)을 사용한 카테고리 분류</title>
+	</head>
+	<body>
+		<p>optgroup 목록 (특정 optgroup 비활성)</p>
+		<label for="food1">음식 선택:</label>
+		<select id="food1">
+			<optgroup label="🍔 패스트푸드" disabled>
+				<option value="burger">햄버거</option>
+				<option value="pizza">피자</option>
+				<option value="fries">감자튀김</option>
+			</optgroup>
+
+			<optgroup label="🍚 한식">
+				<option value="bibimbap">비빔밥</option>
+				<option value="kimchi">김치찌개</option>
+				<option value="bulgogi">불고기</option>
+			</optgroup>
+
+			<optgroup label="🥗 건강식">
+				<option value="salad">샐러드</option>
+				<option value="smoothie">스무디</option>
+				<option value="quinoa">퀴노아</option>
+			</optgroup>
+		</select>
+		<hr>
+
+		<p>optgroup & multiple 목록 (특정 optgroup 비활성)</p>
+		<label for="food3">음식 선택:</label>
+		<select id="food3" size="8" multiple>
+			<optgroup label="🍔 패스트푸드">
+				<option value="burger">햄버거</option>
+				<option value="pizza">피자</option>
+				<option value="fries">감자튀김</option>
+			</optgroup>
+
+			<optgroup label="🍚 한식" disabled>
+				<option value="bibimbap">비빔밥</option>
+				<option value="kimchi">김치찌개</option>
+				<option value="bulgogi">불고기</option>
+			</optgroup>
+		</select>
+
+		<style>
+			hr {margin:15px 0;}
+			select {width:100px; margin:10px 0 0;}
+			p {margin:0;}
+		</style>
+	</body>
+</html>

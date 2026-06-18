@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=1.0, initial-scale=1.0">
+	<title>스크립트와의 상호작용</title>
+</head>
+<body>
+	<p>
+		나는
+		<span class="food">한식</span>을 좋아하고,
+		<span class="hobby">운동</span>이(가) 취미입니다.
+	</p>
+	<div>
+		<label>음식:</label>
+		<input type="radio" id="ko" name="food" value="한식" checked><label for="ko">한식</label>
+		<input type="radio" id="en" name="food" value="양식"><label for="en">양식</label>
+		<input type="radio" id="jp" name="food" value="일식"><label for="jp">일식</label>
+		<input type="radio" id="ch" name="food" value="중식"><label for="ch">중식</label>
+	</div>
+	<div>
+		<label>취미:</label>
+		<input type="radio" id="workout" name="hobby" value="운동" checked><label for="workout">운동</label>
+		<input type="radio" id="movie" name="hobby" value="영화"><label for="movie">영화</label>
+		<input type="radio" id="sing" name="hobby" value="노래"><label for="sing">노래</label>
+		<input type="radio" id="dancing" name="hobby" value="춤"><label for="dancing">춤</label>
+		<input type="radio" id="alcohol" name="hobby" value="술"><label for="alcohol">술</label>
+	</div>
+	<button onclick="replaceText()">텍스트 선택</button>
+
+	<style>
+		p span {
+			font-weight: 700;
+			color: blue;
+		}
+	</style>
+
+	<script>
+		function replaceText() {
+			// Get the span elements
+			const foodElement = document.querySelector('.food');
+			const hobbyElement = document.querySelector('.hobby');
+
+			// Get the selected food option
+			const selectedFood = document.querySelector('input[name="food"]:checked').value;
+			// Get the selected hobby option
+			const selectedHobby = document.querySelector('input[name="hobby"]:checked').value;
+
+			// Update the span elements with the selected values
+			foodElement.innerText = selectedFood;
+			hobbyElement.innerText = selectedHobby;
+		}
+	</script>
+</body>
+</html>

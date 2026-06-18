@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>s 요소를 활용한 쇼핑몰 할인 리스트</title>
+</head>
+<body>
+	<div class="container">
+		<h1>할인된 상품 목록</h1>
+		<div class="product-list">
+			<!-- 상품 1 -->
+			<div class="product-item">
+				<div class="product-name">스타일리시 운동화</div>
+				<div class="price">
+					<s class="original-price">₩80,000</s><br>
+					<span class="discount-price">₩50,000</span>
+				</div>
+			</div>
+			<!-- 상품 2 -->
+			<div class="product-item">
+				<div class="product-name">블루투스 스피커</div>
+				<div class="price">
+					<s class="original-price">₩120,000</s><br>
+					<span class="discount-price">₩85,000</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      padding: 10px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .product-list {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    .product-item {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .product-name {
+      font-size: 1em;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .price {
+      font-size: 1.2em;
+      color: #d9534f;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .original-price {
+      font-size: 0.8em;
+      color: #aaa;
+      text-decoration: line-through;
+    }
+    .discount-price {
+      color: #28a745;
+    }
+	</style>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>올바른 예시 : 자동으로 변경되는 콘텐츠를 제어할 수 있는 경우</title>
+		<style>
+      .slide-container {
+        position: relative;
+        width: 100%;
+        height: 150px;
+        overflow: hidden;
+        margin: auto;
+      }
+
+      .slide-wrapper {
+        display: flex;
+        transition: transform 0.5s ease-in-out; /* Smooth transition */
+        width: 400%;
+      }
+
+      .slide {
+				width:100%;
+				height:150px;
+        flex: 1 0 100%; /* Each slide takes up 100% of the container width */
+        box-sizing: border-box;
+      }
+
+      .controls {
+        text-align: center;
+        margin-top: 10px;
+      }
+		</style>
+	</head>
+	<body>
+		<div class="slide-container">
+			<div class="slide-wrapper">
+				<div class="slide" id="slide1" style="background-color: red;"></div>
+				<div class="slide" id="slide2" style="background-color: blue;"></div>
+				<div class="slide" id="slide3" style="background-color: green;"></div>
+				<div class="slide" id="slide4" style="background-color: yellow;"></div>
+			</div>
+		</div>
+
+		<div class="controls">
+			<button onclick="prevSlide()">이전 슬라이드</button>
+			<button onclick="nextSlide()">다음 슬라이드</button>
+			<button onclick="playSlideshow()">재생</button>
+			<button onclick="pauseSlideshow()">정지</button>
+		</div>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				const slides = document.querySelectorAll('.slide');
+				const slideWrapper = document.querySelector('.slide-wrapper');
+				let currentSlide = 0;
+				let slideInterval = null;
+				const slideDuration = 1500; // Slide duration in milliseconds
+
+				function showSlide(index) {
+					const offset = -index * 100; // Calculate the offset for the current slide
+					slideWrapper.style.transform = `translateX(${offset}%)`;
+				}
+
+				function nextSlide() {
+					currentSlide = (currentSlide + 1) % slides.length;
+					showSlide(currentSlide);
+				}
+
+				function prevSlide() {
+					currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+					showSlide(currentSlide);
+				}
+
+				function startSlideshow() {
+					slideInterval = setInterval(nextSlide, slideDuration);
+				}
+
+				function stopSlideshow() {
+					clearInterval(slideInterval);
+					slideInterval = null;
+				}
+
+				function playSlideshow() {
+					if (!slideInterval) {
+						startSlideshow();
+					}
+				}
+
+				function pauseSlideshow() {
+					stopSlideshow();
+				}
+
+				// Initialize
+				showSlide(currentSlide);
+				startSlideshow();
+
+				// Expose functions to global scope
+				window.nextSlide = nextSlide;
+				window.prevSlide = prevSlide;
+				window.playSlideshow = playSlideshow;
+				window.pauseSlideshow = pauseSlideshow;
+			});
+		</script>
+	</body>
+</html>

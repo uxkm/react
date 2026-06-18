@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[datalist] 일반 텍스트, 검색창, 전화번호, 이메일 자동완성</title>
+		<style>
+			body {padding-top:5px;}
+			hr {margin:15px 0;}
+			p {margin:0 0 10px;}
+			input {
+				width: 150px;
+				padding: 10px;
+				font-size: 16px;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+			}
+			.info {font-size:16px; color:#1e73ff;}
+		</style>
+	</head>
+	<body>
+		<p>
+			<b>이메일 자동완성 예제 (도메인 자동 완성)</b><br />
+			<span class="info">(input text 타입과 연계)</span>
+		</p>
+		<div class="email-container">
+			<input type="text" id="email-id" class="email-input" placeholder="이메일 ID">
+			<span>@</span>
+			<input type="text" list="email-domains" id="email-domain" class="domain-input" placeholder="도메인 선택">
+			<datalist id="email-domains">
+				<option value="gmail.com">
+				<option value="naver.com">
+				<option value="daum.net">
+				<option value="kakao.com">
+				<option value="outlook.com">
+				<option value="yahoo.com">
+			</datalist>
+			<style>
+				.email-container {
+					display: flex;
+					align-items: center;
+					width: 100%;
+					max-width: 280px;
+					gap: 5px;
+				}
+				.email-input, .domain-input {
+					width: 50%;
+					padding: 10px;
+					font-size: 16px;
+					border: 1px solid #ccc;
+					border-radius: 4px;
+				}
+			</style>
+		</div>
+		<hr>
+
+		<p>
+			<b>이메일 자동완성 예제 (전체 이메일 주소 자동 완성)</b><br />
+			<span class="info">(input email 타입과 연계)</span>
+		</p>
+		<div class="email-container">
+			<input type="email" list="email-options" id="email" class="email-input2" placeholder="이메일 입력...">
+			<datalist id="email-options">
+				<option value="user@gmail.com">
+				<option value="example@naver.com">
+				<option value="contact@daum.net">
+				<option value="support@kakao.com">
+				<option value="info@outlook.com">
+				<option value="test@yahoo.com">
+			</datalist>
+		</div>
+		<style>
+			.email-input2 {
+				width: 240px;
+			}
+		</style>
+	</body>
+</html>

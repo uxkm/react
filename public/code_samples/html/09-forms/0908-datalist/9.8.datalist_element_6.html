@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[datalist] 색상 선택 자동 완성</title>
+		<style>
+			body {padding-top:5px;}
+			hr {margin:15px 0;}
+			p {margin:0 0 10px;}
+			.info {font-size:16px; color:#1e73ff;}
+		</style>
+	</head>
+	<body>
+		<p>
+			<b>datalist 없이 input만 사용한 예제</b><br />
+		</p>
+		<div class="color-picker1-container">
+			<label for="color-picker1">색상을 선택하세요:</label>
+			<input type="color" id="color-picker1">
+		</div>
+		<hr>
+
+		<p>
+			<b style="color:#1e73ff;">datalist와 input color 타입과 연계</b><br />
+			<span class="info">(기본 색상 목록 제공)</span>
+		</p>
+		<div class="color-picker1-container">
+			<label for="color-picker2">색상을 선택하세요:</label>
+			<input type="color" id="color-picker2" list="color-options2">
+			<datalist id="color-options2" style="height:150px;">
+				<option value="#F2003C">Red (R)</option>
+				<option value="#F25C19">Red-Orange (YR)</option>
+				<option value="#F28705">Orange (O)</option>
+				<option value="#F2B705">Yellow-Orange (YO)</option>
+				<option value="#F2E205">Yellow (Y)</option>
+				<option value="#B7E205">Yellow-Green (GY)</option>
+				<option value="#5CE205">Green (G)</option>
+				<option value="#05E25C">Blue-Green (BG)</option>
+				<option value="#05E2B7">Cyan (C)</option>
+				<option value="#05B7E2">Blue-Cyan (BC)</option>
+				<option value="#057CE2">Blue (B)</option>
+				<option value="#0519E2">Blue-Violet (BV)</option>
+				<option value="#5C05E2">Violet (V)</option>
+				<option value="#8705E2">Purple (P)</option>
+				<option value="#B705E2">Red-Purple (RP)</option>
+				<option value="#E205C1">Magenta (M)</option>
+				<option value="#E20587">Pink (PK)</option>
+				<option value="#E2055C">Rose (RS)</option>
+				<option value="#E21919">Crimson (CR)</option>
+			</datalist>
+		</div>
+	</body>
+</html>

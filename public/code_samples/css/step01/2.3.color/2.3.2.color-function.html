@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>color() 함수 예제</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			padding: 0 2rem;
+			background: #f5f5f5;
+			margin: 0;
+		}
+
+		.demo-section {
+			background: white;
+			padding: 2rem;
+			border-radius: 8px;
+			box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+			margin-bottom: 2rem;
+		}
+
+		.demo-section h2 {
+			margin-top: 0;
+			color: #333;
+		}
+
+		.color-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+			gap: 1rem;
+			margin-top: 1rem;
+		}
+
+		.color-box {
+			height: 120px;
+			border-radius: 8px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: white;
+			font-weight: bold;
+			text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+			font-size: 0.9rem;
+			text-align: center;
+		}
+
+		/* color() 예제 - sRGB */
+		.color-srgb-1 { background-color: color(srgb 1 0 0); }
+		.color-srgb-2 { background-color: color(srgb 0 1 0); }
+		.color-srgb-3 { background-color: color(srgb 0 0 1); }
+		.color-srgb-4 { background-color: color(srgb 1 1 0); }
+
+		/* color() 예제 - display-p3 (넓은 색역) */
+		.color-p3-1 { background-color: color(display-p3 1 0 0); }
+		.color-p3-2 { background-color: color(display-p3 0 1 0); }
+		.color-p3-3 { background-color: color(display-p3 0 0 1); }
+		.color-p3-4 { background-color: color(display-p3 1 1 0); }
+
+		.label {
+			font-size: 0.85rem;
+			margin-top: 0.5rem;
+			color: #666;
+			text-align: center;
+		}
+
+		.comparison {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 1rem;
+			margin-top: 1rem;
+		}
+
+		.comparison-item {
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<h1>color() 함수 예제</h1>
+	<p>다양한 색 공간을 지정할 수 있는 color() 함수입니다.</p>
+
+	<!-- sRGB 색 공간 -->
+	<div class="demo-section">
+		<h2>sRGB 색 공간</h2>
+		<div class="color-grid">
+			<div>
+				<div class="color-box color-srgb-1">color(srgb 1 0 0)</div>
+				<div class="label">빨강</div>
+			</div>
+			<div>
+				<div class="color-box color-srgb-2">color(srgb 0 1 0)</div>
+				<div class="label">초록</div>
+			</div>
+			<div>
+				<div class="color-box color-srgb-3">color(srgb 0 0 1)</div>
+				<div class="label">파랑</div>
+			</div>
+			<div>
+				<div class="color-box color-srgb-4">color(srgb 1 1 0)</div>
+				<div class="label">노랑</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Display P3 vs sRGB 비교 -->
+	<div class="demo-section">
+		<h2>Display P3 vs sRGB 비교</h2>
+		<p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">
+			Display P3 색 공간은 sRGB보다 넓은 색역을 지원합니다. P3 디스플레이에서 더 생생한 색상을 확인할 수 있습니다.
+		</p>
+		<div class="comparison">
+			<div class="comparison-item">
+				<div class="color-box color-srgb-1">sRGB</div>
+				<div class="label">color(srgb 1 0 0)</div>
+			</div>
+			<div class="comparison-item">
+				<div class="color-box color-p3-1">Display P3</div>
+				<div class="label">color(display-p3 1 0 0)</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

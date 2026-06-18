@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>컨테이너 쿼리 예제</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			padding: 2rem;
+			background: #f5f5f5;
+		}
+
+		/* 컨테이너 설정 */
+		.card-container {
+			container-type: inline-size;
+			container-name: card-container;
+			margin-bottom: 2rem;
+			background: white;
+			border-radius: 8px;
+			box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		}
+
+		/* 기본 카드 스타일 */
+		.card {
+			padding: 1rem;
+		}
+
+		.card-image {
+			width: 100%;
+			height: 200px;
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			border-radius: 4px;
+			margin-bottom: 1rem;
+		}
+
+		.card-title {
+			font-size: 1.25rem;
+			font-weight: bold;
+			margin-bottom: 0.5rem;
+			color: #333;
+		}
+
+		.card-content {
+			font-size: 1rem;
+			color: #666;
+			line-height: 1.6;
+		}
+
+		/* 컨테이너가 400px 이상일 때 */
+		@container card-container (min-width: 400px) {
+			.card {
+				padding: 1.5rem;
+			}
+
+			.card-title {
+				font-size: 1.5rem;
+			}
+
+			.card-content {
+				font-size: 1.1rem;
+			}
+		}
+
+		/* 컨테이너가 600px 이상일 때 - 그리드 레이아웃 */
+		@container card-container (min-width: 600px) {
+			.card {
+				display: grid;
+				grid-template-columns: 200px 1fr;
+				gap: 1.5rem;
+				padding: 2rem;
+			}
+
+			.card-image {
+				height: 100%;
+				margin-bottom: 0;
+			}
+
+			.card-title {
+				font-size: 1.75rem;
+			}
+		}
+
+		/* 컨테이너 크기 조절용 */
+		.resize-demo {
+			margin-top: 2rem;
+			padding: 1rem;
+			background: white;
+			border-radius: 8px;
+		}
+
+		.resize-control {
+			margin-top: 1rem;
+		}
+
+		.resize-control label {
+			display: block;
+			margin-bottom: 0.5rem;
+			font-weight: bold;
+		}
+
+		.resize-control input[type="range"] {
+			width: 100%;
+		}
+
+		.size-display {
+			margin-top: 0.5rem;
+			font-size: 0.9rem;
+			color: #666;
+		}
+	</style>
+</head>
+<body>
+	<h1>컨테이너 쿼리 예제</h1>
+	<p>아래 슬라이더를 조절하여 컨테이너 크기를 변경하면, 카드 레이아웃이 자동으로 변경됩니다.</p>
+
+	<div class="resize-demo">
+		<div class="resize-control">
+			<label for="container-width">컨테이너 너비: <span id="width-value">300px</span></label>
+			<input type="range" id="container-width" min="300" max="800" value="300">
+			<div class="size-display">
+				<strong>현재 크기:</strong> <span id="current-size">300px</span> | 
+				<strong>상태:</strong> <span id="status">기본 레이아웃</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="card-container" id="demo-container" style="width: 300px;">
+		<div class="card">
+			<div class="card-image"></div>
+			<div>
+				<h2 class="card-title">컨테이너 쿼리</h2>
+				<p class="card-content">
+					컨테이너 쿼리를 사용하면 부모 컨테이너의 크기에 따라 스타일을 조정할 수 있습니다.
+					뷰포트 크기와 관계없이 컴포넌트 자체가 반응형으로 동작합니다.
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		const slider = document.getElementById('container-width');
+		const container = document.getElementById('demo-container');
+		const widthValue = document.getElementById('width-value');
+		const currentSize = document.getElementById('current-size');
+		const status = document.getElementById('status');
+
+		slider.addEventListener('input', function() {
+			const width = this.value + 'px';
+			container.style.width = width;
+			widthValue.textContent = width;
+			currentSize.textContent = width;
+
+			// 상태 표시
+			const widthNum = parseInt(this.value);
+			if (widthNum < 400) {
+				status.textContent = '기본 레이아웃 (세로 배치)';
+			} else if (widthNum < 600) {
+				status.textContent = '중간 레이아웃 (패딩 증가)';
+			} else {
+				status.textContent = '그리드 레이아웃 (가로 배치)';
+			}
+		});
+	</script>
+</body>
+</html>

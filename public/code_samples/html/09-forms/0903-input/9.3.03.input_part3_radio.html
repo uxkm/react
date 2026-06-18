@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[type="radio"] 단일 선택 라디오 버튼</title>
+		<style>
+      hr {margin:15px 0;}
+      input {margin:10px 0 0;}
+      p {margin:0;}
+		</style>
+	</head>
+	<body>
+		<p>기본 라디오 버튼</p>
+		<input type="radio" name="fruit1" value="apple"> 사과
+		<input type="radio" name="fruit1" value="banana"> 바나나
+		<input type="radio" name="fruit1" value="strawberry"> 딸기
+		<hr>
+
+		<p>특정 input이 선택된 상태</p>
+		<input type="radio" name="fruit2" value="apple" checked> 사과
+		<input type="radio" name="fruit2" value="banana"> 바나나
+		<input type="radio" name="fruit2" value="strawberry"> 딸기
+		<hr>
+
+		<p>명시적 라벨 사용</p>
+		<input type="radio" id="male" name="fruit3" value="apple">
+		<label for="male">사과</label>
+		<input type="radio" id="banana" name="fruit3" value="banana">
+		<label for="banana">바나나</label>
+		<input type="radio" id="strawberry" name="fruit3" value="strawberry">
+		<label for="strawberry">딸기</label>
+		<hr>
+
+		<p>암묵적 라벨 사용</p>
+		<label>
+			<input type="radio" name="fruit4" value="apple">
+			사과
+		</label>
+		<label>
+			<input type="radio" name="fruit4" value="banana">
+			바나나
+		</label>
+		<label>
+			<input type="radio" name="fruit4" value="strawberry">
+			딸기
+		</label>
+		<hr>
+
+		<p>라디어 버튼 디자인 커스텀(암묵적 라벨 사용)</p>
+		<div class="custom-radio-group">
+			<label class="custom-radio-button">
+				<input type="radio" name="fruit5" value="apple" checked>
+				<span>사과</span>
+			</label>
+			<label class="custom-radio-button">
+				<input type="radio" name="fruit5" value="banana">
+				<span>바나나</span>
+			</label>
+			<label class="custom-radio-button">
+				<input type="radio" name="fruit5" value="strawberry">
+				<span>딸기</span>
+			</label>
+		</div>
+		<style>
+			:root {
+				/* height, circle은 짝수로 설정 */
+				--custo-radio-height: 30px;
+				--custo-radio-circle: 20px;
+				--custo-radio-default-color: #aaa;
+				--custo-radio-primary-color: #349102;
+				--custo-radio-duration: .2s;
+			}
+			.custom-radio-group {
+				display: flex;
+				gap: 10px;
+				margin-top: 10px;
+			}
+			.custom-radio-button {
+				position: relative;
+				padding-left: calc(var(--custo-radio-circle) + 5px);
+				cursor: pointer;
+			}
+      .custom-radio-button input {
+				position: absolute;
+				left: 0;
+				top: 0;
+				opacity: 0;
+			}
+      .custom-radio-button span {
+				line-height: var(--custo-radio-height);
+			}
+      .custom-radio-button span:before {
+				position: absolute;
+				left: 0;
+				top: calc((var(--custo-radio-height) - var(--custo-radio-circle))/2);
+				width: var(--custo-radio-circle);
+				height: var(--custo-radio-circle);
+				background-color: #fff;
+				border: 2px solid var(--custo-radio-default-color);
+				box-sizing: border-box;
+        border-radius: 100%;
+				box-shadow: 0 0 0 calc(var(--custo-radio-circle)/2) #fff inset;
+				transition: background-color var(--custo-radio-duration),
+										border-color var(--custo-radio-duration),
+										box-shadow var(--custo-radio-duration);
+				content: "";
+			}
+      .custom-radio-button input:checked ~ span {
+				color: var(--custo-radio-primary-color);
+			}
+      .custom-radio-button input:checked ~ span:before {
+        background-color: var(--custo-radio-primary-color);
+        border-color: var(--custo-radio-primary-color);
+        box-shadow: 0 0 0 3px #fff inset;
+			}
+		</style>
+	</body>
+</html>

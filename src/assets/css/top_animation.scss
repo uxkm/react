@@ -1,0 +1,172 @@
+@charset "utf-8";
+@use "_font";
+@use "_variable";
+@use "_mixin";
+@use "_color";
+
+
+@mixin side_move($name, $side_time, $start_delay, $timing, $scale, $translateX){
+  animation:side_move_#{$name} $side_time $start_delay $timing both;
+  @keyframes side_move_#{$name} {
+    0% {transform:scale(#{$scale}) translateX(#{$translateX});}
+    100% {transform:scale(1) translateX(0);}
+  }
+}
+@keyframes one_opacity {
+  0% {opacity:1;}
+  100% {opacity:0;}
+}
+@keyframes center_show {
+  0% {opacity:0; transform:scale(.7, .7);}
+  100% {opacity:1; transform:scale(1, 1);}
+}
+@keyframes border_show {
+	0% {opacity:0; transform:scale(.5, .5);} // .77
+	100% {opacity:1; transform:scale(1, 1);}
+}
+@keyframes arrow_show {
+	0% {opacity:0; transform:translate(-50%, 0) rotate(45deg);}
+	50% {opacity:1; transform:translate(-50%, 0) rotate(45deg);}
+	100% {opacity:1; transform:translate(-50%, -21px) rotate(45deg);}
+}
+
+$start_delay: .7s;
+$side_time: 1.9s;
+$gap_time: .2s;
+$border_add: .4s;
+$timing: cubic-bezier(0.65, 0, 0.35, 1); //0.65, 0, 0.35, 1  // 0.37, 0, 0.63, 1
+
+.a11y_animation {
+  $scale: 1.3;
+  $translateX: 375%;
+  $s_position: 111%;
+  $center_color: #cd123b;
+	$border_width: 3px;
+	$border_color: #ddd;
+	$box_bg: #fafafa;
+
+  display:inline-block;
+  position:relative;
+  margin-top:20px;
+  padding:41px;
+  font-size:60px; font-weight:900; color:#222;
+  &:after {
+    opacity:0; transform:scale(.77, .77);
+    position:absolute; left:0; top:0; right:0; bottom:0; z-index:-1;
+	  background-color:$box_bg;
+    border:$border_width solid $border_color; border-radius:15px;
+    animation:border_show ($side_time + $border_add) ($start_delay + $gap_time + $border_add) $timing both;
+    content:"";
+  }
+
+  .a11y_animation_inner > span {
+	  display:inline-block;
+	  position:relative; z-index:1;
+  }
+
+  .side_left {
+    transform:scale($scale) translateX($translateX);
+    @include side_move($name:'left', $side_time:$side_time + $gap_time, $start_delay:$start_delay, $timing:$timing, $scale:$scale, $translateX:$translateX);
+    &:after {
+      position:absolute; top:0; right:-$s_position;
+      color:$center_color;
+      animation:one_opacity $side_time $start_delay $timing both;
+      content:"1";
+    }
+  }
+  .side_right {
+    transform:scale($scale) translateX(-$translateX);
+    @include side_move($name:'right', $side_time:$side_time + $gap_time, $start_delay:$start_delay, $timing:$timing, $scale:$scale, $translateX:-$translateX);
+    &:before {
+      position:absolute; top:0; left:-$s_position;
+      color:$center_color;
+      animation:one_opacity $side_time $start_delay $timing both;
+      content:"1";
+    }
+  }
+  .center {
+    opacity:0;
+    color:$center_color;
+    transform:scale(.7, .7);
+    animation:center_show $side_time ($start_delay + $gap_time) $timing both;
+  }
+
+	&:before,
+	.a11y_animation_inner:before {
+		display:block;
+		position:absolute; left:50%; top:0;
+		transform:translate(-50%, 0) rotate(45deg);
+		width:28px; height:28px;
+		margin-top:15px;
+		background-color:$box_bg;
+		animation:arrow_show 1.5s ($start_delay + $side_time + $border_add - .4s) cubic-bezier(0.61, 1, 0.88, 1) both;
+		content:"";
+	}
+	&:before {
+		z-index:-2;
+		box-shadow:0 0 0 $border_width $border_color;
+	}
+	.a11y_animation_inner:before {
+		z-index:0;
+	}
+}
+@media(max-width:variable.$screen-sm-max){
+	.a11y_animation {
+		$mb: 20px;
+		$border_color: #ddd;
+
+		z-index:2;
+		width:100vw;
+		margin:-2px 0 $mb;
+		//padding:0 0 6vw;
+		padding:4vw 0;
+		line-height:100%;
+		font-size:6vw;
+		background-color:#fff;
+		&:after {
+			border-width:2px;
+			border-radius:8px;
+			width:70vw;
+			margin-left:15vw;
+		}
+
+		&:before,
+		.a11y_animation_inner:before {
+			width:15px; height:15px;
+			margin-top:16px;
+		}
+		&:before {box-shadow:0 0 0 2px $border_color;}
+
+		.a11y_animation_inner:after {
+			position:absolute; left:50%; bottom:-$mb + 1px;
+			transform:translate(-50%);
+			width:100vw; height:1px;
+			background-color:rgba(#eee, 1);
+			content:"";
+		}
+	}
+	html.apple_os.ios .a11y_animation {
+		$scale: 1.3;
+		$translateX: 375%;
+		$s_position: 96%;
+
+		.side_left {
+			margin-left:-2px;
+			transform:scale($scale) translateX($translateX);
+			@include side_move($name:'left', $side_time:$side_time + $gap_time, $start_delay:$start_delay, $timing:$timing, $scale:$scale, $translateX:$translateX);
+			&:after {
+				right:-$s_position;
+				animation:one_opacity $side_time $start_delay $timing both;
+			}
+		}
+		.side_right {
+			margin-right:-2px;
+			transform:scale($scale) translateX(-$translateX);
+			@include side_move($name:'right', $side_time:$side_time + $gap_time, $start_delay:$start_delay, $timing:$timing, $scale:$scale, $translateX:-$translateX);
+			&:before {
+				left:-$s_position;
+				animation:one_opacity $side_time $start_delay $timing both;
+			}
+		}
+	}
+}

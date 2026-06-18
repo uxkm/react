@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>불릿 스타일</title>
+	</head>
+	<body>
+	<h2>기본</h2>
+	<ul style="list-style-type: disc;">
+		<li>사과</li>
+		<li>바나나</li>
+		<li>포도</li>
+	</ul>
+	<hr>
+
+	<h2>빈 원</h2>
+	<ul style="list-style-type: circle;">
+		<li>사과</li>
+		<li>바나나</li>
+		<li>포도</li>
+	</ul>
+	<hr>
+
+	<h2>사각형</h2>
+	<ul style="list-style-type: square;">
+		<li>사과</li>
+		<li>바나나</li>
+		<li>포도</li>
+	</ul>
+	<hr>
+
+	<h2>불릿 제거</h2>
+	<ul style="list-style-type: none;">
+		<li>사과</li>
+		<li>바나나</li>
+		<li>포도</li>
+	</ul>
+	<hr>
+
+	<h2>불릿 제거 후 아이콘</h2>
+	<ul style="list-style-type: none;">
+		<li>🍎 사과</li>
+		<li>🍌 바나나</li>
+		<li>🍇 포도</li>
+	</ul>
+	<hr>
+
+	<h2>불릿 제거 후 CSS Style</h2>
+	<style>
+		.list-style {
+      list-style-type: none;
+		}
+    .list-style li {
+			position: relative;
+			padding-left: 12px;
+		}
+    .list-style li:before {
+			position: absolute; left: 0; top: 9px;
+			width: 6px; height: 6px;
+			background-color: #00f;
+			border-radius: 100%;
+			content: "";
+		}
+	</style>
+	<ul class="list-style">
+		<li>사과</li>
+		<li>바나나</li>
+		<li>포도</li>
+	</ul>
+	</body>
+</html>

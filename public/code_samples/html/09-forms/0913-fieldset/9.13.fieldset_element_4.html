@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+		<title>[fieldset] CSS 스타일링</title>
+		<style>
+			*, html, body {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			body {
+				padding: 10px 10px 15px;
+				font-family: Arial, sans-serif;
+			}
+			h2 {
+				margin-bottom: 5px;
+				font-size: 18px;
+				text-align: center;
+			}
+			fieldset {
+				margin-bottom: 13px;
+				padding: 0 12px 12px;
+				border: 2px solid rgba(30,115,255,.3);
+				border-radius: 7px;
+			}
+			legend {
+				padding: 0 5px;
+				font-size: 14px;
+				font-weight: 600;
+				color: rgba(30,115,255,.6);
+			}
+			label {
+				display: block;
+				margin: 10px 0 0;
+				font-weight: bold;
+			}
+			input, select, textarea {
+				width: 100%;
+				margin-top: 5px;
+				padding: 8px;
+				border: 1px solid #ccc;
+				border-radius: 5px;
+			}
+			button {
+				width: 100%;
+				padding: 10px;
+				font-size: 16px;
+				color: white;
+				background-color: #28a745;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+			button:hover {
+				background-color: #218838;
+			}
+		</style>
+	</head>
+		<body>
+		<h2>[상품 배송 정보]</h2>
+		<form>
+			<!-- 주문자 정보 -->
+			<fieldset>
+				<legend><i class="fa-solid fa-user"></i> 주문자 정보</legend>
+				<label for="name">이름</label>
+				<input type="text" id="name" name="name" required>
+
+				<label for="email">이메일</label>
+				<input type="email" id="email" name="email" required>
+
+				<label for="phone">전화번호</label>
+				<input type="tel" id="phone" name="phone" required>
+			</fieldset>
+
+			<!-- 배송 정보 -->
+			<fieldset>
+				<legend><i class="fa-solid fa-truck"></i> 배송 정보</legend>
+				<label for="address">주소</label>
+				<input type="text" id="address" name="address" required>
+
+				<label for="postcode">우편번호</label>
+				<input type="text" id="postcode" name="postcode" required>
+
+				<label for="delivery-request">배송 요청사항</label>
+				<textarea id="delivery-request" name="delivery-request" rows="3" placeholder="배송 시 요청사항을 입력하세요"></textarea>
+
+				<label for="delivery-type">배송 방법</label>
+				<select id="delivery-type" name="delivery-type">
+					<option value="standard">일반 배송</option>
+					<option value="express">빠른 배송</option>
+					<option value="pickup">매장 픽업</option>
+				</select>
+			</fieldset>
+
+			<button type="submit">주문하기</button>
+		</form>
+	</body>
+</html>

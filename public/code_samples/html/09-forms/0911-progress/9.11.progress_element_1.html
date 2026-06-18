@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[progress] 기본 진행 바</title>
+	</head>
+	<body>
+		<p>
+			<b>기본 진행 바</b><br />
+			<span class="info">(30% 진행률)</span>
+		</p>
+		<div class="progress-container">
+			<progress value="30" max="100"></progress>
+		</div>
+		<hr>
+
+		<p>
+			<b>max 속성 생략</b><br />
+			<span class="info">(75% 진행률)</span>
+		</p>
+		<div class="progress-container">
+			<progress value="0.75"></progress>
+		</div>
+		<hr>
+
+		<p>
+			<b>value 속성 생략</b><br />
+			<span class="info">(불특정 진행 상태(indeterminate))</span>
+		</p>
+		<div class="progress-container">
+			<progress></progress>
+		</div>
+
+		<style>
+			*, html, body {vertical-align:top;}
+			body {padding-top:5px;}
+			hr {margin:15px 0;}
+			p {margin:0 0 10px;}
+			.info {font-size:16px; color:#1e73ff;}
+		</style>
+	</body>
+</html>

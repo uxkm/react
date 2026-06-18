@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+		<meta name="format-detection" content="telephone=no, address=no, email=no, date=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>UXKM CSS :focus-visible Pseudo-class</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				padding: 0 20px;
+				line-height: 1.6;
+			}
+			h1 {
+				color: #333;
+				margin-bottom: 30px;
+			}
+			.example {
+				margin-bottom: 40px;
+				padding: 20px;
+				border: 1px solid #ddd;
+				border-radius: 8px;
+			}
+			.example h2 {
+				margin-top: 0;
+				color: #0066cc;
+			}
+
+			/* 예시 1: 키보드 포커스만 표시 */
+			button:focus-visible {
+				outline: 3px solid blue;
+				outline-offset: 2px;
+			}
+			/* 마우스 클릭 시에는 포커스 링이 보이지 않음 */
+
+			button {
+				padding: 10px 20px;
+				background-color: #0066cc;
+				color: white;
+				border: none;
+				border-radius: 4px;
+				cursor: pointer;
+				margin: 5px;
+			}
+
+			button:hover {
+				background-color: #0052a3;
+			}
+
+			/* 예시 2: 링크의 키보드 포커스만 강조 */
+			a:focus-visible {
+				background-color: yellow;
+				text-decoration: underline;
+				outline: 2px solid #0066cc;
+				outline-offset: 2px;
+			}
+
+			a {
+				color: #0066cc;
+				text-decoration: none;
+				margin: 0 10px;
+			}
+
+			/* 예시 3: 입력 필드의 키보드 포커스만 표시 */
+			input:focus-visible,
+			textarea:focus-visible {
+				border: 2px solid #0066cc;
+				box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.2);
+			}
+
+			input, textarea {
+				padding: 8px;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				width: 200px;
+				margin: 5px 0;
+			}
+
+			.note {
+				background-color: #fff3cd;
+				padding: 15px;
+				border-radius: 4px;
+				margin-top: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>:focus-visible 선택자 예제</h1>
+		<p>키보드로 Tab 키를 눌러 포커스를 이동하면 포커스 링이 보이지만, 마우스로 클릭하면 보이지 않습니다.</p>
+
+		<div class="example">
+			<h2>예시 1: 버튼의 키보드 포커스만 표시</h2>
+			<button>버튼 1</button>
+			<button>버튼 2</button>
+			<button>버튼 3</button>
+			<p>Tab 키로 이동하면 파란색 포커스 링이 보입니다. 마우스로 클릭하면 보이지 않습니다.</p>
+		</div>
+
+		<div class="example">
+			<h2>예시 2: 링크의 키보드 포커스만 강조</h2>
+			<a href="#link1">링크 1</a>
+			<a href="#link2">링크 2</a>
+			<a href="#link3">링크 3</a>
+			<p>Tab 키로 이동하면 노란 배경과 파란 테두리가 나타납니다.</p>
+		</div>
+
+		<div class="example">
+			<h2>예시 3: 입력 필드의 키보드 포커스만 표시</h2>
+			<input type="text" placeholder="이름을 입력하세요">
+			<br>
+			<textarea placeholder="메시지를 입력하세요"></textarea>
+			<p>Tab 키로 이동하면 파란 테두리와 그림자가 나타납니다.</p>
+		</div>
+
+		<div class="note">
+			<strong>참고:</strong> 이 페이지에서 Tab 키를 눌러 포커스를 이동해보세요. 키보드로 탐색할 때만 포커스 표시가 나타나는 것을 확인할 수 있습니다.
+		</div>
+	</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[type="url"] URL 입력 필드</title>
+	</head>
+	<body>
+		<p>기본 URL 입력 필드</p>
+		<input type="url" name="homepage" placeholder="웹사이트 주소 입력">
+		<hr>
+
+		<p>특정 도메인 패턴 적용 / 자동완성 비활성화</p>
+		<form>
+			<input type="url" name="website" pattern="https://.*" autocomplete="off" size="24"
+						 placeholder="https://로 시작하는 주소 입력"
+						 title="https://로 시작하는 주소 입력" required>
+			<input type="submit" value="Send">
+		</form>
+
+		<style>
+      hr {margin:15px 0;}
+      input {margin:10px 0 0;}
+			p {margin:0;}
+		</style>
+	</body>
+</html>

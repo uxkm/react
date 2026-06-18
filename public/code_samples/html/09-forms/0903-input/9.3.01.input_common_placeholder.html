@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[input] placeholder 속성</title>
+		<style>
+      hr {margin:15px 0;}
+      input {margin-top:10px; vertical-align:top;}
+      p {margin-top:10px;}
+		</style>
+	</head>
+	<body>
+		<b>type="text"</b><br />
+		<input type="text" placeholder="이름을 입력하세요.">
+		<hr>
+
+		<b>placeholder 텍스트 색상 변경</b><br />
+		<input type="text" placeholder="이름을 입력하세요." class="light-input">
+		<input type="text" placeholder="이름을 입력하세요." class="dark-input">
+		<style>
+			.light-input,
+			.dark-input {
+				width: 130px;
+				height: 36px;
+				padding: 0 12px;
+				font-size: 16px;
+				border-radius: 6px;
+				border: 1px solid #000;
+			}
+
+			/* 밝은 색 input */
+      .light-input:not(:placeholder-shown) { /* placeholder가 없는 경우 스타일 변경 */
+				font-weight: bold;
+				color: #000;
+			}
+			.light-input::placeholder { /* placeholder 상태일 때 스타일 변경 */
+        font-weight: normal;
+				color: #1e73ff;
+			}
+
+			/* 어두운 색 input */
+			.dark-input {
+        background-color: #000;
+			}
+			.dark-input:not(:placeholder-shown) { /* placeholder가 없는 경우 스타일 변경 */
+        font-weight: bold;
+				color: #fff;
+			}
+      .dark-input::placeholder { /* placeholder 상태일 때 스타일 변경 */
+        font-weight: normal;
+				color: #e4d300;
+			}
+		</style>
+		<hr>
+
+		<p>
+			checkbox, color, date, datetime-local, file, hidden, image, month, radio, range, reset, submit, time, week 타입에는
+			placeholder 속성이 적용되지 않습니다.
+		</p>
+
+	</body>
+</html>

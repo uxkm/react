@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>동적으로 업데이트 가능한 tabpanel 예시 | 독립형 위젯 역할(WAI-ARIA)</title>
+		<style>
+			[role="tablist"] {
+				display: flex;
+			}
+      [role="tablist"]:after {
+				flex: 1;
+				border-bottom: 1px solid #888;
+				content: "";
+			}
+			[role="tab"] {
+				padding: 8px 15px;
+				color: #fff;
+        background-color: #888;
+				border: 1px solid #888;
+				border-radius: 5px 5px 0 0;
+				cursor: pointer;
+			}
+      [role="tab"][aria-selected="true"] {
+				color: #222;
+				background-color: #fff;
+				border-bottom-color: #fff;
+			}
+			[role="tabpanel"] {
+				padding: 10px 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div role="tablist">
+			<div role="tab" id="tab1" aria-selected="true" aria-controls="panel1" tabindex="0">Tab 1</div>
+			<div role="tab" id="tab2" aria-selected="false" aria-controls="panel2" tabindex="-1">Tab 2</div>
+			<div role="tab" id="tab3" aria-selected="false" aria-controls="panel3" tabindex="-1">Tab 3</div>
+		</div>
+		<div role="tabpanel" id="panel1" aria-labelledby="tab1">Content for Tab 1</div>
+		<div role="tabpanel" id="panel2" aria-labelledby="tab2" hidden>Content for Tab 2</div>
+		<div role="tabpanel" id="panel3" aria-labelledby="tab3" hidden>Content for Tab 3</div>
+
+		<script>
+			const tabs = document.querySelectorAll('[role="tab"]');
+			const panels = document.querySelectorAll('[role="tabpanel"]');
+
+			tabs.forEach(tab => {
+				tab.addEventListener('click', () => {
+					tabs.forEach(t => {
+						t.setAttribute('aria-selected', 'false');
+						t.setAttribute('tabindex', '-1');
+					});
+					panels.forEach(p => p.hidden = true);
+
+					tab.setAttribute('aria-selected', 'true');
+					tab.setAttribute('tabindex', '0');
+					document.getElementById(tab.getAttribute('aria-controls')).hidden = false;
+				});
+			});
+		</script>
+	</body>
+</html>

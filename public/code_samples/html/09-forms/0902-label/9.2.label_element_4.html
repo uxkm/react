@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[label] 드롭다운(select)과 label 연결</title>
+	</head>
+	<body>
+		<h2>명시적 방식</h2>
+		<label for="country">국가 선택:</label>
+		<select id="country" name="country">
+			<option value="kr">대한민국</option>
+			<option value="us">미국</option>
+		</select>
+		<hr>
+
+		<h2>암묵적 방식</h2>
+		<label>
+			국가 선택:
+			<select name="country">
+				<option value="kr">대한민국</option>
+				<option value="us">미국</option>
+			</select>
+		</label>
+	</body>
+</html>

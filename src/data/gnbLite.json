@@ -1,0 +1,1614 @@
+{
+  "publishing": {
+    "depth2": [
+      {
+        "d2_name": "HTML",
+        "d2_link": "/html",
+        "depth3": [
+          {
+            "d3_name": "HTML 시작",
+            "d3_link": "/01-htmlStart",
+            "depth4": [
+              {
+                "d4_name": "HTML이란?",
+                "d4_link": "/01-html_start"
+              },
+              {
+                "d4_name": "HTML 기본 구조",
+                "d4_link": "/02-html_basic"
+              },
+              {
+                "d4_name": "HTML 요소",
+                "d4_link": "/03-html_element"
+              }
+            ]
+          },
+          {
+            "d3_name": "블록 요소 vs 인라인 요소",
+            "d3_link": "/02-blockInline",
+            "depth4": [
+              {
+                "d4_name": "블록 요소",
+                "d4_link": "/01-block_element"
+              },
+              {
+                "d4_name": "대표적인 블록 요소 - div",
+                "d4_link": "/02-div_block"
+              },
+              {
+                "d4_name": "인라인 요소",
+                "d4_link": "/03-inline_element"
+              },
+              {
+                "d4_name": "대표적인 인라인 요소 - span",
+                "d4_link": "/04-span_inline"
+              },
+              {
+                "d4_name": "요소 중첩",
+                "d4_link": "/05-element_nesting"
+              },
+              {
+                "d4_name": "단일 요소 또는 빈 요소",
+                "d4_link": "/06-only_empty"
+              }
+            ]
+          },
+          {
+            "d3_name": "섹션 콘텐츠<span>(Section content)</span>",
+            "d3_link": "/03-sections",
+            "depth4": [
+              {
+                "d4_name": "header element",
+                "d4_link": "/01-header_element",
+                "html5": true
+              },
+              {
+                "d4_name": "heading(h1~h6) element",
+                "d4_link": "/02-heading_element"
+              },
+              {
+                "d4_name": "section element",
+                "d4_link": "/03-section_element",
+                "html5": true
+              },
+              {
+                "d4_name": "nav element",
+                "d4_link": "/04-nav_element",
+                "html5": true
+              },
+              {
+                "d4_name": "article element",
+                "d4_link": "/05-article_element",
+                "html5": true
+              },
+              {
+                "d4_name": "footer element",
+                "d4_link": "/06-footer_element",
+                "html5": true
+              },
+              {
+                "d4_name": "aside element",
+                "d4_link": "/07-aside_element",
+                "html5": true
+              },
+              {
+                "d4_name": "hgroup element",
+                "d4_link": "/08-hgroup_element",
+                "html5": true
+              }
+            ]
+          },
+          {
+            "d3_name": "콘텐츠 그룹화<span>(Grouping content)</span>",
+            "d3_link": "/04-grouping",
+            "depth4": [
+              {
+                "d4_name": "main element",
+                "d4_link": "/01-main_element",
+                "html5": true
+              },
+              {
+                "d4_name": "p element",
+                "d4_link": "/02-p_element"
+              },
+              {
+                "d4_name": "ol element",
+                "d4_link": "/03-ol_element"
+              },
+              {
+                "d4_name": "ul element",
+                "d4_link": "/04-ul_element"
+              },
+              {
+                "d4_name": "li element",
+                "d4_link": "/05-li_element"
+              },
+              {
+                "d4_name": "dl element",
+                "d4_link": "/06-dl_element"
+              },
+              {
+                "d4_name": "dt element",
+                "d4_link": "/07-dt_element"
+              },
+              {
+                "d4_name": "dd element",
+                "d4_link": "/08-dd_element"
+              },
+              {
+                "d4_name": "address element",
+                "d4_link": "/09-address_element",
+                "html5": true
+              },
+              {
+                "d4_name": "figure element",
+                "d4_link": "/10-figure_element",
+                "html5": true
+              },
+              {
+                "d4_name": "figcaption element",
+                "d4_link": "/11-figcaption_element",
+                "html5": true
+              },
+              {
+                "d4_name": "pre element",
+                "d4_link": "/12-pre_element"
+              },
+              {
+                "d4_name": "blockquote element",
+                "d4_link": "/13-blockquote_element"
+              }
+            ]
+          },
+          {
+            "d3_name": "문자 콘텐츠<span>(Text-level semantics)</span>",
+            "d3_link": "/05-textLevel",
+            "depth4": [
+              {
+                "d4_name": "a element",
+                "d4_link": "/01-a_element"
+              },
+              {
+                "d4_name": "em element",
+                "d4_link": "/02-em_element"
+              },
+              {
+                "d4_name": "i element",
+                "d4_link": "/03-i_element"
+              },
+              {
+                "d4_name": "strong element",
+                "d4_link": "/04-strong_element"
+              },
+              {
+                "d4_name": "b element",
+                "d4_link": "/05-b_element"
+              },
+              {
+                "d4_name": "br element",
+                "d4_link": "/06-br_element"
+              },
+              {
+                "d4_name": "small element",
+                "d4_link": "/07-small_element"
+              },
+              {
+                "d4_name": "s element",
+                "d4_link": "/08-s_element"
+              },
+              {
+                "d4_name": "cite element",
+                "d4_link": "/09-cite_element"
+              },
+              {
+                "d4_name": "sub element",
+                "d4_link": "/10-sub_element"
+              },
+              {
+                "d4_name": "sup element",
+                "d4_link": "/11-sup_element"
+              },
+              {
+                "d4_name": "mark element",
+                "d4_link": "/12-mark_element"
+              },
+              {
+                "d4_name": "q element",
+                "d4_link": "/13-q_element"
+              },
+              {
+                "d4_name": "code element",
+                "d4_link": "/14-code_element"
+              },
+              {
+                "d4_name": "var element",
+                "d4_link": "/15-var_element"
+              },
+              {
+                "d4_name": "abbr element",
+                "d4_link": "/16-abbr_element"
+              },
+              {
+                "d4_name": "data element",
+                "d4_link": "/17-data_element",
+                "html5": true
+              },
+              {
+                "d4_name": "time element",
+                "d4_link": "/18-time_element",
+                "html5": true
+              },
+              {
+                "d4_name": "samp element",
+                "d4_link": "/19-samp_element"
+              },
+              {
+                "d4_name": "kbd element",
+                "d4_link": "/20-kbd_element"
+              },
+              {
+                "d4_name": "bdi element",
+                "d4_link": "/21-bdi_element",
+                "html5": true
+              },
+              {
+                "d4_name": "bdo element",
+                "d4_link": "/22-bdo_element"
+              },
+              {
+                "d4_name": "wbr element",
+                "d4_link": "/23-wbr_element",
+                "html5": true
+              },
+              {
+                "d4_name": "ruby element",
+                "d4_link": "/24-ruby_element",
+                "html5": true
+              }
+            ]
+          },
+          {
+            "d3_name": "내장 콘텐츠<span>(Embedded content)</span>",
+            "d3_link": "/06-embedded",
+            "depth4": [
+              {
+                "d4_name": "iframe element",
+                "d4_link": "/01-iframe_element"
+              },
+              {
+                "d4_name": "img element",
+                "d4_link": "/02-img_element"
+              },
+              {
+                "d4_name": "map element",
+                "d4_link": "/03-map_element"
+              },
+              {
+                "d4_name": "area element",
+                "d4_link": "/04-area_element"
+              },
+              {
+                "d4_name": "video element",
+                "d4_link": "/05-video_element",
+                "html5": true
+              },
+              {
+                "d4_name": "audio element",
+                "d4_link": "/06-audio_element",
+                "html5": true
+              },
+              {
+                "d4_name": "track element",
+                "d4_link": "/07-track_element",
+                "html5": true
+              },
+              {
+                "d4_name": "picture element",
+                "d4_link": "/08-picture_element",
+                "html5": true
+              },
+              {
+                "d4_name": "source element",
+                "d4_link": "/09-source_element",
+                "html5": true
+              },
+              {
+                "d4_name": "svg element",
+                "d4_link": "/10-svg_element"
+              },
+              {
+                "d4_name": "embed element",
+                "d4_link": "/11-embed_element"
+              },
+              {
+                "d4_name": "object element",
+                "d4_link": "/12-object_element"
+              },
+              {
+                "d4_name": "param element",
+                "d4_link": "/13-param_element"
+              }
+            ]
+          },
+          {
+            "d3_name": "수정 콘텐츠<span>(Edits content)</span>",
+            "d3_link": "/07-edits",
+            "depth4": [
+              {
+                "d4_name": "del(Deleted Text) element",
+                "d4_link": "/01-del_element"
+              },
+              {
+                "d4_name": "ins(insert) element",
+                "d4_link": "/02-ins_element"
+              }
+            ]
+          },
+          {
+            "d3_name": "표 데이터<span>(Tabular data)</span>",
+            "d3_link": "/08-table",
+            "depth4": [
+              {
+                "d4_name": "table element",
+                "d4_link": "/01-table_element"
+              },
+              {
+                "d4_name": "caption element",
+                "d4_link": "/02-caption_element"
+              },
+              {
+                "d4_name": "colgroup element",
+                "d4_link": "/03-colgroup_element"
+              },
+              {
+                "d4_name": "col element",
+                "d4_link": "/04-col_element"
+              },
+              {
+                "d4_name": "thead element",
+                "d4_link": "/05-thead_element"
+              },
+              {
+                "d4_name": "tbody element",
+                "d4_link": "/06-tbody_element"
+              },
+              {
+                "d4_name": "tfoot element",
+                "d4_link": "/07-tfoot_element"
+              },
+              {
+                "d4_name": "tr element",
+                "d4_link": "/08-tr_element"
+              },
+              {
+                "d4_name": "th element",
+                "d4_link": "/09-th_element"
+              },
+              {
+                "d4_name": "td element",
+                "d4_link": "/10-td_element"
+              }
+            ]
+          },
+          {
+            "d3_name": "폼 콘텐츠<span>(Forms content)</span>",
+            "d3_link": "/09-forms",
+            "depth4": [
+              {
+                "d4_name": "form element",
+                "d4_link": "/01-form_element"
+              },
+              {
+                "d4_name": "label element",
+                "d4_link": "/02-label_element"
+              },
+              {
+                "d4_name": "input element",
+                "d4_link": "/03-input_element_part1"
+              },
+              {
+                "d4_name": "button element",
+                "d4_link": "/04-button_element"
+              },
+              {
+                "d4_name": "select element",
+                "d4_link": "/05-select_element"
+              },
+              {
+                "d4_name": "optgroup element",
+                "d4_link": "/06-optgroup_element"
+              },
+              {
+                "d4_name": "option element",
+                "d4_link": "/07-option_element"
+              },
+              {
+                "d4_name": "datalist element",
+                "d4_link": "/08-datalist_element",
+                "html5": true
+              },
+              {
+                "d4_name": "textarea element",
+                "d4_link": "/09-textarea_element"
+              },
+              {
+                "d4_name": "output element",
+                "d4_link": "/10-output_element",
+                "html5": true
+              },
+              {
+                "d4_name": "progress element",
+                "d4_link": "/11-progress_element",
+                "html5": true
+              },
+              {
+                "d4_name": "meter element",
+                "d4_link": "/12-meter_element",
+                "html5": true
+              },
+              {
+                "d4_name": "fieldset element",
+                "d4_link": "/13-fieldset_element"
+              },
+              {
+                "d4_name": "legend element",
+                "d4_link": "/14-legend_element"
+              }
+            ]
+          },
+          {
+            "d3_name": "HTML 문서구조",
+            "d3_link": "/10-structure",
+            "depth4": [
+              {
+                "d4_name": "HTML4에서의 문서 구조",
+                "d4_link": "/01-html4_document"
+              },
+              {
+                "d4_name": "HTML5에서의 문서 구조",
+                "d4_link": "/02-html5_document"
+              },
+              {
+                "d4_name": "HTML4 vs HTML5",
+                "d4_link": "/03-html4_vs_html5"
+              },
+              {
+                "d4_name": "프레임셋 문서 구조",
+                "d4_link": "/04-frameset_document"
+              }
+            ]
+          },
+          {
+            "d3_name": "콘텐츠 모델<span>(Content models)</span>",
+            "d3_link": "/11-models/",
+            "depth4": [
+              {
+                "d4_name": "콘텐츠 모델",
+                "d4_link": "/models"
+              },
+              {
+                "d4_name": "details, summary element",
+                "d4_link": "/details_element",
+                "html5": true
+              }
+            ]
+          },
+          {
+            "d3_name": "HTML 참조 사이트",
+            "d3_link": "/12-bookmark/bookmark",
+            "depth4": []
+          }
+        ]
+      },
+      {
+        "d2_name": "CSS",
+        "d2_link": "/css",
+        "depth3": [
+          {
+            "d3_name": "CSS 시작",
+            "d3_link": "/01-cssStart",
+            "depth4": [
+              {
+                "d4_name": "CSS란?",
+                "d4_link": "/01-css_intro"
+              },
+              {
+                "d4_name": "CSS의 문법",
+                "d4_link": "/02-css_syntax"
+              },
+              {
+                "d4_name": "CSS 선언방식",
+                "d4_link": "/03-css_apply"
+              },
+              {
+                "d4_name": "CSS 상속과 캐스케이딩",
+                "d4_link": "/04-css_cascading"
+              }
+            ]
+          },
+          {
+            "d3_name": "CSS 초급",
+            "d3_link": "/02-cssBeginner",
+            "depth4_style": "depth4_short",
+            "depth4_class": "depth4_cssBeginner",
+            "depth4": [
+              {
+                "d4_name": "CSS 단위",
+                "d4_link": "/01-css_units_part1",
+                "part": [
+                  { "part_name": "part1", "part_link": "/01-css_units_part1" },
+                  { "part_name": "part2", "part_link": "/01-css_units_part2" }
+                ]
+              },
+              {
+                "d4_name": "CSS 선택자 level 1, 2",
+                "d4_link": "/02-css_selectors_level_part1",
+                "part": [
+                  { "part_name": "part1", "part_link": "/02-css_selectors_level_part1" },
+                  { "part_name": "part2", "part_link": "/02-css_selectors_level_part2" }
+                ]
+              },
+              {
+                "d4_name": "Color 속성",
+                "d4_link": "/03-css_color"
+              },
+              {
+                "d4_name": "Font 속성",
+                "d4_link": "/04-css_font"
+              },
+              {
+                "d4_name": "Text 속성",
+                "d4_link": "/05-css_text"
+              },
+              {
+                "d4_name": "Background 속성",
+                "d4_link": "/06-css_background"
+              },
+              {
+                "d4_name": "List 속성",
+                "d4_link": "/07-css_list"
+              },
+              {
+                "d4_name": "Table 속성",
+                "d4_link": "/08-css_table"
+              },
+              {
+                "d4_name": "박스 모델 속성",
+                "d4_link": "/09-css_boxmodel_part1",
+                "part": [
+                  { "part_name": "part1", "part_link": "/09-css_boxmodel_part1" },
+                  { "part_name": "part2", "part_link": "/09-css_boxmodel_part2" }
+                ]
+              },
+              {
+                "d4_name": "시각적인 속성",
+                "d4_link": "/10-css_effects"
+              },
+              {
+                "d4_name": "위치 속성",
+                "d4_link": "/11-css_formatting"
+              },
+              {
+                "d4_name": "사용자 인터페이스 속성",
+                "d4_link": "/12-css_interface"
+              }
+            ]
+          },
+          {
+            "d3_name": "CSS 중급",
+            "d3_link": "/03-cssMiddleclass",
+            "depth4_style": "depth4_short",
+            "depth4_class": "depth4_cssMiddleclass",
+            "depth4": [
+              {
+                "d4_name": "CSS 선택자 level 3",
+                "d4_link": "/01-css_selectors_level3_part1",
+                "part": [
+                  { "part_name": "part1", "part_link": "/01-css_selectors_level3_part1" },
+                  { "part_name": "part2", "part_link": "/01-css_selectors_level3_part2" }
+                ]
+              },
+              {
+                "d4_name": "가상 요소",
+                "d4_link": "/02-css_content"
+              },
+              {
+                "d4_name": "CSS 카운터",
+                "d4_link": "/03-css_counter"
+              },
+              {
+                "d4_name": "접두어",
+                "d4_link": "/04-css_vendor"
+              },
+              {
+                "d4_name": "IR 기법",
+                "d4_link": "/05-css_ir"
+              },
+              {
+                "d4_name": "CSS3 Module",
+                "d4_link": "/06-css_module3_part1",
+                "part": [
+                  { "part_name": "part1", "part_link": "/06-css_module3_part1" },
+                  { "part_name": "part2", "part_link": "/06-css_module3_part2" }
+                ]
+              },
+              {
+                "d4_name": "@규칙(At-Rule)",
+                "d4_link": "/07-css_atrule"
+              },
+              {
+                "d4_name": "@font-face",
+                "d4_link": "/08-css_fontface"
+              },
+              {
+                "d4_name": "@media",
+                "d4_link": "/09-css_media_part1",
+                "part": [
+                  { "part_name": "part1", "part_link": "/09-css_media_part1" },
+                  { "part_name": "part2", "part_link": "/09-css_media_part2" }
+                ]
+              },
+              {
+                "d4_name": "CSS 속성 선언 순서",
+                "d4_link": "/10-css_attr_rule"
+              },
+              {
+                "d4_name": "CSS 선택자 level 4",
+                "d4_link": "/11-css_selectors_level4"
+              }
+            ]
+          },
+          {
+            "d3_name": "CSS 고급",
+            "d3_link": "/04-cssAdvanced",
+            "depth4_style": "depth4_short",
+            "depth4_class": "depth4_cssAdvanced",
+            "depth4": [
+              {
+                "d4_name": "Transform",
+                "d4_link": "/01-css_transform_part1",
+                "part": [
+                  { "part_name": "2D", "part_link": "/01-css_transform_part1" },
+                  { "part_name": "3D", "part_link": "/01-css_transform_part2" }
+                ]
+              },
+              {
+                "d4_name": "Transition",
+                "d4_link": "/02-css_transition"
+              },
+              {
+                "d4_name": "Animation",
+                "d4_link": "/03-css_animation"
+              },
+              {
+                "d4_name": "플렉서블 레이아웃",
+                "d4_link": "/04-css_flexible_part1",
+                "part_class": "two_line_tab x4",
+                "part": [
+                  { "name_length": "short", "part_name": "소개 및 요약", "part_link": "/04-css_flexible_part1" },
+                  { "name_length": "short", "part_name": "부모 속성 part1", "part_link": "/04-css_flexible_part2" },
+                  { "name_length": "short", "part_name": "부모 속성 part2", "part_link": "/04-css_flexible_part3" },
+                  { "name_length": "short", "part_name": "자식 속성 및 데모", "part_link": "/04-css_flexible_part4" }
+                ]
+              },
+              {
+                "d4_name": "그리드 레이아웃",
+                "d4_link": "/05-css_grid_part1",
+                "part_class": "two_line_tab x6",
+                "part": [
+                  { "name_length": "short", "part_name": "요약, 함수, 단위", "part_link": "/05-css_grid_part1" },
+                  { "name_length": "short", "part_name": "명시적, 암시적", "part_link": "/05-css_grid_part2" },
+                  { "name_length": "short", "part_name": "부모 속성 part1", "part_link": "/05-css_grid_part3" },
+                  { "name_length": "short", "part_name": "부모 속성 part2", "part_link": "/05-css_grid_part4" },
+                  { "name_length": "short", "part_name": "자식 속성", "part_link": "/05-css_grid_part5" },
+                  { "name_length": "short", "part_name": "가이드, 데모", "part_link": "/05-css_grid_part6" }
+                ]
+              },
+              {
+                "d4_name": "멀티 컬럼 레이아웃",
+                "d4_link": "/06-css_multicolumn"
+              }
+            ]
+          },
+          {
+            "d3_name": "CSS 참조 사이트",
+            "d3_link": "/05-bookmark/bookmark",
+            "depth4": []
+          }
+        ]
+      },
+      {
+        "d2_name": "SCSS",
+        "d2_link": "/scss",
+        "depth3": [
+          {
+            "d3_name": "SCSS 시작",
+            "d3_link": "/01-scssStart",
+            "depth4": [
+              {
+                "d4_name": "SCSS란?",
+                "d4_link": "/01-scss_intro"
+              },
+              {
+                "d4_name": "CSS와 SCSS의 차이",
+                "d4_link": "/02-css_vs_scss"
+              },
+              {
+                "d4_name": "SCSS가 퍼블리셔에게 중요한 이유",
+                "d4_link": "/03-why_scss_for_publishers"
+              }
+            ]
+          },
+          {
+            "d3_name": "SCSS 개발 환경 이해하기",
+            "d3_link": "/02-devEnvironment",
+            "depth4": [
+              {
+                "d4_name": "SCSS 파일 구조와 확장자 이해",
+                "d4_link": "/01-file_structure"
+              },
+              {
+                "d4_name": "SCSS 컴파일 개념",
+                "d4_link": "/02-compilation"
+              },
+              {
+                "d4_name": "VS Code / WebStorm에서 SCSS 사용하기",
+                "d4_link": "/03-editor_setup"
+              }
+            ]
+          },
+          {
+            "d3_name": "SCSS 기본 문법",
+            "d3_link": "/03-basicSyntax",
+            "depth4": [
+              {
+                "d4_name": "중첩(Nesting) 문법 이해하기",
+                "d4_link": "/01-nesting"
+              },
+              {
+                "d4_name": "부모 선택자 &의 역할과 사용법",
+                "d4_link": "/02-parent-selector"
+              },
+              {
+                "d4_name": "주석 처리 방식 (//, /* */)",
+                "d4_link": "/03-comments"
+              },
+              {
+                "d4_name": "SCSS 문법을 사용할 때 주의할 점",
+                "d4_link": "/04-precautions"
+              }
+            ]
+          },
+          {
+            "d3_name": "변수(Variables)로 스타일 관리하기",
+            "d3_link": "/04-variables",
+            "depth4": [
+              {
+                "d4_name": "변수의 개념과 필요성",
+                "d4_link": "/01-variable-concept"
+              },
+              {
+                "d4_name": "색상, 폰트, 여백 변수 만들기",
+                "d4_link": "/02-creating-variables"
+              },
+              {
+                "d4_name": "변수 네이밍 규칙",
+                "d4_link": "/03-naming-rules"
+              },
+              {
+                "d4_name": "실무에서 자주 사용하는 변수 구성 예시",
+                "d4_link": "/04-practical-examples"
+              },
+              {
+                "d4_name": "CSS 변수와 SCSS 변수의 차이",
+                "d4_link": "/05-css-vs-scss-variables"
+              }
+            ]
+          },
+          {
+            "d3_name": "연산과 함수 기초",
+            "d3_link": "/05-operations",
+            "depth4": [
+              {
+                "d4_name": "SCSS에서 가능한 연산 (+, -, *, /)",
+                "d4_link": "/01-operations"
+              },
+              {
+                "d4_name": "단위 연산 시 주의사항",
+                "d4_link": "/02-unit-precautions"
+              },
+              {
+                "d4_name": "SCSS의 기본 내장 함수",
+                "d4_link": "/03-builtin-functions"
+              },
+              {
+                "d4_name": "연산과 함수를 활용한 스타일 관리 예제",
+                "d4_link": "/04-practical-examples"
+              }
+            ]
+          },
+          {
+            "d3_name": "믹스인(Mixin) 이해하기",
+            "d3_link": "/06-mixins",
+            "depth4": [
+              {
+                "d4_name": "믹스인의 개념과 역할",
+                "d4_link": "/01-mixin-concept"
+              },
+              {
+                "d4_name": "@mixin과 @include 기본 문법",
+                "d4_link": "/02-basic-syntax"
+              },
+              {
+                "d4_name": "파라미터가 있는 믹스인",
+                "d4_link": "/03-parameters"
+              },
+              {
+                "d4_name": "반복되는 스타일을 믹스인으로 정리하기",
+                "d4_link": "/04-organizing-styles"
+              },
+              {
+                "d4_name": "믹스인 실무 예제",
+                "d4_link": "/05-practical-examples"
+              }
+            ]
+          },
+          {
+            "d3_name": "상속과 확장 (@extend)",
+            "d3_link": "/07-extend",
+            "depth4": [
+              {
+                "d4_name": "@extend의 개념",
+                "d4_link": "/01-extend-concept"
+              },
+              {
+                "d4_name": "믹스인과의 차이점",
+                "d4_link": "/02-mixin-difference"
+              },
+              {
+                "d4_name": "@extend 사용 시 주의사항",
+                "d4_link": "/03-precautions"
+              },
+              {
+                "d4_name": "@extend 사용이 필요한 상황",
+                "d4_link": "/04-when-to-use"
+              }
+            ]
+          },
+          {
+            "d3_name": "조건문과 반복문 기초",
+            "d3_link": "/08-control-flow",
+            "depth4": [
+              {
+                "d4_name": "@if, @else 조건문 이해하기",
+                "d4_link": "/01-if-else"
+              },
+              {
+                "d4_name": "@for 반복문의 기본 구조",
+                "d4_link": "/02-for-loop"
+              },
+              {
+                "d4_name": "@each 반복문 사용법",
+                "d4_link": "/03-each-loop"
+              },
+              {
+                "d4_name": "반복문을 활용한 클래스 자동 생성",
+                "d4_link": "/04-class-generation"
+              },
+              {
+                "d4_name": "초급자가 이해하기 쉬운 예제 중심 설명",
+                "d4_link": "/05-beginner-examples"
+              }
+            ]
+          },
+          {
+            "d3_name": "파일 분리와 SCSS 구조 설계",
+            "d3_link": "/09-file-structure",
+            "depth4": [
+              {
+                "d4_name": "SCSS 파일을 분리하는 이유",
+                "d4_link": "/01-why-separate"
+              },
+              {
+                "d4_name": "_partial.scss 개념",
+                "d4_link": "/02-partial-concept"
+              },
+              {
+                "d4_name": "@use, @forward 기본 이해",
+                "d4_link": "/03-use-forward"
+              },
+              {
+                "d4_name": "기본적인 SCSS 폴더 구조 예시",
+                "d4_link": "/04-folder-structure"
+              },
+              {
+                "d4_name": "소규모 프로젝트에서의 SCSS 구조 설계",
+                "d4_link": "/05-small-project"
+              }
+            ]
+          },
+          {
+            "d3_name": "실무 예제로 SCSS 마무리",
+            "d3_link": "/10-scss-examples",
+            "depth4": [
+              {
+                "d4_name": "디자인 토큰과 기본 스타일",
+                "d4_link": "/01-design-tokens-base-styles"
+              },
+              {
+                "d4_name": "레이아웃 시스템과 반응형 구조",
+                "d4_link": "/02-layout-system-responsive"
+              },
+              {
+                "d4_name": "핵심 UI 컴포넌트",
+                "d4_link": "/03-core-ui-components"
+              },
+              {
+                "d4_name": "폼과 인터랙티브 컴포넌트",
+                "d4_link": "/04-form-interactive-components"
+              },
+              {
+                "d4_name": "테마 시스템 (Light / Dark)",
+                "d4_link": "/05-theme-system"
+              },
+              {
+                "d4_name": "디자인 시스템 SCSS 구조",
+                "d4_link": "/06-design-system-structure"
+              },
+              {
+                "d4_name": "Vue / React 컴포넌트 스타일 구조",
+                "d4_link": "/07-framework-integration"
+              },
+              {
+                "d4_name": "퍼블리싱 가이드 구성 및 마무리",
+                "d4_link": "/08-scss-complete"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "d2_name": "ACCESSIBILITY",
+        "d2_link": "/accessibility",
+        "depth3": [
+          {
+            "d3_name": "웹 접근성이란?",
+            "d3_link": "/01-waStart/waStart",
+            "depth4": []
+          },
+          {
+            "d3_name": "WA 인증 마크란?",
+            "d3_link": "/02-waMark/waMark",
+            "depth4": []
+          },
+          {
+            "d3_name": "KWCAG 2.1 개요",
+            "d3_link": "/03-waKwcag/waKwcag",
+            "depth4": []
+          },
+          {
+            "d3_name": "웹 접근성을 고려한 콘텐츠 제작 방법",
+            "d3_link": "/04-waContents/waContents",
+            "depth4": []
+          },
+          {
+            "d3_name": "인식의 용이성(perceivable)",
+            "d3_link": "/05-waPerceivable",
+            "depth4": [
+              {
+                "d4_name": "대체 텍스트",
+                "d4_link": "/01-text"
+              },
+              {
+                "d4_name": "멀티미디어 대체 수단",
+                "d4_link": "/02-media"
+              },
+              {
+                "d4_name": "명료성",
+                "d4_link": "/03-clarity"
+              }
+            ]
+          },
+          {
+            "d3_name": "운용의 용이성(operable)",
+            "d3_link": "/06-waOperable",
+            "depth4": [
+              {
+                "d4_name": "입력장치 접근성",
+                "d4_link": "/01-input_devices"
+              },
+              {
+                "d4_name": "충분한 시간 제공",
+                "d4_link": "/02-enough_time"
+              },
+              {
+                "d4_name": "광과민성 발작 예방",
+                "d4_link": "/03-seizures"
+              },
+              {
+                "d4_name": "쉬운 내비게이션",
+                "d4_link": "/04-easy_navigation"
+              }
+            ]
+          },
+          {
+            "d3_name": "이해의 용이성(understandable)",
+            "d3_link": "/07-waUnderstandable",
+            "depth4": [
+              {
+                "d4_name": "가독성",
+                "d4_link": "/01-readable"
+              },
+              {
+                "d4_name": "예측 가능성",
+                "d4_link": "/02-predictable"
+              },
+              {
+                "d4_name": "콘텐츠의 논리성",
+                "d4_link": "/03-logical_order"
+              },
+              {
+                "d4_name": "입력 도움",
+                "d4_link": "/04-input_assistance"
+              }
+            ]
+          },
+          {
+            "d3_name": "견고성(robust)",
+            "d3_link": "/08-waRobust",
+            "depth4": [
+              {
+                "d4_name": "문법 준수",
+                "d4_link": "/01-markup"
+              },
+              {
+                "d4_name": "웹 애플리케이션 접근성",
+                "d4_link": "/02-waa"
+              }
+            ]
+          },
+          {
+            "d3_name": "ACCESSIBILITY 참조 사이트",
+            "d3_link": "/12-bookmark/bookmark",
+            "depth4": []
+          }
+        ]
+      }
+    ]
+  },
+  "accessibility": {
+    "depth2": [
+      {
+        "d2_name": "A11Y",
+        "d2_link": "/a11y",
+        "depth3": [
+          {
+            "d3_name": "접근성이란?",
+            "d3_link": "/01-a11yStart/a11yStart",
+            "depth4": []
+          },
+          {
+            "d3_name": "장애인차별금지법 관련 지침",
+            "d3_link": "/02-a11yGuideline/a11yGuideline",
+            "depth4": []
+          },
+          {
+            "d3_name": "접근성 인증 마크",
+            "d3_link": "/03-a11yMark/a11yMark",
+            "depth4": []
+          },
+          {
+            "d3_name": "접근성 가이드라인",
+            "d3_link": "/04-a11yCag",
+            "depth4": [
+              {
+                "d4_name": "웹 콘텐츠 접근성",
+                "d4_link": "/01-wcag"
+              },
+              {
+                "d4_name": "한국형 웹 콘텐츠 접근성",
+                "d4_link": "/02-kwcag"
+              },
+              {
+                "d4_name": "모바일 앱 접근성",
+                "d4_link": "/03-macag"
+              },
+              {
+                "d4_name": "무인정보단말기 접근성",
+                "d4_link": "/04-kioskDesignPrinciples"
+              }
+            ]
+          },
+          {
+            "d3_name": "접근성 항목별 준수 가이드",
+            "d3_link": "/05-a11yCagGuide",
+            "depth4": [
+              {
+                "d4_name": "웹 콘텐츠 접근성",
+                "d4_link": "/01-kwcagPerceivable",
+                "part_class": "two_line_tab x4 cag_guide",
+                "part": [
+                  { "part_name": "인식의 용이성", "part_link": "/01-kwcagPerceivable" },
+                  { "part_name": "운용의 용이성", "part_link": "/01-kwcagOperable" },
+                  { "part_name": "이해의 용이성", "part_link": "/01-kwcagUnderstandable" },
+                  { "part_name": "견고성", "part_link": "/01-kwcagRobust" }
+                ]
+              },
+              {
+                "d4_name": "모바일 앱 접근성",
+                "d4_link": "/02-macagPerceivable",
+                "part_class": "two_line_tab x4 cag_guide",
+                "part": [
+                  { "part_name": "인식의 용이성", "part_link": "/02-macagPerceivable" },
+                  { "part_name": "운용의 용이성", "part_link": "/02-macagOperable" },
+                  { "part_name": "이해의 용이성", "part_link": "/02-macagUnderstandable" },
+                  { "part_name": "견고성", "part_link": "/02-macagRobust" }
+                ]
+              },
+              {
+                "d4_name": "무인정보 단말기 접근성",
+                "d4_link": "/03-kiosk"
+              }
+            ]
+          },
+          {
+            "d3_name": "접근성 체크리스트",
+            "d3_link": "/06-a11yCheck",
+            "depth4": [
+              {
+                "d4_name": "웹 콘텐츠 접근성",
+                "d4_link": "/01-checkWcagPerceivable"
+              },
+              {
+                "d4_name": "모바일 앱 접근성",
+                "d4_link": "/02-checkMacagPerceivable"
+              },
+              {
+                "d4_name": "무인정보 단말기 접근성",
+                "d4_link": "/03-checkKioskPrinciple"
+              }
+            ]
+          },
+          {
+            "d3_name": "접근성 관련 도구 및 플러그인",
+            "d3_link": "/07-a11ytool/a11ytool",
+            "depth4": []
+          },
+          {
+            "d3_name": "접근성 참조",
+            "d3_link": "/08-a11yBookmark/bookmark",
+            "depth4": []
+          }
+        ]
+      },
+      {
+        "d2_name": "WAI-ARIA",
+        "d2_link": "/waiAria",
+        "depth3": [
+          {
+            "d3_name": "WAI-ARIA란?",
+            "d3_link": "/01-waiAria/waiAria",
+            "depth4": []
+          },
+          {
+            "d3_name": "WAI-ARIA 역할(Role)",
+            "d3_link": "/02-waiAriaRole",
+            "depth4": [
+              {
+                "d4_name": "추상적 역할",
+                "d4_link": "/01-rolesAbstract"
+              },
+              {
+                "d4_name": "위젯 역할",
+                "d4_link": "/02-rolesWidgetStandalone"
+              },
+              {
+                "d4_name": "문서 구조 역할",
+                "d4_link": "/03-structureDocumentPart1"
+              },
+              {
+                "d4_name": "랜드마크 역할",
+                "d4_link": "/04-rolesLandmark"
+              },
+              {
+                "d4_name": "라이브 영역 역할",
+                "d4_link": "/05-rolesLiveregion"
+              },
+              {
+                "d4_name": "윈도우 역할",
+                "d4_link": "/06-rolesWindow"
+              }
+            ]
+          },
+          {
+            "d3_name": "WAI-ARIA 상태 및 속성",
+            "d3_link": "/03-waiAriaAttrs",
+            "depth4": [
+              {
+                "d4_name": "위젯 속성",
+                "d4_link": "/01-attrsWidgetsPart1"
+              },
+              {
+                "d4_name": "라이브 영역 속성",
+                "d4_link": "/02-attrsLiveregions"
+              },
+              {
+                "d4_name": "드래그 앤 드롭 속성",
+                "d4_link": "/03-attrsDragdrop"
+              },
+              {
+                "d4_name": "관계 속성",
+                "d4_link": "/04-attrsRelationships"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "d2_name": "A11y Creation Tech",
+        "d2_link": "/a11yCreationTech",
+        "depth3": [
+          {
+            "d3_name": "웹 접근성 제작 기법",
+            "d3_sub_name": "인식의 용이성(Perceivable)",
+            "d3_link": "/01-web",
+            "depth4": [
+              {
+                "d4_name": "대체 텍스트 제공",
+                "d4_link": "/01-non-text-content"
+              },
+              {
+                "d4_name": "자막 제공",
+                "d4_link": "/02-captions-prerecorded"
+              },
+              {
+                "d4_name": "표의 구성",
+                "d4_link": "/03-table"
+              },
+              {
+                "d4_name": "콘텐츠의 선형구조",
+                "d4_link": "/04-linearized"
+              },
+              {
+                "d4_name": "명확한 지시사항 제공",
+                "d4_link": "/05-labels-or-instructions"
+              },
+              {
+                "d4_name": "색에 무관한 콘텐츠 인식",
+                "d4_link": "/06-use-of-color"
+              },
+              {
+                "d4_name": "자동 재생 금지",
+                "d4_link": "/07-pause-stop-hide"
+              },
+              {
+                "d4_name": "텍스트 콘텐츠의 명도 대비",
+                "d4_link": "/08-contrast-minimum"
+              },
+              {
+                "d4_name": "콘텐츠 간의 구분",
+                "d4_link": "/09-grouping-content"
+              }
+            ]
+          },
+          {
+            "d3_name": "웹 접근성 제작 기법",
+            "d3_sub_name": "운용의 용이성(Operable)",
+            "d3_link": "/01-web",
+            "depth4_style": "depth4_short",
+            "depth4_class": "depth4_creation_tech_operable",
+            "depth4": [
+              {
+                "d4_name": "키보드 사용 보장",
+                "d4_link": "/10-keyboard"
+              },
+              {
+                "d4_name": "초점 이동과 표시",
+                "d4_link": "/11-focus-visible"
+              },
+              {
+                "d4_name": "조작 가능",
+                "d4_link": "/12-operable"
+              },
+              {
+                "d4_name": "문자 단축키",
+                "d4_link": "/13-character-key-shortcuts"
+              },
+              {
+                "d4_name": "응답시간 조절",
+                "d4_link": "/14-timing-adjustable"
+              },
+              {
+                "d4_name": "정지 기능 제공",
+                "d4_link": "/15-pause-stop-hide"
+              },
+              {
+                "d4_name": "깜빡임과 번쩍임 사용 제한",
+                "d4_link": "/16-three-flashes-or-below-threshold"
+              },
+              {
+                "d4_name": "반복 영역 건너뛰기",
+                "d4_link": "/17-bypass-blocks"
+              },
+              {
+                "d4_name": "제목 제공",
+                "d4_link": "/18-page-titled"
+              },
+              {
+                "d4_name": "적절한 링크 텍스트",
+                "d4_link": "/19-link-purpose-context"
+              },
+              {
+                "d4_name": "고정된 참조 위치 정보",
+                "d4_link": "/20-fixed-reference-points"
+              },
+              {
+                "d4_name": "단일 포인터 입력 지원",
+                "d4_link": "/21-pointer-gestures"
+              },
+              {
+                "d4_name": "포인터 입력 취소",
+                "d4_link": "/22-pointer-cancellation"
+              },
+              {
+                "d4_name": "레이블과 네임",
+                "d4_link": "/23-label-in-name"
+              },
+              {
+                "d4_name": "동작기반 작동",
+                "d4_link": "/24-motion-actuation"
+              }
+            ]
+          },
+          {
+            "d3_name": "웹 접근성 제작 기법",
+            "d3_sub_name": "이해의 용이성(Understandable)",
+            "d3_link": "/01-web",
+            "depth4": [
+              {
+                "d4_name": "기본 언어 표시",
+                "d4_link": "/25-language-of-page"
+              },
+              {
+                "d4_name": "사용자 요구에 따른 실행",
+                "d4_link": "/26-change-on-request"
+              },
+              {
+                "d4_name": "찾기 쉬운 도움 정보",
+                "d4_link": "/27-consistent-help"
+              },
+              {
+                "d4_name": "오류 정정",
+                "d4_link": "/28-error-suggestion"
+              },
+              {
+                "d4_name": "레이블 제공",
+                "d4_link": "/29-labels-or-instructions"
+              },
+              {
+                "d4_name": "접근 가능한 인증",
+                "d4_link": "/30-accessible-authentication"
+              },
+              {
+                "d4_name": "반복 입력 정보",
+                "d4_link": "/31-redundant-entry"
+              }
+            ]
+          },
+          {
+            "d3_name": "웹 접근성 제작 기법",
+            "d3_sub_name": "견고성(Robust)",
+            "d3_link": "/01-web",
+            "depth4": [
+              {
+                "d4_name": "마크업 오류 방지",
+                "d4_link": "/32-validating-markup"
+              },
+              {
+                "d4_name": "웹 애플리케이션 접근성 준수",
+                "d4_link": "/33-web-application-accessibility"
+              }
+            ]
+          },
+          {
+            "d3_name": "모바일 접근성 제작 기법",
+            "d3_sub_name": "인식의 용이성(Perceivable)",
+            "d3_link": "/02-mobile",
+            "depth4": [
+              {
+                "d4_name": "텍스트 아닌 콘텐츠",
+                "d4_link": "/01-non-text-content"
+              },
+              {
+                "d4_name": "자막 또는 수어",
+                "d4_link": "/02-captions-sign"
+              },
+              {
+                "d4_name": "화면해설",
+                "d4_link": "/19-audio-description"
+              },
+              {
+                "d4_name": "표의 구성",
+                "d4_link": "/20-table-structure"
+              },
+              {
+                "d4_name": "콘텐츠의 선형구조",
+                "d4_link": "/21-linear-structure"
+              },
+              {
+                "d4_name": "다양한 감각 지원",
+                "d4_link": "/22-multisensory-support"
+              },
+              {
+                "d4_name": "방향 설정",
+                "d4_link": "/23-orientation"
+              },
+              {
+                "d4_name": "입력 목적 식별",
+                "d4_link": "/24-identify-input-purpose"
+              },
+              {
+                "d4_name": "색에 무관한 콘텐츠",
+                "d4_link": "/03-use-of-color"
+              },
+              {
+                "d4_name": "소리 자동 재생",
+                "d4_link": "/25-audio-control"
+              },
+              {
+                "d4_name": "콘텐츠의 명도대비",
+                "d4_link": "/04-contrast-minimum"
+              },
+              {
+                "d4_name": "콘텐츠 간의 구분",
+                "d4_link": "/26-separation-of-content"
+              },
+              {
+                "d4_name": "텍스트 크기 조정",
+                "d4_link": "/17-resize-text"
+              },
+              {
+                "d4_name": "이미지 텍스트",
+                "d4_link": "/27-image-of-text"
+              },
+              {
+                "d4_name": "리플로우",
+                "d4_link": "/28-reflow"
+              },
+              {
+                "d4_name": "텍스트 간격",
+                "d4_link": "/29-text-spacing"
+              }
+            ]
+          },
+          {
+            "d3_name": "모바일 접근성 제작 기법",
+            "d3_sub_name": "운용의 용이성(Operable)",
+            "d3_link": "/02-mobile",
+            "depth4": [
+              {
+                "d4_name": "초점 이동과 표시",
+                "d4_link": "/07-focus-visible"
+              },
+              {
+                "d4_name": "조작 가능한 크기",
+                "d4_link": "/11-target-size-minimum"
+              },
+              {
+                "d4_name": "단일 문자 단축키",
+                "d4_link": "/30-character-key-shortcuts"
+              },
+              {
+                "d4_name": "응답시간 조절",
+                "d4_link": "/09-timing-adjustable"
+              },
+              {
+                "d4_name": "움직임 제어",
+                "d4_link": "/10-pause-stop-hide"
+              },
+              {
+                "d4_name": "깜빡임과 번쩍임",
+                "d4_link": "/14-three-flashes-or-below-threshold"
+              },
+              {
+                "d4_name": "제목",
+                "d4_link": "/31-page-title"
+              },
+              {
+                "d4_name": "링크 텍스트",
+                "d4_link": "/32-link-purpose"
+              },
+              {
+                "d4_name": "다양한 탐색 방법",
+                "d4_link": "/33-navigation-methods"
+              },
+              {
+                "d4_name": "단일 포인터 입력",
+                "d4_link": "/08-pointer-gestures"
+              },
+              {
+                "d4_name": "포인터 입력 취소",
+                "d4_link": "/34-pointer-cancellation"
+              },
+              {
+                "d4_name": "네임 안의 레이블",
+                "d4_link": "/35-label-in-name"
+              },
+              {
+                "d4_name": "동작기반 작동",
+                "d4_link": "/36-motion-actuation"
+              }
+            ]
+          },
+          {
+            "d3_name": "모바일 접근성 제작 기법",
+            "d3_sub_name": "이해의 용이성(Understandable)",
+            "d3_link": "/02-mobile",
+            "depth4": [
+              {
+                "d4_name": "기본 언어 표시",
+                "d4_link": "/37-language-of-page"
+              },
+              {
+                "d4_name": "부분 언어 표시",
+                "d4_link": "/38-language-of-parts"
+              },
+              {
+                "d4_name": "사용자 요구에 따른 실행",
+                "d4_link": "/16-on-focus"
+              },
+              {
+                "d4_name": "사용자 인터페이스 컴포넌트의 일관성",
+                "d4_link": "/13-consistent-identification"
+              },
+              {
+                "d4_name": "도움 정보",
+                "d4_link": "/39-consistent-help"
+              },
+              {
+                "d4_name": "오류 정정",
+                "d4_link": "/12-error-identification"
+              },
+              {
+                "d4_name": "레이블",
+                "d4_link": "/05-labels-or-instructions"
+              },
+              {
+                "d4_name": "오류 방지",
+                "d4_link": "/40-error-prevention"
+              },
+              {
+                "d4_name": "반복 입력 정보",
+                "d4_link": "/41-redundant-entry"
+              },
+              {
+                "d4_name": "접근 가능한 인증",
+                "d4_link": "/42-accessible-authentication"
+              }
+            ]
+          },
+          {
+            "d3_name": "모바일 접근성 제작 기법",
+            "d3_sub_name": "견고성(Robust)",
+            "d3_link": "/02-mobile",
+            "depth4": [
+              {
+                "d4_name": "사용자 인터페이스 컴포넌트",
+                "d4_link": "/18-name-role-value"
+              },
+              {
+                "d4_name": "상태 메시지",
+                "d4_link": "/43-status-messages"
+              }
+            ]
+          },
+          {
+            "d3_name": "무인정보 단말기 접근성 제작 기법",
+            "d3_link": "/03-kiosk/kiosk",
+            "depth4": []
+          }
+        ]
+      }
+    ]
+  }
+}

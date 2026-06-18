@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[col] 하단에 위치한 제목 및 CSS로 스타일 조정</title>
+	</head>
+	<body>
+		<table>
+			<colgroup>
+				<col style="background-color: #d4f0f9;">
+				<col style="background-color: #deffde;">
+			</colgroup>
+			<tr>
+				<th>상품명</th>
+				<th>가격</th>
+			</tr>
+			<tr>
+				<td>스마트폰</td>
+				<td>1,000,000원</td>
+			</tr>
+			<tr>
+				<td>노트북</td>
+				<td>1,500,000원</td>
+			</tr>
+		</table>
+
+		<style>
+			table {
+				width: 100%;
+				border-collapse: collapse;
+			}
+			th, td {
+				border: 1px solid #bbb;
+				padding: 8px;
+			}
+		</style>
+	</body>
+</html>

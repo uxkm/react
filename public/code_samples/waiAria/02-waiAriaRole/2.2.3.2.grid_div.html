@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>대화형 그리드 예시(role="grid") | 복합형 위젯 역할(WAI-ARIA)</title>
+		<style>
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1px;
+        background-color: #ccc;
+				border: 1px solid #ccc;
+      }
+      .grid-header, .grid-row {
+        display: contents;
+      }
+      .grid-cell {
+        padding: 8px;
+        background-color: white;
+        text-align: left;
+      }
+      .grid-header .grid-cell {
+        background-color: #f3f3f3;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .grid-header .grid-cell.sorted-asc::after {
+        content: " 🔼";
+      }
+      .grid-header .grid-cell.sorted-desc::after {
+        content: " 🔽";
+      }
+      .grid-row:nth-child(even) .grid-cell {
+        background-color: #f9f9f9;
+      }
+      .grid-row:hover .grid-cell {
+        background-color: #e0e0e0;
+      }
+		</style>
+	</head>
+	<body>
+		<div role="grid" class="grid" aria-rowcount="4" aria-colcount="3">
+			<div role="row" class="grid-header">
+				<div role="columnheader" class="grid-cell" tabindex="0" onclick="sortGrid(0)">Name</div>
+				<div role="columnheader" class="grid-cell" tabindex="0" onclick="sortGrid(1)">Age</div>
+				<div role="columnheader" class="grid-cell" tabindex="0" onclick="sortGrid(2)">Country</div>
+			</div>
+			<div role="row" class="grid-row">
+				<div role="gridcell" class="grid-cell">John Doe</div>
+				<div role="gridcell" class="grid-cell">35</div>
+				<div role="gridcell" class="grid-cell">USA</div>
+			</div>
+			<div role="row" class="grid-row">
+				<div role="gridcell" class="grid-cell">Anna Smith</div>
+				<div role="gridcell" class="grid-cell">28</div>
+				<div role="gridcell" class="grid-cell">UK</div>
+			</div>
+			<div role="row" class="grid-row">
+				<div role="gridcell" class="grid-cell">Peter Jones</div>
+				<div role="gridcell" class="grid-cell">42</div>
+				<div role="gridcell" class="grid-cell">Canada</div>
+			</div>
+			<div role="row" class="grid-row">
+				<div role="gridcell" class="grid-cell">Maria Rodriguez</div>
+				<div role="gridcell" class="grid-cell">30</div>
+				<div role="gridcell" class="grid-cell">Spain</div>
+			</div>
+		</div>
+
+		<script>
+      function sortGrid(columnIndex) {
+        const grid = document.querySelector('.grid');
+        const rows = Array.from(grid.querySelectorAll('.grid-row'));
+        const isSorted = grid.querySelectorAll('.grid-header .grid-cell')[columnIndex].classList.contains('sorted-asc');
+        const direction = isSorted ? 'desc' : 'asc';
+
+        rows.sort((rowA, rowB) => {
+          const cellA = rowA.querySelectorAll('.grid-cell')[columnIndex].textContent.trim();
+          const cellB = rowB.querySelectorAll('.grid-cell')[columnIndex].textContent.trim();
+
+          if (direction === 'asc') {
+            return cellA.localeCompare(cellB, undefined, {numeric: true});
+          } else {
+            return cellB.localeCompare(cellA, undefined, {numeric: true});
+          }
+        });
+
+        rows.forEach(row => grid.appendChild(row));
+
+        // Reset sort indicators
+        grid.querySelectorAll('.grid-header .grid-cell').forEach(cell => {
+          cell.classList.remove('sorted-asc', 'sorted-desc');
+        });
+
+        // Apply new sort direction
+        grid.querySelectorAll('.grid-header .grid-cell')[columnIndex].classList.add(direction === 'asc' ? 'sorted-asc' : 'sorted-desc');
+      }
+		</script>
+	</body>
+</html>

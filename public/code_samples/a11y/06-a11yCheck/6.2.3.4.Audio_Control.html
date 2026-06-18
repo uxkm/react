@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>하이브리드 방식의 예시 : 자동재생 금지</title>
+	</head>
+	<body>
+		<button id="playButton">음악 재생</button>
+		<button id="stopButton">재생 정지</button>
+		<audio id="backgroundAudio" src="/_code_samples/a11y/06-a11yCheck/6.2.3.4.backgroundAudio.mp3"></audio>
+
+		<script>
+			const playButton = document.getElementById('playButton');
+			const stopButton = document.getElementById('stopButton');
+			const backgroundAudio = document.getElementById('backgroundAudio');
+
+			// 음악 재생 버튼 클릭 시
+			playButton.addEventListener('click', () => {
+				if (backgroundAudio.paused) {
+					backgroundAudio.play();  // 오디오 재생
+				}
+			});
+
+			// 재생 정지 버튼 클릭 시
+			stopButton.addEventListener('click', () => {
+				if (!backgroundAudio.paused) {
+					backgroundAudio.pause();  // 오디오 일시 정지
+					backgroundAudio.currentTime = 0;  // 오디오 재생 위치를 처음으로 설정
+				}
+			});
+		</script>
+	</body>
+</html>

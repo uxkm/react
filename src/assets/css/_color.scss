@@ -1,0 +1,33 @@
+@use "sass:color";
+@charset "utf-8";
+
+$blue: #1e73ff;
+$skyBlue: #379ad6;
+//$lightBlue: #7caeff;
+//$darkBlue: #4961dd;
+$lightBlue: color.adjust($blue, $lightness: 12%);
+$darkBlue: color.adjust($blue, $lightness: -12%);
+
+$red:#f12323;
+$skyRed:color.adjust($red, $lightness: 14%);
+$lightRed:#ff6565;
+$orange:#f79d30;
+
+$darkOrange:#dc8216;
+
+$green:#00986b;
+$light_green:#11ba88;
+$dark_green: color.adjust($green, $lightness: -6%);
+$edt_green:#00986b;
+
+$navy:#081121;
+$white:#fff;
+$black:#000;
+$t_black: #222;
+$yellow:#fff000;
+$yellow2:#decd11;
+$purple:#b72df8;
+
+$link:rgba(color.adjust($blue, $lightness: -30%), 75%);
+$note:#26529b;
+$note_text:#4b6da5;

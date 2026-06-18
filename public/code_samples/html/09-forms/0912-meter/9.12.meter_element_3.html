@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[meter] 파일 업로드 진행률 / 저장공간 사용량</title>
+	</head>
+	<body>
+		<b>파일 업로드 진행률</b>
+		<p>
+			<label for="upload-low">🔴 느린 업로드 (10%)</label>
+			<meter id="upload-low" min="0" max="100" low="30" high="80" optimum="100" value="10"></meter>
+		</p>
+
+		<p>
+			<label for="upload-medium">🟡 업로드 진행 중 (50%)</label>
+			<meter id="upload-medium" min="0" max="100" low="30" high="80" optimum="100" value="50"></meter>
+		</p>
+
+		<p>
+			<label for="upload-complete">🟢 업로드 완료 (100%)</label>
+			<meter id="upload-complete" min="0" max="100" low="30" high="80" optimum="100" value="100"></meter>
+		</p>
+		<hr>
+
+		<b>저장공간 사용량</b>
+		<p>
+			<label for="storage-low">🔴 저장공간 부족 (19GB/100GB)</label>
+			<meter id="storage-low" min="0" max="100" low="30" high="80" optimum="100" value="19"></meter>
+		</p>
+
+		<p>
+			<label for="storage-medium">🟡 저장공간 절반 사용 (64GB/100GB)</label>
+			<meter id="storage-medium" min="0" max="100" low="30" high="80" optimum="100" value="64"></meter>
+		</p>
+
+		<p>
+			<label for="storage-full">🟢 저장공간 충분 (97GB/100GB)</label>
+			<meter id="storage-full" min="0" max="100" low="30" high="80" optimum="100" value="97"></meter>
+		</p>
+
+		<style>
+			*, html, body {vertical-align:top;}
+			body {padding-top:5px;}
+			hr {margin:20px 0;}
+		</style>
+	</body>
+</html>

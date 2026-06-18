@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>모바일 네비게이션 (햄버거 메뉴)</title>
+</head>
+<body>
+<nav>
+	<button onclick="toggleMenu()">☰ 메뉴</button>
+	<ul id="menu">
+		<li><a href="#home">홈</a></li>
+		<li><a href="#about">소개</a></li>
+		<li><a href="#services">서비스</a></li>
+		<li><a href="#contact">연락처</a></li>
+	</ul>
+</nav>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  nav {
+    background-color: #333;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  nav button {
+    background-color: #444;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+  }
+  nav button:hover {
+    background-color: #555;
+  }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  ul li {
+    margin-right: 20px;
+  }
+  ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 15px;
+    border-radius: 5px;
+  }
+  ul li a:hover {
+    background-color: #555;
+  }
+
+  @media (max-width: 768px) {
+    nav {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    ul {
+      display: none;
+      width: 100%;
+      margin-top: 10px;
+    }
+    ul li {
+      margin: 10px 0;
+    }
+    ul.show {
+      display: block;
+    }
+  }
+</style>
+
+<script>
+  function toggleMenu() {
+    var menu = document.getElementById("menu");
+    menu.classList.toggle("show");
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[textarea] 크기 조정 제한</title>
+		<style>
+			body {padding-top:5px;}
+			hr {margin:15px 0;}
+			p {margin:0 0 10px;}
+			.info {font-size:16px; color:#1e73ff;}
+
+			textarea {
+				width:calc(100% - 10px); max-width:400px;
+				height: 55px;
+			}
+		</style>
+	</head>
+	<body>
+		<p>
+			<b>기본 크기 조정 가능(기본)</b><br />
+			<span class="info">우측 하단의 리사이즈 핸들러(resize handler)를 드레그하여 크기 조정이 가능합니다.</span>
+		</p>
+		<textarea name="message" placeholder="크기 조정이 가능합니다."></textarea>
+		<style>
+			.text-form {
+				display: flex;
+				gap: 5px;
+				width: 100%;
+				max-width: 400px;
+			}
+			.text-form textarea {
+				width: calc(100% - 70px);
+			}
+			.text-form button {
+				width: 65px;
+			}
+		</style>
+		<hr>
+
+		<p>
+			<b>기본 크기 불가능</b><br />
+			<span class="info">
+				CSS로 resize: none;을 선언하면, 리사이즈 핸들러(resize handler)가 숨겨져서 크기 조정을 할 수 없습니다.
+			</span>
+		</p>
+		<textarea name="message" placeholder="크기 조정이 불가능합니다." class="textarea"></textarea>
+		<style>
+			.textarea {
+				resize: none;
+			}
+		</style>
+	</body>
+</html>

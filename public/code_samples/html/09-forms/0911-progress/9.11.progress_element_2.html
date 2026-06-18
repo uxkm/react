@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[progress] JavaScript로 진행률 업데이트</title>
+	</head>
+	<body>
+		<p>
+			<b>JavaScript로 진행률 업데이트</b><br />
+			<span class="info">(진행 버튼 클릭 시 10시 진행률 증가)</span>
+		</p>
+		<div class="progress-container">
+			<progress id="progressBar" value="0" max="100"></progress>
+			<button type="button" onclick="updateProgress()">진행</button>
+			<button type="reset" onclick="resetProgress()">초기화</button>
+		</div>
+		<script>
+			function updateProgress() {
+				let progress = document.getElementById("progressBar");
+				if (progress.value < progress.max) {
+					progress.value += 10; // 10%씩 증가
+				}
+			}
+
+			function resetProgress() {
+				document.getElementById("progressBar").value = 0;
+			}
+		</script>
+		<hr>
+
+		<p>
+			<b>JavaScript로 진행률 업데이트</b><br />
+			<span class="info">(진행 버튼 클릭 시 10시 진행률 증가)</span>
+		</p>
+		<div class="progress-container">
+			<progress id="loader" value="0" max="100"></progress>
+			<button type="button" onclick="startLoading()">시작</button>
+			<button type="reset" onclick="resetoading()">초기화</button>
+		</div>
+		<script>
+			let interval
+
+			function startLoading() {
+				clearInterval(interval);
+				const progress = document.getElementById('loader');
+				let value = 0;
+				interval = setInterval(() => {
+					if (value >= 100) {
+						clearInterval(interval);
+					} else {
+						value += 1;
+						progress.value = value;
+					}
+				}, 30);
+			}
+
+			function resetoading() {
+				document.getElementById("loader").value = 0;
+				clearInterval(interval);
+			}
+		</script>
+
+		<style>
+			*, html, body {vertical-align:top;}
+			body {padding-top:5px;}
+			hr {margin:15px 0;}
+			p {margin:0 0 10px;}
+			.info {font-size:16px; color:#1e73ff;}
+			[type="reset"] {color: red;}
+		</style>
+	</body>
+</html>

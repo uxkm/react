@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>[콘텐츠의 선형구조] 준수 사례</title>
+	</head>
+	<body>
+		<section class="latest-notices" aria-labelledby="latest-notices">
+			<h2 class="title" id="latest-notices">최신 공지사항</h2>
+
+			<ul class="list">
+				<li>
+					<a href="#">
+						<span class="content">2025년 4월에 진행되는 행사에 대한 상세 안내가 포함되어 있습니다.</span>
+						<time class="date">0000.00.00</time>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<span class="content">서버 점검으로 인한 서비스 일시 중단에 대한 공지입니다.</span>
+						<time class="date">0000.00.00</time>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<span class="content">회원가입을 통해 다양한 혜택을 받을 수 있는 이벤트 안내입니다.</span>
+						<time class="date">0000.00.00</time>
+					</a>
+				</li>
+			</ul>
+
+			<a href="/notices" class="more" aria-label="더 많은 공지사항 보기">
+				더보기
+			</a>
+		</section>
+		<style>
+      *, html, body {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      html {
+        background-color: #f6f6f6;
+      }
+      .latest-notices {
+        position: relative;
+        max-width: 300px;
+        margin: 10px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,.1);
+      }
+      .latest-notices a {
+        text-decoration: none;
+      }
+      .latest-notices a:hover {
+        text-decoration: underline;
+      }
+      .latest-notices .title {
+        line-height: 20px;
+        font-size: 16px;
+      }
+      .latest-notices .more {
+        position: absolute;
+        right: 20px;
+        top: 24px;
+        line-height: 20px;
+        font-size: 14px;
+        color: #666;
+      }
+      .latest-notices .more:hover {
+        color: #222;
+      }
+      .latest-notices .list {
+        margin-top: 17px;
+        padding-top: 10px;
+        border-top: 1px solid #999;
+      }
+      .latest-notices .list a {
+        display: flex;
+        line-height: 26px;
+        font-size: 14px;
+        color: #666;
+      }
+      .latest-notices .list a:hover {
+        color: #222;
+      }
+      .latest-notices .list .content {
+        flex: 1;
+        display: block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        padding-right: 10px;
+      }
+		</style>
+		<hr >
+
+		<p style="padding: 10px;">[CSS 적용이 안된 선형 구조]</p>
+		<section style="padding: 10px;">
+			<h2 class="title">최신 공지사항</h2>
+
+			<ul class="list">
+				<li>
+					<a href="#">
+						<span class="content">2025년 4월에 진행되는 행사에 대한 상세 안내가 포함되어 있습니다.</span>
+						<time class="date">0000.00.00</time>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<span class="content">서버 점검으로 인한 서비스 일시 중단에 대한 공지입니다.</span>
+						<time class="date">0000.00.00</time>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<span class="content">회원가입을 통해 다양한 혜택을 받을 수 있는 이벤트 안내입니다.</span>
+						<time class="date">0000.00.00</time>
+					</a>
+				</li>
+			</ul>
+
+			<a href="/notices" class="more" aria-label="더 많은 공지사항 보기">
+				더보기
+			</a>
+		</section>
+	</body>
+</html>

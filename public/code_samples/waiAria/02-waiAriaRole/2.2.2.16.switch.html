@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title>다양한 스타일의 switch 예시 | 독립형 위젯 역할(WAI-ARIA)</title>
+		<style>
+			[role="switch"] {
+				overflow: hidden;
+				display: inline-block;
+				position: relative;
+				width: 55px; height: 30px; padding:4px;
+				background-color: #ddd;
+				border-radius: 20px;
+				cursor: pointer;
+				transition: background-color .2s;
+			}
+			.handle {
+				width: 30px; height: 30px;
+				background-color: #fff;
+				border-radius: 15px;
+				box-shadow: 2px 2px 5px rgba(0, 0, 0, .15);
+				transition: transform .2s;
+			}
+      [role="switch"][aria-checked="true"] {
+        background-color: #36c836;
+      }
+      [role="switch"][aria-checked="true"] .handle {
+				transform: translateX(25px);
+			}
+		</style>
+	</head>
+	<body>
+		<div role="switch" aria-checked="false" tabindex="0">
+			<div class="handle"></div>
+		</div>
+
+		<script>
+			const styledSwitch = document.querySelector('[role="switch"]');
+			styledSwitch.addEventListener('click', function() {
+				const isChecked = this.getAttribute('aria-checked') === 'true';
+				this.setAttribute('aria-checked', !isChecked);
+			});
+		</script>
+	</body>
+</html>
