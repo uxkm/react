@@ -752,6 +752,23 @@ $active_blue:color.adjust($sm_blue, $lightness: 5%);
 				@include layer_close_x;
 			}
 		}
+
+		// 검색 전: 입력폼만 표시 (운영 uxkm.io와 동일)
+		.gsc-control-cse {
+			.gsc-results-wrapper-nooverlay:not(.gsc-results-wrapper-visible) {
+				display: none !important;
+				height: 0 !important;
+				overflow: hidden !important;
+				visibility: hidden !important;
+			}
+
+			.gsc-results-wrapper-nooverlay.gsc-results-wrapper-visible {
+				display: block !important;
+				visibility: visible !important;
+				height: auto !important;
+				overflow: visible !important;
+			}
+		}
 	}
 
 	// google search (black)
@@ -908,7 +925,10 @@ $active_blue:color.adjust($sm_blue, $lightness: 5%);
 
 		// 검색 결과 영역
 		$div_margin:40px;
+		.gsc-results-wrapper-nooverlay.gsc-results-wrapper-visible,
 		.gsc-results-wrapper-visible {
+			display:block !important;
+			visibility:visible !important;
 			margin:$div_margin 0 0;
 
 			// 상세 검색 텝
@@ -1305,7 +1325,10 @@ $active_blue:color.adjust($sm_blue, $lightness: 5%);
 
 			// 검색 결과 영역
 			$div_margin:20px;
+			.gsc-results-wrapper-nooverlay.gsc-results-wrapper-visible,
 			.gsc-results-wrapper-visible {
+				display:block !important;
+				visibility:visible !important;
 				margin:$div_margin 0 0;
 
 				// 상세 검색 텝
@@ -2154,6 +2177,41 @@ $active_blue:color.adjust($sm_blue, $lightness: 5%);
 					}
 				}
 			}
+		}
+	}
+}
+
+// 검색·사이트맵 레이어 — 본문 목차(.content_bottom)만 숨김
+// uk_header z-index를 올리면 body에 붙는 Google 자동완성(.gssb_c, z-index:5000)이 검색 레이어 아래로 가려짐
+html.hd_layer_open {
+	.content_bottom {
+		visibility:hidden;
+		pointer-events:none;
+	}
+
+	// Google CSE 실시간 검색어(자동완성) — script가 body에 직접 삽입
+	.gssb_c,
+	table.gstl_50.gssb_c {
+		z-index:100000 !important;
+		border:0 !important;
+		box-shadow:0 8px 28px rgba(#000, .45);
+
+		.gsc-completion-container {
+			border:0 !important;
+			background:#fff !important;
+		}
+		.gssb_a {
+			padding:14px 18px !important;
+			font-size:16px !important;
+			font-family:font.$font !important;
+			color:#111 !important;
+			background:#fff !important;
+			border-bottom:1px solid rgba(#000, .06) !important;
+		}
+		.gssb_a:hover,
+		.gssb_a.gssb_i {
+			background:#f2f4f8 !important;
+			color:#111 !important;
 		}
 	}
 }

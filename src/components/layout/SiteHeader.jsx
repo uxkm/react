@@ -9,20 +9,18 @@ import { FocusTrap } from 'focus-trap-react'
 import useSitemapDepth3Masonry from '../../hooks/useSitemapDepth3Masonry.js'
 import { registerHeaderLayerCloseHandler } from '../../utils/headerLayerController.js'
 import { lockHeaderLayerDom, unlockHeaderLayerDom } from '../../utils/headerLayerDom.js'
+import {
+  bindGoogleCseClearHandler,
+  bindGoogleCseSearchHandlers,
+  clearGoogleCseSearchResults,
+  ensureGoogleCseSearch,
+  GCSE_CONTAINER_ID,
+  renderGoogleCseSearch,
+  runGoogleCseSearch,
+  scrollSearchLayerToResults,
+} from '../../utils/googleCse.js'
 
 const SiteSitemapNav = lazy(() => import('./SiteSitemapNav.jsx'))
-
-const CSE_SCRIPT_ID = 'uxkm-google-cse'
-
-function ensureGoogleCseScript() {
-  if (typeof document === 'undefined') return
-  if (document.getElementById(CSE_SCRIPT_ID)) return
-  const s = document.createElement('script')
-  s.id = CSE_SCRIPT_ID
-  s.async = true
-  s.src = 'https://cse.google.com/cse.js?cx=2f82e6208e7e1bdd0'
-  document.body.appendChild(s)
-}
 
 function SiteHeader({ isMainPage, topMenus }) {
   const { pathname } = useLocation()
@@ -50,7 +48,15 @@ function SiteHeader({ isMainPage, topMenus }) {
 
   const closeLayers = useCallback(() => {
     const prev = openLayerRef.current
-    if (prev === 'search') setSearchAfter(true)
+    if (prev === 'search') {
+      setSearchAfter(true)
+      clearGoogleCseSearchResults()
+      searchAreaRef.current?.removeAttribute('data-search-handlers-bound')
+      searchAreaRef.current?.removeAttribute('data-clear-handlers-bound')
+      searchAreaRef.current?.removeAttribute('data-user-search-pending')
+      searchAreaRef.current?.removeAttribute('data-had-search-query')
+      searchAreaRef.current?.removeAttribute('data-reset-pending')
+    }
     if (prev === 'sitemap') setSitemapAfter(true)
     setOpenLayer(null)
     unlockHeaderLayerDom()
@@ -81,8 +87,24 @@ function SiteHeader({ isMainPage, topMenus }) {
   const sitemapOpen = openLayer === 'sitemap'
 
   useEffect(() => {
-    if (!searchOpen) return
-    ensureGoogleCseScript()
+    if (!searchOpen) return undefined
+
+    ensureGoogleCseSearch()
+
+    let n = 0
+    const pollId = window.setInterval(() => {
+      n += 1
+      const root = searchAreaRef.current
+      if (root && renderGoogleCseSearch()) {
+        bindGoogleCseSearchHandlers(root)
+        bindGoogleCseClearHandler(root)
+      }
+      if (root?.querySelector('input.gsc-input') || n > 150) {
+        window.clearInterval(pollId)
+      }
+    }, 120)
+
+    return () => window.clearInterval(pollId)
   }, [searchOpen])
 
   useEffect(() => {
@@ -115,10 +137,19 @@ function SiteHeader({ isMainPage, topMenus }) {
 
       if (!btn && inputBtn && container) {
         btn = document.createElement('button')
-        btn.type = 'submit'
+        btn.type = 'button'
         btn.className = inputBtn.className
         btn.title = inputBtn.title || 'search'
-        inputBtn.replaceWith(btn)
+        btn.addEventListener('click', (event) => {
+          event.preventDefault()
+          const query = root.querySelector('input.gsc-input')?.value
+          if (!query?.trim()) return
+          if (!runGoogleCseSearch(root, query)) {
+            inputBtn.click()
+          }
+        })
+        inputBtn.style.display = 'none'
+        container.appendChild(btn)
       }
 
       if (btn && !btn.querySelector('i')) {
@@ -130,6 +161,36 @@ function SiteHeader({ isMainPage, topMenus }) {
       }
     }, 120)
     return () => window.clearInterval(id)
+  }, [searchOpen])
+
+  useEffect(() => {
+    if (!searchOpen) return undefined
+
+    const root = searchAreaRef.current
+    if (!root) return undefined
+
+    const scrollToResults = () => {
+      if (root.dataset.userSearchPending !== 'true') return
+      root.dataset.userSearchPending = 'false'
+      scrollSearchLayerToResults(root)
+    }
+    const observer = new MutationObserver((mutations) => {
+      const resultsShown = mutations.some(
+        (mutation) =>
+          mutation.type === 'attributes' &&
+          mutation.attributeName === 'class' &&
+          mutation.target.classList?.contains('gsc-results-wrapper-visible'),
+      )
+      if (resultsShown) scrollToResults()
+    })
+    observer.observe(root, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['class'],
+    })
+
+    return () => observer.disconnect()
   }, [searchOpen])
 
   const toggleSearch = () => {
@@ -311,7 +372,7 @@ function SiteHeader({ isMainPage, topMenus }) {
                     </strong>
                   </div>
                   <div className="form">
-                    <div className="gcse-search" />
+                    <div id={GCSE_CONTAINER_ID} />
                   </div>
                 </div>
               </div>

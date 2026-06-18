@@ -52,6 +52,11 @@ function useScrollToTopOnRouteChange() {
       window.scrollTo({ top: Math.max(0, top), behavior: 'auto' })
     }
 
+    if (hash && !isDocumentAnchorHash(hash)) {
+      // Google CSE 검색 시 URL 해시(#gsc.*)만 바뀌는 경우 — 페이지 스크롤 건드리지 않음
+      return undefined
+    }
+
     if (hash && isDocumentAnchorHash(hash)) {
       // Defer one frame so the new route has mounted before we look up the id.
       const raf = requestAnimationFrame(scrollToHash)
