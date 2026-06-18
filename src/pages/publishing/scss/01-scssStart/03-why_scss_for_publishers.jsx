@@ -1,5 +1,6 @@
 import { usePageMeta } from "@/components/common/PageMeta";
 import CodeBlock from "@/components/code/CodeBlock";
+import CodePenEmbed from "@/components/code/CodePenEmbed";
 import { IMG } from "@/config/path";
 
 const PAGE_LAYOUT = {
@@ -70,22 +71,13 @@ function WhyScssForPublishersPage() {
         <article className="mt_xl indent">
           <h3 className="ml_mn">토큰 예시</h3>
 
-          <iframe
-            className="codepen mt_m"
-            height={500}
-            style={{ width: "100%" }}
-            scrolling="no"
+          <CodePenEmbed
+            className="mt_m"
+            penId="emZaxGG"
             title="1.3. 토큰 예시"
-            src="https://codepen.io/uxkm/embed/emZaxGG?default-tab=css%2Cresult&theme-id=dark"
-            frameBorder="no"
-            loading="lazy"
-            allowTransparency
-          >
-            See the Pen{" "}
-            <a href="https://codepen.io/uxkm/pen/emZaxGG">1.3. 토큰 예시</a> by
-            UXKM (<a href="https://codepen.io/uxkm">@uxkm</a>) on{" "}
-            <a href="https://codepen.io">CodePen</a>.
-          </iframe>
+            penTitle="1.3. 토큰 예시"
+            height={500}
+          />
           <p className="mt_ms">
             이렇게 선언한 토큰은{" "}
             <b>버튼, 카드, 모달 등 모든 컴포넌트에 공통 적용</b>
@@ -111,22 +103,13 @@ function WhyScssForPublishersPage() {
         <article className="mt_xl indent">
           <h3 className="ml_mn">컴포넌트 예시</h3>
 
-          <iframe
-            className="codepen mt_m"
-            height={550}
-            style={{ width: "100%" }}
-            scrolling="no"
+          <CodePenEmbed
+            className="mt_m"
+            penId="bNpyzvp"
             title="1.3. 컴포넌트 예시"
-            src="https://codepen.io/uxkm/embed/bNpyzvp?default-tab=css%2Cresult&theme-id=dark"
-            frameBorder="no"
-            loading="lazy"
-            allowTransparency
-          >
-            See the Pen{" "}
-            <a href="https://codepen.io/uxkm/pen/bNpyzvp">1.3. 컴포넌트 예시</a>{" "}
-            by UXKM (<a href="https://codepen.io/uxkm">@uxkm</a>) on{" "}
-            <a href="https://codepen.io">CodePen</a>.
-          </iframe>
+            penTitle="1.3. 컴포넌트 예시"
+            height={550}
+          />
           <p className="mt_ms">
             컴포넌트 내부 구조를 중첩으로 표현하면{" "}
             <b>제목, 본문, 링크를 한눈에 파악</b>할 수 있고,
