@@ -801,30 +801,35 @@ $active_blue:color.adjust($sm_blue, $lightness: 5%);
 			margin:0;
 			&.gsc-search-box {width:100%; max-width:unset; margin:0;}
 			table.gsc-search-box {width:100%; border:0; border-spacing:0;}
-			.gsc-input-box {border:0; background-color:transparent;}
+			.gsc-input-box {
+				position:relative;
+				border:0; background-color:transparent;
+			}
 
 			// 검색 td
 			td.gsc-input {
 				padding:0;
 				.gsib_a {
-					position:relative;
 					height:$search_top_padding + $search_font_height + $search_bottom_padding;
 					padding:0;
 					background: unset;
 
 					input.gsc-input {
 						$padding: 3px;
+						$btn_size: $search_font_height;
+						$btn_gap: 8px;
+						$btn_area: $btn_size * 2 + $btn_gap;
 
 						z-index:999;
-						width:calc(100% - #{$padding*2}) !important;
-						height:$search_font_height !important;
-						padding:$search_top_padding $padding $search_bottom_padding !important;
+						width:100% !important;
+						height:($search_top_padding + $search_font_height + $search_bottom_padding) !important;
+						padding:$search_top_padding $btn_area $search_bottom_padding $padding !important;
 						font-size:$search_font_size; font-weight:800; color:#fff;
 						letter-spacing:-0.5px;
 						border-bottom:6px solid $search_border_color !important;
 						background-color:transparent !important;
 						background-image:none !important;
-						box-sizing:content-box;
+						box-sizing:border-box;
 						transition:border-color .15s;
 						&:hover {
 							//box-shadow:0 0 0 2px color.adjust($search_border, $lightness: -5%) inset;
@@ -846,42 +851,52 @@ $active_blue:color.adjust($sm_blue, $lightness: 5%);
 				}
 			}
 
-			// 검색 결과 삭제
-			td.gsib_b,
-			.gsib_b {
-				position:absolute;
-				right:$search_font_height - $right_minus + 20px;
-				top:$search_top_padding + 5px;
-				padding:0;
-				.gsst_b {padding:0 !important;}
-				a.gsst_a {
-					position:relative;
-					width:$search_font_height; height:$search_font_height;
+			// 검색 결과 삭제 (입력 영역 우측 — 검색 버튼 왼쪽)
+			.gsc-input-box {
+				.gsib_b {
+					position:absolute !important;
+					right:$search_font_height - $right_minus + 8px;
+					top:$search_top_padding + 5px;
+					width:$search_font_height;
+					height:$search_font_height;
 					padding:0;
-					span {
-						position:absolute; left:50%; top:50%;
-						transform:translate(-50%, -50%);
-						width:34px; height:34px;
-						font-size:0; text-indent:-9999px;
-						background-color:$search_border_color;
-						border-radius:100%;
-						transition:background-color .15s;
-						&:before, &:after {
-							position:absolute; left:50%; top:50%;
-							width:3px; height:20px;
-							background-color:#000;
-							content:"";
-						}
-						&:before {transform:translate(-50%, -50%) rotate(-45deg);}
-						&:after {transform:translate(-50%, -50%) rotate(45deg);}
+					.gsst_b {
+						display:block;
+						position:relative;
+						width:100%;
+						height:100%;
+						padding:0 !important;
 					}
-					&:hover span {
-						background-color:$search_border_active;
+					a.gsst_a {
+						position:relative;
+						display:block;
+						width:100%; height:100%;
+						padding:0;
+						span, .gscb_a {
+							position:absolute; left:50%; top:50%;
+							transform:translate(-50%, -50%);
+							width:34px; height:34px;
+							font-size:0; text-indent:-9999px;
+							background-color:$search_border_color;
+							border-radius:100%;
+							transition:background-color .15s;
+							&:before, &:after {
+								position:absolute; left:50%; top:50%;
+								width:3px; height:20px;
+								background-color:#000;
+								content:"";
+							}
+							&:before {transform:translate(-50%, -50%) rotate(-45deg);}
+							&:after {transform:translate(-50%, -50%) rotate(45deg);}
+						}
+						&:hover span, &:hover .gscb_a {
+							background-color:$search_border_active;
+						}
 					}
 				}
 			}
 
-			// 검색하기 버튼 (입력 시 우측 표시)
+			// 검색하기 버튼 (입력 시 우측 끝)
 			td.gsc-search-button,
 			div.gsc-search-button {
 				display:none !important;
@@ -909,10 +924,6 @@ $active_blue:color.adjust($sm_blue, $lightness: 5%);
 				}
 			}
 			&:has(input.gsc-input:not(:placeholder-shown)) {
-				td.gsc-input input.gsc-input,
-				.gsc-input-box input.gsc-input {
-					padding-right:($search_font_height * 2 + 20px) !important;
-				}
 				td.gsc-search-button,
 				div.gsc-search-button {
 					display:block !important;
@@ -1266,6 +1277,7 @@ $active_blue:color.adjust($sm_blue, $lightness: 5%);
 				$right_minus: -6px;
 
 				$btn_width:54px;
+				$btn_gap:12px;
 				$scale:scale(.7,.7);
 
 				// 검색 td
@@ -1275,13 +1287,14 @@ $active_blue:color.adjust($sm_blue, $lightness: 5%);
 
 						input.gsc-input {
 							$padding: 3px;
+							$btn_area: $btn_width * 2 + $btn_gap;
 
-							//width:calc(100% - #{$padding*2} - #{$btn_width*2}) !important;
-							width:calc(100% - #{$padding*2} - 100px) !important;
-							height:$search_font_height !important;
-							padding:$search_top_padding ($padding + 100px) $search_bottom_padding $padding !important;
+							width:100% !important;
+							height:($search_top_padding + $search_font_height + $search_bottom_padding) !important;
+							padding:$search_top_padding $btn_area $search_bottom_padding $padding !important;
 							font-size:$search_font_size;
 							border-bottom-width:4px !important;
+							box-sizing:border-box;
 
 							@mixin placeholder {
 								font-size:$search_font_size;
@@ -1297,12 +1310,14 @@ $active_blue:color.adjust($sm_blue, $lightness: 5%);
 				}
 
 				// 검색 결과 삭제
-				td.gsib_b,
-				.gsib_b {
-					right:$btn_width + $right_minus; top:$search_top_padding + 5px;
+				.gsc-input-box .gsib_b {
+					right:$btn_width - $right_minus + $btn_gap;
+					top:$search_top_padding + 5px;
+					width:$btn_width;
+					height:$search_font_height;
 					a.gsst_a {
-						width:$btn_width; height:$search_font_height;
-						span {
+						width:100%; height:100%;
+						span, .gscb_a {
 							transform:translate(-50%, -50%) #{$scale};
 						}
 					}
