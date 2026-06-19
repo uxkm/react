@@ -1,5 +1,5 @@
 import {
-  removePendingCommentSnapshot,
+  removePendingCommentSnapshots,
   syncPendingCommentsWithApproved,
 } from '@/lib/commentOwnership'
 import {
@@ -364,6 +364,8 @@ export async function deletePageComment({ pagePath, commentId, password }) {
       }
     }
 
+    removePendingCommentSnapshots(result.removedIds ?? [commentId])
+
     return { ok: true }
   }
 
@@ -395,6 +397,6 @@ export async function deletePageComment({ pagePath, commentId, password }) {
     }
   }
 
-  removePendingCommentSnapshot(commentId)
+  removePendingCommentSnapshots([commentId], { includeReplySnapshots: true })
   return { ok: true }
 }

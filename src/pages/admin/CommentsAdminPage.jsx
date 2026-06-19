@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { usePageMeta } from "@/components/common/PageMeta";
 import {
@@ -10,6 +10,7 @@ import { COMMENTS_CHANGED_EVENT } from "@/lib/commentsDevStorage";
 import {
   clearAdminSession,
   deleteAdminComment,
+  deleteAdminComments,
   fetchAdminComments,
   getCommentsStorageMode,
   isAdminSessionValid,
@@ -89,11 +90,22 @@ const STATUS_LIST_TITLES = {
 function CommentListRow({
   comment,
   showStatusColumn,
+  selected,
+  onToggleSelect,
   onStatusChange,
   onDelete,
 }) {
   return (
     <tr>
+      <td className="comments_admin__select_cell">
+        <input
+          type="checkbox"
+          className="comments_admin__checkbox"
+          checked={selected}
+          onChange={() => onToggleSelect(comment.id)}
+          aria-label={`${comment.author_name} 댓글 선택`}
+        />
+      </td>
       <td className="comments_admin__date_cell">
         {formatDate(comment.created_at)}
       </td>
@@ -339,10 +351,28 @@ function CommentsListSection({
   showStatusColumn,
   emptyMessage,
   pagination,
+  selectedIds,
+  bulkDeleting,
+  onToggleSelect,
+  onToggleSelectPage,
+  allPageSelected,
+  somePageSelected,
   onPageChange,
   onStatusChange,
   onDelete,
+  onDeleteSelected,
+  onDeleteAll,
 }) {
+  const selectAllRef = useRef(null);
+
+  useEffect(() => {
+    if (selectAllRef.current) {
+      selectAllRef.current.indeterminate = somePageSelected && !allPageSelected;
+    }
+  }, [allPageSelected, somePageSelected]);
+
+  const selectedCount = selectedIds.size;
+
   if (totalCount === 0 && !showEmpty) return null;
 
   return (
@@ -354,6 +384,26 @@ function CommentsListSection({
         <h2 id="comments-list-title" className="comments_admin__pending_title">
           {title} ({totalCount})
         </h2>
+        {totalCount > 0 ? (
+          <div className="comments_admin__bulk_actions">
+            <button
+              type="button"
+              className="comments_admin__bulk_btn comments_admin__bulk_btn--selected"
+              disabled={selectedCount === 0 || bulkDeleting}
+              onClick={onDeleteSelected}
+            >
+              {bulkDeleting ? "삭제 중…" : `선택 삭제 (${selectedCount})`}
+            </button>
+            <button
+              type="button"
+              className="comments_admin__bulk_btn comments_admin__bulk_btn--all"
+              disabled={bulkDeleting}
+              onClick={onDeleteAll}
+            >
+              {bulkDeleting ? "삭제 중…" : `전체 삭제 (${totalCount})`}
+            </button>
+          </div>
+        ) : null}
       </div>
       {totalCount === 0 ? (
         <p className="comments_admin__status">{emptyMessage}</p>
@@ -362,6 +412,7 @@ function CommentsListSection({
           <div className="comments_admin__table_wrap">
             <table className="comments_admin__table">
               <colgroup>
+                <col className="comments_admin__col_select" />
                 <col className="comments_admin__col_date" />
                 <col className="comments_admin__col_page" />
                 <col className="comments_admin__col_author" />
@@ -373,6 +424,16 @@ function CommentsListSection({
               </colgroup>
               <thead>
                 <tr>
+                  <th className="comments_admin__select_cell" scope="col">
+                    <input
+                      ref={selectAllRef}
+                      type="checkbox"
+                      className="comments_admin__checkbox"
+                      checked={allPageSelected}
+                      onChange={onToggleSelectPage}
+                      aria-label="현재 페이지 전체 선택"
+                    />
+                  </th>
                   <th>작성일</th>
                   <th>페이지</th>
                   <th>작성자</th>
@@ -387,6 +448,8 @@ function CommentsListSection({
                     key={comment.id}
                     comment={comment}
                     showStatusColumn={showStatusColumn}
+                    selected={selectedIds.has(comment.id)}
+                    onToggleSelect={onToggleSelect}
                     onStatusChange={onStatusChange}
                     onDelete={onDelete}
                   />
@@ -434,6 +497,8 @@ function CommentsAdminPage() {
   const [subSectionFilter, setSubSectionFilter] = useState("");
   const [pagePathFilter, setPagePathFilter] = useState("");
   const [listPage, setListPage] = useState(1);
+  const [selectedIds, setSelectedIds] = useState(() => new Set());
+  const [bulkDeleting, setBulkDeleting] = useState(false);
   const storageMode = getCommentsStorageMode();
 
   const loadComments = useCallback(
@@ -517,6 +582,10 @@ function CommentsAdminPage() {
     setListPage(1);
   }, [statusFilter, areaFilter, subSectionFilter, pagePathFilter]);
 
+  useEffect(() => {
+    setSelectedIds(new Set());
+  }, [statusFilter, areaFilter, subSectionFilter, pagePathFilter]);
+
   const sectionFilter = useMemo(
     () => resolveSectionPrefix(areaFilter, subSectionFilter),
     [areaFilter, subSectionFilter],
@@ -596,6 +665,38 @@ function CommentsAdminPage() {
     [listComments, listPage],
   );
 
+  const currentPageIds = useMemo(
+    () => listPagination.items.map((comment) => comment.id),
+    [listPagination.items],
+  );
+
+  const allPageSelected =
+    currentPageIds.length > 0 &&
+    currentPageIds.every((id) => selectedIds.has(id));
+
+  const somePageSelected = currentPageIds.some((id) => selectedIds.has(id));
+
+  const toggleSelect = useCallback((commentId) => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(commentId)) next.delete(commentId);
+      else next.add(commentId);
+      return next;
+    });
+  }, []);
+
+  const toggleSelectPage = useCallback(() => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (allPageSelected) {
+        currentPageIds.forEach((id) => next.delete(id));
+      } else {
+        currentPageIds.forEach((id) => next.add(id));
+      }
+      return next;
+    });
+  }, [allPageSelected, currentPageIds]);
+
   const pendingComments = useMemo(() => {
     let filtered = filterComments(comments, {
       sectionPrefix: sectionFilter,
@@ -655,6 +756,7 @@ function CommentsAdminPage() {
     setSubSectionFilter("");
     setPagePathFilter("");
     setListPage(1);
+    setSelectedIds(new Set());
   }
 
   async function handleStatusChange(commentId, status) {
@@ -686,6 +788,73 @@ function CommentsAdminPage() {
     }
 
     await loadComments();
+  }
+
+  async function handleDeleteSelected() {
+    const ids = [...selectedIds];
+    if (ids.length === 0) return;
+    if (!window.confirm(`선택한 댓글 ${ids.length}건을 삭제할까요?`)) return;
+
+    setBulkDeleting(true);
+    setActionError("");
+
+    const result = await deleteAdminComments({
+      adminPassword,
+      commentIds: ids,
+    });
+
+    setBulkDeleting(false);
+
+    if (!result.ok) {
+      setActionError(result.error ?? COMMENT_ERROR_MESSAGES.delete_failed);
+      return;
+    }
+
+    setSelectedIds(new Set());
+    await loadComments();
+
+    if (result.partial) {
+      setActionError(
+        `${result.deleted}건 삭제되었습니다. ${result.failed}건은 삭제하지 못했습니다.`,
+      );
+    }
+  }
+
+  async function handleDeleteAll() {
+    const ids = listComments.map((comment) => comment.id);
+    if (ids.length === 0) return;
+    if (
+      !window.confirm(
+        `현재 필터 조건의 댓글 ${ids.length}건을 모두 삭제할까요?`,
+      )
+    ) {
+      return;
+    }
+
+    setBulkDeleting(true);
+    setActionError("");
+
+    const result = await deleteAdminComments({
+      adminPassword,
+      commentIds: ids,
+    });
+
+    setBulkDeleting(false);
+
+    if (!result.ok) {
+      setActionError(result.error ?? COMMENT_ERROR_MESSAGES.delete_failed);
+      return;
+    }
+
+    setSelectedIds(new Set());
+    setListPage(1);
+    await loadComments();
+
+    if (result.partial) {
+      setActionError(
+        `${result.deleted}건 삭제되었습니다. ${result.failed}건은 삭제하지 못했습니다.`,
+      );
+    }
   }
 
   if (!available) {
@@ -833,9 +1002,17 @@ function CommentsAdminPage() {
                     : "표시할 댓글이 없습니다."
                 }
                 pagination={listPagination}
+                selectedIds={selectedIds}
+                bulkDeleting={bulkDeleting}
+                allPageSelected={allPageSelected}
+                somePageSelected={somePageSelected}
+                onToggleSelect={toggleSelect}
+                onToggleSelectPage={toggleSelectPage}
                 onPageChange={setListPage}
                 onStatusChange={handleStatusChange}
                 onDelete={handleDelete}
+                onDeleteSelected={handleDeleteSelected}
+                onDeleteAll={handleDeleteAll}
               />
             )}
           </div>

@@ -37,11 +37,44 @@ export function getAllPendingCommentSnapshots() {
   return Object.values(pending)
 }
 
-export function removePendingCommentSnapshot(commentId) {
+/**
+ * @param {string | string[]} commentIds
+ * @param {{ includeReplySnapshots?: boolean }} options
+ * includeReplySnapshots: 부모 삭제 시 pending 답글 스냅샷도 함께 제거
+ */
+export function removePendingCommentSnapshots(
+  commentIds,
+  { includeReplySnapshots = false } = {},
+) {
+  const targetIds = new Set(
+    (Array.isArray(commentIds) ? commentIds : [commentIds]).filter(Boolean),
+  )
+  if (targetIds.size === 0) return
+
   const pending = readJson(PENDING_KEY, {})
-  if (!pending[commentId]) return
-  delete pending[commentId]
-  writeJson(PENDING_KEY, pending)
+  let changed = false
+
+  for (const id of Object.keys(pending)) {
+    const snapshot = pending[id]
+    const isTarget = targetIds.has(id)
+    const isReplyOfTarget =
+      includeReplySnapshots &&
+      snapshot?.parent_id &&
+      targetIds.has(snapshot.parent_id)
+
+    if (isTarget || isReplyOfTarget) {
+      delete pending[id]
+      changed = true
+    }
+  }
+
+  if (changed) {
+    writeJson(PENDING_KEY, pending)
+  }
+}
+
+export function removePendingCommentSnapshot(commentId, options) {
+  removePendingCommentSnapshots([commentId], options)
 }
 
 export function syncPendingCommentsWithApproved(approvedIds) {

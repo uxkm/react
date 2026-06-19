@@ -5,7 +5,7 @@ import {
   isDevCommentStorageActive,
 } from '@/lib/commentsDevStorage'
 import { mergeAdminCommentsWithPendingSnapshots } from '@/lib/commentsAdminUtils'
-import { removePendingCommentSnapshot } from '@/lib/commentOwnership'
+import { removePendingCommentSnapshots } from '@/lib/commentOwnership'
 import { ADMIN_COMMENT_AUTHOR_NAME, COMMENT_ERROR_MESSAGES } from '@/lib/commentsConfig'
 import { isCommentsConfigured, supabase } from '@/lib/supabase'
 
@@ -353,9 +353,7 @@ export async function deleteAdminComment({ adminPassword, commentId }) {
       return { ok: false, error: COMMENT_ERROR_MESSAGES.delete_failed }
     }
 
-    for (const removedId of result.removedIds ?? [commentId]) {
-      removePendingCommentSnapshot(removedId)
-    }
+    removePendingCommentSnapshots(result.removedIds ?? [commentId])
 
     return { ok: true }
   }
@@ -377,6 +375,36 @@ export async function deleteAdminComment({ adminPassword, commentId }) {
     return { ok: false, error: COMMENT_ERROR_MESSAGES.delete_failed }
   }
 
-  removePendingCommentSnapshot(commentId)
+  removePendingCommentSnapshots([commentId], { includeReplySnapshots: true })
   return { ok: true }
+}
+
+export async function deleteAdminComments({ adminPassword, commentIds }) {
+  const ids = [...new Set(commentIds)].filter(Boolean)
+  if (ids.length === 0) {
+    return { ok: false, error: COMMENT_ERROR_MESSAGES.delete_failed }
+  }
+
+  let deleted = 0
+  let failed = 0
+
+  for (const commentId of ids) {
+    const result = await deleteAdminComment({ adminPassword, commentId })
+    if (result.ok) {
+      deleted += 1
+    } else {
+      failed += 1
+    }
+  }
+
+  if (deleted === 0) {
+    return { ok: false, error: COMMENT_ERROR_MESSAGES.delete_failed }
+  }
+
+  return {
+    ok: true,
+    deleted,
+    failed,
+    partial: failed > 0,
+  }
 }
