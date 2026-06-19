@@ -1,5 +1,7 @@
 import { getAllPendingCommentSnapshots } from "@/lib/commentOwnership";
+import { accessibilityNavigation } from "@/data/accessibilityNavigation.js";
 import { gulpNavigation } from "@/data/gulpNavigation";
+import { topMenus } from "@/data/siteNavigation.js";
 import { getPagePathBreadcrumbs } from "@/lib/pagePathLabels";
 
 export function getPagePathLabel(pagePath) {
@@ -188,6 +190,54 @@ export function getSubSectionMenuLabel(prefix) {
   return prefix;
 }
 
+function getSubSectionOrder(areaKey) {
+  if (areaKey === "publishing") {
+    const menu = topMenus.find((item) => item.label === "Publishing");
+    return (menu?.depth2 ?? []).map(
+      (item) => item.to.split("/").filter(Boolean)[1],
+    );
+  }
+
+  if (areaKey === "accessibility") {
+    return accessibilityNavigation.map((group) => group.key);
+  }
+
+  if (areaKey === "build-system") {
+    return gulpNavigation.map((section) => section.key);
+  }
+
+  return null;
+}
+
+function getSubSectionOrderKey(prefix, areaKey) {
+  const segments = prefix.split("/").filter(Boolean);
+
+  if (areaKey === "build-system") return segments[2] ?? "";
+  if (areaKey === "publishing" || areaKey === "accessibility") {
+    return segments[1] ?? "";
+  }
+
+  return segments[segments.length - 1] ?? "";
+}
+
+function compareSubSectionPrefixes(a, b, areaKey) {
+  const order = getSubSectionOrder(areaKey);
+
+  if (order) {
+    const rank = (prefix) => {
+      const index = order.indexOf(getSubSectionOrderKey(prefix, areaKey));
+      return index === -1 ? order.length : index;
+    };
+    const diff = rank(a) - rank(b);
+    if (diff !== 0) return diff;
+  }
+
+  return getSubSectionMenuLabel(a).localeCompare(
+    getSubSectionMenuLabel(b),
+    "ko",
+  );
+}
+
 function getSubSectionPrefix(pagePath, areaKey) {
   const segments = String(pagePath ?? "")
     .split("/")
@@ -255,10 +305,7 @@ export function buildSubSectionMenuOptions(comments, areaKey) {
   const options = [{ value: "", label: "전체" }];
 
   for (const [prefix] of [...prefixCounts.entries()].sort((a, b) =>
-    getSubSectionMenuLabel(a[0]).localeCompare(
-      getSubSectionMenuLabel(b[0]),
-      "ko",
-    ),
+    compareSubSectionPrefixes(a[0], b[0], areaKey),
   )) {
     options.push({
       value: prefix,
