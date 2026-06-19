@@ -24,6 +24,7 @@ import {
   isCommentsAdminLoggedIn,
 } from '@/lib/commentsAdminApi'
 import { isCommentsConfigured } from '@/lib/supabase'
+import PageShareButtons from './PageShareButtons'
 import TurnstileWidget from './TurnstileWidget'
 
 function formatCommentDate(value) {
@@ -539,6 +540,7 @@ function PageComments() {
             />
             <span className="page_comments__toggle_switch" aria-hidden="true" />
           </label>
+          <PageShareButtons />
         </div>
       </div>
 
