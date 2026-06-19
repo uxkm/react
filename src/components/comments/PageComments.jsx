@@ -535,18 +535,13 @@ function PageComments() {
               className="page_comments__toggle_input"
               checked={isOpen}
               onChange={(event) => setIsOpen(event.target.checked)}
-              aria-controls="page-comments-panel"
+              aria-controls="page-comments-list"
             />
             <span className="page_comments__toggle_switch" aria-hidden="true" />
           </label>
         </div>
       </div>
 
-      <div
-        id="page-comments-panel"
-        className="page_comments__panel"
-        hidden={!isOpen}
-      >
       {devStorage ? (
         <p className="page_comments__notice mt_m" role="status">
           로컬 테스트 모드입니다. 댓글은 이 브라우저에만 저장됩니다.
@@ -560,7 +555,12 @@ function PageComments() {
         </p>
       ) : null}
 
-      <div className="page_comments__list mt_ml" aria-live="polite">
+      <div
+        id="page-comments-list"
+        className="page_comments__list mt_ml"
+        hidden={!isOpen}
+        aria-live="polite"
+      >
         {loading ? <p className="page_comments__status">댓글을 불러오는 중…</p> : null}
         {loadError ? (
           <p className="page_comments__status page_comments__status--error">
@@ -845,7 +845,6 @@ function PageComments() {
           </button>
         </div>
       </form>
-      </div>
     </section>
   )
 }
