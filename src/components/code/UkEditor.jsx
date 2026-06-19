@@ -39,6 +39,9 @@ import { applyDetectClassesTo, getDetect } from '../../utils/deviceDetect.js'
  */
 
 const BUTTON_LABELS = ['Reset', 'Download', 'FullScreen', 'Browser', 'Info']
+// 레거시 `uk_editor.js`는 Result Area가 열려 있을 때 설명 마커를 Reset / Download / FullScreen
+// 세 개만 렌더한다. Browser·Info 슬롯은 버튼 DOM에만 남기고 가이드에는 포함하지 않는다.
+const EDITOR_INFO_LABELS = ['Reset', 'Download', 'FullScreen']
 const INFO_TEXTS_LEFT = [
   '초기 코드로 되돌립니다.',
   '코드를 html 파일로 다운로드할 수 있습니다.',
@@ -210,7 +213,7 @@ function UkEditor({
   }
 
   const wantsResultPane = result
-  const resultButtonVisible = wantsResultPane && browserState === 'hidden'
+  const browserButtonActive = wantsResultPane && browserState === 'hidden'
 
   const wrapperClassName = [
     'uk_editor',
@@ -360,46 +363,38 @@ function UkEditor({
         <button type="button" tabIndex={-1} className="fas edit_btn Reset_btn" onClick={handleReset}>
           <i>Reset</i>
         </button>
-        {!downloadDisabled ? (
-          <button
-            type="button"
-            tabIndex={-1}
-            className="fas edit_btn Download_btn"
-            onClick={handleDownload}
-          >
-            <i>Download</i>
-          </button>
-        ) : null}
-        {!isDevice ? (
-          <button
-            type="button"
-            tabIndex={-1}
-            className={`fas edit_btn FullScreen_btn ${pullScreen ? 'active' : ''}`}
-            onClick={handlePullScreen}
-          >
-            <i>FullScreen</i>
-          </button>
-        ) : null}
-        {resultButtonVisible ? (
-          <button
-            type="button"
-            tabIndex={-1}
-            className="fas edit_btn Browser_btn"
-            onClick={handleResultRestore}
-          >
-            <i>Browser</i>
-          </button>
-        ) : null}
-        {!isDevice ? (
-          <button
-            type="button"
-            tabIndex={-1}
-            className="fas edit_btn Info_btn"
-            onClick={handleInfoOpen}
-          >
-            <i>Info</i>
-          </button>
-        ) : null}
+        <button
+          type="button"
+          tabIndex={-1}
+          className="fas edit_btn Download_btn"
+          onClick={handleDownload}
+        >
+          <i>Download</i>
+        </button>
+        <button
+          type="button"
+          tabIndex={-1}
+          className={`fas edit_btn FullScreen_btn ${pullScreen ? 'active' : ''}`}
+          onClick={handlePullScreen}
+        >
+          <i>FullScreen</i>
+        </button>
+        <button
+          type="button"
+          tabIndex={-1}
+          className={`fas edit_btn Browser_btn${browserButtonActive ? ' is_active' : ''}`}
+          onClick={handleResultRestore}
+        >
+          <i>Browser</i>
+        </button>
+        <button
+          type="button"
+          tabIndex={-1}
+          className="fas edit_btn Info_btn"
+          onClick={handleInfoOpen}
+        >
+          <i>Info</i>
+        </button>
       </div>
 
       {showInfo ? (
@@ -415,14 +410,17 @@ function UkEditor({
           }}
         >
           <ul className="edite_info">
-            {BUTTON_LABELS.map((label, index) => (
-              <li key={label} className={`info_${label}`}>
-                <div>
-                  <strong>{label}</strong>
-                  <i>{INFO_TEXTS_LEFT[index]}</i>
-                </div>
-              </li>
-            ))}
+            {EDITOR_INFO_LABELS.map((label) => {
+              const index = BUTTON_LABELS.indexOf(label)
+              return (
+                <li key={label} className={`info_${label}`}>
+                  <div>
+                    <strong>{label}</strong>
+                    <i>{INFO_TEXTS_LEFT[index]}</i>
+                  </div>
+                </li>
+              )
+            })}
           </ul>
           <ul className="browser_info">
             {INFO_TEXTS_RIGHT.map(([key, text]) => (

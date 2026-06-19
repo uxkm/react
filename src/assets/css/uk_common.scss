@@ -2865,6 +2865,7 @@ $edt_btn_left:6px;
 				}
 			}
 			.Browser_btn {
+				display:none;
 				background:color2.$purple;
 				&:hover {background:color.adjust(color2.$purple, $lightness: -10%);}
 				//&:before {content:"\f04b"; margin:1px 0 0 1px; font-size:12px;}
@@ -2874,6 +2875,7 @@ $edt_btn_left:6px;
 					//&:before {content:"결과보기";}
 					&:after {border-bottom-color:color.adjust(color2.$purple, $lightness: -10%);}
 				}
+				&.is_active {display:inline-block;}
 			}
 
 			.Info_btn, .InfoExit_btn {
@@ -3119,7 +3121,7 @@ $edt_btn_left:6px;
 		&:not(.fullscreen_mode) {
 			padding-bottom:$info_i_height;
 			.result_wrap {
-				position:absolute; bottom:0; right:0; top:auto;
+				position:absolute; bottom:0; right:0; top:auto; z-index:2;
 				width:100%; height:$info_i_height;
 				padding-top:$browserTitle_height;
 				border-left:0; border-top:$result_border_width solid $edt_border_color;
@@ -3177,6 +3179,23 @@ $edt_btn_left:6px;
 								height:($i * 10px) - $device_minus;
 							}
 						}
+						// mb_result_height 지정 시 info 패널·browser_info도 실제 Result 높이에 맞춤
+						&.editor_info {
+							$result_h: $i * 10px;
+							.info_wrap {
+								&:before {height:calc(100% - #{$result_h});}
+								&:after {height:$result_h;}
+							}
+							.browser_info {top:calc(100% - #{$result_h} + 1px);}
+							&.device {
+								$result_h: ($i * 10px) - $device_minus;
+								.info_wrap {
+									&:before {height:calc(100% - #{$result_h});}
+									&:after {height:$result_h;}
+								}
+								.browser_info {top:calc(100% - #{$result_h} + 1px);}
+							}
+						}
 					}
 				}
 			}
@@ -3201,24 +3220,32 @@ $edt_btn_left:6px;
 		&:not(.fullscreen_mode) {
 			$scroll_height:7px;
 			$min_height:300px;
-			.code_wrap {min-height:$min_height + $scroll_height;}
+			.code_wrap {
+				min-height:$min_height + $scroll_height;
+				max-height:$min_height + $scroll_height;
+				overflow:hidden;
+			}
+			.code_wrap .cm-editor {max-height:$min_height + $scroll_height;}
+			.code_wrap .cm-scroller {max-height:$min_height + $scroll_height;}
 			.CodeMirror-scroll {min-height:$min_height + $scroll_height; max-height:$code_max_height;}
 
-			// 350 ~ 1000
-			// &.min_height_350 .code_wrap,
-			// &.min_height_1000 .code_wrap {min-height:$min_height; max-height:$min_height;}
+			// 350 ~ 1000 — 가로 배치에서도 min_height_* 값을 코드 영역 높이에 반영
 			@for $i from 30 to 101{
-				&.min_height_#{$i * 10} .code_wrap {
-					min-height:$min_height; max-height:$min_height;
-				}
-			}
-
-			// 350 ~ 1000
-			// &.min_height_350 .CodeMirror-scroll,
-			// &.min_height_1000 .CodeMirror-scroll {min-height:$min_height; max-height:$min_height;}
-			@for $i from 30 to 101{
-				&.min_height_#{$i * 10} .CodeMirror-scroll {
-					min-height:$min_height; max-height:$min_height;
+				&.min_height_#{$i * 10} {
+					$h: $i * 10px + $scroll_height;
+					.code_wrap {
+						min-height:$h;
+						max-height:$h;
+					}
+					.code_wrap .cm-editor {
+						min-height:$i * 10px;
+						max-height:$h;
+					}
+					.code_wrap .cm-scroller {max-height:$h;}
+					.CodeMirror-scroll {
+						min-height:$i * 10px;
+						max-height:$h;
+					}
 				}
 			}
 		}
@@ -3295,15 +3322,6 @@ $edt_btn_left:6px;
 			$p_w:1px;
 			.edite_info {
 				right:14px - $p_w;
-				//top:auto; bottom:calc($info_i_height + 11px - $p_w);
-				//li:after {top:auto; bottom:$edt_bt_width + $p_w;}
-				//div {
-				//	top:auto;
-				//	bottom:$edt_bt_width + $p_w + 10px;
-				//	border-width:$p_w;
-				//}
-				//.info_Download div {top:auto; bottom:105px;}
-				//.info_FullScreen div {top:auto; bottom:163px;}
 			}
 			.browser_info {
 				top:calc(100% - #{$info_i_height} + 1px);
