@@ -13,22 +13,24 @@ function PublishingTopNav() {
   if (depth2.length === 0) return null
 
   return (
-    <nav className="top_link inner" aria-label="Publishing 하위 메뉴">
-      <ul>
-        {depth2.map((item) => {
-          const isActive = suppressTopNavActive
-            ? false
-            : isTopMenuDepth2Active(item, pathname)
-          return (
-            <li key={item.to} className={isActive ? 'active' : undefined}>
-              <NavLink to={item.to}>
-                <i>{item.label}</i>
-              </NavLink>
-            </li>
-          )
-        })}
-      </ul>
-    </nav>
+    <div className="top_link_wrap">
+      <nav className="top_link inner" aria-label="Publishing 하위 메뉴">
+        <ul>
+          {depth2.map((item) => {
+            const isActive = suppressTopNavActive
+              ? false
+              : isTopMenuDepth2Active(item, pathname)
+            return (
+              <li key={item.to} className={isActive ? 'active' : undefined}>
+                <NavLink to={item.to}>
+                  <i>{item.label}</i>
+                </NavLink>
+              </li>
+            )
+          })}
+        </ul>
+      </nav>
+    </div>
   )
 }
 

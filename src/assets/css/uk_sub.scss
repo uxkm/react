@@ -358,6 +358,13 @@ body {@include font.font-kr;}
 
 
 // sub top -------------------------------------------------------------------------------------------------------------
+// `useFixedTopLink` 의 TOP_LINK_FIXED_MIN_WIDTH(994px) 이상에서만 `.fixed` 가 적용된다.
+@media (min-width: 994px) {
+	.top_link_wrap {
+		// `.top_link.fixed` 가 문서 흐름을 벗어나도 원래 높이를 유지해 스크롤 임계점 떨림을 방지
+		min-height: 76px; // padding-top(40px) + height(36px), content-box
+	}
+}
 .top_link {
 	$height:36px;
 	max-width:calc(#{variable.$conWidth} - (#{variable.$pc_padding*2})); height:$height; padding-top:40px;
@@ -415,6 +422,8 @@ body {@include font.font-kr;}
 		right:0;
 		top:variable.$hdHeight;
 		z-index:6;
+		backface-visibility:hidden;
+		transform:translateZ(0);
 		height:30px;
 		padding-top:0;
 		display:flex; justify-content:flex-end;
