@@ -23,7 +23,7 @@ import {
   buildPageFilterOptions,
   buildSubSectionMenuOptions,
   filterComments,
-  getPagePathLabel,
+  groupCommentsByPage,
   isPendingComment,
   paginateList,
   resolveSectionPrefix,
@@ -87,17 +87,21 @@ const STATUS_LIST_TITLES = {
   spam: "스팸",
 };
 
-function CommentListRow({
+function getStatusLabel(status) {
+  return STATUS_LIST_TITLES[status] ?? status;
+}
+
+function CommentCardItem({
   comment,
-  showStatusColumn,
+  showStatus,
   selected,
   onToggleSelect,
   onStatusChange,
   onDelete,
 }) {
   return (
-    <tr>
-      <td className="comments_admin__select_cell">
+    <li className="comments_admin__card_item">
+      <div className="comments_admin__card_select">
         <input
           type="checkbox"
           className="comments_admin__checkbox"
@@ -105,37 +109,84 @@ function CommentListRow({
           onChange={() => onToggleSelect(comment.id)}
           aria-label={`${comment.author_name} 댓글 선택`}
         />
-      </td>
-      <td className="comments_admin__date_cell">
-        {formatDate(comment.created_at)}
-      </td>
-      <td className="comments_admin__page_cell">
-        <Link
-          className="comments_admin__pending_page"
-          to={comment.page_path}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {getPagePathLabel(comment.page_path)}
-        </Link>
-      </td>
-      <td>{comment.author_name}</td>
-      <td className="comments_admin__body_cell">{comment.body}</td>
-      {showStatusColumn ? (
-        <td>
-          <span className={statusBadgeClass(comment.status)}>
-            {comment.status}
-          </span>
-        </td>
-      ) : null}
-      <td className="comments_admin__actions_cell">
+      </div>
+      <dl className="comments_admin__card_fields">
+        <div className="comments_admin__card_field">
+          <dt>작성일</dt>
+          <dd>{formatDate(comment.created_at)}</dd>
+        </div>
+        <div className="comments_admin__card_field">
+          <dt>작성자</dt>
+          <dd>{comment.author_name}</dd>
+        </div>
+        {showStatus ? (
+          <div className="comments_admin__card_field">
+            <dt>상태</dt>
+            <dd>
+              <span className={statusBadgeClass(comment.status)}>
+                {getStatusLabel(comment.status)}
+              </span>
+            </dd>
+          </div>
+        ) : null}
+        <div className="comments_admin__card_field comments_admin__card_field--body">
+          <dt>내용</dt>
+          <dd>{comment.body}</dd>
+        </div>
+      </dl>
+      <div className="comments_admin__card_actions">
         <CommentActionsCell
           comment={comment}
           onStatusChange={onStatusChange}
           onDelete={onDelete}
         />
-      </td>
-    </tr>
+      </div>
+    </li>
+  );
+}
+
+function CommentPageGroupCard({
+  group,
+  showStatus,
+  selectedIds,
+  onToggleSelect,
+  onStatusChange,
+  onDelete,
+}) {
+  return (
+    <article className="comments_admin__group">
+      <header className="comments_admin__group_header">
+        <Link
+          className="comments_admin__group_link"
+          to={group.pagePath}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {group.label}
+        </Link>
+        <span className="comments_admin__group_stats">
+          <span>{group.totalCount}건</span>
+          {group.pendingCount > 0 ? (
+            <span className="comments_admin__group_pending">
+              검수 대기 {group.pendingCount}건
+            </span>
+          ) : null}
+        </span>
+      </header>
+      <ul className="comments_admin__group_items">
+        {group.comments.map((comment) => (
+          <CommentCardItem
+            key={comment.id}
+            comment={comment}
+            showStatus={showStatus}
+            selected={selectedIds.has(comment.id)}
+            onToggleSelect={onToggleSelect}
+            onStatusChange={onStatusChange}
+            onDelete={onDelete}
+          />
+        ))}
+      </ul>
+    </article>
   );
 }
 
@@ -348,7 +399,7 @@ function CommentsListSection({
   comments,
   totalCount,
   showEmpty = false,
-  showStatusColumn,
+  showStatus,
   emptyMessage,
   pagination,
   selectedIds,
@@ -364,6 +415,10 @@ function CommentsListSection({
   onDeleteAll,
 }) {
   const selectAllRef = useRef(null);
+  const groupedComments = useMemo(
+    () => groupCommentsByPage(comments),
+    [comments],
+  );
 
   useEffect(() => {
     if (selectAllRef.current) {
@@ -409,53 +464,31 @@ function CommentsListSection({
         <p className="comments_admin__status">{emptyMessage}</p>
       ) : (
         <>
-          <div className="comments_admin__table_wrap">
-            <table className="comments_admin__table">
-              <colgroup>
-                <col className="comments_admin__col_select" />
-                <col className="comments_admin__col_date" />
-                <col className="comments_admin__col_page" />
-                <col className="comments_admin__col_author" />
-                <col className="comments_admin__col_body" />
-                {showStatusColumn ? (
-                  <col className="comments_admin__col_status" />
-                ) : null}
-                <col className="comments_admin__col_actions" />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th className="comments_admin__select_cell" scope="col">
-                    <input
-                      ref={selectAllRef}
-                      type="checkbox"
-                      className="comments_admin__checkbox"
-                      checked={allPageSelected}
-                      onChange={onToggleSelectPage}
-                      aria-label="현재 페이지 전체 선택"
-                    />
-                  </th>
-                  <th>작성일</th>
-                  <th>페이지</th>
-                  <th>작성자</th>
-                  <th>내용</th>
-                  {showStatusColumn ? <th>상태</th> : null}
-                  <th className="comments_admin__actions_cell">관리</th>
-                </tr>
-              </thead>
-              <tbody>
-                {comments.map((comment) => (
-                  <CommentListRow
-                    key={comment.id}
-                    comment={comment}
-                    showStatusColumn={showStatusColumn}
-                    selected={selectedIds.has(comment.id)}
-                    onToggleSelect={onToggleSelect}
-                    onStatusChange={onStatusChange}
-                    onDelete={onDelete}
-                  />
-                ))}
-              </tbody>
-            </table>
+          <div className="comments_admin__list_toolbar">
+            <label className="comments_admin__select_all">
+              <input
+                ref={selectAllRef}
+                type="checkbox"
+                className="comments_admin__checkbox"
+                checked={allPageSelected}
+                onChange={onToggleSelectPage}
+                aria-label="현재 페이지 전체 선택"
+              />
+              현재 페이지 전체 선택
+            </label>
+          </div>
+          <div className="comments_admin__cards">
+            {groupedComments.map((group) => (
+              <CommentPageGroupCard
+                key={group.pagePath}
+                group={group}
+                showStatus={showStatus}
+                selectedIds={selectedIds}
+                onToggleSelect={onToggleSelect}
+                onStatusChange={onStatusChange}
+                onDelete={onDelete}
+              />
+            ))}
           </div>
           <CommentsAdminPagination
             pagination={pagination}
@@ -995,7 +1028,7 @@ function CommentsAdminPage() {
                 comments={listPagination.items}
                 totalCount={listPagination.totalCount}
                 showEmpty
-                showStatusColumn={statusFilter !== "pending"}
+                showStatus={statusFilter !== "pending"}
                 emptyMessage={
                   statusFilter === "pending"
                     ? "검수 대기 중인 댓글이 없습니다."

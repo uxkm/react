@@ -317,7 +317,7 @@ export function filterComments(comments, { sectionPrefix, pagePath }) {
   return filtered;
 }
 
-export const ADMIN_COMMENTS_PAGE_SIZE = 20;
+export const ADMIN_COMMENTS_PAGE_SIZE = 10;
 
 export function paginateList(items, page, pageSize = ADMIN_COMMENTS_PAGE_SIZE) {
   const totalCount = items.length;
