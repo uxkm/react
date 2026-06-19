@@ -1,5 +1,6 @@
 import { isCommentsConfigured } from '@/lib/supabase'
 import { validateCommentContent } from '@/lib/commentContentFilter'
+import { hashCommentIp } from '@/lib/commentIpHash'
 import { COMMENT_ERROR_MESSAGES } from '@/lib/commentsConfig'
 import { hashCommentPassword } from '@/lib/commentPassword'
 
@@ -90,6 +91,7 @@ export async function addDevPageComment(
   }
 
   const passwordHash = isAdmin ? null : await hashCommentPassword(password)
+  const ipHash = await hashCommentIp('127.0.0.1')
   const nextComment = {
     id: crypto.randomUUID(),
     parent_id: parentId,
@@ -97,6 +99,7 @@ export async function addDevPageComment(
     body,
     created_at: new Date().toISOString(),
     password_hash: passwordHash,
+    ip_hash: ipHash,
     status: isAdmin ? 'approved' : 'pending',
     is_pending: !isAdmin,
   }

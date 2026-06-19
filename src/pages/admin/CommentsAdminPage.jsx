@@ -15,13 +15,16 @@ import {
   updateAdminCommentStatus,
 } from '@/lib/commentsAdminApi'
 import {
+  buildAreaMenuOptions,
   buildPageFilterOptions,
-  buildSectionFilterOptions,
+  buildSubSectionMenuOptions,
   filterComments,
   getPagePathLabel,
   isPendingComment,
   paginateList,
+  resolveSectionPrefix,
   ADMIN_COMMENTS_PAGE_SIZE,
+  getCommentAreaKey,
 } from '@/lib/commentsAdminUtils'
 
 const STATUS_OPTIONS = [
@@ -85,7 +88,12 @@ function CommentListRow({ comment, showStatusColumn, onStatusChange, onDelete })
     <tr>
       <td className="comments_admin__date_cell">{formatDate(comment.created_at)}</td>
       <td className="comments_admin__page_cell">
-        <Link className="comments_admin__pending_page" to={comment.page_path}>
+        <Link
+          className="comments_admin__pending_page"
+          to={comment.page_path}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {getPagePathLabel(comment.page_path)}
         </Link>
       </td>
@@ -96,7 +104,7 @@ function CommentListRow({ comment, showStatusColumn, onStatusChange, onDelete })
           <span className={statusBadgeClass(comment.status)}>{comment.status}</span>
         </td>
       ) : null}
-      <td>
+      <td className="comments_admin__actions_cell">
         <CommentActionsCell
           comment={comment}
           onStatusChange={onStatusChange}
@@ -118,6 +126,157 @@ function normalizeAdminComments(comments) {
     }
   }
   return []
+}
+
+const PAGE_FILTER_SEARCH_THRESHOLD = 6
+
+function CommentsAdminPageFilter({
+  areaFilter,
+  subSectionOptions,
+  subSectionFilter,
+  pageOptions,
+  pagePathFilter,
+  onPageChange,
+}) {
+  const [pageSearch, setPageSearch] = useState('')
+  const needsSubSection =
+    areaFilter && subSectionOptions.length > 0 && !subSectionFilter
+  const showPageFilter = areaFilter && pageOptions.length > 1 && !needsSubSection
+
+  const normalizedSearch = pageSearch.trim().toLowerCase()
+  const filteredPageOptions = useMemo(() => {
+    if (!normalizedSearch) return pageOptions
+    return pageOptions.filter((option) => {
+      if (!option.value) return true
+      return option.label.toLowerCase().includes(normalizedSearch)
+    })
+  }, [pageOptions, normalizedSearch])
+
+  const pageCount = pageOptions.length - 1
+  const showSearch = pageCount >= PAGE_FILTER_SEARCH_THRESHOLD
+
+  useEffect(() => {
+    if (!showPageFilter) setPageSearch('')
+  }, [showPageFilter, areaFilter, subSectionFilter])
+
+  if (!areaFilter) return null
+
+  if (needsSubSection) {
+    return (
+      <div className="comments_admin__page_filter">
+        <p className="comments_admin__page_filter_hint">
+          페이지를 선택하려면 하위 섹션을 먼저 선택해 주세요.
+        </p>
+      </div>
+    )
+  }
+
+  if (!showPageFilter) return null
+
+  return (
+    <div className="comments_admin__page_filter">
+      <div className="comments_admin__page_filter_head">
+        <label className="comments_admin__label" htmlFor="filter-page">
+          페이지
+        </label>
+        <span className="comments_admin__page_filter_count">{pageCount}개</span>
+      </div>
+
+      {showSearch ? (
+        <div className="comments_admin__field comments_admin__field--inline">
+          <input
+            id="filter-page-search"
+            className="comments_admin__input comments_admin__input--full"
+            type="search"
+            value={pageSearch}
+            onChange={(event) => setPageSearch(event.target.value)}
+            placeholder="페이지명으로 검색"
+            aria-label="페이지명으로 검색"
+            autoComplete="off"
+          />
+        </div>
+      ) : null}
+
+      <div className="comments_admin__field comments_admin__field--inline">
+        <select
+          id="filter-page"
+          className="comments_admin__select comments_admin__select--wide"
+          value={pagePathFilter}
+          onChange={(event) => onPageChange(event.target.value)}
+        >
+          {filteredPageOptions.map((option) => (
+            <option key={option.value || 'all-page'} value={option.value}>
+              {option.value && option.count
+                ? `${option.label} (${option.count})`
+                : option.label}
+            </option>
+          ))}
+        </select>
+        {showSearch && normalizedSearch && filteredPageOptions.length <= 1 ? (
+          <p className="comments_admin__page_filter_hint">
+            검색 결과가 없습니다.
+          </p>
+        ) : null}
+      </div>
+    </div>
+  )
+}
+
+function CommentsAdminMenuNav({
+  areaOptions,
+  areaFilter,
+  subSectionOptions,
+  subSectionFilter,
+  pageOptions,
+  pagePathFilter,
+  onAreaChange,
+  onSubSectionChange,
+  onPageChange,
+}) {
+  return (
+    <div className="comments_admin__menu_nav">
+      <nav className="comments_admin__nav" aria-label="섹션 메뉴">
+        <ul>
+          {areaOptions.map((option) => (
+            <li
+              key={option.value || 'all'}
+              className={areaFilter === option.value ? 'active' : undefined}
+            >
+              <button type="button" onClick={() => onAreaChange(option.value)}>
+                {option.label}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      {areaFilter && subSectionOptions.length > 0 ? (
+        <nav className="comments_admin__subnav" aria-label="하위 섹션 메뉴">
+          <ul>
+            {subSectionOptions.map((option) => (
+              <li
+                key={option.value || 'all-sub'}
+                className={subSectionFilter === option.value ? 'active' : undefined}
+              >
+                <button type="button" onClick={() => onSubSectionChange(option.value)}>
+                  {option.label}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ) : null}
+
+      <CommentsAdminPageFilter
+        areaFilter={areaFilter}
+        subSectionOptions={subSectionOptions}
+        subSectionFilter={subSectionFilter}
+        pageOptions={pageOptions}
+        pagePathFilter={pagePathFilter}
+        onPageChange={onPageChange}
+      />
+    </div>
+  )
 }
 
 function CommentsAdminPagination({ pagination, onPageChange }) {
@@ -197,7 +356,7 @@ function CommentsListSection({
                   <th>작성자</th>
                   <th>내용</th>
                   {showStatusColumn ? <th>상태</th> : null}
-                  <th>관리</th>
+                  <th className="comments_admin__actions_cell">관리</th>
                 </tr>
               </thead>
               <tbody>
@@ -244,7 +403,8 @@ function CommentsAdminPage() {
   const [loading, setLoading] = useState(false)
   const [comments, setComments] = useState([])
   const [statusFilter, setStatusFilter] = useState('pending')
-  const [sectionFilter, setSectionFilter] = useState('')
+  const [areaFilter, setAreaFilter] = useState('')
+  const [subSectionFilter, setSubSectionFilter] = useState('')
   const [pagePathFilter, setPagePathFilter] = useState('')
   const [listPage, setListPage] = useState(1)
   const storageMode = getCommentsStorageMode()
@@ -326,7 +486,12 @@ function CommentsAdminPage() {
 
   useEffect(() => {
     setListPage(1)
-  }, [statusFilter, sectionFilter, pagePathFilter])
+  }, [statusFilter, areaFilter, subSectionFilter, pagePathFilter])
+
+  const sectionFilter = useMemo(
+    () => resolveSectionPrefix(areaFilter, subSectionFilter),
+    [areaFilter, subSectionFilter],
+  )
 
   const statusFilteredComments = useMemo(() => {
     if (!statusFilter) return comments
@@ -336,23 +501,59 @@ function CommentsAdminPage() {
     return comments.filter((comment) => comment.status === statusFilter)
   }, [comments, statusFilter])
 
-  const sectionOptions = useMemo(
-    () => buildSectionFilterOptions(statusFilteredComments),
+  const areaOptions = useMemo(
+    () => buildAreaMenuOptions(statusFilteredComments),
     [statusFilteredComments],
   )
-  const pageOptions = useMemo(() => {
-    const scoped = filterComments(statusFilteredComments, { sectionPrefix: sectionFilter })
-    return buildPageFilterOptions(scoped)
-  }, [statusFilteredComments, sectionFilter])
-
-  const filteredComments = useMemo(
-    () =>
-      filterComments(statusFilteredComments, {
-        sectionPrefix: sectionFilter,
-        pagePath: pagePathFilter,
-      }),
-    [statusFilteredComments, sectionFilter, pagePathFilter],
+  const subSectionOptions = useMemo(
+    () => buildSubSectionMenuOptions(statusFilteredComments, areaFilter),
+    [statusFilteredComments, areaFilter],
   )
+
+  useEffect(() => {
+    const needsSubSection =
+      areaFilter && subSectionOptions.length > 0 && !subSectionFilter
+    if (needsSubSection && pagePathFilter) {
+      setPagePathFilter('')
+    }
+  }, [areaFilter, subSectionFilter, subSectionOptions.length, pagePathFilter])
+
+  const pageOptions = useMemo(() => {
+    const canListPages =
+      areaFilter &&
+      (subSectionFilter || subSectionOptions.length === 0)
+
+    if (!canListPages) {
+      return [{ value: '', label: '전체 페이지' }]
+    }
+
+    const scoped = filterComments(statusFilteredComments, {
+      sectionPrefix: sectionFilter,
+    })
+    const options = buildPageFilterOptions(scoped)
+    return [{ value: '', label: '전체 페이지' }, ...options]
+  }, [
+    statusFilteredComments,
+    sectionFilter,
+    areaFilter,
+    subSectionFilter,
+    subSectionOptions.length,
+  ])
+
+  const filteredComments = useMemo(() => {
+    let filtered = filterComments(statusFilteredComments, {
+      sectionPrefix: sectionFilter,
+      pagePath: pagePathFilter,
+    })
+
+    if (areaFilter === 'other') {
+      filtered = filtered.filter(
+        (comment) => getCommentAreaKey(comment.page_path) === 'other',
+      )
+    }
+
+    return filtered
+  }, [statusFilteredComments, sectionFilter, pagePathFilter, areaFilter])
 
   const listComments = useMemo(
     () =>
@@ -367,14 +568,20 @@ function CommentsAdminPage() {
     [listComments, listPage],
   )
 
-  const pendingComments = useMemo(
-    () =>
-      filterComments(comments, {
-        sectionPrefix: sectionFilter,
-        pagePath: pagePathFilter,
-      }).filter((comment) => isPendingComment(comment)),
-    [comments, sectionFilter, pagePathFilter],
-  )
+  const pendingComments = useMemo(() => {
+    let filtered = filterComments(comments, {
+      sectionPrefix: sectionFilter,
+      pagePath: pagePathFilter,
+    }).filter((comment) => isPendingComment(comment))
+
+    if (areaFilter === 'other') {
+      filtered = filtered.filter(
+        (comment) => getCommentAreaKey(comment.page_path) === 'other',
+      )
+    }
+
+    return filtered
+  }, [comments, sectionFilter, pagePathFilter, areaFilter])
 
   useEffect(() => {
     const totalPages = Math.max(
@@ -416,7 +623,8 @@ function CommentsAdminPage() {
     setComments([])
     setActionError('')
     setLoginError('')
-    setSectionFilter('')
+    setAreaFilter('')
+    setSubSectionFilter('')
     setPagePathFilter('')
     setListPage(1)
   }
@@ -506,21 +714,40 @@ function CommentsAdminPage() {
         </form>
       ) : (
         <div className="comments_admin__panel">
-          <p className="comments_admin__session" role="status">
-            로그인: <strong>{ADMIN_COMMENT_AUTHOR_NAME}</strong>
-            {!loading ? (
-              <span className="comments_admin__summary">
-                {' '}
-                · 전체 {comments.length}건
-                {pendingComments.length > 0
-                  ? ` · 검수 대기 ${pendingComments.length}건 (${pendingPageCount}페이지)`
-                  : ''}
-              </span>
-            ) : null}
-          </p>
+          <div className="comments_admin__panel_head">
+            <p className="comments_admin__session" role="status">
+              로그인: <strong>{ADMIN_COMMENT_AUTHOR_NAME}</strong>
+              {!loading ? (
+                <span className="comments_admin__summary">
+                  {' '}
+                  · 전체 {comments.length}건
+                  {pendingComments.length > 0
+                    ? ` · 검수 대기 ${pendingComments.length}건 (${pendingPageCount}페이지)`
+                    : ''}
+                </span>
+              ) : null}
+            </p>
+            <div className="comments_admin__panel_actions">
+              <button
+                type="button"
+                className="comments_admin__btn comments_admin__btn--small"
+                onClick={() => loadComments()}
+                disabled={loading}
+              >
+                {loading ? '불러오는 중…' : '새로고침'}
+              </button>
+              <button
+                type="button"
+                className="comments_admin__btn comments_admin__btn--small comments_admin__btn--ghost"
+                onClick={handleLogout}
+              >
+                로그아웃
+              </button>
+            </div>
+          </div>
 
           <div className="comments_admin__filters">
-            <div className="comments_admin__field">
+            <div className="comments_admin__field comments_admin__field--row">
               <label className="comments_admin__label" htmlFor="filter-status">
                 상태
               </label>
@@ -537,66 +764,26 @@ function CommentsAdminPage() {
                 ))}
               </select>
             </div>
-
-            <div className="comments_admin__field">
-              <label className="comments_admin__label" htmlFor="filter-section">
-                섹션
-              </label>
-              <select
-                id="filter-section"
-                className="comments_admin__select comments_admin__select--wide"
-                value={sectionFilter}
-                onChange={(event) => {
-                  setSectionFilter(event.target.value)
-                  setPagePathFilter('')
-                }}
-              >
-                <option value="">전체 섹션</option>
-                {sectionOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="comments_admin__field comments_admin__field--grow">
-              <label className="comments_admin__label" htmlFor="filter-page">
-                페이지
-              </label>
-              <select
-                id="filter-page"
-                className="comments_admin__select comments_admin__select--wide"
-                value={pagePathFilter}
-                onChange={(event) => setPagePathFilter(event.target.value)}
-              >
-                <option value="">전체 페이지</option>
-                {pageOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </div>
           </div>
 
-          <div className="comments_admin__actions">
-            <button
-              type="button"
-              className="comments_admin__btn"
-              onClick={() => loadComments()}
-              disabled={loading}
-            >
-              {loading ? '불러오는 중…' : '새로고침'}
-            </button>
-            <button
-              type="button"
-              className="comments_admin__btn comments_admin__btn--ghost"
-              onClick={handleLogout}
-            >
-              로그아웃
-            </button>
-          </div>
+          <CommentsAdminMenuNav
+            areaOptions={areaOptions}
+            subSectionOptions={subSectionOptions}
+            pageOptions={pageOptions}
+            areaFilter={areaFilter}
+            subSectionFilter={subSectionFilter}
+            pagePathFilter={pagePathFilter}
+            onAreaChange={(value) => {
+              setAreaFilter(value)
+              setSubSectionFilter('')
+              setPagePathFilter('')
+            }}
+            onSubSectionChange={(value) => {
+              setSubSectionFilter(value)
+              setPagePathFilter('')
+            }}
+            onPageChange={setPagePathFilter}
+          />
 
           {actionError ? (
             <p className="comments_admin__error" role="alert">

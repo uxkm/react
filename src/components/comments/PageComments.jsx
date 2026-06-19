@@ -107,7 +107,7 @@ function CommentBodyField({
   className = '',
   disabled = false,
   required = false,
-  placeholder = '내용을 입력',
+  placeholder = '여러분의 소중한 댓글을 입력해주세요',
 }) {
   const counterId = `${id}-counter`
   const isNearLimit = value.length >= maxLength * 0.9
@@ -185,28 +185,51 @@ function CommentAntiSpamFields({
   )
 }
 
-function PasswordFields({
+function AuthorPasswordRow({
   idPrefix,
+  authorName,
+  onAuthorNameChange,
   password,
-  passwordConfirm,
-  replyPassword,
-  replyPasswordConfirm,
-  isReply,
+  onPasswordChange,
+  authorFieldName = 'author_name',
+  passwordFieldName = 'password',
+  showPassword,
   submitting,
   disabled,
-  onPasswordChange,
-  onPasswordConfirmChange,
-  onReplyPasswordChange,
-  onReplyPasswordConfirmChange,
+  isAdminLoggedIn,
+  formResetKey,
 }) {
-  const currentPassword = isReply ? replyPassword : password
-  const currentConfirm = isReply ? replyPasswordConfirm : passwordConfirm
-  const onPassword = isReply ? onReplyPasswordChange : onPasswordChange
-  const onConfirm = isReply ? onReplyPasswordConfirmChange : onPasswordConfirmChange
-
   return (
-    <div className="page_comments__password_group mt_m">
-      <div className="page_comments__password_row">
+    <div
+      className={[
+        'page_comments__author_row mt_m',
+        showPassword ? '' : 'page_comments__author_row--single',
+      ]
+        .filter(Boolean)
+        .join(' ')}
+    >
+      <div className="page_comments__field">
+        <label className="page_comments__label" htmlFor={`${idPrefix}-author`}>
+          이름
+        </label>
+        <input
+          id={`${idPrefix}-author`}
+          className="page_comments__input"
+          type="text"
+          name={authorFieldName}
+          key={`${idPrefix}-author-${formResetKey}`}
+          value={authorName}
+          onChange={(event) => onAuthorNameChange(event.target.value)}
+          maxLength={COMMENT_AUTHOR_MAX}
+          autoComplete="off"
+          placeholder="이름 입력"
+          readOnly={isAdminLoggedIn}
+          required
+          disabled={disabled || submitting}
+        />
+      </div>
+
+      {showPassword ? (
         <div className="page_comments__field">
           <label className="page_comments__label" htmlFor={`${idPrefix}-password`}>
             비밀번호
@@ -215,9 +238,9 @@ function PasswordFields({
             id={`${idPrefix}-password`}
             className="page_comments__input"
             type="password"
-            name={isReply ? 'reply_password' : 'password'}
-            value={currentPassword}
-            onChange={(event) => onPassword(event.target.value)}
+            name={passwordFieldName}
+            value={password}
+            onChange={(event) => onPasswordChange(event.target.value)}
             minLength={COMMENT_PASSWORD_MIN}
             maxLength={COMMENT_PASSWORD_MAX}
             autoComplete="new-password"
@@ -226,33 +249,13 @@ function PasswordFields({
             disabled={disabled || submitting}
           />
         </div>
+      ) : null}
 
-        <div className="page_comments__field">
-          <label
-            className="page_comments__label"
-            htmlFor={`${idPrefix}-password-confirm`}
-          >
-            비밀번호 확인
-          </label>
-          <input
-            id={`${idPrefix}-password-confirm`}
-            className="page_comments__input"
-            type="password"
-            name={isReply ? 'reply_password_confirm' : 'password_confirm'}
-            value={currentConfirm}
-            onChange={(event) => onConfirm(event.target.value)}
-            minLength={COMMENT_PASSWORD_MIN}
-            maxLength={COMMENT_PASSWORD_MAX}
-            autoComplete="new-password"
-            placeholder="비밀번호 입력 후 확인"
-            required
-            disabled={disabled || submitting}
-          />
-        </div>
-      </div>
-      <p className="page_comments__help">
-        삭제 시 필요합니다. {COMMENT_PASSWORD_MIN}~{COMMENT_PASSWORD_MAX}자
-      </p>
+      {showPassword ? (
+        <p className="page_comments__help page_comments__help--row">
+          비밀번호는 삭제 시 필요합니다. {COMMENT_PASSWORD_MIN}~{COMMENT_PASSWORD_MAX}자
+        </p>
+      ) : null}
     </div>
   )
 }
@@ -269,10 +272,8 @@ function PageComments() {
   )
   const [body, setBody] = useState('')
   const [password, setPassword] = useState('')
-  const [passwordConfirm, setPasswordConfirm] = useState('')
   const [replyBody, setReplyBody] = useState('')
   const [replyPassword, setReplyPassword] = useState('')
-  const [replyPasswordConfirm, setReplyPasswordConfirm] = useState('')
   const [botCheck, setBotCheck] = useState('')
   const [turnstileToken, setTurnstileToken] = useState('')
   const [submitting, setSubmitting] = useState(false)
@@ -285,10 +286,12 @@ function PageComments() {
   const [formResetKey, setFormResetKey] = useState(0)
   const [replyTo, setReplyTo] = useState(null)
   const [replyTurnstileKey, setReplyTurnstileKey] = useState(0)
+  const [isOpen, setIsOpen] = useState(false)
   const mainFormOpenedAtRef = useRef(0)
   const replyFormOpenedAtRef = useRef(null)
 
   const commentTree = useMemo(() => buildCommentTree(comments), [comments])
+  const commentCount = comments.length
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(() =>
     isCommentsAdminLoggedIn(),
   )
@@ -301,6 +304,10 @@ function PageComments() {
   useEffect(() => {
     mainFormOpenedAtRef.current = Date.now()
   }, [formResetKey, pathname])
+
+  useEffect(() => {
+    setIsOpen(false)
+  }, [pathname])
 
   useEffect(() => {
     const syncAdminSession = () => {
@@ -382,19 +389,10 @@ function PageComments() {
     ).trim()
     const sourceBody = parentId ? replyBody : body
     const sourcePassword = parentId ? replyPassword : password
-    const sourcePasswordConfirm = parentId ? replyPasswordConfirm : passwordConfirm
     const trimmedBody = sourceBody.trim()
 
     if (!trimmedName || !trimmedBody) {
       setSubmitError(COMMENT_ERROR_MESSAGES.invalid)
-      return
-    }
-
-    if (
-      !isAdminLoggedIn &&
-      sourcePassword !== sourcePasswordConfirm
-    ) {
-      setSubmitError(COMMENT_ERROR_MESSAGES.password_mismatch)
       return
     }
 
@@ -423,13 +421,11 @@ function PageComments() {
     if (parentId) {
       setReplyBody('')
       setReplyPassword('')
-      setReplyPasswordConfirm('')
       setReplyTo(null)
       replyFormOpenedAtRef.current = null
     } else {
       setBody('')
       setPassword('')
-      setPasswordConfirm('')
     }
 
     if (!isAdminLoggedIn) {
@@ -497,7 +493,6 @@ function PageComments() {
     setReplyTo({ id: comment.id, authorName: comment.author_name })
     setReplyBody('')
     setReplyPassword('')
-    setReplyPasswordConfirm('')
     setTurnstileToken('')
     setReplyTurnstileKey((key) => key + 1)
     replyFormOpenedAtRef.current = Date.now()
@@ -510,7 +505,6 @@ function PageComments() {
     setReplyTo(null)
     setReplyBody('')
     setReplyPassword('')
-    setReplyPasswordConfirm('')
     replyFormOpenedAtRef.current = null
     setSubmitError(null)
   }
@@ -520,10 +514,39 @@ function PageComments() {
       className="page_comments indent mt_xxl"
       aria-labelledby="page-comments-title"
     >
-      <h2 id="page-comments-title" className="ml_mn t_blue">
-        댓글
-      </h2>
+      <div className="page_comments__header">
+        <div className="page_comments__heading">
+          <h2 id="page-comments-title" className="page_comments__title ml_mn t_blue">
+            <i className="page_comments__title_icon fas fa-comments" aria-hidden="true" />
+            댓글
+          </h2>
+          <span
+            className="page_comments__count"
+            aria-label={
+              loading ? '댓글 수 불러오는 중' : `등록된 댓글 ${commentCount}개`
+            }
+          >
+            {loading ? '…' : commentCount}
+          </span>
+          <label className="page_comments__toggle">
+            <span className="page_comments__toggle_label">댓글 보기</span>
+            <input
+              type="checkbox"
+              className="page_comments__toggle_input"
+              checked={isOpen}
+              onChange={(event) => setIsOpen(event.target.checked)}
+              aria-controls="page-comments-panel"
+            />
+            <span className="page_comments__toggle_switch" aria-hidden="true" />
+          </label>
+        </div>
+      </div>
 
+      <div
+        id="page-comments-panel"
+        className="page_comments__panel"
+        hidden={!isOpen}
+      >
       {devStorage ? (
         <p className="page_comments__notice mt_m" role="status">
           로컬 테스트 모드입니다. 댓글은 이 브라우저에만 저장됩니다.
@@ -545,7 +568,9 @@ function PageComments() {
           </p>
         ) : null}
         {!loading && !loadError && commentTree.length === 0 ? (
-          <p className="page_comments__status">아직 등록된 댓글이 없습니다.</p>
+          <p className="page_comments__status page_comments__status--empty">
+            아직 등록된 댓글이 없습니다.
+          </p>
         ) : null}
         {commentTree.length > 0 ? (
           <ol className="page_comments__items">
@@ -616,31 +641,20 @@ function PageComments() {
                       <strong>{replyTo.authorName}</strong>님에게 답글
                     </p>
 
-                    <div className="page_comments__field mt_m">
-                      <label
-                        className="page_comments__label"
-                        htmlFor={`comment-reply-author-${thread.id}`}
-                      >
-                        이름
-                      </label>
-                      <input
-                        id={`comment-reply-author-${thread.id}`}
-                        className="page_comments__input"
-                        type="text"
-                        name="reply_author_name"
-                        key={`reply-author-${formResetKey}`}
-                        value={displayAuthorName}
-                        onChange={(event) =>
-                          handleAuthorNameChange(event.target.value)
-                        }
-                        maxLength={COMMENT_AUTHOR_MAX}
-                        autoComplete="off"
-                        placeholder="이름을 입력"
-                        readOnly={isAdminLoggedIn}
-                        required
-                        disabled={submitting}
-                      />
-                    </div>
+                    <AuthorPasswordRow
+                      idPrefix={`comment-reply-${thread.id}`}
+                      authorName={displayAuthorName}
+                      onAuthorNameChange={handleAuthorNameChange}
+                      password={replyPassword}
+                      onPasswordChange={setReplyPassword}
+                      authorFieldName="reply_author_name"
+                      passwordFieldName="reply_password"
+                      showPassword={!isAdminLoggedIn}
+                      submitting={submitting}
+                      disabled={false}
+                      isAdminLoggedIn={isAdminLoggedIn}
+                      formResetKey={formResetKey}
+                    />
 
                     <CommentBodyField
                       id={`comment-reply-body-${thread.id}`}
@@ -654,23 +668,6 @@ function PageComments() {
                       required
                       disabled={submitting}
                     />
-
-                    {isAdminLoggedIn ? null : (
-                      <PasswordFields
-                        idPrefix={`comment-reply-${thread.id}`}
-                        password={password}
-                        passwordConfirm={passwordConfirm}
-                        replyPassword={replyPassword}
-                        replyPasswordConfirm={replyPasswordConfirm}
-                        isReply
-                        submitting={submitting}
-                        disabled={false}
-                        onPasswordChange={setPassword}
-                        onPasswordConfirmChange={setPasswordConfirm}
-                        onReplyPasswordChange={setReplyPassword}
-                        onReplyPasswordConfirmChange={setReplyPasswordConfirm}
-                      />
-                    )}
 
                     <CommentAntiSpamFields
                       honeypotId={`comment-reply-bot-check-${thread.id}`}
@@ -789,26 +786,18 @@ function PageComments() {
             : '작성한 댓글은 관리자 검수 후 공개됩니다. 삭제 시 등록한 비밀번호가 필요합니다.'}
         </p>
 
-        <div className="page_comments__field mt_m">
-          <label className="page_comments__label" htmlFor="comment-author">
-            이름
-          </label>
-          <input
-            id="comment-author"
-            className="page_comments__input"
-            type="text"
-            name="author_name"
-            key={`author-${formResetKey}`}
-            value={displayAuthorName}
-            onChange={(event) => handleAuthorNameChange(event.target.value)}
-            maxLength={COMMENT_AUTHOR_MAX}
-            autoComplete="off"
-            placeholder="이름을 입력"
-            readOnly={isAdminLoggedIn}
-            required
-            disabled={!enabled || submitting}
-          />
-        </div>
+        <AuthorPasswordRow
+          idPrefix="comment"
+          authorName={displayAuthorName}
+          onAuthorNameChange={handleAuthorNameChange}
+          password={password}
+          onPasswordChange={setPassword}
+          showPassword={!isAdminLoggedIn}
+          submitting={submitting}
+          disabled={!enabled}
+          isAdminLoggedIn={isAdminLoggedIn}
+          formResetKey={formResetKey}
+        />
 
         <CommentBodyField
           id="comment-body"
@@ -821,23 +810,6 @@ function PageComments() {
           required
           disabled={!enabled || submitting}
         />
-
-        {isAdminLoggedIn ? null : (
-          <PasswordFields
-            idPrefix="comment"
-            password={password}
-            passwordConfirm={passwordConfirm}
-            replyPassword={replyPassword}
-            replyPasswordConfirm={replyPasswordConfirm}
-            isReply={false}
-            submitting={submitting}
-            disabled={!enabled}
-            onPasswordChange={setPassword}
-            onPasswordConfirmChange={setPasswordConfirm}
-            onReplyPasswordChange={setReplyPassword}
-            onReplyPasswordConfirmChange={setReplyPasswordConfirm}
-          />
-        )}
 
         <CommentAntiSpamFields
           honeypotId="comment-bot-check"
@@ -873,6 +845,7 @@ function PageComments() {
           </button>
         </div>
       </form>
+      </div>
     </section>
   )
 }

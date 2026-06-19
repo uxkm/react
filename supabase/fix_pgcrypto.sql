@@ -179,6 +179,7 @@ begin
       author_name,
       body,
       status,
+      ip_hash,
       created_at
     from public.comments
     where (p_status is null or status::text = p_status)

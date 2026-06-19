@@ -1,8 +1,18 @@
 import { getAllPendingCommentSnapshots } from '@/lib/commentOwnership'
+import { gulpNavigation } from '@/data/gulpNavigation'
 import { getPagePathBreadcrumbs } from '@/lib/pagePathLabels'
 
 export function getPagePathLabel(pagePath) {
   return getPagePathBreadcrumbs(pagePath)?.label ?? pagePath
+}
+
+/** 1·2뎁스(영역·하위 섹션)는 상위 메뉴에서 선택하므로, 페이지 메뉴에는 마지막 2단계만 표시합니다. */
+export function getPagePathShortLabel(pagePath) {
+  const breadcrumbs = getPagePathBreadcrumbs(pagePath)?.breadcrumbs
+  if (breadcrumbs?.length >= 2) {
+    return breadcrumbs.slice(-2).join(' > ')
+  }
+  return getPagePathLabel(pagePath)
 }
 
 export function isPendingComment(comment) {
@@ -114,15 +124,165 @@ export function buildSectionFilterOptions(comments) {
     }))
 }
 
-export function buildPageFilterOptions(comments) {
-  const paths = [...new Set(comments.map((comment) => comment.page_path))]
+export const COMMENT_AREA_CONFIG = {
+  publishing: { label: 'Publishing', prefix: '/publishing/' },
+  accessibility: { label: 'A11Y', prefix: '/accessibility/' },
+  'build-system': { label: 'Gulp', prefix: '/build-system/' },
+  updates: { label: 'Updates', prefix: '/updates/' },
+}
 
-  return paths
-    .sort((a, b) => getPagePathLabel(a).localeCompare(getPagePathLabel(b), 'ko'))
-    .map((pagePath) => ({
-      value: pagePath,
-      label: getPagePathLabel(pagePath),
-    }))
+const ACCESSIBILITY_GROUP_LABELS = {
+  a11y: 'A11Y',
+  waiAria: 'WAI-ARIA',
+  a11yCreationTech: 'A11y Creation Tech',
+}
+
+export function getCommentAreaKey(pagePath) {
+  const segments = String(pagePath ?? '').split('/').filter(Boolean)
+  const first = segments[0]
+
+  if (first === 'publishing') return 'publishing'
+  if (first === 'accessibility') return 'accessibility'
+  if (first === 'build-system') return 'build-system'
+  if (first === 'updates') return 'updates'
+  return first ? 'other' : ''
+}
+
+export function getSubSectionMenuLabel(prefix) {
+  const segments = prefix.split('/').filter(Boolean)
+
+  if (segments[0] === 'publishing' && segments[1]) {
+    if (segments[1] === 'html') return 'HTML'
+    if (segments[1] === 'css') return 'CSS'
+    if (segments[1] === 'scss') return 'SCSS'
+    return segments[1].toUpperCase()
+  }
+
+  if (segments[0] === 'accessibility' && segments[1]) {
+    return ACCESSIBILITY_GROUP_LABELS[segments[1]] ?? segments[1]
+  }
+
+  if (segments[0] === 'build-system' && segments[1] === 'gulp') {
+    if (segments[2]) {
+      const section = gulpNavigation.find((item) => item.key === segments[2])
+      return section?.title ?? segments[2]
+    }
+    return 'Gulp'
+  }
+
+  if (segments.length >= 2) {
+    return getPagePathLabel(`/${segments.slice(0, 2).join('/')}`) ?? segments[1]
+  }
+
+  return prefix
+}
+
+function getSubSectionPrefix(pagePath, areaKey) {
+  const segments = String(pagePath ?? '').split('/').filter(Boolean)
+
+  if (areaKey === 'publishing' && segments.length >= 2) {
+    return `/${segments.slice(0, 2).join('/')}/`
+  }
+
+  if (areaKey === 'accessibility' && segments.length >= 2) {
+    return `/${segments.slice(0, 2).join('/')}/`
+  }
+
+  if (areaKey === 'build-system' && segments.length >= 3) {
+    return `/${segments.slice(0, 3).join('/')}/`
+  }
+
+  if (segments.length >= 2) {
+    return `/${segments.slice(0, 2).join('/')}/`
+  }
+
+  return ''
+}
+
+export function buildAreaMenuOptions(comments) {
+  const counts = new Map()
+
+  for (const comment of comments) {
+    const key = getCommentAreaKey(comment.page_path)
+    if (!key) continue
+    counts.set(key, (counts.get(key) ?? 0) + 1)
+  }
+
+  const options = [{ value: '', label: '전체' }]
+
+  for (const [key, config] of Object.entries(COMMENT_AREA_CONFIG)) {
+    if (!counts.has(key)) continue
+    options.push({
+      value: key,
+      label: config.label,
+    })
+  }
+
+  if (counts.has('other')) {
+    options.push({ value: 'other', label: '기타' })
+  }
+
+  return options
+}
+
+export function buildSubSectionMenuOptions(comments, areaKey) {
+  if (!areaKey) return []
+
+  const prefixCounts = new Map()
+
+  for (const comment of comments) {
+    if (getCommentAreaKey(comment.page_path) !== areaKey) continue
+    const subPrefix = getSubSectionPrefix(comment.page_path, areaKey)
+    if (!subPrefix) continue
+    prefixCounts.set(subPrefix, (prefixCounts.get(subPrefix) ?? 0) + 1)
+  }
+
+  if (prefixCounts.size === 0) return []
+
+  const options = [{ value: '', label: '전체' }]
+
+  for (const [prefix] of [...prefixCounts.entries()].sort((a, b) =>
+    getSubSectionMenuLabel(a[0]).localeCompare(getSubSectionMenuLabel(b[0]), 'ko'),
+  )) {
+    options.push({
+      value: prefix,
+      label: getSubSectionMenuLabel(prefix),
+    })
+  }
+
+  return options
+}
+
+export function resolveSectionPrefix(areaKey, subSectionPrefix) {
+  if (subSectionPrefix) return subSectionPrefix
+  if (!areaKey) return ''
+
+  const config = COMMENT_AREA_CONFIG[areaKey]
+  if (config?.prefix) return config.prefix
+
+  return ''
+}
+
+export function buildPageFilterOptions(comments) {
+  const pathCounts = new Map()
+
+  for (const comment of comments) {
+    const pagePath = comment.page_path
+    pathCounts.set(pagePath, (pathCounts.get(pagePath) ?? 0) + 1)
+  }
+
+  return [...pathCounts.keys()]
+    .sort((a, b) =>
+      getPagePathShortLabel(a).localeCompare(getPagePathShortLabel(b), 'ko'),
+    )
+    .map((pagePath) => {
+      const count = pathCounts.get(pagePath) ?? 0
+      return {
+        value: pagePath,
+        label: getPagePathShortLabel(pagePath),
+        count,
+      }
+    })
 }
 
 export function filterComments(comments, { sectionPrefix, pagePath }) {
