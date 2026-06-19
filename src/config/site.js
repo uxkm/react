@@ -6,5 +6,11 @@ export function getSiteOrigin() {
     return window.location.origin
   }
 
-  return 'https://uxkm.io'
+  return 'https://doc.uxkm.io'
+}
+
+export const DEFAULT_OG_IMAGE_PATH = '/images/og_image.png'
+
+export function getDefaultOgImageUrl() {
+  return `${getSiteOrigin()}${DEFAULT_OG_IMAGE_PATH}`
 }

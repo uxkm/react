@@ -1,10 +1,11 @@
 import { useLayoutEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { getSiteOrigin } from '@/config/site'
+import { getDefaultOgImageUrl, getSiteOrigin } from '@/config/site'
 
 const DEFAULT_TITLE = 'UXKM'
 const DEFAULT_DESCRIPTION = 'UXKM 웹 문서와 접근성 학습 콘텐츠를 제공합니다.'
-const DEFAULT_OG_IMAGE = 'https://uxkm.io/images/new_logo.svg'
+const DEFAULT_OG_IMAGE_WIDTH = '1000'
+const DEFAULT_OG_IMAGE_HEIGHT = '750'
 
 /** 레거시 `mainClass: "css bookmark"`처럼 공백으로 구분된 body 클래스 목록 */
 function splitMainClassTokens(mainClass) {
@@ -78,9 +79,15 @@ export function usePageMeta({ title, description, keyword, layout }) {
 
     ensureMetaTag('content-language').setAttribute('content', 'kr')
     ensureMetaPropertyTag('og:type').setAttribute('content', 'website')
-    ensureMetaPropertyTag('og:image').setAttribute('content', DEFAULT_OG_IMAGE)
-    ensureMetaPropertyTag('og:image:width').setAttribute('content', '1000')
-    ensureMetaPropertyTag('og:image:height').setAttribute('content', '750')
+    const ogImageUrl = getDefaultOgImageUrl()
+    ensureMetaPropertyTag('og:image').setAttribute('content', ogImageUrl)
+    ensureMetaPropertyTag('og:image:type').setAttribute('content', 'image/png')
+    ensureMetaPropertyTag('og:image:width').setAttribute('content', DEFAULT_OG_IMAGE_WIDTH)
+    ensureMetaPropertyTag('og:image:height').setAttribute('content', DEFAULT_OG_IMAGE_HEIGHT)
+    ensureMetaTag('twitter:card').setAttribute('content', 'summary_large_image')
+    ensureMetaTag('twitter:image').setAttribute('content', ogImageUrl)
+    ensureMetaTag('twitter:title').setAttribute('content', resolvedTitle)
+    ensureMetaTag('twitter:description').setAttribute('content', resolvedDescription)
     ensureMetaPropertyTag('og:url').setAttribute(
       'content',
       pathname === '/' ? getSiteOrigin() : `${getSiteOrigin()}${pathname}`,
