@@ -612,6 +612,20 @@ function CommentsAdminPage() {
   }, [authenticated, loadComments]);
 
   useEffect(() => {
+    setSelectedIds((prev) => {
+      if (prev.size === 0) return prev;
+      const validIds = new Set(comments.map((comment) => comment.id));
+      let changed = false;
+      const next = new Set();
+      for (const id of prev) {
+        if (validIds.has(id)) next.add(id);
+        else changed = true;
+      }
+      return changed ? next : prev;
+    });
+  }, [comments]);
+
+  useEffect(() => {
     setListPage(1);
   }, [statusFilter, areaFilter, subSectionFilter, pagePathFilter]);
 
@@ -820,6 +834,12 @@ function CommentsAdminPage() {
       return;
     }
 
+    setSelectedIds((prev) => {
+      if (!prev.has(commentId)) return prev;
+      const next = new Set(prev);
+      next.delete(commentId);
+      return next;
+    });
     await loadComments();
   }
 
