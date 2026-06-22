@@ -536,7 +536,7 @@ function PageComments() {
               className="page_comments__toggle_input"
               checked={isOpen}
               onChange={(event) => setIsOpen(event.target.checked)}
-              aria-controls="page-comments-list"
+              aria-controls="page-comments-list page-comments-form"
             />
             <span className="page_comments__toggle_switch" aria-hidden="true" />
           </label>
@@ -776,10 +776,12 @@ function PageComments() {
       </div>
 
       <form
+        id="page-comments-form"
         className="page_comments__form mt_xl"
         onSubmit={(event) => handleSubmit(event)}
         noValidate
         autoComplete="off"
+        hidden={!isOpen}
       >
         <h3 className="page_comments__form_title ml_mn">댓글 남기기</h3>
         <p className="page_comments__form_desc mt_s">
