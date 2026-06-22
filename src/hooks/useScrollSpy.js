@@ -7,22 +7,53 @@ import { useEffect, useState } from 'react'
  * `src/assets/js/uk_sub.js`.
  *
  * Given an ordered list of `{ id }` items (document order) it returns the id
- * of the active heading: the last one whose top edge has crossed the reference
- * line just below the fixed `.uk_header` (header height + extra offset). This
- * viewport-based rule stays aligned with `scrollToHeading` in `ContentList`
- * and avoids parent-only activation when smooth scroll ends a pixel short.
+ * of the active heading:
+ *   - position:sticky 헤딩(h2 등) → 상단에 고정(stuck)되는 순간 활성
+ *   - 일반 헤딩(h3/h4) → 기준선(header + extraOffset)을 지나면 활성
  *
- * The hook re-computes on scroll / resize / item change. Listeners are
- * passive, registration is idempotent across StrictMode double-mounts.
+ * titleSticky 페이지에서 sticky h2는 getBoundingClientRect().top 이
+ * sticky top(예: hdHeight + pc_padding)에 고정되므로, stuck 여부를
+ * 우선 판별해야 섹션 전환 시 활성 표시가 한 템포 늦지 않는다.
  *
  * @param {Array<{ id: string }>} items
  * @param {{ extraOffset?: number }} [options]
  *   - extraOffset: extra pixels added to the header height when computing the
  *                  trigger line (matches the previous `content_list_empty`
  *                  values per breakpoint, default: 40)
- * @returns {string | null} id of the active item, or `null` before any has
- *                          been entered.
+ * @returns {string | null} id of the active item, or the first item before any
+ *                          heading has been entered.
  */
+const STUCK_TOLERANCE_PX = 6
+
+function isStickyPositioned(el) {
+  const style = window.getComputedStyle(el)
+  return style.position === 'sticky' || style.position === '-webkit-sticky'
+}
+
+function parseStickyTop(el) {
+  const top = parseFloat(window.getComputedStyle(el).top)
+  return Number.isNaN(top) ? null : top
+}
+
+/** sticky 헤딩이 CSS top 값에 고정( stuck )되어 있는지 판별 */
+function isStuckAtTop(el) {
+  if (!isStickyPositioned(el)) return false
+  const stickyTop = parseStickyTop(el)
+  if (stickyTop == null) return false
+  const rectTop = el.getBoundingClientRect().top
+  return Math.abs(rectTop - stickyTop) <= STUCK_TOLERANCE_PX
+}
+
+function isHeadingActive(el, line) {
+  if (isStuckAtTop(el)) return true
+
+  // sticky 헤딩은 stuck 되기 전·후에는 활성 판정하지 않음
+  // (다음 섹션이 stuck 될 때까지 이전 활성을 유지)
+  if (isStickyPositioned(el)) return false
+
+  return el.getBoundingClientRect().top <= line + 2
+}
+
 function useScrollSpy(items, options) {
   const extraOffset = options?.extraOffset ?? 40
   const [activeId, setActiveId] = useState(null)
@@ -37,24 +68,14 @@ function useScrollSpy(items, options) {
       const header = document.querySelector('.uk_header')
       const line = (header ? header.offsetHeight : 0) + extraOffset
       const scrollTop = window.scrollY
-      // 서브픽셀·smooth scroll 종료 위치가 기준선과 1px 어긋나면 자식 헤딩이
-      // 조건에서 빠지고 부모만 활성으로 남는 경우가 있어 소량 허용한다.
-      const tolerancePx = 2
 
-      let current = null
-      // 문서 순서(flat list)대로, 뷰포트 상단에서 `line` 이하로 올라온(지나간)
-      // 헤딩을 누적해 마지막 것을 활성으로 한다. scrollY와의 대수 비교보다
-      // getBoundingClientRect 기준이 클릭 이동 후에도 부모/자식 구분이 안정적이다.
+      let current = items[0]?.id ?? null
       for (const item of items) {
         const el = document.getElementById(item.id)
         if (!el) continue
-        const top = el.getBoundingClientRect().top
-        if (top <= line + tolerancePx) current = item.id
+        if (isHeadingActive(el, line)) current = item.id
       }
 
-      // When the page is scrolled all the way to the bottom, the previous code
-      // pins the last entry as active even if its threshold has not been
-      // reached. Replicate that here.
       const atBottom =
         Math.ceil(scrollTop + window.innerHeight) >= document.documentElement.scrollHeight
       if (atBottom) current = items[items.length - 1]?.id ?? current

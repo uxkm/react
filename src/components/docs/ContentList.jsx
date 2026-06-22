@@ -42,9 +42,32 @@ function slugify(text) {
     .replace(/\s+/g, '-')
 }
 
+function getHeadingText(heading) {
+  const clone = heading.cloneNode(true)
+  clone.querySelectorAll('.toggleButton, button').forEach((el) => el.remove())
+  return clone.textContent?.replace(/\s+/g, ' ').trim() || ''
+}
+
+function isConlistExcludedH2(heading) {
+  return heading.tagName.toLowerCase() === 'h2' && heading.dataset.conlist === 'false'
+}
+
+function isConlistChildrenExcludedH2(heading) {
+  // `data-conlist="false"` h2는 목차에 노출하되, 하위 h3/h4만 제외한다.
+  return isConlistExcludedH2(heading)
+}
+
+function isConlistExcludedH3(heading) {
+  return heading.tagName.toLowerCase() === 'h3' && heading.dataset.conlistH4 === 'false'
+}
+
+function isConlistH3AsH4(heading) {
+  return heading.tagName.toLowerCase() === 'h3' && heading.dataset.conlistH4 === 'true'
+}
+
 function ensureHeadingId(heading, index) {
   if (heading.id) return heading.id
-  const baseId = slugify(heading.textContent) || `section-${index + 1}`
+  const baseId = slugify(getHeadingText(heading)) || `section-${index + 1}`
   const id = `${baseId}-${index + 1}`
   heading.id = id
   return id
@@ -54,20 +77,40 @@ function buildTreeFromHeadings(headings) {
   const tree = []
   let currentH2 = null
   let currentH3 = null
+  let skipChildrenForCurrentH2 = false
   let counter = 0
 
   for (const heading of headings) {
     const tag = heading.tagName.toLowerCase()
-    counter += 1
-    const id = ensureHeadingId(heading, counter)
-    const text = heading.textContent?.trim() || ''
-    const node = { id, text, level: tag, children: [] }
 
     if (tag === 'h2') {
-      currentH2 = node
+      skipChildrenForCurrentH2 = isConlistChildrenExcludedH2(heading)
+      currentH2 = null
       currentH3 = null
-      tree.push(currentH2)
-    } else if (tag === 'h3') {
+
+      counter += 1
+      const id = ensureHeadingId(heading, counter)
+      const node = { id, text: getHeadingText(heading), level: tag, children: [] }
+      if (!skipChildrenForCurrentH2) currentH2 = node
+      tree.push(node)
+      continue
+    }
+
+    if (skipChildrenForCurrentH2 || isConlistExcludedH3(heading)) continue
+
+    counter += 1
+    const id = ensureHeadingId(heading, counter)
+    const text = getHeadingText(heading)
+    const node = { id, text, level: tag, children: [] }
+
+    if (tag === 'h3') {
+      if (isConlistH3AsH4(heading)) {
+        if (!currentH2) continue
+        currentH3 = { ...node, level: 'h4', promotedFromH3: true }
+        currentH2.children.push(currentH3)
+        continue
+      }
+
       if (!currentH2) {
         currentH2 = { id, text, level: 'h2', children: [] }
         tree.push(currentH2)
@@ -76,10 +119,7 @@ function buildTreeFromHeadings(headings) {
       currentH2.children.push(currentH3)
     } else if (tag === 'h4') {
       if (!currentH3) {
-        if (!currentH2) {
-          currentH2 = { id, text, level: 'h2', children: [] }
-          tree.push(currentH2)
-        }
+        if (!currentH2) continue
         currentH3 = { id, text, level: 'h3', children: [] }
         currentH2.children.push(currentH3)
       }
@@ -100,6 +140,58 @@ function flattenTree(tree) {
     }
   }
   return flat
+}
+
+function renderContentListLink(item, activeId, onClick) {
+  return (
+    <a
+      href={`#${item.id}`}
+      className={activeId === item.id ? 'active' : undefined}
+      onClick={(event) => onClick(event, item.id)}
+    >
+      {item.text}
+    </a>
+  )
+}
+
+function renderDepth3Children(items, activeId, onClick) {
+  if (!items.length) return null
+  return (
+    <ul className="cl_d3">
+      {items.map((h4) => (
+        <li key={h4.id}>{renderContentListLink(h4, activeId, onClick)}</li>
+      ))}
+    </ul>
+  )
+}
+
+function renderDepth2Children(items, activeId, onClick) {
+  if (!items.length) return null
+  return (
+    <ul className="cl_d2">
+      {items.map((child) => {
+        if (child.promotedFromH3) {
+          return (
+            <li key={child.id}>
+              <ul className="cl_d3">
+                <li>
+                  {renderContentListLink(child, activeId, onClick)}
+                  {renderDepth3Children(child.children, activeId, onClick)}
+                </li>
+              </ul>
+            </li>
+          )
+        }
+
+        return (
+          <li key={child.id}>
+            {renderContentListLink(child, activeId, onClick)}
+            {renderDepth3Children(child.children, activeId, onClick)}
+          </li>
+        )
+      })}
+    </ul>
+  )
 }
 
 function scrollToHeading(id) {
@@ -278,36 +370,9 @@ function ContentList({
                 >
                   {h2.text}
                 </a>
-                {h2.children.length > 0 ? (
-                  <ul className="cl_d2">
-                    {h2.children.map((h3) => (
-                      <li key={h3.id}>
-                        <a
-                          href={`#${h3.id}`}
-                          className={activeId === h3.id ? 'active' : undefined}
-                          onClick={(event) => handleAnchorClick(event, h3.id)}
-                        >
-                          {h3.text}
-                        </a>
-                        {h3.children.length > 0 ? (
-                          <ul className="cl_d3">
-                            {h3.children.map((h4) => (
-                              <li key={h4.id}>
-                                <a
-                                  href={`#${h4.id}`}
-                                  className={activeId === h4.id ? 'active' : undefined}
-                                  onClick={(event) => handleAnchorClick(event, h4.id)}
-                                >
-                                  {h4.text}
-                                </a>
-                              </li>
-                            ))}
-                          </ul>
-                        ) : null}
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
+                {h2.children.length > 0
+                  ? renderDepth2Children(h2.children, activeId, handleAnchorClick)
+                  : null}
               </li>
             ))}
           </ul>
