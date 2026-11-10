@@ -1,0 +1,80 @@
+'use client'
+
+import { Page, PageLoading, PublishScreenStub } from '@/comp'
+import { resolveSkeletonMode } from '@/config/skeleton'
+import HumanRightsSkeleton from './skeleton/human-rightsSkeleton'
+
+export const pageTitle = "인권경영"
+
+/** IA publishing scaffold. Replace this screen body with the approved markup. */
+export default function B2bCompanySustainabilityHumanRightsPage () {
+  const links = [
+    {
+      "to": "/b2b/company/sustainability/esg",
+      "label": "ESG경영체계",
+      "screenId": "B2B-ABOUT-005"
+    },
+    {
+      "to": "/b2b/company/sustainability/environment",
+      "label": "환경경영",
+      "screenId": "B2B-COMPANY-SUSTAINABILITY-ENVIRONMENT"
+    },
+    {
+      "to": "/b2b/company/sustainability/diversity",
+      "label": "다양성/노사",
+      "screenId": "B2B-COMPANY-SUSTAINABILITY-DIVERSITY"
+    },
+    {
+      "to": "/b2b/company/sustainability/safety",
+      "label": "안전보건",
+      "screenId": "B2B-COMPANY-SUSTAINABILITY-SAFETY"
+    },
+    {
+      "to": "/b2b/company/sustainability/information",
+      "label": "정보보호",
+      "screenId": "B2B-COMPANY-SUSTAINABILITY-INFORMATION"
+    },
+    {
+      "to": "/b2b/company/sustainability/consumer",
+      "label": "소비자보호",
+      "screenId": "B2B-COMPANY-SUSTAINABILITY-CONSUMER"
+    },
+    {
+      "to": "/b2b/company/sustainability/contribution",
+      "label": "사회공헌",
+      "screenId": "B2B-COMPANY-SUSTAINABILITY-CONTRIBUTION"
+    },
+    {
+      "to": "/b2b/company/sustainability/esg-data",
+      "label": "ESG Data",
+      "screenId": "B2B-COMPANY-SUSTAINABILITY-ESG-DATA"
+    }
+  ]
+  const skeletonId = 'b2b/company/sustainability/human-rights'
+  const skeletonMode = resolveSkeletonMode(skeletonId)
+
+  return (
+    <>
+      <Page page="b2b-company-sustainability-human-rights" title={pageTitle} />
+      <PageLoading
+        loading={false}
+        skeletonId={skeletonId}
+        skeletonMode={skeletonMode}
+        skeleton={skeletonMode === 'manual' ? <HumanRightsSkeleton /> : undefined}
+        className="page-container"
+      >
+        <PublishScreenStub
+          device="B2B"
+          folderId="company"
+          folderName="회사소개"
+          screenName={pageTitle}
+          screenType="Page"
+          screenId="B2B-COMPANY-SUSTAINABILITY-HUMAN-RIGHTS"
+          pageUrl="/b2b/company/sustainability/human-rights"
+          links={links}
+        />
+
+      </PageLoading>
+    </>
+  )
+}

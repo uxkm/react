@@ -1,0 +1,129 @@
+/** One lifecycle for registry generation, styles, static refresh, and Next dev. */
+import fs from 'node:fs'
+import path from 'node:path'
+import { spawn, execFile } from 'node:child_process'
+import { promisify } from 'node:util'
+import { fileURLToPath } from 'node:url'
+import { root } from './projects.mjs'
+import { getStyleEntries } from './style-entries.mjs'
+import { watchSourceFiles } from './watch-files.mjs'
+
+const execute = promisify(execFile)
+function sourceTopology () {
+  const files = []
+  function walk (dir) {
+    if (!fs.existsSync(dir)) return
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (entry.name.startsWith('.')) continue
+      const file = path.join(dir, entry.name)
+      if (entry.isDirectory()) walk(file)
+      else if (/\.(jsx|tsx|js|ts)$/.test(entry.name)) files.push(path.relative(root, file))
+    }
+  }
+  walk(path.join(root, 'src/app'))
+  walk(path.join(root, 'src/screen'))
+  walk(path.join(root, 'src/widgets'))
+  return JSON.stringify([files.sort(), getStyleEntries()])
+}
+function registrySnapshot () {
+  const file = path.join(root, 'src/generated/registry-ids.js')
+  return fs.existsSync(file) ? fs.readFileSync(file, 'utf8') : ''
+}
+export async function startDevelopment ({ styleMode = 'scss' } = {}) {
+  let child = null
+  let closing = false
+  let topology = sourceTopology()
+  let registry = registrySnapshot()
+  let revision = 0
+  let ownsDevCache = false
+  let refreshTimer
+  const expectedExit = new WeakSet()
+  const styles = styleMode === 'css' ? await import('./build-styles.mjs') : null
+  if (styles) styles.compileAll()
+
+  function startServer () {
+    if (child || closing) return
+    const current = spawn(process.execPath, [path.join(root, 'scripts/serve.mjs'), '--dev'], {
+      cwd: root,
+      env: { ...process.env, STYLE_MODE: styles ? 'css' : 'scss' },
+      stdio: ['inherit', 'inherit', 'inherit', 'ipc']
+    })
+    child = current
+    current.on('message', (message) => {
+      if (child === current && message?.type === 'server-ready') ownsDevCache = true
+    })
+    current.on('error', (error) => console.error('[watch]', error.message))
+    current.on('exit', (code) => {
+      if (child === current) child = null
+      if (!closing && !expectedExit.has(current)) console.error(`[watch] Next exited (${code}); watching for the next correction`)
+    })
+  }
+  async function stopServer () {
+    const current = child
+    if (!current) return
+    expectedExit.add(current)
+    await new Promise((resolve) => {
+      const timer = setTimeout(() => current.kill('SIGKILL'), 3000)
+      current.once('exit', () => { clearTimeout(timer); resolve() })
+      current.kill('SIGTERM')
+    })
+    if (child === current) child = null
+  }
+  async function regenerate () {
+    const { stdout } = await execute(process.execPath, [path.join(root, 'scripts/registry.mjs')], { cwd: root })
+    const { stdout: validation } = await execute(process.execPath, [path.join(root, 'scripts/validate-projects.mjs')], { cwd: root })
+    process.stdout.write(stdout + validation)
+  }
+  function refreshBrowser () {
+    clearTimeout(refreshTimer)
+    refreshTimer = setTimeout(() => {
+      if (child?.connected) child.send({ type: 'static-refresh', revision: ++revision })
+    }, 500)
+  }
+  const watcher = watchSourceFiles({
+    root,
+    async onBatch (paths) {
+      if (closing) return
+      const before = sourceTopology()
+      const changedTopology = before !== topology
+      const configuration = paths.some((file) => !file.includes('/') || file.startsWith('scripts/') || file.startsWith('src/config/'))
+      let restart = changedTopology || configuration
+      if (restart) await stopServer()
+      const needsRegistry = changedTopology || paths.some((file) => file === 'src/screen' || file.startsWith('src/screen/') || file.startsWith('src/widgets/') || file === 'public/data/pub/index.json' || file.startsWith('scripts/'))
+      if (needsRegistry) await regenerate()
+      const nextRegistry = registrySnapshot()
+      if (nextRegistry !== registry) restart = true
+      if (restart) await stopServer()
+      if (styles && (restart || paths.some((file) => file.endsWith('.scss')))) styles.compileAll()
+      // A structural restart must not reuse manifests from the previous route graph.
+      // Only clear cache after a server owned by this supervisor actually started.
+      if (restart && ownsDevCache) {
+        fs.rmSync(path.join(root, '.next/dev'), { recursive: true, force: true })
+        ownsDevCache = false
+      }
+      topology = sourceTopology() // includes managed routes created by the registry
+      registry = nextRegistry
+      startServer()
+      if (!restart && paths.some((file) => file.startsWith('public/') || (file.startsWith('src/') && !/\.(?:[cm]?[jt]sx?|scss|sass)$/.test(file)))) refreshBrowser()
+      console.log(`[watch] ${restart ? 'routes/config refreshed; Next restarted' : 'updated'}: ${paths.slice(0, 4).join(', ')}${paths.length > 4 ? ' …' : ''}`)
+    },
+    onError (error) {
+      console.error('[watch] update failed; fix the source to retry:', error.stderr || error.message || error)
+      if (!closing) startServer()
+    }
+  })
+  startServer()
+  console.log('[watch] src/ · public/ · scripts/ · config — create/change/delete; generated output excluded')
+  async function close () {
+    if (closing) return
+    closing = true
+    clearTimeout(refreshTimer)
+    await watcher.close()
+    await stopServer()
+  }
+  for (const signal of ['SIGINT', 'SIGTERM']) process.once(signal, () => { close().then(() => process.exit(0)) })
+  return { close }
+}
+if (process.argv[1] && fs.realpathSync(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  await startDevelopment({ styleMode: process.argv.includes('--css') ? 'css' : 'scss' })
+}

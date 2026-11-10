@@ -1,0 +1,140 @@
+{
+  "id": "insight",
+  "name": "HR인사이트",
+  "filePath": "@/screen/b2b/insight",
+  "depth2": [
+    {
+      "id": "insight/on",
+      "name": "멀캠ON",
+      "depth3": [
+        {
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "remark": [
+            {
+              "date": "",
+              "author": "IA",
+              "text": "3*3 카드형 목록. 기존 페이지 디자인·기능 활용"
+            }
+          ],
+          "name": "멀캠ON 목록",
+          "type": "Page",
+          "id": "B2B-INSIGHT-ON-LIST",
+          "pageUrl": "/b2b/insight/on/list",
+          "filePath": "@/screen/b2b/insight/on/list.tsx",
+          "priority": 2
+        },
+        {
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "remark": [
+            {
+              "date": "",
+              "author": "IA",
+              "text": "상세 콘텐츠와 자료 다운로드 팝업 연결"
+            }
+          ],
+          "name": "멀캠ON 상세",
+          "type": "Page",
+          "id": "B2B-INSIGHT-ON-DETAIL",
+          "pageUrl": "/b2b/insight/on/detail",
+          "filePath": "@/screen/b2b/insight/on/detail.tsx",
+          "priority": 2
+        }
+      ]
+    },
+    {
+      "id": "insight/resources",
+      "name": "자료실",
+      "depth3": [
+        {
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "remark": [
+            {
+              "date": "",
+              "author": "IA",
+              "text": "3*3 카드형 목록"
+            }
+          ],
+          "name": "자료실 목록",
+          "type": "Page",
+          "id": "B2B-INSIGHT-RESOURCES-LIST",
+          "pageUrl": "/b2b/insight/resources/list",
+          "filePath": "@/screen/b2b/insight/resources/list.tsx",
+          "priority": 2
+        },
+        {
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "remark": [
+            {
+              "date": "",
+              "author": "IA",
+              "text": "콘텐츠 상세와 자료 다운로드 팝업 연결"
+            }
+          ],
+          "name": "자료실 상세",
+          "type": "Page",
+          "id": "B2B-INSIGHT-RESOURCES-DETAIL",
+          "pageUrl": "/b2b/insight/resources/detail",
+          "filePath": "@/screen/b2b/insight/resources/detail.tsx",
+          "priority": 2
+        }
+      ]
+    },
+    {
+      "id": "insight/download",
+      "name": "자료 다운로드",
+      "depth3": [
+        {
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "remark": [
+            {
+              "date": "",
+              "author": "IA",
+              "text": "상세 페이지 하단 자료 다운로드 버튼. 개인정보 입력·수집 및 활용 동의 후 다운로드"
+            }
+          ],
+          "name": "자료 다운로드 팝업",
+          "type": "Layer",
+          "id": "B2B-COMMON-DOWNLOAD",
+          "pageUrl": "/b2b/common/download",
+          "filePath": "@/widgets/b2b/previews/download.tsx",
+          "priority": 2
+        }
+      ]
+    }
+  ]
+}

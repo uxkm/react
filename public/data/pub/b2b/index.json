@@ -1,0 +1,39 @@
+{
+  "folders": [
+    {
+      "id": "main",
+      "name": "메인",
+      "file": "main.json"
+    },
+    {
+      "id": "contents",
+      "name": "기업교육",
+      "file": "contents.json"
+    },
+    {
+      "id": "service",
+      "name": "서비스",
+      "file": "service.json"
+    },
+    {
+      "id": "insight",
+      "name": "HR인사이트",
+      "file": "insight.json"
+    },
+    {
+      "id": "contact",
+      "name": "문의하기",
+      "file": "contact.json"
+    },
+    {
+      "id": "common",
+      "name": "공통",
+      "file": "common.json"
+    },
+    {
+      "id": "company",
+      "name": "회사소개",
+      "file": "company.json"
+    }
+  ]
+}

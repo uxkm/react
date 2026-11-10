@@ -1,0 +1,251 @@
+{
+  "id": "contact",
+  "name": "문의하기",
+  "filePath": "@/screen/b2b/contact",
+  "depth2": [
+    {
+      "name": "기업교육문의",
+      "type": "Page",
+      "id": "B2B-INSIGH-001",
+      "pageUrl": "/b2b/contact/education",
+      "filePath": "@/screen/b2b/contact/education.tsx",
+      "owner": "",
+      "start": "",
+      "expected": "",
+      "end": "",
+      "status": "pending",
+      "progress": 0,
+      "planning": "",
+      "design": "",
+      "remark": [
+        {
+          "date": "",
+          "author": "IA",
+          "text": "문의상담·견적 통합 페이지. 문의구분, 교육인원·일정, 교육방식, 문의내용, 상담 필요 여부, 회사·기업유형·이름·부서·연락처·이메일, 개인정보 수집·이용 동의"
+        }
+      ],
+      "priority": 1
+    },
+    {
+      "id": "contact/education-form",
+      "name": "기업교육문의 입력 영역",
+      "depth3": [
+        {
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "id": "B2B-INSIGH-001-INQUIRY",
+          "name": "문의 정보",
+          "type": "Section",
+          "pageUrl": "/b2b/contact/education#inquiry",
+          "filePath": "@/screen/b2b/contact/education.tsx",
+          "priority": 1,
+          "remark": [
+            {
+              "date": "",
+              "author": "IA",
+              "text": "문의구분, 교육인원, 교육일정, 교육방식, 문의내용, 상담 필요 여부"
+            }
+          ]
+        },
+        {
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "id": "B2B-INSIGH-001-COMPANY",
+          "name": "기업·담당자 정보",
+          "type": "Section",
+          "pageUrl": "/b2b/contact/education#company",
+          "filePath": "@/screen/b2b/contact/education.tsx",
+          "priority": 1,
+          "remark": [
+            {
+              "date": "",
+              "author": "IA",
+              "text": "회사명, 기업유형, 이름, 부서, 연락처, 이메일"
+            }
+          ]
+        },
+        {
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "id": "B2B-INSIGH-001-PRIVACY",
+          "name": "개인정보 수집 및 이용 동의",
+          "type": "Section",
+          "pageUrl": "/b2b/contact/education#privacy",
+          "filePath": "@/screen/b2b/contact/education.tsx",
+          "priority": 1,
+          "remark": [
+            {
+              "date": "",
+              "author": "IA",
+              "text": "개인정보 수집·이용 동의 안내"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "contact/diagnosis",
+      "name": "간편 진단·맞춤교육 추천",
+      "depth3": [
+        {
+          "name": "간편 진단 모달",
+          "type": "Layer",
+          "id": "B2B-INSIGH-002",
+          "pageUrl": "/b2b/common/education-diagnosis",
+          "filePath": "@/widgets/b2b/previews/education-diagnosis.tsx",
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "remark": [
+            {
+              "date": "",
+              "author": "IA",
+              "text": "메인 카드그리드와 퀵링크에서 진입. 진단 문항 → 개인정보 동의 → 추천 결과"
+            }
+          ],
+          "priority": 2
+        },
+        {
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "remark": [
+            {
+              "date": "",
+              "author": "IA",
+              "text": "교육 대상·교육 규모·기업 목표·선호 교육방식에 따른 시나리오별 질문"
+            }
+          ],
+          "name": "진단 문항",
+          "type": "Section",
+          "id": "B2B-DIAGNOSIS-QUESTIONS",
+          "pageUrl": "/b2b/common/education-diagnosis",
+          "filePath": "@/widgets/b2b/previews/education-diagnosis.tsx",
+          "priority": 2
+        },
+        {
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "remark": [],
+          "name": "진단 개인정보 입력·동의",
+          "type": "Section",
+          "id": "B2B-DIAGNOSIS-PRIVACY",
+          "pageUrl": "/b2b/common/education-diagnosis",
+          "filePath": "@/widgets/b2b/previews/education-diagnosis.tsx",
+          "priority": 2
+        },
+        {
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "remark": [
+            {
+              "date": "",
+              "author": "IA",
+              "text": "추천 과정 페이지와 교육문의 진입 연결"
+            }
+          ],
+          "name": "진단 추천 결과",
+          "type": "Section",
+          "id": "B2B-DIAGNOSIS-RESULT",
+          "pageUrl": "/b2b/common/education-diagnosis",
+          "filePath": "@/widgets/b2b/previews/education-diagnosis.tsx",
+          "priority": 2
+        }
+      ]
+    },
+    {
+      "id": "contact/mail",
+      "name": "자동 메일 연계",
+      "depth3": [
+        {
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "remark": [
+            {
+              "date": "",
+              "author": "IA",
+              "text": "문의구분별 담당자에게 문의 접수 내용 자동 안내. 서버 연계 작업 항목"
+            }
+          ],
+          "name": "기업문의 자동메일(내부)",
+          "type": "Mail",
+          "id": "B2B-CONTACT-MAIL-INTERNAL",
+          "pageUrl": "",
+          "filePath": "",
+          "priority": 1,
+          "excludeFromStats": true
+        },
+        {
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "remark": [
+            {
+              "date": "",
+              "author": "IA",
+              "text": "문의구분별 회신 템플릿과 문의 내용·상품 소개서 연결. 서버 연계 작업 항목"
+            }
+          ],
+          "name": "기업문의 자동회신(고객)",
+          "type": "Mail",
+          "id": "B2B-CONTACT-MAIL-CUSTOMER",
+          "pageUrl": "",
+          "filePath": "",
+          "priority": 1,
+          "excludeFromStats": true
+        }
+      ]
+    }
+  ]
+}

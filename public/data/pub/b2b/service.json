@@ -1,0 +1,163 @@
+{
+  "id": "service",
+  "name": "서비스",
+  "filePath": "@/screen/b2b/service",
+  "depth2": [
+    {
+      "id": "service/platform",
+      "name": "러닝플랫폼",
+      "depth3": [
+        {
+          "name": "러닝플랫폼",
+          "type": "Page",
+          "id": "B2B-SERVIC-001",
+          "pageUrl": "/b2b/service/platform",
+          "filePath": "@/screen/b2b/service/platform/index.tsx",
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "remark": [],
+          "priority": 1
+        },
+        {
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "remark": [],
+          "name": "플랫폼 활용 컨설팅",
+          "type": "Page",
+          "id": "B2B-SERVICE-PLATFORM-CONSULTING",
+          "pageUrl": "/b2b/service/platform/consulting",
+          "filePath": "@/screen/b2b/service/platform/consulting.tsx",
+          "priority": 2
+        }
+      ]
+    },
+    {
+      "id": "service/learning",
+      "name": "러닝 서비스",
+      "depth3": [
+        {
+          "name": "러닝 서비스",
+          "type": "Page",
+          "id": "B2B-SERVIC-002",
+          "pageUrl": "/b2b/service/learning",
+          "filePath": "@/screen/b2b/service/learning/index.tsx",
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "remark": [
+            {
+              "date": "",
+              "author": "IA",
+              "text": "이러닝·블렌디드 러닝 등 학습 서비스 소개"
+            }
+          ],
+          "priority": 2
+        }
+      ]
+    },
+    {
+      "id": "service/diagnosis",
+      "name": "진단 서비스",
+      "depth3": [
+        {
+          "name": "진단 서비스",
+          "type": "Page",
+          "id": "B2B-SERVIC-003",
+          "pageUrl": "/b2b/service/diagnosis",
+          "filePath": "@/screen/b2b/service/diagnosis/index.tsx",
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "remark": [
+            {
+              "date": "",
+              "author": "IA",
+              "text": "멀티캠퍼스 진단 서비스 소개: 개인진단·조직진단 등"
+            }
+          ],
+          "priority": 2
+        }
+      ]
+    },
+    {
+      "id": "service/consulting",
+      "name": "컨설팅 서비스",
+      "depth3": [
+        {
+          "name": "컨설팅 서비스",
+          "type": "Page",
+          "id": "B2B-SERVIC-004",
+          "pageUrl": "/b2b/service/consulting",
+          "filePath": "@/screen/b2b/service/consulting/index.tsx",
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "remark": [
+            {
+              "date": "",
+              "author": "IA",
+              "text": "컨설팅 서비스 소개. 기존 컨설팅 콘텐츠 활용"
+            }
+          ],
+          "priority": 2
+        }
+      ]
+    },
+    {
+      "id": "service/bpo",
+      "name": "BPO 서비스",
+      "depth3": [
+        {
+          "name": "BPO 서비스",
+          "type": "Page",
+          "id": "B2B-SERVIC-005",
+          "pageUrl": "/b2b/service/bpo",
+          "filePath": "@/screen/b2b/service/bpo/index.tsx",
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "remark": [
+            {
+              "date": "",
+              "author": "IA",
+              "text": "기존 플랫폼 서비스 콘텐츠 활용"
+            }
+          ],
+          "priority": 2
+        }
+      ]
+    }
+  ]
+}
