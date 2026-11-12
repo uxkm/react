@@ -32,7 +32,7 @@ const props = [
     name: 'children · Tab · TabPanel',
     type: 'ReactNode',
     default: '—',
-    description: '메뉴는 tabs.map → Tab 반복을 권장합니다. TabPanel 없이 남은 children 은 활성 패널 단일 슬롯(내용·컴포넌트 교체)으로 씁니다. 항목별 패널이 필요하면 TabPanel(value) 또는 tabs[].content 를 씁니다. Tabs.Tab · Tabs.Panel 별칭도 같습니다.'
+    description: '메뉴는 tabs.map → Tab 반복을 권장합니다. Tab 에 label 을 주고 children 을 넣으면 탭별 패널 슬롯입니다(또는 panel prop · TabPanel). label 없이 Tab children 은 메뉴 커스텀입니다. 패널 슬롯이 하나도 없으면 남은 children 이 활성 공통 패널로 쓰입니다. Tabs.Tab · Tabs.Panel 별칭도 같습니다.'
   },
   {
     name: 'value · defaultValue',
@@ -140,13 +140,61 @@ const props = [
     name: 'children',
     type: 'ReactNode',
     default: '—',
-    description: '활성 탭 패널(tabs_panel) 내용입니다. 없으면 패널을 렌더링하지 않습니다.'
+    description: 'Tab · TabPanel 및 공통 패널 슬롯입니다. 항목별 패널이 없으면 나머지 노드가 활성 공통 패널로 렌더됩니다.'
   },
   {
     name: 'className · ...props',
     type: 'div attributes',
     default: '—',
     description: '루트(tabs) 클래스와 속성입니다. 탭에는 role=\"tab\", 목록에는 role=\"tablist\", 패널에는 role=\"tabpanel\" 이 붙습니다.'
+  }
+]
+
+const tabProps = [
+  {
+    name: 'value',
+    type: 'string | number',
+    default: '—',
+    description: '탭 식별 값입니다. onChange · TabPanel value 와 맞춥니다.'
+  },
+  {
+    name: 'label',
+    type: 'ReactNode',
+    default: '—',
+    description: '탭 버튼 문구입니다. 지정하면 children 은 메뉴가 아니라 이 탭의 패널 슬롯으로 쓰입니다.'
+  },
+  {
+    name: 'panel',
+    type: 'ReactNode',
+    default: '—',
+    description: '이 탭의 패널 내용입니다. 있으면 children 패널보다 우선합니다. label 유무와 관계없이 패널로 등록됩니다.'
+  },
+  {
+    name: 'children',
+    type: 'ReactNode',
+    default: '—',
+    description: 'label 이 있으면 패널 슬롯, 없으면 탭 버튼 커스텀 내용(아이콘+라벨 마크업 등)입니다.'
+  },
+  {
+    name: 'icon · disabled · closable · closeLabel',
+    type: 'ReactNode · boolean · boolean · string',
+    default: '—',
+    description: '아이콘, 비활성, 닫기 버튼, 닫기 aria-label 입니다.'
+  }
+]
+
+const tabPanelProps = [
+  {
+    name: 'value',
+    type: 'string | number',
+    default: '—',
+    description: '연결할 탭 value 입니다.'
+  },
+  {
+    name: 'children',
+    type: 'ReactNode',
+    default: '—',
+    description: '해당 탭이 활성일 때 보이는 패널 내용입니다.'
   }
 ]
 
@@ -245,6 +293,16 @@ export const tabsApiSections = [
     title: 'API · Props',
     description: 'React · Next.js Tabs props입니다. tabs · value · onChange 로 구성하고, variant · size · vertical · layout · navFade · navSelect · navVariant · navColor 으로 형태를 바꿉니다.',
     tables: [{ columns, rows: props }]
+  },
+  {
+    title: 'API · Tab',
+    description: 'Tabs 자식 Tab 입니다. label + children(또는 panel)으로 탭별 패널 슬롯을 구성합니다.',
+    tables: [{ columns, rows: tabProps }]
+  },
+  {
+    title: 'API · TabPanel',
+    description: 'Tabs 자식 TabPanel 입니다. value 가 같은 탭의 패널로 등록됩니다.',
+    tables: [{ columns, rows: tabPanelProps }]
   },
   {
     title: '공통 API · 클래스',

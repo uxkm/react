@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url'
 import { root } from './project.mjs'
 import { getStyleEntries } from './style-entries.mjs'
 import { watchSourceFiles } from './watch-files.mjs'
+import { syncLottieList } from './lottie-list.mjs'
 
 const execute = promisify(execFile)
 function sourceTopology () {
@@ -40,6 +41,8 @@ export async function startDevelopment ({ styleMode = 'scss' } = {}) {
   const expectedExit = new WeakSet()
   const styles = styleMode === 'css' ? await import('./build-styles.mjs') : null
   if (styles) styles.compileAll()
+  // 기동 시점에 lottie 폴더 목록을 맞춰 둔다 (watch 코드 반영 전 추가분 포함)
+  syncLottieList()
 
   function startServer () {
     if (child || closing) return
@@ -95,6 +98,11 @@ export async function startDevelopment ({ styleMode = 'scss' } = {}) {
       if (nextRegistry !== registry) restart = true
       if (restart) await stopServer()
       if (styles && (restart || paths.some((file) => file.endsWith('.scss')))) styles.compileAll()
+      // lottie JSON 추가·삭제 시 목록만 갱신 (Next 재시작 불필요)
+      if (paths.some((file) => file === 'public/images/lottie' || file.startsWith('public/images/lottie/'))) {
+        const files = syncLottieList()
+        console.log(`[watch] lottie list synced (${files.length})`)
+      }
       // A structural restart must not reuse manifests from the previous route graph.
       // Only clear cache after a server owned by this supervisor actually started.
       if (restart && ownsDevCache) {

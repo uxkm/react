@@ -1,0 +1,74 @@
+@use 'common/global' as *;
+
+:root {
+  // ----- Lottie
+  --lottie-gap: var(--space-sm);
+  --lottie-stage-min-height: 8rem;
+  --lottie-stage-radius: var(--radius-panel, 12px);
+  --lottie-stage-bg: transparent;
+  --lottie-loading-size: var(--text-size-sm);
+  --lottie-loading-color: var(--color-text-muted);
+}
+
+// Lottie — OOCSS: 구조(.lottie) + 변형(.lottie_controls-on) + 파트(.lottie_stage · .lottie_controls · .lottie_player)
+// 마크업은 span 기반 — `<p>` 등 phrasing 컨텍스트에도 유효
+//
+//   <Lottie name="fireworks" controls />  →  /images/lottie/fireworks.json
+//
+//   <span class="lottie lottie_controls-on" data-lottie="fireworks">
+//     <span class="lottie_stage" role="img" aria-label="애니메이션">
+//       <span class="lottie_player" aria-hidden="true">…</span>
+//     </span>
+//     <span class="lottie_controls">
+//       <button type="button" class="btn btn_outline … btn_icon-only" aria-pressed="true">…</button>
+//     </span>
+//   </span>
+
+.lottie {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--lottie-gap);
+  max-width: 100%;
+  vertical-align: top;
+
+  &_stage {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    min-height: var(--lottie-stage-min-height);
+    border-radius: var(--lottie-stage-radius);
+    background: var(--lottie-stage-bg);
+    overflow: hidden;
+  }
+
+  &_player {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    > svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &_loading {
+    display: block;
+    margin: 0;
+    padding: var(--space-md);
+    color: var(--lottie-loading-color);
+    font-size: var(--lottie-loading-size);
+  }
+
+  &_controls {
+    display: flex;
+    gap: var(--space-xs);
+  }
+
+  &.is-loading &_stage,
+  &.is-error &_stage {
+    min-height: var(--lottie-stage-min-height);
+  }
+}

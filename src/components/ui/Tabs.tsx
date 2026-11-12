@@ -124,14 +124,28 @@ export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChang
   children?: ReactNode
 }
 
-/** Tab 컴포넌트 props — 커스텀 탭 메뉴 */
+/** Tab 컴포넌트 props — 커스텀 탭 메뉴 · 패널 슬롯 */
 export interface TabProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onClick' | 'value'> {
   value: TabValue
+  /**
+   * 탭 버튼 문구.
+   * 있으면 children 은 메뉴가 아니라 해당 탭 패널 슬롯으로 쓴다.
+   * 없으면 children 은 탭 버튼 커스텀 내용(아이콘+라벨 등)이다.
+   */
   label?: ReactNode
   icon?: ReactNode
   disabled?: boolean
   closable?: boolean
   closeLabel?: string
+  /**
+   * 이 탭의 패널 내용(슬롯).
+   * label 유무와 관계없이 패널로 쓴다. 있으면 children 패널보다 우선한다.
+   */
+  panel?: ReactNode
+  /**
+   * label 이 있으면 패널 슬롯, 없으면 탭 버튼 커스텀 내용.
+   * panel prop 이 있으면 패널은 panel 을 쓰고 children 은 무시(메뉴 커스텀도 아님).
+   */
   children?: ReactNode
 }
 
@@ -198,15 +212,20 @@ function parseCompoundChildren (children: ReactNode): {
     const type = (child.type as { tabsType?: string })?.tabsType
     if (type === TAB_TYPE) {
       const props = child.props as TabProps
+      const hasLabel = props.label != null
+      const hasPanelProp = hasNodes(props.panel)
+      /** label 있으면 children=패널 슬롯, 없으면 children=메뉴 커스텀 */
+      const panelFromChildren = hasLabel && !hasPanelProp ? props.children : undefined
+      const menuCustom = !hasLabel && !hasPanelProp ? props.children : undefined
       tabs.push({
         value: props.value,
-        label: props.label != null ? props.label : props.value,
-        custom: props.children,
+        label: hasLabel ? props.label : props.value,
+        custom: menuCustom,
         icon: props.icon,
         disabled: !!props.disabled,
         closable: !!props.closable,
         closeLabel: props.closeLabel || '',
-        content: undefined,
+        content: hasPanelProp ? props.panel : panelFromChildren,
         className: props.className || '',
         panelClassName: ''
       })
@@ -230,6 +249,7 @@ function parseCompoundChildren (children: ReactNode): {
 /**
  * 커스텀 탭 메뉴 칸.
  * Tabs 자식으로 두면 탭 목록을 구성한다. 단독으로는 DOM 을 렌더하지 않는다.
+ * label + children → 패널 슬롯, panel prop → 명시적 패널, label 없이 children → 메뉴 커스텀.
  */
 export function Tab (_props: TabProps): ReactElement | null {
   return null

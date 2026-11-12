@@ -9,6 +9,7 @@
 import { syncProject } from './project.mjs'
 import fs from 'node:fs'
 import { writeIfChanged } from './write-if-changed.mjs'
+import { syncLottieList } from './lottie-list.mjs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import ts from 'typescript'
@@ -296,3 +297,4 @@ const pubPages = Object.fromEntries([['guide', componentPages], ['demo', demoPag
   Object.entries(pages).sort(([a], [b]) => a.localeCompare(b)).map(([id, page]) => ({ id, label: page.label }))
 ]))
 writeIfChanged(path.join(generatedRoot, 'pub-pages.js'), banner + `export const pubPages = ${JSON.stringify(pubPages, null, 2)}\n`)
+syncLottieList()

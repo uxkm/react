@@ -267,6 +267,13 @@ const paths = {
     <>
       <path d="M5 12h.01M12 12h.01M19 12h.01" strokeWidth="3" strokeLinecap="round" />
     </>
+  ),
+  play: <path d="M8 5v14l11-7z" fill="currentColor" stroke="none" />,
+  pause: (
+    <>
+      <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor" stroke="none" />
+      <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor" stroke="none" />
+    </>
   )
 } as const
 

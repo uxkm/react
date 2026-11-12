@@ -9,7 +9,7 @@ export function isWatchedPath (relative) {
   if (parts[0] === 'src' && (parts[1] === 'generated' || (parts[1] === 'styles' && ['css', 'dist'].includes(parts[2])))) return false
   if (parts.includes('.DS_Store')) return false
   const name = parts.at(-1)
-  if (name.endsWith('~') || /\.(?:swp|tmp|tsbuildinfo)$/.test(name) || relative === 'public/data/pub/b2b.generated.json') return false
+  if (name.endsWith('~') || /\.(?:swp|tmp|tsbuildinfo)$/.test(name) || relative === 'public/data/pub/b2b.generated.json' || relative === 'public/data/pub/lottie.json') return false
   return ['src', 'public', 'scripts'].includes(parts[0]) ||
     (parts.length === 1 && /^(?:next\.config\.|postcss\.config\.|tsconfig\.json$|package\.json$|README\.md$|\.env)/.test(name))
 }

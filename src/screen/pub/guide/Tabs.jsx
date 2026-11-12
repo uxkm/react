@@ -1,7 +1,24 @@
 'use client'
 
 import { useState } from 'react'
-import { Button, Icon, Space, Tab, Tabs } from '@/comp'
+import {
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Carousel,
+  CarouselSlide,
+  FormActions,
+  FormField,
+  FormLayout,
+  Icon,
+  Input,
+  Space,
+  Tab,
+  TabPanel,
+  Tabs
+} from '@/comp'
 import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
 import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
 import { GuideLayout } from '@/screen/pub/layout'
@@ -37,7 +54,7 @@ const CUSTOM_MENU = [
   { value: 'activity', label: '활동(비활성)', disabled: true }
 ]
 
-/** 데이터 map + 단일 패널(내용만 교체) */
+/** 데이터 map + value별 panels 슬롯 */
 function ControlledTabs ({
   tabs = BASIC_TABS,
   initial = tabs[0]?.value,
@@ -45,7 +62,14 @@ function ControlledTabs ({
   ...props
 }) {
   const [value, setValue] = useState(initial)
-  const active = tabs.find((tab) => tab.value === value) || tabs[0]
+  const panels = Object.fromEntries(
+    tabs.map((tab) => [
+      tab.value,
+      <p className="tabs_panel-placeholder" key={String(tab.value)}>
+        {panelPrefix}: {tab.label}
+      </p>
+    ])
+  )
 
   return (
     <Tabs {...props} value={value} onChange={setValue}>
@@ -57,16 +81,15 @@ function ControlledTabs ({
           icon={tab.icon}
           disabled={tab.disabled}
           closable={tab.closable}
-        />
+        >
+          {panels[tab.value]}
+        </Tab>
       ))}
-      <p className="tabs_panel-placeholder">
-        {panelPrefix}: {active?.label}
-      </p>
     </Tabs>
   )
 }
 
-/** 코드보기용 — 페이지 함수 안에서 tabs map + 단일 패널 슬롯 */
+/** 코드보기용 — tabs map + value별 패널 슬롯(panels) */
 function compoundCode (options = {}) {
   const {
     props = '',
@@ -98,6 +121,19 @@ function compoundCode (options = {}) {
       return `  { ${fields} }`
     }).join(',\n')}\n]`
 
+  const panelsDecl = tabs.length > 6
+    ? `const panels = Object.fromEntries(\n` +
+      `  tabs.map((tab) => [\n` +
+      `    tab.value,\n` +
+      `    <p className="tabs_panel-placeholder" key={tab.value}>${panelPrefix}: {tab.label}</p>\n` +
+      `  ])\n` +
+      ')'
+    : `const panels = {\n${tabs.map((tab) => (
+      `  '${tab.value}': (\n` +
+      `    <p className="tabs_panel-placeholder">${panelPrefix}: ${tab.label}</p>\n` +
+      '  )'
+    )).join(',\n')}\n}`
+
   const tabAttrs = [
     'key={tab.value}',
     'value={tab.value}',
@@ -111,9 +147,10 @@ function compoundCode (options = {}) {
   {tabs.map((tab) => (
     <Tab
       ${tabAttrs}
-    />
+    >
+      {panels[tab.value]}
+    </Tab>
   ))}
-  <p className="tabs_panel-placeholder">${panelPrefix}: {active?.label}</p>
 </Tabs>`
 
   const jsx = wrapStart
@@ -127,30 +164,40 @@ function compoundCode (options = {}) {
     body: pageExampleReturn(
       jsx,
       `${tabsDecl}
-const [value, setValue] = useState('${initial}')
-const active = tabs.find((tab) => tab.value === value)`
+
+${panelsDecl}
+
+const [value, setValue] = useState('${initial}')`
     )
   })
 }
 
-/** 메뉴 데이터 map + 아이콘 커스텀 · 패널 내용만 교체 */
+/** 메뉴 map + label · children(panels 맵) 패널 슬롯 */
 function CompoundTabsDemo () {
   const [value, setValue] = useState('overview')
-  const active = CUSTOM_MENU.find((tab) => tab.value === value)
+  const panels = {
+    overview: <p className="tabs_panel-placeholder">콘텐츠: 개요</p>,
+    settings: <p className="tabs_panel-placeholder">콘텐츠: 설정</p>,
+    activity: <p className="tabs_panel-placeholder">콘텐츠: 활동(비활성)</p>
+  }
 
   return (
     <Tabs value={value} onChange={setValue} indicatorSlide>
       {CUSTOM_MENU.map((tab) => (
-        <Tab key={tab.value} value={tab.value} disabled={tab.disabled}>
-          {tab.icon && (
-            <span className="tabs_icon">
+        <Tab
+          key={tab.value}
+          value={tab.value}
+          label={tab.label}
+          icon={tab.icon
+            ? (
               <Icon name={tab.icon} size="100%" />
-            </span>
-          )}
-          <span className="tabs_label">{tab.label}</span>
+              )
+            : undefined}
+          disabled={tab.disabled}
+        >
+          {panels[tab.value]}
         </Tab>
       ))}
-      <p className="tabs_panel-placeholder">콘텐츠: {active?.label}</p>
     </Tabs>
   )
 }
@@ -178,24 +225,171 @@ const PANEL_SLOTS = {
   activity: ActivitySlot
 }
 
-/** 메뉴 map + value → 컴포넌트(슬롯) 패널 */
+/** 메뉴 map + panel prop 으로 탭별 컴포넌트 슬롯 */
 function SlotPanelTabsDemo () {
   const [value, setValue] = useState('overview')
-  const Panel = PANEL_SLOTS[value]
 
   return (
     <Tabs value={value} onChange={setValue} indicatorSlide>
-      {CUSTOM_MENU.map((tab) => (
-        <Tab key={tab.value} value={tab.value} disabled={tab.disabled}>
-          {tab.icon && (
-            <span className="tabs_icon">
-              <Icon name={tab.icon} size="100%" />
-            </span>
-          )}
-          <span className="tabs_label">{tab.label}</span>
-        </Tab>
-      ))}
-      {Panel ? <Panel key={value} /> : null}
+      {CUSTOM_MENU.map((tab) => {
+        const Panel = PANEL_SLOTS[tab.value]
+        return (
+          <Tab
+            key={tab.value}
+            value={tab.value}
+            label={tab.label}
+            icon={tab.icon
+              ? (
+                <Icon name={tab.icon} size="100%" />
+                )
+              : undefined}
+            disabled={tab.disabled}
+            panel={Panel ? <Panel /> : null}
+          />
+        )
+      })}
+    </Tabs>
+  )
+}
+
+/** Tab + TabPanel 조합 */
+function TabPanelCompoundDemo () {
+  const [value, setValue] = useState('overview')
+
+  return (
+    <Tabs value={value} onChange={setValue} indicatorSlide>
+      <Tab value="overview" label="개요" />
+      <Tab value="settings" label="설정" />
+      <Tab value="activity" label="활동" disabled />
+      <TabPanel value="overview">
+        <p className="tabs_panel-placeholder">개요 패널</p>
+      </TabPanel>
+      <TabPanel value="settings">
+        <p className="tabs_panel-placeholder">설정 패널</p>
+      </TabPanel>
+      <TabPanel value="activity">
+        <p className="tabs_panel-placeholder">활동 패널</p>
+      </TabPanel>
+    </Tabs>
+  )
+}
+
+/** 패널별 위젯/모듈: 슬라이드 · 폼 · 카드 */
+function PanelSlideModule () {
+  return (
+    <Carousel ariaLabel="탭 패널 슬라이드" autoplay>
+      <CarouselSlide>
+        <article className="card card_accent color_primary card_elevated">
+          <div className="card_body">
+            <p className="typo_overline">이벤트</p>
+            <h3 className="card_title">신규 가입 혜택</h3>
+            <p className="card_subtitle">첫 주문 20% 할인 쿠폰을 드립니다.</p>
+          </div>
+        </article>
+      </CarouselSlide>
+      <CarouselSlide>
+        <article className="card card_accent color_success card_elevated">
+          <div className="card_body">
+            <p className="typo_overline">혜택</p>
+            <h3 className="card_title">무료 배송</h3>
+            <p className="card_subtitle">3만 원 이상 구매 시 무료 배송이 적용됩니다.</p>
+          </div>
+        </article>
+      </CarouselSlide>
+      <CarouselSlide>
+        <article className="card card_accent color_warning card_elevated">
+          <div className="card_body">
+            <p className="typo_overline">세일</p>
+            <h3 className="card_title">시즌 세일</h3>
+            <p className="card_subtitle">베스트셀러를 최대 50% 할인합니다.</p>
+          </div>
+        </article>
+      </CarouselSlide>
+    </Carousel>
+  )
+}
+
+function PanelFormModule ({ idPrefix = 'tabs-panel' } = {}) {
+  return (
+    <FormLayout>
+      <FormField label="이름" htmlFor={`${idPrefix}-name`} required>
+        <Input id={`${idPrefix}-name`} placeholder="홍길동" />
+      </FormField>
+      <FormField label="이메일" htmlFor={`${idPrefix}-email`}>
+        <Input id={`${idPrefix}-email`} type="email" placeholder="name@example.com" />
+      </FormField>
+      <FormActions>
+        <Button variant="outline" color="default" label="취소" />
+        <Button label="저장" />
+      </FormActions>
+    </FormLayout>
+  )
+}
+
+function PanelCardModule () {
+  return (
+    <Card style={{ maxWidth: 360, width: '100%' }}>
+      <CardHeader title="프로젝트 카드" subtitle="모듈 패널 예시" />
+      <CardBody>
+        탭 패널에서 Card 위젯을 호출한 예시입니다. 관련 설명과 액션을 담을 수 있습니다.
+      </CardBody>
+      <CardFooter>
+        <Button size="sm" variant="outline" label="자세히" />
+        <Button size="sm" label="열기" />
+      </CardFooter>
+    </Card>
+  )
+}
+
+/** 페이지에 이미 있는 위젯 — Tabs에서 그대로 호출 */
+const HeroCarousel = PanelSlideModule
+function ContactForm () {
+  return <PanelFormModule idPrefix="tabs-page-form" />
+}
+const ProjectCard = PanelCardModule
+
+const MODULE_PANEL_MAP = {
+  slide: PanelSlideModule,
+  form: PanelFormModule,
+  card: PanelCardModule
+}
+
+const MODULE_TABS = [
+  { value: 'slide', label: '슬라이드' },
+  { value: 'form', label: '폼' },
+  { value: 'card', label: '카드' }
+]
+
+/** 탭마다 다른 위젯/모듈 패널 */
+function ModulePanelsDemo () {
+  const [value, setValue] = useState('slide')
+
+  return (
+    <Tabs value={value} onChange={setValue} indicatorSlide>
+      {MODULE_TABS.map((tab) => {
+        const Panel = MODULE_PANEL_MAP[tab.value]
+        return (
+          <Tab
+            key={tab.value}
+            value={tab.value}
+            label={tab.label}
+            panel={Panel ? <Panel /> : null}
+          />
+        )
+      })}
+    </Tabs>
+  )
+}
+
+/** 페이지 위젯을 panel에 직접 호출 */
+function PageWidgetPanelsDemo () {
+  const [value, setValue] = useState('slide')
+
+  return (
+    <Tabs value={value} onChange={setValue} indicatorSlide>
+      <Tab value="slide" label="슬라이드" panel={<HeroCarousel />} />
+      <Tab value="form" label="폼" panel={<ContactForm />} />
+      <Tab value="card" label="카드" panel={<ProjectCard />} />
     </Tabs>
   )
 }
@@ -208,7 +402,6 @@ function ClosableTabsDemo () {
     { value: 'doc-3', label: '문서 3', closable: true }
   ])
   const [value, setValue] = useState('doc-1')
-  const active = items.find((tab) => tab.value === value)
 
   const onClose = (closed) => {
     setItems((prev) => {
@@ -255,9 +448,10 @@ function ClosableTabsDemo () {
           value={tab.value}
           label={tab.label}
           closable={tab.closable}
-        />
+        >
+          <p className="tabs_panel-placeholder">{tab.label} 내용</p>
+        </Tab>
       ))}
-      <p className="tabs_panel-placeholder">{active?.label} 내용</p>
     </Tabs>
   )
 }
@@ -267,7 +461,8 @@ const SECTIONS = [
     title: '기본 사용',
     description: (
       <>
-        메뉴는 데이터 <code>map</code>으로 <code>Tab</code>을 돌리고, 패널은 활성 값에 맞춰 내용만 교체합니다.
+        메뉴는 데이터 <code>map</code>으로 <code>Tab</code>을 돌립니다.
+        <code>label</code>과 함께 <code>children</code>에 넣으면 탭별 패널 슬롯으로 표시됩니다.
         기본 스킨은 <code>line</code>(<code>tabs_line</code>)이며, 선택 탭에 <code>is-active</code>와
         <code>aria-selected</code>가 붙습니다.
       </>
@@ -499,77 +694,299 @@ const SECTIONS = [
     )
   },
   {
-    title: '커스텀 탭 · 패널',
+    title: '패널 슬롯 · children',
     description: (
       <>
-        메뉴가 많으면 데이터 <code>map</code>으로 <code>Tab</code>을 반복합니다.
-        패널은 활성 <code>value</code>에 맞춰 텍스트만 바꾸거나, 컴포넌트(슬롯)·페이지를 교체해 넣습니다.
+        <code>Tab</code>에 <code>label</code>을 주고 <code>children</code>에 패널을 넣습니다.
+        <code>panels[tab.value]</code>처럼 value별 슬롯 맵을 두면 탭마다 다른 내용을 제어할 수 있습니다.
       </>
     ),
-    code: [
-      pageExampleCode({
-        name: 'TabsCustomLabelExample',
-        reactImports: ['useState'],
-        compImports: ['Icon', 'Tab', 'Tabs'],
-        body: pageExampleReturn(
-          `<Tabs value={value} onChange={setValue} indicatorSlide>
+    code: pageExampleCode({
+      name: 'TabsPanelChildrenExample',
+      reactImports: ['useState'],
+      compImports: ['Icon', 'Tab', 'Tabs'],
+      body: pageExampleReturn(
+        `<Tabs value={value} onChange={setValue} indicatorSlide>
   {menu.map((tab) => (
-    <Tab key={tab.value} value={tab.value} disabled={tab.disabled}>
-      {tab.icon && (
-        <span className="tabs_icon"><Icon name={tab.icon} size="100%" /></span>
-      )}
-      <span className="tabs_label">{tab.label}</span>
+    <Tab
+      key={tab.value}
+      value={tab.value}
+      label={tab.label}
+      icon={tab.icon ? <Icon name={tab.icon} size="100%" /> : undefined}
+      disabled={tab.disabled}
+    >
+      {panels[tab.value]}
     </Tab>
   ))}
-  <p className="tabs_panel-placeholder">콘텐츠: {active?.label}</p>
 </Tabs>`,
-          `const menu = [
+        `const menu = [
   { value: 'overview', label: '개요', icon: 'home' },
   { value: 'settings', label: '설정', icon: 'settings' },
   { value: 'activity', label: '활동(비활성)', disabled: true }
 ]
-const [value, setValue] = useState('overview')
-const active = menu.find((tab) => tab.value === value)`
-        )
-      }),
-      pageExampleCode({
-        name: 'TabsSlotPanelExample',
-        reactImports: ['useState'],
-        compImports: ['Icon', 'Tab', 'Tabs'],
-        body: pageExampleReturn(
-          `<Tabs value={value} onChange={setValue} indicatorSlide>
-  {menu.map((tab) => (
-    <Tab key={tab.value} value={tab.value} disabled={tab.disabled}>
-      {tab.icon && (
-        <span className="tabs_icon"><Icon name={tab.icon} size="100%" /></span>
-      )}
-      <span className="tabs_label">{tab.label}</span>
-    </Tab>
-  ))}
-  {Panel ? <Panel key={value} /> : null}
-</Tabs>`,
-          `const menu = [
-  { value: 'overview', label: '개요', icon: 'home' },
-  { value: 'settings', label: '설정', icon: 'settings' },
-  { value: 'activity', label: '활동(비활성)', disabled: true }
-]
-const [value, setValue] = useState('overview')
-// OverviewPage · SettingsPage · ActivityPage 는 페이지/슬롯 컴포넌트
+
 const panels = {
+  overview: (
+    <p className="tabs_panel-placeholder">콘텐츠: 개요</p>
+  ),
+  settings: (
+    <p className="tabs_panel-placeholder">콘텐츠: 설정</p>
+  ),
+  activity: (
+    <p className="tabs_panel-placeholder">콘텐츠: 활동(비활성)</p>
+  )
+}
+
+const [value, setValue] = useState('overview')`
+      )
+    }),
+    preview: <CompoundTabsDemo />
+  },
+  {
+    title: '패널 슬롯 · panel prop',
+    description: (
+      <>
+        <code>panel</code> prop에 페이지·슬롯 컴포넌트를 넘깁니다.
+        <code>PanelMap[tab.value]</code>로 탭별 화면을 연결합니다.
+      </>
+    ),
+    code: pageExampleCode({
+      name: 'TabsPanelPropExample',
+      reactImports: ['useState'],
+      compImports: ['Button', 'Icon', 'Space', 'Tab', 'Tabs'],
+      body: pageExampleReturn(
+        `<Tabs value={value} onChange={setValue} indicatorSlide>
+  {menu.map((tab) => {
+    const Panel = PanelMap[tab.value]
+    return (
+      <Tab
+        key={tab.value}
+        value={tab.value}
+        label={tab.label}
+        icon={tab.icon ? <Icon name={tab.icon} size="100%" /> : undefined}
+        disabled={tab.disabled}
+        panel={Panel ? <Panel /> : null}
+      />
+    )
+  })}
+</Tabs>`,
+        `function OverviewPage () {
+  return <p className="tabs_panel-placeholder">개요 페이지 슬롯</p>
+}
+
+function SettingsPage () {
+  return (
+    <Space vertical block size={8}>
+      <p className="tabs_panel-placeholder">설정 페이지 슬롯</p>
+      <Button size="sm" variant="outline" label="저장" />
+    </Space>
+  )
+}
+
+function ActivityPage () {
+  return <p className="tabs_panel-placeholder">활동 페이지 슬롯</p>
+}
+
+const menu = [
+  { value: 'overview', label: '개요', icon: 'home' },
+  { value: 'settings', label: '설정', icon: 'settings' },
+  { value: 'activity', label: '활동(비활성)', disabled: true }
+]
+
+const PanelMap = {
   overview: OverviewPage,
   settings: SettingsPage,
   activity: ActivityPage
 }
-const Panel = panels[value]`
-        )
-      })
-    ].join('\n\n'),
-    preview: (
-      <Space vertical block size={24}>
-        <CompoundTabsDemo />
-        <SlotPanelTabsDemo />
-      </Space>
+
+const [value, setValue] = useState('overview')`
+      )
+    }),
+    preview: <SlotPanelTabsDemo />
+  },
+  {
+    title: '패널 슬롯 · TabPanel',
+    description: (
+      <>
+        <code>Tab</code>과 <code>TabPanel</code>을 형제로 두고 <code>value</code>로 연결합니다.
+        메뉴와 패널 마크업을 분리할 때 사용합니다.
+      </>
+    ),
+    code: pageExampleCode({
+      name: 'TabsTabPanelExample',
+      reactImports: ['useState'],
+      compImports: ['Tab', 'TabPanel', 'Tabs'],
+      body: pageExampleReturn(
+        `<Tabs value={value} onChange={setValue} indicatorSlide>
+  <Tab value="overview" label="개요" />
+  <Tab value="settings" label="설정" />
+  <Tab value="activity" label="활동" disabled />
+  <TabPanel value="overview">
+    <p className="tabs_panel-placeholder">개요 패널</p>
+  </TabPanel>
+  <TabPanel value="settings">
+    <p className="tabs_panel-placeholder">설정 패널</p>
+  </TabPanel>
+  <TabPanel value="activity">
+    <p className="tabs_panel-placeholder">활동 패널</p>
+  </TabPanel>
+</Tabs>`,
+        `const [value, setValue] = useState('overview')`
+      )
+    }),
+    preview: <TabPanelCompoundDemo />
+  },
+  {
+    title: '패널 슬롯 · 위젯/모듈',
+    description: (
+      <>
+        탭마다 다른 위젯·모듈을 호출합니다. 첫 탭은 <code>Carousel</code>(슬라이드),
+        둘째는 <code>FormLayout</code> 폼 요소, 셋째는 <code>Card</code>입니다.
+        <code>panel</code> prop에 모듈 컴포넌트를 넘깁니다.
+      </>
+    ),
+    code: pageExampleCode({
+      name: 'TabsModulePanelsExample',
+      reactImports: ['useState'],
+      compImports: [
+        'Button',
+        'Card',
+        'CardBody',
+        'CardFooter',
+        'CardHeader',
+        'Carousel',
+        'CarouselSlide',
+        'FormActions',
+        'FormField',
+        'FormLayout',
+        'Input',
+        'Tab',
+        'Tabs'
+      ],
+      body: pageExampleReturn(
+        `<Tabs value={value} onChange={setValue} indicatorSlide>
+  {menu.map((tab) => {
+    const Panel = PanelMap[tab.value]
+    return (
+      <Tab
+        key={tab.value}
+        value={tab.value}
+        label={tab.label}
+        panel={Panel ? <Panel /> : null}
+      />
     )
+  })}
+</Tabs>`,
+        `function PanelSlideModule () {
+  return (
+    <Carousel ariaLabel="탭 패널 슬라이드" autoplay>
+      <CarouselSlide>
+        <article className="card card_accent color_primary card_elevated">
+          <div className="card_body">
+            <p className="typo_overline">이벤트</p>
+            <h3 className="card_title">신규 가입 혜택</h3>
+            <p className="card_subtitle">첫 주문 20% 할인 쿠폰을 드립니다.</p>
+          </div>
+        </article>
+      </CarouselSlide>
+      <CarouselSlide>
+        <article className="card card_accent color_success card_elevated">
+          <div className="card_body">
+            <p className="typo_overline">혜택</p>
+            <h3 className="card_title">무료 배송</h3>
+            <p className="card_subtitle">3만 원 이상 구매 시 무료 배송이 적용됩니다.</p>
+          </div>
+        </article>
+      </CarouselSlide>
+      <CarouselSlide>
+        <article className="card card_accent color_warning card_elevated">
+          <div className="card_body">
+            <p className="typo_overline">세일</p>
+            <h3 className="card_title">시즌 세일</h3>
+            <p className="card_subtitle">베스트셀러를 최대 50% 할인합니다.</p>
+          </div>
+        </article>
+      </CarouselSlide>
+    </Carousel>
+  )
+}
+
+function PanelFormModule () {
+  return (
+    <FormLayout>
+      <FormField label="이름" htmlFor="tabs-panel-name" required>
+        <Input id="tabs-panel-name" placeholder="홍길동" />
+      </FormField>
+      <FormField label="이메일" htmlFor="tabs-panel-email">
+        <Input id="tabs-panel-email" type="email" placeholder="name@example.com" />
+      </FormField>
+      <FormActions>
+        <Button variant="outline" color="default" label="취소" />
+        <Button label="저장" />
+      </FormActions>
+    </FormLayout>
+  )
+}
+
+function PanelCardModule () {
+  return (
+    <Card style={{ maxWidth: 360, width: '100%' }}>
+      <CardHeader title="프로젝트 카드" subtitle="모듈 패널 예시" />
+      <CardBody>
+        탭 패널에서 Card 위젯을 호출한 예시입니다.
+      </CardBody>
+      <CardFooter>
+        <Button size="sm" variant="outline" label="자세히" />
+        <Button size="sm" label="열기" />
+      </CardFooter>
+    </Card>
+  )
+}
+
+const menu = [
+  { value: 'slide', label: '슬라이드' },
+  { value: 'form', label: '폼' },
+  { value: 'card', label: '카드' }
+]
+
+const PanelMap = {
+  slide: PanelSlideModule,
+  form: PanelFormModule,
+  card: PanelCardModule
+}
+
+const [value, setValue] = useState('slide')`
+      )
+    }),
+    preview: <ModulePanelsDemo />
+  },
+  {
+    title: '패널 슬롯 · 페이지 위젯 호출',
+    description: (
+      <>
+        페이지에 이미 위젯이 있다면 모듈을 새로 감싸지 않고{' '}
+        <code>&lt;HeroCarousel /&gt;</code> · <code>&lt;ContactForm /&gt;</code> ·{' '}
+        <code>&lt;ProjectCard /&gt;</code>처럼 <code>panel</code>에 그대로 넘깁니다.
+      </>
+    ),
+    code: pageExampleCode({
+      name: 'TabsPageWidgetPanelsExample',
+      reactImports: ['useState'],
+      compImports: ['Tab', 'Tabs'],
+      extraImports: [
+        "// 페이지에 이미 있는 위젯",
+        "import { HeroCarousel, ContactForm, ProjectCard } from './widgets'"
+      ],
+      body: pageExampleReturn(
+        `<Tabs value={value} onChange={setValue} indicatorSlide>
+  <Tab value="slide" label="슬라이드" panel={<HeroCarousel />} />
+  <Tab value="form" label="폼" panel={<ContactForm />} />
+  <Tab value="card" label="카드" panel={<ProjectCard />} />
+</Tabs>`,
+        `const [value, setValue] = useState('slide')`
+      )
+    }),
+    preview: <PageWidgetPanelsDemo />
   },
   {
     title: '크기',
@@ -708,17 +1125,17 @@ const Panel = panels[value]`
       value={tab.value}
       label={tab.label}
       closable={tab.closable}
-    />
+    >
+      <p className="tabs_panel-placeholder">{tab.label} 내용</p>
+    </Tab>
   ))}
-  <p className="tabs_panel-placeholder">{active?.label} 내용</p>
 </Tabs>`,
         `const [items, setItems] = useState([
   { value: 'doc-1', label: '문서 1', closable: true },
   { value: 'doc-2', label: '문서 2', closable: true },
   { value: 'doc-3', label: '문서 3', closable: true }
 ])
-const [value, setValue] = useState('doc-1')
-const active = items.find((tab) => tab.value === value)`
+const [value, setValue] = useState('doc-1')`
       )
     }),
     preview: <ClosableTabsDemo />
@@ -829,14 +1246,14 @@ const active = items.find((tab) => tab.value === value)`
 
 /**
  * Tabs 가이드 화면.
- * 메뉴는 데이터 map · 패널은 단일 슬롯(내용·컴포넌트 교체) 기준으로 예시를 모은다.
+ * 메뉴는 데이터 map · 패널은 Tab children / panel / TabPanel 슬롯으로 구성한다.
  */
 export default function TabsGuide () {
   return (
     <GuideLayout
       category="네비게이션"
       title="Tabs"
-      description="탭 전환. 메뉴는 데이터 map으로 Tab을 돌리고, 패널은 활성 value에 맞춰 내용·컴포넌트(슬롯)만 교체합니다. line · card · pill · indicatorSlide · navFade · navSelect · scroll을 지원합니다."
+      description="탭 전환. 메뉴는 데이터 map으로 Tab을 돌리고, 패널은 label+children · panel prop · TabPanel 슬롯으로 탭별 내용을 제어합니다. line · card · pill · indicatorSlide · navFade · navSelect · scroll을 지원합니다."
     >
       {SECTIONS.map((section) => (
         <DemoBlock

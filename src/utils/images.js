@@ -12,7 +12,7 @@
 
 const BASE = '/images'
 
-/** @param {'icon'|'common'|'pages'} folder @param {string} file */
+/** @param {'icon'|'common'|'pages'|'lottie'} folder @param {string} file */
 export function img (folder, file) {
   const name = String(file || '').replace(/^\/+/, '')
   return `${BASE}/${folder}/${name}`
@@ -21,6 +21,14 @@ export function img (folder, file) {
 /** @param {string} file */
 export function imgIcon (file) {
   return img('icon', file)
+}
+
+/** @param {string} file — `fireworks` · `fireworks.json` → /images/lottie/… */
+export function imgLottie (file) {
+  const raw = String(file || '').trim()
+  if (!raw) return ''
+  const name = raw.endsWith('.json') ? raw : `${raw}.json`
+  return img('lottie', name)
 }
 
 /** @param {string} file */
