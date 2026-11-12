@@ -30,6 +30,7 @@ export { Icon, iconNames, iconSizes, resolveIconSrc, toIconCssSize } from './ui/
 
 export { Badge, BadgeWrap } from './ui/Badge.tsx'
 export { Tag, TagGroup } from './ui/Tag.tsx'
+export { Keyword, Keywords } from './ui/Keywords.tsx'
 export { Card, CardHeader, CardBody, CardFooter, CardDeck } from './ui/Card.tsx'
 export { Avatar, AvatarGroup } from './ui/Avatar.tsx'
 export { Table } from './ui/Table.tsx'

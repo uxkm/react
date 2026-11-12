@@ -843,14 +843,17 @@ const SECTIONS = [
     title: '루트 태그',
     description: (
       <>
-        <code>tag</code> prop으로 <code>button</code> · <code>a</code> · <code>div</code>를 선택합니다.
-        <code>div</code>와 <code>href</code> 없는 <code>a</code>에는 키보드 접근을 위해 <code>role</code>과 <code>tabindex=0</code>을 자동 적용합니다.
+        <code>tag</code> prop으로 <code>button</code> · <code>a</code> · <code>div</code> · <code>span</code>을 선택합니다.
+        <code>a</code>는 <code>href</code>가 없으면 <code>#</code>를 쓰고,
+        <code>div</code>·<code>span</code>에는 키보드 접근을 위해 <code>role=&quot;button&quot;</code>과 <code>tabindex=0</code>을 자동 적용합니다.
       </>
     ),
     code: wrapPageExample(`<div className="btn_row btn_row-wrap">
   <Button label="button" />
   <Button tag="a" href="#button" variant="outline" label="a + href" />
+  <Button tag="a" variant="outline" label="a · href 기본 #" />
   <Button tag="div" variant="ghost" label="div → role=button" />
+  <Button tag="span" variant="ghost" label="span → role=button" />
   <Button tag="a" role="link" variant="text" label="a, role=link" />
 </div>`, {
   name: 'ButtonTagExample',
@@ -861,7 +864,9 @@ const SECTIONS = [
       <div className="btn_row btn_row-wrap">
         <Button label="button" />
         <Button tag="a" href="#button" variant="outline" label="a + href" />
+        <Button tag="a" variant="outline" label="a · href 기본 #" />
         <Button tag="div" variant="ghost" label="div → role=button" />
+        <Button tag="span" variant="ghost" label="span → role=button" />
         <Button tag="a" role="link" variant="text" label="a, role=link" />
       </div>
     )

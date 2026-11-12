@@ -132,21 +132,21 @@ const props = [
   },
   {
     name: 'tag',
-    type: "'button' | 'a' | 'div'",
+    type: "'button' | 'a' | 'div' | 'span'",
     default: 'button',
-    description: '렌더 루트 HTML 태그.'
+    description: '렌더 루트 HTML 태그. a 는 href 기본 \'#\', div·span 은 role=button 과 tabindex=0 을 자동 적용합니다.'
   },
   {
     name: 'href',
     type: 'string',
-    default: '—',
-    description: 'tag가 a일 때 링크 주소.'
+    default: "tag=a 일 때 '#'",
+    description: 'tag가 a일 때 링크 주소. 비어 있으면 \'#\' 가 적용됩니다.'
   },
   {
     name: 'role',
     type: 'string',
     default: '자동',
-    description: 'href 없는 a·div에는 button 역할 자동.'
+    description: 'div·span 에는 button 역할을 자동 적용합니다. 직접 넘기면 그 값을 씁니다.'
   },
   {
     name: 'ariaLabel',

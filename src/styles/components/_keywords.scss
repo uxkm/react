@@ -1,0 +1,267 @@
+@use 'common/global' as *;
+
+:root {
+  // ----- Keywords — structure
+  --keywords-gap: var(--space-8);
+  --keywords-toggle-size: 1.75rem;
+  --keywords-toggle-icon-size: 0.875rem;
+  --keywords-padding-y: 0.2rem;
+  --keywords-padding-x: 0.55rem;
+  --keywords-font-size: var(--text-size-xs);
+  --keywords-font-weight: 600;
+  --keywords-line-height: 1.4;
+  --keywords-radius: var(--radius-sm);
+  --keywords-bg: var(--color-surface-raised);
+  --keywords-border: var(--color-border);
+  --keywords-color: var(--color-text);
+  --keywords-dim-width: 1.5rem;
+  --keywords-dim-color: var(--color-surface);
+}
+
+// Keywords — OOCSS: 구조(.keywords) + 상태(.is-collapsed · .is-expanded) + 아이템(.keyword)
+//
+//   <div class="keywords keywords_collapsible is-collapsed">
+//     <div class="keywords_list">
+//       <span class="keyword">표시</span>
+//       <button type="button" class="keyword">버튼</button>
+//       <a class="keyword" href="…">링크</a>
+//     </div>
+//     <button type="button" class="keywords_toggle" aria-expanded="false">…</button>
+//   </div>
+
+.keywords {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--keywords-gap);
+  width: 100%;
+  min-width: 0;
+
+  &_list {
+    display: flex;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--keywords-gap);
+    min-width: 0;
+  }
+
+  // 접힘: 1행 + 가로 스크롤(바 숨김, 토글은 넘칠 때만)
+  &_collapsible.is-collapsed &_list {
+    --osb-skip: 1;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+  }
+
+  &_collapsible.is-expanded &_list {
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+
+  &_toggle {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--keywords-toggle-size);
+    height: var(--keywords-toggle-size);
+    margin: 0;
+    padding: 0 0.5rem;
+    overflow: visible;
+    border: 1px solid var(--keywords-border);
+    border-radius: var(--keywords-radius);
+    background: var(--color-surface);
+    color: var(--color-text-muted);
+    font-size: var(--keywords-font-size);
+    font-weight: var(--keywords-font-weight);
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease,
+      transform 0.15s ease;
+
+    &:hover {
+      background: var(--color-surface-raised);
+      color: var(--color-text);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+
+    .icon {
+      width: var(--keywords-toggle-icon-size);
+      height: var(--keywords-toggle-icon-size);
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+  }
+
+  &.is-expanded &_toggle .icon {
+    transform: rotate(180deg);
+  }
+
+  // 토글 형태: pill
+  &_toggle-round {
+    border-radius: var(--radius-pill);
+  }
+
+  // 토글 형태: 원형 (정사각 + 50%)
+  &_toggle-circle {
+    width: var(--keywords-toggle-size);
+    min-width: var(--keywords-toggle-size);
+    padding: 0;
+    border-radius: 50%;
+  }
+
+  // 목록 단위 round → 하위 .keyword · 토글 pill (toggleShape 미지정 시)
+  &_round {
+    .keyword {
+      border-radius: var(--radius-pill);
+    }
+
+    .keywords_toggle:not(.keywords_toggle-circle) {
+      border-radius: var(--radius-pill);
+    }
+  }
+
+  // 접힘·넘침 + toggleDim: 리스트 우측 페이드(토글 텍스트는 가리지 않음)
+  &_toggle-dim.is-collapsed.is-overflowing &_list {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      #000 0%,
+      #000 calc(100% - var(--keywords-dim-width)),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      #000 0%,
+      #000 calc(100% - var(--keywords-dim-width)),
+      transparent 100%
+    );
+  }
+}
+
+.keyword {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  max-width: 100%;
+  padding: var(--keywords-padding-y) var(--keywords-padding-x);
+  font-size: var(--keywords-font-size);
+  font-weight: var(--keywords-font-weight);
+  line-height: var(--keywords-line-height);
+  color: var(--keywords-color);
+  background: var(--keywords-bg);
+  border: 1px solid var(--keywords-border);
+  border-radius: var(--keywords-radius);
+  white-space: nowrap;
+  text-decoration: none;
+  vertical-align: middle;
+
+  &.color_default {
+    color: color-token(muted);
+    background: var(--color-surface-raised);
+    border-color: var(--color-border);
+  }
+
+  @include surface-soft-colors();
+
+  &.keyword_outline {
+    background: transparent;
+    @include outline-border-colors();
+  }
+
+  &.keyword_solid {
+    @each $name in default, primary, success, danger, warning, info {
+      &.color_#{$name} {
+        @include surface-filled($name);
+      }
+    }
+  }
+
+  &.keyword_borderless {
+    border-color: transparent;
+  }
+
+  &.keyword_round {
+    border-radius: var(--radius-pill);
+  }
+
+  &.keyword_sm {
+    --keywords-padding-y: 0.05rem;
+    --keywords-padding-x: 0.35rem;
+    --keywords-font-size: 0.6875rem;
+  }
+
+  &.keyword_lg {
+    --keywords-padding-y: 0.25rem;
+    --keywords-padding-x: 0.65rem;
+    --keywords-font-size: var(--text-size-sm);
+  }
+
+  &.is-selected {
+    color: var(--color-accent-text);
+    border-color: var(--color-accent);
+    background: var(--color-accent-muted);
+  }
+
+  &.is-disabled {
+    @include disabled-state;
+    background: var(--color-surface-disabled);
+    border-color: var(--color-border-disabled);
+
+    &.keyword_solid {
+      &.color_primary {
+        @include disabled-filled(var(--color-accent-disabled), var(--color-on-accent-disabled));
+      }
+
+      &.color_success {
+        @include disabled-filled(var(--color-success-disabled), var(--color-on-success-disabled));
+      }
+
+      &.color_danger {
+        @include disabled-filled(var(--color-danger-disabled), var(--color-on-danger-disabled));
+      }
+
+      &.color_warning {
+        @include disabled-filled(var(--color-warning-disabled), var(--color-on-warning-disabled));
+      }
+
+      &.color_default {
+        @include disabled-surface;
+      }
+    }
+  }
+}
+
+a.keyword,
+button.keyword {
+  margin: 0;
+  font-family: inherit;
+  cursor: pointer;
+  @include focus-ring;
+
+  &:hover:not(.is-disabled) {
+    opacity: 0.88;
+  }
+}
+
+button.keyword {
+  appearance: none;
+}

@@ -28,6 +28,7 @@ export const componentLoaders = {
   'header': () => import('@/screen/pub/guide/Header.jsx'),
   'icon': () => import('@/screen/pub/guide/Icon.jsx'),
   'input': () => import('@/screen/pub/guide/Input.jsx'),
+  'keyword': () => import('@/screen/pub/guide/Keyword.jsx'),
   'link': () => import('@/screen/pub/guide/Link.jsx'),
   'list': () => import('@/screen/pub/guide/List.jsx'),
   'menu': () => import('@/screen/pub/guide/Menu.jsx'),

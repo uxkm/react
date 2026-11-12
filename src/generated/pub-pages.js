@@ -111,6 +111,10 @@ export const pubPages = {
       "label": "input"
     },
     {
+      "id": "keyword",
+      "label": "keyword"
+    },
+    {
       "id": "link",
       "label": "link"
     },

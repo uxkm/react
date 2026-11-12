@@ -69,6 +69,10 @@
           "label": "Tag"
         },
         {
+          "id": "keyword",
+          "label": "Keyword"
+        },
+        {
           "id": "card",
           "label": "Card"
         },

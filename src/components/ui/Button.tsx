@@ -1,6 +1,6 @@
 /**
  * 공통 버튼.
- * variant·color·size, 아이콘·loading·disabled. button/a/div 태그 선택 가능.
+ * variant·color·size, 아이콘·loading·disabled. button/a/div/span 태그 선택 가능.
  */
 import {
   createElement,
@@ -53,7 +53,8 @@ export interface ButtonProps
   type?: 'button' | 'submit' | 'reset'
   /** @deprecated use `type` — kept for older demos */
   nativeType?: 'button' | 'submit' | 'reset' | ''
-  tag?: 'button' | 'a' | 'div'
+  /** 루트 HTML 태그. a 는 href 기본 '#', div·span 은 tabindex·role=button */
+  tag?: 'button' | 'a' | 'div' | 'span'
   href?: string
   role?: string
   ariaLabel?: string
@@ -70,7 +71,7 @@ export interface ButtonProps
 /**
  * 공통 버튼.
  * variant 모양, color 색, size 크기. label 또는 children 이 문구다.
- * tag 로 button / a / div 를 고르고, loading·disabled 이면 클릭을 막는다.
+ * tag 로 button / a / div / span 을 고르고, loading·disabled 이면 클릭을 막는다.
  */
 export function Button ({
   variant = 'filled',
@@ -110,10 +111,12 @@ export function Button ({
   onKeyDown,
   ...rest
 }: ButtonProps) {
-  const rootTag = tag
+  const rootTag = tag === 'a' || tag === 'div' || tag === 'span' ? tag : 'button'
   const resolvedType = nativeType || type
   const isDisabled = !!(disabled || ariaDisabled || loading)
   const showCaret = variant === 'select' ? true : !!selectCaret
+  /** a 태그: href 미지정 시 '#' */
+  const resolvedHref = rootTag === 'a' ? (href || '#') : undefined
 
   const btnClass = classNames(
     'btn',
@@ -138,13 +141,14 @@ export function Button ({
     className
   )
 
-  const needsButtonRole = tag === 'div' || (tag === 'a' && !href)
+  /** div·span → role=button + tabindex=0 (a 는 href 기본 '#' 로 포커스 가능) */
+  const needsButtonRole = rootTag === 'div' || rootTag === 'span'
   const computedRole = role || (needsButtonRole ? 'button' : undefined)
 
   let computedTabIndex: number | undefined
   if (tabIndex !== undefined && tabIndex !== null) {
     computedTabIndex = tabIndex
-  } else if (isDisabled && tag !== 'button') {
+  } else if (isDisabled && rootTag !== 'button') {
     computedTabIndex = -1
   } else if (needsButtonRole) {
     computedTabIndex = 0
@@ -231,7 +235,7 @@ export function Button ({
       ...rest,
       className: btnClass,
       type: rootTag === 'button' ? resolvedType : undefined,
-      href: rootTag === 'a' ? (href || undefined) : undefined,
+      href: resolvedHref,
       disabled: rootTag === 'button' ? isDisabled : undefined,
       role: computedRole,
       tabIndex: computedTabIndex,
