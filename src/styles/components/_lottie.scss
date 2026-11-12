@@ -13,9 +13,9 @@
 // Lottie — OOCSS: 구조(.lottie) + 변형(.lottie_controls-on) + 파트(.lottie_stage · .lottie_controls · .lottie_player)
 // 마크업은 span 기반 — `<p>` 등 phrasing 컨텍스트에도 유효
 //
-//   <Lottie name="fireworks" controls />  →  /images/lottie/fireworks.json
+//   <Lottie name="demo_fireworks" controls />  →  /images/lottie/demo_fireworks.json
 //
-//   <span class="lottie lottie_controls-on" data-lottie="fireworks">
+//   <span class="lottie lottie_controls-on" data-lottie="demo_fireworks">
 //     <span class="lottie_stage" role="img" aria-label="애니메이션">
 //       <span class="lottie_player" aria-hidden="true">…</span>
 //     </span>

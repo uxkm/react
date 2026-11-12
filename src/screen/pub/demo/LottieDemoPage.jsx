@@ -143,7 +143,7 @@ return (
         title="controls — 재생·정지"
         description="name으로 파일을 지정하고 controls로 재생·정지를 켭니다."
         code={wrapPageExample(`<Lottie
-  name="fireworks"
+  name="demo_fireworks"
   loop
   controls
   width={320}
@@ -157,7 +157,7 @@ return (
         })}
       >
         <Lottie
-          name="fireworks"
+          name="demo_fireworks"
           loop
           controls
           width={320}
@@ -171,7 +171,7 @@ return (
         title="기본 — controls 없음"
         description="controls를 끄면(기본값) 재생·정지 버튼 없이 자동 재생만 합니다."
         code={wrapPageExample(`<Lottie
-  name="fresh"
+  name="demo_fresh"
   loop
   width={180}
   height={180}
@@ -183,7 +183,7 @@ return (
         })}
       >
         <Lottie
-          name="fresh"
+          name="demo_fresh"
           loop
           width={180}
           height={180}
@@ -195,7 +195,7 @@ return (
         title="loop={false} — 일회 재생"
         description="루프를 끄면 한 번만 재생합니다. controls로 다시 재생할 수 있습니다."
         code={wrapPageExample(`<Lottie
-  name="check"
+  name="demo_check"
   loop={false}
   controls
   width={200}
@@ -208,7 +208,7 @@ return (
         })}
       >
         <Lottie
-          name="check"
+          name="demo_check"
           loop={false}
           controls
           width={200}

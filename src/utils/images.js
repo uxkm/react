@@ -23,7 +23,7 @@ export function imgIcon (file) {
   return img('icon', file)
 }
 
-/** @param {string} file — `fireworks` · `fireworks.json` → /images/lottie/… */
+/** @param {string} file — `demo_fireworks` · `demo_fireworks.json` → /images/lottie/… */
 export function imgLottie (file) {
   const raw = String(file || '').trim()
   if (!raw) return ''

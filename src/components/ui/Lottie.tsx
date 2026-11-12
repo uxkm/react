@@ -23,7 +23,7 @@ import { imgLottie } from '@/utils/images'
  * Lottie 경로 해석 (Icon resolveIconSrc 와 동일 규칙).
  * - `/…` · `http(s):` · `data:` 는 그대로
  * - `b2b/finish` 처럼 폴더 포함이면 `/images/lottie/…`
- * - `fireworks` · `fireworks.json` 은 `/images/lottie/…`
+ * - `demo_fireworks` · `demo_fireworks.json` 은 `/images/lottie/…`
  */
 export function resolveLottieSrc (nameOrSrc: string): string {
   const value = String(nameOrSrc || '').trim()
@@ -73,7 +73,7 @@ type FetchState = {
 export interface LottieProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'children' | 'color'> {
   /**
    * Lottie 파일 이름.
-   * `fireworks` · `fireworks.json` → /images/lottie/fireworks.json
+   * `demo_fireworks` · `demo_fireworks.json` → /images/lottie/demo_fireworks.json
    */
   name?: string
   /** Lottie JSON 객체. name · src 보다 우선 */
