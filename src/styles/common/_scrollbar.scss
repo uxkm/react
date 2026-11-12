@@ -1,0 +1,155 @@
+/* =============================================================================
+ * Overlay scrollbar — macOS 스타일
+ * - overlay OS(맥 등): 네이티브 오버레이 유지 (webkit width 지정 금지)
+ * - classic OS(윈도우 등): 네이티브 스크롤바 숨김 → 내용 너비 불변 + JS 오버레이 썸
+ * ============================================================================= */
+
+// ----- SimpleBar — 네이티브 대신 쓰는 커스텀 스크롤바 비주얼을 맥 스타일에 맞춤
+.simplebar-scrollbar {
+  &::before {
+    inset: var(--scrollbar-edge);
+    border-radius: var(--radius-pill);
+    background: var(--scrollbar-thumb);
+    opacity: 1;
+    transition: background-color var(--transition-fast), opacity var(--scrollbar-fade-ms) ease;
+  }
+
+  &.simplebar-hover::before,
+  &:hover::before {
+    background: var(--scrollbar-thumb-hover);
+  }
+
+  &.simplebar-dragging::before {
+    background: var(--scrollbar-thumb-active);
+  }
+}
+
+.simplebar-track {
+  &.simplebar-vertical {
+    width: var(--scrollbar-size);
+    right: 0;
+  }
+
+  &.simplebar-horizontal {
+    height: var(--scrollbar-size);
+    bottom: 0;
+  }
+}
+
+// ----- classic OS: 네이티브 스크롤바·상하 버튼 제거 (레이아웃 너비 고정)
+html[data-scrollbar='classic'] {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  * {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      width: 0 !important;
+      height: 0 !important;
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-button {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+
+    &::-webkit-scrollbar-track,
+    &::-webkit-scrollbar-track-piece,
+    &::-webkit-scrollbar-corner {
+      background: transparent;
+    }
+  }
+}
+
+// ----- 커스텀 오버레이 썸 (utils/overlayScrollbar.js)
+// host 는 전체 화면 덮개를 쓰지 않는다 — fixed inset:0 이면 app-header backdrop-filter 가 가려질 수 있다.
+.osb-host {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.osb {
+  position: fixed;
+  z-index: 1200;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--scrollbar-fade-ms) ease;
+  will-change: opacity;
+
+  &.is-visible,
+  &.is-dragging {
+    opacity: 1;
+
+    .osb_thumb {
+      pointer-events: auto;
+    }
+  }
+
+  &.is-dragging {
+    transition: none;
+
+    .osb_thumb {
+      background-color: var(--scrollbar-thumb-active);
+    }
+  }
+
+  // ----- 썸(드래그 핸들)
+  &_thumb {
+    position: absolute;
+    box-sizing: border-box;
+    pointer-events: none;
+    border-radius: var(--radius-pill);
+    background-color: var(--scrollbar-thumb);
+    background-clip: content-box;
+    border: var(--scrollbar-edge) solid transparent;
+    cursor: default;
+    touch-action: none;
+
+    &:hover {
+      background-color: var(--scrollbar-thumb-hover);
+    }
+  }
+
+  // ----- 세로 레일
+  &_vertical {
+    top: 0;
+    right: 0;
+    width: var(--scrollbar-size);
+    height: 100%;
+
+    .osb_thumb {
+      left: 0;
+      width: 100%;
+      min-height: var(--scrollbar-min-thumb);
+    }
+  }
+
+  // ----- 가로 레일
+  &_horizontal {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: var(--scrollbar-size);
+
+    .osb_thumb {
+      top: 0;
+      height: 100%;
+      min-width: var(--scrollbar-min-thumb);
+    }
+  }
+}
+
+// ----- Firefox 등 webkit 미지원 + overlay OS: thin 네이티브만
+@supports not selector(::-webkit-scrollbar) {
+  html:not([data-scrollbar='classic']) {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) transparent;
+  }
+}

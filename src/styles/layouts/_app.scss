@@ -24,6 +24,8 @@
 
 .app-header {
   --app-header-top-height: 0px;
+  // 스크롤 배경 기본값 — 색상 변경은 테마(--color-header-bg-scrolled) 또는 페이지 SCSS에서
+  --app-header-bg-scrolled: var(--color-header-bg-scrolled);
   --app-header-current-bg: var(--app-header-bg, var(--color-header-bg));
 
   position: sticky;

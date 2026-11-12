@@ -1,5 +1,6 @@
-@use 'demo-layout';
-@use 'guide-shell';
+// 퍼블 가이드·데모 페이지 스타일 진입점
+@use 'demo-layout'; // GuideLayout / DemoLayout 본문
+@use 'guide-layout'; // 좌측 GuideMenu + 마크다운
 @use 'sorting-menu-demo';
 @use 'filter-scroll-demo';
 @use 'lib-demos';

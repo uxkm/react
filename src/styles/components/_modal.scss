@@ -23,6 +23,7 @@
   --modal-footer-gap: var(--space-sm);
   --modal-footer-padding-y: var(--space-md);
   --modal-footer-padding-x: var(--space-lg);
+  --modal-adaptive-sheet-max-height: 90vh;
 
 }
 
@@ -299,6 +300,35 @@
       max-height: none;
       border-radius: 0;
       border: none;
+    }
+  }
+
+  // ----- adaptive: ≥BP 가운데 유지 / <BP 하단 바텀시트
+  // JS: .modal_adaptive + .is-adaptive-sheet (adaptiveBreakpoint 반영)
+
+  &_adaptive.is-adaptive-sheet {
+    align-items: flex-end;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+
+    .modal_dialog {
+      width: 100%;
+      max-width: 100%;
+      max-height: var(--modal-adaptive-sheet-max-height);
+      border-radius: var(--modal-radius) var(--modal-radius) 0 0;
+      transform: translateY(100%);
+      opacity: 0;
+    }
+
+    .modal_body {
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    &.is-open .modal_dialog {
+      transform: translateY(0);
+      opacity: 1;
     }
   }
 

@@ -2,6 +2,8 @@
 
 import { Lottie } from '@/lib/lottie'
 import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
 
 /** 최소 원형 회전 Lottie JSON */
 const pulseAnim = {
@@ -75,14 +77,28 @@ export default function LottieDemoPage () {
       description="lottie-react / lottie-web — JSON 애니메이션 (@/lib/lottie)"
       slug="lottie"
     >
-      <div className="demo-block">
-        <h2 className="demo-block__title">루프 애니메이션</h2>
+      <DemoBlock
+        title="루프 애니메이션"
+        code={wrapPageExample(`<Lottie
+  animationData={pulseAnim}
+  loop
+  style={{ width: 200, height: 200 }}
+/>`, {
+          name: 'LottieExample',
+          reactImports: [],
+          compImports: [],
+          extraImports: [
+            "import { Lottie } from '@/lib/lottie'",
+            "import pulseAnim from './pulse.json'"
+          ]
+        })}
+      >
         <Lottie
           animationData={pulseAnim}
           loop
           style={{ width: 200, height: 200 }}
         />
-      </div>
+      </DemoBlock>
     </DemoLayout>
   )
 }

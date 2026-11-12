@@ -186,6 +186,33 @@ function SizeDemo () {
   )
 }
 
+/** adaptive: ≥1440 가운데 모달형 / 미만 하단 시트(+드래그) */
+function AdaptiveDemo () {
+  const [open, setOpen] = useState(false)
+  const close = () => setOpen(false)
+
+  return (
+    <>
+      <Button label="adaptive 서랍 열기" onClick={() => setOpen(true)} />
+      <Drawer
+        open={open}
+        adaptive
+        adaptiveBreakpoint="pc-md"
+        draggable
+        title="adaptive 서랍"
+        footer={<FooterActions onCancel={close} onConfirm={close} />}
+        onClose={close}
+        onOpenChange={(next) => {
+          if (!next) close()
+        }}
+      >
+        뷰포트가 1440px 이상이면 가운데 모달형 패널, 미만이면 하단 시트(드래그 가능)로 표시됩니다.
+        창 너비를 바꿔 전환을 확인하세요.
+      </Drawer>
+    </>
+  )
+}
+
 const SECTIONS = [
   {
     title: '배경 dim 숨기기',
@@ -281,6 +308,31 @@ const SECTIONS = [
   compImports: ['Drawer']
 }),
     preview: <BottomSheetDemo />
+  },
+  {
+    title: '반응형 · adaptive',
+    description: (
+      <>
+        <code>adaptive</code>를 켜면 기본 기준(<code>adaptiveBreakpoint=&quot;pc-md&quot;</code> · 1440px) 이상에서는 가운데 모달형 패널,
+        미만에서는 <code>placement</code>를 무시하고 하단 시트로 전환합니다.
+        하단일 때 <code>draggable</code>이면 핸들·드래그가 유지됩니다. 옵션이 없으면 기존 placement 동작만 유지됩니다.
+      </>
+    ),
+    code: wrapPageExample(`<Drawer
+  open={open}
+  adaptive
+  adaptiveBreakpoint="pc-md"
+  draggable
+  title="adaptive 서랍"
+  onClose={close}
+>
+  ≥1440 가운데 모달형 · &lt;1440 하단 시트
+</Drawer>`, {
+  name: 'DrawerAdaptiveExample',
+  reactImports: [],
+  compImports: ['Drawer']
+}),
+    preview: <AdaptiveDemo />
   },
   {
     title: '하단 시트 · 확장 제어',

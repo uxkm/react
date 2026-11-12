@@ -4,6 +4,8 @@ import { useEffect, useRef } from 'react'
 import { Link } from '@/lib/router'
 import { AppHeaderLink } from '@/comp'
 import { GuideLayout } from '@/screen/pub/layout'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
 import { am5, am5xy, am5percent, am5themes_Animated } from '@/lib/amcharts'
 
 /** 막대 차트 데이터. category 축 이름, value 값 */
@@ -244,20 +246,184 @@ export default function ChartDemoPage () {
         </>
       )}
     >
-      <div className="demo-block">
-        <h2 className="demo-block__title">Column Chart</h2>
+      <DemoBlock
+        title="Column Chart"
+        code={wrapPageExample(`const columnRef = useRef(null)
+
+useEffect(() => {
+  if (!columnRef.current) return undefined
+
+  const root = am5.Root.new(columnRef.current)
+  root.setThemes([am5themes_Animated.new(root)])
+
+  const chart = root.container.children.push(
+    am5xy.XYChart.new(root, { panX: false, panY: false, paddingLeft: 0, layout: root.verticalLayout })
+  )
+
+  const xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 40, cellStartLocation: 0.15, cellEndLocation: 0.85 })
+  xRenderer.grid.template.setAll({ visible: false })
+
+  const xAxis = chart.xAxes.push(
+    am5xy.CategoryAxis.new(root, {
+      categoryField: 'category',
+      renderer: xRenderer,
+      tooltip: am5.Tooltip.new(root, {})
+    })
+  )
+  xAxis.data.setAll(columnData)
+
+  const yAxis = chart.yAxes.push(
+    am5xy.ValueAxis.new(root, { min: 0, renderer: am5xy.AxisRendererY.new(root, {}) })
+  )
+
+  const series = chart.series.push(
+    am5xy.ColumnSeries.new(root, {
+      name: '수강 신청',
+      xAxis,
+      yAxis,
+      valueYField: 'value',
+      categoryXField: 'category',
+      tooltip: am5.Tooltip.new(root, { labelText: '{categoryX}: {valueY}' })
+    })
+  )
+  series.columns.template.setAll({ cornerRadiusTL: 4, cornerRadiusTR: 4, strokeOpacity: 0 })
+  series.data.setAll(columnData)
+
+  chart.set('cursor', am5xy.XYCursor.new(root, { behavior: 'none' }))
+  series.appear(800)
+  chart.appear(800, 100)
+
+  return () => root.dispose()
+}, [])
+
+<div ref={columnRef} style={{ width: '100%', height: 320 }} />`, {
+          name: 'ColumnChartExample',
+          reactImports: ['useEffect', 'useRef'],
+          compImports: [],
+          extraImports: [
+            "import { am5, am5xy, am5themes_Animated } from '@/lib/amcharts'\n\nconst columnData = [\n  { category: '1월', value: 120 },\n  { category: '2월', value: 98 }\n]"
+          ]
+        })}
+      >
         <div ref={columnRef} style={{ width: '100%', height: 320 }} />
-      </div>
+      </DemoBlock>
 
-      <div className="demo-block">
-        <h2 className="demo-block__title">Line Chart</h2>
+      <DemoBlock
+        title="Line Chart"
+        code={wrapPageExample(`const lineRef = useRef(null)
+
+useEffect(() => {
+  if (!lineRef.current) return undefined
+
+  const root = am5.Root.new(lineRef.current)
+  root.setThemes([am5themes_Animated.new(root)])
+
+  const chart = root.container.children.push(
+    am5xy.XYChart.new(root, { panX: false, panY: false, paddingLeft: 0 })
+  )
+
+  const xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 40 })
+  xRenderer.grid.template.setAll({ visible: false })
+
+  const xAxis = chart.xAxes.push(
+    am5xy.CategoryAxis.new(root, {
+      categoryField: 'category',
+      renderer: xRenderer,
+      tooltip: am5.Tooltip.new(root, {})
+    })
+  )
+  xAxis.data.setAll(lineData)
+
+  const yAxis = chart.yAxes.push(
+    am5xy.ValueAxis.new(root, { min: 0, renderer: am5xy.AxisRendererY.new(root, {}) })
+  )
+
+  const series = chart.series.push(
+    am5xy.LineSeries.new(root, {
+      name: '완료율',
+      xAxis,
+      yAxis,
+      valueYField: 'value',
+      categoryXField: 'category',
+      tooltip: am5.Tooltip.new(root, { labelText: '{categoryX}: {valueY}%' })
+    })
+  )
+  series.strokes.template.setAll({ strokeWidth: 2 })
+  series.bullets.push(() =>
+    am5.Bullet.new(root, {
+      sprite: am5.Circle.new(root, { radius: 4, fill: series.get('fill') })
+    })
+  )
+  series.data.setAll(lineData)
+
+  chart.set('cursor', am5xy.XYCursor.new(root, { behavior: 'none' }))
+  series.appear(800)
+  chart.appear(800, 100)
+
+  return () => root.dispose()
+}, [])
+
+<div ref={lineRef} style={{ width: '100%', height: 320 }} />`, {
+          name: 'LineChartExample',
+          reactImports: ['useEffect', 'useRef'],
+          compImports: [],
+          extraImports: [
+            "import { am5, am5xy, am5themes_Animated } from '@/lib/amcharts'\n\nconst lineData = [\n  { category: '1월', value: 42 },\n  { category: '2월', value: 55 }\n]"
+          ]
+        })}
+      >
         <div ref={lineRef} style={{ width: '100%', height: 320 }} />
-      </div>
+      </DemoBlock>
 
-      <div className="demo-block">
-        <h2 className="demo-block__title">Pie Chart (Donut)</h2>
+      <DemoBlock
+        title="Pie Chart (Donut)"
+        code={wrapPageExample(`const pieRef = useRef(null)
+
+useEffect(() => {
+  if (!pieRef.current) return undefined
+
+  const root = am5.Root.new(pieRef.current)
+  root.setThemes([am5themes_Animated.new(root)])
+
+  const chart = root.container.children.push(
+    am5percent.PieChart.new(root, {
+      layout: root.verticalLayout,
+      innerRadius: am5.percent(45)
+    })
+  )
+
+  const series = chart.series.push(
+    am5percent.PieSeries.new(root, {
+      valueField: 'value',
+      categoryField: 'category',
+      alignLabels: false
+    })
+  )
+  series.labels.template.setAll({ textType: 'circular', centerX: 0, centerY: 0 })
+  series.slices.template.setAll({ strokeWidth: 2, stroke: am5.color(0xffffff) })
+  series.data.setAll(pieData)
+
+  const legend = chart.children.push(
+    am5.Legend.new(root, { centerX: am5.percent(50), x: am5.percent(50), marginTop: 12 })
+  )
+  legend.data.setAll(series.dataItems)
+
+  series.appear(800, 100)
+
+  return () => root.dispose()
+}, [])
+
+<div ref={pieRef} style={{ width: '100%', height: 360 }} />`, {
+          name: 'PieChartExample',
+          reactImports: ['useEffect', 'useRef'],
+          compImports: [],
+          extraImports: [
+            "import { am5, am5percent, am5themes_Animated } from '@/lib/amcharts'\n\nconst pieData = [\n  { category: '온라인', value: 45 },\n  { category: '오프라인', value: 28 }\n]"
+          ]
+        })}
+      >
         <div ref={pieRef} style={{ width: '100%', height: 360 }} />
-      </div>
+      </DemoBlock>
     </GuideLayout>
   )
 }

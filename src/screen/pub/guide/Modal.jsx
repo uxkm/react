@@ -69,6 +69,32 @@ function SizeDemo () {
   )
 }
 
+/** adaptive: ≥1440 가운데 lg / 미만 바텀시트 */
+function AdaptiveDemo () {
+  const [open, setOpen] = useState(false)
+  const close = () => setOpen(false)
+
+  return (
+    <>
+      <Button label="adaptive 모달 열기" onClick={() => setOpen(true)} />
+      <Modal
+        open={open}
+        adaptive
+        size="lg"
+        title="adaptive 모달"
+        footer={<FooterActions onCancel={close} onConfirm={close} />}
+        onClose={close}
+        onOpenChange={(next) => {
+          if (!next) close()
+        }}
+      >
+        뷰포트가 1440px 이상이면 가운데 lg 모달, 미만이면 하단 바텀시트로 표시됩니다.
+        창 너비를 바꿔 전환을 확인하세요.
+      </Modal>
+    </>
+  )
+}
+
 const SECTIONS = [
   {
     title: '배경 dim 숨기기',
@@ -206,6 +232,30 @@ const close = () => {
   compImports: ['Modal']
 }),
     preview: <SizeDemo />
+  },
+  {
+    title: '반응형 · adaptive',
+    description: (
+      <>
+        <code>adaptive</code>를 켜면 기본 기준(<code>adaptiveBreakpoint=&quot;pc-md&quot;</code> · 1440px) 이상에서는 가운데 모달(<code>size</code> 유지),
+        미만에서는 하단 바텀시트로 전환합니다. 옵션이 없으면 기존 가운데 모달만 유지됩니다.
+        기준은 숫자(px) 또는 <code>pc-sm</code> · <code>pc-md</code> · <code>pc-lg</code> · <code>pc-xl</code>로 바꿀 수 있습니다.
+      </>
+    ),
+    code: wrapPageExample(`<Modal
+  open={open}
+  adaptive
+  size="lg"
+  title="adaptive 모달"
+  onClose={close}
+>
+  ≥1440 가운데 lg · &lt;1440 바텀시트
+</Modal>`, {
+  name: 'ModalAdaptiveExample',
+  reactImports: [],
+  compImports: ['Modal']
+}),
+    preview: <AdaptiveDemo />
   },
   {
     title: '푸터 액션',

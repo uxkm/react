@@ -3,6 +3,8 @@
 import { useEffect, useRef } from 'react'
 import { createViewer } from '@/lib/viewer'
 import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
 
 const images = [
   { src: 'https://picsum.photos/id/1015/800/600', alt: '산' },
@@ -31,8 +33,41 @@ export default function ViewerDemoPage () {
       description="viewerjs — 이미지 갤러리 확대 (@/lib/viewer)"
       slug="viewer"
     >
-      <div className="demo-block">
-        <h2 className="demo-block__title">썸네일 클릭 → 뷰어</h2>
+      <DemoBlock
+        title="썸네일 클릭 → 뷰어"
+        code={wrapPageExample(`const galleryRef = useRef(null)
+
+useEffect(() => {
+  const viewer = createViewer(galleryRef.current, {
+    toolbar: true,
+    navbar: true,
+    title: true
+  })
+  return () => {
+    if (viewer) viewer.destroy()
+  }
+}, [])
+
+<ul ref={galleryRef} className="lib-demo-gallery">
+  {images.map((img) => (
+    <li key={img.src}>
+      <img src={img.src} alt={img.alt} />
+    </li>
+  ))}
+</ul>`, {
+          name: 'ViewerExample',
+          reactImports: ['useEffect', 'useRef'],
+          compImports: [],
+          extraImports: [
+            `import { createViewer } from '@/lib/viewer'
+
+const images = [
+  { src: 'https://picsum.photos/id/1015/800/600', alt: '산' },
+  { src: 'https://picsum.photos/id/1025/800/600', alt: '강아지' }
+]`
+          ]
+        })}
+      >
         <ul ref={galleryRef} className="lib-demo-gallery">
           {images.map((img) => (
             <li key={img.src}>
@@ -40,7 +75,7 @@ export default function ViewerDemoPage () {
             </li>
           ))}
         </ul>
-      </div>
+      </DemoBlock>
     </DemoLayout>
   )
 }

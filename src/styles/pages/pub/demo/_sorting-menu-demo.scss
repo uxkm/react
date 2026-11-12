@@ -1,14 +1,22 @@
-// Sorting Menu 데모 페이지 (기존 Vue scoped 스타일 → .sorting-menu-demo 로 범위 한정)
+// =============================================================================
+// Sorting Menu 데모 (.sorting-menu-demo) — 기존 Vue scoped → 범위 한정
+// =============================================================================
 .sorting-menu-demo {
+  // ----- 메뉴 정렬 래퍼
   .menu-wrap {
     display: flex;
     justify-content: flex-end;
   }
 
+  // ----- 정렬 드롭다운
   .sorting-wrap {
     position: relative;
     display: inline-block;
     min-width: 140px;
+
+    &.open .sort-btn::after {
+      transform: rotate(180deg);
+    }
   }
 
   .sort-btn {
@@ -36,10 +44,6 @@
       border-top: 5px solid currentColor;
       transition: transform 0.15s ease;
     }
-  }
-
-  .sorting-wrap.open .sort-btn::after {
-    transform: rotate(180deg);
   }
 
   .sorting-menu {
@@ -77,6 +81,7 @@
     }
   }
 
+  // ----- 선택 상태 문구
   .demo-status {
     margin: 20px 0 0;
     font-size: 13px;

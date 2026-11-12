@@ -3,10 +3,17 @@
 /**
  * 모달 대화상자.
  * open 시 오버레이와 제목·본문·푸터를 중앙에 띄운다. 닫기 버튼은 Icon 을 쓴다.
+ * adaptive 이면 브레이크포인트 미만에서 하단 바텀시트로 전환한다.
  */
 
 import { useState, type HTMLAttributes, type ReactNode } from 'react'
 import { useAutoClose } from '@/hooks/useAutoClose'
+import { useMinWidth } from '@/hooks/useMediaQuery'
+import {
+  ADAPTIVE_BREAKPOINT_DEFAULT,
+  resolveAdaptiveBreakpoint,
+  type AdaptiveBreakpoint
+} from '@/lib/breakpoints'
 import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 import { Icon } from './Icon'
@@ -23,6 +30,16 @@ export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'
   title?: ReactNode
   footer?: ReactNode
   size?: 'sm' | 'md' | 'lg'
+  /**
+   * true 이면 viewport ≥ adaptiveBreakpoint 에서 가운데 모달,
+   * 미만에서 하단 바텀시트로 전환한다. 생략 시 기존 가운데 모달만 유지.
+   */
+  adaptive?: boolean
+  /**
+   * adaptive 전환 기준. 숫자(px) 또는 pc-sm|pc-md|pc-lg|pc-xl.
+   * 기본 'pc-md'(1440).
+   */
+  adaptiveBreakpoint?: AdaptiveBreakpoint
   /** 배경 dim 표시 및 배경 클릭 닫기. 기본 true */
   backdrop?: boolean
   staticDemo?: boolean
@@ -34,6 +51,7 @@ export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'
 /**
  * 화면 가운데 대화상자.
  * open 이 참일 때 보여 준다. title 제목, footer 아래 버튼, size 로 너비를 고른다.
+ * adaptive 이면 좁은 뷰포트에서 바텀시트로 바뀐다.
  * 오버레이나 닫기 버튼(Icon close)을 누르면 onOpenChange(false) · onClose 가 호출된다.
  */
 export function Modal ({
@@ -44,6 +62,8 @@ export function Modal ({
   title,
   footer,
   size = 'md',
+  adaptive = false,
+  adaptiveBreakpoint = ADAPTIVE_BREAKPOINT_DEFAULT,
   backdrop = true,
   staticDemo = false,
   className,
@@ -56,6 +76,10 @@ export function Modal ({
   const [innerOpen, setInnerOpen] = useState(openOnLoad ?? defaultOpen)
   const open = controlled ? openProp : innerOpen
 
+  const bpPx = resolveAdaptiveBreakpoint(adaptiveBreakpoint)
+  const isWide = useMinWidth(bpPx)
+  const sheetMode = adaptive && !isWide
+
   const requestClose = () => {
     if (!controlled) setInnerOpen(false)
     onOpenChange?.(false)
@@ -67,7 +91,24 @@ export function Modal ({
   if (!open) return null
 
   return (
-    <div {...rest} className={classNames('modal', 'is-open', staticDemo && 'modal_demo-static', size === 'sm' && 'modal_sm', size === 'lg' && 'modal_lg', className)} role="dialog" aria-modal="true" data-modal-backdrop={backdrop}>
+    <div
+      {...rest}
+      className={classNames(
+        'modal',
+        'is-open',
+        staticDemo && 'modal_demo-static',
+        size === 'sm' && 'modal_sm',
+        size === 'lg' && 'modal_lg',
+        adaptive && 'modal_adaptive',
+        sheetMode && 'is-adaptive-sheet',
+        className
+      )}
+      role="dialog"
+      aria-modal="true"
+      data-modal-backdrop={backdrop}
+      data-adaptive={adaptive || undefined}
+      data-adaptive-breakpoint={adaptive ? String(bpPx) : undefined}
+    >
       {backdrop && <div className="modal_backdrop" aria-hidden="true" onClick={requestClose} />}
       <div className="modal_dialog">
         <div className="modal_header">

@@ -38,13 +38,25 @@ const props = [
     name: 'placement',
     type: "'left' | 'right' | 'top' | 'bottom'",
     default: "'right'",
-    description: '서랍이 붙는 화면 가장자리입니다. drawer_panel 에 drawer_placement-{값} 클래스가 붙습니다.'
+    description: '서랍이 붙는 화면 가장자리입니다. drawer_panel 에 drawer_placement-{값} 클래스가 붙습니다. adaptive 가 켜지면 유효 placement 는 ≥BP 에서 center, <BP 에서 bottom 으로 대체됩니다.'
+  },
+  {
+    name: 'adaptive',
+    type: 'boolean',
+    default: 'false',
+    description: 'true 이면 viewport ≥ adaptiveBreakpoint 에서 가운데 모달형 패널, 미만에서 placement 를 무시하고 하단 시트로 전환합니다. 생략 시 기존 placement 동작만 유지합니다.'
+  },
+  {
+    name: 'adaptiveBreakpoint',
+    type: "number | 'pc-sm' | 'pc-md' | 'pc-lg' | 'pc-xl'",
+    default: "'pc-md' (1440)",
+    description: 'adaptive 전환 기준입니다. 숫자(px) 또는 PC 브레이크포인트 토큰명입니다. pc-sm=1024, pc-md=1440, pc-lg=1920, pc-xl=2580.'
   },
   {
     name: 'draggable',
     type: 'boolean',
     default: 'false',
-    description: 'placement="bottom" 일 때만 유효합니다. true 이면 상단 핸들 바(drawer_handle)를 표시하고 드래그로 닫기·확장하며 상단 좌우 모서리를 둥글게 표시합니다. false 이면 핸들을 숨기고 상단 좌우 radius 를 0 으로 표시합니다.'
+    description: 'effective placement 가 bottom 일 때만 유효합니다(일반 bottom 또는 adaptive <BP). true 이면 상단 핸들 바(drawer_handle)를 표시하고 드래그로 닫기·확장하며 상단 좌우 모서리를 둥글게 표시합니다. false 이면 핸들을 숨기고 상단 좌우 radius 를 0 으로 표시합니다.'
   },
   {
     name: 'expanded',
@@ -143,10 +155,16 @@ const classes = [
     description: '본문(스크롤)과 푸터 영역입니다.'
   },
   {
-    name: 'drawer_placement-left · drawer_placement-right · drawer_placement-top · drawer_placement-bottom',
+    name: 'drawer_placement-left · drawer_placement-right · drawer_placement-top · drawer_placement-bottom · drawer_placement-center',
     type: 'class',
     default: '—',
-    description: '패널(drawer_panel) 배치 변형입니다. placement 로 지정합니다.'
+    description: '패널(drawer_panel) 배치 변형입니다. placement 또는 adaptive 유효 placement 로 지정합니다. center 는 adaptive ≥BP 모달형입니다.'
+  },
+  {
+    name: 'drawer_adaptive · drawer_adaptive-center',
+    type: 'class',
+    default: '—',
+    description: 'adaptive 루트와 ≥BP 가운데 모드입니다. data-adaptive-breakpoint 에 해석된 px 가 붙습니다.'
   },
   {
     name: 'drawer_sm · drawer_lg',
@@ -259,6 +277,13 @@ const tokens = [
     default: '0.32s · 0.36s · 0.24s',
     description: '좌우·상하 패널 이동 시간과 백드롭 페이드 시간입니다.'
   },
+  {
+    name: '--drawer-adaptive-center-width · --drawer-adaptive-center-max-height · --drawer-adaptive-center-radius',
+    type: 'length',
+    default: 'var(--drawer-width-lg) · 90vh · var(--radius-lg)',
+    description: 'adaptive ≥BP 가운데 모달형 패널의 너비·최대 높이·모서리 반경입니다.'
+  },
+
   {
     name: '--drawer-panel-easing-x · --drawer-panel-easing-y',
     type: 'easing',

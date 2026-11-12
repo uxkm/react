@@ -56,7 +56,19 @@ const props = [
     name: 'size',
     type: "'sm' | 'md' | 'lg'",
     default: "'md'",
-    description: '대화상자 너비입니다. sm 은 modal_sm, lg 는 modal_lg 클래스가 붙습니다.'
+    description: '대화상자 너비입니다. sm 은 modal_sm, lg 는 modal_lg 클래스가 붙습니다. adaptive 가운데 모드에서도 유지됩니다.'
+  },
+  {
+    name: 'adaptive',
+    type: 'boolean',
+    default: 'false',
+    description: 'true 이면 viewport ≥ adaptiveBreakpoint 에서 가운데 모달, 미만에서 하단 바텀시트로 전환합니다. 생략 시 기존 가운데 모달만 유지합니다.'
+  },
+  {
+    name: 'adaptiveBreakpoint',
+    type: "number | 'pc-sm' | 'pc-md' | 'pc-lg' | 'pc-xl'",
+    default: "'pc-md' (1440)",
+    description: 'adaptive 전환 기준입니다. 숫자(px) 또는 PC 브레이크포인트 토큰명입니다. pc-sm=1024, pc-md=1440, pc-lg=1920, pc-xl=2580.'
   },
   {
     name: 'staticDemo',
@@ -137,6 +149,12 @@ const classes = [
     description: '크기 변형입니다. fullscreen 은 className 으로 직접 붙입니다.'
   },
   {
+    name: 'modal_adaptive · is-adaptive-sheet',
+    type: 'class',
+    default: '—',
+    description: 'adaptive 루트와 바텀시트 모드입니다. data-adaptive-breakpoint 에 해석된 px 가 붙습니다.'
+  },
+  {
     name: 'modal_scrollable',
     type: 'class',
     default: '—',
@@ -204,6 +222,12 @@ const tokens = [
     type: 'length',
     default: 'var(--space-sm) · var(--space-md) · var(--space-lg)',
     description: '푸터 버튼 간격과 내부 여백입니다.'
+  },
+  {
+    name: '--modal-adaptive-sheet-max-height',
+    type: 'length',
+    default: '90vh',
+    description: 'adaptive 바텀시트 대화상자의 최대 높이입니다.'
   }
 ]
 

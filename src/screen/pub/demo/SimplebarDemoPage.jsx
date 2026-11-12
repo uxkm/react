@@ -2,6 +2,8 @@
 
 import { SimpleBar } from '@/lib/simplebar'
 import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
 
 const lines = Array.from({ length: 24 }, (_, i) => (
   `라인 ${i + 1} — SimpleBar 커스텀 스크롤 영역 예시입니다.`
@@ -15,8 +17,23 @@ export default function SimplebarDemoPage () {
       description="simplebar-react — 커스텀 스크롤바 (@/lib/simplebar)"
       slug="simplebar"
     >
-      <div className="demo-block">
-        <h2 className="demo-block__title">고정 높이 스크롤</h2>
+      <DemoBlock
+        title="고정 높이 스크롤"
+        code={wrapPageExample(`const lines = Array.from({ length: 24 }, (_, i) => 'Line ' + (i + 1))
+
+<div className="lib-demo-scroll">
+  <SimpleBar style={{ maxHeight: 180 }}>
+    {lines.map((line) => (
+      <p key={line} style={{ margin: '0 0 8px' }}>{line}</p>
+    ))}
+  </SimpleBar>
+</div>`, {
+          name: 'SimplebarExample',
+          reactImports: [],
+          compImports: [],
+          extraImports: ["import { SimpleBar } from '@/lib/simplebar'"]
+        })}
+      >
         <div className="lib-demo-scroll">
           <SimpleBar style={{ maxHeight: 180 }}>
             <div className="lib-demo-scroll__inner">
@@ -26,7 +43,7 @@ export default function SimplebarDemoPage () {
             </div>
           </SimpleBar>
         </div>
-      </div>
+      </DemoBlock>
     </DemoLayout>
   )
 }

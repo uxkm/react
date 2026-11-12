@@ -549,16 +549,20 @@
     }
 
     .tabs_list {
+      --osb-skip: 1;
       flex-wrap: nowrap;
       max-width: 100%;
       min-width: 0;
       overflow-x: auto;
       overflow-y: hidden;
       scrollbar-width: none;
+      -ms-overflow-style: none;
       -webkit-overflow-scrolling: touch;
 
       &::-webkit-scrollbar {
         display: none;
+        width: 0;
+        height: 0;
       }
     }
 
@@ -666,18 +670,17 @@
     }
 
     .tabs_list {
+      --osb-skip: 1;
       flex-wrap: nowrap;
       overflow-x: auto;
-      scrollbar-width: thin;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
       -webkit-overflow-scrolling: touch;
 
       &::-webkit-scrollbar {
-        height: 4px;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        border-radius: $radius-pill;
-        background: var(--color-border);
+        display: none;
+        width: 0;
+        height: 0;
       }
     }
   }

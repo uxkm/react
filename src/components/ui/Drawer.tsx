@@ -4,6 +4,7 @@
  * 서랍(Drawer) 패널.
  * 화면 가장자리(left/right/top/bottom)에서 슬라이드로 열리는 오버레이.
  * bottom + draggable 이면 상단 핸들 바로 드래그(닫기·확장)한다.
+ * adaptive 이면 ≥BP 가운데 모달형, <BP 하단 시트로 전환한다.
  */
 import {
   useEffect,
@@ -15,6 +16,12 @@ import {
   type TransitionEvent
 } from 'react'
 import { useAutoClose } from '@/hooks/useAutoClose'
+import { useMinWidth } from '@/hooks/useMediaQuery'
+import {
+  ADAPTIVE_BREAKPOINT_DEFAULT,
+  resolveAdaptiveBreakpoint,
+  type AdaptiveBreakpoint
+} from '@/lib/breakpoints'
 import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 import { Icon } from './Icon'
@@ -22,15 +29,19 @@ import { Icon } from './Icon'
 /** 서랍이 붙는 방향 */
 export type DrawerPlacement = 'left' | 'right' | 'top' | 'bottom'
 
+/** 실제 렌더·애니메에 쓰는 배치 (adaptive center 포함) */
+export type DrawerActivePlacement = DrawerPlacement | 'center'
+
 /** 열림/닫힘 슬라이드 단계 */
 type Phase = 'hidden' | 'enter-start' | 'enter' | 'shown' | 'leave'
 
-/** 가로·세로 패널 전환 시간(ms). CSS 토큰보다 약간 여유 */
-const PANEL_MS: Record<DrawerPlacement, number> = {
+/** 가로·세로·센터 패널 전환 시간(ms). CSS 토큰보다 약간 여유 */
+const PANEL_MS: Record<DrawerActivePlacement, number> = {
   left: 360,
   right: 360,
   top: 400,
-  bottom: 400
+  bottom: 400,
+  center: 320
 }
 
 const DISMISS_DISTANCE = 0.35
@@ -49,6 +60,16 @@ export interface DrawerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title
   title?: ReactNode
   footer?: ReactNode
   placement?: DrawerPlacement
+  /**
+   * true 이면 viewport ≥ adaptiveBreakpoint 에서 가운데 모달형 패널,
+   * 미만에서 placement 를 무시하고 하단 시트로 전환한다.
+   */
+  adaptive?: boolean
+  /**
+   * adaptive 전환 기준. 숫자(px) 또는 pc-sm|pc-md|pc-lg|pc-xl.
+   * 기본 'pc-md'(1440).
+   */
+  adaptiveBreakpoint?: AdaptiveBreakpoint
   /** bottom 전용. true 이면 상단 핸들 바를 보여주고 드래그로 닫기·확장 */
   draggable?: boolean
   /** bottom + draggable 확장 상태(제어) */
@@ -69,6 +90,7 @@ export interface DrawerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title
  * 화면 가장자리에서 나오는 패널.
  * open 표시 여부, placement 방향, title 제목, footer 아래 버튼.
  * bottom 에서 draggable 이면 핸들 바로 드래그한다.
+ * adaptive 이면 넓은 뷰포트에서 가운데 모달형으로 바뀐다.
  */
 export function Drawer ({
   open: openProp,
@@ -78,6 +100,8 @@ export function Drawer ({
   title,
   footer,
   placement = 'right',
+  adaptive = false,
+  adaptiveBreakpoint = ADAPTIVE_BREAKPOINT_DEFAULT,
   draggable = false,
   expanded: expandedProp,
   defaultExpanded = false,
@@ -92,7 +116,7 @@ export function Drawer ({
 }: DrawerProps) {
   const panelRef = useRef<HTMLDivElement>(null)
   /** 닫힘 애니메이션 동안 placement 가 기본값으로 바뀌어도 열렸던 방향 유지 */
-  const [retainedPlacement, setRetainedPlacement] = useState<DrawerPlacement>(placement)
+  const [retainedPlacement, setRetainedPlacement] = useState<DrawerActivePlacement>(placement)
   /** 드래그로 닫을 때 현재 offset → 100% 로 이어서 애니메이트 */
   const dragDismissRef = useRef(false)
   const dragRef = useRef({
@@ -109,6 +133,12 @@ export function Drawer ({
   const openControlled = openProp !== undefined
   const [innerOpen, setInnerOpen] = useState(openOnLoad ?? defaultOpen)
   const open = openControlled ? openProp : innerOpen
+
+  const bpPx = resolveAdaptiveBreakpoint(adaptiveBreakpoint)
+  const isWide = useMinWidth(bpPx)
+  const effectivePlacement: DrawerActivePlacement = adaptive
+    ? (isWide ? 'center' : 'bottom')
+    : placement
 
   const [phase, setPhase] = useState<Phase>(() => (
     open ? (staticDemo ? 'shown' : 'enter-start') : 'hidden'
@@ -133,8 +163,11 @@ export function Drawer ({
 
   useAutoClose(open, autoCloseDelay, requestClose)
 
-  if ((open || phase === 'hidden') && retainedPlacement !== placement) setRetainedPlacement(placement)
-  const activePlacement = open || phase === 'hidden' ? placement : retainedPlacement
+  // adaptive 리사이즈·placement 변경 시 즉시 전환 (열림 중 포함)
+  if ((open || phase === 'hidden') && retainedPlacement !== effectivePlacement) {
+    setRetainedPlacement(effectivePlacement)
+  }
+  const activePlacement = open || phase === 'hidden' ? effectivePlacement : retainedPlacement
   const showHandle = draggable && activePlacement === 'bottom'
   const canDrag = showHandle && !staticDemo
 
@@ -170,7 +203,7 @@ export function Drawer ({
     const panel = panelRef.current
     if (!panel) return
 
-    if (dragDismissRef.current) {
+    if (dragDismissRef.current && activePlacement === 'bottom') {
       const from = Math.max(0, dragRef.current.dy)
       panel.style.transform = `translateY(${from}px)`
       void panel.offsetHeight
@@ -181,7 +214,7 @@ export function Drawer ({
     }
 
     panel.style.transform = ''
-  }, [phase])
+  }, [phase, activePlacement])
 
   // transitionend 누락 대비 타임아웃
   useEffect(() => {
@@ -323,16 +356,17 @@ export function Drawer ({
 
   const handlePanelTransitionEnd = (event: TransitionEvent<HTMLDivElement>) => {
     if (event.target !== event.currentTarget) return
-    if (event.propertyName !== 'transform' && event.propertyName !== 'height') return
-    if (phase === 'enter' && event.propertyName === 'transform') setPhase('shown')
-    if (phase === 'leave' && event.propertyName === 'transform') {
+    const prop = event.propertyName
+    if (prop !== 'transform' && prop !== 'height' && prop !== 'opacity') return
+    if (phase === 'enter' && (prop === 'transform' || prop === 'opacity')) setPhase('shown')
+    if (phase === 'leave' && (prop === 'transform' || prop === 'opacity')) {
       dragDismissRef.current = false
       const panel = panelRef.current
       if (panel) panel.style.transform = ''
       setPhase('hidden')
     }
     // 드래그 스냅백 후 인라인 스타일 제거 → 이후 CSS 전환과 충돌 방지
-    if ((phase === 'shown' || phase === 'enter') && event.propertyName === 'transform') {
+    if ((phase === 'shown' || phase === 'enter') && prop === 'transform') {
       const panel = panelRef.current
       if (panel && !dragRef.current.active && !dragDismissRef.current) {
         panel.style.transform = ''
@@ -360,9 +394,13 @@ export function Drawer ({
         (phase === 'enter-start' || phase === 'enter') && 'is-opening',
         phase === 'leave' && 'is-closing',
         staticDemo && 'drawer_demo-static',
+        adaptive && 'drawer_adaptive',
+        adaptive && activePlacement === 'center' && 'drawer_adaptive-center',
         className
       )}
       data-drawer-backdrop={backdrop}
+      data-adaptive={adaptive || undefined}
+      data-adaptive-breakpoint={adaptive ? String(bpPx) : undefined}
       role="dialog"
       aria-modal="true"
     >

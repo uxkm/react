@@ -5,10 +5,11 @@
  * GuideLayout에서 호출한다. 소개 / 접근성 / 컴포넌트 / 위젯 / 데모 네비.
  * 접힘 시 카테고리 아이콘 레일 + 우측 Tooltip.
  */
-import { useEffect, useMemo, useState } from 'react' // 접힘 상태·메뉴 로드 효과
+import { useMemo, useState } from 'react' // 접힘 상태·메뉴 로드
 import { usePathname } from 'next/navigation' // 현재 경로 (활성 메뉴 표시)
 import { Link } from '@/lib/router' // 앱 라우터 Link
 import { Icon } from '@/comp/ui/Icon' // 접힘 레일·토글 아이콘
+import { Switch } from '@/comp/ui/Switch' // 하위 뎁스 모두 펼침/접힘
 import { Tooltip } from '@/comp/ui/Tooltip' // 접힘 시 카테고리 툴팁
 import { classNames } from '@/utils/classNames' // className 결합
 import {
@@ -76,6 +77,12 @@ export function GuideMenu ({ className }) {
   const guideMenu = useMemo(() => menu?.guideMenu || [], [menu])
   const guideWidgetItems = useMemo(() => menu?.guideWidgetItems || [], [menu])
   const guideDemoMenu = useMemo(() => menu?.guideDemoMenu || [], [menu])
+  /** 아코디언으로 접히는 모든 그룹 id (컴포넌트 + 데모) */
+  const allGroupIds = useMemo(
+    () => [...guideMenu.map((group) => group.id), ...guideDemoMenu.map((group) => group.id)],
+    [guideMenu, guideDemoMenu]
+  )
+  const allExpanded = allGroupIds.length > 0 && allGroupIds.every((id) => !!openGroups[id])
   const introHref = guideHomePath
   const introActive = pathname === guideHomePath || pathname === '/pub/guide/'
   const a11yHref = guideAccessibilityPath
@@ -94,6 +101,15 @@ export function GuideMenu ({ className }) {
 
   const toggleGroup = (id) => {
     setOpenGroups((prev) => ({ ...prev, [id]: !prev[id] }))
+  }
+
+  /** 하위 뎁스(컴포넌트·데모 그룹) 전부 펼침 또는 접힘 */
+  const setAllGroupsExpanded = (expanded) => {
+    setOpenGroups((prev) => {
+      const next = { ...prev }
+      for (const id of allGroupIds) next[id] = expanded
+      return next
+    })
   }
 
   /** 접힘 레일에서 그룹 선택 → 메뉴 펼치고 해당 그룹 연다 */
@@ -115,6 +131,16 @@ export function GuideMenu ({ className }) {
             <>
               <div className="comp-guide__nav-head">
                 <p className="comp-guide__nav-title">가이드</p>
+                <Switch
+                  className="comp-guide__nav-expand"
+                  size="sm"
+                  labelEnd
+                  checked={allExpanded}
+                  disabled={allGroupIds.length === 0}
+                  ariaLabel="하위 메뉴 모두 펼침"
+                  label={allExpanded ? '모두 접기' : '모두 펼침'}
+                  onChange={(event) => setAllGroupsExpanded(event.target.checked)}
+                />
               </div>
 
               <nav id="comp-guide-list" className="comp-guide__list">

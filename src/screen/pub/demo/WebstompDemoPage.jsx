@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { client as createStompClient } from 'webstomp-client'
 import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
 
 /** 로컬/데모용 기본 엔드포인트 (브로커 없으면 실패가 정상) */
 const DEFAULT_WS = 'ws://127.0.0.1:15674/ws'
@@ -68,11 +70,67 @@ export default function WebstompDemoPage () {
       description="webstomp-client — STOMP over WebSocket (브로커 필요)"
       slug="webstomp"
     >
-      <div className="demo-block">
-        <h2 className="demo-block__title">연결 시도</h2>
-        <p style={{ margin: '0 0 12px', fontSize: 13, color: 'var(--color-text-muted)' }}>
-          RabbitMQ 등 STOMP 브로커가 없으면 실패가 정상입니다. API 호출 흐름만 확인합니다.
-        </p>
+      <DemoBlock
+        title="연결 시도"
+        description="RabbitMQ 등 STOMP 브로커가 없으면 실패가 정상입니다. API 호출 흐름만 확인합니다."
+        code={wrapPageExample(`const [url, setUrl] = useState('ws://127.0.0.1:15674/ws')
+const [status, setStatus] = useState('연결 안 됨')
+const [log, setLog] = useState([])
+const clientRef = useRef(null)
+
+const pushLog = (line) => {
+  setLog((prev) => [new Date().toLocaleTimeString() + '  ' + line, ...prev].slice(0, 12))
+}
+
+const disconnect = () => {
+  const c = clientRef.current
+  if (c && c.connected) {
+    c.disconnect(() => {
+      setStatus('연결 해제됨')
+      pushLog('disconnect')
+    })
+  }
+  clientRef.current = null
+}
+
+const connect = () => {
+  disconnect()
+  setStatus('연결 중…')
+
+  const stomp = createStompClient(url, { debug: false, protocols: ['v12.stomp'] })
+  clientRef.current = stomp
+  stomp.connect({}, () => {
+    setStatus('연결됨')
+    stomp.subscribe('/topic/demo', (message) => pushLog('message: ' + message.body))
+  }, (err) => {
+    setStatus('연결 실패')
+    pushLog('error: ' + err)
+    clientRef.current = null
+  })
+}
+
+useEffect(() => disconnect, [])
+
+<div className="demo-stack">
+  <input
+    className="lib-demo-input"
+    value={url}
+    onChange={(e) => setUrl(e.target.value)}
+    aria-label="WebSocket URL"
+  />
+  <div className="demo-row">
+    <button type="button" onClick={connect}>연결</button>
+    <button type="button" onClick={disconnect}>해제</button>
+    <span>{status}</span>
+  </div>
+  <pre className="lib-demo-pre">{log.join('\\n') || '(로그 없음)'}</pre>
+</div>`, {
+          name: 'WebstompExample',
+          reactImports: ['useEffect', 'useRef', 'useState'],
+          compImports: [],
+          extraImports: ["import { client as createStompClient } from 'webstomp-client'"]
+        })}
+      >
         <div className="demo-stack">
           <input
             className="lib-demo-input"
@@ -91,7 +149,7 @@ export default function WebstompDemoPage () {
           </div>
           <pre className="lib-demo-pre">{log.join('\n') || '(로그 없음)'}</pre>
         </div>
-      </div>
+      </DemoBlock>
     </DemoLayout>
   )
 }

@@ -113,4 +113,13 @@
   --size-2580: 2580px;
 
   --content-max: var(--size-1440);
+
+  // ----- Global — scrollbar (macOS overlay 스타일)
+  --scrollbar-size: 9px;
+  --scrollbar-thumb: rgba(0, 0, 0, 0.35);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.5);
+  --scrollbar-thumb-active: rgba(0, 0, 0, 0.6);
+  --scrollbar-edge: 2px;
+  --scrollbar-min-thumb: 24px;
+  --scrollbar-fade-ms: 600ms;
 }

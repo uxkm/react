@@ -96,16 +96,6 @@
         overflow-y: auto;
         overscroll-behavior: contain;
         -webkit-overflow-scrolling: touch;
-        scrollbar-width: thin;
-
-        &::-webkit-scrollbar {
-          width: 6px;
-        }
-
-        &::-webkit-scrollbar-thumb {
-          border-radius: 3px;
-          background: var(--color-border);
-        }
       }
     }
   }

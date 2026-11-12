@@ -34,6 +34,9 @@
   --drawer-handle-hit: 1.25rem;
   --drawer-handle-padding-top: var(--space-sm);
   --drawer-height-expanded: 90%;
+  --drawer-adaptive-center-width: var(--drawer-width-lg);
+  --drawer-adaptive-center-max-height: 90vh;
+  --drawer-adaptive-center-radius: var(--radius-lg);
 
 }
 
@@ -375,6 +378,41 @@
     &.is-dragging {
       transition: none;
       touch-action: none;
+    }
+  }
+
+  // adaptive ≥BP: 가운데 모달형 패널 (fade/scale)
+  &_placement-center {
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    width: var(--drawer-adaptive-center-width);
+    max-width: calc(100% - var(--space-lg) * 2);
+    height: auto;
+    max-height: var(--drawer-adaptive-center-max-height);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--drawer-adaptive-center-radius);
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.96);
+    transition:
+      opacity var(--drawer-backdrop-duration) ease,
+      transform var(--drawer-panel-duration-x) var(--drawer-panel-easing-x);
+
+    .drawer_body {
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .drawer.is-open & {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .drawer.is-closing & {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.96);
     }
   }
 

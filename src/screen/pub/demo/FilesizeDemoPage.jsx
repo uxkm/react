@@ -3,6 +3,8 @@
 import { useMemo, useState } from 'react'
 import { filesize } from 'filesize'
 import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
 
 const presets = [0, 512, 1024, 1536, 1048576, 1073741824, 5368709120]
 
@@ -17,8 +19,37 @@ export default function FilesizeDemoPage () {
       description="filesize — 바이트를 읽기 쉬운 용량 문자열로 변환"
       slug="filesize"
     >
-      <div className="demo-block">
-        <h2 className="demo-block__title">바이트 입력</h2>
+      <DemoBlock
+        title="바이트 입력"
+        code={wrapPageExample(`const [bytes, setBytes] = useState(1536)
+const formatted = useMemo(() => filesize(bytes, { base: 2, standard: 'jedec' }), [bytes])
+
+<div className="demo-stack">
+  <input
+    className="lib-demo-input"
+    type="number"
+    min={0}
+    value={bytes}
+    onChange={(e) => setBytes(Number(e.target.value) || 0)}
+    aria-label="바이트"
+  />
+  <pre className="lib-demo-pre">{bytes} bytes → {formatted}</pre>
+  <div className="demo-row">
+    {presets.map((value) => (
+      <button key={value} type="button" onClick={() => setBytes(value)}>
+        {filesize(value, { base: 2, standard: 'jedec' })}
+      </button>
+    ))}
+  </div>
+</div>`, {
+          name: 'FilesizeExample',
+          reactImports: ['useMemo', 'useState'],
+          compImports: [],
+          extraImports: [
+            "import { filesize } from 'filesize'\n\nconst presets = [0, 512, 1024, 1536, 1048576, 1073741824]"
+          ]
+        })}
+      >
         <div className="demo-stack">
           <input
             className="lib-demo-input"
@@ -42,7 +73,7 @@ export default function FilesizeDemoPage () {
             ))}
           </div>
         </div>
-      </div>
+      </DemoBlock>
     </DemoLayout>
   )
 }

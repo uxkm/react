@@ -484,6 +484,7 @@
     margin: 0;
     padding: calc((var(--calendar-wheel-list-height) - var(--calendar-wheel-row-height)) / 2) 0;
     list-style: none;
+    --osb-skip: 1;
     overflow-y: auto;
     scroll-snap-type: y mandatory;
     scrollbar-width: none;

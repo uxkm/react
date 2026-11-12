@@ -1,37 +1,8 @@
+// =============================================================================
+// Filter Scroll 데모 (.filter-scroll-demo) — DemoLayout 안에서 WBS 필터 스크롤 확인
+// =============================================================================
 .filter-scroll-demo {
-  &__head {
-    margin: 0 0 24px;
-  }
-
-  &__back {
-    display: inline-block;
-    margin-bottom: 12px;
-    color: var(--color-accent);
-    font-size: 13px;
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  &__title {
-    margin: 0 0 8px;
-    font-size: 24px;
-    font-weight: 700;
-  }
-
-  &__desc {
-    margin: 0;
-    color: var(--color-text-muted);
-    font-size: 14px;
-    line-height: 1.5;
-
-    code {
-      font-size: 12px;
-    }
-  }
-
+  // ----- 메타 지표 그리드
   &__meta {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -71,6 +42,7 @@
     }
   }
 
+  // ----- 액션 버튼 행
   &__actions {
     display: flex;
     flex-wrap: wrap;

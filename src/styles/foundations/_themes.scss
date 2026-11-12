@@ -57,6 +57,7 @@
   --color-on-warning: #ffffff;
 
   --color-header-bg: rgba(244, 246, 249, 0.88);
+  --color-header-bg-scrolled: #ffffff;
   --color-overlay: rgba(15, 20, 25, 0.4);
   --shadow-sm: 0 1px 3px rgba(15, 20, 25, 0.08);
   --shadow-md: 0 8px 24px rgba(15, 20, 25, 0.1);
@@ -88,6 +89,10 @@
   --color-badge-warning-bg: rgba(192, 86, 33, 0.12);
   --color-input-error-ring: rgba(197, 48, 48, 0.25);
   --color-input-success-ring: rgba(39, 103, 73, 0.25);
+
+  --scrollbar-thumb: rgba(0, 0, 0, 0.35);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.5);
+  --scrollbar-thumb-active: rgba(0, 0, 0, 0.6);
 }
 
 @mixin theme-dark {
@@ -138,6 +143,7 @@
   --color-on-warning: #1a1200;
 
   --color-header-bg: rgba(15, 20, 25, 0.85);
+  --color-header-bg-scrolled: #1a2332;
   --color-overlay: rgba(0, 0, 0, 0.5);
   --spin-overlay-bg: rgba(0, 0, 0, 0.72);
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
@@ -170,6 +176,10 @@
   --color-badge-warning-bg: rgba(221, 107, 32, 0.18);
   --color-input-error-ring: rgba(252, 129, 129, 0.28);
   --color-input-success-ring: rgba(104, 211, 145, 0.28);
+
+  --scrollbar-thumb: rgba(255, 255, 255, 0.35);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.5);
+  --scrollbar-thumb-active: rgba(255, 255, 255, 0.65);
 }
 
 :root,

@@ -1,5 +1,9 @@
+import Script from 'next/script'
 import AppProviders from '@/comp/providers/AppProviders'
 import '@/styles/index.scss'
+
+const SCROLLBAR_MODE_SCRIPT =
+  '(function(){try{var o=document.createElement("div");o.style.cssText="position:absolute;top:-9999px;width:100px;height:100px;overflow:scroll;visibility:hidden";document.documentElement.appendChild(o);document.documentElement.dataset.scrollbar=o.offsetWidth-o.clientWidth>0?"classic":"overlay";o.remove()}catch(e){}})();'
 
 const SITE_TITLE = '멀티캠퍼스 기업교육'
 const SITE_DESCRIPTION =
@@ -46,6 +50,10 @@ export default function RootLayout ({ children }) {
         <link rel="stylesheet" href="/fonts/pretendard/pretendard.css" />
       </head>
       <body suppressHydrationWarning>
+        {/* classic 스크롤바 OS에서 네이티브 바를 즉시 숨겨 내용 너비 점프를 막는다 */}
+        <Script id="scrollbar-mode" strategy="beforeInteractive">
+          {SCROLLBAR_MODE_SCRIPT}
+        </Script>
         <AppProviders>{children}</AppProviders>
       </body>
     </html>

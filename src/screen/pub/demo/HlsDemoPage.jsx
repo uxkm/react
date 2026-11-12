@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react'
 import Hls from 'hls.js'
 import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
 
 // Shaka 공식 샘플: 매니페스트에 영어 등 WebVTT 자막 트랙이 포함되어 있다.
 const STREAM_URL = 'https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8'
@@ -49,8 +51,48 @@ export default function HlsDemoPage () {
       description="hls.js — HLS(.m3u8) 스트리밍 재생"
       slug="hls"
     >
-      <div className="demo-block">
-        <h2 className="demo-block__title">샘플 스트림</h2>
+      <DemoBlock
+        title="샘플 스트림"
+        code={wrapPageExample(`const videoRef = useRef(null)
+const [status, setStatus] = useState('초기화 중…')
+
+useEffect(() => {
+  const video = videoRef.current
+  if (!video) return undefined
+
+  if (Hls.isSupported()) {
+    const hls = new Hls()
+    hls.loadSource(STREAM_URL)
+    hls.attachMedia(video)
+    hls.on(Hls.Events.MANIFEST_PARSED, () => setStatus('매니페스트 로드 완료'))
+    hls.on(Hls.Events.ERROR, (_, data) => {
+      if (data.fatal) setStatus('오류: ' + data.type + ' / ' + data.details)
+    })
+    return () => hls.destroy()
+  }
+
+  if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    video.src = STREAM_URL
+    setStatus('네이티브 HLS (Safari 등)')
+    return undefined
+  }
+
+  setStatus('이 브라우저는 HLS를 지원하지 않습니다.')
+  return undefined
+}, [])
+
+<>
+  <p>{status}</p>
+  <video ref={videoRef} className="lib-demo-video" controls playsInline />
+</>`, {
+          name: 'HlsExample',
+          reactImports: ['useEffect', 'useRef', 'useState'],
+          compImports: [],
+          extraImports: [
+            "import Hls from 'hls.js'\n\nconst STREAM_URL = 'https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8'"
+          ]
+        })}
+      >
         <p style={{ margin: '0 0 12px', fontSize: 13, color: 'var(--color-text-muted)' }}>
           {status}
         </p>
@@ -61,7 +103,7 @@ export default function HlsDemoPage () {
           controls
           playsInline
         />
-      </div>
+      </DemoBlock>
     </DemoLayout>
   )
 }

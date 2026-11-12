@@ -152,7 +152,7 @@ SCSS 원본은 `src/styles/`에 있습니다. 개발은 SCSS 직접 처리와 �
 
 헤더 위 배너는 `TopBanner`로 만들고 페이지별로는 `PageBanner` 슬롯에 등록합니다. 기본 너비 100%·안쪽 최대 너비 1200px·최소 높이 80px이며, 여러 배너는 슬라이드·페이드 전환, 단일 배너는 정적 표시로 동작합니다. 닫기와 다음 자정까지 하루 숨김을 제공합니다. [상단 배너 가이드](/pub/guide/top-banner)에서 확인할 수 있습니다.
 
-헤더는 `<Header background="transparent" scrolledBackground="#fff" />`처럼 기본·스크롤 배경을 분리할 수 있습니다. `className`과 `style`도 전달하며, SCSS에서는 `--app-header-bg`, `--app-header-bg-scrolled`, `.is-scrolled`로 조정합니다. [헤더 가이드](/pub/guide/header)에서 확인할 수 있습니다.
+헤더는 `<Header background="transparent" scrolledBackground="var(--color-header-bg-scrolled)" />`처럼 기본·스크롤 배경을 분리할 수 있습니다. 스크롤 색상은 테마 변수 `--color-header-bg-scrolled`로 CSS에서 바꿉니다. `className`과 `style`도 전달하며, SCSS에서는 `--app-header-bg`, `--app-header-bg-scrolled`, `.is-scrolled`로 조정합니다. [헤더 가이드](/pub/guide/header)에서 확인할 수 있습니다.
 
 페이지에만 필요한 플로팅 버튼·UI는 `PageFloating` 안에 `Floating.Item`을 넣어 공통 플로팅에 추가합니다. 사용 방법은 [컴포넌트 구조](src/components/README.md#페이지별-플로팅)와 [Floating 가이드](/pub/guide/floating)를 참고하세요.
 

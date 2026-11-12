@@ -57,24 +57,36 @@ Button API는 `variant` · `color` · `size` · `round` · `block` · `loading` 
 `Header`, `PageHeader`, `AppHeader`는 기본 배경과 스크롤 후 배경을 지원합니다. 공통 기본값은 `AppLayout`의 `headerAppearance`에 지정하며 페이지의 `Header` 설정이 우선합니다.
 
 ```jsx
-<Header background="transparent" scrolledBackground="#ffffff" className="service-header" />
+<Header
+  background="transparent"
+  scrolledBackground="var(--color-header-bg-scrolled)"
+  className="service-header"
+/>
 
-<Header style={{ '--app-header-bg': 'transparent', '--app-header-bg-scrolled': '#ffffff' }} />
+<Header style={{
+  '--app-header-bg': 'transparent',
+  '--app-header-bg-scrolled': 'var(--color-header-bg-scrolled)'
+}} />
 ```
 
-SCSS에서도 같은 CSS 변수를 지정할 수 있습니다.
+스크롤 후 상단 색은 테마 변수 `--color-header-bg-scrolled`로 두고, 페이지·서비스 SCSS에서 바꿉니다.
 
 ```scss
+// foundations/_themes.scss (라이트 기본)
+:root {
+  --color-header-bg-scrolled: #ffffff;
+}
+
 .service-header {
   --app-header-bg: transparent;
-  --app-header-bg-scrolled: #ffffff;
+  --app-header-bg-scrolled: var(--color-header-bg-scrolled);
 }
 .service-header.is-scrolled { box-shadow: 0 2px 12px rgb(0 0 0 / 8%); }
 ```
 
 헤더의 문서상 시작 위치가 화면 상단을 지나면 `is-scrolled`와 `data-scrolled="true"`가 붙고, 위로 복귀하면 제거됩니다. 상단 배너가 있으면 헤더가 실제 상단에 도달한 뒤 전환합니다. 기존 스크롤 숨김(`is-scroll-hidden`)은 별개로 유지합니다.
 
-옵션을 생략하면 기존 테마를 유지하고, 스크롤 배경만 생략하면 기본 배경을 유지합니다. `style`의 변수가 props보다 우선하며 인라인 변수는 SCSS 변수보다 우선합니다. 하단 메뉴 배경을 별도로 지정하려면 `--app-header-nav-bg`를 사용합니다. 기존 배경 블러를 끄려면 style의 `backdropFilter`·`WebkitBackdropFilter` 또는 SCSS를 지정합니다.
+`scrolledBackground` props를 생략해도 `.app-header` 기본값이 `var(--color-header-bg-scrolled)`입니다. `style`의 변수가 props보다 우선하며 인라인 변수는 SCSS 변수보다 우선합니다. 하단 메뉴 배경을 별도로 지정하려면 `--app-header-nav-bg`를 사용합니다. 기존 배경 블러를 끄려면 style의 `backdropFilter`·`WebkitBackdropFilter` 또는 SCSS를 지정합니다.
 
 `Header`의 페이지 설정은 이동 시 정리됩니다. 커스텀 헤더는 루트에 `className`과 `style`을 전달해야 공통 외형 설정이 적용됩니다.
 

@@ -1,39 +1,53 @@
+// =============================================================================
+// 가이드·데모 페이지 본문 (.demo-page) — GuideLayout / DemoLayout
+// =============================================================================
 .demo-page {
   min-height: 100vh;
   padding: 32px 0 64px;
   background:
     radial-gradient(900px 400px at 0% 0%, var(--color-accent-muted), transparent 55%),
     var(--color-bg);
+
+  // ----- 페이지 헤더 (카테고리 · 제목 · 설명)
+  &__header {
+    margin-bottom: 24px;
+  }
+
+  &__cat {
+    margin: 0 0 6px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent-text);
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+  }
+
+  &__desc {
+    margin: 8px 0 0;
+    color: var(--color-text-muted);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  // ----- 예시 본문 카드
+  &__body {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-panel);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-md);
+    padding: 22px;
+  }
 }
 
-.demo-page__header {
-  margin-bottom: 24px;
-}
-
-.demo-page__cat {
-  margin: 0 0 6px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-accent-text);
-}
-
-.demo-page__title {
-  margin: 0;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  color: var(--color-text);
-}
-
-.demo-page__desc {
-  margin: 8px 0 0;
-  color: var(--color-text-muted);
-  font-size: 14px;
-  line-height: 1.5;
-}
-
+// ----- 세로 스택 유틸
 .demo-stack {
   display: flex;
   flex-direction: column;
@@ -42,43 +56,41 @@
   width: 100%;
 }
 
-.demo-page__body {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-panel);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-md);
-  padding: 22px;
-}
+// =============================================================================
+// 데모 블록 (.demo-block) — 예시 구역 단위
+// =============================================================================
+.demo-block {
+  + .demo-block {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-border);
+  }
 
-.demo-block + .demo-block {
-  margin-top: 28px;
-  padding-top: 24px;
-  border-top: 1px solid var(--color-border);
-}
+  &__title {
+    margin: 0 0 12px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-text);
+  }
 
-.demo-block__title {
-  margin: 0 0 12px;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--color-text);
-}
+  &__desc {
+    margin: 0 0 12px;
+    color: var(--color-text-muted);
+    font-size: 13px;
+    line-height: 1.5;
 
-.demo-block__desc {
-  margin: 0 0 12px;
-  color: var(--color-text-muted);
-  font-size: 13px;
-  line-height: 1.5;
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.92em;
+    }
+  }
 
-  code {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.92em;
+  &__preview {
+    min-width: 0;
   }
 }
 
-.demo-block__preview {
-  min-width: 0;
-}
-
+// ----- 가로 나열 유틸
 .demo-row {
   display: flex;
   flex-wrap: wrap;
@@ -86,116 +98,119 @@
   align-items: center;
 }
 
-// 가이드 코드보기 (Storybook FrameworkTabs Show code 대응)
+// =============================================================================
+// 코드보기 패널 (.demo-code) — Storybook FrameworkTabs Show code 대응
+// =============================================================================
 .demo-code {
   margin-top: 12px;
-}
 
-.demo-code__togglebar {
-  display: flex;
-  align-items: center;
-  min-height: 36px;
-}
-
-.demo-code__toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin: 0;
-  padding: 6px 10px;
-  border: 0;
-  border-radius: var(--radius-sm, 6px);
-  color: var(--color-accent-text);
-  background: var(--color-accent-muted);
-  font: inherit;
-  font-size: 13px;
-  font-weight: 650;
-  line-height: 1.4;
-  cursor: pointer;
-
-  &:hover {
-    filter: brightness(0.97);
+  &__togglebar {
+    display: flex;
+    align-items: center;
+    min-height: 36px;
   }
 
-  &:focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 2px;
-  }
-
-  svg {
-    width: 15px;
-    height: 15px;
-    flex-shrink: 0;
-  }
-}
-
-.demo-code__body {
-  overflow: hidden;
-  margin-top: 4px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-panel, 12px);
-  background: #101827;
-}
-
-.demo-code__filebar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  min-height: 36px;
-  padding: 0 14px;
-  border-bottom: 1px solid #263246;
-
-  code {
-    overflow: hidden;
-    color: #94a3b8;
-    font-size: 12px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-}
-
-.demo-code__copy {
-  flex-shrink: 0;
-  margin: 0;
-  padding: 4px 8px;
-  border: 1px solid #475569;
-  border-radius: 5px;
-  color: #cbd5e1;
-  background: transparent;
-  font: inherit;
-  font-size: 12px;
-  line-height: 1.4;
-  cursor: pointer;
-
-  &:hover {
-    color: #fff;
-    border-color: #64748b;
-  }
-}
-
-.demo-code__pre {
-  overflow: auto;
-  max-height: 560px;
-  margin: 0;
-  padding: 12px 14px 14px;
-  color: #dbeafe;
-  font:
-    13px / 1.55 ui-monospace,
-    SFMono-Regular,
-    Menlo,
-    Monaco,
-    Consolas,
-    monospace;
-  tab-size: 2;
-  white-space: pre;
-
-  code {
+  &__toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    padding: 6px 10px;
+    border: 0;
+    border-radius: var(--radius-sm, 6px);
+    color: var(--color-accent-text);
+    background: var(--color-accent-muted);
     font: inherit;
-    color: inherit;
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 1.4;
+    cursor: pointer;
+
+    &:hover {
+      filter: brightness(0.97);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+
+    svg {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+    }
+  }
+
+  &__body {
+    overflow: hidden;
+    margin-top: 4px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-panel, 12px);
+    background: #101827;
+  }
+
+  &__filebar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 36px;
+    padding: 0 14px;
+    border-bottom: 1px solid #263246;
+
+    code {
+      overflow: hidden;
+      color: #94a3b8;
+      font-size: 12px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  &__copy {
+    flex-shrink: 0;
+    margin: 0;
+    padding: 4px 8px;
+    border: 1px solid #475569;
+    border-radius: 5px;
+    color: #cbd5e1;
+    background: transparent;
+    font: inherit;
+    font-size: 12px;
+    line-height: 1.4;
+    cursor: pointer;
+
+    &:hover {
+      color: #fff;
+      border-color: #64748b;
+    }
+  }
+
+  &__pre {
+    overflow: auto;
+    max-height: 560px;
+    margin: 0;
+    padding: 12px 14px 14px;
+    color: #dbeafe;
+    font:
+      13px / 1.55 ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      Monaco,
+      Consolas,
+      monospace;
+    tab-size: 2;
+    white-space: pre;
+
+    code {
+      font: inherit;
+      color: inherit;
+    }
   }
 }
 
+// ----- 인라인 스니펫 버튼
 .demo-code-snippet {
   display: block;
   max-width: 100%;
@@ -226,83 +241,96 @@
   }
 }
 
-// ----- Guide API docs (Props · 클래스 · 토큰)
+// =============================================================================
+// 가이드 API 문서 (.guide-api) — Props · 클래스 · 토큰 표
+// =============================================================================
 .guide-api {
   margin-top: 36px;
   padding-top: 8px;
   border-top: 1px solid var(--color-border);
-}
 
-.guide-api__section + .guide-api__section {
-  margin-top: 28px;
-  padding-top: 24px;
-  border-top: 1px solid var(--color-border);
-}
-
-.guide-api__title {
-  margin: 0 0 8px;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--color-text);
-}
-
-.guide-api__desc {
-  margin: 0 0 12px;
-  color: var(--color-text-muted);
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-.guide-api__table-wrap {
-  overflow-x: auto;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-panel, 12px);
-  background: var(--color-bg);
-}
-
-.guide-api__table {
-  width: 100%;
-  min-width: 40rem;
-  border-collapse: collapse;
-  font-size: 13px;
-  line-height: 1.45;
-
-  th,
-  td {
-    padding: 10px 12px;
-    text-align: left;
-    vertical-align: top;
-    border-bottom: 1px solid var(--color-border);
+  &__section {
+    + .guide-api__section {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid var(--color-border);
+    }
   }
 
-  th {
-    font-size: 12px;
+  &__title {
+    margin: 0 0 8px;
+    font-size: 15px;
     font-weight: 700;
-    color: var(--color-text-muted);
-    background: var(--color-surface-raised);
-    white-space: nowrap;
-  }
-
-  tbody tr:last-child th,
-  tbody tr:last-child td {
-    border-bottom: 0;
-  }
-
-  td[data-col='name'] code,
-  td[data-col='type'] code,
-  td[data-col='default'] code {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.92em;
-    color: var(--color-accent-text);
-    word-break: break-word;
-  }
-
-  td[data-col='description'] {
     color: var(--color-text);
   }
+
+  &__desc {
+    margin: 0 0 12px;
+    color: var(--color-text-muted);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  &__table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-panel, 12px);
+    background: var(--color-bg);
+  }
+
+  &__table {
+    width: 100%;
+    min-width: 40rem;
+    border-collapse: collapse;
+    font-size: 13px;
+    line-height: 1.45;
+
+    th,
+    td {
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    th {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--color-text-muted);
+      background: var(--color-surface-raised);
+      white-space: nowrap;
+    }
+
+    tbody tr:last-child th,
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    td[data-col='name'] code,
+    td[data-col='type'] code,
+    td[data-col='default'] code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.92em;
+      color: var(--color-accent-text);
+      word-break: break-word;
+    }
+
+    td[data-col='description'] {
+      color: var(--color-text);
+    }
+  }
 }
 
-// 가이드 데모 — 레이아웃 유틸 시각화 (docs · Storybook 공통)
+// =============================================================================
+// Header 가이드 — 스크롤 배경은 테마 변수로 제어
+// =============================================================================
+.header-background-demo {
+  --app-header-bg-scrolled: var(--color-header-bg-scrolled);
+}
+
+// =============================================================================
+// 레이아웃 유틸 시각화 — Container · Flex · Grid · Space 데모 셀
+// =============================================================================
 .container_demo-fill,
 .flex_demo-cell,
 .grid_demo-cell,

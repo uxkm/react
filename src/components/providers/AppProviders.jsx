@@ -12,6 +12,7 @@ import {
   bootstrapLocale
 } from '@/lib/i18n'
 import { useLocaleStore } from '@/lib/localeStore'
+import { initOverlayScrollbar } from '@/utils/overlayScrollbar'
 import { initRipple } from '@/utils/ripple'
 import DevelopmentRefresh from './DevelopmentRefresh'
 
@@ -61,6 +62,12 @@ function RippleBootstrap ({ children }) {
   return children
 }
 
+/** classic 스크롤바 OS에서 맥 스타일 오버레이 스크롤 등록 */
+function ScrollbarBootstrap ({ children }) {
+  useEffect(() => initOverlayScrollbar(), [])
+  return children
+}
+
 /** 앱 레이아웃으로 화면을 감싼다 */
 export default function AppProviders ({ children }) {
   return (
@@ -68,7 +75,9 @@ export default function AppProviders ({ children }) {
       <DevelopmentRefresh />
       <LocaleBootstrap>
         <RippleBootstrap>
-          <AppLayout>{children}</AppLayout>
+          <ScrollbarBootstrap>
+            <AppLayout>{children}</AppLayout>
+          </ScrollbarBootstrap>
         </RippleBootstrap>
       </LocaleBootstrap>
     </>

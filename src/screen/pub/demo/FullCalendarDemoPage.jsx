@@ -9,6 +9,8 @@ import {
   formatDate
 } from '@/lib/fullcalendar'
 import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
 
 const initialEvents = [
   { id: '1', title: '디자인 리뷰', start: '2026-11-05' },
@@ -27,8 +29,61 @@ export default function FullCalendarDemoPage () {
       description="@fullcalendar/react + daygrid/timegrid/interaction (@/lib/fullcalendar)"
       slug="fullcalendar"
     >
-      <div className="demo-block">
-        <h2 className="demo-block__title">월/주 뷰 · 날짜 클릭 · 드래그</h2>
+      <DemoBlock
+        title="월/주 뷰 · 날짜 클릭 · 드래그"
+        code={wrapPageExample(`const [events, setEvents] = useState([
+  { id: '1', title: '디자인 리뷰', start: '2026-11-05' },
+  { id: '2', title: '배포', start: '2026-11-12' }
+])
+const [lastAction, setLastAction] = useState('')
+
+<>
+  <p>
+    today: {formatDate(new Date(), { month: 'long', year: 'numeric', day: 'numeric', locale: 'ko' })}
+    <br />
+    {lastAction}
+  </p>
+  <FullCalendar
+    plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+    initialView="dayGridMonth"
+    headerToolbar={{
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek'
+    }}
+    editable
+    selectable
+    events={events}
+    height="auto"
+    dateClick={(info) => {
+      const title = '새 일정 ' + (events.length + 1)
+      setEvents((prev) => [...prev, { id: String(Date.now()), title, start: info.dateStr }])
+      setLastAction('추가: ' + title + ' (' + info.dateStr + ')')
+    }}
+    eventDrop={(info) => {
+      setEvents((prev) => prev.map((ev) => (
+        ev.id === info.event.id
+          ? { ...ev, start: info.event.startStr, end: info.event.endStr || undefined }
+          : ev
+      )))
+      setLastAction('이동: ' + info.event.title + ' → ' + info.event.startStr)
+    }}
+  />
+</>`, {
+          name: 'FullCalendarExample',
+          reactImports: ['useState'],
+          compImports: [],
+          extraImports: [
+            `import {
+  FullCalendar,
+  dayGridPlugin,
+  timeGridPlugin,
+  interactionPlugin,
+  formatDate
+} from '@/lib/fullcalendar'`
+          ]
+        })}
+      >
         <p style={{ margin: '0 0 12px', fontSize: 13, color: 'var(--color-text-muted)' }}>
           today: {formatDate(new Date(), { month: 'long', year: 'numeric', day: 'numeric', locale: 'ko' })}
           <br />
@@ -63,7 +118,7 @@ export default function FullCalendarDemoPage () {
             }}
           />
         </div>
-      </div>
+      </DemoBlock>
     </DemoLayout>
   )
 }

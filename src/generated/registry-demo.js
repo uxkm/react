@@ -26,5 +26,5 @@ export const demoLoaders = {
   'youtube': () => import('@/screen/pub/demo/YoutubeDemoPage.jsx')
 }
 export const demoMeta = {
-  'filter-scroll': {"header":false}
+
 }
