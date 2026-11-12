@@ -7,9 +7,9 @@ import {
   type AnchorHTMLAttributes,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 
-/** `#/web/login` → `/web/login` */
+/** `#/b2b/login` → `/b2b/login` */
 export function toAppHref (url?: string | null) {
   if (url == null || url === '') return url as any
   const s = String(url)
@@ -58,7 +58,7 @@ export const Link = forwardRef<HTMLAnchorElement, AppLinkProps>(function Link (
       href={target}
       replace={replace}
       prefetch={prefetch}
-      className={cx(resolvedClass)}
+      className={classNames(resolvedClass)}
       {...rest}
     >
       {children}

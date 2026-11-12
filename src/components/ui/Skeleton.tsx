@@ -3,7 +3,7 @@
  * variant · size · width 토큰으로 로딩 뼈대 조각을 그린다.
  */
 import type { CSSProperties, HTMLAttributes } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 
 /** SCSS 형태 클래스에 대응하는 variant. avatar 등은 별칭 */
 export type SkeletonVariant =
@@ -93,7 +93,7 @@ export function Skeleton ({
   return (
     <span
       {...rest}
-      className={cx(
+      className={classNames(
         'skeleton',
         formClass,
         round && variant !== 'circle' && variant !== 'avatar' && 'skeleton_circle',

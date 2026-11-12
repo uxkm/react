@@ -3,7 +3,7 @@
  * 데이터 없을 때 아이콘·설명·푸터 액션을 보여 준다.
  */
 import type { HTMLAttributes, ReactNode } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 
 /** 빈 상태가 받는 값 */
@@ -53,7 +53,7 @@ export function Empty ({
   return (
     <div
       {...rest}
-      className={cx(
+      className={classNames(
         'empty',
         size === 'sm' && 'empty_sm',
         size === 'lg' && 'empty_lg',

@@ -5,7 +5,7 @@ import os from 'node:os'
 import path from 'node:path'
 import { spawn, execFileSync } from 'node:child_process'
 import { chromium, expect } from '@playwright/test'
-import { root as sourceRoot } from '../scripts/projects.mjs'
+import { root as sourceRoot } from '../scripts/project.mjs'
 
 async function until (predicate, message, timeout = 30000) {
   const deadline = Date.now() + timeout
@@ -49,7 +49,7 @@ for (const [index, mode] of ['scss', 'css'].entries()) {
       write('public/data/watch.json', '{"label":"initial data"}')
       execFileSync(process.execPath, [path.join(root, 'scripts/registry.mjs')], { cwd: root, stdio: 'pipe' })
       child = spawn(process.execPath, [path.join(root, 'scripts/dev.mjs'), ...(mode === 'css' ? ['--css'] : [])], {
-        cwd: root, env: { ...process.env, HOSTNAME: '127.0.0.1', PORT: String(port), HTTPS_PORT: String(port + 1) }, stdio: ['ignore', 'pipe', 'pipe']
+        cwd: root, env: { ...process.env, BIND_HOST: '127.0.0.1', PORT: String(port), HTTPS_PORT: String(port + 1) }, stdio: ['ignore', 'pipe', 'pipe']
       })
       const capture = (chunk) => { log += chunk }
       child.stdout.on('data', capture)
@@ -104,9 +104,9 @@ export default function Example () {
       await until(async () => (await fetch(baseURL + '/pub/guide/relocated/renamed')).status === 404 && (await fetch(baseURL + '/pub/demo/watch-check/nested')).status === 404 && (await fetch(baseURL + '/assets/watch.svg')).status === 404, 'deleted routes/assets were retained')
       await page.goto(baseURL + '/pub/demo/libs')
       await expect(page.locator('a[href="/pub/demo/watch-check/nested"]')).toHaveCount(0)
-      write('src/widgets/b2b/previews/watch-preview.tsx', 'export default function Preview () { return <h1>Project widget preview</h1> }')
+      write('src/widgets/b2b/previews/watch-preview/index.tsx', 'export default function Preview () { return <h1>Project widget preview</h1> }')
       await until(async () => (await fetch(baseURL + '/b2b/common/watch-preview')).status === 200, 'new project widget preview was not detected')
-      fs.unlinkSync(path.join(root, 'src/widgets/b2b/previews/watch-preview.tsx'))
+      fs.unlinkSync(path.join(root, 'src/widgets/b2b/previews/watch-preview/index.tsx'))
       await until(async () => (await fetch(baseURL + '/b2b/common/watch-preview')).status === 404, 'removed project widget preview was retained')
       write('src/app/watch-static/page.jsx', 'export default function Page () { return <h1>Static app route</h1> }')
       await until(async () => (await fetch(baseURL + '/watch-static')).status === 200, 'new static app folder was not detected')
@@ -119,10 +119,10 @@ export default function Example () {
       await expect(page.locator('.comp-guide__nav a[href="/pub/guide/accessibility"]')).toHaveCount(0)
       if (mode === 'css') assert.equal(fs.existsSync(path.join(root, 'src/styles/css/watch-check.min.css')), false)
       // A local design skeleton is rendered only after the screen is marked manual.
-      const overviewFile = 'src/screen/b2b/contents/ax/overview.tsx'
+      const overviewFile = 'src/screen/b2b/contents/ax/overview/index.tsx'
       const overviewSource = fs.readFileSync(path.join(root, overviewFile), 'utf8')
       write(overviewFile, overviewSource.replace('loading={false}', 'loading={true}'))
-      write('src/screen/b2b/contents/ax/skeleton/overviewSkeleton.tsx', 'export default function OverviewSkeleton () { return <div id="manual-b2b-skeleton">Approved design skeleton</div> }')
+      write('src/screen/b2b/contents/ax/overview/skeleton/indexSkeleton.tsx', 'export default function OverviewSkeleton () { return <div id="manual-b2b-skeleton">Approved design skeleton</div> }')
       await page.goto(baseURL + '/b2b/contents/ax/overview')
       await expect(page.locator('.page-loading[aria-busy="true"]')).toBeVisible({ timeout: 30000 })
       await expect(page.locator('#manual-b2b-skeleton')).toHaveCount(0)
@@ -132,12 +132,12 @@ export default function Example () {
       write('src/config/skeleton.ts', configSource)
       await expect(page.locator('#manual-b2b-skeleton')).toHaveCount(0, { timeout: 30000 })
       await expect(page.locator('.page-loading[aria-busy="true"]')).toBeVisible()
-      assert.equal((await fetch(baseURL + '/b2b/contents/ax/skeleton/overview-skeleton')).status, 404)
+      assert.equal((await fetch(baseURL + '/b2b/contents/ax/overview/skeleton/index-skeleton')).status, 404)
       write(overviewFile, overviewSource)
       assert.ok(!log.includes('update failed'), log)
     } catch (error) {
       fs.writeFileSync(path.join(os.tmpdir(), 'uxkm-watch-' + mode + '.log'), log)
-      throw new Error(error.message + '\n--- dev output ---\n' + log.split('\n').filter((line) => /\[watch\]|\[styles\]|wrote|projects|Error:/.test(line)).slice(0, 100).join('\n'), { cause: error })
+      throw new Error(error.message + '\n--- dev output ---\n' + log.split('\n').filter((line) => /\[watch\]|\[styles\]|wrote|project|Error:/.test(line)).slice(0, 100).join('\n'), { cause: error })
     } finally {
       if (browser) await browser.close()
       await stop(child)

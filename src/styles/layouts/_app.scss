@@ -14,19 +14,32 @@
 // ---------------------------------------------------------------------------
 // AppHeader (from AppHeader SFC)
 // ---------------------------------------------------------------------------
+.app-header-anchor {
+  display: block;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
+
 .app-header {
   --app-header-top-height: 0px;
+  --app-header-current-bg: var(--app-header-bg, var(--color-header-bg));
 
   position: sticky;
   top: 0;
   z-index: 100;
   flex-shrink: 0;
   border-bottom: 1px solid var(--color-border);
-  background: var(--color-header-bg);
+  background: var(--app-header-current-bg);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  transition: transform 0.22s ease;
+  transition: transform 0.22s ease, background-color 0.22s ease;
   will-change: transform;
+
+  &.is-scrolled {
+    --app-header-current-bg: var(--app-header-bg-scrolled, var(--app-header-bg, var(--color-header-bg)));
+  }
 
   // inline(기본 한 줄): 스크롤 시 헤더 전체 숨김
   &:not(.app-header--stacked).is-scroll-hidden {
@@ -65,7 +78,7 @@
     position: relative;
     z-index: 2;
     border-top: 1px solid var(--color-border-subtle);
-    background: var(--color-header-bg);
+    background: var(--app-header-nav-bg, transparent);
   }
 
   &__inner {

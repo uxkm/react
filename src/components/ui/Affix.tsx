@@ -16,7 +16,7 @@ import {
   type HTMLAttributes,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 
 /** 스크롤 컨테이너. 생략 시 window(문서 뷰포트) */
@@ -230,7 +230,7 @@ export function Affix ({
       {...rest}
       ref={rootRef}
       id={rest.id || `affix-${uid}`}
-      className={cx('affix', className)}
+      className={classNames('affix', className)}
       style={style}
       data-affix=""
       data-target={targetMode}
@@ -245,7 +245,7 @@ export function Affix ({
       />
       <div
         ref={targetRef}
-        className={cx(
+        className={classNames(
           'affix_target',
           skin === 'bar' && 'affix_bar',
           skin === 'anchor' && 'affix_anchor',

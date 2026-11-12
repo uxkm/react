@@ -27,7 +27,7 @@
           "type": "Page",
           "id": "B2B-INSIGHT-ON-LIST",
           "pageUrl": "/b2b/insight/on/list",
-          "filePath": "@/screen/b2b/insight/on/list.tsx",
+          "filePath": "@/screen/b2b/insight/on/list/index.tsx",
           "priority": 2
         },
         {
@@ -50,7 +50,7 @@
           "type": "Page",
           "id": "B2B-INSIGHT-ON-DETAIL",
           "pageUrl": "/b2b/insight/on/detail",
-          "filePath": "@/screen/b2b/insight/on/detail.tsx",
+          "filePath": "@/screen/b2b/insight/on/detail/index.tsx",
           "priority": 2
         }
       ]
@@ -79,7 +79,7 @@
           "type": "Page",
           "id": "B2B-INSIGHT-RESOURCES-LIST",
           "pageUrl": "/b2b/insight/resources/list",
-          "filePath": "@/screen/b2b/insight/resources/list.tsx",
+          "filePath": "@/screen/b2b/insight/resources/list/index.tsx",
           "priority": 2
         },
         {
@@ -102,7 +102,7 @@
           "type": "Page",
           "id": "B2B-INSIGHT-RESOURCES-DETAIL",
           "pageUrl": "/b2b/insight/resources/detail",
-          "filePath": "@/screen/b2b/insight/resources/detail.tsx",
+          "filePath": "@/screen/b2b/insight/resources/detail/index.tsx",
           "priority": 2
         }
       ]
@@ -131,7 +131,7 @@
           "type": "Layer",
           "id": "B2B-COMMON-DOWNLOAD",
           "pageUrl": "/b2b/common/download",
-          "filePath": "@/widgets/b2b/previews/download.tsx",
+          "filePath": "@/widgets/b2b/previews/download/index.tsx",
           "priority": 2
         }
       ]

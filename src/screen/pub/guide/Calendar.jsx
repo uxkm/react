@@ -2,7 +2,10 @@
 
 import { useState } from 'react'
 import { Calendar, CalendarFooter, CalendarGroup, CalendarHeader, CalendarMonth, CalendarNav, CalendarWeekdays, CalendarWheel, CalendarWheelColumn } from '@/comp'
-import { DemoBlock, GuideApiDocs, GuideLayout, wrapPageExample } from '@/screen/pub/widgets/guide'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
+import { GuideLayout } from '@/screen/pub/layout'
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
 import { calendarApiSections } from '@/screen/pub/data/guide/calendarApiSections'
 
 const header = (title = '2024년 6월', showNav = true) => (

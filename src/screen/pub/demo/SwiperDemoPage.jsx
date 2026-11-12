@@ -1,7 +1,7 @@
 'use client'
 
 import { Swiper, SwiperSlide, defaultSwiperModules } from '@/lib/swiper'
-import { DemoPageShell } from '../shared/DemoPageShell'
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
 
 const slides = [
   { label: 'Slide 1', color: '#1f6feb' },
@@ -13,7 +13,7 @@ const slides = [
 /** swiper 데모 */
 export default function SwiperDemoPage () {
   return (
-    <DemoPageShell
+    <DemoLayout
       title="Swiper"
       description="swiper — Navigation / Pagination / Autoplay (@/lib/swiper)"
       slug="swiper"
@@ -39,6 +39,6 @@ export default function SwiperDemoPage () {
           </Swiper>
         </div>
       </div>
-    </DemoPageShell>
+    </DemoLayout>
   )
 }

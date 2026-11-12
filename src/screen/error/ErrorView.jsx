@@ -1,7 +1,7 @@
 'use client'
 
 import { Link } from '@/lib/router'
-import { Header, Page, PageChrome } from '@/comp'
+import { Header, Page, PageLayoutVisibility } from '@/comp'
 
 /**
  * 오류 화면 크롬.
@@ -22,7 +22,7 @@ export default function ErrorView ({ error, reset }) {
   return (
     <>
       <Page page="error" title="Error" />
-      <PageChrome meta={meta} />
+      <PageLayoutVisibility meta={meta} />
       <Header
         layout="inline"
         brand={<Link className="app-header__brand" to="/">퍼블리싱 목록</Link>}

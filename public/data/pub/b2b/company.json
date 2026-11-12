@@ -8,7 +8,7 @@
       "type": "Page",
       "id": "B2B-ABOUT-001",
       "pageUrl": "/b2b/company/intro",
-      "filePath": "@/screen/b2b/company/intro.tsx",
+      "filePath": "@/screen/b2b/company/intro/index.tsx",
       "owner": "",
       "start": "",
       "expected": "",
@@ -31,7 +31,7 @@
       "type": "Page",
       "id": "B2B-ABOUT-002",
       "pageUrl": "/b2b/company/ceo",
-      "filePath": "@/screen/b2b/company/ceo.tsx",
+      "filePath": "@/screen/b2b/company/ceo/index.tsx",
       "owner": "",
       "start": "",
       "expected": "",
@@ -48,7 +48,7 @@
       "type": "Page",
       "id": "B2B-ABOUT-003",
       "pageUrl": "/b2b/company/history",
-      "filePath": "@/screen/b2b/company/history.tsx",
+      "filePath": "@/screen/b2b/company/history/index.tsx",
       "owner": "",
       "start": "",
       "expected": "",
@@ -69,7 +69,7 @@
           "type": "Page",
           "id": "B2B-ABOUT-004",
           "pageUrl": "/b2b/company/ethics/management",
-          "filePath": "@/screen/b2b/company/ethics/management.tsx",
+          "filePath": "@/screen/b2b/company/ethics/management/index.tsx",
           "owner": "",
           "start": "",
           "expected": "",
@@ -95,7 +95,7 @@
           "type": "Page",
           "id": "B2B-COMPANY-ETHICS-COMPLIANCE",
           "pageUrl": "/b2b/company/ethics/compliance",
-          "filePath": "@/screen/b2b/company/ethics/compliance.tsx",
+          "filePath": "@/screen/b2b/company/ethics/compliance/index.tsx",
           "priority": 3
         },
         {
@@ -133,7 +133,7 @@
           "type": "Page",
           "id": "B2B-ABOUT-005",
           "pageUrl": "/b2b/company/sustainability/esg",
-          "filePath": "@/screen/b2b/company/sustainability/esg.tsx",
+          "filePath": "@/screen/b2b/company/sustainability/esg/index.tsx",
           "owner": "",
           "start": "",
           "expected": "",
@@ -159,7 +159,7 @@
           "type": "Page",
           "id": "B2B-COMPANY-SUSTAINABILITY-ENVIRONMENT",
           "pageUrl": "/b2b/company/sustainability/environment",
-          "filePath": "@/screen/b2b/company/sustainability/environment.tsx",
+          "filePath": "@/screen/b2b/company/sustainability/environment/index.tsx",
           "priority": 3
         },
         {
@@ -176,7 +176,7 @@
           "type": "Page",
           "id": "B2B-COMPANY-SUSTAINABILITY-DIVERSITY",
           "pageUrl": "/b2b/company/sustainability/diversity",
-          "filePath": "@/screen/b2b/company/sustainability/diversity.tsx",
+          "filePath": "@/screen/b2b/company/sustainability/diversity/index.tsx",
           "priority": 3
         },
         {
@@ -193,7 +193,7 @@
           "type": "Page",
           "id": "B2B-COMPANY-SUSTAINABILITY-HUMAN-RIGHTS",
           "pageUrl": "/b2b/company/sustainability/human-rights",
-          "filePath": "@/screen/b2b/company/sustainability/human-rights.tsx",
+          "filePath": "@/screen/b2b/company/sustainability/human-rights/index.tsx",
           "priority": 3
         },
         {
@@ -210,7 +210,7 @@
           "type": "Page",
           "id": "B2B-COMPANY-SUSTAINABILITY-SAFETY",
           "pageUrl": "/b2b/company/sustainability/safety",
-          "filePath": "@/screen/b2b/company/sustainability/safety.tsx",
+          "filePath": "@/screen/b2b/company/sustainability/safety/index.tsx",
           "priority": 3
         },
         {
@@ -227,7 +227,7 @@
           "type": "Page",
           "id": "B2B-COMPANY-SUSTAINABILITY-INFORMATION",
           "pageUrl": "/b2b/company/sustainability/information",
-          "filePath": "@/screen/b2b/company/sustainability/information.tsx",
+          "filePath": "@/screen/b2b/company/sustainability/information/index.tsx",
           "priority": 3
         },
         {
@@ -244,7 +244,7 @@
           "type": "Page",
           "id": "B2B-COMPANY-SUSTAINABILITY-CONSUMER",
           "pageUrl": "/b2b/company/sustainability/consumer",
-          "filePath": "@/screen/b2b/company/sustainability/consumer.tsx",
+          "filePath": "@/screen/b2b/company/sustainability/consumer/index.tsx",
           "priority": 3
         },
         {
@@ -261,7 +261,7 @@
           "type": "Page",
           "id": "B2B-COMPANY-SUSTAINABILITY-CONTRIBUTION",
           "pageUrl": "/b2b/company/sustainability/contribution",
-          "filePath": "@/screen/b2b/company/sustainability/contribution.tsx",
+          "filePath": "@/screen/b2b/company/sustainability/contribution/index.tsx",
           "priority": 3
         },
         {
@@ -278,7 +278,7 @@
           "type": "Page",
           "id": "B2B-COMPANY-SUSTAINABILITY-ESG-DATA",
           "pageUrl": "/b2b/company/sustainability/esg-data",
-          "filePath": "@/screen/b2b/company/sustainability/esg-data.tsx",
+          "filePath": "@/screen/b2b/company/sustainability/esg-data/index.tsx",
           "priority": 3
         }
       ]
@@ -292,7 +292,7 @@
           "type": "Page",
           "id": "B2B-ABOUT-006",
           "pageUrl": "/b2b/company/investors/financial",
-          "filePath": "@/screen/b2b/company/investors/financial.tsx",
+          "filePath": "@/screen/b2b/company/investors/financial/index.tsx",
           "owner": "",
           "start": "",
           "expected": "",
@@ -324,7 +324,7 @@
           "type": "Page",
           "id": "B2B-COMPANY-INVESTORS-STOCK",
           "pageUrl": "/b2b/company/investors/stock",
-          "filePath": "@/screen/b2b/company/investors/stock.tsx",
+          "filePath": "@/screen/b2b/company/investors/stock/index.tsx",
           "priority": 3
         },
         {
@@ -347,7 +347,7 @@
           "type": "Page",
           "id": "B2B-COMPANY-INVESTORS-DISCLOSURE",
           "pageUrl": "/b2b/company/investors/disclosure",
-          "filePath": "@/screen/b2b/company/investors/disclosure.tsx",
+          "filePath": "@/screen/b2b/company/investors/disclosure/index.tsx",
           "priority": 3
         },
         {
@@ -364,7 +364,7 @@
           "type": "Page",
           "id": "B2B-COMPANY-INVESTORS-IR",
           "pageUrl": "/b2b/company/investors/ir",
-          "filePath": "@/screen/b2b/company/investors/ir.tsx",
+          "filePath": "@/screen/b2b/company/investors/ir/index.tsx",
           "priority": 3
         }
       ]
@@ -378,7 +378,7 @@
           "type": "Page",
           "id": "B2B-ABOUT-007",
           "pageUrl": "/b2b/company/pr/news-list",
-          "filePath": "@/screen/b2b/company/pr/news-list.tsx",
+          "filePath": "@/screen/b2b/company/pr/news-list/index.tsx",
           "owner": "",
           "start": "",
           "expected": "",
@@ -404,7 +404,7 @@
           "type": "Page",
           "id": "B2B-COMPANY-PR-NEWS-DETAIL",
           "pageUrl": "/b2b/company/pr/news-detail",
-          "filePath": "@/screen/b2b/company/pr/news-detail.tsx",
+          "filePath": "@/screen/b2b/company/pr/news-detail/index.tsx",
           "priority": 3
         },
         {
@@ -421,7 +421,7 @@
           "type": "Page",
           "id": "B2B-COMPANY-PR-AWARDS",
           "pageUrl": "/b2b/company/pr/awards",
-          "filePath": "@/screen/b2b/company/pr/awards.tsx",
+          "filePath": "@/screen/b2b/company/pr/awards/index.tsx",
           "priority": 3
         }
       ]

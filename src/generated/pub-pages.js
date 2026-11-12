@@ -99,6 +99,10 @@ export const pubPages = {
       "label": "grid"
     },
     {
+      "id": "header",
+      "label": "Header · 헤더"
+    },
+    {
       "id": "icon",
       "label": "icon"
     },
@@ -205,6 +209,10 @@ export const pubPages = {
     {
       "id": "tooltip",
       "label": "tooltip"
+    },
+    {
+      "id": "top-banner",
+      "label": "TopBanner · 상단 배너"
     },
     {
       "id": "tree",

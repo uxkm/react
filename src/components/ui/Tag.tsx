@@ -12,7 +12,7 @@ import {
   type MouseEvent,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 
 /** 태그 색 */
@@ -103,7 +103,7 @@ export function Tag ({
   const [innerSelected, setInnerSelected] = useState(defaultSelected)
   const isSelected = selectedControlled ? Boolean(selected) : innerSelected
 
-  const tagClass = cx(
+  const tagClass = classNames(
     'tag',
     resolvedColor && 'color_' + resolvedColor,
     resolvedVariant !== 'filled' && 'tag_' + resolvedVariant,
@@ -226,7 +226,7 @@ export function TagGroup ({
   return (
     <div
       {...rest}
-      className={cx('tag_group', tight && 'tag_group-tight', className)}
+      className={classNames('tag_group', tight && 'tag_group-tight', className)}
       role="group"
       aria-label={ariaLabel || undefined}
     >

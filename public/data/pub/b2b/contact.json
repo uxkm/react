@@ -8,7 +8,7 @@
       "type": "Page",
       "id": "B2B-INSIGH-001",
       "pageUrl": "/b2b/contact/education",
-      "filePath": "@/screen/b2b/contact/education.tsx",
+      "filePath": "@/screen/b2b/contact/education/index.tsx",
       "owner": "",
       "start": "",
       "expected": "",
@@ -43,7 +43,7 @@
           "name": "문의 정보",
           "type": "Section",
           "pageUrl": "/b2b/contact/education#inquiry",
-          "filePath": "@/screen/b2b/contact/education.tsx",
+          "filePath": "@/screen/b2b/contact/education/index.tsx",
           "priority": 1,
           "remark": [
             {
@@ -66,7 +66,7 @@
           "name": "기업·담당자 정보",
           "type": "Section",
           "pageUrl": "/b2b/contact/education#company",
-          "filePath": "@/screen/b2b/contact/education.tsx",
+          "filePath": "@/screen/b2b/contact/education/index.tsx",
           "priority": 1,
           "remark": [
             {
@@ -89,7 +89,7 @@
           "name": "개인정보 수집 및 이용 동의",
           "type": "Section",
           "pageUrl": "/b2b/contact/education#privacy",
-          "filePath": "@/screen/b2b/contact/education.tsx",
+          "filePath": "@/screen/b2b/contact/education/index.tsx",
           "priority": 1,
           "remark": [
             {
@@ -110,7 +110,7 @@
           "type": "Layer",
           "id": "B2B-INSIGH-002",
           "pageUrl": "/b2b/common/education-diagnosis",
-          "filePath": "@/widgets/b2b/previews/education-diagnosis.tsx",
+          "filePath": "@/widgets/b2b/previews/education-diagnosis/index.tsx",
           "owner": "",
           "start": "",
           "expected": "",
@@ -148,7 +148,7 @@
           "type": "Section",
           "id": "B2B-DIAGNOSIS-QUESTIONS",
           "pageUrl": "/b2b/common/education-diagnosis",
-          "filePath": "@/widgets/b2b/previews/education-diagnosis.tsx",
+          "filePath": "@/widgets/b2b/previews/education-diagnosis/index.tsx",
           "priority": 2
         },
         {
@@ -165,7 +165,7 @@
           "type": "Section",
           "id": "B2B-DIAGNOSIS-PRIVACY",
           "pageUrl": "/b2b/common/education-diagnosis",
-          "filePath": "@/widgets/b2b/previews/education-diagnosis.tsx",
+          "filePath": "@/widgets/b2b/previews/education-diagnosis/index.tsx",
           "priority": 2
         },
         {
@@ -188,7 +188,7 @@
           "type": "Section",
           "id": "B2B-DIAGNOSIS-RESULT",
           "pageUrl": "/b2b/common/education-diagnosis",
-          "filePath": "@/widgets/b2b/previews/education-diagnosis.tsx",
+          "filePath": "@/widgets/b2b/previews/education-diagnosis/index.tsx",
           "priority": 2
         }
       ]

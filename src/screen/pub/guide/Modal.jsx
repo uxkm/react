@@ -2,8 +2,14 @@
 
 import { useState } from 'react'
 import { Button, Modal } from '@/comp'
-import { DemoBlock, GuideApiDocs, GuideLayout, wrapPageExample } from '@/screen/pub/widgets/guide'
+import { LoadOpenOverlayDemo } from '@/screen/pub/widgets/preview/LoadOpenOverlayDemo'
+import { TimedOverlayDemo } from '@/screen/pub/widgets/preview/TimedOverlayDemo'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
+import { GuideLayout } from '@/screen/pub/layout'
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
 import { modalApiSections } from '@/screen/pub/data/guide/modalApiSections'
+import { NoticeModalDemo } from '@/screen/pub/widgets/preview/NoticeModalDemo'
 
 /** 취소·확인 푸터 버튼 */
 function FooterActions ({ onCancel, onConfirm, confirmLabel = '저장', confirmColor = 'primary' }) {
@@ -64,6 +70,66 @@ function SizeDemo () {
 }
 
 const SECTIONS = [
+  {
+    title: '배경 dim 숨기기',
+    description: 'backdrop 의 기본값은 true 입니다. false 를 지정하면 배경 dim 없이 표시하고 배경 클릭으로 닫히지 않습니다. 닫기 버튼은 그대로 사용할 수 있습니다. 미리보기는 프레임 안에 표시합니다.',
+    code: wrapPageExample(`<Modal openOnLoad backdrop={false} title="배경 dim 없음">배경 dim 없이 표시합니다.</Modal>`, { compImports: ['Modal'] }),
+    preview: <LoadOpenOverlayDemo component="Modal" backdrop={false} />
+  },
+  {
+    title: '페이지 로드 시 열림 · 자동 닫힘 없음',
+    description: 'openOnLoad 만 지정하여 페이지 로드 시 열립니다. autoCloseDelay 를 생략하므로 시간 경과로 닫히지 않습니다. 각 컴포넌트의 기본 닫기 동작은 유지됩니다. 예시 다시 불러오기로 초기 상태를 다시 확인할 수 있습니다. 가이드 미리보기는 staticDemo 로 프레임 안에 표시하며, 실제 페이지에서는 코드 예시처럼 사용합니다.',
+    code: wrapPageExample(`<Modal openOnLoad title="안내">로드 시 열리며 자동으로 닫히지 않습니다.</Modal>`, { compImports: ['Modal'] }),
+    preview: <LoadOpenOverlayDemo component="Modal" />
+  },
+  {
+    title: '페이지 진입 시 자동 열림 · 지정 시간 후 닫기',
+    description: '호출부에 openOnLoad 와 autoCloseDelay={5000} 을 지정하면 마운트 시 열리고 5초 후 닫힙니다. 시간은 밀리초이며 생략하거나 0 이하이면 자동으로 닫히지 않습니다. 아래 실행 버튼은 페이지 진입을 대신해 예시를 새로 마운트합니다. open 을 직접 제어할 때는 open={open} onOpenChange={setOpen} 으로 연결하고 초기 상태를 true 로 지정하세요.',
+    code: wrapPageExample(`<Modal openOnLoad autoCloseDelay={5000} title="안내">5초 후 닫힙니다.</Modal>`, { compImports: ['Modal'] }),
+    preview: <TimedOverlayDemo component="Modal" />
+  },
+  {
+    title: '공지사항 · 오늘 하루 보지 않기',
+    description: (
+      <>
+        체크 후 닫으면 다음 자정까지 숨기며 새로고침 후에도 유지합니다. 체크하지 않으면 다시 열 수 있습니다.
+        가이드에서는 버튼으로 열고, 페이지 진입 시 자동으로 표시하려면 <code>open</code>의 초기값을 true로 지정합니다.
+        공지별로 저장 키를 다르게 지정하세요.
+      </>
+    ),
+    code: wrapPageExample(`const [open, setOpen] = useState(false) // 페이지 진입 시 자동 표시는 true
+const [hideToday, setHideToday] = useState(false)
+const hydrated = useHydrated()
+const { isHidden, dismiss } = useDailyDismissal('notice-maintenance-v1')
+const close = () => {
+  if (hideToday) dismiss(true)
+  setOpen(false)
+  setHideToday(false)
+}
+
+<Button label="공지사항 모달 열기" disabled={!hydrated || isHidden} onClick={() => setOpen(true)} />
+{hydrated && isHidden && <p role="status">공지사항을 오늘 하루 숨겼습니다.</p>}
+<Modal
+  open={hydrated && open && !isHidden}
+  title="공지사항"
+  onClose={close}
+  footer={
+    <Flex align="center" justify="between" gap="sm" wrap style={{ width: '100%' }}>
+      <Checkbox label="오늘 하루 보지 않기" checked={hideToday} onChange={(event) => setHideToday(event.target.checked)} />
+      <Button label="닫기" onClick={close} />
+    </Flex>
+  }
+>
+  <h2>서비스 이용 안내</h2>
+  <p>공지사항 내용을 입력하세요.</p>
+</Modal>`, {
+      name: 'NoticeModalExample',
+      reactImports: ['useState'],
+      compImports: ['Button', 'Checkbox', 'Flex', 'Modal'],
+      extraImports: ["import { useDailyDismissal } from '@/hooks/useDailyDismissal'", "import { useHydrated } from '@/hooks/useHydrated'"]
+    }),
+    preview: <NoticeModalDemo />
+  },
   {
     title: '열기와 닫기',
     description: (

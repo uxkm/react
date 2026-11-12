@@ -21,7 +21,7 @@ const props = [
     name: 'src',
     type: 'string',
     default: '—',
-    description: 'public/images SVG. `close.svg` → /images/icon/, `common/a.svg` · 절대 URL 지원.'
+    description: 'public/images SVG. `ico_close.svg` → /images/icon/, `common/a.svg` · 절대 URL 지원.'
   },
   {
     name: 'embed',

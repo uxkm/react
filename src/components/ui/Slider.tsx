@@ -11,7 +11,7 @@ import {
   type InputHTMLAttributes,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 
 const VALID_SIZES = new Set(['sm', 'md', 'lg'])
 
@@ -106,7 +106,7 @@ export function Slider ({
       ? 0
       : ((currentValue - numericMin) / (numericMax - numericMin)) * 100
 
-  const classes = cx(
+  const classes = classNames(
     'slider',
     resolvedSize === 'sm' && 'slider_sm',
     resolvedSize === 'lg' && 'slider_lg',

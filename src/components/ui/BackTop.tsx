@@ -16,7 +16,7 @@ import {
   type ButtonHTMLAttributes,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 import { Icon } from './Icon'
 import { useFloatingContext } from './Floating'
@@ -173,7 +173,7 @@ export function BackTop ({
   return (
     <div
       id={`back-top-${uid}`}
-      className={cx('back_top', visible && 'is-visible', floating.inside && 'is-in-floating')}
+      className={classNames('back_top', visible && 'is-visible', floating.inside && 'is-in-floating')}
       data-back-top=""
       data-target={targetMode}
       data-visibility-height={visibilityHeight}
@@ -183,7 +183,7 @@ export function BackTop ({
         {...buttonRest}
         id={buttonId}
         type="button"
-        className={cx(
+        className={classNames(
           'back_top_btn',
           variant === 'primary' && 'back_top_primary',
           variant === 'ghost' && 'back_top_ghost',

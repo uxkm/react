@@ -9,7 +9,7 @@ import {
   type MouseEvent,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 
 /** 카드 모양 */
@@ -129,7 +129,7 @@ export function Card ({
     hasNodes(header) ||
     hasNodes(extra)
 
-  const cardClass = cx(
+  const cardClass = classNames(
     'card',
     variantClass(resolvedVariant),
     resolvedSize !== 'md' && 'card_' + resolvedSize,
@@ -195,7 +195,7 @@ export function CardHeader ({
   ...rest
 }: CardHeaderProps) {
   return (
-    <div {...rest} className={cx('card_header', className)}>
+    <div {...rest} className={classNames('card_header', className)}>
       <div className="card_header-main">
         {children ?? (
           <>
@@ -212,7 +212,7 @@ export function CardHeader ({
 /** 카드 본문 */
 export function CardBody ({ children, className, ...rest }: CardBodyProps) {
   return (
-    <div {...rest} className={cx('card_body', className)}>
+    <div {...rest} className={classNames('card_body', className)}>
       {children}
     </div>
   )
@@ -228,7 +228,7 @@ export function CardFooter ({
   return (
     <div
       {...rest}
-      className={cx('card_footer', between && 'card_footer-between', className)}
+      className={classNames('card_footer', between && 'card_footer-between', className)}
     >
       {children}
     </div>
@@ -246,7 +246,7 @@ export function CardDeck ({
   return (
     <div
       {...rest}
-      className={cx('card_deck', resolved && 'card_deck-' + resolved, className)}
+      className={classNames('card_deck', resolved && 'card_deck-' + resolved, className)}
     >
       {children}
     </div>

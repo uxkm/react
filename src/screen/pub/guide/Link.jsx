@@ -2,7 +2,10 @@
 
 import { useState } from 'react'
 import { Icon, Link } from '@/comp'
-import { DemoBlock, GuideApiDocs, GuideLayout, wrapPageExample } from '@/screen/pub/widgets/guide'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
+import { GuideLayout } from '@/screen/pub/layout'
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
 import { linkApiSections } from '@/screen/pub/data/guide/linkApiSections'
 
 /** as="button" · onClick 으로 페이지 상태를 갱신하는 예시 */

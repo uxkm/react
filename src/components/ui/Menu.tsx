@@ -14,7 +14,7 @@ import {
   type MouseEvent,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 import { Icon } from './Icon'
 
@@ -150,7 +150,7 @@ function MenuItemNode ({
   if (hasSub) {
     return (
       <li
-        className={cx(
+        className={classNames(
           'menu_item',
           'menu_item-submenu',
           item.disabled && 'is-disabled'
@@ -158,7 +158,7 @@ function MenuItemNode ({
       >
         <button
           type="button"
-          className={cx('menu_link', active && 'is-active', item.disabled && 'is-disabled')}
+          className={classNames('menu_link', active && 'is-active', item.disabled && 'is-disabled')}
           aria-expanded={open}
           aria-controls={subId}
           disabled={item.disabled}
@@ -187,10 +187,10 @@ function MenuItemNode ({
   }
 
   return (
-    <li className={cx('menu_item', item.disabled && 'is-disabled')}>
+    <li className={classNames('menu_item', item.disabled && 'is-disabled')}>
       {item.href ? <a
         href={item.href}
-        className={cx(
+        className={classNames(
           'menu_link',
           active && 'is-active',
           item.disabled && 'is-disabled'
@@ -203,7 +203,7 @@ function MenuItemNode ({
         <MenuLinkContent icon={item.icon} label={item.label} extra={item.extra} />
       </a> : <button
         type="button"
-        className={cx('menu_link', active && 'is-active', item.disabled && 'is-disabled')}
+        className={classNames('menu_link', active && 'is-active', item.disabled && 'is-disabled')}
         disabled={item.disabled}
         onClick={handleClick}
       >
@@ -269,7 +269,7 @@ export function Menu ({
     >
       <nav
         {...rest}
-        className={cx(
+        className={classNames(
           'menu',
           direction === 'horizontal' ? 'menu_horizontal' : 'menu_vertical',
           bordered && 'menu_bordered',

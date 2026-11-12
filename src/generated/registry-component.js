@@ -25,6 +25,7 @@ export const componentLoaders = {
   'floating': () => import('@/screen/pub/guide/Floating.jsx'),
   'form-layout': () => import('@/screen/pub/guide/FormLayout.jsx'),
   'grid': () => import('@/screen/pub/guide/Grid.jsx'),
+  'header': () => import('@/screen/pub/guide/Header.jsx'),
   'icon': () => import('@/screen/pub/guide/Icon.jsx'),
   'input': () => import('@/screen/pub/guide/Input.jsx'),
   'link': () => import('@/screen/pub/guide/Link.jsx'),
@@ -52,10 +53,11 @@ export const componentLoaders = {
   'textarea': () => import('@/screen/pub/guide/Textarea.jsx'),
   'timeline': () => import('@/screen/pub/guide/Timeline.jsx'),
   'tooltip': () => import('@/screen/pub/guide/Tooltip.jsx'),
+  'top-banner': () => import('@/screen/pub/guide/TopBanner.jsx'),
   'tree': () => import('@/screen/pub/guide/Tree.jsx'),
   'typography': () => import('@/screen/pub/guide/Typography.jsx'),
   'upload': () => import('@/screen/pub/guide/Upload.jsx')
 }
 export const componentMeta = {
-
+  'floating': {"footer":true}
 }

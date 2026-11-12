@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { client as createStompClient } from 'webstomp-client'
-import { DemoPageShell } from '../shared/DemoPageShell'
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
 
 /** 로컬/데모용 기본 엔드포인트 (브로커 없으면 실패가 정상) */
 const DEFAULT_WS = 'ws://127.0.0.1:15674/ws'
@@ -63,7 +63,7 @@ export default function WebstompDemoPage () {
   }, [])
 
   return (
-    <DemoPageShell
+    <DemoLayout
       title="webstomp-client"
       description="webstomp-client — STOMP over WebSocket (브로커 필요)"
       slug="webstomp"
@@ -92,6 +92,6 @@ export default function WebstompDemoPage () {
           <pre className="lib-demo-pre">{log.join('\n') || '(로그 없음)'}</pre>
         </div>
       </div>
-    </DemoPageShell>
+    </DemoLayout>
   )
 }

@@ -1,6 +1,7 @@
 'use client'
 
-import { Page, PageLoading, PublishScreenStub } from '@/comp'
+import { Page, PageLoading } from '@/comp'
+import { PublishingPlaceholder } from '@/screen/pub/widgets/publishing/PublishingPlaceholder'
 import { resolveSkeletonMode } from '@/config/skeleton'
 import IndexSkeleton from './skeleton/indexSkeleton'
 
@@ -48,7 +49,7 @@ export default function B2bContentsSmallBusinessPage () {
         skeleton={skeletonMode === 'manual' ? <IndexSkeleton /> : undefined}
         className="page-container"
       >
-        <PublishScreenStub
+        <PublishingPlaceholder
           device="B2B"
           folderId="contents"
           folderName="기업교육"

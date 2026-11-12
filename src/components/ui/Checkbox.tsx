@@ -12,7 +12,7 @@ import {
   type InputHTMLAttributes,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 
 /** 체크박스가 받는 값 */
 export interface CheckboxProps
@@ -56,7 +56,7 @@ export function Checkbox ({
   const content = children ?? label
   const standalone = content == null || content === ''
 
-  const classes = cx(
+  const classes = classNames(
     'checkbox',
     labelEnd && 'checkbox_label-end',
     button && 'checkbox_button',
@@ -88,7 +88,7 @@ export function Checkbox ({
   if (standalone) {
     return (
       <label
-        className={cx('checkbox_control', className)}
+        className={classNames('checkbox_control', className)}
         aria-label={ariaLabel}
         {...rippleAttrs}
       >

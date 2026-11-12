@@ -1,6 +1,6 @@
 import { routeMetadata } from '@/lib/routeMetadata'
 import '@/styles/pub.scss'
-import PubIndex from '@/screen/pub/IndexPage'
+import PubIndex from '@/screen/pub/index'
 
 /**
  * 라우트 셸만. 화면 본문은 src/screen/pub (app → screens 분리).

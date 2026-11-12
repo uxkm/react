@@ -13,7 +13,7 @@ import {
   type ReactNode,
   type SVGAttributes
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { imgIcon } from '@/utils/images'
 import {
   loadEmbeddedSvg,
@@ -24,7 +24,7 @@ import {
  * images 경로 해석.
  * - `/…` · `http(s):` · `data:` 는 그대로
  * - `common/logo.svg` 처럼 폴더 포함이면 `/images/…`
- * - `close.svg` · `close` 는 `/images/icon/…`
+ * - `ico_close.svg` · `ico_close` 는 `/images/icon/…`
  */
 export function resolveIconSrc (src: string): string {
   const value = String(src || '').trim()
@@ -363,7 +363,7 @@ export interface IconProps
   name?: IconName | string
   /**
    * public/images 의 SVG 파일.
-   * `close.svg` → /images/icon/close.svg
+   * `ico_close.svg` → /images/icon/ico_close.svg
    * `common/logo.svg` → /images/common/logo.svg
    * `/images/…` · 절대 URL 은 그대로 사용
    */
@@ -435,8 +435,8 @@ export function Icon ({
   const frameSizeClass =
     sizeToken && sizeToken !== 'md' ? `icon_circle-${sizeToken}` : ''
 
-  const iconClass = cx('icon', sizeClass, spin && 'icon_spin')
-  const outerClass = cx(
+  const iconClass = classNames('icon', sizeClass, spin && 'icon_spin')
+  const outerClass = classNames(
     asButton
       ? ['icon_button', frameSizeClass]
       : circle

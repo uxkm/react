@@ -1,7 +1,7 @@
 'use client'
 
-import { SimpleBar } from '@/lib/scroll'
-import { DemoPageShell } from '../shared/DemoPageShell'
+import { SimpleBar } from '@/lib/simplebar'
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
 
 const lines = Array.from({ length: 24 }, (_, i) => (
   `라인 ${i + 1} — SimpleBar 커스텀 스크롤 영역 예시입니다.`
@@ -10,9 +10,9 @@ const lines = Array.from({ length: 24 }, (_, i) => (
 /** simplebar-react 데모 */
 export default function SimplebarDemoPage () {
   return (
-    <DemoPageShell
+    <DemoLayout
       title="SimpleBar"
-      description="simplebar-react — 커스텀 스크롤바 (@/lib/scroll)"
+      description="simplebar-react — 커스텀 스크롤바 (@/lib/simplebar)"
       slug="simplebar"
     >
       <div className="demo-block">
@@ -27,6 +27,6 @@ export default function SimplebarDemoPage () {
           </SimpleBar>
         </div>
       </div>
-    </DemoPageShell>
+    </DemoLayout>
   )
 }

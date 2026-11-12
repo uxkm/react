@@ -3,7 +3,7 @@
  * thead·tbody children과 스킨·스크롤·고정 열을 조합한다.
  */
 import type { CSSProperties, HTMLAttributes, ReactNode } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 
 const VALID_STICKY_COLS = new Set([1, 2, 3, 4])
 
@@ -105,7 +105,7 @@ export function Table<T extends Record<string, ReactNode> = Record<string, React
   const dataMode = !children && Array.isArray(rows) && columns.some(isDataColumn)
   const resolvedStickyCols = VALID_STICKY_COLS.has(stickyCols) ? stickyCols : 1
 
-  const tableClass = cx(
+  const tableClass = classNames(
     'table',
     bordered && 'table_bordered',
     striped && 'table_striped',
@@ -170,7 +170,7 @@ export function Table<T extends Record<string, ReactNode> = Record<string, React
     return (
       <table
         {...(rest as HTMLAttributes<HTMLTableElement>)}
-        className={cx(tableClass, className)}
+        className={classNames(tableClass, className)}
         style={tableStyle}
       >
         {colgroup}
@@ -187,7 +187,7 @@ export function Table<T extends Record<string, ReactNode> = Record<string, React
   return (
     <div
       {...rest}
-      className={cx('table_wrap', scroll && 'table_wrap-scroll', className)}
+      className={classNames('table_wrap', scroll && 'table_wrap-scroll', className)}
       style={wrapStyle}
       role={rest.role || (scroll ? 'region' : undefined)}
       aria-label={rest['aria-label'] || (scroll ? '표 스크롤 영역' : undefined)}

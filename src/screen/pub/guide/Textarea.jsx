@@ -2,7 +2,10 @@
 
 import { useState } from 'react'
 import { Button, Textarea } from '@/comp'
-import { DemoBlock, GuideApiDocs, GuideLayout, wrapPageExample } from '@/screen/pub/widgets/guide'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
+import { GuideLayout } from '@/screen/pub/layout'
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
 import { textareaApiSections } from '@/screen/pub/data/guide/textareaApiSections'
 
 function Field ({ id, label, hint, children }) {

@@ -2,7 +2,10 @@
 
 import { useState } from 'react'
 import { Rate } from '@/comp'
-import { DemoBlock, GuideApiDocs, GuideLayout, wrapPageExample } from '@/screen/pub/widgets/guide'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
+import { GuideLayout } from '@/screen/pub/layout'
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
 import { rateApiSections } from '@/screen/pub/data/guide/rateApiSections'
 
 /** value · onChange 로 부모가 별점을 소유하는 제어 예시 */

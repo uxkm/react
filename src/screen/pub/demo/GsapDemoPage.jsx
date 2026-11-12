@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
-import { DemoPageShell } from '../shared/DemoPageShell'
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
 
 /** gsap 트윈 데모 */
 export default function GsapDemoPage () {
@@ -34,7 +34,7 @@ export default function GsapDemoPage () {
   }
 
   return (
-    <DemoPageShell
+    <DemoLayout
       title="GSAP"
       description="gsap — 트윈 / yoyo 반복 애니메이션"
       slug="gsap"
@@ -50,6 +50,6 @@ export default function GsapDemoPage () {
           </button>
         </div>
       </div>
-    </DemoPageShell>
+    </DemoLayout>
   )
 }

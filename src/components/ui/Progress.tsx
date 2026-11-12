@@ -3,7 +3,7 @@
  * 0~100% 표시, 줄무늬·애니메이션·indeterminate 지원.
  */
 import type { HTMLAttributes } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 
 /** 진행 막대가 받는 값. value 는 0~100 */
 export interface ProgressProps extends Omit<HTMLAttributes<HTMLDivElement>, 'color'> {
@@ -54,7 +54,7 @@ export function Progress ({
   return (
     <div
       {...rest}
-      className={cx(
+      className={classNames(
         'progress',
         size === 'sm' && 'progress_sm',
         size === 'lg' && 'progress_lg',
@@ -75,7 +75,7 @@ export function Progress ({
     >
       <div className="progress_track">
         <div
-          className={cx('progress_bar', color && 'color_' + color)}
+          className={classNames('progress_bar', color && 'color_' + color)}
           style={indeterminate ? undefined : { width: clamped + '%' }}
         >
           {inside && showInfo && <span className="progress_info">{infoText}</span>}

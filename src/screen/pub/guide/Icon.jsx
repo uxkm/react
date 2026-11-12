@@ -2,7 +2,10 @@
 
 import { useState } from 'react'
 import { Icon, iconNames, iconSizes } from '@/comp'
-import { DemoBlock, GuideApiDocs, GuideLayout, wrapPageExample } from '@/screen/pub/widgets/guide'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
+import { GuideLayout } from '@/screen/pub/layout'
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
 import { iconApiSections } from '@/screen/pub/data/guide/iconApiSections'
 
 /** button · onClick 으로 페이지 상태를 갱신하는 예시 */
@@ -333,23 +336,23 @@ const SECTIONS = [
         파일명만 쓰면 <code>/images/icon/</code> 기준입니다. 이미지 방식은 <code>currentColor</code>를 상속하지 않습니다.
       </>
     ),
-    code: wrapPageExample(`// <img src="/images/icon/search.svg"> 로 렌더
-<Icon src="search.svg" size="lg" ariaLabel="검색" />
-<Icon src="check.svg" circle size="sm" />
-<Icon src="close.svg" button ariaLabel="닫기" />
-<Icon src="star.svg" square />
-<Icon name="check.svg" /> // name 이 .svg 이면 파일로 처리`, {
+    code: wrapPageExample(`// <img src="/images/icon/ico_search.svg"> 로 렌더
+<Icon src="ico_search.svg" size="lg" ariaLabel="검색" />
+<Icon src="ico_check.svg" circle size="sm" />
+<Icon src="ico_close.svg" button ariaLabel="닫기" />
+<Icon src="ico_star.svg" square />
+<Icon name="ico_check.svg" /> // name 이 .svg 이면 파일로 처리`, {
   name: 'IconExample12',
   reactImports: [],
   compImports: ['Icon']
 }),
     preview: (
       <div className="demo-row icon_group">
-        <Icon src="search.svg" size="lg" ariaLabel="검색" />
-        <Icon src="check.svg" circle size="sm" />
-        <Icon src="close.svg" button ariaLabel="닫기" />
-        <Icon src="star.svg" square />
-        <Icon name="check.svg" size="lg" />
+        <Icon src="ico_search.svg" size="lg" ariaLabel="검색" />
+        <Icon src="ico_check.svg" circle size="sm" />
+        <Icon src="ico_close.svg" button ariaLabel="닫기" />
+        <Icon src="ico_star.svg" square />
+        <Icon name="ico_check.svg" size="lg" />
       </div>
     )
   },
@@ -362,22 +365,22 @@ const SECTIONS = [
       </>
     ),
     code: wrapPageExample(`// fetch → 인라인 <svg>…</svg> 코드로 렌더
-<Icon src="search.svg" embed size="lg" color="primary" ariaLabel="검색" />
-<Icon src="check.svg" embed circle color="success" size="sm" />
-<Icon src="close.svg" embed button color="danger" ariaLabel="닫기" />
-<Icon src="star.svg" embed square color="warning" />
-<Icon name="check.svg" embed color="info" size="lg" />`, {
+<Icon src="ico_search.svg" embed size="lg" color="primary" ariaLabel="검색" />
+<Icon src="ico_check.svg" embed circle color="success" size="sm" />
+<Icon src="ico_close.svg" embed button color="danger" ariaLabel="닫기" />
+<Icon src="ico_star.svg" embed square color="warning" />
+<Icon name="ico_check.svg" embed color="info" size="lg" />`, {
   name: 'IconExample13',
   reactImports: [],
   compImports: ['Icon']
 }),
     preview: (
       <div className="demo-row icon_group">
-        <Icon src="search.svg" embed size="lg" color="primary" ariaLabel="검색" />
-        <Icon src="check.svg" embed circle color="success" size="sm" />
-        <Icon src="close.svg" embed button color="danger" ariaLabel="닫기" />
-        <Icon src="star.svg" embed square color="warning" />
-        <Icon name="check.svg" embed color="info" size="lg" />
+        <Icon src="ico_search.svg" embed size="lg" color="primary" ariaLabel="검색" />
+        <Icon src="ico_check.svg" embed circle color="success" size="sm" />
+        <Icon src="ico_close.svg" embed button color="danger" ariaLabel="닫기" />
+        <Icon src="ico_star.svg" embed square color="warning" />
+        <Icon name="ico_check.svg" embed color="info" size="lg" />
       </div>
     )
   }

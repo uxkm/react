@@ -7,7 +7,7 @@ import type {
   InputHTMLAttributes,
   ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 
 const VALID_SIZES = new Set(['sm', 'md', 'lg'])
 
@@ -50,7 +50,7 @@ export function Switch ({
   const content = children ?? label
   const hasLabel = content != null && content !== ''
   const resolvedSize = VALID_SIZES.has(size) ? size : 'md'
-  const classes = cx(
+  const classes = classNames(
     'switch',
     labelEnd && 'switch_label-end',
     resolvedSize === 'sm' && 'switch_sm',

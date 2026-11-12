@@ -8,7 +8,7 @@ import {
   type MouseEvent,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 
 /** 링크 글자 색 */
@@ -80,7 +80,7 @@ export function Link ({
   const resolvedTarget = target || (blank ? '_blank' : '')
   const resolvedRel = rel || (resolvedTarget === '_blank' ? 'noopener noreferrer' : undefined)
 
-  const linkClass = cx(
+  const linkClass = classNames(
     'link',
     color && 'color_' + color,
     size && 'size_' + size,

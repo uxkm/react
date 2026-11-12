@@ -2,14 +2,10 @@
 
 import { useRef, useState } from 'react'
 import { Affix, Button, Link, Space } from '@/comp'
-import {
-  DemoBlock,
-  GuideApiDocs,
-  GuideLayout,
-  ensurePageModule,
-  pageExampleCode,
-  wrapPageExample
-} from '@/screen/pub/widgets/guide'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
+import { GuideLayout } from '@/screen/pub/layout'
+import { ensurePageModule, pageExampleCode, wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
 import { affixApiSections } from '@/screen/pub/data/guide/affixApiSections'
 
 const DEMO_PARAS = Array.from({ length: 10 }, (_, index) => (

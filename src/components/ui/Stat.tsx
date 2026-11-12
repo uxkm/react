@@ -3,7 +3,7 @@
  * title · value · prefix/suffix · trend · description을 카드·크기로 조합한다.
  */
 import type { HTMLAttributes, ReactNode } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 
 const TrendIcon = () => (
   <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -60,7 +60,7 @@ export function Stat ({
   const resolvedDescription = description ?? desc
   const resolvedSize = ['sm', 'md', 'lg'].includes(size) ? size : 'md'
 
-  const classes = cx(
+  const classes = classNames(
     'stat',
     resolvedSize !== 'md' && `stat_${resolvedSize}`,
     card && 'stat_card',
@@ -69,8 +69,8 @@ export function Stat ({
     className
   )
 
-  const trendClasses = cx('stat_trend', trendColor && `color_${trendColor}`)
-  const descriptionClasses = cx(
+  const trendClasses = classNames('stat_trend', trendColor && `color_${trendColor}`)
+  const descriptionClasses = classNames(
     'stat_desc',
     resolvedDescription && trendColor && `color_${trendColor}`
   )

@@ -3,7 +3,7 @@
  * page/list/form/card 프리셋으로 로딩 뼈대를 그린다.
  */
 import type { HTMLAttributes, ReactNode } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 import { Skeleton } from './Skeleton'
 
@@ -126,7 +126,7 @@ export function PageSkeleton ({
   return (
     <div
       {...rest}
-      className={cx('page-skeleton', 'page-skeleton_' + type, className)}
+      className={classNames('page-skeleton', 'page-skeleton_' + type, className)}
       aria-hidden="true"
     >
       {hasNodes(children) ? children : preset}

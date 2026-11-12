@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { YouTube } from '@/lib/youtube'
-import { DemoPageShell } from '../shared/DemoPageShell'
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
 
 /** Google IFrame API 샘플 영상 */
 const SAMPLE_ID = 'M7lc1UVf-VE'
@@ -12,7 +12,7 @@ export default function YoutubeDemoPage () {
   const [status, setStatus] = useState('대기')
 
   return (
-    <DemoPageShell
+    <DemoLayout
       title="YouTube"
       description="react-youtube — iframe 플레이어 (@/lib/youtube)"
       slug="youtube"
@@ -35,6 +35,6 @@ export default function YoutubeDemoPage () {
           onEnd={() => setStatus('ended')}
         />
       </div>
-    </DemoPageShell>
+    </DemoLayout>
   )
 }

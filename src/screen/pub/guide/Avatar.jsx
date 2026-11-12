@@ -1,10 +1,13 @@
 'use client'
 
 import { Avatar, AvatarGroup, Icon } from '@/comp'
-import { DemoBlock, GuideApiDocs, GuideLayout, wrapPageExample } from '@/screen/pub/widgets/guide'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
+import { GuideLayout } from '@/screen/pub/layout'
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
 import { avatarApiSections } from '@/screen/pub/data/guide/avatarApiSections'
 
-const SAMPLE = '/images/samples/avatar/avatar-sample.svg'
+const SAMPLE = '/images/icon/ico_avatar.svg'
 
 const SECTIONS = [
   {
@@ -14,7 +17,7 @@ const SECTIONS = [
         이미지가 있으면 <code>avatar_image</code>로 표시하고, 없으면 아이콘·이니셜 순으로 대체합니다.
       </>
     ),
-    code: wrapPageExample(`<Avatar src="/images/samples/avatar/avatar-sample.svg" alt="홍길동" />
+    code: wrapPageExample(`<Avatar src="/images/icon/ico_avatar.svg" alt="홍길동" />
 <Avatar color="primary" initials="홍" ariaHidden />
 <Avatar color="default" icon={<Icon name="user" className="avatar_icon" />} ariaHidden />`, {
       name: 'AvatarExample',

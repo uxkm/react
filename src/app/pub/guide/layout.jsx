@@ -1,5 +1,5 @@
 import '@/styles/demo.scss'
-import { PageChrome } from '@/comp/widget/PageChrome'
+import { PageLayoutVisibility } from '@/comp/layout/PageLayoutVisibility'
 
 /**
  * /pub/guide · /pub/guide/:name 공통.
@@ -9,7 +9,7 @@ import { PageChrome } from '@/comp/widget/PageChrome'
 export default function GuideLayoutRoute ({ children }) {
   return (
     <>
-      <PageChrome meta={{ footer: false }} />
+      <PageLayoutVisibility meta={{ footer: false }} />
       {children}
     </>
   )

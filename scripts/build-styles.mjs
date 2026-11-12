@@ -18,7 +18,7 @@ import path from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import * as sass from 'sass-embedded'
 import { STYLE_ENTRIES, getStyleEntries } from './style-entries.mjs'
-import { writeIfChanged } from './files.mjs'
+import { writeIfChanged } from './write-if-changed.mjs'
 
 /** 이 스크립트 파일이 있는 디렉터리 (scripts/) */
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -55,11 +55,11 @@ function toDistMinCss (cssPath) {
 
 /**
  * common/global 를 소스 앞에 주입할지 여부.
- * styles 루트 엔트리(index/pub/web/mobile/demo)는 global 미주입.
+ * styles 루트 엔트리(index/pub/demo)는 global 미주입.
  */
 function needsGlobal (entryRel) {
   const f = entryRel.replace(/\\/g, '/')
-  if (/\/styles\/(index|pub|web|mobile|demo)\.scss$/.test(f)) return false
+  if (/\/styles\/(index|pub|demo)\.scss$/.test(f)) return false
   return true
 }
 

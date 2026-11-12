@@ -1,8 +1,8 @@
 'use client'
 
 import { Link } from '@/lib/router'
-import { useGuideMenu } from '@/screen/pub/guideMenu'
-import { DemoPageShell } from '../shared/DemoPageShell'
+import { useGuideMenu } from '@/screen/pub/hooks/useGuideMenu'
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
 
 /** URL /pub/demo/libs (파일명 기본 slug 인 libs-index 대신) */
 export const routeId = 'libs'
@@ -32,7 +32,7 @@ export default function LibsIndexDemoPage () {
   const items = demoItemsFromMenu(menu?.guideDemoMenu)
 
   return (
-    <DemoPageShell
+    <DemoLayout
       title="라이브러리 데모"
       description="guide-menu.json 의 Demo 목록. 각 카드로 이동합니다."
       slug="libs"
@@ -54,6 +54,6 @@ export default function LibsIndexDemoPage () {
           </Link>
         ))}
       </div>
-    </DemoPageShell>
+    </DemoLayout>
   )
 }

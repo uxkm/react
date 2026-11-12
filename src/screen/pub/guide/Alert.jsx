@@ -2,7 +2,12 @@
 
 import { useState } from 'react'
 import { Alert, Button, Icon } from '@/comp'
-import { DemoBlock, GuideApiDocs, GuideLayout, wrapPageExample } from '@/screen/pub/widgets/guide'
+import { LoadOpenOverlayDemo } from '@/screen/pub/widgets/preview/LoadOpenOverlayDemo'
+import { TimedOverlayDemo } from '@/screen/pub/widgets/preview/TimedOverlayDemo'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
+import { GuideLayout } from '@/screen/pub/layout'
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
 import { alertApiSections } from '@/screen/pub/data/guide/alertApiSections'
 
 /** open · onOpenChange 로 표시를 제어하는 예시 */
@@ -32,6 +37,18 @@ function ControlledDemo () {
 }
 
 const SECTIONS = [
+  {
+    title: '페이지 로드 시 열림 · 자동 닫힘 없음',
+    description: 'openOnLoad 만 지정하여 페이지 로드 시 열립니다. autoCloseDelay 를 생략하므로 시간 경과로 닫히지 않습니다. 각 컴포넌트의 기본 닫기 동작은 유지됩니다. 예시 다시 불러오기로 초기 상태를 다시 확인할 수 있습니다.',
+    code: wrapPageExample(`<Alert openOnLoad closable title="안내">로드 시 열리며 자동으로 닫히지 않습니다.</Alert>`, { compImports: ['Alert'] }),
+    preview: <LoadOpenOverlayDemo component="Alert" />
+  },
+  {
+    title: '페이지 진입 시 자동 열림 · 지정 시간 후 닫기',
+    description: '호출부에 openOnLoad 와 autoCloseDelay={5000} 을 지정하면 마운트 시 열리고 5초 후 닫힙니다. 시간은 밀리초이며 생략하거나 0 이하이면 자동으로 닫히지 않습니다. 아래 실행 버튼은 페이지 진입을 대신해 예시를 새로 마운트합니다. open 을 직접 제어할 때는 open={open} onOpenChange={setOpen} 으로 연결하고 초기 상태를 true 로 지정하세요.',
+    code: wrapPageExample(`<Alert openOnLoad autoCloseDelay={5000} closable title="안내">5초 후 닫힙니다.</Alert>`, { compImports: ['Alert'] }),
+    preview: <TimedOverlayDemo component="Alert" />
+  },
   {
     title: '유형',
     description: (

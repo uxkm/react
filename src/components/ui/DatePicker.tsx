@@ -15,7 +15,7 @@ import {
   type InputHTMLAttributes,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 
 const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토']
 const pad = (value: number) => String(value).padStart(2, '0')
@@ -209,7 +209,7 @@ export function DatePicker ({
 
   useEscapeKey(rootRef, () => setOpen(false), open)
 
-  const classes = cx(
+  const classes = classNames(
     'date_picker',
     size !== 'md' && `date_picker_${size}`,
     fit && 'date_picker_fit',
@@ -294,7 +294,7 @@ export function DatePicker ({
       </div>
       <div
         id={panelId}
-        className={cx('date_picker_panel', panelAlign === 'end' && 'date_picker_panel-end')}
+        className={classNames('date_picker_panel', panelAlign === 'end' && 'date_picker_panel-end')}
         role="dialog"
         aria-modal="false"
         aria-label={ariaLabel}
@@ -337,7 +337,7 @@ export function DatePicker ({
                 <button
                   key={cell.value}
                   type="button"
-                  className={cx(
+                  className={classNames(
                     'calendar_day',
                     cell.other && 'is-other-month',
                     cell.value === today && 'is-today',

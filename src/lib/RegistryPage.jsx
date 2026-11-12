@@ -1,7 +1,7 @@
 import 'server-only'
 
 import { notFound } from 'next/navigation'
-import { PageChrome } from '@/comp/widget/PageChrome'
+import { PageLayoutVisibility } from '@/comp/layout/PageLayoutVisibility'
 
 /** 서버에서 화면 모듈을 읽어 초기 HTML과 RSC 응답에 본문을 포함한다. */
 export async function RegistryPage ({ loaders, metaMap, routeKey, meta }) {
@@ -12,7 +12,7 @@ export async function RegistryPage ({ loaders, metaMap, routeKey, meta }) {
   const { default: Screen } = await load()
   return (
     <>
-      <PageChrome meta={meta ?? metaMap?.[routeKey]} />
+      <PageLayoutVisibility meta={meta ?? metaMap?.[routeKey]} />
       <Screen />
     </>
   )

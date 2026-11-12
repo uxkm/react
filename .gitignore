@@ -39,7 +39,7 @@ node_modules/.vite/
 node_modules/.cache/
 package-lock.json
 
-# Playwright / accessibility reports
-/reports/a11y/
+# Playwright reports
+/reports/
 /test-results/
 /playwright-report/

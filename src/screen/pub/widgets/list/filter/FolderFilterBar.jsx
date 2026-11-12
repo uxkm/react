@@ -2,7 +2,7 @@
  * FolderFilterBar
  * - 화면명 필터 트리거 버튼과, 선택된 폴더의 하위 리프 바로가기 목록
  */
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { toAppHref } from '../table/PathLinkCell'
 
 export default function FolderFilterBar ({
@@ -20,7 +20,7 @@ export default function FolderFilterBar ({
     <div className="wbs-filter-bar">
       <button
         type="button"
-        className={cx('wbs-filter-btn', { 'is-active': active })}
+        className={classNames('wbs-filter-btn', { 'is-active': active })}
         aria-expanded={open ? 'true' : 'false'}
         aria-haspopup="dialog"
         aria-label={active ? filterWithLabel : filterLabel}

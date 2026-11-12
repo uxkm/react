@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import { createViewer } from '@/lib/viewer'
-import { DemoPageShell } from '../shared/DemoPageShell'
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
 
 const images = [
   { src: 'https://picsum.photos/id/1015/800/600', alt: '산' },
@@ -26,7 +26,7 @@ export default function ViewerDemoPage () {
   }, [])
 
   return (
-    <DemoPageShell
+    <DemoLayout
       title="Viewer.js"
       description="viewerjs — 이미지 갤러리 확대 (@/lib/viewer)"
       slug="viewer"
@@ -41,6 +41,6 @@ export default function ViewerDemoPage () {
           ))}
         </ul>
       </div>
-    </DemoPageShell>
+    </DemoLayout>
   )
 }

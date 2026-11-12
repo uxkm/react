@@ -8,7 +8,7 @@ import { useId, useRef, useState } from 'react'
 import { Button } from '../ui/Button.tsx'
 import { useClickOutside } from '@/hooks/useClickOutside'
 import { useLocale } from '@/hooks/useLocale'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 
 /**
  * 전역 언어 전환 버튼.
@@ -54,7 +54,7 @@ export function LanguageSwitcher ({
   return (
     <div
       ref={rootRef}
-      className={cx(
+      className={classNames(
         'dropdown',
         'dropdown_placement-end',
         'lang-switcher',
@@ -100,7 +100,7 @@ export function LanguageSwitcher ({
               type="button"
               role="menuitemradio"
               aria-checked={locale === item.code}
-              className={cx('menu_link', locale === item.code && 'is-active')}
+              className={classNames('menu_link', locale === item.code && 'is-active')}
               disabled={localeBusy && item.code !== 'ko'}
               onClick={() => onSelect(item.code)}
             >

@@ -5,7 +5,7 @@
  * 이니셜·이미지·아이콘으로 사용자/엔티티를 표시한다. 상태 점·그룹을 지원한다.
  */
 import { useState, type HTMLAttributes, type ReactNode } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 
 /** 아바타 크기 */
@@ -77,7 +77,7 @@ export function Avatar ({
   return (
     <span
       {...rest}
-      className={cx(
+      className={classNames(
         'avatar',
         color && 'color_' + color,
         resolvedSize !== 'md' && 'avatar_' + resolvedSize,
@@ -99,7 +99,7 @@ export function Avatar ({
       {badgeColor
         ? (
           <span
-            className={cx('avatar_badge', 'color_' + badgeColor)}
+            className={classNames('avatar_badge', 'color_' + badgeColor)}
             role="img"
             aria-label={badgeLabel || undefined}
           />
@@ -121,7 +121,7 @@ export function AvatarGroup ({
   return (
     <div
       {...rest}
-      className={cx('avatar_group', className)}
+      className={classNames('avatar_group', className)}
       role="group"
       aria-label={ariaLabel || undefined}
     >

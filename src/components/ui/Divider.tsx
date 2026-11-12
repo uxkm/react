@@ -3,7 +3,7 @@
  * 가로·세로, dashed, 가운데/좌우 라벨을 지원한다.
  */
 import { createElement, type HTMLAttributes, type ReactNode } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 
 /** 구분선. 가로가 기본, vertical 이면 세로 */
@@ -53,7 +53,7 @@ export function Divider ({
 
   const resolvedOrient = orient || orientation || ''
 
-  const dividerClass = cx(
+  const dividerClass = classNames(
     'divider',
     vertical && 'divider_vertical',
     dashed && 'divider_dashed',

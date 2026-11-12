@@ -1,10 +1,10 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { discoverProjects, root } from './projects.mjs'
+import { discoverProject, root } from './project.mjs'
 
 /** Discover standalone SCSS entries, including entries created after startup. */
 export function getStyleEntries () {
-  const projects = new Set(discoverProjects().map(({ id }) => id))
+  const b2b = discoverProject()
   const entries = []
   function walk (folder) {
     if (!fs.existsSync(folder)) return
@@ -14,7 +14,7 @@ export function getStyleEntries () {
       const relative = path.relative(root, file).split(path.sep).join('/')
       const owner = relative.match(/^src\/styles\/pages\/([^/]+)\//)?.[1] ||
         relative.match(/^src\/(?:screen|widgets|modules)\/([^/]+)\//)?.[1]
-      if (owner && !['pub', 'error', 'common'].includes(owner) && !projects.has(owner)) continue
+      if (owner && !['pub', 'error', 'common'].includes(owner) && owner !== b2b?.id) continue
       if (entry.isDirectory()) walk(file)
       else if (entry.name.endsWith('.scss') && !entry.name.startsWith('_')) entries.push(relative)
     }

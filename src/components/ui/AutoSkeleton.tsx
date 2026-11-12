@@ -13,7 +13,7 @@ import {
   type HTMLAttributes,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 
 /** 측정한 뼈대 한 칸. x·y 위치, w·h 크기, r 모서리, shape 네모 또는 원 */
 export interface AutoBone {
@@ -375,7 +375,7 @@ export function AutoSkeleton ({
       return (
         <div
           {...rest}
-          className={cx('auto-skeleton', 'is-loading', className)}
+          className={classNames('auto-skeleton', 'is-loading', className)}
           aria-busy="true"
         >
           <BonesView bones={bones} height={contentHeight} />
@@ -387,7 +387,7 @@ export function AutoSkeleton ({
       return (
         <div
           {...rest}
-          className={cx('auto-skeleton', 'is-loading', 'is-fallback', className)}
+          className={classNames('auto-skeleton', 'is-loading', 'is-fallback', className)}
           aria-busy="true"
         >
           {fallback}
@@ -398,7 +398,7 @@ export function AutoSkeleton ({
     return (
       <div
         {...rest}
-        className={cx('auto-skeleton', 'is-loading', className)}
+        className={classNames('auto-skeleton', 'is-loading', className)}
         aria-busy="true"
       />
     )
@@ -408,7 +408,7 @@ export function AutoSkeleton ({
     <div
       {...rest}
       ref={rootRef}
-      className={cx('auto-skeleton', className)}
+      className={classNames('auto-skeleton', className)}
     >
       {children}
     </div>

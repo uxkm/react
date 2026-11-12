@@ -2,14 +2,14 @@
 
 import { useRef, useState } from 'react'
 import { BackTop, Button, Floating, Icon, Space } from '@/comp'
-import {
-  DemoBlock,
-  GuideApiDocs,
-  GuideLayout,
-  ensurePageModule,
-  wrapPageExample
-} from '@/screen/pub/widgets/guide'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
+import { GuideLayout } from '@/screen/pub/layout'
+import { ensurePageModule, wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
 import { floatingApiSections } from '@/screen/pub/data/guide/floatingApiSections'
+
+// 문서 기준 플로팅의 푸터 경계 동작을 확인할 수 있도록 이 가이드에서는 푸터를 표시한다.
+export const meta = { footer: true }
 
 const DEMO_PARAS = Array.from({ length: 12 }, (_, index) => (
   <p key={index}>
@@ -96,16 +96,26 @@ function ScrollFloatingDemo ({
 /** 문서(window · DOM 뷰포트) 기준 Floating — 페이지 스크롤·뷰포트 fixed */
 function WindowFloatingDemo () {
   const [visible, setVisible] = useState(false)
+  const [boundary, setBoundary] = useState('viewport')
 
   return (
-    <div className="floating_demo-window">
+    <div className="floating_demo-window" data-floating-window-demo="">
       <p>
         이 가이드 <strong>문서(페이지)</strong>를 스크롤하면 <strong>뷰포트 우하단</strong>에
         Floating 스택이 <code>position: fixed</code>로 붙습니다.
         BackTop <code>target</code>도 생략(<code>window</code> · <code>data-target=&quot;window&quot;</code>)입니다.
         내부 스크롤 박스가 아닙니다. BackTop 표시: <code>{String(visible)}</code>
       </p>
+      <label>
+        플로팅 경계
+        <select value={boundary} onChange={(event) => setBoundary(event.target.value)}>
+          <option value="viewport">뷰포트에 고정</option>
+          <option value="footer">푸터 위에서 멈춤</option>
+        </select>
+      </label>
       <Floating
+        boundary={boundary}
+        boundaryGap={16}
         placement="bottom-right"
         offsetBottom={24}
         offsetRight={24}
@@ -142,7 +152,129 @@ const FLOAT_ACTION_CODE = `function FloatAction ({ label = '문의', icon = 'mai
   )
 }`
 
+/** 로컬 meta로 전체·항목별 표시를 확인하는 미리보기 */
+function FloatingMetaDemo () {
+  const [showFloating, setShowFloating] = useState(true)
+  const [showChat, setShowChat] = useState(true)
+  const [showExtra, setShowExtra] = useState(false)
+  return (
+    <div data-floating-meta-demo="">
+      <Space>
+        <Button onClick={() => setShowFloating((value) => !value)}>전체 표시 전환</Button>
+        <Button onClick={() => setShowChat((value) => !value)}>상담 표시 전환</Button>
+        <Button onClick={() => setShowExtra((value) => !value)}>페이지 추가 항목 전환</Button>
+      </Space>
+      <div className="floating_demo-wrap floating_demo-preview">
+        <Floating
+          meta={{ floating: showFloating, floatingItems: { chat: showChat, 'page-help': showExtra } }}
+          style={{ position: 'absolute' }}
+        >
+          <Floating.Item name="chat"><Button>상담</Button></Floating.Item>
+          <Floating.Item name="page-help"><Button>페이지 도움말</Button></Floating.Item>
+          <Floating.Item name="backTop"><Button>맨 위로</Button></Floating.Item>
+        </Floating>
+      </div>
+    </div>
+  )
+}
+
+function FloatingSlotsDemo () {
+  const [showCustom, setShowCustom] = useState(true)
+  return (
+    <div data-floating-slots-demo="">
+      <Button onClick={() => setShowCustom((value) => !value)}>커스텀 영역 표시 전환</Button>
+      <div className="floating_demo-wrap floating_demo-preview" style={{ minHeight: 200 }}>
+        <Floating
+          style={{ position: 'absolute' }}
+          meta={{ floatingItems: { 'page-tools': showCustom } }}
+          slots={{ 'page-tools': (
+            <div>
+              <strong>페이지 전용 UI</strong>
+              <input aria-label="플로팅 메모" placeholder="직접 입력할 수 있습니다" />
+              <Button size="sm">저장</Button>
+            </div>
+          ) }}
+        />
+      </div>
+    </div>
+  )
+}
+
 const SECTIONS = [
+  {
+    title: '커스텀 UI 슬롯 · 페이지별 배치',
+    description: (
+      <>
+        <code>slots</code>에 이름과 UI를 전달하면 해당 이름의 플로팅 항목으로 등록됩니다.
+        버튼·입력·카드 등 임의의 UI를 넣을 수 있고 <code>meta.floatingItems</code>와
+        <code>order</code>에 같은 이름을 사용합니다.
+      </>
+    ),
+    code: `'use client'
+import { Button, PageFloating } from '@/comp'
+
+export const meta = { floating: true, floatingItems: { 'page-tools': true } }
+
+export default function ExamplePage () {
+  return (
+    <PageFloating
+      floatingProps={{ boundary: 'footer', boundaryGap: 20, offsetBottom: 24 }}
+      slots={{ 'page-tools': (
+        <div>
+          <p>이 페이지에서만 제공하는 영역</p>
+          <input aria-label="메모" />
+          <Button>저장</Button>
+        </div>
+      ) }}
+    />
+  )
+}
+
+// 직접 사용하는 Floating에도 같은 slots와 배치 옵션을 전달할 수 있습니다.
+// boundary="viewport": 기존 화면 고정(기본값)
+// boundary="footer": 푸터 위에서 멈춤
+// boundary="#stop-area": 지정한 영역 위에서 멈춤
+// getPosition={({ defaultStyle }) => ({ ...defaultStyle, right: 48 })}: 직접 좌표 보정`,
+    preview: <FloatingSlotsDemo />
+  },
+  {
+    title: '페이지 meta · 전체와 항목별 표시',
+    description: (
+      <>
+        페이지의 <code>meta.floating</code>은 전체, <code>meta.floatingItems</code>는
+        <code>Floating.Item name</code>별 표시를 제어합니다. 생략하면 표시하며,
+        전체가 false면 내부 항목이 true여도 숨깁니다. 아래 미리보기는 Floating의 로컬 meta로 동작을 보여 줍니다.
+      </>
+    ),
+    code: `'use client'
+
+import { Button, Floating, PageFloating } from '@/comp'
+
+export const meta = {
+  header: true,
+  footer: true,
+  floating: true,
+  floatingItems: {
+    chat: false,
+    backTop: true,
+    'page-help': true
+  }
+}
+
+export default function ExamplePage () {
+  return (
+    <>
+      <h1>페이지 내용</h1>
+      <PageFloating>
+        <Floating.Item name="page-help">
+          <Button>이 페이지 도움말</Button>
+        </Floating.Item>
+      </PageFloating>
+    </>
+  )
+}`,
+    preview: <FloatingMetaDemo />
+  },
   {
     title: '기본 사용',
     description: (

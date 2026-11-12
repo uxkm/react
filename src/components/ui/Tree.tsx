@@ -12,7 +12,7 @@ import {
   type MouseEvent,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 
 /** Tree 루트 props */
 export interface TreeProps extends HTMLAttributes<HTMLUListElement> {
@@ -41,7 +41,7 @@ export function Tree ({
   return (
     <ul
       {...rest}
-      className={cx(
+      className={classNames(
         'tree',
         bordered && 'tree_bordered',
         lines && 'tree_lines',
@@ -146,17 +146,17 @@ export function TreeNode ({
   return (
     <li
       {...rest}
-      className={cx('tree_item', className)}
+      className={classNames('tree_item', className)}
       role="treeitem"
       aria-expanded={showToggle ? isExpanded : undefined}
       aria-selected={selected || undefined}
     >
-      <div className={cx('tree_row', selected && 'is-selected', disabled && 'is-disabled')}>
+      <div className={classNames('tree_row', selected && 'is-selected', disabled && 'is-disabled')}>
         {showToggle
           ? (
             <button
               type="button"
-              className={cx('tree_toggle', plusToggle && 'tree_toggle-plus')}
+              className={classNames('tree_toggle', plusToggle && 'tree_toggle-plus')}
               aria-expanded={isExpanded}
               aria-label={toggleLabel}
               disabled={disabled || undefined}

@@ -3,7 +3,7 @@
  * 본문 최대 폭(size) 또는 fluid 전체 폭으로 콘텐츠를 감싼다.
  */
 import { createElement, type HTMLAttributes, type ReactNode } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 
 /** 가로 폭을 제한하는 컨테이너 */
 export interface ContainerProps extends HTMLAttributes<HTMLElement> {
@@ -29,7 +29,7 @@ export function Container ({
     as,
     {
       ...rest,
-      className: cx('container', fluid ? 'container_fluid' : size && 'container_' + size, className)
+      className: classNames('container', fluid ? 'container_fluid' : size && 'container_' + size, className)
     },
     children
   )

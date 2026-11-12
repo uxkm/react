@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import { encode, decode } from 'js-base64'
-import { DemoPageShell } from '../shared/DemoPageShell'
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
 
 /** js-base64 데모 */
 export default function Base64DemoPage () {
@@ -18,7 +18,7 @@ export default function Base64DemoPage () {
   }, [encoded])
 
   return (
-    <DemoPageShell
+    <DemoLayout
       title="js-base64"
       description="js-base64 — 유니코드 안전 Base64 인코딩/디코딩"
       slug="base64"
@@ -50,6 +50,6 @@ export default function Base64DemoPage () {
           <pre className="lib-demo-pre">{decoded}</pre>
         </div>
       </div>
-    </DemoPageShell>
+    </DemoLayout>
   )
 }

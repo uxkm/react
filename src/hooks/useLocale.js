@@ -9,7 +9,7 @@ import {
   normalizeLocale,
   setAppLocale
 } from '@/lib/i18n'
-import { useAppStore } from '@/lib/store'
+import { useLocaleStore } from '@/lib/localeStore'
 import { resetTranslationService } from '@/lib/pageTranslate'
 
 /**
@@ -17,11 +17,11 @@ import { resetTranslationService } from '@/lib/pageTranslate'
  * 화면 번역은 AppLayout GlobalTranslator.
  */
 export function useLocale () {
-  const storeLocale = useAppStore((s) => s.locale)
-  const setStoreLocale = useAppStore((s) => s.setLocale)
-  const localeProgress = useAppStore((s) => s.localeProgress)
-  const translationError = useAppStore((s) => s.translationError)
-  const requestRetry = useAppStore((s) => s.retryTranslation)
+  const storeLocale = useLocaleStore((s) => s.locale)
+  const setStoreLocale = useLocaleStore((s) => s.setLocale)
+  const localeProgress = useLocaleStore((s) => s.localeProgress)
+  const translationError = useLocaleStore((s) => s.translationError)
+  const requestRetry = useLocaleStore((s) => s.retryTranslation)
   const hydrated = useHydrated()
   const [localeLoading, setLocaleLoading] = useState(false)
   const [localeError, setLocaleError] = useState('')
@@ -38,7 +38,7 @@ export function useLocale () {
       setLocaleLoading(true)
       setLocaleError('')
       resetTranslationService()
-      useAppStore.getState().setTranslationError('')
+      useLocaleStore.getState().setTranslationError('')
       try {
         const applied = await setAppLocale(next)
         setStoreLocale(applied)

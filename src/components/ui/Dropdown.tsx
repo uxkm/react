@@ -14,7 +14,7 @@ import {
   type HTMLAttributes,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 import { Button, type ButtonSize, type ButtonVariant } from './Button'
 
@@ -237,7 +237,7 @@ export function Dropdown ({
     <div
       {...rest}
       ref={rootRef}
-      className={cx(
+      className={classNames(
         'dropdown',
         shown && 'is-open',
         disabled && 'is-disabled',
@@ -262,7 +262,7 @@ export function Dropdown ({
         variant={triggerVariant}
         color="default"
         size={size}
-        className={cx(
+        className={classNames(
           'dropdown_trigger',
           isPlaceholder && triggerVariant === 'select' && 'btn_select-placeholder'
         )}
@@ -280,7 +280,7 @@ export function Dropdown ({
       {shown && (
         <div
           id={menuId}
-          className={cx('dropdown_menu', scrollable && 'dropdown_menu-scrollable')}
+          className={classNames('dropdown_menu', scrollable && 'dropdown_menu-scrollable')}
           role="menu"
           aria-labelledby={triggerId}
         >
@@ -296,11 +296,11 @@ export function Dropdown ({
                 return (
                   <li
                     key={item.key}
-                    className={cx('menu_item', item.disabled && 'is-disabled')}
+                    className={classNames('menu_item', item.disabled && 'is-disabled')}
                   >
                     <button
                       type="button"
-                      className={cx(
+                      className={classNames(
                         'menu_link',
                         active && 'is-active',
                         item.danger && 'color_danger',

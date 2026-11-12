@@ -11,7 +11,7 @@ import {
   type HTMLAttributes,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 
 const VALID_SIZES = new Set(['sm', 'md', 'lg'])
 const STAR_PATH =
@@ -92,7 +92,7 @@ export function Rate ({
     [resolvedCount]
   )
 
-  const classes = cx(
+  const classes = classNames(
     'rate',
     resolvedSize === 'sm' && 'rate_sm',
     resolvedSize === 'lg' && 'rate_lg',
@@ -126,7 +126,7 @@ export function Rate ({
                   ? 'is-half'
                   : ''
             return (
-              <span key={star} className={cx('rate_star-readonly', state)}>
+              <span key={star} className={classNames('rate_star-readonly', state)}>
                 <StarGraphic half={state === 'is-half'} />
               </span>
             )

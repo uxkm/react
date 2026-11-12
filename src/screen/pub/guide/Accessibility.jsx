@@ -4,7 +4,8 @@
  * 퍼블리싱 가이드 접근성 — /pub/guide/accessibility
  * KWCAG 2.2 검사기준·체크리스트.
  */
-import { GuideLayout, MarkdownDoc } from '@/screen/pub/widgets/guide'
+import { GuideLayout } from '@/screen/pub/layout'
+import { MarkdownDoc } from '@/screen/pub/widgets/docs/MarkdownDoc'
 import {
   accessibilityBody,
   accessibilitySummary

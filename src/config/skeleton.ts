@@ -17,7 +17,7 @@ export const SKELETON_DEFAULT_MODE: SkeletonMode = 'auto'
  * key = skeletonId (PageLoading 의 skeletonId)
  *
  * @example
- * 'web/user-page': 'manual',
+ * 'b2b/user-page': 'manual',
  * 'pub/index': 'manual',
  */
 export const SKELETON_PAGE_MODE: Record<string, SkeletonMode> = {

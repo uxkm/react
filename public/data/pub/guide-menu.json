@@ -368,5 +368,15 @@
         }
       ]
     }
+  ],
+  "widgetItems": [
+    {
+      "id": "top-banner",
+      "label": "TopBanner · 상단 배너"
+    },
+    {
+      "id": "header",
+      "label": "Header · 헤더"
+    }
   ]
 }

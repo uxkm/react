@@ -30,7 +30,7 @@
           "type": "Widget",
           "id": "B2B-COMMON-001",
           "pageUrl": "/b2b/common/gnb",
-          "filePath": "@/widgets/b2b/previews/gnb.tsx",
+          "filePath": "@/widgets/b2b/previews/gnb/index.tsx",
           "owner": "",
           "start": "",
           "expected": "",
@@ -68,7 +68,7 @@
           "type": "Layer",
           "id": "B2B-COMMON-MEGA-MENU",
           "pageUrl": "/b2b/common/mega-menu",
-          "filePath": "@/widgets/b2b/previews/mega-menu.tsx",
+          "filePath": "@/widgets/b2b/previews/mega-menu/index.tsx",
           "priority": 2
         },
         {
@@ -76,7 +76,7 @@
           "type": "Layer",
           "id": "B2B-COMMON-002",
           "pageUrl": "/b2b/common/full-menu",
-          "filePath": "@/widgets/b2b/previews/full-menu.tsx",
+          "filePath": "@/widgets/b2b/previews/full-menu/index.tsx",
           "owner": "",
           "start": "",
           "expected": "",
@@ -99,7 +99,7 @@
           "type": "Layer",
           "id": "B2B-COMMON-004",
           "pageUrl": "/b2b/common/sitemap",
-          "filePath": "@/widgets/b2b/previews/sitemap.tsx",
+          "filePath": "@/widgets/b2b/previews/sitemap/index.tsx",
           "owner": "",
           "start": "",
           "expected": "",
@@ -137,7 +137,7 @@
           "type": "Widget",
           "id": "B2B-COMMON-TAB-NAVIGATION",
           "pageUrl": "/b2b/common/tab-navigation",
-          "filePath": "@/widgets/b2b/previews/tab-navigation.tsx",
+          "filePath": "@/widgets/b2b/previews/tab-navigation/index.tsx",
           "priority": 2
         },
         {
@@ -160,7 +160,7 @@
           "type": "Widget",
           "id": "B2B-COMMON-QUICK-LINKS",
           "pageUrl": "/b2b/common/quick-links",
-          "filePath": "@/widgets/b2b/previews/quick-links.tsx",
+          "filePath": "@/widgets/b2b/previews/quick-links/index.tsx",
           "priority": 2
         },
         {
@@ -183,7 +183,7 @@
           "type": "Widget",
           "id": "B2B-COMMON-BACK-TOP",
           "pageUrl": "/b2b/common/back-top",
-          "filePath": "@/widgets/b2b/previews/back-top.tsx",
+          "filePath": "@/widgets/b2b/previews/back-top/index.tsx",
           "priority": 2
         }
       ]
@@ -197,7 +197,7 @@
           "type": "Page",
           "id": "B2B-COMMON-003",
           "pageUrl": "/b2b/common/integrated-search",
-          "filePath": "@/widgets/b2b/previews/integrated-search.tsx",
+          "filePath": "@/widgets/b2b/previews/integrated-search/index.tsx",
           "owner": "",
           "start": "",
           "expected": "",
@@ -235,7 +235,7 @@
           "type": "Page",
           "id": "B2B-COMMON-INTEGRATED-SEARCH-RESULTS",
           "pageUrl": "/b2b/common/integrated-search-results",
-          "filePath": "@/widgets/b2b/previews/integrated-search-results.tsx",
+          "filePath": "@/widgets/b2b/previews/integrated-search-results/index.tsx",
           "priority": 2
         }
       ]
@@ -249,7 +249,7 @@
           "type": "Widget",
           "id": "B2B-COMMON-005",
           "pageUrl": "/b2b/common/footer",
-          "filePath": "@/widgets/b2b/previews/footer.tsx",
+          "filePath": "@/widgets/b2b/previews/footer/index.tsx",
           "owner": "",
           "start": "",
           "expected": "",
@@ -281,7 +281,7 @@
           "type": "Layer",
           "id": "B2B-COMMON-TERMS",
           "pageUrl": "/b2b/common/terms",
-          "filePath": "@/widgets/b2b/previews/terms.tsx",
+          "filePath": "@/widgets/b2b/previews/terms/index.tsx",
           "priority": 2
         },
         {
@@ -298,7 +298,7 @@
           "type": "Layer",
           "id": "B2B-COMMON-PRIVACY",
           "pageUrl": "/b2b/common/privacy",
-          "filePath": "@/widgets/b2b/previews/privacy.tsx",
+          "filePath": "@/widgets/b2b/previews/privacy/index.tsx",
           "priority": 2
         },
         {
@@ -315,7 +315,7 @@
           "type": "Layer",
           "id": "B2B-COMMON-EMAIL-PRIVACY",
           "pageUrl": "/b2b/common/email-privacy",
-          "filePath": "@/widgets/b2b/previews/email-privacy.tsx",
+          "filePath": "@/widgets/b2b/previews/email-privacy/index.tsx",
           "priority": 2
         },
         {
@@ -332,7 +332,7 @@
           "type": "Page",
           "id": "B2B-COMMON-NOTICE-LIST",
           "pageUrl": "/b2b/common/notice-list",
-          "filePath": "@/widgets/b2b/previews/notice-list.tsx",
+          "filePath": "@/widgets/b2b/previews/notice-list/index.tsx",
           "priority": 2
         },
         {
@@ -349,7 +349,7 @@
           "type": "Page",
           "id": "B2B-COMMON-NOTICE-DETAIL",
           "pageUrl": "/b2b/common/notice-detail",
-          "filePath": "@/widgets/b2b/previews/notice-detail.tsx",
+          "filePath": "@/widgets/b2b/previews/notice-detail/index.tsx",
           "priority": 2
         },
         {
@@ -366,7 +366,7 @@
           "type": "Layer",
           "id": "B2B-COMMON-CONTACT-US",
           "pageUrl": "/b2b/common/contact-us",
-          "filePath": "@/widgets/b2b/previews/contact-us.tsx",
+          "filePath": "@/widgets/b2b/previews/contact-us/index.tsx",
           "priority": 2
         },
         {
@@ -383,7 +383,7 @@
           "type": "Layer",
           "id": "B2B-COMMON-FAMILY-SITE",
           "pageUrl": "/b2b/common/family-site",
-          "filePath": "@/widgets/b2b/previews/family-site.tsx",
+          "filePath": "@/widgets/b2b/previews/family-site/index.tsx",
           "priority": 2
         },
         {

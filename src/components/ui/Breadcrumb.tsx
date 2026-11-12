@@ -11,7 +11,7 @@ import {
   type MouseEvent,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 
 /** 경로 한 칸 */
@@ -102,7 +102,7 @@ export function Breadcrumb ({
   return (
     <nav
       {...rest}
-      className={cx(
+      className={classNames(
         'breadcrumb',
         separator === 'slash' && 'breadcrumb_sep-slash',
         separator === 'dot' && 'breadcrumb_sep-dot',
@@ -142,13 +142,13 @@ export function Breadcrumb ({
           return (
             <li
               key={itemKey(item, sourceIndex)}
-              className={cx('breadcrumb_item', current && 'is-current')}
+              className={classNames('breadcrumb_item', current && 'is-current')}
               aria-current={current ? 'page' : undefined}
             >
               {item.href && !current && !item.disabled
                 ? (
                   <a
-                    className={cx(
+                    className={classNames(
                       'breadcrumb_link',
                       iconOnly && 'breadcrumb_link-icon'
                     )}
@@ -164,7 +164,7 @@ export function Breadcrumb ({
                 )
                 : (
                   <span
-                    className={cx(
+                    className={classNames(
                       current ? 'breadcrumb_current' : 'breadcrumb_link',
                       !current && item.disabled && 'is-disabled',
                       iconOnly && 'breadcrumb_link-icon'

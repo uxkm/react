@@ -11,7 +11,7 @@ import {
   applyDocumentLang,
   bootstrapLocale
 } from '@/lib/i18n'
-import { useAppStore } from '@/lib/store'
+import { useLocaleStore } from '@/lib/localeStore'
 import { initRipple } from '@/utils/ripple'
 import DevelopmentRefresh from './DevelopmentRefresh'
 
@@ -20,7 +20,7 @@ let localeBootstrapped = false
 
 /** 저장 언어 복원 후 전 라우트에 적용 (번역은 AppLayout GlobalTranslator) */
 function LocaleBootstrap ({ children }) {
-  const setLocale = useAppStore((s) => s.setLocale)
+  const setLocale = useLocaleStore((s) => s.setLocale)
 
   useEffect(() => {
     if (localeBootstrapped) return undefined

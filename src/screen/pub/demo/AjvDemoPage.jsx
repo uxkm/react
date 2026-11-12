@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import Ajv from 'ajv'
-import { DemoPageShell } from '../shared/DemoPageShell'
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
 
 const schema = {
   type: 'object',
@@ -36,7 +36,7 @@ export default function AjvDemoPage () {
   }, [jsonText, validate])
 
   return (
-    <DemoPageShell
+    <DemoLayout
       title="Ajv"
       description="ajv — JSON Schema 검증 예시"
       slug="ajv"
@@ -60,6 +60,6 @@ export default function AjvDemoPage () {
           </pre>
         </div>
       </div>
-    </DemoPageShell>
+    </DemoLayout>
   )
 }

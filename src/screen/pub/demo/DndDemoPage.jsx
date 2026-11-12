@@ -13,7 +13,7 @@ import {
   verticalListSortingStrategy,
   CSS
 } from '@/lib/dnd'
-import { DemoPageShell } from '../shared/DemoPageShell'
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
 
 function SortableItem ({ id }) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id })
@@ -51,7 +51,7 @@ export default function DndDemoPage () {
   }
 
   return (
-    <DemoPageShell
+    <DemoLayout
       title="DnD Kit"
       description="@dnd-kit/core · sortable · utilities — 목록 드래그 정렬 (@/lib/dnd)"
       slug="dnd"
@@ -72,6 +72,6 @@ export default function DndDemoPage () {
           {JSON.stringify(items, null, 2)}
         </pre>
       </div>
-    </DemoPageShell>
+    </DemoLayout>
   )
 }

@@ -12,7 +12,7 @@
           "type": "Page",
           "id": "B2B-CORPED-001",
           "pageUrl": "/b2b/contents/ax/overview",
-          "filePath": "@/screen/b2b/contents/ax/overview.tsx",
+          "filePath": "@/screen/b2b/contents/ax/overview/index.tsx",
           "owner": "",
           "start": "",
           "expected": "",
@@ -50,7 +50,7 @@
           "type": "Page",
           "id": "B2B-CONTENTS-AX-AI-SEARCH",
           "pageUrl": "/b2b/contents/ax/ai-search",
-          "filePath": "@/screen/b2b/contents/ax/ai-search.tsx",
+          "filePath": "@/screen/b2b/contents/ax/ai-search/index.tsx",
           "priority": 1
         },
         {
@@ -73,7 +73,7 @@
           "type": "Page",
           "id": "B2B-CONTENTS-AX-COMPETENCY",
           "pageUrl": "/b2b/contents/ax/competency",
-          "filePath": "@/screen/b2b/contents/ax/competency.tsx",
+          "filePath": "@/screen/b2b/contents/ax/competency/index.tsx",
           "priority": 1
         },
         {
@@ -96,7 +96,7 @@
           "type": "Page",
           "id": "B2B-CONTENTS-AX-AI-STUDIO",
           "pageUrl": "/b2b/contents/ax/ai-studio",
-          "filePath": "@/screen/b2b/contents/ax/ai-studio.tsx",
+          "filePath": "@/screen/b2b/contents/ax/ai-studio/index.tsx",
           "priority": 2
         },
         {
@@ -119,7 +119,7 @@
           "type": "Page",
           "id": "B2B-CONTENTS-AX-WORKSHOP",
           "pageUrl": "/b2b/contents/ax/workshop",
-          "filePath": "@/screen/b2b/contents/ax/workshop.tsx",
+          "filePath": "@/screen/b2b/contents/ax/workshop/index.tsx",
           "priority": 2
         },
         {
@@ -142,7 +142,7 @@
           "type": "Page",
           "id": "B2B-CONTENTS-AX-HACKATHON",
           "pageUrl": "/b2b/contents/ax/hackathon",
-          "filePath": "@/screen/b2b/contents/ax/hackathon.tsx",
+          "filePath": "@/screen/b2b/contents/ax/hackathon/index.tsx",
           "priority": 2
         },
         {
@@ -265,7 +265,7 @@
           "type": "Page",
           "id": "B2B-CONTENTS-JOB-PROFESSIONAL",
           "pageUrl": "/b2b/contents/job/professional",
-          "filePath": "@/screen/b2b/contents/job/professional.tsx",
+          "filePath": "@/screen/b2b/contents/job/professional/index.tsx",
           "priority": 2
         },
         {
@@ -282,7 +282,7 @@
           "type": "Page",
           "id": "B2B-CONTENTS-JOB-INDUSTRY",
           "pageUrl": "/b2b/contents/job/industry",
-          "filePath": "@/screen/b2b/contents/job/industry.tsx",
+          "filePath": "@/screen/b2b/contents/job/industry/index.tsx",
           "priority": 2
         },
         {
@@ -299,7 +299,7 @@
           "type": "Page",
           "id": "B2B-CONTENTS-JOB-CERTIFICATION",
           "pageUrl": "/b2b/contents/job/certification",
-          "filePath": "@/screen/b2b/contents/job/certification.tsx",
+          "filePath": "@/screen/b2b/contents/job/certification/index.tsx",
           "priority": 2
         }
       ]
@@ -345,7 +345,7 @@
           "type": "Page",
           "id": "B2B-CONTENTS-LEADERSHIP-ASSESSMENT",
           "pageUrl": "/b2b/contents/leadership/assessment",
-          "filePath": "@/screen/b2b/contents/leadership/assessment.tsx",
+          "filePath": "@/screen/b2b/contents/leadership/assessment/index.tsx",
           "priority": 2
         },
         {
@@ -362,7 +362,7 @@
           "type": "Page",
           "id": "B2B-CONTENTS-LEADERSHIP-EXECUTIVE",
           "pageUrl": "/b2b/contents/leadership/executive",
-          "filePath": "@/screen/b2b/contents/leadership/executive.tsx",
+          "filePath": "@/screen/b2b/contents/leadership/executive/index.tsx",
           "priority": 2
         },
         {
@@ -379,7 +379,7 @@
           "type": "Page",
           "id": "B2B-CONTENTS-LEADERSHIP-MBA",
           "pageUrl": "/b2b/contents/leadership/mba",
-          "filePath": "@/screen/b2b/contents/leadership/mba.tsx",
+          "filePath": "@/screen/b2b/contents/leadership/mba/index.tsx",
           "priority": 2
         },
         {
@@ -443,7 +443,7 @@
           "type": "Page",
           "id": "B2B-CONTENTS-MANDATORY-FEATURES",
           "pageUrl": "/b2b/contents/mandatory/features",
-          "filePath": "@/screen/b2b/contents/mandatory/features.tsx",
+          "filePath": "@/screen/b2b/contents/mandatory/features/index.tsx",
           "priority": 2
         },
         {
@@ -466,7 +466,7 @@
           "type": "Page",
           "id": "B2B-CONTENTS-MANDATORY-COURSES",
           "pageUrl": "/b2b/contents/mandatory/courses",
-          "filePath": "@/screen/b2b/contents/mandatory/courses.tsx",
+          "filePath": "@/screen/b2b/contents/mandatory/courses/index.tsx",
           "priority": 2
         },
         {
@@ -489,7 +489,7 @@
           "type": "Page",
           "id": "B2B-CONTENTS-MANDATORY-ESTIMATE",
           "pageUrl": "/b2b/contents/mandatory/estimate",
-          "filePath": "@/screen/b2b/contents/mandatory/estimate.tsx",
+          "filePath": "@/screen/b2b/contents/mandatory/estimate/index.tsx",
           "priority": 1
         },
         {
@@ -505,7 +505,7 @@
           "name": "STEP 01 카테고리 선택",
           "type": "Section",
           "pageUrl": "/b2b/contents/mandatory/estimate#category",
-          "filePath": "@/screen/b2b/contents/mandatory/estimate.tsx",
+          "filePath": "@/screen/b2b/contents/mandatory/estimate/index.tsx",
           "priority": 1,
           "remark": [
             {
@@ -528,7 +528,7 @@
           "name": "STEP 02 과정·인원 선택",
           "type": "Section",
           "pageUrl": "/b2b/contents/mandatory/estimate#courses",
-          "filePath": "@/screen/b2b/contents/mandatory/estimate.tsx",
+          "filePath": "@/screen/b2b/contents/mandatory/estimate/index.tsx",
           "priority": 1,
           "remark": [
             {
@@ -551,7 +551,7 @@
           "name": "STEP 03 정보 입력·견적서 받기",
           "type": "Section",
           "pageUrl": "/b2b/contents/mandatory/estimate#quotation",
-          "filePath": "@/screen/b2b/contents/mandatory/estimate.tsx",
+          "filePath": "@/screen/b2b/contents/mandatory/estimate/index.tsx",
           "priority": 1,
           "remark": [
             {
@@ -604,7 +604,7 @@
           "type": "Page",
           "id": "B2B-CONTENTS-LANGUAGE-AI-LANGUAGE",
           "pageUrl": "/b2b/contents/language/ai-language",
-          "filePath": "@/screen/b2b/contents/language/ai-language.tsx",
+          "filePath": "@/screen/b2b/contents/language/ai-language/index.tsx",
           "priority": 2
         },
         {
@@ -621,7 +621,7 @@
           "type": "Page",
           "id": "B2B-CONTENTS-LANGUAGE-LANGUAGE-LIFE",
           "pageUrl": "/b2b/contents/language/language-life",
-          "filePath": "@/screen/b2b/contents/language/language-life.tsx",
+          "filePath": "@/screen/b2b/contents/language/language-life/index.tsx",
           "priority": 2
         },
         {

@@ -4,7 +4,7 @@ import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import { watchSourceFiles, isWatchedPath } from '../scripts/watch-files.mjs'
-import { mergeGuideGroups, resolveGuideMenu } from '../src/lib/guideMenu.mjs'
+import { mergeGuideGroups, resolveGuideMenu } from '../src/screen/pub/lib/guideMenu.mjs'
 
 async function until (predicate) {
   const deadline = Date.now() + 5000
@@ -53,7 +53,7 @@ test('generated output cannot trigger regeneration loops; static CSS and hidden 
   t.after(() => watcher.close())
   write('src/generated/registry.js', 'generated')
   write('src/styles/css/pub.min.css', 'generated')
-  write('public/data/pub/projects.generated.json', '{}')
+  write('public/data/pub/b2b.generated.json', '{}')
   await new Promise((resolve) => setTimeout(resolve, 180))
   assert.deepEqual(batches, [])
   assert.equal(isWatchedPath('public/css/theme.css'), true)
@@ -112,4 +112,18 @@ test('special accessibility entry is omitted when the screen is deleted', () => 
   const menu = resolveGuideMenu({}, pages, defaults)
   assert.equal(menu.accessibility.id, 'accessibility')
   assert.deepEqual(menu.guideMenu.flatMap((group) => group.items).map((item) => item.id), ['button'])
+})
+
+test('widget menu entries stay outside component groups and automatic additions', () => {
+  const defaults = { intro: { id: 'intro' }, accessibility: { id: 'accessibility' } }
+  const data = {
+    componentGroups: [{ id: 'layout', label: '레이아웃', items: [{ id: 'grid' }, { id: 'header' }] }],
+    widgetItems: [{ id: 'top-banner', label: '상단 배너' }, { id: 'header', label: '헤더' }, { id: 'deleted' }]
+  }
+  const pages = { guide: ['grid', 'header', 'top-banner', 'new-screen'].map((id) => ({ id })), demo: [] }
+  const menu = resolveGuideMenu(data, pages, defaults)
+  assert.deepEqual(menu.guideWidgetItems.map((item) => item.id), ['top-banner', 'header'])
+  assert.deepEqual(menu.guideMenu.flatMap((group) => group.items).map((item) => item.id), ['grid', 'new-screen'])
+  pages.guide = pages.guide.filter((page) => page.id !== 'header')
+  assert.deepEqual(resolveGuideMenu(data, pages, defaults).guideWidgetItems.map((item) => item.id), ['top-banner'])
 })

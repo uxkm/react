@@ -1,16 +1,17 @@
 /**
  * screen 폴더를 스캔해 Next 동적 import 레지스트리를 생성한다.
- * - 활성 프로젝트: 재귀 JSX/TSX 화면 자동 인식
+ * - 단일 B2B: 재귀 JSX/TSX 화면 자동 인식
  * - pub/guide · pub/demo: 페이지 파일 자동 인식 (수동 맵 없음)
  * - 메뉴 JSON의 분류와 generated/pub-pages.js의 현재 화면 목록을 병합
  *
  * 사용: node scripts/registry.mjs
  */
-import { syncProjects } from './projects.mjs'
+import { syncProject } from './project.mjs'
 import fs from 'node:fs'
-import { writeIfChanged } from './files.mjs'
+import { writeIfChanged } from './write-if-changed.mjs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import ts from 'typescript'
 
 /** 이 스크립트 폴더 */
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -44,29 +45,51 @@ function guideFileToRouteId (fileName, { demo = false } = {}) {
   return kebabCase(raw)
 }
 
-/**
- * 화면 파일의 export const meta 를 읽는다. (공통 빌드, 로딩 전에 쓰기 위해 필수)
- *
- * header / footer 만 본다.
- * true 표시, false 숨김. 없는 키는 맵에 넣지 않고, 화면에서는 표시로 둔다.
- * 중괄호 안 주석에 '}' 가 있으면 여기서 객체가 끊기니 넣지 않는다.
- */
+/** 정적인 meta 객체만 읽는다. 화면 코드를 실행하지 않고 중첩 항목·주석·타입 구문을 처리한다. */
 function readPageMeta (filePath) {
   if (!fs.existsSync(filePath)) return null
-  const src = fs.readFileSync(filePath, 'utf8')
-  // 주석 안의 예시(export const meta …)는 무시
-  const code = src
-    .replace(/\/\*[\s\S]*?\*\//g, '')
-    .replace(/^\s*\/\/.*$/gm, '')
-  const match = code.match(/export\s+const\s+meta\s*=\s*\{([^}]*)\}/)
-  if (!match) return null
-  const body = match[1]
-  const meta = {}
-  const header = body.match(/header\s*:\s*(true|false)/)
-  const footer = body.match(/footer\s*:\s*(true|false)/)
-  if (header) meta.header = header[1] === 'true'
-  if (footer) meta.footer = footer[1] === 'true'
-  return Object.keys(meta).length ? meta : null
+  const source = ts.createSourceFile(filePath, fs.readFileSync(filePath, 'utf8'), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX)
+  function unwrap (node) {
+    while (node && (ts.isAsExpression(node) || ts.isSatisfiesExpression(node) || ts.isParenthesizedExpression(node))) node = node.expression
+    return node
+  }
+  function booleanValue (node, key) {
+    const value = unwrap(node)
+    if (value?.kind === ts.SyntaxKind.TrueKeyword) return true
+    if (value?.kind === ts.SyntaxKind.FalseKeyword) return false
+    throw new Error(`${filePath}: meta.${key} must be a static true or false`)
+  }
+  function propertyName (node) {
+    return node && (ts.isIdentifier(node) || ts.isStringLiteral(node)) ? node.text : null
+  }
+  for (const statement of source.statements) {
+    if (!ts.isVariableStatement(statement) || !statement.modifiers?.some((modifier) => modifier.kind === ts.SyntaxKind.ExportKeyword)) continue
+    for (const declaration of statement.declarationList.declarations) {
+      if (!ts.isIdentifier(declaration.name) || declaration.name.text !== 'meta') continue
+      const object = unwrap(declaration.initializer)
+      if (!object || !ts.isObjectLiteralExpression(object)) throw new Error(`${filePath}: export const meta must be a static object`)
+      const meta = {}
+      for (const property of object.properties) {
+        if (ts.isSpreadAssignment(property) || ts.isShorthandPropertyAssignment(property)) {
+          throw new Error(`${filePath}: meta requires explicit static properties without spreads or shorthand`)
+        }
+        if (!ts.isPropertyAssignment(property)) continue
+        const name = propertyName(property.name)
+        if (['banner', 'header', 'footer', 'floating'].includes(name)) meta[name] = booleanValue(property.initializer, name)
+        if (name === 'floatingItems') {
+          const items = unwrap(property.initializer)
+          if (!ts.isObjectLiteralExpression(items)) throw new Error(`${filePath}: meta.floatingItems must be a static object`)
+          meta.floatingItems = Object.fromEntries(items.properties.map((item) => {
+            const key = propertyName(item.name)
+            if (!ts.isPropertyAssignment(item) || key == null) throw new Error(`${filePath}: meta.floatingItems requires named boolean entries`)
+            return [key, booleanValue(item.initializer, `floatingItems.${key}`)]
+          }))
+        }
+      }
+      return Object.keys(meta).length ? meta : null
+    }
+  }
+  return null
 }
 
 /** export const name = 'value' */
@@ -78,7 +101,7 @@ function readExportString (filePath, exportName) {
   return match ? match[1] : null
 }
 
-/** JSX 의 slug="..." (DemoPageShell 등) — routeId 대용 */
+/** JSX 의 slug="..." (DemoLayout 등) — routeId 대용 */
 function readSlugProp (filePath) {
   if (!fs.existsSync(filePath)) return null
   const src = fs.readFileSync(filePath, 'utf8')
@@ -107,20 +130,27 @@ function buildProject (id) {
       if (!/\.(jsx|tsx)$/.test(entry.name)) continue
       const file = path.join(folder, entry.name)
       const stem = entry.name.replace(/\.(jsx|tsx)$/, '')
-      const key = prefix === '' && stem === 'IndexPage' ? 'main'
+      // 페이지명/index.tsx는 폴더 경로로 등록합니다. URL에는 index를 붙이지 않습니다.
+      const key = prefix === '' && stem === 'index' ? 'main'
         : /^index$/i.test(stem) ? prefix.replace(/\/$/, '')
           : prefix + kebabCase(stem.replace(/Page$/, ''))
       if (!key) continue
-      // Root IndexPage keeps the existing /main alias in preference to main/index.
-      if (entries.has(key) && key !== 'main') throw new Error(`Duplicate route: ${id}/${key}`)
-      if (entries.has(key) && stem !== 'IndexPage') continue
+      // Root index keeps the existing /main alias in preference to main/index.
+      if (entries.has(key)) {
+        const rootIndex = prefix === '' && stem === 'index'
+        const previousIsRootIndex = /^index\.(jsx|tsx)$/.test(path.relative(dir, entries.get(key).file))
+        if (key === 'main' && previousIsRootIndex && prefix === 'main/' && stem === 'index') continue
+        if (!(key === 'main' && rootIndex && /[/\\]main[/\\]index\.(jsx|tsx)$/.test(entries.get(key).file))) {
+          throw new Error(`Duplicate route: ${id}/${key}`)
+        }
+      }
       entries.set(key, { file, importPath: importBase + path.relative(sourceRoot, file).split(path.sep).join('/'), index: /^index$/i.test(stem) || key === 'main' })
     }
   }
   walk(dir)
   // Project widget previews keep their own sources outside screen/. PUB imports no loaders.
   walk(path.join(root, 'src/widgets', id, 'previews'), 'common/', '@/widgets/', path.join(root, 'src/widgets'))
-  if (!entries.has('main')) throw new Error(`Missing src/screen/${id}/IndexPage.jsx (or main/index.tsx)`)
+  if (!entries.has('main')) throw new Error(`Missing src/screen/${id}/index.jsx (or index.tsx / main/index.tsx)`)
   return entries
 }
 
@@ -193,17 +223,17 @@ const componentNames = Object.keys(componentPages).sort()
 const demoNames = Object.keys(demoPages).sort()
 
 const banner = '/* eslint-disable */\n/** Auto-generated by scripts/registry.mjs — do not edit */\n'
-const projects = syncProjects()
-const bundles = Object.fromEntries(projects.map(({ id }) => [id, buildProject(id)]))
+const b2b = syncProject()
+const entries = b2b ? buildProject(b2b.id) : new Map()
 const registryFiles = {}
-for (const [id, entries] of Object.entries(bundles)) {
+if (b2b) {
   let output = banner
   for (const [group, isIndex] of [['index', true], ['screen', false]]) {
     const selected = [...entries].filter(([, page]) => page.index === isIndex)
     output += `export const ${group}Loaders = {\n${selected.map(([key, page]) => `  '${key}': () => import('${page.importPath}')`).join(',\n')}\n}\n`
     output += `export const ${group}Meta = {\n${selected.map(([key, page]) => metaLine(key, page.file)).filter(Boolean).join(',\n')}\n}\n`
   }
-  registryFiles[id] = output
+  registryFiles.b2b = output
 }
 for (const [group, lines, meta] of [
   ['component', componentLines, componentMetaLines],
@@ -211,23 +241,23 @@ for (const [group, lines, meta] of [
 ]) {
   registryFiles[group] = banner + `export const ${group}Loaders = {\n${lines.join(',\n')}\n}\nexport const ${group}Meta = {\n${meta.join(',\n')}\n}\n`
 }
-// Core barrel intentionally never imports optional projects.
+// PUB 공통 진입점은 B2B 화면 로더를 가져오지 않습니다.
 const content = banner + "export * from './registry-component'\nexport * from './registry-demo'\n"
 
 /** 정적 제목 추출. 명시한 pageTitle export가 있으면 우선 사용한다. */
 function readPageTitle (filePath) {
   const source = fs.readFileSync(filePath, 'utf8')
   return readExportString(filePath, 'pageTitle') ||
-    source.match(/<(?:Page|GuideLayout|DemoPageShell)\b[^>]*?\btitle\s*=\s*["']([^"']+)["']/)?.[1]
+    source.match(/<(?:Page|GuideLayout|DemoLayout)\b[^>]*?\btitle\s*=\s*["']([^"']+)["']/)?.[1]
 }
 
 const routeTitles = {}
-for (const [id, entries] of Object.entries(bundles)) {
+if (b2b) {
   for (const [key, page] of entries) {
     const title = readPageTitle(page.file)
     if (title) {
-      routeTitles[`/${id}/${key}`] = title
-      if (key === 'main') routeTitles[`/${id}`] = title
+      routeTitles[`/b2b/${key}`] = title
+      if (key === 'main') routeTitles['/b2b'] = title
     }
   }
 }
@@ -240,8 +270,8 @@ for (const [group, pages] of [['guide', componentPages], ['demo', demoPages]]) {
 routeTitles['/pub/guide'] = '소개 - 퍼블리싱가이드'
 routeTitles['/pub'] = '퍼블리시 목록'
 
-const projectRoutes = Object.fromEntries(Object.entries(bundles).map(([id, entries]) => [id, [...entries.keys()]]))
-const idsContent = banner + `export const projectRoutes = ${JSON.stringify(projectRoutes, null, 2)}
+const b2bRoutes = [...entries.keys()]
+const idsContent = banner + `export const b2bRoutes = ${JSON.stringify(b2bRoutes, null, 2)}
 export const componentNames = ${JSON.stringify(componentNames, null, 2)}
 export const demoNames = ${JSON.stringify(demoNames, null, 2)}
 export const routeTitles = ${JSON.stringify(routeTitles, null, 2)}
@@ -259,7 +289,7 @@ writeIfChanged(outFile, content)
 writeIfChanged(idsFile, idsContent)
 console.log('wrote', path.relative(root, outFile))
 console.log('wrote', path.relative(root, idsFile))
-console.log('projects', projects.map(({ id }) => id).join(', ') || '(PUB only)')
+console.log('project', b2b?.id || '(PUB only)')
 console.log('components', componentNames.length, 'demos', demoNames.length)
 
 const pubPages = Object.fromEntries([['guide', componentPages], ['demo', demoPages]].map(([group, pages]) => [group,

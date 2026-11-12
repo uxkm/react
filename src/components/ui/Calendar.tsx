@@ -14,7 +14,7 @@ import {
   type HTMLAttributes,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 
 const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토']
 
@@ -117,7 +117,7 @@ export function Calendar ({
   role = 'application',
   ...rest
 }: CalendarProps) {
-  const classes = cx(
+  const classes = classNames(
     'calendar',
     noHeader && 'calendar_no-header',
     minimal && 'calendar_minimal',
@@ -190,7 +190,7 @@ export function CalendarHeader ({
   const prev = showPrev ?? showNav
   const next = showNext ?? showNav
   return (
-    <div className={cx('calendar_header', className)} {...rest}>
+    <div className={classNames('calendar_header', className)} {...rest}>
       {prev
         ? (
           <button
@@ -242,7 +242,7 @@ export function CalendarNav ({
   onNext
 }: CalendarNavProps) {
   return (
-    <div className={cx('calendar_nav', className)}>
+    <div className={classNames('calendar_nav', className)}>
       <button
         type="button"
         className="btn btn_ghost btn_icon-only btn_sm"
@@ -275,7 +275,7 @@ export function CalendarWeekdays ({
   className
 }: CalendarWeekdaysProps) {
   return (
-    <div className={cx('calendar_weekdays', className)} aria-hidden="true">
+    <div className={classNames('calendar_weekdays', className)} aria-hidden="true">
       {labels.map((label) => (
         <span key={label} className="calendar_weekday">
           {label}
@@ -317,7 +317,7 @@ export function CalendarDay ({
   className,
   ...rest
 }: CalendarDayProps) {
-  const classes = cx(
+  const classes = classNames(
     'calendar_day',
     otherMonth && 'is-other-month',
     today && 'is-today',
@@ -359,7 +359,7 @@ export function CalendarGrid ({
   ...rest
 }: CalendarGridProps) {
   return (
-    <div className={cx('calendar_grid', week && 'calendar_grid-week', className)} {...rest}>
+    <div className={classNames('calendar_grid', week && 'calendar_grid-week', className)} {...rest}>
       {children}
     </div>
   )
@@ -513,7 +513,7 @@ export function CalendarFooter ({
   ...rest
 }: CalendarFooterProps) {
   return (
-    <div className={cx('calendar_footer', className)} {...rest}>
+    <div className={classNames('calendar_footer', className)} {...rest}>
       <button
         type="button"
         className="btn btn_text color_primary btn_sm"
@@ -558,7 +558,7 @@ export function CalendarGroup ({
   ...rest
 }: CalendarGroupProps) {
   return (
-    <div className={cx('calendar_group', className)} {...rest}>
+    <div className={classNames('calendar_group', className)} {...rest}>
       {children}
     </div>
   )
@@ -724,7 +724,7 @@ export function CalendarWheelColumn ({
             <button
               type="button"
               role="option"
-              className={cx(
+              className={classNames(
                 'calendar_wheel-item',
                 String(item) === String(active) && 'is-selected'
               )}

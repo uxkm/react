@@ -3,7 +3,7 @@
  * spinning 중 회전 표시. tip · 크기 · 색 · 인라인 · 래퍼 오버레이 지원.
  */
 import type { HTMLAttributes, ReactNode } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 
 /** 로딩 표시가 받는 값 */
@@ -44,7 +44,7 @@ export function Spin ({
   const indicator = (
     <div
       {...(hasChild ? {} : rest)}
-      className={cx(
+      className={classNames(
         'spin',
         hasChild && 'spin_overlay',
         color && 'color_' + color,
@@ -69,7 +69,7 @@ export function Spin ({
   return (
     <div
       {...rest}
-      className={cx(
+      className={classNames(
         'spin_wrap',
         block && 'spin_wrap-block',
         blur && 'spin_wrap-blur',

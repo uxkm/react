@@ -9,7 +9,7 @@ import {
   type HTMLAttributes,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 
 const LAYOUTS = new Set(['vertical', 'horizontal', 'inline'])
 const LABEL_WIDTHS = new Set(['', 'sm', 'lg'])
@@ -44,7 +44,7 @@ export function FormLayout ({
   ...props
 }: FormLayoutProps) {
   const resolvedLayout = LAYOUTS.has(layout) ? layout : 'vertical'
-  const classes = cx(
+  const classes = classNames(
     'form',
     `form_${resolvedLayout}`,
     fit && 'form_fit',
@@ -87,7 +87,7 @@ export function FormField ({
   className,
   ...props
 }: FormFieldProps) {
-  const classes = cx('form_field', fit && 'form_field_fit', className)
+  const classes = classNames('form_field', fit && 'form_field_fit', className)
 
   return createElement(
     Root,
@@ -134,7 +134,7 @@ export function FormActions ({
 }: FormActionsProps) {
   return createElement(
     Root,
-    { className: cx('form_actions', className), ...props },
+    { className: classNames('form_actions', className), ...props },
     children
   )
 }

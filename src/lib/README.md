@@ -9,18 +9,18 @@
 | `@/lib/staticParams` | App Router `generateStaticParams`용 주소 목록 |
 | `@/lib/routeMetadata` | 생성한 화면 제목을 Next.js metadata에 전달 |
 | `@/lib/siteTitle` | 클라이언트의 브라우저 탭 제목 유틸리티 |
-| `@/lib/store` | Zustand 기반 언어·번역 진행 상태 |
+| `@/lib/localeStore` | Zustand 기반 언어·번역 진행 상태 |
 | `@/lib/i18n` | 지원 언어·선택 저장·문서 언어 동기화 |
 | `@/lib/pageTranslate` | 브라우저 DOM 문구 번역·캐시·진행률 처리 |
-| `@/lib/calendar` | FullCalendar React 연동 |
+| `@/lib/fullcalendar` | FullCalendar React 연동 |
 | `@/lib/swiper` | Swiper React 컴포넌트·모듈·스타일 |
 | `@/lib/lottie` | Lottie React·Web 연동 |
 | `@/lib/clipboard` | clipboard-copy |
 | `@/lib/dnd` | dnd-kit |
 | `@/lib/viewer` | Viewer.js 이미지 뷰어 |
-| `@/lib/scroll` | SimpleBar React |
+| `@/lib/simplebar` | SimpleBar React |
 | `@/lib/youtube` | react-youtube |
-| `@/lib/charts` | amCharts 5 |
+| `@/lib/amcharts` | amCharts 5 |
 | `@/lib/dayjs` | 날짜 처리 |
 
 언어 전환은 번역 JSON을 읽는 구조가 아닙니다. `GlobalTranslator`가 `pageTranslate`를 통해 외부 번역 엔드포인트에 화면 문구를 요청합니다. 장애 시 원문을 복원하고 사용자 재시도 전까지 요청을 중단합니다. 성공 응답만 캐시하며 언어 변경·DOM 변경·언마운트 시 진행 요청을 취소합니다. `useLocale`는 현재 언어와 진행률·오류·재시도 API를 제공합니다.

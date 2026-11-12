@@ -3,14 +3,14 @@
 /**
  * PubTable
  * - 퍼블리시 화면 목록 표 (헤더 고정 + 본문 스크롤, 가로 스크롤 동기화)
- * - 폴더 BranchRow 를 나열하고, 화면명 열 너비를 최장 텍스트에 맞춤
+ * - 폴더 PubGroupRow 를 나열하고, 화면명 열 너비를 최장 텍스트에 맞춤
  * - depth2 그룹 / 리프까지 이름 폭 측정에 포함
  */
 import { useCallback, useEffect, useLayoutEffect, useRef } from 'react'
-import { cx } from '@/utils/cx'
-import BranchRow from './BranchRow'
-import { folderLabel, itemLabel } from '../lib/labels'
-import { countLeaves, groupLabel, isGroupNode } from '../lib/tree'
+import { classNames } from '@/utils/classNames'
+import PubGroupRow from './PubGroupRow'
+import { folderLabel, itemLabel } from '../lib/publishLabels'
+import { countLeaves, groupLabel, isGroupNode } from '../lib/publishTree'
 import { useEllipsisTooltip } from './useEllipsisTooltip.jsx'
 
 /** 화면명 열 최대 너비 */
@@ -46,7 +46,7 @@ export default function PubTable ({
   const bodyWrapRef = useRef(null)
   const syncingScroll = useRef(false)
 
-  const tableClass = cx('wbs-table', { 'is-progress-hidden': !showProgress })
+  const tableClass = classNames('wbs-table', { 'is-progress-hidden': !showProgress })
 
   /** 가로 스크롤 딤 표시 */
   const syncScrolledX = useCallback(() => {
@@ -201,7 +201,7 @@ export default function PubTable ({
             ? (
               <ul className="wbs-table__list">
                 {folders.map((folder) => (
-                  <BranchRow
+                  <PubGroupRow
                     key={folder.id}
                     folder={folder}
                     node={folder}

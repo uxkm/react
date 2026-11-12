@@ -3,8 +3,8 @@
 import { useEffect, useRef } from 'react'
 import { Link } from '@/lib/router'
 import { AppHeaderLink } from '@/comp'
-import { GuideLayout } from '@/screen/pub/widgets/guide'
-import { am5, am5xy, am5percent, am5themes_Animated } from '@/lib/charts'
+import { GuideLayout } from '@/screen/pub/layout'
+import { am5, am5xy, am5percent, am5themes_Animated } from '@/lib/amcharts'
 
 /** 막대 차트 데이터. category 축 이름, value 값 */
 const columnData = [
@@ -230,7 +230,7 @@ export default function ChartDemoPage () {
     <GuideLayout
       category="데모"
       title="Chart (amCharts 5)"
-      description="@amcharts/amcharts5 — Column / Line / Pie 샘플 (@/lib/charts)"
+      description="@amcharts/amcharts5 — Column / Line / Pie 샘플 (@/lib/amcharts)"
       headerLayout="stacked"
       showBack
       backTo="/pub"

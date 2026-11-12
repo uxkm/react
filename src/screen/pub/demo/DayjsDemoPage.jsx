@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import { dayjs } from '@/lib/dayjs'
-import { DemoPageShell } from '../shared/DemoPageShell'
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
 
 /** dayjs 데모 */
 export default function DayjsDemoPage () {
@@ -11,7 +11,7 @@ export default function DayjsDemoPage () {
   const valid = parsed.isValid()
 
   return (
-    <DemoPageShell
+    <DemoLayout
       title="Day.js"
       description="dayjs + utc/timezone/relativeTime/customParseFormat (@/lib/dayjs)"
       slug="dayjs"
@@ -37,6 +37,6 @@ export default function DayjsDemoPage () {
           </pre>
         </div>
       </div>
-    </DemoPageShell>
+    </DemoLayout>
   )
 }

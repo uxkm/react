@@ -8,16 +8,18 @@ import { useLatestRef } from '@/hooks/useLatestRef'
  * 앱 공통 레이아웃 셸.
  * 헤더·본문·푸터 배치, 슬롯 병합, 스크롤 시 헤더 숨김, GlobalTranslator 연결.
  */
-import { useCallback, useEffect, useLayoutEffect, useRef, type HTMLAttributes, type ReactNode } from 'react'
-import { cx } from '@/utils/cx'
+import { Fragment, cloneElement, isValidElement, useCallback, useEffect, useLayoutEffect, useMemo, useRef, type HTMLAttributes, type ReactElement, type ReactNode } from 'react'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
-import { useAppStore } from '@/lib/store'
+import { useLocaleStore } from '@/lib/localeStore'
 import { DEFAULT_LOCALE, normalizeLocale } from '@/lib/i18n'
 import { AppFooter } from './AppFooter'
 import { AppHeader, isAppHeaderLayout, type AppHeaderLayout } from './AppHeader'
 import { GlobalTranslator } from './GlobalTranslator'
-import { LayoutProvider, useLayoutSlots } from '@/comp/module/LayoutContext'
+import { LayoutProvider, useLayoutSlots, usePageFloatingOptions } from '@/comp/layout/LayoutContext'
 import { isLayoutSlotHidden } from '@/comp/shared/layout-slot'
+import { Floating, type FloatingProps } from '@/comp/ui/Floating'
+import { headerAppearanceStyle, type HeaderAppearance, type HeaderStyle } from '@/comp/shared/header-appearance'
 
 /** 같은 방향으로 이만큼 누적되면 헤더 show/hide (느린 스크롤도 감지) */
 const SCROLL_TRIGGER = 8
@@ -26,6 +28,8 @@ const SHOW_AT_TOP = 24
 
 /** 앱 레이아웃이 받는 값. 헤더·본문·푸터를 감싼다 */
 export interface AppLayoutProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
+  /** 헤더 위 공통 배너. TopBanner 또는 커스텀 UI를 전달한다. */
+  banner?: ReactNode
   /** 헤더 전체 교체 */
   header?: ReactNode
   headerBack?: ReactNode
@@ -34,6 +38,8 @@ export interface AppLayoutProps extends Omit<HTMLAttributes<HTMLDivElement>, 'ch
   headerActions?: ReactNode
   /** stacked: 상단 브랜드 + 하단 네비 (스크롤 시 상단만 숨김) */
   headerLayout?: AppHeaderLayout
+  /** 공통 헤더의 기본·스크롤 배경과 클래스·CSS 변수 */
+  headerAppearance?: HeaderAppearance
   /**
    * stacked 전용: 스크롤 시 하단 네비까지 함께 숨김
    * (Header hideNavOnScroll 슬롯이 있으면 그쪽 우선)
@@ -43,6 +49,10 @@ export interface AppLayoutProps extends Omit<HTMLAttributes<HTMLDivElement>, 'ch
   footer?: ReactNode
   /** 기본 AppFooter 내용 */
   footerContent?: ReactNode
+  /** 공통 플로팅 항목(Floating.Item). 페이지 전용 항목은 PageFloating으로 추가한다. */
+  floating?: ReactNode
+  /** 공통 플로팅의 위치·정렬·기본 표시 설정 */
+  floatingProps?: Omit<FloatingProps, 'children'>
   children?: ReactNode
 }
 
@@ -51,23 +61,40 @@ export interface AppLayoutProps extends Omit<HTMLAttributes<HTMLDivElement>, 'ch
  * 페이지의 Header/Footer/meta 가 슬롯을 채우기 전에는 기본 크롬을 쓴다.
  */
 function AppLayoutInner ({
+  banner,
   header,
   headerBack,
   headerBrand,
   headerNav,
   headerActions,
   headerLayout = 'stacked',
+  headerAppearance,
   hideNavOnScroll = false,
   footer,
   footerContent,
+  floating,
+  floatingProps,
   children,
   className,
   ...rest
 }: AppLayoutProps) {
   const pageSlots = useLayoutSlots()
+  const headerSlot = pageSlots.header
+  const appearanceSlot = pageSlots['header-appearance']
+  const pageHeaderAppearance: HeaderAppearance = useMemo(() => typeof appearanceSlot === 'string' ? JSON.parse(appearanceSlot) : {}, [appearanceSlot])
+  const resolvedHeaderAppearance: HeaderAppearance = {
+    ...headerAppearance,
+    ...pageHeaderAppearance,
+    className: classNames(headerAppearance?.className, pageHeaderAppearance.className),
+    style: { ...headerAppearance?.style, ...pageHeaderAppearance.style }
+  }
+  const pageFloatingOptions = usePageFloatingOptions()
+  const mergedFloatingProps = { ...floatingProps, ...pageFloatingOptions }
+  const hasFloatingSlots = Object.values(mergedFloatingProps.slots || {}).some(hasNodes)
   const layoutRef = useRef<HTMLDivElement>(null)
+  const headerAnchorRef = useRef<HTMLSpanElement>(null)
   /** 원문(ko) 복귀 시 React 트리를 리마운트해 한글 원문을 다시 그림 */
-  const locale = useAppStore((s) => normalizeLocale(s.locale || DEFAULT_LOCALE))
+  const locale = useLocaleStore((s) => normalizeLocale(s.locale || DEFAULT_LOCALE))
   const treeKey = locale === 'ko' ? 'ko' : 'xlate'
   /**
    * 기본 헤더/푸터는 마운트 후에만 — SSR·첫 페인트에서 기본 헤더가 먼저 뜨는 깜빡임 방지.
@@ -106,7 +133,7 @@ function AppLayoutInner ({
   const resolvedHideNavOnScroll =
     pageSlots['header-hide-nav-on-scroll'] === 'true' || hideNavOnScroll === true
 
-  /** PageChrome meta.header / meta.footer — 'false' 만 숨김, 없거나 'true' 면 표시 */
+  /** PageLayoutVisibility meta.header / meta.footer — 'false' 만 숨김, 없거나 'true' 면 표시 */
   const metaHeaderVisible = pageSlots['meta-header'] !== 'false'
   const metaFooterVisible = pageSlots['meta-footer'] !== 'false'
 
@@ -119,6 +146,7 @@ function AppLayoutInner ({
     } else if (defaultsReady) {
       headerNode = (
         <AppHeader
+          {...resolvedHeaderAppearance}
           layout={resolvedLayout}
           hideNavOnScroll={resolvedHideNavOnScroll}
           back={pick('header-back', headerBack)}
@@ -128,6 +156,15 @@ function AppLayoutInner ({
         />
       )
     }
+  }
+
+  // 커스텀 헤더는 루트가 className·style을 전달해야 페이지별 외형 설정이 적용된다.
+  if ((header != null && header !== false || hasSlotNodes('header')) && isValidElement(headerNode) && headerNode.type !== Fragment) {
+    const customHeader = headerNode as ReactElement<{ className?: string; style?: HeaderStyle }>
+    headerNode = cloneElement(customHeader, {
+      className: classNames(resolvedHeaderAppearance.className, customHeader.props.className),
+      style: { ...headerAppearanceStyle(resolvedHeaderAppearance), ...customHeader.props.style }
+    })
   }
 
   let footerNode: ReactNode = null
@@ -148,6 +185,25 @@ function AppLayoutInner ({
   const hasHeader = headerNode != null
   const headerHiddenRef = useRef(false)
   const hideNavOnScrollRef = useLatestRef(resolvedHideNavOnScroll)
+  const syncHeaderScrolled = useCallback((headerEl: HTMLElement) => {
+    const anchor = headerAnchorRef.current
+    const scrollY = window.scrollY || window.pageYOffset || 0
+    const computed = getComputedStyle(headerEl)
+    const stickyTop = Number.parseFloat(computed.top) || 0
+    const scrolled = scrollY > 0 && (computed.position === 'fixed' || (anchor?.getBoundingClientRect().top ?? 0) < stickyTop)
+    headerEl.classList.toggle('is-scrolled', scrolled)
+    if (scrolled) headerEl.dataset.scrolled = 'true'
+    else delete headerEl.dataset.scrolled
+  }, [])
+
+  // 페이지 클래스가 바뀌면 React가 class 속성을 갱신하므로 스크롤 상태 클래스를 다시 맞춘다.
+  useLayoutEffect(() => {
+    const main = layoutRef.current?.querySelector('.app-layout__main')
+    const headerEl = main?.previousElementSibling as HTMLElement | null
+    if (!hasHeader || !headerEl) return
+    headerEl.classList.toggle('is-scroll-hidden', headerHiddenRef.current)
+    syncHeaderScrolled(headerEl)
+  })
 
   /** 헤더 높이를 CSS 변수로 남긴다. 숨김이면 메뉴 높이를 뺀다 */
   const measureHeader = useCallback((headerEl: HTMLElement, hidden: boolean) => {
@@ -197,18 +253,22 @@ function AppLayoutInner ({
 
     /** 지금 헤더 높이로 CSS 변수를 다시 맞춘다 */
     const update = () => {
+      syncHeaderScrolled(headerEl)
       setHeight(measureHeader(headerEl, headerHiddenRef.current))
     }
     update()
 
     const ro = new ResizeObserver(update)
     ro.observe(headerEl)
+    ro.observe(layout)
+    const bannerEl = headerAnchorRef.current?.previousElementSibling
+    if (bannerEl) ro.observe(bannerEl)
     const topEl = headerEl.querySelector('.app-header__top')
     const navBar = headerEl.querySelector('.app-header__nav-bar')
     if (topEl) ro.observe(topEl)
     if (navBar) ro.observe(navBar)
     return () => ro.disconnect()
-  }, [hasHeader, resolvedLayout, resolvedHideNavOnScroll, measureHeader])
+  }, [hasHeader, header, headerSlot, resolvedLayout, resolvedHideNavOnScroll, measureHeader, syncHeaderScrolled])
 
   // 아래로 스크롤 → 상단(또는 전체) 숨김, 위로 스크롤 → 복귀
   useEffect(() => {
@@ -220,6 +280,7 @@ function AppLayoutInner ({
     const main = layout.querySelector('.app-layout__main')
     const headerEl = main?.previousElementSibling as HTMLElement | null
     if (!headerEl) return
+    syncHeaderScrolled(headerEl)
 
     let lastY = window.scrollY || window.pageYOffset || 0
     let pendingY = lastY
@@ -244,6 +305,7 @@ function AppLayoutInner ({
       ticking = true
       window.requestAnimationFrame(() => {
         ticking = false
+        syncHeaderScrolled(headerEl)
         const y = pendingY
         const delta = y - lastY
         lastY = y
@@ -278,25 +340,33 @@ function AppLayoutInner ({
       window.removeEventListener('scroll', onScroll)
       applyHidden(false)
     }
-  }, [hasHeader, resolvedLayout, resolvedHideNavOnScroll, measureHeader])
+  }, [hasHeader, header, headerSlot, resolvedLayout, resolvedHideNavOnScroll, measureHeader, syncHeaderScrolled])
 
   return (
     <div
       {...rest}
       ref={layoutRef}
-      className={cx('app-layout', hasHeader && 'app-layout--has-header', className)}
+      className={classNames('app-layout', hasHeader && 'app-layout--has-header', className)}
     >
       {/* 헤더·본문·푸터 전체 DOM 을 선택 언어로 번역 (locales 폴더 불필요) */}
       <GlobalTranslator rootRef={layoutRef} />
       <div key={treeKey} className="app-layout__tree">
+        {defaultsReady && pageSlots['meta-banner'] !== 'false' && pick('banner', banner)}
+        {hasHeader && <span ref={headerAnchorRef} className="app-header-anchor" aria-hidden="true" />}
         {headerNode}
         <main
-          className={cx('app-layout__main', mainClass)}
+          className={classNames('app-layout__main', mainClass)}
           data-page={mainPage || undefined}
         >
           {children}
         </main>
         {footerNode}
+        {defaultsReady && (hasNodes(floating) || hasSlotNodes('floating-items') || hasFloatingSlots) && (
+          <Floating {...mergedFloatingProps}>
+            {floating}
+            {slotNodes('floating-items')}
+          </Floating>
+        )}
       </div>
     </div>
   )

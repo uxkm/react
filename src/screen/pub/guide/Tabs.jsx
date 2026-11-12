@@ -2,13 +2,10 @@
 
 import { useState } from 'react'
 import { Button, Icon, Space, Tab, Tabs } from '@/comp'
-import {
-  DemoBlock,
-  GuideApiDocs,
-  GuideLayout,
-  pageExampleCode,
-  pageExampleReturn
-} from '@/screen/pub/widgets/guide'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
+import { GuideLayout } from '@/screen/pub/layout'
+import { pageExampleCode, pageExampleReturn } from '@/screen/pub/lib/pageExampleCode'
 import { tabsApiSections } from '@/screen/pub/data/guide/tabsApiSections'
 
 const BASIC_TABS = [

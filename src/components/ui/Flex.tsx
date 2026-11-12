@@ -3,7 +3,7 @@
  * direction·gap·정렬로 가로·세로 배치 상자를 만든다.
  */
 import { createElement, type HTMLAttributes, type ReactNode } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 
 /** 간격 이름 → flex_gap-* 클래스 */
 const GAP_TOKEN: Record<string, string> = {
@@ -49,7 +49,7 @@ export function Flex ({
 }: FlexProps) {
   const isCol = direction === 'col' || direction === 'column'
 
-  const flexClass = cx(
+  const flexClass = classNames(
     'flex',
     isCol ? 'flex_col' : 'flex_row',
     wrap && 'flex_wrap',

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from '@/lib/router'
-import { useGuideTitle } from '@/screen/pub/shared/guideTitle'
+import { useGuideTitle } from '@/screen/pub/hooks/useGuideTitle'
 import '@/styles/pub.scss'
 
 /**

@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
-import { DemoPageShell } from '../shared/DemoPageShell'
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
 
 const cards = [
   { anim: 'fade-up', label: 'fade-up' },
@@ -20,7 +20,7 @@ export default function AosDemoPage () {
   }, [])
 
   return (
-    <DemoPageShell
+    <DemoLayout
       title="AOS"
       description="aos — 스크롤 시 요소 등장 애니메이션"
       slug="aos"
@@ -47,6 +47,6 @@ export default function AosDemoPage () {
           </div>
         </div>
       </div>
-    </DemoPageShell>
+    </DemoLayout>
   )
 }

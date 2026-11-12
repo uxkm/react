@@ -3,7 +3,7 @@
  * engine(amcharts/us/echarts/highcharts/d3) 이름과 높이·제목을 둔다.
  */
 import type { HTMLAttributes, ReactNode } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 
 /** 차트 캔버스가 받는 값. 엔진 이름과 높이, 제목 */
@@ -30,7 +30,7 @@ export function Chart ({
   ...rest
 }: ChartProps) {
   return (
-    <figure {...rest} className={cx('chart', className)} data-engine={engine}>
+    <figure {...rest} className={classNames('chart', className)} data-engine={engine}>
       {hasNodes(title) && <figcaption className="chart_title">{title}</figcaption>}
       <div className="chart_canvas" style={{ height, ...style }}>
         {children}

@@ -14,7 +14,8 @@ import {
   type ReactNode,
   type TransitionEvent
 } from 'react'
-import { cx } from '@/utils/cx'
+import { useAutoClose } from '@/hooks/useAutoClose'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 import { Icon } from './Icon'
 
@@ -41,6 +42,10 @@ export interface DrawerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title
   open?: boolean
   /** 비제어 초기 열림 */
   defaultOpen?: boolean
+  /** 마운트 시 열림. open 이 없을 때 defaultOpen 보다 우선한다 */
+  openOnLoad?: boolean
+  /** 열린 후 자동 닫힘 시간(ms). 생략하거나 0 이하이면 사용하지 않는다 */
+  autoCloseDelay?: number
   title?: ReactNode
   footer?: ReactNode
   placement?: DrawerPlacement
@@ -54,6 +59,8 @@ export interface DrawerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title
   onExpandedChange?: (expanded: boolean) => void
   /** 열림이 바뀔 때 호출(닫힐 때 false). onClose 와 함께 쓸 수 있다 */
   onOpenChange?: (open: boolean) => void
+  /** 배경 dim 표시 및 배경 클릭 닫기. 기본 true */
+  backdrop?: boolean
   staticDemo?: boolean
   onClose?: () => void
 }
@@ -66,6 +73,8 @@ export interface DrawerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title
 export function Drawer ({
   open: openProp,
   defaultOpen = false,
+  openOnLoad,
+  autoCloseDelay,
   title,
   footer,
   placement = 'right',
@@ -74,6 +83,7 @@ export function Drawer ({
   defaultExpanded = false,
   onExpandedChange,
   onOpenChange,
+  backdrop = true,
   staticDemo = false,
   className,
   children,
@@ -97,7 +107,7 @@ export function Drawer ({
   })
 
   const openControlled = openProp !== undefined
-  const [innerOpen, setInnerOpen] = useState(defaultOpen)
+  const [innerOpen, setInnerOpen] = useState(openOnLoad ?? defaultOpen)
   const open = openControlled ? openProp : innerOpen
 
   const [phase, setPhase] = useState<Phase>(() => (
@@ -120,6 +130,8 @@ export function Drawer ({
     onOpenChange?.(false)
     onClose?.()
   }
+
+  useAutoClose(open, autoCloseDelay, requestClose)
 
   if ((open || phase === 'hidden') && retainedPlacement !== placement) setRetainedPlacement(placement)
   const activePlacement = open || phase === 'hidden' ? placement : retainedPlacement
@@ -342,7 +354,7 @@ export function Drawer ({
   return (
     <div
       {...rest}
-      className={cx(
+      className={classNames(
         'drawer',
         (phase === 'enter' || phase === 'shown') && 'is-open',
         (phase === 'enter-start' || phase === 'enter') && 'is-opening',
@@ -350,13 +362,14 @@ export function Drawer ({
         staticDemo && 'drawer_demo-static',
         className
       )}
+      data-drawer-backdrop={backdrop}
       role="dialog"
       aria-modal="true"
     >
-      <div className="drawer_backdrop" aria-hidden="true" onClick={requestClose} />
+      {backdrop && <div className="drawer_backdrop" aria-hidden="true" onClick={requestClose} />}
       <div
         ref={panelRef}
-        className={cx(
+        className={classNames(
           'drawer_panel',
           'drawer_placement-' + activePlacement,
           showHandle && 'drawer_draggable',

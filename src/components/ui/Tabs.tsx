@@ -19,7 +19,7 @@ import {
   type ReactElement,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 import { Icon, type IconColor } from './Icon'
 
@@ -481,7 +481,7 @@ export function Tabs ({
     })
   }
 
-  const tabsClass = cx(
+  const tabsClass = classNames(
     'tabs',
     variant === 'line' && 'tabs_line',
     variant === 'card' && 'tabs_card',
@@ -501,14 +501,14 @@ export function Tabs ({
     opacity: 0
   }
 
-  const viewportClass = cx(
+  const viewportClass = classNames(
     'tabs_list-wrap',
     scrollNav && 'tabs_scroll-viewport',
     navFade && scrollState.prev && 'is-fade-start',
     navFade && scrollState.next && 'is-fade-end'
   )
 
-  const navButtonClass = (side: 'prev' | 'next') => cx(
+  const navButtonClass = (side: 'prev' | 'next') => classNames(
     'tabs_nav',
     side === 'prev' ? 'tabs_nav_prev' : 'tabs_nav_next',
     navVariant === 'outline' && 'tabs_nav-outline',
@@ -614,7 +614,7 @@ export function Tabs ({
                   id={tabId}
                   type="button"
                   data-value={String(tab.value)}
-                  className={cx(
+                  className={classNames(
                     'tabs_tab',
                     active && 'is-active',
                     tab.disabled && 'is-disabled',
@@ -662,7 +662,7 @@ export function Tabs ({
                 <div
                   key={String(tab.value)}
                   id={`${uid}-panel-${index}`}
-                  className={cx(
+                  className={classNames(
                     'tabs_panel',
                     active && 'is-active',
                     mapped?.className || tab.panelClassName

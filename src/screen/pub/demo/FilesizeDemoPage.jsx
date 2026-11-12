@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import { filesize } from 'filesize'
-import { DemoPageShell } from '../shared/DemoPageShell'
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
 
 const presets = [0, 512, 1024, 1536, 1048576, 1073741824, 5368709120]
 
@@ -12,7 +12,7 @@ export default function FilesizeDemoPage () {
   const formatted = useMemo(() => filesize(bytes, { base: 2, standard: 'jedec' }), [bytes])
 
   return (
-    <DemoPageShell
+    <DemoLayout
       title="filesize"
       description="filesize — 바이트를 읽기 쉬운 용량 문자열로 변환"
       slug="filesize"
@@ -43,6 +43,6 @@ export default function FilesizeDemoPage () {
           </div>
         </div>
       </div>
-    </DemoPageShell>
+    </DemoLayout>
   )
 }

@@ -1,7 +1,10 @@
 'use client'
 
 import { Avatar, Badge, BadgeWrap, Button, Icon } from '@/comp'
-import { DemoBlock, GuideApiDocs, GuideLayout, wrapPageExample } from '@/screen/pub/widgets/guide'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
+import { GuideLayout } from '@/screen/pub/layout'
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
 import { badgeApiSections } from '@/screen/pub/data/guide/badgeApiSections'
 
 const SECTIONS = [

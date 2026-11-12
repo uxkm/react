@@ -2,7 +2,10 @@
 
 import { useState } from 'react'
 import { Card, CardBody, CardDeck, CardHeader, Radio } from '@/comp'
-import { DemoBlock, GuideApiDocs, GuideLayout, wrapPageExample } from '@/screen/pub/widgets/guide'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
+import { GuideLayout } from '@/screen/pub/layout'
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
 import { radioApiSections } from '@/screen/pub/data/guide/radioApiSections'
 
 /** 카드 전체 클릭 → 내부 radio input */

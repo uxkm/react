@@ -11,6 +11,18 @@ const columns = [
 
 const props = [
   {
+    name: 'openOnLoad',
+    type: 'boolean',
+    default: '—',
+    description: '마운트 시 자동으로 엽니다. open 을 생략했을 때만 적용하며, 지정하면 defaultOpen 보다 우선합니다. 이후 변경으로 다시 열리지는 않습니다.'
+  },
+  {
+    name: 'autoCloseDelay',
+    type: 'number (ms)',
+    default: '— (자동 닫힘 없음)',
+    description: '열린 시점부터 지정 시간 후 닫습니다. 재열림·시간 변경 시 다시 계산하며 수동 닫기·언마운트 시 취소합니다. 0 이하·유효하지 않은 값은 비활성입니다. 제어 모드는 onOpenChange(false) 에서 부모의 open 을 갱신해야 합니다.'
+  },
+  {
     name: 'color',
     type: "'info' | 'success' | 'warning' | 'danger' | 'error'",
     default: "'info'",
@@ -99,9 +111,9 @@ const events = [
   },
   {
     name: 'onClose',
-    type: '(event: MouseEvent<HTMLButtonElement>) => void',
+    type: '(event?: MouseEvent<HTMLButtonElement>) => void',
     default: '—',
-    description: '닫기 요청 시 호출됩니다(onOpenChange(false) 와 함께). 실제 표시는 open 제어 부모가 결정합니다.'
+    description: '수동·자동 닫기 요청 시 호출됩니다(onOpenChange(false) 와 함께). 자동 닫힘에는 event 가 없습니다. 실제 표시는 open 제어 부모가 결정합니다.'
   }
 ]
 

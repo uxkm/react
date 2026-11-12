@@ -7,7 +7,7 @@ import type {
   InputHTMLAttributes,
   ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 
 /** 라디오가 받는 값 */
 export interface RadioProps
@@ -49,7 +49,7 @@ export function Radio ({
 }: RadioProps) {
   const content = children ?? label
   const standalone = content == null || content === ''
-  const classes = cx(
+  const classes = classNames(
     'radio',
     labelEnd && 'radio_label-end',
     button && 'radio_button',
@@ -78,7 +78,7 @@ export function Radio ({
   if (standalone) {
     return (
       <label
-        className={cx('radio_control', className)}
+        className={classNames('radio_control', className)}
         aria-label={ariaLabel}
         {...rippleAttrs}
       >

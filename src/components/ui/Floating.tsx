@@ -9,25 +9,28 @@
 
 import {
   Children,
+  Fragment,
   createContext,
   isValidElement,
   useContext,
   useId,
   useMemo,
+  useRef,
   type CSSProperties,
   type HTMLAttributes,
   type ReactElement,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
+import { useHydrated } from '@/hooks/useHydrated'
+import { useLayoutSlots } from '@/comp/layout/LayoutContext'
+import type { FloatingVisibilityMeta } from '@/comp/shared/page-meta'
+import { useFloatingPosition } from '@/hooks/useFloatingPosition'
+import type { FloatingBoundary, FloatingPlacement, FloatingPositionResolver } from '@/comp/shared/floating-position'
 
-/** 모서리 배치 */
-export type FloatingPlacement =
-  | 'bottom-right'
-  | 'bottom-left'
-  | 'top-right'
-  | 'top-left'
+export type { FloatingBoundary, FloatingPlacement, FloatingPositionContext, FloatingPositionResolver } from '@/comp/shared/floating-position'
+export type FloatingSlots = Record<string, ReactNode>
 
 /** 스택 방향 */
 export type FloatingDirection =
@@ -40,11 +43,13 @@ export type FloatingDirection =
 export interface FloatingContextValue {
   inside: boolean
   placement: FloatingPlacement
+  itemVisibility: Record<string, boolean>
 }
 
 export const FloatingContext = createContext<FloatingContextValue>({
   inside: false,
-  placement: 'bottom-right'
+  placement: 'bottom-right',
+  itemVisibility: {}
 })
 
 /** Floating 안에 있는지 */
@@ -54,6 +59,8 @@ export function useFloatingContext () {
 
 /** Floating props */
 export interface FloatingProps extends HTMLAttributes<HTMLDivElement> {
+  /** 플로팅 기본 표시 설정. 페이지 meta의 항목별 설정이 우선한다. */
+  meta?: FloatingVisibilityMeta
   /** 모서리. 기본 bottom-right(우측 하단) */
   placement?: FloatingPlacement
   /** 하단 여백(px). top-* 이면 상단 여백으로 쓴다 */
@@ -69,6 +76,14 @@ export interface FloatingProps extends HTMLAttributes<HTMLDivElement> {
    * 지정하면 해당 이름 순으로 재배치하고, 나머지 name 없는 아이템은 뒤에 붙인다.
    */
   order?: string[]
+  /** 이름별 커스텀 UI. 이름은 order와 meta.floatingItems에도 사용한다. */
+  slots?: FloatingSlots
+  /** 기본 viewport 고정. footer 또는 선택자·요소·함수로 경계 위에서 멈춘다. */
+  boundary?: FloatingBoundary
+  /** 경계 상단과 플로팅 사이 간격(px). */
+  boundaryGap?: number
+  /** 기본 좌표를 사용자 정의 CSS 좌표로 보정한다. */
+  getPosition?: FloatingPositionResolver
   children?: ReactNode
 }
 
@@ -86,27 +101,7 @@ export interface FloatingItemProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode
 }
 
-function placementStyle (
-  placement: FloatingPlacement,
-  offsetBottom: number,
-  offsetRight: number
-): CSSProperties {
-  const y = offsetBottom
-  const x = offsetRight
-  switch (placement) {
-    case 'bottom-left':
-      return { bottom: y, left: x, top: 'auto', right: 'auto' }
-    case 'top-right':
-      return { top: y, right: x, bottom: 'auto', left: 'auto' }
-    case 'top-left':
-      return { top: y, left: x, bottom: 'auto', right: 'auto' }
-    case 'bottom-right':
-    default:
-      return { bottom: y, right: x, top: 'auto', left: 'auto' }
-  }
-}
-
-function collectItems (children: ReactNode) {
+function collectItems (children: ReactNode, keyPrefix = '') {
   const items: Array<{
     key: string
     name?: string
@@ -115,18 +110,23 @@ function collectItems (children: ReactNode) {
   let index = 0
   Children.forEach(children, (child) => {
     if (!isValidElement(child)) return
+    if (child.type === Fragment) {
+      items.push(...collectItems((child.props as { children?: ReactNode }).children, `${keyPrefix}${child.key ?? index}/`))
+      index += 1
+      return
+    }
     const props = child.props as FloatingItemProps
     const isItem = child.type === FloatingItem || (child.type as { displayName?: string })?.displayName === 'FloatingItem'
     if (isItem) {
       items.push({
-        key: String(child.key ?? props.name ?? index),
+        key: keyPrefix + String(child.key ?? props.name ?? index),
         name: props.name,
         node: child
       })
     } else {
       // 임의 자식도 아이템으로 래핑해 순서에 포함
       items.push({
-        key: String(child.key ?? `anon-${index}`),
+        key: keyPrefix + String(child.key ?? `anon-${index}`),
         name: undefined,
         node: (
           <FloatingItem key={`anon-${index}`}>
@@ -159,32 +159,56 @@ function sortItems (
  * BackTop · 버튼 등을 Floating.Item 으로 넣고 order · direction 으로 순서를 맞춘다.
  */
 export function Floating ({
+  meta,
   placement = 'bottom-right',
   offsetBottom = 24,
   offsetRight = 24,
   gap = 12,
   direction = 'column',
   order,
+  slots,
+  boundary = 'viewport',
+  boundaryGap = 16,
+  getPosition,
   className,
   style,
   children,
   ...rest
 }: FloatingProps) {
+  const hydrated = useHydrated()
+  const rootRef = useRef<HTMLDivElement>(null)
+  const pageSlots = useLayoutSlots()
+  const pageItemSettings = pageSlots['meta-floating-items']
+  const itemVisibility = useMemo(() => ({
+    ...meta?.floatingItems,
+    ...(typeof pageItemSettings === 'string' ? JSON.parse(pageItemSettings) as Record<string, boolean> : {})
+  }), [meta?.floatingItems, pageItemSettings])
   const uid = useId().replace(/:/g, '')
   const ctx = useMemo(
-    () => ({ inside: true as const, placement }),
-    [placement]
+    () => ({ inside: true as const, placement, itemVisibility }),
+    [placement, itemVisibility]
   )
 
-  const items = sortItems(collectItems(children), order)
-  const place = placementStyle(placement, offsetBottom, offsetRight)
+  const content = <>{children}{Object.entries(slots || {}).map(([name, node]) => (
+    <FloatingItem key={`slot-${name}`} name={name} data-floating-slot={name}>{node}</FloatingItem>
+  ))}</>
+  const items = sortItems(collectItems(content).filter((item) => {
+    const props = item.node.props as FloatingItemProps
+    return !props.hidden && hasNodes(props.children) && (item.name == null || itemVisibility[item.name] !== false)
+  }), order)
+  const enabled = hydrated && meta?.floating !== false && pageSlots['meta-floating'] !== 'false' && items.length > 0
+  const place = useFloatingPosition(rootRef, { enabled, placement, offsetBottom, offsetRight, boundary, boundaryGap, getPosition })
+
+  // 헤더·푸터와 같이 페이지 meta가 등록된 후 표시해 숨김 항목의 첫 화면 노출을 막는다.
+  if (!enabled) return null
 
   return (
     <FloatingContext.Provider value={ctx}>
       <div
         {...rest}
+        ref={rootRef}
         id={rest.id || `floating-${uid}`}
-        className={cx('floating', className)}
+        className={classNames('floating', className)}
         style={{
           ...place,
           gap,
@@ -195,8 +219,9 @@ export function Floating ({
         data-placement={placement}
         data-direction={direction}
         data-order={order?.length ? order.join(',') : undefined}
+        data-boundary={typeof boundary === 'string' ? boundary : 'custom'}
       >
-        {items.map((item) => item.node)}
+        {items.map((item) => <Fragment key={item.key}>{item.node}</Fragment>)}
       </div>
     </FloatingContext.Provider>
   )
@@ -215,12 +240,13 @@ export function FloatingItem ({
   children,
   ...rest
 }: FloatingItemProps) {
-  if (hidden || !hasNodes(children)) return null
+  const { itemVisibility } = useFloatingContext()
+  if (hidden || !hasNodes(children) || (name != null && itemVisibility[name] === false)) return null
 
   return (
     <div
       {...rest}
-      className={cx('floating_item', className)}
+      className={classNames('floating_item', className)}
       style={order != null ? { order, ...style } : style}
       data-floating-item=""
       data-name={name}

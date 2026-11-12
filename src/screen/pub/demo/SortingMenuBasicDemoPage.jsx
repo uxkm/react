@@ -1,8 +1,8 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { cx } from '@/utils/cx'
-import { GuideLayout } from '@/screen/pub/widgets/guide'
+import { classNames } from '@/utils/classNames'
+import { GuideLayout } from '@/screen/pub/layout'
 
 /** 정렬 기준 목록 */
 const sortList = ['최신순', '인기순', '이름순', '오래된순']
@@ -49,7 +49,7 @@ export default function SortingMenuBasicDemoPage() {
               {sortList.length > 0 && (
                 <div
                   ref={sortingWrapRef}
-                  className={cx('sorting-wrap', { open: isSortingOpen })}
+                  className={classNames('sorting-wrap', { open: isSortingOpen })}
                 >
                   <button
                     type="button"
@@ -69,7 +69,7 @@ export default function SortingMenuBasicDemoPage() {
                         <button
                           key={index}
                           type="button"
-                          className={cx({ active: current === item })}
+                          className={classNames({ active: current === item })}
                           onClick={(e) => {
                             e.stopPropagation()
                             setSelectedItem(item)

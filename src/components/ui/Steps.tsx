@@ -6,7 +6,7 @@
  */
 
 import { useState, type HTMLAttributes, type ReactNode } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 import { Icon } from './Icon'
 
@@ -86,7 +86,7 @@ export function Steps ({
   return (
     <ol
       {...rest}
-      className={cx(
+      className={classNames(
         'steps',
         direction === 'vertical' && 'steps_vertical',
         size === 'sm' && 'steps_sm',
@@ -145,7 +145,7 @@ export function Steps ({
 
         return (
           <li
-            className={cx('steps_item', state)}
+            className={classNames('steps_item', state)}
             key={item.key || index}
             aria-current={isCurrent ? 'step' : undefined}
           >
@@ -153,7 +153,7 @@ export function Steps ({
               ? (
                 <button
                   type="button"
-                  className={cx('steps_trigger', item.disabled && 'is-disabled')}
+                  className={classNames('steps_trigger', item.disabled && 'is-disabled')}
                   disabled={!canNavigate}
                   onClick={() => {
                     if (canNavigate) go(index)

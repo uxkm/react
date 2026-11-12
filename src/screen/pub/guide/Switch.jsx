@@ -2,7 +2,10 @@
 
 import { useState } from 'react'
 import { Switch } from '@/comp'
-import { DemoBlock, GuideApiDocs, GuideLayout, wrapPageExample } from '@/screen/pub/widgets/guide'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
+import { GuideLayout } from '@/screen/pub/layout'
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
 import { switchApiSections } from '@/screen/pub/data/guide/switchApiSections'
 
 /** checked · onChange 로 부모가 켜짐 상태를 관리하는 예시 */

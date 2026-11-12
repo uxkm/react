@@ -22,7 +22,7 @@ import {
 import Swiper from 'swiper'
 import type { Swiper as SwiperInstance } from 'swiper'
 import { carouselSwiperModules } from '@/lib/swiper'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 
 /** 커버플로우 좌우 노출 */
@@ -158,7 +158,7 @@ function applyCoverflowGap (
 /** 한 장(swiper-slide) */
 export function CarouselSlide ({ children, className, ...rest }: CarouselSlideProps) {
   return (
-    <div {...rest} className={cx('swiper-slide', className)}>
+    <div {...rest} className={classNames('swiper-slide', className)}>
       {children}
     </div>
   )
@@ -509,7 +509,7 @@ export function Carousel ({
     setPlaying(!playing)
   }
 
-  const rootClass = cx(
+  const rootClass = classNames(
     'carousel',
     'carousel_demo',
     multi && 'carousel_multi',

@@ -1,12 +1,12 @@
 // @generated-project-route
 import { RegistryPage } from '@/lib/RegistryPage'
-import { projectStaticParams } from '@/lib/staticParams'
+import { b2bStaticParams } from '@/lib/staticParams'
 import { routeMetadata } from '@/lib/routeMetadata'
 import { indexLoaders, screenLoaders, indexMeta, screenMeta } from '@/generated/registry-b2b'
 import RouteRedirect from '@/comp/providers/RouteRedirect'
 
 export const dynamicParams = false
-export function generateStaticParams () { return projectStaticParams('b2b') }
+export function generateStaticParams () { return b2bStaticParams() }
 export default async function Page ({ params }) {
   const { slug } = await params
   const key = slug.join('/')

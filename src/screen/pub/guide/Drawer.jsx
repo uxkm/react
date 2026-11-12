@@ -2,7 +2,12 @@
 
 import { useState } from 'react'
 import { Button, Drawer } from '@/comp'
-import { DemoBlock, GuideApiDocs, GuideLayout, wrapPageExample } from '@/screen/pub/widgets/guide'
+import { LoadOpenOverlayDemo } from '@/screen/pub/widgets/preview/LoadOpenOverlayDemo'
+import { TimedOverlayDemo } from '@/screen/pub/widgets/preview/TimedOverlayDemo'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
+import { GuideLayout } from '@/screen/pub/layout'
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
 import { drawerApiSections } from '@/screen/pub/data/guide/drawerApiSections'
 
 /** 취소·확인 푸터 버튼 */
@@ -182,6 +187,24 @@ function SizeDemo () {
 }
 
 const SECTIONS = [
+  {
+    title: '배경 dim 숨기기',
+    description: 'backdrop 의 기본값은 true 입니다. false 를 지정하면 배경 dim 없이 표시하고 배경 클릭으로 닫히지 않습니다. 닫기 버튼은 그대로 사용할 수 있습니다. 미리보기는 프레임 안에 표시합니다.',
+    code: wrapPageExample(`<Drawer openOnLoad placement="bottom" backdrop={false} title="배경 dim 없음">배경 dim 없이 표시합니다.</Drawer>`, { compImports: ['Drawer'] }),
+    preview: <LoadOpenOverlayDemo component="Drawer" placement="bottom" backdrop={false} />
+  },
+  {
+    title: '페이지 로드 시 열림 · 자동 닫힘 없음',
+    description: 'openOnLoad 와 placement="bottom" 을 지정하여 페이지 로드 시 하단에서 열립니다. autoCloseDelay 를 생략하므로 시간 경과로 닫히지 않습니다. 각 컴포넌트의 기본 닫기 동작은 유지됩니다. 예시 다시 불러오기로 초기 상태를 다시 확인할 수 있습니다. 가이드 미리보기는 staticDemo 로 프레임 안에 표시하며, 실제 페이지에서는 코드 예시처럼 사용합니다.',
+    code: wrapPageExample(`<Drawer openOnLoad placement="bottom" title="안내">로드 시 열리며 자동으로 닫히지 않습니다.</Drawer>`, { compImports: ['Drawer'] }),
+    preview: <LoadOpenOverlayDemo component="Drawer" placement="bottom" />
+  },
+  {
+    title: '페이지 진입 시 자동 열림 · 지정 시간 후 닫기',
+    description: '호출부에 openOnLoad, placement="bottom", autoCloseDelay={5000} 을 지정하면 마운트 시 하단에서 열리고 5초 후 닫힙니다. 시간은 밀리초이며 생략하거나 0 이하이면 자동으로 닫히지 않습니다. 아래 실행 버튼은 페이지 진입을 대신해 예시를 새로 마운트합니다. open 을 직접 제어할 때는 open={open} onOpenChange={setOpen} 으로 연결하고 초기 상태를 true 로 지정하세요.',
+    code: wrapPageExample(`<Drawer openOnLoad placement="bottom" autoCloseDelay={5000} title="안내">5초 후 닫힙니다.</Drawer>`, { compImports: ['Drawer'] }),
+    preview: <TimedOverlayDemo component="Drawer" placement="bottom" />
+  },
   {
     title: '열기와 닫기',
     description: (

@@ -3,7 +3,7 @@
  * 문단·제목·코드·인용 등 글 종류·색·크기를 통일한다.
  */
 import { createElement, type HTMLAttributes, type ReactNode } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 
 /** 글 종류. 문단, 리드, 캡션, 코드, 인용 등 */
@@ -118,7 +118,7 @@ export function Typography ({
   const resolvedColor = color || (muted ? 'muted' : '')
   const ell = Number(ellipsis)
 
-  const typoClass = cx(
+  const typoClass = classNames(
     isTitle
       ? 'typo_title-' + titleLevel
       : VARIANT_CLASS[variant] || 'typo_text',

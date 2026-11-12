@@ -6,7 +6,8 @@
  */
 
 import { useState, type HTMLAttributes, type ReactNode } from 'react'
-import { cx } from '@/utils/cx'
+import { useAutoClose } from '@/hooks/useAutoClose'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 import { Icon, type IconName } from './Icon'
 
@@ -33,6 +34,10 @@ export interface SnackbarProps extends HTMLAttributes<HTMLDivElement> {
   open?: boolean
   /** 비제어 초기 표시. 기본 true */
   defaultOpen?: boolean
+  /** 마운트 시 열림. open 이 없을 때 defaultOpen 보다 우선한다 */
+  openOnLoad?: boolean
+  /** 열린 후 자동 닫힘 시간(ms). 생략하거나 0 이하이면 사용하지 않는다 */
+  autoCloseDelay?: number
   /** 표시 상태가 바뀔 때 호출 */
   onOpenChange?: (open: boolean) => void
   onClose?: () => void
@@ -51,6 +56,8 @@ export function Snackbar ({
   closable = false,
   open,
   defaultOpen = true,
+  openOnLoad,
+  autoCloseDelay,
   className,
   children,
   onOpenChange,
@@ -58,7 +65,7 @@ export function Snackbar ({
   ...rest
 }: SnackbarProps) {
   const controlled = open !== undefined
-  const [innerOpen, setInnerOpen] = useState(defaultOpen)
+  const [innerOpen, setInnerOpen] = useState(openOnLoad ?? defaultOpen)
   const visible = controlled ? open : innerOpen
 
   const setVisible = (next: boolean) => {
@@ -67,6 +74,8 @@ export function Snackbar ({
     if (!next) onClose?.()
   }
 
+  useAutoClose(visible, autoCloseDelay, () => setVisible(false))
+
   if (!visible) return null
   const resolved = color === 'danger' ? 'error' : color
   const defaultIconName = ICON_NAME[resolved] || 'info'
@@ -74,7 +83,7 @@ export function Snackbar ({
   return (
     <div
       {...rest}
-      className={cx('snackbar', 'color_' + resolved, round && 'snackbar_round', className)}
+      className={classNames('snackbar', 'color_' + resolved, round && 'snackbar_round', className)}
       role={resolved === 'error' ? 'alert' : 'status'}
     >
       {showIcon && (

@@ -8,6 +8,7 @@ import { readFileSync, existsSync, statSync, createReadStream } from 'node:fs'
 import { networkInterfaces } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { listenServer } from './listen-server.mjs'
 
 /** 이 스크립트 파일이 있는 디렉터리 (scripts/) */
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -20,8 +21,6 @@ const outDir = path.join(root, 'out')
 const HTTP_PORT = Number(process.env.PORT || 8090)
 /** HTTPS 포트 — env HTTPS_PORT, 기본 8443 */
 const HTTPS_PORT = Number(process.env.HTTPS_PORT || 8443)
-/** listen 바인드 주소 — env HOSTNAME, 기본 0.0.0.0 */
-const HOST = process.env.HOSTNAME || '0.0.0.0'
 
 /** 로컬 HTTPS용 private key 경로 */
 const keyPath = path.join(root, 'certificates/localhost-key.pem')
@@ -119,12 +118,12 @@ const httpServer = createHttpServer((req, res) => {
   }
 })
 
-httpServer.listen(HTTP_PORT, HOST, () => {
+listenServer(httpServer, HTTP_PORT).then(() => {
   console.log('')
   console.log('  ▲ 퍼블리싱 목록 (static out/)')
   console.log(`  - Local HTTP:    http://localhost:${HTTP_PORT}`)
   if (lan) console.log(`  - Network HTTP:  http://${lan}:${HTTP_PORT}`)
-})
+}).catch(onListenError)
 
 if (existsSync(keyPath) && existsSync(certPath)) {
   /** HTTPS 정적 서버 (인증서 있을 때만) */
@@ -140,11 +139,16 @@ if (existsSync(keyPath) && existsSync(certPath)) {
       }
     }
   )
-  httpsServer.listen(HTTPS_PORT, HOST, () => {
+  listenServer(httpsServer, HTTPS_PORT).then(() => {
     console.log(`  - Local HTTPS:   https://localhost:${HTTPS_PORT}`)
     if (lan) console.log(`  - Network HTTPS: https://${lan}:${HTTPS_PORT}`)
     console.log('')
-  })
+  }).catch(onListenError)
 } else {
   console.log('')
+}
+
+function onListenError (error) {
+  console.error('[serve-static]', error)
+  process.exit(1)
 }

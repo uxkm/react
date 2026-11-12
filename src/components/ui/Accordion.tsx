@@ -17,7 +17,7 @@ import {
   type ReactNode,
   type TransitionEvent
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 import { Icon } from './Icon'
 
@@ -290,7 +290,7 @@ function AccordionPanelShell ({
     <div
       ref={ref}
       id={id}
-      className={cx('accordion_panel', className)}
+      className={classNames('accordion_panel', className)}
       role="region"
       aria-labelledby={labelledBy}
       hidden={!open && !slide}
@@ -371,7 +371,7 @@ export function Accordion ({
     setOpen(next)
   }
 
-  const rootClass = cx(
+  const rootClass = classNames(
     'accordion',
     skin === 'bordered' && 'accordion_bordered',
     skin === 'flush' && 'accordion_flush',
@@ -427,7 +427,7 @@ export function Accordion ({
         return (
           <div
             key={String(item.value)}
-            className={cx(
+            className={classNames(
               'accordion_item',
               open && 'is-open',
               item.disabled && 'is-disabled',

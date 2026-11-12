@@ -17,7 +17,7 @@ import {
   type ReactNode,
   type TransitionEvent
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 import { Icon } from './Icon'
 
@@ -290,7 +290,7 @@ function CollapseBodyShell ({
     <div
       ref={ref}
       id={id}
-      className={cx('collapse_body', className)}
+      className={classNames('collapse_body', className)}
       role="region"
       aria-labelledby={labelledBy}
       hidden={!open && !slide}
@@ -371,7 +371,7 @@ export function Collapse ({
     setOpenValues([...openValues, next])
   }
 
-  const rootClass = cx(
+  const rootClass = classNames(
     'collapse_group',
     skin === 'bordered' && 'collapse_bordered',
     skin === 'ghost' && 'collapse_ghost',
@@ -426,7 +426,7 @@ export function Collapse ({
         return (
           <div
             key={String(item.value)}
-            className={cx(
+            className={classNames(
               'collapse_panel',
               open && 'is-open',
               item.disabled && 'is-disabled',

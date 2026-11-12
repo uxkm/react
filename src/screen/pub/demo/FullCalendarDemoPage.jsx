@@ -7,8 +7,8 @@ import {
   timeGridPlugin,
   interactionPlugin,
   formatDate
-} from '@/lib/calendar'
-import { DemoPageShell } from '../shared/DemoPageShell'
+} from '@/lib/fullcalendar'
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
 
 const initialEvents = [
   { id: '1', title: '디자인 리뷰', start: '2026-11-05' },
@@ -22,9 +22,9 @@ export default function FullCalendarDemoPage () {
   const [lastAction, setLastAction] = useState('날짜를 클릭하거나 이벤트를 드래그해 보세요.')
 
   return (
-    <DemoPageShell
+    <DemoLayout
       title="FullCalendar"
-      description="@fullcalendar/react + daygrid/timegrid/interaction (@/lib/calendar)"
+      description="@fullcalendar/react + daygrid/timegrid/interaction (@/lib/fullcalendar)"
       slug="fullcalendar"
     >
       <div className="demo-block">
@@ -64,6 +64,6 @@ export default function FullCalendarDemoPage () {
           />
         </div>
       </div>
-    </DemoPageShell>
+    </DemoLayout>
   )
 }

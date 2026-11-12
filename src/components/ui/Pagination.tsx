@@ -13,7 +13,7 @@ import {
   type KeyboardEvent,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 
 /** 페이지 이동이 받는 값 */
@@ -116,7 +116,7 @@ export function Pagination ({
     go(parsed)
   }
 
-  const rootClass = cx(
+  const rootClass = classNames(
     'pagination',
     size === 'sm' && 'pagination_sm',
     size === 'lg' && 'pagination_lg',
@@ -162,7 +162,7 @@ export function Pagination ({
               : (
                 <button
                   type="button"
-                  className={cx('pagination_link', item === current && 'is-active')}
+                  className={classNames('pagination_link', item === current && 'is-active')}
                   aria-current={item === current ? 'page' : undefined}
                   aria-label={`${item} 페이지`}
                   onClick={() => go(item)}

@@ -5,7 +5,7 @@
  */
 import { ellipsisAttr } from './useEllipsisTooltip.jsx'
 
-/** `#/web/login` → `/web/login` */
+/** `#/b2b/login` → `/b2b/login` */
 export function toAppHref (url) {
   if (url == null || url === '') return url
   const s = String(url)

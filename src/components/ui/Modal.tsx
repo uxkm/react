@@ -6,7 +6,8 @@
  */
 
 import { useState, type HTMLAttributes, type ReactNode } from 'react'
-import { cx } from '@/utils/cx'
+import { useAutoClose } from '@/hooks/useAutoClose'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 import { Icon } from './Icon'
 
@@ -15,9 +16,15 @@ export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'
   open?: boolean
   /** 비제어 초기 열림 */
   defaultOpen?: boolean
+  /** 마운트 시 열림. open 이 없을 때 defaultOpen 보다 우선한다 */
+  openOnLoad?: boolean
+  /** 열린 후 자동 닫힘 시간(ms). 생략하거나 0 이하이면 사용하지 않는다 */
+  autoCloseDelay?: number
   title?: ReactNode
   footer?: ReactNode
   size?: 'sm' | 'md' | 'lg'
+  /** 배경 dim 표시 및 배경 클릭 닫기. 기본 true */
+  backdrop?: boolean
   staticDemo?: boolean
   /** 열림이 바뀔 때 호출(닫힐 때 false). onClose 와 함께 쓸 수 있다 */
   onOpenChange?: (open: boolean) => void
@@ -32,9 +39,12 @@ export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'
 export function Modal ({
   open: openProp,
   defaultOpen = false,
+  openOnLoad,
+  autoCloseDelay,
   title,
   footer,
   size = 'md',
+  backdrop = true,
   staticDemo = false,
   className,
   children,
@@ -43,10 +53,8 @@ export function Modal ({
   ...rest
 }: ModalProps) {
   const controlled = openProp !== undefined
-  const [innerOpen, setInnerOpen] = useState(defaultOpen)
+  const [innerOpen, setInnerOpen] = useState(openOnLoad ?? defaultOpen)
   const open = controlled ? openProp : innerOpen
-
-  if (!open) return null
 
   const requestClose = () => {
     if (!controlled) setInnerOpen(false)
@@ -54,9 +62,13 @@ export function Modal ({
     onClose?.()
   }
 
+  useAutoClose(open, autoCloseDelay, requestClose)
+
+  if (!open) return null
+
   return (
-    <div {...rest} className={cx('modal', 'is-open', staticDemo && 'modal_demo-static', size === 'sm' && 'modal_sm', size === 'lg' && 'modal_lg', className)} role="dialog" aria-modal="true">
-      <div className="modal_backdrop" aria-hidden="true" onClick={requestClose} />
+    <div {...rest} className={classNames('modal', 'is-open', staticDemo && 'modal_demo-static', size === 'sm' && 'modal_sm', size === 'lg' && 'modal_lg', className)} role="dialog" aria-modal="true" data-modal-backdrop={backdrop}>
+      {backdrop && <div className="modal_backdrop" aria-hidden="true" onClick={requestClose} />}
       <div className="modal_dialog">
         <div className="modal_header">
           {hasNodes(title)

@@ -6,7 +6,7 @@
  */
 import type { HTMLAttributes, ReactNode } from 'react'
 import { resolveSkeletonMode, type SkeletonMode } from '@/config/skeleton'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 import { AutoSkeleton } from './AutoSkeleton'
 import { PageSkeleton, type PageSkeletonType } from './PageSkeleton'
@@ -23,7 +23,7 @@ export interface PageLoadingProps extends HTMLAttributes<HTMLDivElement> {
    * 생략 시 src/config/skeleton.ts 의 페이지 맵 → 전역 기본값
    */
   skeletonMode?: SkeletonMode
-  /** auto 캐시·설정 키 (예: 'web/user-page') */
+  /** auto 캐시·설정 키 (예: 'b2b/user-page') */
   skeletonId?: string
   /**
    * manual 모드: 수동 스켈레톤
@@ -74,7 +74,7 @@ function resolvePresetOrNode (
  *
  * @example
  * // 자동 (기본)
- * <PageLoading loading={loading} skeletonId="web/user-page" className="page-container">
+ * <PageLoading loading={loading} skeletonId="b2b/user-page" className="page-container">
  *   ...
  * </PageLoading>
  *
@@ -82,7 +82,7 @@ function resolvePresetOrNode (
  * // 디자인 확정 후 수동
  * <PageLoading
  *   loading={loading}
- *   skeletonId="web/user-page"
+ *   skeletonId="b2b/user-page"
  *   skeletonMode="manual"
  *   skeleton={<IndexSkeleton />}
  *   className="page-container"
@@ -116,7 +116,7 @@ export function PageLoading ({
       return (
         <div
           {...rest}
-          className={cx('page-loading', className)}
+          className={classNames('page-loading', className)}
           role={rest.role || 'status'}
           aria-busy="true"
           aria-label={label}
@@ -141,7 +141,7 @@ export function PageLoading ({
   return (
     <div
       {...rest}
-      className={cx(loading && 'page-loading', className)}
+      className={classNames(loading && 'page-loading', className)}
       role={rest.role || (loading ? 'status' : undefined)}
       aria-busy={loading || undefined}
       aria-label={loading ? label : undefined}

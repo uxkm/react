@@ -9,7 +9,7 @@ import {
   type MouseEvent,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 
 /** 버튼 모양. filled 채움, outline 테두리, ghost 옅은 배경, text 글자만, select 선택됨 */
@@ -115,7 +115,7 @@ export function Button ({
   const isDisabled = !!(disabled || ariaDisabled || loading)
   const showCaret = variant === 'select' ? true : !!selectCaret
 
-  const btnClass = cx(
+  const btnClass = classNames(
     'btn',
     variant === 'select' && selectText
       ? 'btn_select-text'
@@ -192,7 +192,7 @@ export function Button ({
 
   const caret = showCaret ? (
     <span
-      className={cx(
+      className={classNames(
         'btn_icon',
         'btn_icon-after',
         variant === 'select' ? 'btn_select-caret' : 'btn_caret'

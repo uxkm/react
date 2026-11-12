@@ -3,7 +3,7 @@
  * 열 개수(cols)·간격으로 격자 배치를 만든다.
  */
 import { createElement, type HTMLAttributes, type ReactNode } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 
 /** 간격 이름 → grid_gap-* 클래스 */
 const GAP_TOKEN: Record<string, string> = {
@@ -48,7 +48,7 @@ export function Grid ({
 }: GridProps) {
   const resolvedCols = columns != null ? columns : cols
 
-  const gridClass = cx(
+  const gridClass = classNames(
     'grid',
     resolvedCols && 'grid_cols-' + resolvedCols,
     typeof gap === 'string' && GAP_TOKEN[gap],

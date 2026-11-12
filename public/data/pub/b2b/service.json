@@ -38,7 +38,7 @@
           "type": "Page",
           "id": "B2B-SERVICE-PLATFORM-CONSULTING",
           "pageUrl": "/b2b/service/platform/consulting",
-          "filePath": "@/screen/b2b/service/platform/consulting.tsx",
+          "filePath": "@/screen/b2b/service/platform/consulting/index.tsx",
           "priority": 2
         }
       ]

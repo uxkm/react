@@ -17,7 +17,7 @@ import {
   type KeyboardEvent,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 
 /** 업로드 목록 항목 */
 export interface UploadFileItem {
@@ -295,7 +295,7 @@ export function Upload ({
     />
   )
 
-  const classes = cx(
+  const classes = classNames(
     'upload',
     fit && 'upload_fit',
     size !== 'md' && `upload_${size}`,
@@ -310,7 +310,7 @@ export function Upload ({
   } else if (resolvedVariant === 'drag') {
     triggerNode = (
       <label
-        className={cx(
+        className={classNames(
           'upload_dropzone',
           (dragover || dragActive) && 'is-dragover',
           (error || message) && 'is-error'
@@ -420,7 +420,7 @@ export function Upload ({
         <ul className="upload_list">
           {files.map((item, index) => (
             <li
-              className={cx(
+              className={classNames(
                 'upload_item',
                 item.status === 'error' && 'is-error',
                 item.status !== 'uploading' && 'is-done'

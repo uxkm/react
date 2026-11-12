@@ -2,12 +2,10 @@
 
 import { useState } from 'react'
 import { Button, Space, Spin } from '@/comp'
-import {
-  DemoBlock,
-  GuideApiDocs,
-  GuideLayout,
-  wrapPageExample
-} from '@/screen/pub/widgets/guide'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
+import { GuideLayout } from '@/screen/pub/layout'
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
 import { spinApiSections } from '@/screen/pub/data/guide/spinApiSections'
 
 /** spinning 을 버튼으로 켜고 끄는 래퍼 예시 */

@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import filterXss from 'xss'
-import { DemoPageShell } from '../shared/DemoPageShell'
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
 
 const SAMPLE = '<p>안녕 <script>alert(1)</script><b onclick="evil()">강조</b> <a href="javascript:alert(1)">링크</a></p>'
 
@@ -12,7 +12,7 @@ export default function XssDemoPage () {
   const cleaned = useMemo(() => filterXss(raw), [raw])
 
   return (
-    <DemoPageShell
+    <DemoLayout
       title="xss"
       description="xss — 위험 HTML 태그/속성 제거"
       slug="xss"
@@ -43,6 +43,6 @@ export default function XssDemoPage () {
           dangerouslySetInnerHTML={{ __html: cleaned }}
         />
       </div>
-    </DemoPageShell>
+    </DemoLayout>
   )
 }

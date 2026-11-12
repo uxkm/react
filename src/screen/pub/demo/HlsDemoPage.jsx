@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Hls from 'hls.js'
-import { DemoPageShell } from '../shared/DemoPageShell'
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
 
 // Shaka 공식 샘플: 매니페스트에 영어 등 WebVTT 자막 트랙이 포함되어 있다.
 const STREAM_URL = 'https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8'
@@ -44,7 +44,7 @@ export default function HlsDemoPage () {
   }, [])
 
   return (
-    <DemoPageShell
+    <DemoLayout
       title="hls.js"
       description="hls.js — HLS(.m3u8) 스트리밍 재생"
       slug="hls"
@@ -55,7 +55,6 @@ export default function HlsDemoPage () {
           {status}
         </p>
         {/* HLS가 WebVTT 트랙을 런타임에 추가하므로 정적 JSX 검사에서는 확인할 수 없다. */}
-        {/* eslint-disable-next-line jsx-a11y/media-has-caption -- 공식 샘플 매니페스트의 EXT-X-MEDIA:TYPE=SUBTITLES 사용 */}
         <video
           ref={videoRef}
           className="lib-demo-video"
@@ -63,6 +62,6 @@ export default function HlsDemoPage () {
           playsInline
         />
       </div>
-    </DemoPageShell>
+    </DemoLayout>
   )
 }

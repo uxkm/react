@@ -6,7 +6,8 @@
  */
 
 import { useState, type HTMLAttributes, type MouseEvent, type ReactNode } from 'react'
-import { cx } from '@/utils/cx'
+import { useAutoClose } from '@/hooks/useAutoClose'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 import { Icon, type IconName } from './Icon'
 
@@ -48,9 +49,13 @@ export interface AlertProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'
   open?: boolean
   /** 비제어 초기 표시. 기본 true */
   defaultOpen?: boolean
+  /** 마운트 시 열림. open 이 없을 때 defaultOpen 보다 우선한다 */
+  openOnLoad?: boolean
+  /** 열린 후 자동 닫힘 시간(ms). 생략하거나 0 이하이면 사용하지 않는다 */
+  autoCloseDelay?: number
   /** 표시 상태가 바뀔 때 호출 */
   onOpenChange?: (open: boolean) => void
-  onClose?: (event: MouseEvent<HTMLButtonElement>) => void
+  onClose?: (event?: MouseEvent<HTMLButtonElement>) => void
 }
 
 /**
@@ -72,20 +77,24 @@ export function Alert ({
   children,
   open,
   defaultOpen = true,
+  openOnLoad,
+  autoCloseDelay,
   className,
   onOpenChange,
   onClose,
   ...rest
 }: AlertProps) {
   const controlled = open !== undefined
-  const [innerOpen, setInnerOpen] = useState(defaultOpen)
+  const [innerOpen, setInnerOpen] = useState(openOnLoad ?? defaultOpen)
   const visible = controlled ? open : innerOpen
 
   const setVisible = (next: boolean, event?: MouseEvent<HTMLButtonElement>) => {
     if (!controlled) setInnerOpen(next)
     onOpenChange?.(next)
-    if (!next && event) onClose?.(event)
+    if (!next) onClose?.(event)
   }
+
+  useAutoClose(visible, autoCloseDelay, () => setVisible(false))
 
   if (!visible) return null
 
@@ -96,7 +105,7 @@ export function Alert ({
   return (
     <div
       {...rest}
-      className={cx(
+      className={classNames(
         'alert',
         'color_' + resolvedColor,
         size === 'sm' && 'alert_sm',

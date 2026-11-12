@@ -6,9 +6,10 @@
  */
 import type { AnchorHTMLAttributes, HTMLAttributes, ReactNode } from 'react'
 import { Link, NavLink } from '@/lib/router'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 import { LanguageSwitcher } from './LanguageSwitcher'
+import { headerAppearanceStyle, type HeaderAppearance, type HeaderStyle } from '@/comp/shared/header-appearance'
 
 /** 헤더 메뉴 링크 한 줄. to 와 label */
 export interface AppHeaderLinkProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href' | 'className'> {
@@ -26,7 +27,7 @@ export function AppHeaderLink ({ className, end = true, to, href, children, ...r
       {...rest}
       to={to ?? href}
       end={end}
-      className={({ isActive }) => cx(
+      className={({ isActive }) => classNames(
         'app-header__link',
         isActive && 'is-active router-link-exact-active',
         typeof className === 'string' && className
@@ -46,7 +47,8 @@ export function isAppHeaderLayout (value: unknown): value is AppHeaderLayout {
 }
 
 /** 앱 헤더가 받는 값. layout, 메뉴, 숨김 */
-export interface AppHeaderProps extends Omit<HTMLAttributes<HTMLElement>, 'children'> {
+export interface AppHeaderProps extends Omit<HTMLAttributes<HTMLElement>, 'children' | 'style'>, HeaderAppearance {
+  style?: HeaderStyle
   /** 브랜드 왼쪽 뒤로가기 영역 */
   back?: ReactNode
   brand?: ReactNode
@@ -95,6 +97,9 @@ export function AppHeader ({
   showLanguageSwitcher = true,
   children,
   className,
+  background,
+  scrolledBackground,
+  style,
   ...rest
 }: AppHeaderProps) {
   const stacked = layout === 'stacked'
@@ -107,7 +112,8 @@ export function AppHeader ({
   return (
     <header
       {...rest}
-      className={cx(
+      style={headerAppearanceStyle({ background, scrolledBackground, style })}
+      className={classNames(
         'app-header',
         stacked && 'app-header--stacked',
         stacked && hideNavOnScroll && 'app-header--hide-nav-on-scroll',

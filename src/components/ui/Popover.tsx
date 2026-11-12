@@ -11,7 +11,8 @@ import {
   type HTMLAttributes,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { useAutoClose } from '@/hooks/useAutoClose'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 import { Icon } from './Icon'
 
@@ -22,6 +23,10 @@ export interface PopoverProps extends Omit<HTMLAttributes<HTMLDivElement>, 'titl
   open?: boolean
   /** 비제어 초기 열림 */
   defaultOpen?: boolean
+  /** 마운트 시 열림. open 이 없을 때 defaultOpen 보다 우선한다 */
+  openOnLoad?: boolean
+  /** 열린 후 자동 닫힘 시간(ms). 생략하거나 0 이하이면 사용하지 않는다 */
+  autoCloseDelay?: number
   trigger?: ReactNode
   /** true 이면 패널에 닫기(Icon close) 버튼을 표시한다. 기본 true */
   closable?: boolean
@@ -47,6 +52,8 @@ export function Popover ({
   content,
   open,
   defaultOpen = false,
+  openOnLoad,
+  autoCloseDelay,
   trigger,
   closable = true,
   closeOnOutsideClick = true,
@@ -59,7 +66,7 @@ export function Popover ({
   ...rest
 }: PopoverProps) {
   const rootRef = useRef<HTMLDivElement>(null)
-  const [inner, setInner] = useState(defaultOpen)
+  const [inner, setInner] = useState(openOnLoad ?? defaultOpen)
   const shown = open ?? inner
 
   const setShown = (next: boolean) => {
@@ -69,6 +76,8 @@ export function Popover ({
 
   const toggle = () => setShown(!shown)
   const close = () => setShown(false)
+
+  useAutoClose(shown, autoCloseDelay, close)
 
   // 바깥 영역 클릭 시 닫기
   useEffect(() => {
@@ -91,7 +100,7 @@ export function Popover ({
     <div
       {...rest}
       ref={rootRef}
-      className={cx(
+      className={classNames(
         'popover',
         shown && 'is-open',
         !arrow && 'popover_no-arrow',

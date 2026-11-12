@@ -7,7 +7,7 @@ import type {
   ReactNode,
   SelectHTMLAttributes
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 
 const VALID_SIZES = new Set(['sm', 'md', 'lg'])
@@ -55,7 +55,7 @@ export function Select ({
   ...props
 }: SelectProps) {
   const resolvedSize = VALID_SIZES.has(size) ? size : 'md'
-  const classes = cx(
+  const classes = classNames(
     'input',
     resolvedSize === 'sm' && 'input_sm',
     resolvedSize === 'lg' && 'input_lg',

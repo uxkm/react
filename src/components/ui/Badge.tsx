@@ -3,7 +3,7 @@
  * 짧은 상태·수치 라벨을 색상별로 표시한다. BadgeWrap으로 요소 위에 겹친다.
  */
 import type { HTMLAttributes, ReactNode } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 
 /** 배지 색 */
@@ -55,7 +55,7 @@ export function Badge ({
   return (
     <span
       {...rest}
-      className={cx(
+      className={classNames(
         dotOnly ? 'badge_dot-only' : 'badge',
         resolvedColor && 'color_' + resolvedColor,
         resolvedSize === 'sm' && 'badge_sm',
@@ -84,7 +84,7 @@ export function BadgeWrap ({
   return (
     <span
       {...rest}
-      className={cx('badge_wrap', className)}
+      className={classNames('badge_wrap', className)}
       aria-label={ariaLabel || undefined}
     >
       {children}

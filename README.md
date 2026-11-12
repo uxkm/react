@@ -4,10 +4,10 @@ Next.js 16 App Router와 React 19 기반 퍼블리싱 작업 환경입니다. �
 
 ## 프로젝트 구성
 
-- **화면 작업**: B2B·WEB·MOBILE 화면과 스켈레톤을 `src/screen/`에서 관리합니다.
+- **화면 작업**: 단일 프로젝트 화면과 스켈레톤을 `src/screen/`에서 관리합니다.
 - **UI 가이드**: 공통 컴포넌트의 사용 예제·속성·디자인 토큰을 확인합니다.
 - **퍼블리시 목록**: 화면별 경로·작업 상태·비고를 JSON으로 관리합니다.
-- **검사 도구**: ESLint, TypeScript, Playwright·axe와 KWCAG 2.2 수동 체크리스트를 사용합니다.
+- **검사 도구**: ESLint, TypeScript와 Playwright 기반 일반 회귀 검사를 사용합니다.
 
 | 경로 | 용도 |
 | --- | --- |
@@ -16,7 +16,7 @@ Next.js 16 App Router와 React 19 기반 퍼블리싱 작업 환경입니다. �
 | [컴포넌트 예제](/pub/guide/button) | 공통 UI 가이드의 시작 화면 |
 | [라이브러리 데모](/pub/demo/libs) | 외부 라이브러리 사용 예제 |
 | [퍼블리시 목록](/pub) | 화면 목록·진행 상태 |
-| `/b2b`, `/web`, `/mobile` | 기기별 메인과 하위 화면 |
+| `/b2b` | 프로젝트 메인과 하위 화면 |
 
 ## 개발 환경
 
@@ -32,7 +32,7 @@ Next.js 16 App Router와 React 19 기반 퍼블리싱 작업 환경입니다. �
 | 번들러 | 개발·UI·프로덕션 빌드 모두 **Turbopack** |
 | 스타일 | Sass Embedded + PostCSS·Autoprefixer |
 | 코드 검사 | ESLint 9 · Flat Config · 경고 허용 안 함 |
-| 브라우저 검사 | Playwright `1.65.0` + axe `4.14.0` |
+| 브라우저 검사 | Playwright `1.65.0` · 일반 회귀 검사 |
 | 배포 | `output: 'export'`로 생성한 `out/` 정적 파일 |
 
 지원 대상은 Chrome·Edge·Firefox 111 이상, Safari·iOS Safari 16.4 이상, Android Chrome 111 이상입니다. `browserslist`는 브라우저 버전을 기준으로 설정합니다.
@@ -47,7 +47,7 @@ npm ci
 npm run dev
 ```
 
-개발 주소는 `http://localhost:8090`입니다. 로컬 인증서가 있으면 `https://localhost:8443`도 함께 제공합니다.
+개발 주소는 `http://localhost:8090`입니다. `http://127.0.0.1:8090`도 사용할 수 있습니다. 개발·UI·정적 미리보기 서버는 기본적으로 IPv4와 IPv6를 함께 수신하며, IPv6를 지원하지 않는 환경에서는 IPv4로 실행합니다. OS의 `HOSTNAME` 환경변수는 수신 주소로 사용하지 않습니다. 특정 주소에서만 수신하려면 `BIND_HOST`를 지정합니다. 로컬 인증서가 있으면 `https://localhost:8443`도 함께 제공합니다.
 
 | 작업 | 명령 | 동작 |
 | --- | --- | --- |
@@ -58,7 +58,7 @@ npm run dev
 | 프로덕션 빌드 | `npm run build` | 레지스트리·스타일 생성 후 Turbopack으로 정적 사이트 빌드 |
 | 빌드 미리보기 | `npm run start` | `out/`을 HTTP와 선택적 HTTPS로 제공 |
 | HTTP 미리보기 | `npm run start:http` | `serve`로 `out/`을 HTTP 8090에서 제공 |
-| 전체 코드 검사 | `npm run lint` | React·접근성 규칙 검사 · 경고도 실패 처리 |
+| 전체 코드 검사 | `npm run lint` | React·Next.js 규칙 검사 · 경고도 실패 처리 |
 | 타입 검사 | `npm run typecheck` | TypeScript 검사 · 산출물 출력 없음 |
 
 `npm run dev`와 `npm run ui`는 실행 시 Registry를 생성하고 파일 감시를 계속 실행합니다. 화면·폴더를 추가·삭제·이름 변경하면 라우트와 메뉴를 자동 갱신합니다. 이미지·JSON 등 정적 파일 변경도 브라우저에 자동 반영합니다. 라우트 구조·설정·SCSS 진입점이 바뀌면 감시기가 개발 서버를 자동 재시작합니다.
@@ -73,7 +73,7 @@ URL은 `src/app/`에서 정의하고, 실제 화면은 `src/screen/`에 둡니�
 │   ├── app/                # URL·레이아웃·메타데이터·로딩·오류 화면
 │   ├── screen/             # 프로젝트 화면·PUB 가이드·데모
 │   ├── widgets/            # common/ 및 프로젝트별 위젯
-│   ├── modules/            # common/ 및 프로젝트별 모듈
+│   ├── modules/            # common/ 및 프로젝트별 기능 영역
 │   ├── components/         # 공통 UI·레이아웃·Provider
 │   ├── hooks/              # 상태·hydration·키보드·DOM 관련 훅
 │   ├── lib/                # 라우팅·정적 경로·외부 라이브러리 연동
@@ -83,18 +83,21 @@ URL은 `src/app/`에서 정의하고, 실제 화면은 `src/screen/`에 둡니�
 │   ├── utils/              # 문자열·이미지·DOM 등 유틸리티
 │   └── assets/             # 번들에 포함할 소량 에셋
 ├── public/                 # 폰트·이미지·퍼블리시 목록 JSON·가이드 문서
-│   └── data/pub/docs/       # 접근성 운영 문서·체크리스트·검사 이력
+│   └── data/pub/docs/       # 접근성 참고 문서·수동 체크리스트
 ├── scripts/                # 코드 생성·스타일 빌드·로컬 서버·검사
-├── tests/a11y/             # 접근성 자동 검사와 UI 상호작용 검사
+├── tests/browser/          # 라우팅·번역·메타데이터 등 일반 회귀 검사
 └── .vscode/                # 편집 도구 설정(settings.json)
 ```
 
 | 계층 | 작업 위치와 역할 |
 | --- | --- |
 | 라우트 | `src/app/**/page.jsx`에서 URL 매개변수·정적 경로·제목을 처리합니다. |
-| 화면 | `src/screen/{b2b,web,mobile}/`에서 JSX 화면과 스켈레톤을 작성합니다. |
+| 화면 | `src/screen/b2b/`에서 JSX 화면과 스켈레톤을 작성합니다. |
 | 가이드·데모 | `src/screen/pub/guide/`, `src/screen/pub/demo/`에서 예제를 관리합니다. |
 | 공통 컴포넌트 | `src/components/`에서 TSX 기반 UI를 작성하고 `@/comp`로 가져옵니다. |
+| 레이아웃 기반 | `src/components/layout/`에서 Header·Footer·Page와 레이아웃 슬롯을 관리합니다. |
+| 기능 모듈 | `src/modules/common/`, `src/modules/b2b/`에서 입력·상태·검증을 묶은 기능 영역을 관리합니다. |
+| PUB 전용 코드 | `src/screen/pub/` 안에 화면·위젯·모듈·훅·메뉴 처리 로직을 모읍니다. 공통 UI·레이아웃·페이지에서 재사용할 기능은 기존 공통 폴더에 둡니다. |
 | 생성물 | `src/generated/registry-*.js`는 스크립트로 생성하며 직접 편집하지 않습니다. |
 
 일반 화면 소스는 Next.js의 예약 라우팅 경로인 `src/pages/`에 두지 않습니다.
@@ -107,17 +110,17 @@ URL은 `src/app/`에서 정의하고, 실제 화면은 `src/screen/`에 둡니�
 
 | URL 형태 | 설명 |
 | --- | --- |
-| `/` | B2B가 있으면 `/b2b`, 없으면 `/pub`로 이동 |
-| `/b2b`, `/web`, `/mobile` | 기기별 메인 |
-| `/{device}/{menuId}` | 기기별 메뉴 메인 |
-| `/{device}/{menuId}/{screen}` | 기기별 상세 화면 |
+| `/` | 프로젝트가 있으면 `/b2b`, 없으면 `/pub`로 이동 |
+| `/b2b` | 프로젝트 메인 |
+| `/b2b/{menuId}` | 프로젝트 메뉴 메인 |
+| `/b2b/{menuId}/{screen}` | 프로젝트 상세 화면 |
 | `/pub/guide` | 현재 소개 페이지 |
 | `/pub/guide/accessibility` | 접근성 가이드 |
 | `/pub/guide/{name}` | 컴포넌트 가이드 |
 | `/pub/demo/{name}` | 라이브러리·패턴 데모 |
 | `/pub` | 퍼블리시 목록 |
 
-`device`는 `b2b`, `web`, `mobile`입니다. `/b2b/main`처럼 기기 경로 뒤에 `main`이 오는 주소는 해당 기기 루트로 이동합니다.
+`device` 표시는 `B2B`이며 모든 화면은 `/b2b` 아래에 있습니다. `/b2b/main`처럼 프로젝트 경로 뒤에 `main`이 오는 주소는 프로젝트 루트로 이동합니다.
 
 ## 스타일 작업
 
@@ -129,18 +132,31 @@ SCSS 원본은 `src/styles/`에 있습니다. 개발은 SCSS 직접 처리와 �
 | `ui` | SCSS를 감시·컴파일하고 생성된 `.min.css`를 Turbopack에서 사용 |
 | `build` | 스타일을 먼저 생성하고 `.min.css`로 정적 사이트 빌드 |
 
-스타일 엔트리는 `scripts/style-entries.mjs`에서 관리합니다. 현재 `index`, `pub`, `web`, `mobile`, `demo`의 5개 엔트리를 사용하며 출력 위치는 `src/styles/css/`입니다. 공용 변수·믹스인이 필요한 SCSS에는 `@use`를 명시합니다.
+스타일 엔트리는 `scripts/style-entries.mjs`에서 관리합니다. 공통 `index`, `pub`, `demo`와 프로젝트 페이지 엔트리를 자동 탐색하며 출력 위치는 `src/styles/css/`입니다. 공용 변수·믹스인이 필요한 SCSS에는 `@use`를 명시합니다.
 
 화면에서는 기존 방식으로 SCSS를 import합니다. `ui`와 `build`는 `next.config.ts`의 Turbopack 별칭을 통해 압축 CSS로 연결합니다.
 
 ## 퍼블리시 목록과 정적 자산
 
-- 프로젝트·탭 정보: `public/data/pub/index.json`
-- 화면 목록·상태·비고: `public/data/pub/{b2b,web,mobile}/`의 JSON
+- 프로젝트 설정: `public/data/pub/index.json`
+- 화면 목록·상태·비고: `public/data/pub/b2b/`의 JSON
 - 가이드 메뉴: `public/data/pub/guide-menu.json`
 - 폰트·이미지: `public/fonts/`, `public/images/`
+- 예시·샘플·데모용 이미지: `public/images/@dummy/`에 보관하고 `/images/@dummy/파일명`으로 참조합니다.
 
 퍼블리시 목록 JSON과 화면 파일 레지스트리는 별도로 관리합니다. 목록·메뉴 데이터는 브라우저에서 읽으며, 화면 추가 시 목록과 레지스트리에 필요한 내용을 각각 반영합니다.
+
+## 페이지별 공통 영역 표시
+
+화면의 `export const meta`에서 `banner`, `header`, `footer`, `floating`을 `true`·`false`로 제어합니다. `floatingItems: { chat: false, backTop: true }`처럼 플로팅 내부 항목도 `Floating.Item name`별로 제어할 수 있습니다. 생략한 설정은 표시이며, 전체 `floating:false`가 항목별 표시보다 우선합니다.
+
+헤더 위 배너는 `TopBanner`로 만들고 페이지별로는 `PageBanner` 슬롯에 등록합니다. 기본 너비 100%·안쪽 최대 너비 1200px·최소 높이 80px이며, 여러 배너는 슬라이드·페이드 전환, 단일 배너는 정적 표시로 동작합니다. 닫기와 다음 자정까지 하루 숨김을 제공합니다. [상단 배너 가이드](/pub/guide/top-banner)에서 확인할 수 있습니다.
+
+헤더는 `<Header background="transparent" scrolledBackground="#fff" />`처럼 기본·스크롤 배경을 분리할 수 있습니다. `className`과 `style`도 전달하며, SCSS에서는 `--app-header-bg`, `--app-header-bg-scrolled`, `.is-scrolled`로 조정합니다. [헤더 가이드](/pub/guide/header)에서 확인할 수 있습니다.
+
+페이지에만 필요한 플로팅 버튼·UI는 `PageFloating` 안에 `Floating.Item`을 넣어 공통 플로팅에 추가합니다. 사용 방법은 [컴포넌트 구조](src/components/README.md#페이지별-플로팅)와 [Floating 가이드](/pub/guide/floating)를 참고하세요.
+
+커스텀 UI는 `PageFloating slots={{ 'page-tools': <MyPageTools /> }}`처럼 이름별로 넣을 수 있습니다. `floatingProps={{ boundary: 'footer', boundaryGap: 20 }}`는 푸터 위 정지, `boundary: 'viewport'`는 기존 화면 고정입니다. CSS 선택자·요소·함수로 다른 경계를 지정하거나 `getPosition`으로 좌표를 직접 보정할 수도 있습니다.
 
 ## 언어 전환
 
@@ -148,42 +164,32 @@ SCSS 원본은 `src/styles/`에 있습니다. 개발은 SCSS 직접 처리와 �
 
 - 언어 상태·지원 목록: `src/lib/i18n.js`
 - 언어 선택 UI: `src/components/widget/LanguageSwitcher.jsx`
-- 상태와 전환 API: `src/hooks/useLocale.js`, `src/lib/store.js`
+- 상태와 전환 API: `src/hooks/useLocale.js`, `src/lib/localeStore.js`
 
 선택한 언어는 `localStorage`에 저장하며 마운트 후 복원합니다. `html`의 `lang`과 `data-locale`도 선택에 맞춰 변경합니다. 원문으로 전환하면 한국어 UI를 다시 표시합니다.
 
 현재는 번역 JSON 파일 대신 Google 번역 엔드포인트로 화면 문구를 요청하는 방식입니다. 외부 네트워크가 필요하며, 서비스 오류·시간 초과 시 화면을 원문으로 복원하고 자동 요청을 중단합니다. 언어 선택 영역의 ‘다시 시도’ 또는 다른 언어 선택으로 재요청할 수 있습니다. 동시 요청은 최대 2개이며 성공한 번역만 캐시합니다. 코드·번역 제외 영역은 번역 대상에서 제외합니다.
 
-## 접근성·품질 검사
+## 코드 품질·브라우저 검사
 
-ESLint는 `eslint.config.mjs`의 React·JSX 접근성 권장 규칙을 사용합니다. `npm run lint`는 `--max-warnings=0`을 적용합니다. `next build`와 별도로 실행합니다.
+`npm run lint`는 React·Next.js 코드 규칙을 검사하며 `--max-warnings=0`을 적용합니다. 접근성 전용 정적 검사와 axe 검사는 사용하지 않습니다.
 
 ```bash
 npm run lint
-npm run lint:a11y
 npm run typecheck
 npm run build
 ```
 
-브라우저 검사를 처음 실행하는 환경에서는 Chromium을 설치합니다.
+라우팅·번역·메타데이터 등 일반 브라우저 회귀 검사는 다음 명령으로 실행합니다.
 
 ```bash
 npx playwright install chromium
-npm run test:a11y
+npm run test:browser
 ```
 
-| 명령 | 검사 범위 |
-| --- | --- |
-| `npm run lint:a11y` | JSX 접근성 정적 검사 · 진단이 있으면 실패 |
-| `npm run test:a11y` | 빌드 후 Playwright·axe 검사와 UI 상호작용 회귀 검사 |
-| `npm run a11y:audit` | 빌드 후 접근성 현황 수집 · 위반은 보고하고 실행 오류는 실패 |
-| `npm run a11y:report` | HTML 검사 보고서 열기 |
+테스트는 `tests/browser/`, 보고서는 `reports/browser/html/`, 산출물은 `test-results/browser/`에서 관리합니다. 외부 검증 서버는 `BROWSER_TEST_BASE_URL`, 테스트 포트는 `BROWSER_TEST_PORT`로 지정합니다.
 
-대표 페이지와 모달 상태는 데스크톱·모바일 크기 Chromium에서 검사합니다. 아코디언·접기·서랍·날짜 선택·업로드·캐러셀의 키보드·상태 전환도 확인합니다.
-
-보고서는 `reports/a11y/`, 테스트 산출물은 `test-results/a11y/`에 생성합니다. 수동 검수는 [KWCAG 2.2 수동 체크리스트](/data/pub/docs/a11y/kwcag-2.2-checklist.md)의 33개 항목에 기록합니다. [접근성 검사 운영](/data/pub/docs/a11y/README.md)과 [검사 이력](/data/pub/docs/a11y/baseline.md)은 `public/data/pub/docs/a11y/`에서 관리합니다.
-
-자동 검사는 WCAG 기반 규칙을 활용합니다. 정적 검사 통과나 감사 모드의 성공은 KWCAG 2.2 전체 준수 판정이 아니며, 키보드·스크린리더·자막 품질 등은 수동으로 확인합니다. 상세 기준은 [접근성 가이드](/pub/guide/accessibility)를 참고하세요.
+접근성 제작 기준과 수동 체크리스트는 [접근성 가이드](/pub/guide/accessibility)에서 참고할 수 있습니다.
 
 ## VS Code 사용
 
@@ -200,15 +206,14 @@ JS/TS 저장 시 ESLint가 수정 가능한 항목을 처리합니다. JSON·JSO
 | 파일 | 역할 |
 | --- | --- |
 | `next.config.ts` | `NextConfig` 타입을 사용하는 Next.js·Turbopack·Sass 설정 |
-| `eslint.config.mjs` | React·접근성 코드 검사 규칙 |
+| `eslint.config.mjs` | React·Next.js 코드 검사 규칙 |
 | `postcss.config.mjs` | CSS 후처리 설정 |
 | `playwright.config.mjs` | 브라우저·테스트 서버·결과 보고서 설정 |
 | `scripts/registry.mjs` | 화면 레지스트리·정적 주소·제목 생성 |
 | `scripts/build-styles.mjs` | SCSS → CSS 변환 |
-| `scripts/serve.mjs` | 개발용 HTTP·HTTPS 서버 |
-| `scripts/ui.mjs` | 스타일 감시와 CSS 모드 개발 서버 |
+| `scripts/serve-next.mjs` | 개발용 HTTP·HTTPS 서버 |
+| `scripts/dev-css.mjs` | 스타일 감시와 CSS 모드 개발 서버 |
 | `scripts/serve-static.mjs` | `out/` 정적 미리보기 서버 |
-| `scripts/lint-a11y.mjs` | 접근성 전용 정적 검사·보고서 생성 |
 
 `.mjs`는 Node.js가 ES Module로 실행하는 파일입니다. Next.js 설정은 타입 검사를 위해 `.ts`를 사용하고, 도구 설정과 실행 스크립트에는 지원되는 `.mjs` 형식을 사용합니다.
 
@@ -240,15 +245,17 @@ mkcert -key-file certificates/localhost-key.pem \
 
 코드와 컴포넌트 구조는 `src/components/README.md`, 라이브러리 연동 목록은 `src/lib/README.md`에서 확인할 수 있습니다.
 
-## 프로젝트 추가·삭제와 PUB 독립성
+## 단일 프로젝트와 PUB 독립성
 
-B2B 화면은 전달된 IA의 `main`, `contents`, `service`, `insight`, `contact`, `company` 구조에 맞춘 TSX 56개로 관리합니다. 루트 `/b2b`는 `src/screen/b2b/main/index.tsx`를 사용하며, 예를 들어 AX 소개는 `/b2b/contents/ax/overview`, 기업교육문의는 `/b2b/contact/education`, 회사소개는 `/b2b/company/intro`입니다. 이전의 `corpeduc`, `about` 및 문의 화면에 사용하던 `insight` 경로는 새 분류로 변경했습니다. WEB·MOBILE은 기존 구조를 유지합니다.
+B2B 페이지는 `페이지명/index.tsx` 구조로 작성합니다. 예를 들어 `src/screen/b2b/company/ethics/compliance/index.tsx`는 `/b2b/company/ethics/compliance`로 접속하며 URL에 `index`를 붙이지 않습니다. 각 페이지의 스켈레톤은 `페이지명/skeleton/indexSkeleton.tsx`에 둡니다. 위젯 프리뷰도 같은 폴더 구조를 사용합니다.
 
-공통 위젯·레이어의 작업용 프리뷰는 `src/widgets/b2b/previews`에 분리합니다. Registry는 각 프로젝트의 `src/widgets/{id}/previews`를 `/프로젝트/common/...` 프리뷰 경로로 자동 등록하며, 이 폴더의 생성·삭제도 개발 감시기에 반영됩니다. PUB는 이 프리뷰 컴포넌트를 import하지 않고 JSON의 경로만 표시합니다. 메인 구성 요소·견적 단계·문의 입력 영역은 부모 페이지의 섹션으로 관리하고, 외부 링크와 자동 메일 연계 항목은 정적 페이지로 만들지 않습니다. 외부 링크·메일 항목의 `excludeFromStats`는 퍼블리싱 진행률 집계에서 제외합니다.
+프로젝트 화면은 전달된 IA의 `main`, `contents`, `service`, `insight`, `contact`, `company` 구조에 맞춘 TSX 56개로 관리합니다. 루트 `/b2b`는 `src/screen/b2b/main/index.tsx`를 사용하며, 예를 들어 AX 소개는 `/b2b/contents/ax/overview`, 기업교육문의는 `/b2b/contact/education`, 회사소개는 `/b2b/company/intro`입니다. 이전의 `corpeduc`, `about` 및 문의 화면에 사용하던 `insight` 경로는 새 분류로 변경했습니다.
 
-B2B PUB 목록은 `public/data/pub/b2b/{main,contents,service,insight,contact,common,company}.json`에 있습니다. 화면 ID·작업 정보·기획/디자인 링크·기존 비고를 대응 화면에 유지하고, 새 화면은 대기 상태로 등록했습니다. IA 이미지는 디자인 시안이므로 화면 본문은 퍼블리싱 작업용 골격이며, 실제 시안 마크업은 각 TSX 파일에서 구현합니다. `npm run test:b2b`로 요청된 56개 파일, 정적 라우트, PUB 내부 경로·섹션 앵커, 작업 정보 보존을 검사합니다.
+공통 위젯·레이어의 작업용 프리뷰는 `src/widgets/b2b/previews`에 분리합니다. Registry는 `src/widgets/b2b/previews`를 `/b2b/common/...` 프리뷰 경로로 자동 등록하며, 이 폴더의 생성·삭제도 개발 감시기에 반영됩니다. PUB는 이 프리뷰 컴포넌트를 import하지 않고 JSON의 경로만 표시합니다. 메인 구성 요소·견적 단계·문의 입력 영역은 부모 페이지의 섹션으로 관리하고, 외부 링크와 자동 메일 연계 항목은 정적 페이지로 만들지 않습니다. 외부 링크·메일 항목의 `excludeFromStats`는 퍼블리싱 진행률 집계에서 제외합니다.
 
-각 B2B 화면의 수동 스켈레톤은 해당 화면과 같은 폴더의 `skeleton/`에 둡니다. 예를 들어 `main/index.tsx`는 `main/skeleton/indexSkeleton.tsx`, `contents/ax/overview.tsx`는 `contents/ax/skeleton/overviewSkeleton.tsx`를 사용합니다. 위젯 프리뷰도 `src/widgets/b2b/previews/skeleton/` 안에 파일별 스켈레톤을 둡니다. 이 파일들은 보조 컴포넌트이며 라우트로 등록하지 않습니다.
+프로젝트 PUB 목록은 `public/data/pub/b2b/{main,contents,service,insight,contact,common,company}.json`에 있습니다. 화면 ID·작업 정보·기획/디자인 링크·기존 비고를 대응 화면에 유지하고, 새 화면은 대기 상태로 등록했습니다. IA 이미지는 디자인 시안이므로 화면 본문은 퍼블리싱 작업용 골격이며, 실제 시안 마크업은 각 TSX 파일에서 구현합니다. `npm run test:project`로 요청된 56개 파일, 정적 라우트, PUB 내부 경로·섹션 앵커, 작업 정보 보존을 검사합니다.
+
+각 프로젝트 화면의 수동 스켈레톤은 해당 화면과 같은 폴더의 `skeleton/`에 둡니다. 예를 들어 `main/index.tsx`는 `main/skeleton/indexSkeleton.tsx`, `contents/ax/overview/index.tsx`는 `contents/ax/overview/skeleton/indexSkeleton.tsx`를 사용합니다. 위젯 프리뷰도 각 프리뷰 폴더의 `skeleton/` 안에 파일별 스켈레톤을 둡니다. 이 파일들은 보조 컴포넌트이며 라우트로 등록하지 않습니다.
 
 기본은 `auto` 모드입니다. 새 디자인이 확정되면 해당 스켈레톤 파일의 레이아웃을 수정하고 `src/config/skeleton.ts`에 해당 화면을 `manual`로 등록합니다. 각 화면은 `manual`일 때만 전용 스켈레톤을 전달하므로 자동 모드의 첫 방문 폴백에서도 전용 디자인을 사용하지 않습니다. 실제 표시는 `PageLoading`의 `loading` 상태에 따릅니다. 현재 작업용 화면의 `loading={false}`는 실제 데이터 로딩 상태가 생길 때 연결합니다.
 
@@ -260,26 +267,43 @@ export const SKELETON_PAGE_MODE: Record<string, SkeletonMode> = {
 ```
 
 ```bash
-npm run projects:add -- new-project
-npm run projects:remove -- new-project
-npm run projects:sync
-npm run validate:projects
-npm run test:projects
+npm run project:sync
+npm run validate:project
+npm run test:project
 ```
 
-추가 명령은 `src/app/{id}`, `src/screen/{id}`, `src/widgets/{id}`, `src/modules/{id}`, `src/styles/pages/{id}`, `public/data/pub/{id}`, `public/assets/{id}`를 생성합니다. 삭제 명령은 이 프로젝트 전용 폴더와 내부 파일을 삭제합니다. 공통 UI는 `src/components`, 공통 위젯·모듈은 각 `common/` 폴더에 둡니다.
+단일 프로젝트의 폴더는 `src/app/b2b`, `src/screen/b2b`, `src/widgets/b2b`, `src/modules/b2b`, `src/styles/pages/b2b`, `public/data/pub/b2b`, `public/assets/b2b`입니다. 작업용 빈 폴더는 그대로 유지하며, 없는 공통 위젯·모듈·이미지 폴더와 B2B 위젯·모듈·자산 폴더는 Registry 생성 시 자동으로 만듭니다.
 
-활성 프로젝트는 `src/app/{id}`와 `src/screen/{id}`가 모두 있는 폴더입니다. 둘 중 하나를 직접 삭제해도 다음 Registry 생성 시 PUB 목록, Registry, 정적 경로 및 스타일 빌드 대상에서 빠집니다. 화면 폴더만 삭제하면 생성기가 관리하는 라우트 셸도 정리합니다. `dev`, `ui`, `build` 시작 시 자동 생성·검사합니다. 개발 서버 실행 중 추가·삭제는 감시기가 자동으로 처리하므로 Registry 갱신 명령을 따로 실행하지 않아도 됩니다.
+공통 컴포넌트는 `src/components`, 공통 위젯·모듈은 각 `common/` 폴더에 둡니다. 프로젝트 추가·삭제 명령과 기기별 프로젝트 탭은 사용하지 않습니다.
 
-`src/app/{id}/page.jsx`, `layout.jsx`, `[...slug]/page.jsx`는 생성기가 관리합니다. 실제 UI와 프로젝트 로직은 `src/screen/{id}`에 작성합니다. `IndexPage.jsx` 또는 `main/index.tsx`는 프로젝트 루트입니다. 하위 `index.jsx`·`index.tsx`는 폴더 주소, 다른 JSX·TSX 파일은 파일명 주소로 등록됩니다. 기존 `CeoPage.jsx → ceo` 규칙을 유지하며 `contents/ax/overview.tsx`처럼 여러 단계의 경로도 지원합니다. `skeleton`, `widgets`, `modules`, `shared`, `data` 폴더는 화면 등록에서 제외합니다.
+`public/data/pub/index.json`의 `b2b`에서 목록 이름·설명·표시 이름을 관리합니다. `id`와 `base`는 각각 `b2b`, `b2b/`로 고정합니다. `b2b.generated.json`과 `src/generated/b2b.js`에는 단일 프로젝트 메타데이터만 저장합니다.
 
-`public/data/pub/index.json`의 탭 설정은 활성 프로젝트의 표시 이름·순서만 지정합니다. 삭제된 프로젝트는 설정에 남아 있어도 표시하지 않으며, 새 프로젝트는 자동으로 목록에 포함합니다. `projects.generated.json`과 `src/generated/projects.js`에는 메타데이터만 저장합니다. 프로젝트가 없어도 `/pub`, `/pub/guide`, `/pub/guide/{name}`, `/pub/demo/{name}`을 유지합니다. 가이드·데모 라우트는 `src/app/pub/` 아래에서만 관리합니다.
+`src/app/b2b/page.jsx`, `layout.jsx`, `[...slug]/page.jsx`는 생성기가 관리합니다. 실제 UI는 `src/screen/b2b`에 작성하며 `main/index.tsx`를 메인으로 사용합니다. `dev`, `ui`, `build`에서 라우트와 설정을 자동 생성·검사하고 개발 중에는 파일 변경을 감시합니다.
 
-PUB와 공통 코드는 프로젝트 화면·위젯·모듈·스타일·Registry를 가져오지 않습니다. 프로젝트 사이의 import도 허용하지 않습니다. `validate:projects`가 import 및 re-export 경로를 검사하고 PUB의 간접 의존성을 확인합니다. B2B·WEB·MOBILE 스타일은 각 `src/styles/pages/{id}`에 독립적으로 배치합니다. 프로젝트 이미지는 `public/assets/{id}`를 사용합니다.
+PUB 구조와 공통 컴포넌트는 프로젝트에 관계없이 동일하게 유지합니다. `/pub`, `/pub/guide`, `/pub/guide/{name}`, `/pub/demo/{name}`을 제공하며, PUB는 프로젝트 화면·위젯·모듈·스타일·Registry를 가져오지 않습니다. `validate:project`가 직접·간접 의존성과 정적 배포 제약을 검사합니다. 프로젝트 스타일은 `src/styles/pages/b2b`, 이미지는 `public/assets/b2b`에서 관리합니다.
+
 
 정적 export의 동적 경로는 `generateStaticParams`로 열거하고 `dynamicParams = false`로 제한합니다. 서버의 `params`는 Promise이므로 `await`한 뒤 사용합니다. 서버에서 요청 시점의 `searchParams`를 읽으면 정적 export를 할 수 없으므로, 쿼리가 필요한 UI는 클라이언트에서 읽습니다. `useSearchParams`는 `Suspense`로 감쌉니다. Server Actions, 요청 시점의 cookies/headers, 런타임 API·동적 라우트는 사용하지 않습니다. 빌드 시 실행되는 Server Component와 Registry의 서버 렌더링은 유지합니다.
 
 참고: [Next.js 정적 export](https://nextjs.org/docs/app/guides/static-exports), [page의 비동기 params·searchParams](https://nextjs.org/docs/app/api-reference/file-conventions/page).
+
+## 자동 생성 파일과 수정 위치
+
+`src/generated/`는 원본 화면과 설정으로부터 생성합니다. 직접 수정하지 않고 아래 원본을 수정한 뒤 `npm run generate:registry`로 갱신합니다. `dev`, `ui`, `build`에서도 자동 실행하며, 개발 서버의 파일 감시기는 변경 시 다시 생성합니다.
+
+| 생성 파일 | 생성 함수·스크립트 | 수정할 원본과 역할 |
+| --- | --- | --- |
+| `src/generated/b2b.js` | `scripts/project.mjs` → `syncProject()` | `public/data/pub/index.json`의 `b2b`, `src/screen/b2b/` 존재 여부. 단일 B2B 메타데이터이며 화면 폴더가 없으면 `null`입니다. |
+| `src/generated/registry-b2b.js` | `scripts/registry.mjs` → `buildProject()` | `src/screen/b2b/`, `src/widgets/b2b/previews/`. 화면 import와 `meta`를 등록합니다. |
+| `src/generated/registry-component.js` | `scripts/registry.mjs` → `buildPubPages('guide')` | `src/screen/pub/guide/`. 공통 컴포넌트 가이드 import와 `meta`를 등록합니다. |
+| `src/generated/registry-demo.js` | `scripts/registry.mjs` → `buildPubPages('demo')` | `src/screen/pub/demo/`. 데모 import와 `meta`를 등록합니다. |
+| `src/generated/registry-ids.js` | `scripts/registry.mjs` | 위 화면들의 B2B 경로 배열 `b2bRoutes`, 가이드·데모 ID와 제목입니다. 화면 파일명, `pageTitle`, `routeId`를 원본에서 수정합니다. |
+| `src/generated/pub-pages.js` | `scripts/registry.mjs` | 가이드·데모 화면 목록과 `guideLabel`. 메뉴 분류·순서는 `public/data/pub/guide-menu.json`에서 관리합니다. |
+| `src/generated/registry.js` | `scripts/registry.mjs` | 가이드·데모 레지스트리만 묶는 공통 진입점입니다. 생성 방식을 바꾸려면 해당 스크립트를 수정합니다. |
+
+`public/data/pub/b2b.generated.json`과 `src/app/b2b/{page.jsx,layout.jsx,[...slug]/page.jsx}`도 `syncProject()`가 생성합니다. 실제 화면은 `src/screen/b2b`에서 수정합니다. 루트 `index.jsx` 또는 `index.tsx`가 있으면 메인으로 우선 사용하고, 없으면 `main/index.tsx`를 사용합니다. 두 방식 모두 `/b2b`로 열며 `/b2b/main`은 `/b2b`로 이동합니다.
+
+설정은 `b2b` 객체 하나만 지원합니다. 이전 `tabs`, `project`, `projects` 설정과 WEB·MOBILE·project 전용 폴더는 검증 오류로 알립니다. 이전 이름의 생성 메타데이터와 사용하지 않는 `registry-*.js`는 재생성 시 정리합니다. 재생성은 내용이 달라진 파일만 갱신합니다.
 
 ## 빈 메타데이터 컨테이너
 
@@ -303,12 +327,12 @@ PUB와 공통 코드는 프로젝트 화면·위젯·모듈·스타일·Registry
 
 `guide-menu.json`의 기존 분류·순서·표시명을 유지합니다. 파일이 삭제된 항목은 메뉴에서 제외하며, 새 파일은 「추가 화면」 그룹에 자동으로 표시합니다. 원하는 분류가 있으면 JSON에 해당 항목을 추가합니다.
 
-변경 처리는 debounce와 직렬 실행으로 묶습니다. 생성 파일은 내용이 달라졌을 때만 원자적으로 교체합니다. `src/generated`, `src/styles/css`, `src/styles/dist`, `projects.generated.json`, `.next`, `out`, `node_modules`는 감시 입력에서 제외해 재생성 순환을 방지합니다. 네이티브 파일 이벤트와 750ms 주기의 스냅샷 검사를 함께 사용하므로 이벤트 누락·네이티브 감시 제한이 있는 환경에서도 동작합니다. 일시적인 소스 오류가 발생해도 감시기는 유지되며 다음 저장 시 다시 처리합니다.
+변경 처리는 debounce와 직렬 실행으로 묶습니다. 생성 파일은 내용이 달라졌을 때만 원자적으로 교체합니다. `src/generated`, `src/styles/css`, `src/styles/dist`, `b2b.generated.json`, `.next`, `out`, `node_modules`는 감시 입력에서 제외해 재생성 순환을 방지합니다. 네이티브 파일 이벤트와 750ms 주기의 스냅샷 검사를 함께 사용하므로 이벤트 누락·네이티브 감시 제한이 있는 환경에서도 동작합니다. 일시적인 소스 오류가 발생해도 감시기는 유지되며 다음 저장 시 다시 처리합니다.
 
 정적 export는 기존과 같이 `npm run build`로 생성합니다. 개발용 새로고침 채널은 개발 서버에서만 제공하며 배포 파일에는 서버 API를 추가하지 않습니다.
 
 ```bash
 npm run test:watch          # 파일 이벤트·처리 순서·오류 복구·메뉴 검사
-npm run test:projects       # 프로젝트 및 재귀 guide/demo 라우트 검사
+npm run test:project       # 프로젝트 및 재귀 guide/demo 라우트 검사
 npm run test:watch:browser  # 격리된 dev/ui 서버에서 실제 파일·브라우저 갱신 검사
 ```

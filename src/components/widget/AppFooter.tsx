@@ -3,7 +3,7 @@
  * children 이 있으면 그 내용, 없으면 기본 문구(@Publish Guide).
  */
 import type { HTMLAttributes, ReactNode } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 
 /** 앱 푸터가 받는 값 */
@@ -17,7 +17,7 @@ export interface AppFooterProps extends HTMLAttributes<HTMLElement> {
  */
 export function AppFooter ({ children, className, ...rest }: AppFooterProps) {
   return (
-    <footer {...rest} className={cx('app-footer', className)}>
+    <footer {...rest} className={classNames('app-footer', className)}>
       <div className="app-footer__inner">
         {hasNodes(children)
           ? children

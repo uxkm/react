@@ -1,16 +1,16 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useAppStore } from '@/lib/store'
+import { useLocaleStore } from '@/lib/localeStore'
 import { DEFAULT_LOCALE, normalizeLocale } from '@/lib/i18n'
 import { applyPageTranslation, hasTranslatableMutation } from '@/lib/pageTranslate'
 
 /** 한글 렌더 후 번역한다. 장애 시 원문과 재시도 상태를 유지한다. */
 export function GlobalTranslator ({ rootRef }) {
-  const locale = useAppStore((s) => normalizeLocale(s.locale || DEFAULT_LOCALE))
-  const attempt = useAppStore((s) => s.translationAttempt)
-  const setLocaleProgress = useAppStore((s) => s.setLocaleProgress)
-  const setTranslationError = useAppStore((s) => s.setTranslationError)
+  const locale = useLocaleStore((s) => normalizeLocale(s.locale || DEFAULT_LOCALE))
+  const attempt = useLocaleStore((s) => s.translationAttempt)
+  const setLocaleProgress = useLocaleStore((s) => s.setLocaleProgress)
+  const setTranslationError = useLocaleStore((s) => s.setTranslationError)
 
   useEffect(() => {
     let cancelled = false

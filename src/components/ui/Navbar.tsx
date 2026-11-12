@@ -13,7 +13,7 @@ import {
   type MouseEvent,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { hasNodes } from '@/utils/react'
 import { Icon } from './Icon'
 
@@ -104,7 +104,7 @@ export function Navbar ({
   return (
     <header
       {...rest}
-      className={cx(
+      className={classNames(
         'navbar',
         sticky && 'navbar_sticky',
         borderless && 'navbar_borderless',
@@ -148,7 +148,7 @@ export function Navbar ({
 
         <div
           id={collapseId}
-          className={cx('navbar_collapse', isOpen && 'is-open')}
+          className={classNames('navbar_collapse', isOpen && 'is-open')}
         >
           {hasNodes(children) ? (
             children
@@ -165,7 +165,7 @@ export function Navbar ({
                         <li className="navbar_item" key={item.key}>
                           <a
                             href={item.href || '#'}
-                            className={cx('navbar_link', active && 'is-active')}
+                            className={classNames('navbar_link', active && 'is-active')}
                             aria-current={active ? 'page' : undefined}
                             onClick={(event) => handleSelect(item, event)}
                           >

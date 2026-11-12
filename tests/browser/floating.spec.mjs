@@ -1,0 +1,48 @@
+import { test, expect } from '@playwright/test'
+
+test('플로팅 meta는 전체·개별 항목을 숨기고 다시 표시한다', async ({ page }) => {
+  await page.goto('/pub/guide/floating')
+  const demo = page.locator('[data-floating-meta-demo]')
+  const stack = demo.locator('[data-floating]')
+  await expect(stack.locator('[data-floating-item]')).toHaveCount(2)
+  await expect(stack.locator('[data-name="page-help"]')).toHaveCount(0)
+  await demo.getByRole('button', { name: '상담 표시 전환', exact: true }).click()
+  await expect(stack.locator('[data-name="chat"]')).toHaveCount(0)
+  await expect(stack.locator('[data-floating-item]')).toHaveCount(1)
+  await demo.getByRole('button', { name: '페이지 추가 항목 전환', exact: true }).click()
+  await expect(stack.locator('[data-name="page-help"]')).toHaveCount(1)
+  await demo.getByRole('button', { name: '전체 표시 전환', exact: true }).click()
+  await expect(stack).toHaveCount(0)
+  await demo.getByRole('button', { name: '전체 표시 전환', exact: true }).click()
+  await expect(stack.locator('[data-name="page-help"]')).toHaveCount(1)
+  await expect(stack.locator('[data-name="chat"]')).toHaveCount(0)
+})
+
+test('이름 있는 커스텀 슬롯에 입력 UI를 넣고 meta로 표시를 전환한다', async ({ page }) => {
+  await page.goto('/pub/guide/floating')
+  const demo = page.locator('[data-floating-slots-demo]')
+  const slot = demo.locator('[data-floating-slot="page-tools"]')
+  await expect(slot).toHaveCount(1)
+  await slot.getByRole('textbox', { name: '플로팅 메모' }).fill('페이지 전용 메모')
+  await expect(slot.getByRole('textbox', { name: '플로팅 메모' })).toHaveValue('페이지 전용 메모')
+  await demo.getByRole('button', { name: '커스텀 영역 표시 전환' }).click()
+  await expect(demo.locator('[data-floating]')).toHaveCount(0)
+  await demo.getByRole('button', { name: '커스텀 영역 표시 전환' }).click()
+  await expect(slot).toHaveCount(1)
+})
+
+test('푸터 경계 옵션은 푸터 위에서 멈추고 viewport 옵션은 화면 고정을 유지한다', async ({ page }) => {
+  await page.goto('/pub/guide/floating')
+  const demo = page.locator('[data-floating-window-demo]')
+  const stack = demo.locator('[data-floating]')
+  await demo.getByLabel('플로팅 경계').selectOption('footer')
+  await expect(page.locator('.app-footer')).toHaveCount(1)
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight))
+  await expect.poll(() => stack.evaluate((node) => {
+    const footer = document.querySelector('.app-footer')
+    return Math.round(footer.getBoundingClientRect().top - node.getBoundingClientRect().bottom)
+  })).toBe(16)
+  await demo.getByLabel('플로팅 경계').selectOption('viewport')
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight))
+  await expect.poll(() => stack.evaluate((node) => Math.round(window.innerHeight - node.getBoundingClientRect().bottom))).toBe(24)
+})

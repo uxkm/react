@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { chunk, debounce, uniq } from 'lodash-es'
-import { DemoPageShell } from '../shared/DemoPageShell'
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
 
 /** lodash-es 데모 */
 export default function LodashDemoPage () {
@@ -24,7 +24,7 @@ export default function LodashDemoPage () {
   }, [query])
 
   return (
-    <DemoPageShell
+    <DemoLayout
       title="lodash-es"
       description="lodash-es — uniq / chunk / debounce 예시"
       slug="lodash"
@@ -56,6 +56,6 @@ export default function LodashDemoPage () {
           <pre className="lib-demo-pre">즉시: {query || '(비어 있음)'}{'\n'}지연: {debounced || '(비어 있음)'}</pre>
         </div>
       </div>
-    </DemoPageShell>
+    </DemoLayout>
   )
 }

@@ -12,7 +12,7 @@ import {
   type ChangeEvent,
   type TextareaHTMLAttributes
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { Icon } from './Icon'
 
 const VALID_SIZES = new Set(['sm', 'md', 'lg'])
@@ -85,7 +85,7 @@ export function Textarea ({
 
   const classes = useMemo(
     () =>
-      cx(
+      classNames(
         'textarea',
         resolvedSize === 'sm' && 'textarea_sm',
         resolvedSize === 'lg' && 'textarea_lg',
@@ -151,7 +151,7 @@ export function Textarea ({
 
   return (
     <div
-      className={cx(
+      className={classNames(
         'textarea_wrap',
         showCount && 'textarea_show-count',
         clearable && 'textarea_clearable',
@@ -166,7 +166,7 @@ export function Textarea ({
         ? (
           <span
             id={countId}
-            className={cx('textarea_count', hasLimit && count >= (nativeMaxLength as number) && 'is-limit')}
+            className={classNames('textarea_count', hasLimit && count >= (nativeMaxLength as number) && 'is-limit')}
             role="status"
             aria-live="polite"
             aria-atomic="true"

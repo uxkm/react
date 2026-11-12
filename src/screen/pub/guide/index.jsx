@@ -4,7 +4,8 @@
  * 퍼블리싱 가이드 홈 — /pub/guide
  * 소개 본문은 루트 README.md 내용.
  */
-import { GuideLayout, MarkdownDoc } from '@/screen/pub/widgets/guide'
+import { GuideLayout } from '@/screen/pub/layout'
+import { MarkdownDoc } from '@/screen/pub/widgets/docs/MarkdownDoc'
 import { projectReadmeBody, projectReadmeSummary } from '@/screen/pub/data/projectReadme'
 
 export default function GuideIndex () {

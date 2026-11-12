@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { copyText } from '@/lib/clipboard'
-import { DemoPageShell } from '../shared/DemoPageShell'
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
 
 /** clipboard-copy 데모 */
 export default function ClipboardDemoPage () {
@@ -19,7 +19,7 @@ export default function ClipboardDemoPage () {
   }
 
   return (
-    <DemoPageShell
+    <DemoLayout
       title="Clipboard"
       description="clipboard-copy — 텍스트 클립보드 복사 (@/lib/clipboard)"
       slug="clipboard"
@@ -41,6 +41,6 @@ export default function ClipboardDemoPage () {
           </div>
         </div>
       </div>
-    </DemoPageShell>
+    </DemoLayout>
   )
 }

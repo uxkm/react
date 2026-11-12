@@ -4,8 +4,8 @@
  * - 실제 파일: public/images/{icon|common|pages}/...
  *
  * @example
- *   img('icon', 'close.svg')           // → /images/icon/close.svg
- *   imgIcon('close.svg')               // → /images/icon/close.svg
+ *   img('icon', 'ico_close.svg')           // → /images/icon/ico_close.svg
+ *   imgIcon('ico_close.svg')               // → /images/icon/ico_close.svg
  *   <img src={img('common', 'logo.svg')} alt="" />
  *   style={{ backgroundImage: `url(${img('pages', 'home/hero.png')})` }}
  */

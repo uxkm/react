@@ -4,7 +4,7 @@ import path from 'node:path'
 import { spawn, execFile } from 'node:child_process'
 import { promisify } from 'node:util'
 import { fileURLToPath } from 'node:url'
-import { root } from './projects.mjs'
+import { root } from './project.mjs'
 import { getStyleEntries } from './style-entries.mjs'
 import { watchSourceFiles } from './watch-files.mjs'
 
@@ -43,7 +43,7 @@ export async function startDevelopment ({ styleMode = 'scss' } = {}) {
 
   function startServer () {
     if (child || closing) return
-    const current = spawn(process.execPath, [path.join(root, 'scripts/serve.mjs'), '--dev'], {
+    const current = spawn(process.execPath, [path.join(root, 'scripts/serve-next.mjs'), '--dev'], {
       cwd: root,
       env: { ...process.env, STYLE_MODE: styles ? 'css' : 'scss' },
       stdio: ['inherit', 'inherit', 'inherit', 'ipc']
@@ -71,7 +71,7 @@ export async function startDevelopment ({ styleMode = 'scss' } = {}) {
   }
   async function regenerate () {
     const { stdout } = await execute(process.execPath, [path.join(root, 'scripts/registry.mjs')], { cwd: root })
-    const { stdout: validation } = await execute(process.execPath, [path.join(root, 'scripts/validate-projects.mjs')], { cwd: root })
+    const { stdout: validation } = await execute(process.execPath, [path.join(root, 'scripts/validate-project.mjs')], { cwd: root })
     process.stdout.write(stdout + validation)
   }
   function refreshBrowser () {

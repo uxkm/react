@@ -3,7 +3,7 @@
  * 자식 사이에 gap 을 넣는 간단한 배치 래퍼.
  */
 import { createElement, type HTMLAttributes, type ReactNode } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 
 /** 간격 이름 → space_gap-* 클래스. md 는 기본이라 클래스 없음 */
 const GAP_TOKEN: Record<string, string> = {
@@ -53,7 +53,7 @@ export function Space ({
     token = Object.prototype.hasOwnProperty.call(GAP_TOKEN, key) ? key : 'md'
   }
 
-  const spaceClass = cx(
+  const spaceClass = classNames(
     'space',
     token && GAP_TOKEN[token],
     vertical && 'space_vertical',

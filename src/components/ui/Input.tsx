@@ -13,7 +13,7 @@ import {
   type InputHTMLAttributes,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 import { Icon } from './Icon'
 
 const VALID_SIZES = new Set(['sm', 'md', 'lg'])
@@ -88,7 +88,7 @@ export function Input ({
 
   const inputClasses = useMemo(
     () =>
-      cx(
+      classNames(
         'input',
         resolvedSize === 'sm' && 'input_sm',
         resolvedSize === 'lg' && 'input_lg',
@@ -192,7 +192,7 @@ export function Input ({
   const control = clearable
     ? (
       <span
-        className={cx(
+        className={classNames(
           'input_clearable',
           String(currentValue).length > 0 && !disabled && !readOnly && 'is-filled'
         )}
@@ -209,7 +209,7 @@ export function Input ({
     return clearable
       ? (
         <span
-          className={cx(
+          className={classNames(
             'input_clearable',
             String(currentValue).length > 0 && !disabled && !readOnly && 'is-filled',
             className
@@ -225,7 +225,7 @@ export function Input ({
   }
 
   return (
-    <div className={cx('input_group', className)}>
+    <div className={classNames('input_group', className)}>
       {prefix != null && (
         <span className="input_group-addon" aria-hidden="true">
           {prefix}

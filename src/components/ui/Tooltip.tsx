@@ -13,7 +13,8 @@ import {
   type MouseEvent,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { useAutoClose } from '@/hooks/useAutoClose'
+import { classNames } from '@/utils/classNames'
 
 /** 툴팁 방향 */
 export type TooltipPlacement = 'top' | 'bottom' | 'left' | 'right'
@@ -34,6 +35,10 @@ export interface TooltipProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'con
   open?: boolean
   /** 비제어 초기 열림 */
   defaultOpen?: boolean
+  /** 마운트 시 열림. open 이 없을 때 defaultOpen 보다 우선한다 */
+  openOnLoad?: boolean
+  /** 열린 후 자동 닫힘 시간(ms). 생략하거나 0 이하이면 사용하지 않는다 */
+  autoCloseDelay?: number
   /** 열림 상태가 바뀔 때 호출 */
   onOpenChange?: (open: boolean) => void
   style?: CSSProperties
@@ -52,6 +57,8 @@ export function Tooltip ({
   arrowPosition,
   open,
   defaultOpen = false,
+  openOnLoad,
+  autoCloseDelay,
   className,
   style,
   children,
@@ -63,7 +70,7 @@ export function Tooltip ({
   ...rest
 }: TooltipProps) {
   const controlled = open !== undefined
-  const [innerOpen, setInnerOpen] = useState(defaultOpen)
+  const [innerOpen, setInnerOpen] = useState(openOnLoad ?? defaultOpen)
   const [hovered, setHovered] = useState(false)
   const [focused, setFocused] = useState(false)
   const shown = controlled ? open : innerOpen
@@ -72,6 +79,8 @@ export function Tooltip ({
     if (!controlled) setInnerOpen(next)
     onOpenChange?.(next)
   }
+
+  useAutoClose(shown, autoCloseDelay, () => setShown(false))
 
   /** hover · focus 중 하나라도 있으면 열림 유지 */
   const syncPointerOpen = (nextHovered: boolean, nextFocused: boolean) => {
@@ -87,7 +96,7 @@ export function Tooltip ({
   return (
     <span
       {...rest}
-      className={cx(
+      className={classNames(
         'tooltip',
         shown && 'is-open',
         placement !== 'bottom' && 'tooltip_placement-' + placement,

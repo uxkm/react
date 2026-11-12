@@ -3,7 +3,7 @@
  * Timeline · TimelineItem으로 시간순 이벤트를 세로·가로·교차로 배치한다.
  */
 import type { HTMLAttributes, LiHTMLAttributes, ReactNode } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 
 const VALID_TAGS = new Set(['ol', 'ul'])
 
@@ -38,7 +38,7 @@ export function Timeline ({
   ...rest
 }: TimelineProps) {
   const Root = (VALID_TAGS.has(tag) ? tag : 'ol') as 'ol' | 'ul'
-  const classes = cx(
+  const classes = classNames(
     'timeline',
     card && 'timeline_card',
     alternate && 'timeline_alternate',
@@ -96,8 +96,8 @@ export function TimelineItem ({
   className,
   ...rest
 }: TimelineItemProps) {
-  const itemClasses = cx('timeline_item', active && 'is-active', pending && 'is-pending', className)
-  const dotClasses = cx('timeline_dot', outline && 'timeline_dot-outline', color && `color_${color}`)
+  const itemClasses = classNames('timeline_item', active && 'is-active', pending && 'is-pending', className)
+  const dotClasses = classNames('timeline_dot', outline && 'timeline_dot-outline', color && `color_${color}`)
 
   return (
     <li {...rest} className={itemClasses}>

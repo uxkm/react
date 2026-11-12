@@ -2,7 +2,10 @@
 
 import { useState } from 'react'
 import { Pagination, Space } from '@/comp'
-import { DemoBlock, GuideApiDocs, GuideLayout, wrapPageExample } from '@/screen/pub/widgets/guide'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
+import { GuideLayout } from '@/screen/pub/layout'
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
 import { paginationApiSections } from '@/screen/pub/data/guide/paginationApiSections'
 
 /** page 상태를 가진 데모 */

@@ -7,13 +7,13 @@ export {
   bootstrapLocale,
   detectLocale
 } from './i18n'
-export { useAppStore } from './store'
+export { useLocaleStore } from './localeStore'
 export { copyText } from './clipboard'
-export { FullCalendar, dayGridPlugin, timeGridPlugin, interactionPlugin } from './calendar'
+export { FullCalendar, dayGridPlugin, timeGridPlugin, interactionPlugin } from './fullcalendar'
 export { Swiper, SwiperSlide, defaultSwiperModules } from './swiper'
 export { Lottie, lottie } from './lottie'
 export { createViewer, Viewer } from './viewer'
-export { SimpleBar } from './scroll'
+export { SimpleBar } from './simplebar'
 export { YouTube } from './youtube'
 export {
   DndContext,
@@ -29,4 +29,4 @@ export {
   horizontalListSortingStrategy,
   CSS
 } from './dnd'
-export { am5, am5xy, am5percent, am5themes_Animated } from './charts'
+export { am5, am5xy, am5percent, am5themes_Animated } from './amcharts'

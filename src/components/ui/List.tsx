@@ -12,7 +12,7 @@ import {
   type HTMLAttributes,
   type ReactNode
 } from 'react'
-import { cx } from '@/utils/cx'
+import { classNames } from '@/utils/classNames'
 
 const VARIANT_TAG = {
   default: 'ul',
@@ -97,7 +97,7 @@ export function List ({
     tag && VALID_TAGS.includes(tag) ? tag : VARIANT_TAG[resolvedVariant]
   ) as ListRootTag
 
-  const classes = cx(
+  const classes = classNames(
     'list',
     VARIANT_CLASS[resolvedVariant],
     bordered && 'list_bordered',
@@ -157,7 +157,7 @@ export function ListItem ({
       <Fragment>
         <dt
           {...(rest as HTMLAttributes<HTMLElement>)}
-          className={cx('list_title', className)}
+          className={classNames('list_title', className)}
         >
           {title}
         </dt>
@@ -180,7 +180,7 @@ export function ListItem ({
   return (
     <Root
       {...(rest as HTMLAttributes<HTMLElement>)}
-      className={cx('list_item', className)}
+      className={classNames('list_item', className)}
       role={role ?? (context.tag === 'div' ? 'listitem' : undefined)}
     >
       {prefix}

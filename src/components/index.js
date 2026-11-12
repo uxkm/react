@@ -1,6 +1,6 @@
 /**
  * 컴포넌트 공개 입구(배럴).
- * ui·widget·module 구현을 여기서만 re-export. 화면은 이 파일(또는 @/comp)로 import.
+ * ui·widget·layout 구현을 여기서만 re-export. 화면은 이 파일(또는 @/comp)로 import.
  */
 export { Container } from './ui/Container.tsx'
 export { Space } from './ui/Space.tsx'
@@ -8,17 +8,19 @@ export { Divider } from './ui/Divider.tsx'
 export { Flex } from './ui/Flex.tsx'
 export { Grid } from './ui/Grid.tsx'
 export { AppHeader, AppHeaderLink } from './widget/AppHeader.tsx'
+export { TopBanner } from './widget/TopBanner.tsx'
+export { PageBanner } from './layout/PageBanner.tsx'
 export { LanguageSwitcher } from './widget/LanguageSwitcher.jsx'
-export { PublishScreenStub } from './widget/PublishScreenStub.jsx'
 export { AppFooter } from './widget/AppFooter.tsx'
 export { AppLayout } from './widget/AppLayout.tsx'
-export { PageChrome } from './widget/PageChrome.tsx'
-export { Header } from './module/Header.tsx'
-export { PageHeader } from './module/PageHeader.tsx'
-export { Footer } from './module/Footer.tsx'
-export { Page } from './module/Page.tsx'
-export { LayoutSlot } from './module/LayoutSlot.tsx'
-export { LayoutProvider, useLayoutSlots, useLayoutSetSlot } from './module/LayoutContext.tsx'
+export { PageLayoutVisibility } from './layout/PageLayoutVisibility.tsx'
+export { PageFloating } from './layout/PageFloating.tsx'
+export { Header } from './layout/Header.tsx'
+export { PageHeader } from './layout/PageHeader.tsx'
+export { Footer } from './layout/Footer.tsx'
+export { Page } from './layout/Page.tsx'
+export { LayoutSlot } from './layout/LayoutSlot.tsx'
+export { LayoutProvider, useLayoutSlots, useLayoutSetSlot } from './layout/LayoutContext.tsx'
 export { LAYOUT_SLOT_HIDDEN } from './shared/layout-slot.ts'
 
 export { Button } from './ui/Button.tsx'

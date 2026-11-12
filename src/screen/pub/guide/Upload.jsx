@@ -2,10 +2,13 @@
 
 import { useState } from 'react'
 import { Button, Upload } from '@/comp'
-import { DemoBlock, GuideApiDocs, GuideLayout, wrapPageExample } from '@/screen/pub/widgets/guide'
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
+import { GuideLayout } from '@/screen/pub/layout'
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
 import { uploadApiSections } from '@/screen/pub/data/guide/uploadApiSections'
 
-const SAMPLE = '/images/samples/avatar/avatar-sample.svg'
+const SAMPLE = '/images/icon/ico_avatar.svg'
 const sampleFile = {
   name: '제품소개서.pdf',
   size: 1843200,
@@ -244,7 +247,7 @@ const SECTIONS = [
     code: wrapPageExample(`<Upload
   variant="avatar"
   accept="image/*"
-  avatarSrc="/images/samples/avatar/avatar-sample.svg"
+  avatarSrc="/images/icon/ico_avatar.svg"
   avatarAlt="프로필 사진"
 />`, {
   name: 'UploadUploadExample2',
