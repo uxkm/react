@@ -15,7 +15,7 @@ export default function B2bCommonDownloadPage () {
 
   return (
     <>
-      <Page page="b2b-common-download" title={pageTitle} />
+      <Page page="common-download" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

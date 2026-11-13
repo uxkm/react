@@ -27,7 +27,7 @@
       "priority": 3
     },
     {
-      "name": "CEO 인사말",
+      "name": "CEO인사말",
       "type": "Page",
       "id": "B2B-ABOUT-002",
       "pageUrl": "/b2b/company/ceo",
@@ -64,6 +64,23 @@
       "id": "company/ethics",
       "name": "윤리/준법경영",
       "depth3": [
+        {
+          "name": "SERICEO",
+          "type": "Page",
+          "id": "B2B-COMPANY-ETHICS-SERICEO",
+          "pageUrl": "/b2b/company/ethics/sericeo",
+          "filePath": "@/screen/b2b/company/ethics/sericeo/index.tsx",
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "remark": [],
+          "priority": 2
+        },
         {
           "name": "경영원칙",
           "type": "Page",
@@ -172,7 +189,7 @@
           "planning": "",
           "design": "",
           "remark": [],
-          "name": "다양성/노사",
+          "name": "다양성 / 노사",
           "type": "Page",
           "id": "B2B-COMPANY-SUSTAINABILITY-DIVERSITY",
           "pageUrl": "/b2b/company/sustainability/diversity",
@@ -318,14 +335,36 @@
               "date": "",
               "author": "IA",
               "text": "주주정보 및 주주총회 관련 정보"
+            },
+            {
+              "date": "2026-11-13",
+              "author": "메뉴",
+              "text": "주주정보는 shareholders 폴더로 이동. 기존 화면 ID와 작업 이력 유지."
             }
           ],
           "name": "주주정보",
           "type": "Page",
           "id": "B2B-COMPANY-INVESTORS-STOCK",
-          "pageUrl": "/b2b/company/investors/stock",
-          "filePath": "@/screen/b2b/company/investors/stock/index.tsx",
+          "pageUrl": "/b2b/company/investors/shareholders",
+          "filePath": "@/screen/b2b/company/investors/shareholders/index.tsx",
           "priority": 3
+        },
+        {
+          "name": "주가정보",
+          "type": "Page",
+          "id": "B2B-COMPANY-INVESTORS-STOCK-PRICE",
+          "pageUrl": "/b2b/company/investors/stock-price",
+          "filePath": "@/screen/b2b/company/investors/stock-price/index.tsx",
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "remark": [],
+          "priority": 2
         },
         {
           "owner": "",
@@ -377,8 +416,8 @@
           "name": "언론보도 목록",
           "type": "Page",
           "id": "B2B-ABOUT-007",
-          "pageUrl": "/b2b/company/pr/news-list",
-          "filePath": "@/screen/b2b/company/pr/news-list/index.tsx",
+          "pageUrl": "/b2b/company/pr/news/list",
+          "filePath": "@/screen/b2b/company/pr/news/list/index.tsx",
           "owner": "",
           "start": "",
           "expected": "",
@@ -403,8 +442,8 @@
           "name": "언론보도 상세",
           "type": "Page",
           "id": "B2B-COMPANY-PR-NEWS-DETAIL",
-          "pageUrl": "/b2b/company/pr/news-detail",
-          "filePath": "@/screen/b2b/company/pr/news-detail/index.tsx",
+          "pageUrl": "/b2b/company/pr/news/detail",
+          "filePath": "@/screen/b2b/company/pr/news/detail/index.tsx",
           "priority": 3
         },
         {

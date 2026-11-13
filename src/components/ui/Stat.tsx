@@ -4,6 +4,7 @@
  */
 import type { HTMLAttributes, ReactNode } from 'react'
 import { classNames } from '@/utils/classNames'
+import { Icon } from './Icon'
 
 const TrendIcon = () => (
   <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -13,6 +14,12 @@ const TrendIcon = () => (
 
 /** 지표가 받는 값 */
 export interface StatProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'prefix'> {
+  /** testimonial: 업종·인용문·작성자·프로필로 구성하는 고객사례 유형. */
+  variant?: 'default' | 'testimonial'
+  /** 고객사례 프로필. 생략하면 user 아이콘을 표시합니다. */
+  avatar?: ReactNode
+  /** 고객사례 선택 테두리 표시 여부. */
+  selected?: boolean
   title?: ReactNode
   value?: ReactNode
   prefix?: ReactNode
@@ -38,6 +45,9 @@ export interface StatProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title' 
  * title 라벨, value 수치, trend 증감, card · shadow 스킨.
  */
 export function Stat ({
+  variant = 'default',
+  avatar,
+  selected = false,
   title,
   value,
   prefix,
@@ -59,11 +69,14 @@ export function Stat ({
   const resolvedTitle = title ?? label
   const resolvedDescription = description ?? desc
   const resolvedSize = ['sm', 'md', 'lg'].includes(size) ? size : 'md'
+  const testimonial = variant === 'testimonial'
 
   const classes = classNames(
     'stat',
     resolvedSize !== 'md' && `stat_${resolvedSize}`,
-    card && 'stat_card',
+    (card || testimonial) && 'stat_card',
+    testimonial && 'stat_testimonial',
+    testimonial && selected && 'is-selected',
     shadow && 'stat_shadow',
     horizontal && 'stat_horizontal',
     className
@@ -77,6 +90,25 @@ export function Stat ({
 
   const showHeader = Boolean(resolvedTitle && trend)
   const hasValue = value != null && value !== ''
+
+  if (testimonial) {
+    return (
+      <div {...rest} className={classes}>
+        {resolvedTitle && <span className="stat_label">{resolvedTitle}</span>}
+        <blockquote className="stat_quote">
+          <span className="stat_quote-mark" aria-hidden="true">“</span>
+          {hasValue && <strong className="stat_value">{value}</strong>}
+        </blockquote>
+        <div className="stat_footer">
+          <span className="stat_desc">{resolvedDescription}</span>
+          <span className="profile" aria-hidden="true">
+            {avatar ?? <Icon name="user" size={44} />}
+          </span>
+        </div>
+        {children}
+      </div>
+    )
+  }
 
   const valueNode =
     prefix || suffix

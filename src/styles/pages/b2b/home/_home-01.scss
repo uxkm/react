@@ -52,12 +52,12 @@
   color: var(--mc-white);
   pointer-events: none;
 
-  &__brand,
-  &__menu {
+  &_brand,
+  &_menu {
     pointer-events: auto;
   }
 
-  &__brand {
+  &_brand {
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -66,14 +66,14 @@
     letter-spacing: -0.02em;
   }
 
-  &__brand-mark {
+  &_brand-mark {
     width: 10px;
     height: 10px;
     border-radius: 2px;
     background: var(--mc-accent);
   }
 
-  &__menu {
+  &_menu {
     width: 44px;
     height: 44px;
     display: inline-flex;
@@ -126,7 +126,7 @@
     visibility: visible;
   }
 
-  &__inner {
+  &_inner {
     width: #{"min(360px, 88vw)"};
     height: 100%;
     padding: 96px 40px 40px;
@@ -136,11 +136,11 @@
     transition: transform 0.3s ease;
   }
 
-  &.is-open &__inner {
+  &.is-open &_inner {
     transform: translateX(0);
   }
 
-  &__list {
+  &_list {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -148,7 +148,7 @@
     gap: 8px;
   }
 
-  &__link {
+  &_link {
     display: block;
     padding: 14px 0;
     font-size: 22px;
@@ -173,12 +173,12 @@
   color: var(--mc-white);
   overflow: hidden;
 
-  &__slides {
+  &_slides {
     position: absolute;
     inset: 0;
   }
 
-  &__slide {
+  &_slide {
     position: absolute;
     inset: 0;
     opacity: 0;
@@ -193,7 +193,7 @@
     }
   }
 
-  &__bg {
+  &_bg {
     position: absolute;
     inset: 0;
     background:
@@ -202,7 +202,7 @@
       linear-gradient(160deg, #050505 0%, #0d1220 55%, #0a0a0a 100%);
   }
 
-  &__visual {
+  &_visual {
     position: absolute;
     right: 6%;
     top: 50%;
@@ -232,11 +232,11 @@
     }
   }
 
-  &__slide.is-active &__visual img {
+  &_slide.is-active &_visual img {
     transform: scale(1);
   }
 
-  &__body {
+  &_body {
     position: relative;
     z-index: 2;
     display: flex;
@@ -249,7 +249,7 @@
     padding: calc(var(--mc-header-h) + 48px) 40px 120px;
   }
 
-  &__tag {
+  &_tag {
     margin: 0 0 18px;
     color: var(--mc-accent);
     font-size: 14px;
@@ -257,7 +257,7 @@
     letter-spacing: -0.01em;
   }
 
-  &__title {
+  &_title {
     margin: 0 0 20px;
     max-width: 560px;
     font-size: #{"clamp(28px, 3.2vw, 42px)"};
@@ -266,7 +266,7 @@
     letter-spacing: -0.03em;
   }
 
-  &__desc {
+  &_desc {
     margin: 0 0 36px;
     max-width: 480px;
     color: rgba(255, 255, 255, 0.72);
@@ -275,7 +275,7 @@
     letter-spacing: -0.01em;
   }
 
-  &__actions {
+  &_actions {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
@@ -295,7 +295,7 @@
   font-weight: 600;
   transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 
-  &__arrow {
+  &_arrow {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -316,7 +316,7 @@
     color: var(--mc-ink);
     border-color: var(--mc-white);
 
-    .mc-cta__arrow {
+    .mc-cta_arrow {
       transform: translateX(3px);
       background: var(--mc-accent);
       border-color: var(--mc-accent);
@@ -324,7 +324,7 @@
     }
   }
 
-  &--ghost {
+  &_ghost {
     border-color: rgba(255, 255, 255, 0.45);
 
     &:hover {
@@ -332,7 +332,7 @@
       color: var(--mc-white);
       border-color: rgba(255, 255, 255, 0.85);
 
-      .mc-cta__arrow {
+      .mc-cta_arrow {
         background: transparent;
         border-color: currentColor;
         color: inherit;
@@ -351,13 +351,13 @@
   gap: 18px;
   color: var(--mc-white);
 
-  &__tabs {
+  &_tabs {
     display: flex;
     align-items: center;
     gap: 18px;
   }
 
-  &__tab {
+  &_tab {
     position: relative;
     padding: 8px 0 10px;
     color: rgba(255, 255, 255, 0.4);
@@ -409,7 +409,7 @@
     }
   }
 
-  &__pause {
+  &_pause {
     width: 36px;
     height: 36px;
     display: inline-flex;
@@ -464,7 +464,7 @@
   display: grid;
   gap: 4px;
 
-  &__item {
+  &_item {
     position: relative;
     display: block;
     padding: 12px 0 12px 18px;
@@ -508,14 +508,14 @@
 .mc-section {
   scroll-margin-top: 40px;
 
-  &__eyebrow {
+  &_eyebrow {
     margin: 0 0 14px;
     color: var(--mc-accent);
     font-size: 14px;
     font-weight: 700;
   }
 
-  &__head {
+  &_head {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
@@ -523,7 +523,7 @@
     margin-bottom: 36px;
   }
 
-  &__title {
+  &_title {
     margin: 0;
     max-width: 720px;
     font-size: #{"clamp(24px, 2.6vw, 34px)"};
@@ -539,7 +539,7 @@
   gap: 10px;
   flex-shrink: 0;
 
-  &__btn {
+  &_btn {
     width: 40px;
     height: 40px;
     display: inline-flex;
@@ -567,7 +567,7 @@
     }
   }
 
-  &__count {
+  &_count {
     min-width: 52px;
     text-align: center;
     font-size: 13px;
@@ -595,7 +595,7 @@
   min-width: 260px;
   max-width: 380px;
 
-  &__media {
+  &_media {
     position: relative;
     aspect-ratio: 16 / 10;
     margin-bottom: 18px;
@@ -611,18 +611,18 @@
     }
   }
 
-  &:hover &__media img {
+  &:hover &_media img {
     transform: scale(1.05);
   }
 
-  &__title {
+  &_title {
     margin: 0 0 10px;
     font-size: 20px;
     font-weight: 700;
     letter-spacing: -0.02em;
   }
 
-  &__desc {
+  &_desc {
     margin: 0;
     color: var(--mc-muted);
     font-size: 14px;
@@ -647,20 +647,20 @@
   border-radius: 8px;
   transition: border-color 0.2s ease, transform 0.25s ease, box-shadow 0.25s ease;
 
-  &__label {
+  &_label {
     font-size: 18px;
     font-weight: 700;
     letter-spacing: -0.02em;
   }
 
-  &__hint {
+  &_hint {
     margin-top: 12px;
     color: var(--mc-muted);
     font-size: 13px;
     line-height: 1.5;
   }
 
-  &__go {
+  &_go {
     align-self: flex-end;
     margin-top: 20px;
     width: 32px;
@@ -683,7 +683,7 @@
     transform: translateY(-4px);
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
 
-    .mc-solution-card__go {
+    .mc-solution-card_go {
       background: var(--mc-accent);
       color: var(--mc-white);
       transform: translateX(2px);
@@ -712,7 +712,7 @@
     transition: transform 0.55s ease;
   }
 
-  &__overlay {
+  &_overlay {
     position: absolute;
     inset: 0;
     display: flex;
@@ -722,13 +722,13 @@
     background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.72) 100%);
   }
 
-  &__name {
+  &_name {
     font-size: 18px;
     font-weight: 700;
     letter-spacing: -0.02em;
   }
 
-  &__desc {
+  &_desc {
     margin-top: 6px;
     color: rgba(255, 255, 255, 0.75);
     font-size: 13px;
@@ -748,27 +748,27 @@
   background: var(--mc-white);
   border-radius: 12px;
 
-  &__title {
+  &_title {
     margin: 0 0 12px;
     font-size: 28px;
     font-weight: 700;
     letter-spacing: -0.03em;
   }
 
-  &__desc {
+  &_desc {
     margin: 0 0 28px;
     color: var(--mc-muted);
     font-size: 15px;
     line-height: 1.65;
   }
 
-  &__actions {
+  &_actions {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
   }
 
-  &__btn {
+  &_btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -779,7 +779,7 @@
     font-weight: 700;
     transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
 
-    &--primary {
+    &_primary {
       background: var(--mc-accent);
       color: var(--mc-white);
 
@@ -789,7 +789,7 @@
       }
     }
 
-    &--line {
+    &_line {
       border: 1px solid #d0d0d0;
       background: transparent;
 
@@ -799,13 +799,13 @@
     }
   }
 
-  &__aside {
+  &_aside {
     display: grid;
     gap: 12px;
     align-content: center;
   }
 
-  &__link {
+  &_link {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -843,7 +843,7 @@
   border-radius: 8px 0 0 8px;
   overflow: hidden;
 
-  &__item {
+  &_item {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -892,7 +892,7 @@
     --mc-quick-w: 64px;
   }
 
-  .mc-hero__visual {
+  .mc-hero_visual {
     right: 2%;
     width: #{"min(42vw, 420px)"};
     opacity: 0.9;
@@ -912,7 +912,7 @@
     padding-bottom: 8px;
     border-bottom: 1px solid #e0e0e0;
 
-    &__item {
+    &_item {
       padding-left: 14px;
     }
   }
@@ -939,11 +939,11 @@
     padding: 0 20px;
   }
 
-  .mc-hero__body {
+  .mc-hero_body {
     padding: calc(var(--mc-header-h) + 32px) 20px 140px;
   }
 
-  .mc-hero__visual {
+  .mc-hero_visual {
     right: 16px;
     top: auto;
     bottom: 110px;
@@ -957,7 +957,7 @@
     bottom: 28px;
     gap: 12px;
 
-    &__tabs {
+    &_tabs {
       gap: 12px;
     }
   }
@@ -974,7 +974,7 @@
     gap: 80px;
   }
 
-  .mc-section__head {
+  .mc-section_head {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -1002,7 +1002,7 @@
     border-radius: 12px;
     box-shadow: 0 8px 28px rgba(0, 0, 0, 0.16);
 
-    &__item {
+    &_item {
       min-width: 64px;
       min-height: 64px;
       border-bottom: 0;

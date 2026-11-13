@@ -46,10 +46,11 @@ export default function PathLinkCell ({ href, label }) {
       className="path-link"
       href={appHref}
       target="_blank"
+      title="새 창 열림"
       rel="noopener noreferrer"
     >
       {label
-        ? <span className="path-link__label" {...ellipsisAttr}>{text}</span>
+        ? <span className="path-link_label" {...ellipsisAttr}>{text}</span>
         : <code {...ellipsisAttr}>{text}</code>}
     </a>
   )

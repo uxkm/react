@@ -17,27 +17,27 @@ export default function GlobalError ({ error, reset }) {
         <title>Error · 퍼블리싱 목록</title>
       </head>
       <body>
-        <main className="app-layout__main" data-page="error">
+        <main className="app-layout_main" data-page="error">
           <div className="page-container error-status">
-            <p className="error-status__code">Error</p>
-            <h1 className="error-status__title">앱을 불러오지 못했습니다</h1>
-            <p className="error-status__desc">
+            <p className="error-status_code">Error</p>
+            <h1 className="error-status_title">앱을 불러오지 못했습니다</h1>
+            <p className="error-status_desc">
               치명적인 오류가 발생했습니다. 다시 시도해 주세요.
             </p>
             {detail
-              ? <pre className="error-status__detail">{detail}</pre>
+              ? <pre className="error-status_detail">{detail}</pre>
               : null}
-            <div className="error-status__actions">
+            <div className="error-status_actions">
               <button
                 type="button"
-                className="error-status__btn error-status__btn--primary"
+                className="error-status_btn error-status_btn_primary"
                 onClick={reset}
               >
                 다시 시도
               </button>
               {/* global-error 는 루트 레이아웃이 깨진 상태라 Link 대신 풀 리로드 */}
               {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-              <a className="error-status__btn" href="/">
+              <a className="error-status_btn" href="/">
                 퍼블리시 목록
               </a>
             </div>

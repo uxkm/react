@@ -16,7 +16,7 @@ for (const [pathname, title] of pages) {
     expect(response?.status()).toBe(200)
     const html = await response.text()
     expect(html).not.toMatch(/<div hidden="">(?:<!--[\s\S]*?-->|\s)*<\/div>/)
-    await expect(page.locator('.app-layout--has-header')).toBeVisible()
+    await expect(page.locator('.app-layout_has-header')).toBeVisible()
     await expect(page.locator('body > div[hidden]:not([id])')).toHaveCount(0)
     await expect(page).toHaveTitle(new RegExp(title, 'i'))
     await expect(page.locator('head > title')).toHaveCount(1)
@@ -32,13 +32,13 @@ test('페이지 왕복 이동에도 메타데이터와 hydration 유지', async 
     if (message.type() === 'error') errors.push(message.text())
   })
   await page.goto('/pub/guide/button')
-  await expect(page.locator('.app-layout--has-header')).toBeVisible()
+  await expect(page.locator('.app-layout_has-header')).toBeVisible()
   // This value survives client navigation, so a full reload cannot mask a mismatch.
   await page.evaluate(() => { window.__metadataNavigationCheck = true })
   for (let i = 0; i < 2; i++) {
     for (const [pathname, title] of [['/pub/guide/input', 'Input'], ['/pub/guide/button', 'Button']]) {
       const link = page.locator(`a[href="${pathname}"]`).first()
-      const group = page.locator('.comp-guide__group').filter({ has: link })
+      const group = page.locator('.comp-guide_group').filter({ has: link })
       const toggle = group.locator('button[aria-expanded]').first()
       if (await toggle.getAttribute('aria-expanded') === 'false') await toggle.click()
       await link.click()

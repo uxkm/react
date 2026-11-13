@@ -31,7 +31,7 @@ export default function PubListSkeleton ({
               <PubSkeletonPiece mod="value" />
             </div>
             <PubSkeletonPiece mod="bar" />
-            <div className="wbs-skeleton__stats">
+            <div className="wbs-skeleton_stats">
               {[1, 2, 3, 4, 5].map((n) => <PubSkeletonPiece key={'stat-' + n} mod="stat" />)}
             </div>
           </div>
@@ -39,11 +39,11 @@ export default function PubListSkeleton ({
       </header>
 
       <div className="wbs-sticky" aria-hidden="true">
-        <div className="wbs-tabs-bar wbs-skeleton__tabs">
+        <div className="wbs-tabs-bar wbs-skeleton_tabs">
           {[1, 2, 3, 4].map((n) => <PubSkeletonPiece key={'tab-' + n} mod="tab" />)}
         </div>
         <div className="wbs-panel-head">
-          <div className="wbs-skeleton__search">
+          <div className="wbs-skeleton_search">
             <PubSkeletonPiece mod="select" />
             <PubSkeletonPiece mod="input" />
           </div>
@@ -59,17 +59,17 @@ export default function PubListSkeleton ({
       <section className="wbs-panel" aria-hidden="true">
         <div className="wbs-table-wrap">
           <div className={classNames('wbs-table', { 'is-progress-hidden': !showProgress })}>
-            <div className="wbs-table__head" role="presentation">
+            <div className="wbs-table_head" role="presentation">
               {visible.map((col) => (
                 <div key={col.key} className={'col-' + col.key}>
                   <PubSkeletonPiece mod="th" />
                 </div>
               ))}
             </div>
-            <ul className="wbs-table__list">
+            <ul className="wbs-table_list">
               {Array.from({ length: rowCount }, (_, i) => i + 1).map((n) => (
-                <li key={'row-' + n} className="wbs-table__group">
-                  <div className="wbs-table__row level-0">
+                <li key={'row-' + n} className="wbs-table_group">
+                  <div className="wbs-table_row level-0">
                     <div className="col-name" role="presentation">
                       <PubSkeletonPiece mod="toggle" />
                       <PubSkeletonPiece mod="name" style={{ width: (40 + (n % 5) * 10) + '%' }} />

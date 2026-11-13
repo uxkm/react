@@ -16,7 +16,7 @@ export default function B2bCompanyInvestorsDisclosurePage () {
       "screenId": "B2B-ABOUT-006"
     },
     {
-      "to": "/b2b/company/investors/stock",
+      "to": "/b2b/company/investors/shareholders",
       "label": "주주정보",
       "screenId": "B2B-COMPANY-INVESTORS-STOCK"
     },
@@ -31,7 +31,7 @@ export default function B2bCompanyInvestorsDisclosurePage () {
 
   return (
     <>
-      <Page page="b2b-company-investors-disclosure" title={pageTitle} />
+      <Page page="company-investors-disclosure" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

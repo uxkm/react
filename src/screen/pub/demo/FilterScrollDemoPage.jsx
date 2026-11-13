@@ -76,11 +76,11 @@ useEffect(() => {
 <div className="wbs filter-scroll-demo">
   <div className="wbs-filter-bar">
     <button type="button" className="wbs-filter-btn is-active" aria-label="필터, 로그인">
-      <span className="wbs-filter-btn__label">로그인</span>
-      <span className="wbs-filter-btn__icon" aria-hidden="true">▾</span>
+      <span className="wbs-filter-btn_label">로그인</span>
+      <span className="wbs-filter-btn_icon" aria-hidden="true">▾</span>
     </button>
     <div className="wbs-filter-selected">
-      <span className="wbs-filter-selected__sep" aria-hidden="true" />
+      <span className="wbs-filter-selected_sep" aria-hidden="true" />
       <ul ref={subsRef} className="wbs-filter-subs" aria-label="선택한 화면명 하위 목록">
         {Array.from({ length: chipCount }, (_, i) => i + 1).map((n) => (
           <li key={'chip-' + n}>
@@ -90,7 +90,7 @@ useEffect(() => {
       </ul>
     </div>
   </div>
-  <div className="filter-scroll-demo__actions">
+  <div className="filter-scroll-demo_actions">
     <button type="button" className="wbs-btn" onClick={() => setChipCount(5)}>칩 5개</button>
     <button type="button" className="wbs-btn" onClick={() => setChipCount(40)}>칩 40개</button>
     <button type="button" className="wbs-btn" onClick={measure}>다시 측정</button>
@@ -108,11 +108,11 @@ useEffect(() => {
               className="wbs-filter-btn is-active"
               aria-label="필터, 로그인"
             >
-              <span className="wbs-filter-btn__label">로그인</span>
-              <span className="wbs-filter-btn__icon" aria-hidden="true">▾</span>
+              <span className="wbs-filter-btn_label">로그인</span>
+              <span className="wbs-filter-btn_icon" aria-hidden="true">▾</span>
             </button>
             <div className="wbs-filter-selected">
-              <span className="wbs-filter-selected__sep" aria-hidden="true" />
+              <span className="wbs-filter-selected_sep" aria-hidden="true" />
               <ul
                 ref={subsRef}
                 className="wbs-filter-subs"
@@ -127,7 +127,7 @@ useEffect(() => {
             </div>
           </div>
 
-          <dl className="filter-scroll-demo__meta">
+          <dl className="filter-scroll-demo_meta">
             <div>
               <dt>칩 개수</dt>
               <dd>{chipCount}</dd>
@@ -148,7 +148,7 @@ useEffect(() => {
             </div>
           </dl>
 
-          <div className="filter-scroll-demo__actions">
+          <div className="filter-scroll-demo_actions">
             <button type="button" className="wbs-btn" onClick={() => setChipCount(5)}>칩 5개</button>
             <button type="button" className="wbs-btn" onClick={() => setChipCount(20)}>칩 20개</button>
             <button type="button" className="wbs-btn" onClick={() => setChipCount(40)}>칩 40개</button>

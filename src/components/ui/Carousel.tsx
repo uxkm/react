@@ -44,8 +44,12 @@ export interface CarouselProps extends Omit<HTMLAttributes<HTMLDivElement>, 'chi
   dotsOutside?: boolean
   /** 재생·정지 토글 버튼 */
   autoplayToggle?: boolean
+  /** 1장일 때도 페이지 수와 비활성 이동·재생 버튼을 표시합니다. 기본 false. */
+  readonly showControlsWhenSingle?: boolean
   /** fade · coverflow */
   effect?: 'fade' | 'coverflow'
+  /** 슬라이드 전환 시간(ms). 기본 300. */
+  readonly speed?: number
   /** 자동 재생 */
   autoplay?: boolean
   /** 자동 재생 간격(ms) */
@@ -211,7 +215,9 @@ export function Carousel ({
   multi = false,
   dotsOutside = false,
   autoplayToggle = false,
+  showControlsWhenSingle = false,
   effect,
+  speed = 300,
   autoplay = false,
   delay = 4000,
   loop = false,
@@ -260,16 +266,17 @@ export function Carousel ({
   }
 
   const slides = normalizeSlideChildren(children)
-  /** 1장이면 좌우·닷·재생/정지·자동재생을 쓰지 않는다 */
+  /** 1장일 때 자동재생은 끄고, 요청한 경우에만 비활성 제어부를 표시합니다. */
   const multiSlide = slideCount > 1
 
   const isCoverflow = effect === 'coverflow'
   const isGrid = gridRows > 1
   const sides = normalizeCoverflowSides(coverflowSides)
   const view: number | 'auto' = isCoverflow || multi || slidesPerView === 'auto' ? 'auto' : slidesPerView
-  const showPagination = multiSlide && pagination !== false
-  const showNavigation = multiSlide && navigation !== false
-  const showAutoplayControls = multiSlide && (autoplay || autoplayToggle)
+  const showControls = multiSlide || (slideCount === 1 && showControlsWhenSingle)
+  const showPagination = showControls && pagination !== false
+  const showNavigation = showControls && navigation !== false
+  const showAutoplayControls = showControls && (autoplay || autoplayToggle)
   /** autoplay 또는 autoplayToggle 이면 Swiper autoplay 모듈을 켠다(토글만 켜도 재생 가능) */
   const enableAutoplay = multiSlide && (autoplay || autoplayToggle)
 
@@ -322,6 +329,7 @@ export function Carousel ({
 
     const options: Record<string, unknown> = {
       modules: carouselSwiperModules,
+      speed: Math.max(0, speed),
       initialSlide: startIndex,
       slidesPerView: view,
       slidesPerGroup,
@@ -338,7 +346,10 @@ export function Carousel ({
         paginationBulletMessage: '{{index}}번 슬라이드로 이동'
       },
       observer: true,
-      observeParents: true,
+      // 상위 레이아웃의 상태 속성 변경은 슬라이더 크기 변화가 아닙니다.
+      // 부모 감시가 전환 도중 slideToLoop(..., 0)를 호출하지 않도록 끕니다.
+      // 실제 크기 변화는 Swiper와 아래 ResizeObserver에서 처리합니다.
+      observeParents: false,
       watchSlidesProgress: !!(watchSlidesProgress || thumbsControl || isCoverflow)
     }
 
@@ -446,6 +457,7 @@ export function Carousel ({
     coverflowStyle,
     delay,
     effect,
+    speed,
     enableAutoplay,
     freeMode,
     gridFill,
@@ -553,6 +565,7 @@ export function Carousel ({
             type="button"
             className="swiper-button-prev"
             aria-label="이전 슬라이드"
+            disabled={!multiSlide}
             data-ripple={ripple ? 'surface' : 'false'}
           />
         )}
@@ -561,6 +574,7 @@ export function Carousel ({
             type="button"
             className="swiper-button-next"
             aria-label="다음 슬라이드"
+            disabled={!multiSlide}
             data-ripple={ripple ? 'surface' : 'false'}
           />
         )}
@@ -575,6 +589,7 @@ export function Carousel ({
           data-ripple={ripple ? 'surface' : 'false'}
           aria-label={playing ? '슬라이드 정지' : '슬라이드 재생'}
           aria-pressed={playing}
+          disabled={!multiSlide}
           onClick={toggleAutoplay}
         >
           <svg

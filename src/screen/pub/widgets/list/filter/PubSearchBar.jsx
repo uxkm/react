@@ -68,8 +68,8 @@ export default function PubSearchBar ({
             checked={expanded}
             onChange={(e) => onExpand(e.target.checked)}
           />
-          <span className="wbs-switch__ui" aria-hidden="true" />
-          <span className="wbs-switch__label">{expanded ? collapseLabel : expandLabel}</span>
+          <span className="wbs-switch_ui" aria-hidden="true" />
+          <span className="wbs-switch_label">{expanded ? collapseLabel : expandLabel}</span>
         </label>
       </div>
     </div>

@@ -15,7 +15,7 @@ export default function B2bCommonTermsPage () {
 
   return (
     <>
-      <Page page="b2b-common-terms" title={pageTitle} />
+      <Page page="common-terms" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

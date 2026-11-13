@@ -36,7 +36,7 @@ export default function B2bServiceLearningPage () {
 
   return (
     <>
-      <Page page="b2b-service-learning" title={pageTitle} />
+      <Page page="service-learning" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

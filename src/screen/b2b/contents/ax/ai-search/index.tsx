@@ -5,19 +5,19 @@ import { PublishingPlaceholder } from '@/screen/pub/widgets/publishing/Publishin
 import { resolveSkeletonMode } from '@/config/skeleton'
 import AiSearchSkeleton from './skeleton/indexSkeleton'
 
-export const pageTitle = "AI 교육 탐색"
+export const pageTitle = "AI교육 탐색"
 
 /** IA publishing scaffold. Replace this screen body with the approved markup. */
 export default function B2bContentsAxAiSearchPage () {
   const links = [
     {
       "to": "/b2b/contents/ax/overview",
-      "label": "AX교육 Overview",
+      "label": "Overview",
       "screenId": "B2B-CORPED-001"
     },
     {
       "to": "/b2b/contents/ax/competency",
-      "label": "AX 역량수준 진단",
+      "label": "AX역량수준 진단",
       "screenId": "B2B-CONTENTS-AX-COMPETENCY"
     },
     {
@@ -31,8 +31,8 @@ export default function B2bContentsAxAiSearchPage () {
       "screenId": "B2B-CONTENTS-AX-WORKSHOP"
     },
     {
-      "to": "/b2b/contents/ax/hackathon",
-      "label": "AX 해커톤",
+      "to": "/b2b/contents/ax/camp",
+      "label": "AX캠프",
       "screenId": "B2B-CONTENTS-AX-HACKATHON"
     }
   ]
@@ -41,7 +41,7 @@ export default function B2bContentsAxAiSearchPage () {
 
   return (
     <>
-      <Page page="b2b-contents-ax-ai-search" title={pageTitle} />
+      <Page page="contents-ax-ai-search" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

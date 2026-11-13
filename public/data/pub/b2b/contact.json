@@ -4,27 +4,97 @@
   "filePath": "@/screen/b2b/contact",
   "depth2": [
     {
-      "name": "기업교육문의",
-      "type": "Page",
-      "id": "B2B-INSIGH-001",
-      "pageUrl": "/b2b/contact/education",
-      "filePath": "@/screen/b2b/contact/education/index.tsx",
-      "owner": "",
-      "start": "",
-      "expected": "",
-      "end": "",
-      "status": "pending",
-      "progress": 0,
-      "planning": "",
-      "design": "",
-      "remark": [
+      "id": "contact/inquiry",
+      "name": "문의하기",
+      "depth3": [
         {
-          "date": "",
-          "author": "IA",
-          "text": "문의상담·견적 통합 페이지. 문의구분, 교육인원·일정, 교육방식, 문의내용, 상담 필요 여부, 회사·기업유형·이름·부서·연락처·이메일, 개인정보 수집·이용 동의"
+          "name": "기업교육문의",
+          "type": "Page",
+          "id": "B2B-INSIGH-001",
+          "pageUrl": "/b2b/contact/education",
+          "filePath": "@/screen/b2b/contact/education/index.tsx",
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "remark": [
+            {
+              "date": "",
+              "author": "IA",
+              "text": "문의상담·견적 통합 페이지. 문의구분, 교육인원·일정, 교육방식, 문의내용, 상담 필요 여부, 회사·기업유형·이름·부서·연락처·이메일, 개인정보 수집·이용 동의"
+            }
+          ],
+          "priority": 1
+        },
+        {
+          "name": "플랫폼도입문의",
+          "type": "Page",
+          "id": "B2B-CONTACT-PLATFORM",
+          "pageUrl": "/b2b/contact/platform",
+          "filePath": "@/screen/b2b/contact/platform/index.tsx",
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "remark": [],
+          "priority": 2
+        },
+        {
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "remark": [
+            {
+              "date": "2026-11-13",
+              "author": "메뉴",
+              "text": "기업교육 > 법정필수 > 간편 견적받기와 같은 화면으로 연결"
+            }
+          ],
+          "name": "법정교육 간편견적",
+          "type": "Page",
+          "id": "B2B-CONTACT-ESTIMATE",
+          "pageUrl": "/b2b/contents/mandatory/estimate",
+          "filePath": "@/screen/b2b/contents/mandatory/estimate/index.tsx",
+          "priority": 1,
+          "excludeFromStats": true
+        },
+        {
+          "name": "진단&맞춤추천",
+          "type": "Layer",
+          "id": "B2B-INSIGH-002",
+          "pageUrl": "/b2b/common/education-diagnosis",
+          "filePath": "@/widgets/b2b/previews/education-diagnosis/index.tsx",
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "remark": [
+            {
+              "date": "",
+              "author": "IA",
+              "text": "메인 카드그리드와 퀵링크에서 진입. 진단 문항 → 개인정보 동의 → 추천 결과"
+            }
+          ],
+          "priority": 2
         }
-      ],
-      "priority": 1
+      ]
     },
     {
       "id": "contact/education-form",
@@ -105,29 +175,6 @@
       "id": "contact/diagnosis",
       "name": "간편 진단·맞춤교육 추천",
       "depth3": [
-        {
-          "name": "간편 진단 모달",
-          "type": "Layer",
-          "id": "B2B-INSIGH-002",
-          "pageUrl": "/b2b/common/education-diagnosis",
-          "filePath": "@/widgets/b2b/previews/education-diagnosis/index.tsx",
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [
-            {
-              "date": "",
-              "author": "IA",
-              "text": "메인 카드그리드와 퀵링크에서 진입. 진단 문항 → 개인정보 동의 → 추천 결과"
-            }
-          ],
-          "priority": 2
-        },
         {
           "owner": "",
           "start": "",

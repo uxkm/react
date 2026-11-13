@@ -16,12 +16,10 @@ const controllers = new WeakMap()
 /** @type {Set<Element>} */
 const activeElements = new Set()
 
-/** @type {WeakSet<Element>} */
-const listening = new WeakSet()
-
 let host = null
 let started = false
 let dragging = null
+let positionFrame = 0
 
 function prefersReducedMotion () {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -198,8 +196,18 @@ function updateRail (el, axis) {
   const overflow =
     axis === 'y' ? m.scrollHeight - m.clientHeight : m.scrollWidth - m.clientWidth
 
-  if (overflow <= 1) {
+  if (overflow <= 1 || !canScroll(el, axis)) {
     rail.classList.remove('is-visible')
+    rail.style.display = 'none'
+    return rail
+  }
+
+  // fixed 레일이 원래 스크롤 영역을 벗어난 화면 위에 남지 않도록 합니다.
+  if (!isViewportScroller(el) && (
+    m.rect.width <= 0 || m.rect.height <= 0 ||
+    m.rect.bottom <= 0 || m.rect.top >= window.innerHeight ||
+    m.rect.right <= 0 || m.rect.left >= window.innerWidth
+  )) {
     rail.style.display = 'none'
     return rail
   }
@@ -237,23 +245,11 @@ function updateRail (el, axis) {
   return rail
 }
 
-function ensureScrollListener (el) {
-  if (listening.has(el)) return
-  listening.add(el)
-  const onScroll = () => showFor(el)
-  if (isViewportScroller(el)) {
-    window.addEventListener('scroll', onScroll, { passive: true })
-  } else {
-    el.addEventListener('scroll', onScroll, { passive: true })
-  }
-}
-
 function showFor (el) {
   if (!(el instanceof Element) || !el.isConnected) return
 
   const ctrl = getController(el)
   clearHide(ctrl)
-  ensureScrollListener(el)
 
   const y = canScroll(el, 'y')
   const x = canScroll(el, 'x')
@@ -273,6 +269,7 @@ function showFor (el) {
   }
 
   scheduleHide(ctrl)
+  schedulePositionUpdate()
 }
 
 function startDrag (event, el, axis) {
@@ -297,6 +294,7 @@ function startDrag (event, el, axis) {
   dragging = { el, axis }
   clearHide(ctrl)
   rail.classList.add('is-visible', 'is-dragging')
+  schedulePositionUpdate()
 
   const onMove = (moveEvent) => {
     if (!dragging) return
@@ -330,14 +328,12 @@ function startDrag (event, el, axis) {
 }
 
 function onScrollCapture (event) {
-  const el = event.target
+  const el = event.target === document ? document.documentElement : event.target
   if (el instanceof Element && (canScroll(el, 'y') || canScroll(el, 'x'))) {
     showFor(el)
-    return
   }
-  if (canScroll(document.documentElement, 'y') || canScroll(document.documentElement, 'x')) {
-    showFor(document.documentElement)
-  }
+  // 바디·상위 영역의 이동도 표시 중인 내부 레일의 화면 좌표에 영향을 줍니다.
+  schedulePositionUpdate()
 }
 
 function onPointerOver (event) {
@@ -347,21 +343,39 @@ function onPointerOver (event) {
   if (x && x !== y) showFor(x)
 }
 
-function onResize () {
+function updateVisiblePositions () {
+  positionFrame = 0
+  let tracking = false
   for (const el of [...activeElements]) {
+    const ctrl = controllers.get(el)
+    if (!ctrl) continue
     if (!el.isConnected) {
+      clearHide(ctrl)
+      ctrl.vertical.remove()
+      ctrl.horizontal.remove()
+      controllers.delete(el)
       activeElements.delete(el)
       continue
     }
-    const ctrl = controllers.get(el)
-    if (!ctrl) continue
-    if (ctrl.vertical.classList.contains('is-visible') || ctrl.horizontal.classList.contains('is-visible')) {
-      showFor(el)
-    } else {
-      updateRail(el, 'y')
-      updateRail(el, 'x')
+    // 위치만 갱신합니다. 다른 영역의 스크롤로 숨김 타이머를 재시작하지 않습니다.
+    for (const axis of ['y', 'x']) {
+      const rail = axis === 'y' ? ctrl.vertical : ctrl.horizontal
+      if (
+        rail.classList.contains('is-visible') || rail.classList.contains('is-dragging') ||
+        Number.parseFloat(getComputedStyle(rail).opacity) > 0
+      ) {
+        updateRail(el, axis)
+        tracking = true
+      }
     }
   }
+  // 접기·펼치기/전환 애니메이션은 scroll·resize 이벤트 없이 좌표를 바꿀 수 있습니다.
+  // 레일이 표시되거나 페이드아웃 중인 동안에만 추적하고, 완전히 사라지면 멈춥니다.
+  if (tracking) schedulePositionUpdate()
+}
+
+function schedulePositionUpdate () {
+  if (!positionFrame) positionFrame = window.requestAnimationFrame(updateVisiblePositions)
 }
 
 /** classic 환경에서만 오버레이 스크롤바를 켠다 */
@@ -380,12 +394,19 @@ export function initOverlayScrollbar () {
 
   document.addEventListener('scroll', onScrollCapture, { capture: true, passive: true })
   document.addEventListener('pointerover', onPointerOver, { passive: true })
-  window.addEventListener('resize', onResize, { passive: true })
+  window.addEventListener('resize', schedulePositionUpdate, { passive: true })
 
   return () => {
     document.removeEventListener('scroll', onScrollCapture, { capture: true })
     document.removeEventListener('pointerover', onPointerOver)
-    window.removeEventListener('resize', onResize)
+    window.removeEventListener('resize', schedulePositionUpdate)
+    window.cancelAnimationFrame(positionFrame)
+    positionFrame = 0
+    for (const el of activeElements) {
+      const ctrl = controllers.get(el)
+      if (ctrl) clearHide(ctrl)
+      controllers.delete(el)
+    }
     host?.remove()
     host = null
     activeElements.clear()

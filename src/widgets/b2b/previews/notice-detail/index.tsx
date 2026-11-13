@@ -15,7 +15,7 @@ export default function B2bCommonNoticeDetailPage () {
 
   return (
     <>
-      <Page page="b2b-common-notice-detail" title={pageTitle} />
+      <Page page="common-notice-detail" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

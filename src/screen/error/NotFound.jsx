@@ -19,21 +19,21 @@ export default function NotFoundView () {
       <PageLayoutVisibility meta={meta} />
       <Header
         layout="inline"
-        brand={<Link className="app-header__brand" to="/">퍼블리싱 목록</Link>}
-        actions={<Link className="app-header__link" to="/pub">목록으로</Link>}
+        brand={<Link className="app-header_brand" to="/">퍼블리싱 목록</Link>}
+        actions={<Link className="app-header_link" to="/pub">목록으로</Link>}
       />
 
       <div className="page-container error-status">
-        <p className="error-status__code">404</p>
-        <h1 className="error-status__title">페이지를 찾을 수 없습니다</h1>
-        <p className="error-status__desc">
+        <p className="error-status_code">404</p>
+        <h1 className="error-status_title">페이지를 찾을 수 없습니다</h1>
+        <p className="error-status_desc">
           요청한 주소가 없거나 이동되었습니다. URL을 확인하거나 퍼블리시 목록으로 돌아가 주세요.
         </p>
-        <div className="error-status__actions">
-          <Link className="error-status__btn error-status__btn--primary" to="/pub">
+        <div className="error-status_actions">
+          <Link className="error-status_btn error-status_btn_primary" to="/pub">
             퍼블리시 목록
           </Link>
-          <Link className="error-status__btn" to="/b2b">
+          <Link className="error-status_btn" to="/b2b">
             프로젝트
           </Link>
         </div>

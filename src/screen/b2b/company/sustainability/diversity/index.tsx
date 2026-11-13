@@ -5,7 +5,7 @@ import { PublishingPlaceholder } from '@/screen/pub/widgets/publishing/Publishin
 import { resolveSkeletonMode } from '@/config/skeleton'
 import DiversitySkeleton from './skeleton/indexSkeleton'
 
-export const pageTitle = "다양성/노사"
+export const pageTitle = "다양성 / 노사"
 
 /** IA publishing scaffold. Replace this screen body with the approved markup. */
 export default function B2bCompanySustainabilityDiversityPage () {
@@ -56,7 +56,7 @@ export default function B2bCompanySustainabilityDiversityPage () {
 
   return (
     <>
-      <Page page="b2b-company-sustainability-diversity" title={pageTitle} />
+      <Page page="company-sustainability-diversity" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

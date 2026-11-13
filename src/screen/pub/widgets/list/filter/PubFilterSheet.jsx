@@ -27,34 +27,34 @@ export default function PubFilterSheet ({
     <div
       className="wbs-bottom-sheet"
     >
-      <div className="wbs-bottom-sheet__backdrop" aria-hidden="true" onClick={onClose} />
+      <div className="wbs-bottom-sheet_backdrop" aria-hidden="true" onClick={onClose} />
       <div
         ref={panelRef}
-        className="wbs-bottom-sheet__panel"
+        className="wbs-bottom-sheet_panel"
         role="dialog"
         aria-modal="true"
         aria-labelledby="wbs-filter-sheet-title"
         tabIndex={-1}
       >
-        <header className="wbs-bottom-sheet__header">
-          <div className="wbs-bottom-sheet__handle" aria-hidden="true" />
-          <h2 id="wbs-filter-sheet-title" className="wbs-bottom-sheet__title">{title}</h2>
+        <header className="wbs-bottom-sheet_header">
+          <div className="wbs-bottom-sheet_handle" aria-hidden="true" />
+          <h2 id="wbs-filter-sheet-title" className="wbs-bottom-sheet_title">{title}</h2>
           <button
             type="button"
-            className="wbs-btn is-ghost wbs-bottom-sheet__close"
+            className="wbs-btn is-ghost wbs-bottom-sheet_close"
             aria-label={closeLabel}
             onClick={onClose}
           >×</button>
         </header>
-        <ul className="wbs-bottom-sheet__list" role="listbox" aria-label={ariaLabel}>
+        <ul className="wbs-bottom-sheet_list" role="listbox" aria-label={ariaLabel}>
           <li role="option" aria-selected={!activeId ? 'true' : 'false'}>
             <button
               type="button"
-              className={classNames('wbs-bottom-sheet__item', { 'is-active': !activeId })}
+              className={classNames('wbs-bottom-sheet_item', { 'is-active': !activeId })}
               onClick={() => onPick(null)}
             >
               <span>{allLabel}</span>
-              <span className="wbs-bottom-sheet__count">{folders.length}</span>
+              <span className="wbs-bottom-sheet_count">{folders.length}</span>
             </button>
           </li>
           {folders.map((folder) => (
@@ -65,11 +65,11 @@ export default function PubFilterSheet ({
             >
               <button
                 type="button"
-                className={classNames('wbs-bottom-sheet__item', { 'is-active': activeId === folder.id })}
+                className={classNames('wbs-bottom-sheet_item', { 'is-active': activeId === folder.id })}
                 onClick={() => onPick(folder.id)}
               >
                 <span>{labelOf(folder)}</span>
-                <span className="wbs-bottom-sheet__count">{countOf(folder)}</span>
+                <span className="wbs-bottom-sheet_count">{countOf(folder)}</span>
               </button>
             </li>
           ))}

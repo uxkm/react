@@ -12,7 +12,7 @@
   text-align: left;
 
   // ----- 상태 코드 · 제목 · 설명
-  &__code {
+  &_code {
     margin: 0;
     font-size: 13px;
     font-weight: 700;
@@ -21,7 +21,7 @@
     color: var(--color-accent-text);
   }
 
-  &__title {
+  &_title {
     margin: 0;
     font-size: 28px;
     font-weight: 700;
@@ -30,7 +30,7 @@
     color: var(--color-text);
   }
 
-  &__desc {
+  &_desc {
     margin: 0;
     font-size: 14px;
     line-height: 1.6;
@@ -38,14 +38,14 @@
   }
 
   // ----- 액션 버튼
-  &__actions {
+  &_actions {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
     margin-top: 8px;
   }
 
-  &__btn {
+  &_btn {
     display: inline-flex;
     align-items: center;
     min-height: 36px;
@@ -63,7 +63,7 @@
       border-color: var(--color-accent);
     }
 
-    &--primary {
+    &_primary {
       border-color: var(--color-accent);
       background: var(--color-accent);
       color: var(--color-on-accent);
@@ -76,7 +76,7 @@
   }
 
   // ----- 상세(스택·메시지) 블록
-  &__detail {
+  &_detail {
     margin: 4px 0 0;
     padding: 12px 14px;
     width: 100%;

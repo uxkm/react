@@ -22,50 +22,50 @@ export default function RemarkModal ({
     <div
       className="remark-modal"
     >
-      <div className="remark-modal__backdrop" aria-hidden="true" onClick={onClose} />
+      <div className="remark-modal_backdrop" aria-hidden="true" onClick={onClose} />
       <div
         ref={dialogRef}
-        className="remark-modal__dialog"
+        className="remark-modal_dialog"
         role="dialog"
         aria-modal="true"
         aria-labelledby="remark-modal-title"
         tabIndex={-1}
       >
-        <header className="remark-modal__header">
+        <header className="remark-modal_header">
           <div>
-            <p className="remark-modal__eyebrow">{historyLabel}</p>
-            <h2 id="remark-modal-title" className="remark-modal__title">
+            <p className="remark-modal_eyebrow">{historyLabel}</p>
+            <h2 id="remark-modal-title" className="remark-modal_title">
               {itemName || detailLabel}
             </h2>
             {itemId && (
-              <p className="remark-modal__meta">{itemId}</p>
+              <p className="remark-modal_meta">{itemId}</p>
             )}
           </div>
           <button
             type="button"
-            className="wbs-btn is-ghost remark-modal__close"
+            className="wbs-btn is-ghost remark-modal_close"
             aria-label={closeLabel}
             onClick={onClose}
           >×</button>
         </header>
-        <div className="remark-modal__body">
+        <div className="remark-modal_body">
           {items.length
             ? (
               <ul className="remark-history">
                 {items.map((item, index) => (
-                  <li key={index} className="remark-history__item">
-                    <div className="remark-history__head">
-                      <span className="remark-history__date">{item.date || '-'}</span>
+                  <li key={index} className="remark-history_item">
+                    <div className="remark-history_head">
+                      <span className="remark-history_date">{item.date || '-'}</span>
                       {item.author && (
-                        <span className="remark-history__author">{item.author}</span>
+                        <span className="remark-history_author">{item.author}</span>
                       )}
                     </div>
-                    <p className="remark-history__text">{item.text}</p>
+                    <p className="remark-history_text">{item.text}</p>
                   </li>
                 ))}
               </ul>
             )
-            : <div className="remark-modal__empty">{emptyLabel}</div>}
+            : <div className="remark-modal_empty">{emptyLabel}</div>}
         </div>
       </div>
     </div>

@@ -54,7 +54,7 @@ function LottieFolderPreview () {
 
   return (
     <div className="lib-demo-lottie-picker">
-      <div className="form_field lib-demo-lottie-picker__field">
+      <div className="form_field lib-demo-lottie-picker_field">
         <label className="form_field-label" htmlFor="lottie-file-select">
           Lottie 파일
         </label>
@@ -87,7 +87,7 @@ function LottieFolderPreview () {
           />
           )
         : (
-          <p className="lib-demo-lottie-picker__empty">
+          <p className="lib-demo-lottie-picker_empty">
             {listError ? '목록을 불러오지 못했습니다.' : '선택 가능한 Lottie 파일이 없습니다.'}
           </p>
           )}

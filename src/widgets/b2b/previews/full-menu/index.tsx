@@ -1,40 +1,20 @@
 'use client'
 
 import { Page, PageLoading } from '@/comp'
-import { PublishingPlaceholder } from '@/screen/pub/widgets/publishing/PublishingPlaceholder'
+import { FullMenuContent } from '@/widgets/b2b/common/FullMenu'
 import { resolveSkeletonMode } from '@/config/skeleton'
 import FullMenuSkeleton from './skeleton/indexSkeleton'
 
-export const pageTitle = "전체 사이트맵"
+export const pageTitle = "전체메뉴"
+export const meta = { banner: false, header: false, footer: false, floating: false }
 
-/** IA publishing scaffold. Replace this screen body with the approved markup. */
 export default function B2bCommonFullMenuPage () {
-  const links = []
   const skeletonId = 'b2b/common/full-menu'
   const skeletonMode = resolveSkeletonMode(skeletonId)
-
-  return (
-    <>
-      <Page page="b2b-common-full-menu" title={pageTitle} />
-      <PageLoading
-        loading={false}
-        skeletonId={skeletonId}
-        skeletonMode={skeletonMode}
-        skeleton={skeletonMode === 'manual' ? <FullMenuSkeleton /> : undefined}
-        className="page-container"
-      >
-        <PublishingPlaceholder
-          device="B2B"
-          folderId="common"
-          folderName="공통"
-          screenName={pageTitle}
-          screenType="Layer"
-          screenId="B2B-COMMON-002"
-          pageUrl="/b2b/common/full-menu"
-          links={links}
-        />
-
-      </PageLoading>
-    </>
-  )
+  return <>
+    <Page page="common-full-menu" title={pageTitle} className="project-content widget-preview" />
+    <PageLoading loading={false} skeletonId={skeletonId} skeletonMode={skeletonMode} skeleton={skeletonMode === 'manual' ? <FullMenuSkeleton /> : undefined} className="full-menu-content-preview">
+      <FullMenuContent initialSection="business" />
+    </PageLoading>
+  </>
 }

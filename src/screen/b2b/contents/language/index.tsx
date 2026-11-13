@@ -5,7 +5,7 @@ import { PublishingPlaceholder } from '@/screen/pub/widgets/publishing/Publishin
 import { resolveSkeletonMode } from '@/config/skeleton'
 import IndexSkeleton from './skeleton/indexSkeleton'
 
-export const pageTitle = "외국어 교육"
+export const pageTitle = "외국어교육"
 
 /** IA publishing scaffold. Replace this screen body with the approved markup. */
 export default function B2bContentsLanguagePage () {
@@ -32,7 +32,7 @@ export default function B2bContentsLanguagePage () {
     },
     {
       "to": "/b2b/contents/small-business",
-      "label": "중소기업 인재키움 프리미엄",
+      "label": "[상생협력] 중소기업 인재키움 프리미엄",
       "screenId": "B2B-CONTENTS-SMALL-BUSINESS"
     }
   ]
@@ -41,7 +41,7 @@ export default function B2bContentsLanguagePage () {
 
   return (
     <>
-      <Page page="b2b-contents-language" title={pageTitle} />
+      <Page page="contents-language" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

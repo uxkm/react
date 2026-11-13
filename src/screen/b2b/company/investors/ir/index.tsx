@@ -16,7 +16,7 @@ export default function B2bCompanyInvestorsIrPage () {
       "screenId": "B2B-ABOUT-006"
     },
     {
-      "to": "/b2b/company/investors/stock",
+      "to": "/b2b/company/investors/shareholders",
       "label": "주주정보",
       "screenId": "B2B-COMPANY-INVESTORS-STOCK"
     },
@@ -31,7 +31,7 @@ export default function B2bCompanyInvestorsIrPage () {
 
   return (
     <>
-      <Page page="b2b-company-investors-ir" title={pageTitle} />
+      <Page page="company-investors-ir" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

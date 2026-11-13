@@ -21,7 +21,7 @@ export default function B2bInsightResourcesListPage () {
 
   return (
     <>
-      <Page page="b2b-insight-resources-list" title={pageTitle} />
+      <Page page="insight-resources-list" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

@@ -41,20 +41,20 @@ export function DemoBlock ({
 
   return (
     <div className={classNames('demo-block', className)}>
-      {title ? <h2 className="demo-block__title">{title}</h2> : null}
+      {title ? <h2 className="demo-block_title">{title}</h2> : null}
       {description
         ? (
-          <div className="demo-block__desc">{description}</div>
+          <div className="demo-block_desc">{description}</div>
           )
         : null}
-      <div className="demo-block__preview">{children}</div>
+      <div className="demo-block_preview">{children}</div>
       {hasCode
         ? (
           <div className={classNames('demo-code', expanded && 'is-expanded')}>
-            <div className="demo-code__togglebar">
+            <div className="demo-code_togglebar">
               <button
                 type="button"
-                className="demo-code__toggle"
+                className="demo-code_toggle"
                 aria-controls={panelId}
                 aria-expanded={expanded}
                 onClick={() => setExpanded((v) => !v)}
@@ -67,14 +67,14 @@ export function DemoBlock ({
             </div>
             {expanded
               ? (
-                <div className="demo-code__body" id={panelId}>
-                  <div className="demo-code__filebar">
+                <div className="demo-code_body" id={panelId}>
+                  <div className="demo-code_filebar">
                     <code>{fileName}</code>
-                    <button type="button" className="demo-code__copy" onClick={copyCode}>
+                    <button type="button" className="demo-code_copy" onClick={copyCode}>
                       {copied ? '복사됨' : '코드 복사'}
                     </button>
                   </div>
-                  <pre className="demo-code__pre"><code>{code}</code></pre>
+                  <pre className="demo-code_pre"><code>{code}</code></pre>
                 </div>
                 )
               : null}

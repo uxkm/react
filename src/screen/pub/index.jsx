@@ -377,7 +377,7 @@ export default function PubIndex () {
     if (!root) return
 
     const sticky = stickyRef.current
-    const headEl = root.querySelector('.wbs-table__head')
+    const headEl = root.querySelector('.wbs-table_head')
     const headH = headEl ? headEl.offsetHeight : 33
 
     if (sticky) {

@@ -9,11 +9,11 @@
     var(--color-bg);
 
   // ----- 페이지 헤더 (카테고리 · 제목 · 설명)
-  &__header {
+  &_header {
     margin-bottom: 24px;
   }
 
-  &__cat {
+  &_cat {
     margin: 0 0 6px;
     font-size: 12px;
     font-weight: 700;
@@ -22,7 +22,7 @@
     color: var(--color-accent-text);
   }
 
-  &__title {
+  &_title {
     margin: 0;
     font-size: 28px;
     font-weight: 700;
@@ -30,7 +30,7 @@
     color: var(--color-text);
   }
 
-  &__desc {
+  &_desc {
     margin: 8px 0 0;
     color: var(--color-text-muted);
     font-size: 14px;
@@ -38,7 +38,7 @@
   }
 
   // ----- 예시 본문 카드
-  &__body {
+  &_body {
     border: 1px solid var(--color-border);
     border-radius: var(--radius-panel);
     background: var(--color-surface);
@@ -66,14 +66,14 @@
     border-top: 1px solid var(--color-border);
   }
 
-  &__title {
+  &_title {
     margin: 0 0 12px;
     font-size: 14px;
     font-weight: 700;
     color: var(--color-text);
   }
 
-  &__desc {
+  &_desc {
     margin: 0 0 12px;
     color: var(--color-text-muted);
     font-size: 13px;
@@ -85,7 +85,7 @@
     }
   }
 
-  &__preview {
+  &_preview {
     min-width: 0;
   }
 }
@@ -104,13 +104,13 @@
 .demo-code {
   margin-top: 12px;
 
-  &__togglebar {
+  &_togglebar {
     display: flex;
     align-items: center;
     min-height: 36px;
   }
 
-  &__toggle {
+  &_toggle {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -142,7 +142,7 @@
     }
   }
 
-  &__body {
+  &_body {
     overflow: hidden;
     margin-top: 4px;
     border: 1px solid var(--color-border);
@@ -150,7 +150,7 @@
     background: #101827;
   }
 
-  &__filebar {
+  &_filebar {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -168,7 +168,7 @@
     }
   }
 
-  &__copy {
+  &_copy {
     flex-shrink: 0;
     margin: 0;
     padding: 4px 8px;
@@ -187,7 +187,7 @@
     }
   }
 
-  &__pre {
+  &_pre {
     overflow: auto;
     max-height: 560px;
     margin: 0;
@@ -249,36 +249,36 @@
   padding-top: 8px;
   border-top: 1px solid var(--color-border);
 
-  &__section {
-    + .guide-api__section {
+  &_section {
+    + .guide-api_section {
       margin-top: 28px;
       padding-top: 24px;
       border-top: 1px solid var(--color-border);
     }
   }
 
-  &__title {
+  &_title {
     margin: 0 0 8px;
     font-size: 15px;
     font-weight: 700;
     color: var(--color-text);
   }
 
-  &__desc {
+  &_desc {
     margin: 0 0 12px;
     color: var(--color-text-muted);
     font-size: 13px;
     line-height: 1.5;
   }
 
-  &__table-wrap {
+  &_table-wrap {
     overflow-x: auto;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-panel, 12px);
     background: var(--color-bg);
   }
 
-  &__table {
+  &_table {
     width: 100%;
     min-width: 40rem;
     border-collapse: collapse;

@@ -27,12 +27,12 @@ export default function B2bContentsLeadershipPage () {
     },
     {
       "to": "/b2b/contents/language",
-      "label": "외국어 교육",
+      "label": "외국어교육",
       "screenId": "B2B-CORPED-006"
     },
     {
       "to": "/b2b/contents/small-business",
-      "label": "중소기업 인재키움 프리미엄",
+      "label": "[상생협력] 중소기업 인재키움 프리미엄",
       "screenId": "B2B-CONTENTS-SMALL-BUSINESS"
     }
   ]
@@ -41,7 +41,7 @@ export default function B2bContentsLeadershipPage () {
 
   return (
     <>
-      <Page page="b2b-contents-leadership" title={pageTitle} />
+      <Page page="contents-leadership" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

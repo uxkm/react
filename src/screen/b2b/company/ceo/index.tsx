@@ -5,7 +5,7 @@ import { PublishingPlaceholder } from '@/screen/pub/widgets/publishing/Publishin
 import { resolveSkeletonMode } from '@/config/skeleton'
 import CeoSkeleton from './skeleton/indexSkeleton'
 
-export const pageTitle = "CEO 인사말"
+export const pageTitle = "CEO인사말"
 
 /** IA publishing scaffold. Replace this screen body with the approved markup. */
 export default function B2bCompanyCeoPage () {
@@ -26,7 +26,7 @@ export default function B2bCompanyCeoPage () {
 
   return (
     <>
-      <Page page="b2b-company-ceo" title={pageTitle} />
+      <Page page="company-ceo" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

@@ -15,7 +15,7 @@ export default function B2bCommonBackTopPage () {
 
   return (
     <>
-      <Page page="b2b-common-back-top" title={pageTitle} />
+      <Page page="common-back-top" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

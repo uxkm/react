@@ -22,13 +22,8 @@ export default function B2bCommonPage () {
     },
     {
       "to": "/b2b/common/full-menu",
-      "label": "전체 사이트맵",
+      "label": "전체메뉴",
       "screenId": "B2B-COMMON-002"
-    },
-    {
-      "to": "/b2b/common/sitemap",
-      "label": "About 사이트맵",
-      "screenId": "B2B-COMMON-004"
     },
     {
       "to": "/b2b/common/tab-navigation",
@@ -111,7 +106,7 @@ export default function B2bCommonPage () {
 
   return (
     <>
-      <Page page="b2b-common" title={pageTitle} />
+      <Page page="common" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

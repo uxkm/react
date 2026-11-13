@@ -113,6 +113,7 @@ export function Link ({
       className: linkClass,
       href: rootTag === 'a' ? (href || '#') : undefined,
       target: resolvedTarget || undefined,
+      title: resolvedTarget === '_blank' ? '새 창 열림' : rest.title,
       rel: resolvedRel,
       'aria-label': ariaLabel || (rest as Record<string, unknown>)['aria-label'] || undefined,
       'aria-disabled': disabled ? 'true' : undefined,

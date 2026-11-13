@@ -4,7 +4,8 @@ const endpoint = 'https://translate.googleapis.com/translate_a/single?**'
 const failureMessage = '번역 서비스를 사용할 수 없어 원문을 표시합니다.'
 
 async function visit (page) {
-  await page.goto('/b2b/contents/ax/overview')
+  // 언어 선택기가 있는 공통 헤더에서 번역 계약을 검증합니다.
+  await page.goto('/pub/guide/button')
   await expect(page.locator('#app-header-language')).toBeVisible()
   await expect(page.locator('.app-layout')).toHaveAttribute('data-translating', 'false')
   return page.getByRole('main').locator('h1').textContent()

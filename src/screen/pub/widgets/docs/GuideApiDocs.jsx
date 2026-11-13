@@ -24,8 +24,8 @@ function ApiTable ({ columns = DEFAULT_COLUMNS, rows, codeColumn = 'name' }) {
   if (!rows?.length) return null
 
   return (
-    <div className="guide-api__table-wrap" role="region" aria-label="API 표" tabIndex={0}>
-      <table className="guide-api__table">
+    <div className="guide-api_table-wrap" role="region" aria-label="API 표" tabIndex={0}>
+      <table className="guide-api_table">
         <thead>
           <tr>
             {columns.map((col) => (
@@ -65,15 +65,15 @@ export function GuideApiDocs ({ sections, className }) {
     <div className={['guide-api', className].filter(Boolean).join(' ')}>
       {sections.map((section, sectionIndex) => (
         <section
-          className="guide-api__section"
+          className="guide-api_section"
           key={`${section.title}-${sectionIndex}`}
           aria-labelledby={`guide-api-${sectionIndex}`}
         >
-          <h2 className="guide-api__title" id={`guide-api-${sectionIndex}`}>
+          <h2 className="guide-api_title" id={`guide-api-${sectionIndex}`}>
             {section.title}
           </h2>
           {section.description
-            ? <p className="guide-api__desc">{section.description}</p>
+            ? <p className="guide-api_desc">{section.description}</p>
             : null}
           {section.tables.map((table, tableIndex) => (
             <ApiTable key={tableIndex} {...table} />

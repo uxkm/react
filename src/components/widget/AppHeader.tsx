@@ -28,7 +28,7 @@ export function AppHeaderLink ({ className, end = true, to, href, children, ...r
       to={to ?? href}
       end={end}
       className={({ isActive }) => classNames(
-        'app-header__link',
+        'app-header_link',
         isActive && 'is-active router-link-exact-active',
         typeof className === 'string' && className
       )}
@@ -115,8 +115,8 @@ export function AppHeader ({
       style={headerAppearanceStyle({ background, scrolledBackground, style })}
       className={classNames(
         'app-header',
-        stacked && 'app-header--stacked',
-        stacked && hideNavOnScroll && 'app-header--hide-nav-on-scroll',
+        stacked && 'app-header_stacked',
+        stacked && hideNavOnScroll && 'app-header_hide-nav-on-scroll',
         className
       )}
       data-header-layout={layout}
@@ -124,36 +124,36 @@ export function AppHeader ({
     >
       {hasNodes(children)
         ? (
-          <div className="app-header__top">
-            <div className="app-header__inner">{children}</div>
+          <div className="app-header_top">
+            <div className="app-header_inner">{children}</div>
           </div>
         )
         : (
           <>
-            <div className="app-header__top">
-              <div className="app-header__inner">
-                <div className="app-header__start">
+            <div className="app-header_top">
+              <div className="app-header_inner">
+                <div className="app-header_start">
                   {hasNodes(back) && (
-                    <div className="app-header__back">{back}</div>
+                    <div className="app-header_back">{back}</div>
                   )}
-                  <div className="app-header__brand-wrap">
+                  <div className="app-header_brand-wrap">
                     {hasNodes(brand)
                       ? brand
-                      : <Link className="app-header__brand" to="/pub">퍼블리싱 목록</Link>}
+                      : <Link className="app-header_brand" to="/pub">퍼블리싱 목록</Link>}
                   </div>
                 </div>
-                <div className="app-header__end">
+                <div className="app-header_end">
                   {!stacked && showNav && (
-                    <nav className="app-header__nav" aria-label="주요 메뉴">
+                    <nav className="app-header_nav" aria-label="주요 메뉴">
                       {navNodes}
                     </nav>
                   )}
                   {showActions && (
-                    <div className="app-header__actions">
+                    <div className="app-header_actions">
                       {hasNodes(actions) ? actions : null}
                       {showLanguageSwitcher ? (
                         <LanguageSwitcher
-                          className="app-header__lang"
+                          className="app-header_lang"
                           id="app-header-language"
                         />
                       ) : null}
@@ -163,9 +163,9 @@ export function AppHeader ({
               </div>
             </div>
             {showNavBar && (
-              <div className="app-header__nav-bar">
-                <div className="app-header__inner app-header__inner--nav">
-                  <nav className="app-header__nav" aria-label="주요 메뉴">
+              <div className="app-header_nav-bar">
+                <div className="app-header_inner app-header_inner_nav">
+                  <nav className="app-header_nav" aria-label="주요 메뉴">
                     {navNodes}
                   </nav>
                 </div>

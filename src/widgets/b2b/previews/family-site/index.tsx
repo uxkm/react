@@ -15,7 +15,7 @@ export default function B2bCommonFamilySitePage () {
 
   return (
     <>
-      <Page page="b2b-common-family-site" title={pageTitle} />
+      <Page page="common-family-site" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

@@ -18,7 +18,7 @@ import { GUIDE_SECTION, useGuideTitle } from '@/screen/pub/hooks/useGuideTitle' 
 import { GuideMenu } from '@/screen/pub/widgets/navigation/GuideMenu' // 좌측 가이드 네비
 
 const DEFAULT_GUIDE_BRAND = (
-  <span className="app-header__brand">퍼블리싱 가이드</span>
+  <span className="app-header_brand">퍼블리싱 가이드</span>
 )
 
 /**
@@ -64,7 +64,7 @@ export function GuideLayout ({
   useGuideTitle(documentTitle || title, { section: documentSection })
 
   const defaultBack = showBack
-    ? <Link className="app-header__back-link" to={backTo}>{backLabel}</Link>
+    ? <Link className="app-header_back-link" to={backTo}>{backLabel}</Link>
     : null
   const backNode = headerBack !== undefined ? headerBack : defaultBack
   const brandNode = headerBrand !== undefined ? headerBrand : DEFAULT_GUIDE_BRAND
@@ -89,12 +89,12 @@ export function GuideLayout ({
     <div className="demo-page">
       {/* fluid: max-width 해제, 좌우 padding 만 남기고 가용 폭 100% */}
       <Container fluid>
-        <header className="demo-page__header">
-          {category && <p className="demo-page__cat">{category}</p>}
-          <h1 className="demo-page__title">{title}</h1>
-          {description && <p className="demo-page__desc">{description}</p>}
+        <header className="demo-page_header">
+          {category && <p className="demo-page_cat">{category}</p>}
+          <h1 className="demo-page_title">{title}</h1>
+          {description && <p className="demo-page_desc">{description}</p>}
         </header>
-        <section className="demo-page__body">{children}</section>
+        <section className="demo-page_body">{children}</section>
       </Container>
     </div>
   )
@@ -107,7 +107,7 @@ export function GuideLayout ({
         ? (
           <div className={classNames('comp-guide', className)}>
             <GuideMenu />
-            <div className="comp-guide__main">{page}</div>
+            <div className="comp-guide_main">{page}</div>
           </div>
           )
         : page}

@@ -5,7 +5,7 @@
 export default function PubLoadError ({ message, retryLabel, onRetry }) {
   return (
     <div className="wbs-state wbs-alert" role="alert">
-      <p className="wbs-alert__title">{message}</p>
+      <p className="wbs-alert_title">{message}</p>
       <button type="button" className="wbs-btn" onClick={onRetry}>
         {retryLabel}
       </button>

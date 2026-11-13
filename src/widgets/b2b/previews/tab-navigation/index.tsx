@@ -15,7 +15,7 @@ export default function B2bCommonTabNavigationPage () {
 
   return (
     <>
-      <Page page="b2b-common-tab-navigation" title={pageTitle} />
+      <Page page="common-tab-navigation" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

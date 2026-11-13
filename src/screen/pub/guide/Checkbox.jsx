@@ -91,9 +91,9 @@ const SECTIONS = [
                 />
               )}
             >
-              <h3 className="card_title" id="checkbox-type-card-title">
+              <strong className="card_title" id="checkbox-type-card-title">
                 카드형 — checkbox_card
-              </h3>
+              </strong>
             </CardHeader>
             <CardBody id="checkbox-type-card-desc">
               card 컴포넌트와 조합해 제목·설명을 표시합니다.
@@ -370,7 +370,7 @@ const [email, setEmail] = useState(true)
     code: wrapPageExample(`<div className="checkbox_card">
   <Card compact className="card_shadow">
     <CardHeader extra={<Checkbox id="…" checked aria-labelledby="…" />}>
-      <h3 className="card_title" id="…">Basic</h3>
+      <strong className="card_title" id="…">Basic</strong>
       <p className="card_subtitle">월 9,000원</p>
     </CardHeader>
     <CardBody id="…">개인 프로젝트에 적합합니다.</CardBody>
@@ -398,7 +398,7 @@ const [email, setEmail] = useState(true)
                     />
                   )}
                 >
-                  <h3 className="card_title" id="checkbox-plan-basic-title">Basic</h3>
+                  <strong className="card_title" id="checkbox-plan-basic-title">Basic</strong>
                   <p className="card_subtitle">월 9,000원</p>
                 </CardHeader>
                 <CardBody id="checkbox-plan-basic-desc">개인 프로젝트에 적합합니다.</CardBody>
@@ -416,7 +416,7 @@ const [email, setEmail] = useState(true)
                     />
                   )}
                 >
-                  <h3 className="card_title" id="checkbox-plan-pro-title">Pro</h3>
+                  <strong className="card_title" id="checkbox-plan-pro-title">Pro</strong>
                   <p className="card_subtitle">월 29,000원</p>
                 </CardHeader>
                 <CardBody id="checkbox-plan-pro-desc">팀 협업과 고급 기능을 제공합니다.</CardBody>
@@ -435,7 +435,7 @@ const [email, setEmail] = useState(true)
                     />
                   )}
                 >
-                  <h3 className="card_title" id="checkbox-plan-enterprise-title">Enterprise</h3>
+                  <strong className="card_title" id="checkbox-plan-enterprise-title">Enterprise</strong>
                   <p className="card_subtitle">별도 문의</p>
                 </CardHeader>
                 <CardBody id="checkbox-plan-enterprise-desc">
@@ -459,7 +459,7 @@ const [email, setEmail] = useState(true)
                     />
                   )}
                 >
-                  <h3 className="card_title" id="checkbox-perm-read-title">읽기</h3>
+                  <strong className="card_title" id="checkbox-perm-read-title">읽기</strong>
                 </CardHeader>
                 <CardBody id="checkbox-perm-read-desc">조회 권한</CardBody>
               </Card>
@@ -475,7 +475,7 @@ const [email, setEmail] = useState(true)
                     />
                   )}
                 >
-                  <h3 className="card_title" id="checkbox-perm-write-title">쓰기</h3>
+                  <strong className="card_title" id="checkbox-perm-write-title">쓰기</strong>
                 </CardHeader>
                 <CardBody id="checkbox-perm-write-desc">수정 권한</CardBody>
               </Card>
@@ -490,7 +490,7 @@ const [email, setEmail] = useState(true)
                     />
                   )}
                 >
-                  <h3 className="card_title" id="checkbox-perm-delete-title">삭제</h3>
+                  <strong className="card_title" id="checkbox-perm-delete-title">삭제</strong>
                 </CardHeader>
                 <CardBody id="checkbox-perm-delete-desc">삭제 권한</CardBody>
               </Card>
@@ -520,7 +520,7 @@ const [email, setEmail] = useState(true)
                     />
                   )}
                 >
-                  <h3 className="card_title" id="checkbox-plan-full-basic-title">Basic</h3>
+                  <strong className="card_title" id="checkbox-plan-full-basic-title">Basic</strong>
                   <p className="card_subtitle">월 9,000원</p>
                 </CardHeader>
                 <CardBody id="checkbox-plan-full-basic-desc">
@@ -545,7 +545,7 @@ const [email, setEmail] = useState(true)
                     />
                   )}
                 >
-                  <h3 className="card_title" id="checkbox-plan-full-pro-title">Pro</h3>
+                  <strong className="card_title" id="checkbox-plan-full-pro-title">Pro</strong>
                   <p className="card_subtitle">월 29,000원</p>
                 </CardHeader>
                 <CardBody id="checkbox-plan-full-pro-desc">
@@ -571,7 +571,7 @@ const [email, setEmail] = useState(true)
                     />
                   )}
                 >
-                  <h3 className="card_title" id="checkbox-plan-full-enterprise-title">Enterprise</h3>
+                  <strong className="card_title" id="checkbox-plan-full-enterprise-title">Enterprise</strong>
                   <p className="card_subtitle">별도 문의</p>
                 </CardHeader>
                 <CardBody id="checkbox-plan-full-enterprise-desc">

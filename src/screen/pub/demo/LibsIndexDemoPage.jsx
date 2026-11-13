@@ -45,11 +45,11 @@ export default function LibsIndexDemoPage () {
             to={`/pub/demo/${item.id}`}
           >
             {item.package
-              ? <p className="lib-demo-card__pkg">{item.package}</p>
+              ? <p className="lib-demo-card_pkg">{item.package}</p>
               : null}
-            <h2 className="lib-demo-card__title">{item.title}</h2>
+            <h2 className="lib-demo-card_title">{item.title}</h2>
             {item.description
-              ? <p className="lib-demo-card__desc">{item.description}</p>
+              ? <p className="lib-demo-card_desc">{item.description}</p>
               : null}
           </Link>
         ))}

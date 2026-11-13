@@ -198,7 +198,7 @@ function AppLayoutInner ({
 
   // 페이지 클래스가 바뀌면 React가 class 속성을 갱신하므로 스크롤 상태 클래스를 다시 맞춘다.
   useLayoutEffect(() => {
-    const main = layoutRef.current?.querySelector('.app-layout__main')
+    const main = layoutRef.current?.querySelector('.app-layout_main')
     const headerEl = main?.previousElementSibling as HTMLElement | null
     if (!hasHeader || !headerEl) return
     headerEl.classList.toggle('is-scroll-hidden', headerHiddenRef.current)
@@ -207,14 +207,14 @@ function AppLayoutInner ({
 
   /** 헤더 높이를 CSS 변수로 남긴다. 숨김이면 메뉴 높이를 뺀다 */
   const measureHeader = useCallback((headerEl: HTMLElement, hidden: boolean) => {
-    const topEl = headerEl.querySelector('.app-header__top') as HTMLElement | null
-    const navBar = headerEl.querySelector('.app-header__nav-bar') as HTMLElement | null
+    const topEl = headerEl.querySelector('.app-header_top') as HTMLElement | null
+    const navBar = headerEl.querySelector('.app-header_nav-bar') as HTMLElement | null
     const topH = topEl?.offsetHeight ?? 0
     headerEl.style.setProperty('--app-header-top-height', `${topH}px`)
 
     const hideAll =
       hideNavOnScrollRef.current ||
-      headerEl.classList.contains('app-header--hide-nav-on-scroll') ||
+      headerEl.classList.contains('app-header_hide-nav-on-scroll') ||
       headerEl.dataset.hideNavOnScroll === 'true'
 
     // hideNavOnScroll / inline 숨김: 0 / stacked 기본 숨김: 네비만 / 그 외: 전체
@@ -239,7 +239,7 @@ function AppLayoutInner ({
       return
     }
 
-    const main = layout.querySelector('.app-layout__main')
+    const main = layout.querySelector('.app-layout_main')
     const headerEl = main?.previousElementSibling as HTMLElement | null
     if (!headerEl) {
       setHeight(0)
@@ -247,7 +247,7 @@ function AppLayoutInner ({
     }
 
     // 커스텀 헤더 슬롯에도 옵션 반영
-    headerEl.classList.toggle('app-header--hide-nav-on-scroll', resolvedHideNavOnScroll)
+    headerEl.classList.toggle('app-header_hide-nav-on-scroll', resolvedHideNavOnScroll)
     if (resolvedHideNavOnScroll) headerEl.dataset.hideNavOnScroll = 'true'
     else delete headerEl.dataset.hideNavOnScroll
 
@@ -263,8 +263,8 @@ function AppLayoutInner ({
     ro.observe(layout)
     const bannerEl = headerAnchorRef.current?.previousElementSibling
     if (bannerEl) ro.observe(bannerEl)
-    const topEl = headerEl.querySelector('.app-header__top')
-    const navBar = headerEl.querySelector('.app-header__nav-bar')
+    const topEl = headerEl.querySelector('.app-header_top')
+    const navBar = headerEl.querySelector('.app-header_nav-bar')
     if (topEl) ro.observe(topEl)
     if (navBar) ro.observe(navBar)
     return () => ro.disconnect()
@@ -277,7 +277,7 @@ function AppLayoutInner ({
     const layout = layoutRef.current
     if (!layout) return
 
-    const main = layout.querySelector('.app-layout__main')
+    const main = layout.querySelector('.app-layout_main')
     const headerEl = main?.previousElementSibling as HTMLElement | null
     if (!headerEl) return
     syncHeaderScrolled(headerEl)
@@ -289,6 +289,8 @@ function AppLayoutInner ({
 
     /** 스크롤로 헤더를 접거나 편다 */
     const applyHidden = (hidden: boolean) => {
+      // 고정 헤더는 스크롤 방향과 무관하게 표시하고 높이도 유지합니다.
+      hidden = hidden && headerEl.dataset.headerScroll !== 'fixed'
       if (headerHiddenRef.current === hidden) return
       headerHiddenRef.current = hidden
       headerEl.classList.toggle('is-scroll-hidden', hidden)
@@ -297,6 +299,8 @@ function AppLayoutInner ({
         `${measureHeader(headerEl, hidden)}px`
       )
     }
+
+    if (headerEl.dataset.headerScroll === 'fixed') applyHidden(false)
 
     /** 스크롤 방향을 모아 한 프레임에 한 번 헤더를 접는다 */
     const onScroll = () => {
@@ -346,16 +350,16 @@ function AppLayoutInner ({
     <div
       {...rest}
       ref={layoutRef}
-      className={classNames('app-layout', hasHeader && 'app-layout--has-header', className)}
+      className={classNames('app-layout', hasHeader && 'app-layout_has-header', className)}
     >
       {/* 헤더·본문·푸터 전체 DOM 을 선택 언어로 번역 (locales 폴더 불필요) */}
       <GlobalTranslator rootRef={layoutRef} />
-      <div key={treeKey} className="app-layout__tree">
+      <div key={treeKey} className="app-layout_tree">
         {defaultsReady && pageSlots['meta-banner'] !== 'false' && pick('banner', banner)}
         {hasHeader && <span ref={headerAnchorRef} className="app-header-anchor" aria-hidden="true" />}
         {headerNode}
         <main
-          className={classNames('app-layout__main', mainClass)}
+          className={classNames('app-layout_main', mainClass)}
           data-page={mainPage || undefined}
         >
           {children}

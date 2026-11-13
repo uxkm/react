@@ -21,7 +21,7 @@ export default function B2bCompanyEthicsCompliancePage () {
 
   return (
     <>
-      <Page page="b2b-company-ethics-compliance" title={pageTitle} />
+      <Page page="company-ethics-compliance" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

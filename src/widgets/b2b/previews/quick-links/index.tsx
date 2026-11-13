@@ -15,7 +15,7 @@ export default function B2bCommonQuickLinksPage () {
 
   return (
     <>
-      <Page page="b2b-common-quick-links" title={pageTitle} />
+      <Page page="common-quick-links" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

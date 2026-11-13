@@ -24,7 +24,7 @@ export function DemoLayout ({
       backTo={demoHomePath}
       backLabel="← 라이브러리 데모"
       headerBrand={(
-        <Link className="app-header__brand" to={demoHomePath}>Libs</Link>
+        <Link className="app-header_brand" to={demoHomePath}>Libs</Link>
       )}
       headerNav={(
         <>

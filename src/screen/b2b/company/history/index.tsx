@@ -17,7 +17,7 @@ export default function B2bCompanyHistoryPage () {
     },
     {
       "to": "/b2b/company/ceo",
-      "label": "CEO 인사말",
+      "label": "CEO인사말",
       "screenId": "B2B-ABOUT-002"
     }
   ]
@@ -26,7 +26,7 @@ export default function B2bCompanyHistoryPage () {
 
   return (
     <>
-      <Page page="b2b-company-history" title={pageTitle} />
+      <Page page="company-history" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

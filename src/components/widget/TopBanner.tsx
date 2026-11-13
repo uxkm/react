@@ -86,7 +86,7 @@ export function TopBanner ({
   }
 
   const renderBanner = (item: TopBannerItem) => item.href
-    ? <a className="top-banner_content" href={item.href} target={item.target} rel={item.target === '_blank' ? 'noopener noreferrer' : undefined}>{item.content}</a>
+    ? <a className="top-banner_content" href={item.href} target={item.target} title={item.target === '_blank' ? '새 창 열림' : undefined} rel={item.target === '_blank' ? 'noopener noreferrer' : undefined}>{item.content}</a>
     : <div className="top-banner_content">{item.content}</div>
   return (
     <aside

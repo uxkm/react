@@ -25,6 +25,23 @@
           "priority": 1
         },
         {
+          "name": "AI 서비스",
+          "type": "Page",
+          "id": "B2B-SERVICE-PLATFORM-AI",
+          "pageUrl": "/b2b/service/platform/ai",
+          "filePath": "@/screen/b2b/service/platform/ai/index.tsx",
+          "owner": "",
+          "start": "",
+          "expected": "",
+          "end": "",
+          "status": "pending",
+          "progress": 0,
+          "planning": "",
+          "design": "",
+          "remark": [],
+          "priority": 2
+        },
+        {
           "owner": "",
           "start": "",
           "expected": "",

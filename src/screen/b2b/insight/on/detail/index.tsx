@@ -21,7 +21,7 @@ export default function B2bInsightOnDetailPage () {
 
   return (
     <>
-      <Page page="b2b-insight-on-detail" title={pageTitle} />
+      <Page page="insight-on-detail" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

@@ -26,7 +26,7 @@ export default function B2bContentsJobIndustryPage () {
 
   return (
     <>
-      <Page page="b2b-contents-job-industry" title={pageTitle} />
+      <Page page="contents-job-industry" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

@@ -15,7 +15,7 @@ export default function B2bCommonIntegratedSearchResultsPage () {
 
   return (
     <>
-      <Page page="b2b-common-integrated-search-results" title={pageTitle} />
+      <Page page="common-integrated-search-results" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

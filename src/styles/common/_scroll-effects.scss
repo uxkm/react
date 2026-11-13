@@ -17,7 +17,7 @@
 }
 
 [data-fx='up'],
-.fx-reveal--up {
+.fx-reveal_up {
   transform: translate3d(0, 36px, 0);
 }
 
@@ -42,7 +42,7 @@
 [data-fx='left'].is-in,
 [data-fx='right'].is-in,
 [data-fx='scale'].is-in,
-.fx-reveal--up.is-in {
+.fx-reveal_up.is-in {
   transform: translate3d(0, 0, 0) scale(1);
 }
 

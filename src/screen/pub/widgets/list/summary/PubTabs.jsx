@@ -17,7 +17,7 @@ export default function PubTabs ({
 
   return (
     <div className="wbs-tabs-bar">
-      <div className="wbs-tabs-bar__tabs" role="tablist" aria-label={ariaLabel}>
+      <div className="wbs-tabs-bar_tabs" role="tablist" aria-label={ariaLabel}>
         {tabs.map((tab) => (
           <button
             key={tab.id}

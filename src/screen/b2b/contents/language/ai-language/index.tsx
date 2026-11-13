@@ -21,7 +21,7 @@ export default function B2bContentsLanguageAiLanguagePage () {
 
   return (
     <>
-      <Page page="b2b-contents-language-ai-language" title={pageTitle} />
+      <Page page="contents-language-ai-language" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

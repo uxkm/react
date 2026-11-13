@@ -26,7 +26,7 @@ export default function B2bContentsJobCertificationPage () {
 
   return (
     <>
-      <Page page="b2b-contents-job-certification" title={pageTitle} />
+      <Page page="contents-job-certification" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

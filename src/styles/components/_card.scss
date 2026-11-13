@@ -48,7 +48,7 @@
   background: var(--color-surface);
   border: var(--card-border-width) solid var(--card-border-color);
   border-radius: var(--card-radius);
-  box-shadow: var(--card-shadow);
+  box-shadow: none;
   overflow: hidden;
   transition:
     background-color $transition-base,
@@ -66,13 +66,11 @@
 
   &.card_elevated {
     border-color: transparent;
-    box-shadow: var(--card-shadow-md);
   }
 
   &.card_ghost {
     background: transparent;
     border-color: transparent;
-    box-shadow: none;
   }
 
   &.card_compact {
@@ -98,7 +96,7 @@
   &.card_hover {
     &:hover {
       border-color: var(--color-accent);
-      box-shadow: var(--card-shadow-md);
+      &.card_shadow { box-shadow: var(--card-shadow-md); }
       transform: translateY(var(--card-hover-translate));
     }
   }
@@ -306,6 +304,7 @@
   }
 
   &_title {
+    display: block;
     font-size: var(--card-title-size);
     font-weight: var(--card-title-weight);
     margin: 0;
@@ -540,7 +539,7 @@ button.card,
 
   &:hover:not(.is-disabled) {
     border-color: var(--color-accent);
-    box-shadow: var(--card-shadow);
+    &.card_shadow { box-shadow: var(--card-shadow); }
   }
 }
 

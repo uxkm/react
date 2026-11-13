@@ -13,7 +13,7 @@ function fixture (t) {
   fs.mkdirSync(path.join(dir, 'src/app'), { recursive: true })
   fs.symlinkSync(path.join(root, 'node_modules'), path.join(dir, 'node_modules'), process.platform === 'win32' ? 'junction' : 'dir')
   const write = (file, source) => { fs.mkdirSync(path.dirname(path.join(dir, file)), { recursive: true }); fs.writeFileSync(path.join(dir, file), source) }
-  for (const file of ['project.mjs', 'registry.mjs', 'write-if-changed.mjs']) write(`scripts/${file}`, fs.readFileSync(path.join(root, 'scripts', file)))
+  for (const file of ['project.mjs', 'registry.mjs', 'lottie-list.mjs', 'write-if-changed.mjs']) write(`scripts/${file}`, fs.readFileSync(path.join(root, 'scripts', file)))
   write('public/data/pub/index.json', JSON.stringify({ b2b: { id: 'b2b', label: 'B2B', base: 'b2b/' } }))
   write('src/screen/pub/guide/Button.jsx', 'export default function Button () { return null }')
   write('src/screen/pub/demo/ChartDemoPage.jsx', 'export default function Chart () { return null }')

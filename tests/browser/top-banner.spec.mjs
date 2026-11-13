@@ -4,7 +4,7 @@ test.use({ timezoneId: 'Asia/Seoul' })
 
 test('가이드 상단 배너는 숨기고 본문 미리보기는 닫기와 다시 표시를 지원한다', async ({ page }) => {
   await page.goto('/pub/guide/top-banner')
-  await expect(page.locator('.app-layout__tree > [data-top-banner]')).toHaveCount(0)
+  await expect(page.locator('.app-layout_tree > [data-top-banner]')).toHaveCount(0)
   const banner = page.locator('[data-top-banner-demo] [data-top-banner]')
   await expect(banner).toHaveCount(1)
   await banner.getByRole('button', { name: '상단 배너 닫기' }).click()

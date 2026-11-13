@@ -1,5 +1,16 @@
 # 컴포넌트 구조
 
+## OOCSS 클래스 규칙
+
+공통 UI·레이아웃·위젯은 구조, 파트, 스킨·배치, 상태를 구분합니다. 파트와 변형은 `_`로 연결하고, 상태는 `is-*`로 표현합니다.
+
+- 구조: `card`, `app-header`, `lang-switcher`, `auto-skeleton`
+- 파트: `card_body`, `app-header_inner`, `lang-switcher_status`, `auto-skeleton_bone`
+- 스킨·배치: `card_shadow`, `app-header_stacked`, `app-header_inner_nav`
+- 상태: `is-open`, `is-active`, `is-disabled`, `is-loading`
+
+변형은 구조 클래스와 조합합니다. 예: `className="app-header app-header_stacked"`. 색상 스킨은 공통 `color_*` 클래스, 컴포넌트 옵션, CSS 디자인 토큰을 사용합니다. 클래스명을 변경할 때는 SCSS·DOM 선택자·가이드 예제·테스트의 참조도 함께 수정합니다.
+
 디자인 시스템 컴포넌트를 역할별로 나눕니다. React(`.tsx`) + 공개 입구 `index.js` 기준입니다.
 
 ```
@@ -51,6 +62,8 @@ import { Button, Container, Input } from '@/comp'
 ```
 
 Button API는 `variant` · `color` · `size` · `round` · `block` · `loading` 계약을 따릅니다.
+
+새 창 링크는 숨김 텍스트 대신 `title="새 창 열림"`으로 안내합니다. 공통 UI `Link`와 라우터 `Link`는 `target="_blank"`일 때 이 제목을 자동으로 제공합니다. 네이티브 `<a>`와 `window.open` 버튼에는 직접 지정합니다. 아이콘 링크의 `aria-label`은 채널·기능 이름만 표시하고, `target`·`rel`은 기존 보안 규칙을 유지합니다.
 
 ## 헤더 배경과 스크롤 상태
 

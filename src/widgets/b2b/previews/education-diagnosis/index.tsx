@@ -5,7 +5,7 @@ import { PublishingPlaceholder } from '@/screen/pub/widgets/publishing/Publishin
 import { resolveSkeletonMode } from '@/config/skeleton'
 import EducationDiagnosisSkeleton from './skeleton/indexSkeleton'
 
-export const pageTitle = "간편 진단 모달"
+export const pageTitle = "진단&맞춤추천"
 
 /** IA publishing scaffold. Replace this screen body with the approved markup. */
 export default function B2bCommonEducationDiagnosisPage () {
@@ -15,7 +15,7 @@ export default function B2bCommonEducationDiagnosisPage () {
 
   return (
     <>
-      <Page page="b2b-common-education-diagnosis" title={pageTitle} />
+      <Page page="common-education-diagnosis" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

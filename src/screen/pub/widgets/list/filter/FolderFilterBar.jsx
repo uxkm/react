@@ -26,12 +26,12 @@ export default function FolderFilterBar ({
         aria-label={active ? filterWithLabel : filterLabel}
         onClick={onOpen}
       >
-        <span className="wbs-filter-btn__label">{label || filterLabel}</span>
-        <span className="wbs-filter-btn__icon" aria-hidden="true">▾</span>
+        <span className="wbs-filter-btn_label">{label || filterLabel}</span>
+        <span className="wbs-filter-btn_icon" aria-hidden="true">▾</span>
       </button>
       {items.length > 0 && (
         <div className="wbs-filter-selected">
-          <span className="wbs-filter-selected__sep" aria-hidden="true" />
+          <span className="wbs-filter-selected_sep" aria-hidden="true" />
           <ul className="wbs-filter-subs" aria-label={subsAria}>
             {items.map((item, idx) => (
               <li key={(item.id || item.name || idx) + '-sub'}>
@@ -41,6 +41,7 @@ export default function FolderFilterBar ({
                       className="wbs-filter-sub"
                       href={toAppHref(item.pageUrl)}
                       target="_blank"
+                      title="새 창 열림"
                       rel="noopener noreferrer"
                     >{itemLabelOf(item)}</a>
                   )

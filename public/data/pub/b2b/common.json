@@ -72,7 +72,7 @@
           "priority": 2
         },
         {
-          "name": "전체 사이트맵",
+          "name": "전체메뉴",
           "type": "Layer",
           "id": "B2B-COMMON-002",
           "pageUrl": "/b2b/common/full-menu",
@@ -90,29 +90,6 @@
               "date": "",
               "author": "IA",
               "text": "GNB 우측 햄버거 메뉴 클릭 시 전체 메뉴 노출"
-            }
-          ],
-          "priority": 2
-        },
-        {
-          "name": "About 사이트맵",
-          "type": "Layer",
-          "id": "B2B-COMMON-004",
-          "pageUrl": "/b2b/common/sitemap",
-          "filePath": "@/widgets/b2b/previews/sitemap/index.tsx",
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [
-            {
-              "date": "",
-              "author": "IA",
-              "text": "GNB About 클릭 시 회사소개 전체 메뉴 노출"
             }
           ],
           "priority": 2

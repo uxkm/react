@@ -18,7 +18,7 @@
   }
 
   // ----- 좌측 내비 (헤더 아래 sticky)
-  &__nav {
+  &_nav {
     position: sticky;
     top: var(--app-header-height, 0px);
     z-index: 2;
@@ -33,21 +33,21 @@
     &.is-collapsed {
       width: var(--guide-nav-collapsed-width);
 
-      .comp-guide__nav-body {
+      .comp-guide_nav-body {
         overflow: visible;
       }
     }
   }
 
   // ----- 내비 스크롤 영역
-  &__nav-body {
+  &_nav-body {
     height: 100%;
     overflow: auto;
     overflow-x: hidden;
   }
 
   // ----- 내비 상단 타이틀 (스크롤 시 sticky) + 하위 모두 펼침 Switch
-  &__nav-head {
+  &_nav-head {
     position: sticky;
     top: 0;
     z-index: 1;
@@ -59,14 +59,14 @@
     background: var(--color-surface);
   }
 
-  &__nav-title {
+  &_nav-title {
     margin: 0;
     font-size: 13px;
     font-weight: 700;
     color: var(--color-text);
   }
 
-  &__nav-expand {
+  &_nav-expand {
     flex: 0 0 auto;
     margin: 0;
     gap: 6px;
@@ -80,7 +80,7 @@
   }
 
   // ----- 접기/펼치기 원형 토글 (내비 우측 경계)
-  &__toggle {
+  &_toggle {
     position: absolute;
     top: var(--guide-nav-toggle-top);
     right: 0;
@@ -122,7 +122,7 @@
   }
 
   // ----- 접힘 레일 (카테고리 아이콘 + Tooltip)
-  &__rail {
+  &_rail {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -135,7 +135,7 @@
     }
   }
 
-  &__rail-btn {
+  &_rail-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -176,19 +176,19 @@
   }
 
   // ----- 펼침 메뉴 목록
-  &__list {
+  &_list {
     padding: 4px 10px 24px;
   }
 
   // ----- 상단 고정 링크 (소개·접근성 등)
-  &__top {
+  &_top {
     display: flex;
     flex-direction: column;
     gap: 2px;
     margin-bottom: 4px;
   }
 
-  &__top-link {
+  &_top-link {
     display: block;
     padding: 8px 10px;
     border-radius: 8px;
@@ -209,21 +209,21 @@
   }
 
   // ----- 카테고리 섹션 · 그룹 · 항목 링크
-  &__section {
+  &_section {
     margin-top: 12px;
     padding-top: 12px;
     border-top: 1px solid var(--color-border);
 
-    &--demo {
+    &_demo {
       margin-top: 12px;
     }
 
-    &.is-open > .comp-guide__section-toggle .comp-guide__chevron {
+    &.is-open > .comp-guide_section-toggle .comp-guide_chevron {
       transform: rotate(-135deg);
     }
   }
 
-  &__section-label {
+  &_section-label {
     display: flex;
     align-items: center;
     gap: 6px;
@@ -234,14 +234,14 @@
     color: var(--color-text);
   }
 
-  &__toggle-label {
+  &_toggle-label {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     min-width: 0;
   }
 
-  &__count {
+  &_count {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -257,8 +257,8 @@
     line-height: 1;
   }
 
-  &__section-toggle,
-  &__group-toggle {
+  &_section-toggle,
+  &_group-toggle {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -280,21 +280,21 @@
     }
   }
 
-  &__section-toggle {
+  &_section-toggle {
     margin-bottom: 4px;
     font-size: 13px;
     font-weight: 700;
     color: var(--color-text);
   }
 
-  &__group-toggle {
+  &_group-toggle {
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.04em;
     color: var(--color-text-muted);
   }
 
-  &__chevron {
+  &_chevron {
     flex: 0 0 auto;
     width: 6px;
     height: 6px;
@@ -306,14 +306,14 @@
     transition: transform 0.15s ease;
   }
 
-  &__section-list {
+  &_section-list {
     margin: 0 0 4px;
     padding: 0;
     list-style: none;
   }
 
-  &__group {
-    + .comp-guide__group {
+  &_group {
+    + .comp-guide_group {
       margin-top: 4px;
     }
 
@@ -323,13 +323,13 @@
       list-style: none;
     }
 
-    &.is-open > .comp-guide__group-toggle .comp-guide__chevron {
+    &.is-open > .comp-guide_group-toggle .comp-guide_chevron {
       /* 펼침: 위(∧) */
       transform: rotate(-135deg);
     }
   }
 
-  &__link {
+  &_link {
     display: block;
     padding: 6px 10px 6px 16px;
     border-radius: 8px;
@@ -350,7 +350,7 @@
   }
 
   // ----- 우측 본문
-  &__main {
+  &_main {
     flex: 1 1 auto;
     min-width: 0;
   }
@@ -373,36 +373,36 @@
   }
 
   // ----- 제목
-  &__h1,
-  &__h2,
-  &__h3 {
+  &_h1,
+  &_h2,
+  &_h3 {
     margin: 1.6em 0 0.6em;
     font-weight: 700;
     line-height: 1.35;
     color: var(--color-text);
   }
 
-  &__h1 {
+  &_h1 {
     margin-top: 0;
     font-size: 1.5rem;
   }
 
-  &__h2 {
+  &_h2 {
     padding-bottom: 0.35em;
     border-bottom: 1px solid var(--color-border);
     font-size: 1.2rem;
   }
 
-  &__h3 {
+  &_h3 {
     font-size: 1.05rem;
   }
 
   // ----- 문단 · 목록 · 링크
-  &__p {
+  &_p {
     margin: 0 0 0.9em;
   }
 
-  &__list {
+  &_list {
     margin: 0 0 1em;
     padding-left: 1.2em;
 
@@ -410,12 +410,12 @@
       margin-top: 0.35em;
     }
 
-    &--ordered {
+    &_ordered {
       list-style: decimal;
     }
   }
 
-  &__link {
+  &_link {
     color: var(--color-accent-text);
     font-weight: 600;
     text-decoration: none;
@@ -426,7 +426,7 @@
   }
 
   // ----- 코드 블록
-  &__pre {
+  &_pre {
     margin: 0 0 1.1em;
     padding: 12px 14px;
     overflow: auto;
@@ -444,14 +444,14 @@
   }
 
   // ----- 표
-  &__table-wrap {
+  &_table-wrap {
     margin: 0 0 1.2em;
     overflow-x: auto;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-panel);
   }
 
-  &__table {
+  &_table {
     width: 100%;
     border-collapse: collapse;
     font-size: 13px;

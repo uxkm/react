@@ -4,7 +4,7 @@
   min-height: 100vh;
   text-align: left;
 
-  &__main {
+  &_main {
     flex: 1 1 auto;
     min-height: 0;
     width: 100%;
@@ -44,46 +44,46 @@
   }
 
   // inline(기본 한 줄): 스크롤 시 헤더 전체 숨김
-  &:not(.app-header--stacked).is-scroll-hidden {
+  &:not(.app-header_stacked).is-scroll-hidden {
     transform: translateY(-100%);
     pointer-events: none;
   }
 
   // stacked + hideNavOnScroll: 네비까지 함께 전체 숨김
-  &--stacked.app-header--hide-nav-on-scroll.is-scroll-hidden {
+  &_stacked.app-header_hide-nav-on-scroll.is-scroll-hidden {
     transform: translateY(-100%);
     pointer-events: none;
   }
 
   // stacked 기본: 상단(브랜드)만 올리고 하단 네비는 뷰포트에 유지
-  &--stacked:not(.app-header--hide-nav-on-scroll).is-scroll-hidden {
+  &_stacked:not(.app-header_hide-nav-on-scroll).is-scroll-hidden {
     transform: translateY(calc(-1 * var(--app-header-top-height)));
 
-    .app-header__top {
+    .app-header_top {
       pointer-events: none;
     }
   }
 
-  &__top {
+  &_top {
     position: relative;
     z-index: 1;
 
     // 언어 드롭다운 등이 열릴 때 nav-bar 위로 올림
     &:has(.lang-switcher.is-open),
-    &:has(.lang-switcher__status),
+    &:has(.lang-switcher_status),
     &:has(.dropdown.is-open) {
       z-index: 3;
     }
   }
 
-  &__nav-bar {
+  &_nav-bar {
     position: relative;
     z-index: 2;
     border-top: 1px solid var(--color-border-subtle);
     background: var(--app-header-nav-bg, transparent);
   }
 
-  &__inner {
+  &_inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -93,27 +93,27 @@
     padding: 12px 24px;
     box-sizing: border-box;
 
-    &--nav {
+    &_nav {
       justify-content: flex-start;
       padding-top: 8px;
       padding-bottom: 8px;
     }
   }
 
-  &__start {
+  &_start {
     display: flex;
     align-items: center;
     gap: 10px;
     min-width: 0;
   }
 
-  &__back {
+  &_back {
     display: flex;
     align-items: center;
     flex-shrink: 0;
   }
 
-  &__back-link {
+  &_back-link {
     display: inline-flex;
     align-items: center;
     min-height: 32px;
@@ -129,11 +129,11 @@
     }
   }
 
-  &__brand-wrap {
+  &_brand-wrap {
     min-width: 0;
   }
 
-  &__brand {
+  &_brand {
     color: var(--color-accent-text);
     font-size: 15px;
     font-weight: 700;
@@ -145,27 +145,27 @@
     }
   }
 
-  &__end {
+  &_end {
     display: flex;
     align-items: center;
     gap: 12px;
     min-width: 0;
   }
 
-  &__nav {
+  &_nav {
     display: flex;
     align-items: center;
     gap: 8px;
     flex-wrap: wrap;
   }
 
-  &__actions {
+  &_actions {
     display: flex;
     align-items: center;
     gap: 8px;
   }
 
-  &__link {
+  &_link {
     display: inline-flex;
     align-items: center;
     min-height: 32px;
@@ -198,12 +198,12 @@
   border-top: 1px solid var(--color-border);
   background: var(--color-surface);
 
-  &__inner {
+  &_inner {
     padding: 14px 24px;
     box-sizing: border-box;
   }
 
-  &__text {
+  &_text {
     margin: 0;
     color: var(--color-text-muted);
     font-size: 12px;

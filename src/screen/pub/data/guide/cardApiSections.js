@@ -11,6 +11,12 @@ const columns = [
 
 const props = [
   {
+    name: 'shadow',
+    type: 'boolean',
+    default: 'false (shadow·elevated variant는 true)',
+    description: '기본·호버 그림자 표시 여부. 명시한 값이 variant보다 우선합니다.'
+  },
+  {
     name: 'variant',
     type: "'bordered' | 'shadow' | 'flat' | 'elevated' | 'ghost' | …",
     default: 'bordered',
@@ -30,9 +36,9 @@ const props = [
   },
   {
     name: 'as · tag',
-    type: 'string',
+    type: 'ElementType · string (tag)',
     default: 'article',
-    description: '루트 태그. href면 a, onClick이면 button.'
+    description: 'as는 HTML 태그 또는 Link 컴포넌트. 사용자 컴포넌트에도 href 전달. href면 a, onClick이면 button.'
   },
   {
     name: 'href',

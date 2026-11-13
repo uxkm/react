@@ -27,17 +27,18 @@ export default function PubScreenRow ({
 
   return (
     <li
-      className={classNames('wbs-table__row', rowLevel, 'status-' + (item.status || 'pending'))}
+      className={classNames('wbs-table_row', rowLevel, 'status-' + (item.status || 'pending'))}
       role="row"
     >
       <div className="col-name" role="cell">
-        <span className={classNames('name', level === 2 ? 'name--grandchild' : 'name--child')}>
+        <span className={classNames('name', level === 2 ? 'name_grandchild' : 'name_child')}>
           {item.pageUrl
             ? (
               <a
                 className="wbs-link"
                 href={toAppHref(item.pageUrl)}
                 target="_blank"
+                title="새 창 열림"
                 rel="noopener noreferrer"
                 {...ellipsisAttr}
               >{itemLabel(folder, item)}</a>

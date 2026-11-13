@@ -15,7 +15,7 @@ export default function B2bCommonContactUsPage () {
 
   return (
     <>
-      <Page page="b2b-common-contact-us" title={pageTitle} />
+      <Page page="common-contact-us" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

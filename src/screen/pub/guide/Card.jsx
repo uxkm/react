@@ -52,7 +52,7 @@ function ClickableCardDemo () {
       <CardDeck columns={2}>
         <Card href="#card" hoverable>
           <CardBody>
-            <h3 className="card_title">링크 카드</h3>
+            <strong className="card_title">링크 카드</strong>
             <p className="card_subtitle">클릭하면 상세 페이지로 이동합니다.</p>
           </CardBody>
         </Card>
@@ -62,7 +62,7 @@ function ClickableCardDemo () {
           onClick={() => setSelected('알림')}
         >
           <CardBody>
-            <h3 className="card_title">클릭 카드</h3>
+            <strong className="card_title">클릭 카드</strong>
             <p className="card_subtitle">onClick으로 페이지 상태를 갱신합니다.</p>
           </CardBody>
         </Card>
@@ -254,7 +254,7 @@ const SECTIONS = [
       >
         <CardHeader>
           <div className="card_header-row">
-            <h3 className="card_title">프로젝트 Alpha</h3>
+            <strong className="card_title">프로젝트 Alpha</strong>
             <Tag size="sm" color="primary" label="진행 중" />
           </div>
           <p className="card_subtitle">업데이트 · 2일 전</p>
@@ -320,7 +320,7 @@ const SECTIONS = [
     code: wrapPageExample(`<Card hoverable variant="shadow">
   <CardBody>
     <span className="card_icon color_primary" aria-hidden="true">…</span>
-    <h3 className="card_title">빠른 성능</h3>
+    <strong className="card_title">빠른 성능</strong>
     <p className="card_subtitle">가벼운 번들, 빠른 로딩</p>
   </CardBody>
 </Card>`, {
@@ -333,14 +333,14 @@ const SECTIONS = [
         <Card hoverable variant="shadow">
           <CardBody>
             <span className="card_icon color_primary" aria-hidden="true">{BoltIcon}</span>
-            <h3 className="card_title">빠른 성능</h3>
+            <strong className="card_title">빠른 성능</strong>
             <p className="card_subtitle">가벼운 번들, 빠른 로딩</p>
           </CardBody>
         </Card>
         <Card hoverable variant="shadow">
           <CardBody>
             <span className="card_icon color_success" aria-hidden="true">{ShieldIcon}</span>
-            <h3 className="card_title">접근성</h3>
+            <strong className="card_title">접근성</strong>
             <p className="card_subtitle">WCAG 2.2 AA 기준</p>
           </CardBody>
         </Card>
@@ -384,7 +384,7 @@ const SECTIONS = [
           <div className="card_header-row">
             <Avatar color="primary" label="홍" aria-hidden="true" />
             <div>
-              <h3 className="card_title">홍길동</h3>
+              <strong className="card_title">홍길동</strong>
               <p className="card_subtitle">프론트엔드 개발자</p>
             </div>
           </div>
@@ -415,7 +415,7 @@ const SECTIONS = [
 
 <Card href="#card" hoverable>
   <CardBody>
-    <h3 className="card_title">링크 카드</h3>
+    <strong className="card_title">링크 카드</strong>
     <p className="card_subtitle">클릭하면 상세 페이지로 이동합니다.</p>
   </CardBody>
 </Card>
@@ -425,7 +425,7 @@ const SECTIONS = [
   onClick={() => setSelected('알림')}
 >
   <CardBody>
-    <h3 className="card_title">클릭 카드</h3>
+    <strong className="card_title">클릭 카드</strong>
     <p className="card_subtitle">onClick으로 페이지 상태를 갱신합니다.</p>
   </CardBody>
 </Card>`, {
@@ -444,7 +444,7 @@ const SECTIONS = [
     ),
     code: wrapPageExample(`<Card disabled style={{ maxWidth: 280 }}>
   <CardBody>
-    <h3 className="card_title">비활성 카드</h3>
+    <strong className="card_title">비활성 카드</strong>
     <p className="card_subtitle">현재 이용할 수 없습니다.</p>
   </CardBody>
 </Card>`, {
@@ -455,7 +455,7 @@ const SECTIONS = [
     preview: (
       <Card disabled style={{ maxWidth: 280, width: '100%' }}>
         <CardBody>
-          <h3 className="card_title">비활성 카드</h3>
+          <strong className="card_title">비활성 카드</strong>
           <p className="card_subtitle">현재 이용할 수 없습니다.</p>
         </CardBody>
       </Card>

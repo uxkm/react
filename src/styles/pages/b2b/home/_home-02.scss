@@ -31,26 +31,26 @@
   padding: 0 40px;
   color: var(--k-white);
 
-  &__brand {
+  &_brand {
     font-size: 18px;
     font-weight: 700;
     letter-spacing: -0.02em;
   }
 
-  &__nav {
+  &_nav {
     display: flex;
     gap: 28px;
     font-size: 15px;
     font-weight: 600;
   }
 
-  &__link {
+  &_link {
     opacity: 0.85;
     transition: opacity 0.2s ease;
     &:hover { opacity: 1; }
   }
 
-  &__meta {
+  &_meta {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -58,7 +58,7 @@
     font-weight: 600;
   }
 
-  &__chip {
+  &_chip {
     padding: 8px 12px;
     border: 1px solid rgba(255,255,255,0.35);
     border-radius: 999px;
@@ -71,9 +71,9 @@
   color: var(--k-white);
   overflow: hidden;
 
-  &__slides { position: absolute; inset: 0; }
+  &_slides { position: absolute; inset: 0; }
 
-  &__slide {
+  &_slide {
     position: absolute;
     inset: 0;
     opacity: 0;
@@ -82,7 +82,7 @@
     &.is-active { opacity: 1; pointer-events: auto; }
   }
 
-  &__media {
+  &_media {
     position: absolute;
     left: 0;
     right: 0;
@@ -92,13 +92,13 @@
     background-position: center;
   }
 
-  &__dim {
+  &_dim {
     position: absolute;
     inset: 0;
     background: linear-gradient(180deg, rgba(5,15,28,0.35) 0%, rgba(5,15,28,0.55) 55%, rgba(5,15,28,0.75) 100%);
   }
 
-  &__body {
+  &_body {
     position: relative;
     z-index: 2;
     display: flex;
@@ -110,7 +110,7 @@
     padding: 120px 40px 120px;
   }
 
-  &__tag {
+  &_tag {
     margin: 0 0 16px;
     font-size: 13px;
     font-weight: 700;
@@ -118,7 +118,7 @@
     color: var(--k-green);
   }
 
-  &__title {
+  &_title {
     margin: 0 0 18px;
     max-width: 720px;
     font-size: 44px;
@@ -127,7 +127,7 @@
     letter-spacing: -0.03em;
   }
 
-  &__desc {
+  &_desc {
     margin: 0 0 28px;
     max-width: 520px;
     color: rgba(255,255,255,0.78);
@@ -135,7 +135,7 @@
     line-height: 1.7;
   }
 
-  &__cta {
+  &_cta {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -148,7 +148,7 @@
     &:hover { color: var(--k-green); border-color: var(--k-green); }
   }
 
-  &__controls {
+  &_controls {
     position: absolute;
     left: 40px;
     bottom: 40px;
@@ -158,7 +158,7 @@
     gap: 10px;
   }
 
-  &__btn {
+  &_btn {
     width: 42px;
     height: 42px;
     display: inline-flex;
@@ -172,7 +172,7 @@
     svg { width: 16px; height: 16px; }
   }
 
-  &__now {
+  &_now {
     margin-left: 8px;
     padding: 8px 14px;
     border: 1px solid rgba(255,255,255,0.35);
@@ -188,7 +188,7 @@
   max-width: var(--k-max);
   margin: 0 auto;
 
-  &__eyebrow {
+  &_eyebrow {
     margin: 0 0 12px;
     color: var(--k-blue);
     font-size: 13px;
@@ -196,7 +196,7 @@
     letter-spacing: 0.08em;
   }
 
-  &__title {
+  &_title {
     margin: 0 0 36px;
     font-size: 34px;
     font-weight: 700;
@@ -210,7 +210,7 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
 
-  &__card {
+  &_card {
     position: relative;
     min-height: 220px;
     padding: 24px;
@@ -241,12 +241,12 @@
     &:hover::before { transform: scale(1.08); }
   }
 
-  &__name {
+  &_name {
     font-size: 20px;
     font-weight: 700;
   }
 
-  &__desc {
+  &_desc {
     margin-top: 10px;
     color: rgba(255,255,255,0.78);
     font-size: 13px;
@@ -257,19 +257,19 @@
 .ksoe-esg {
   background: var(--k-panel);
 
-  &__inner {
+  &_inner {
     max-width: var(--k-max);
     margin: 0 auto;
     padding: 96px 40px;
   }
 
-  &__tabs {
+  &_tabs {
     display: flex;
     gap: 8px;
     margin-bottom: 28px;
   }
 
-  &__tab {
+  &_tab {
     padding: 10px 18px;
     border-radius: 999px;
     background: var(--k-white);
@@ -286,7 +286,7 @@
     }
   }
 
-  &__panel {
+  &_panel {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
     gap: 28px;
@@ -295,21 +295,21 @@
     border-radius: 12px;
   }
 
-  &__title {
+  &_title {
     margin: 0 0 12px;
     font-size: 28px;
     font-weight: 700;
     letter-spacing: -0.03em;
   }
 
-  &__desc {
+  &_desc {
     margin: 0;
     color: var(--k-muted);
     font-size: 15px;
     line-height: 1.7;
   }
 
-  &__visual {
+  &_visual {
     min-height: 220px;
     border-radius: 8px;
     overflow: hidden;
@@ -322,7 +322,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 
-  &__item {
+  &_item {
     display: grid;
     gap: 10px;
     padding: 24px;
@@ -336,13 +336,13 @@
     }
   }
 
-  &__date {
+  &_date {
     color: var(--k-muted);
     font-size: 12px;
     font-weight: 600;
   }
 
-  &__title {
+  &_title {
     margin: 0;
     font-size: 17px;
     font-weight: 700;
@@ -360,7 +360,7 @@
   color: var(--k-white);
   border-radius: 12px;
 
-  &__label {
+  &_label {
     margin: 0 0 8px;
     color: var(--k-green);
     font-size: 12px;
@@ -368,20 +368,20 @@
     letter-spacing: 0.08em;
   }
 
-  &__title {
+  &_title {
     margin: 0 0 12px;
     font-size: 28px;
     font-weight: 700;
   }
 
-  &__desc {
+  &_desc {
     margin: 0 0 20px;
     color: rgba(255,255,255,0.7);
     font-size: 14px;
     line-height: 1.6;
   }
 
-  &__stock {
+  &_stock {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -390,13 +390,13 @@
     border-radius: 8px;
   }
 
-  &__price {
+  &_price {
     font-size: 36px;
     font-weight: 700;
     letter-spacing: -0.03em;
   }
 
-  &__meta {
+  &_meta {
     margin-top: 8px;
     color: rgba(255,255,255,0.6);
     font-size: 13px;
@@ -411,18 +411,18 @@
 }
 
 @media (max-width: 1024px) {
-  .ksoe-header__nav { display: none; }
+  .ksoe-header_nav { display: none; }
   .ksoe-biz { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .ksoe-esg__panel,
+  .ksoe-esg_panel,
   .ksoe-news,
   .ksoe-ir { grid-template-columns: 1fr; }
-  .ksoe-hero__title { font-size: 32px; }
+  .ksoe-hero_title { font-size: 32px; }
 }
 
 @media (max-width: 640px) {
   .ksoe-biz { grid-template-columns: 1fr; }
   .ksoe-header,
   .ksoe-section,
-  .ksoe-esg__inner,
-  .ksoe-hero__body { padding-left: 20px; padding-right: 20px; }
+  .ksoe-esg_inner,
+  .ksoe-hero_body { padding-left: 20px; padding-right: 20px; }
 }

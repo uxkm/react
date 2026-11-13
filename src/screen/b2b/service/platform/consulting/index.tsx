@@ -15,7 +15,7 @@ export default function B2bServicePlatformConsultingPage () {
 
   return (
     <>
-      <Page page="b2b-service-platform-consulting" title={pageTitle} />
+      <Page page="service-platform-consulting" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

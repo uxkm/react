@@ -1,38 +1,29 @@
 'use client'
 
 import { Page, PageLoading } from '@/comp'
-import { PublishingPlaceholder } from '@/screen/pub/widgets/publishing/PublishingPlaceholder'
+import Footer from '@/widgets/b2b/common/Footer'
 import { resolveSkeletonMode } from '@/config/skeleton'
 import FooterSkeleton from './skeleton/indexSkeleton'
 
 export const pageTitle = "Footer"
+export const meta = { banner: false, header: false, footer: false, floating: false }
 
-/** IA publishing scaffold. Replace this screen body with the approved markup. */
+/** 공통 레이아웃 없이 푸터 위젯만 표시합니다. */
 export default function B2bCommonFooterPage () {
-  const links = []
   const skeletonId = 'b2b/common/footer'
   const skeletonMode = resolveSkeletonMode(skeletonId)
 
   return (
     <>
-      <Page page="b2b-common-footer" title={pageTitle} />
+      <Page page="common-footer" title={pageTitle} className="project-content widget-preview" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}
         skeletonMode={skeletonMode}
         skeleton={skeletonMode === 'manual' ? <FooterSkeleton /> : undefined}
-        className="page-container"
+        className="footer-preview"
       >
-        <PublishingPlaceholder
-          device="B2B"
-          folderId="common"
-          folderName="공통"
-          screenName={pageTitle}
-          screenType="Widget"
-          screenId="B2B-COMMON-005"
-          pageUrl="/b2b/common/footer"
-          links={links}
-        />
+        <Footer />
 
       </PageLoading>
     </>

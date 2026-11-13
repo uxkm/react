@@ -18,10 +18,10 @@ export interface AppFooterProps extends HTMLAttributes<HTMLElement> {
 export function AppFooter ({ children, className, ...rest }: AppFooterProps) {
   return (
     <footer {...rest} className={classNames('app-footer', className)}>
-      <div className="app-footer__inner">
+      <div className="app-footer_inner">
         {hasNodes(children)
           ? children
-          : <p className="app-footer__text">@Publish Guide</p>}
+          : <p className="app-footer_text">@Publish Guide</p>}
       </div>
     </footer>
   )

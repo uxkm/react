@@ -28,7 +28,7 @@ export default function PubProgressSummary ({
           aria-valuemax="100"
           aria-label={label}
         >
-          <span className="wbs-progress__bar" style={{ width: progress + '%' }} />
+          <span className="wbs-progress_bar" style={{ width: progress + '%' }} />
         </div>
         <ul className="wbs-stats">
           {stats.map((stat) => (

@@ -277,7 +277,7 @@ function measureContentHeight (root: HTMLElement) {
 function BonesView ({ bones, height }: { bones: AutoBone[]; height: number }) {
   return (
     <div
-      className="auto-skeleton__bones"
+      className="auto-skeleton_bones"
       style={{ height: height > 0 ? height + 'px' : undefined }}
       aria-hidden="true"
     >
@@ -290,7 +290,7 @@ function BonesView ({ bones, height }: { bones: AutoBone[]; height: number }) {
           height: bone.h,
           borderRadius: bone.shape === 'circle' ? '999px' : bone.r
         }
-        return <span key={i} className="auto-skeleton__bone skeleton" style={style} />
+        return <span key={i} className="auto-skeleton_bone skeleton" style={style} />
       })}
     </div>
   )

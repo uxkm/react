@@ -39,18 +39,18 @@ export default function PubGroupRow ({
   return (
     <li
       id={isRoot ? ('wbs-folder-' + node.id) : undefined}
-      className={isRoot ? 'wbs-table__group' : 'wbs-table__subgroup'}
+      className={isRoot ? 'wbs-table_group' : 'wbs-table_subgroup'}
     >
       <div
         className={classNames(
-          'wbs-table__row',
+          'wbs-table_row',
           isRoot ? 'level-0' : 'level-1',
           'status-' + (node.status || 'pending')
         )}
         role="row"
       >
         <div className="col-name" role="cell">
-          <span className={classNames('name', { 'name--child': !isRoot })}>
+          <span className={classNames('name', { 'name_child': !isRoot })}>
             {showToggle && (
               <button
                 type="button"
@@ -85,7 +85,7 @@ export default function PubGroupRow ({
         ))}
       </div>
       <ul
-        className={isRoot ? 'wbs-table__depth2' : 'wbs-table__depth3'}
+        className={isRoot ? 'wbs-table_depth2' : 'wbs-table_depth3'}
         style={open ? undefined : { display: 'none' }}
       >
         {isRoot

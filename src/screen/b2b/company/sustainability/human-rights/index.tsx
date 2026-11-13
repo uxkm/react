@@ -22,7 +22,7 @@ export default function B2bCompanySustainabilityHumanRightsPage () {
     },
     {
       "to": "/b2b/company/sustainability/diversity",
-      "label": "다양성/노사",
+      "label": "다양성 / 노사",
       "screenId": "B2B-COMPANY-SUSTAINABILITY-DIVERSITY"
     },
     {
@@ -56,7 +56,7 @@ export default function B2bCompanySustainabilityHumanRightsPage () {
 
   return (
     <>
-      <Page page="b2b-company-sustainability-human-rights" title={pageTitle} />
+      <Page page="company-sustainability-human-rights" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

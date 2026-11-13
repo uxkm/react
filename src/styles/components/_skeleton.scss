@@ -190,14 +190,14 @@
     min-height: 160px;
   }
 
-  &__bones {
+  &_bones {
     position: relative;
     width: 100%;
     min-height: inherit;
   }
 
   // .skeleton 의 position:relative 를 덮어 측정 좌표(left/top)를 맞춤
-  &__bone {
+  &_bone {
     position: absolute;
     display: block;
     pointer-events: none;

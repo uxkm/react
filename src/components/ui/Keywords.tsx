@@ -207,7 +207,8 @@ export function Keywords ({
   const listRef = useRef<HTMLDivElement>(null)
   const controlled = expandedProp !== undefined
   const [innerExpanded, setInnerExpanded] = useState(defaultExpanded)
-  const [overflowing, setOverflowing] = useState(false)
+  const [measuredOverflow, setMeasuredOverflow] = useState(false)
+  const overflowing = collapsible && measuredOverflow
   const expanded = collapsible ? (controlled ? !!expandedProp : innerExpanded) : true
   const gapValue = Number.isFinite(gap) && gap >= 0 ? gap : 8
   /** 넘칠 때만 기본 토글·펼침 UI 적용 (커스텀 슬롯은 overflowing 으로 직접 제어) */
@@ -231,19 +232,17 @@ export function Keywords ({
   const toggleExpanded = () => setExpanded(!expanded)
 
   useLayoutEffect(() => {
-    if (!collapsible) {
-      setOverflowing(false)
-      return
-    }
+    if (!collapsible) return
     const root = rootRef.current
     const list = listRef.current
     if (!root || !list) return
 
     const update = () => {
-      setOverflowing(measureOverflow(root, list, gapValue))
+      setMeasuredOverflow(measureOverflow(root, list, gapValue))
     }
 
-    update()
+    // ResizeObserver의 최초 알림에서 초기 크기도 측정합니다.
+    // effect 본문에서 동기적으로 상태를 갱신하지 않습니다.
     const observer = new ResizeObserver(update)
     observer.observe(root)
     observer.observe(list)

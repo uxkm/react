@@ -4,29 +4,30 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { root } from '../scripts/project.mjs'
 
-// Contract from the supplied B2B IA; independent of the generated registry.
+// Contract from the supplied B2B full-menu design; independent of the generated registry.
 const expected = {
   main: ['index'],
-  'contents/ax': ['overview', 'ai-search', 'competency', 'ai-studio', 'workshop', 'hackathon'],
+  'contents/ax': ['overview', 'ai-search', 'competency', 'ai-studio', 'workshop', 'camp'],
   'contents/it': ['index'],
   'contents/job': ['index', 'professional', 'industry', 'certification'],
   'contents/leadership': ['index', 'assessment', 'executive', 'mba'],
   'contents/mandatory': ['index', 'features', 'courses', 'estimate'],
   'contents/language': ['index', 'ai-language', 'language-life'],
   'contents/small-business': ['index'],
-  'service/platform': ['index', 'consulting'],
+  'service/platform': ['index', 'ai', 'consulting'],
   'service/learning': ['index'],
   'service/diagnosis': ['index'],
   'service/consulting': ['index'],
   'service/bpo': ['index'],
   'insight/on': ['list', 'detail'],
   'insight/resources': ['list', 'detail'],
-  contact: ['education'],
+  contact: ['education', 'platform'],
   company: ['intro', 'ceo', 'history'],
-  'company/ethics': ['management', 'compliance'],
+  'company/ethics': ['sericeo', 'management', 'compliance'],
   'company/sustainability': ['esg', 'environment', 'diversity', 'human-rights', 'safety', 'information', 'consumer', 'contribution', 'esg-data'],
-  'company/investors': ['financial', 'stock', 'disclosure', 'ir'],
-  'company/pr': ['news-list', 'news-detail', 'awards']
+  'company/investors': ['financial', 'shareholders', 'stock-price', 'disclosure', 'ir'],
+  'company/pr/news': ['list', 'detail'],
+  'company/pr': ['awards']
 }
 const files = Object.entries(expected).flatMap(([folder, names]) => names.map((name) => name === 'index' ? `${folder}/index.tsx` : `${folder}/${name}/index.tsx`))
 const read = (relative) => fs.readFileSync(path.join(root, relative), 'utf8')
@@ -37,15 +38,16 @@ function leaves (nodes) {
 }
 const rows = index.folders.flatMap((folder) => leaves(JSON.parse(read('public/data/pub/b2b/' + folder.file)).depth2))
 
-test('all 56 requested TSX screens exist and have generated routes and PUB entries', () => {
-  assert.equal(files.length, 56)
+test('all 60 requested TSX screens exist and have generated routes and PUB entries', () => {
+  assert.equal(files.length, 60)
   for (const base of ['src/screen/b2b', 'src/widgets/b2b/previews']) {
     for (const file of fs.readdirSync(path.join(root, base), { recursive: true })) {
-      if (!file.endsWith('.tsx') || file.split(path.sep).includes('skeleton')) continue
+      if (!file.endsWith('.tsx') || file.split(path.sep).some(part => ['skeleton', 'sections'].includes(part))) continue
       assert.equal(path.basename(file), 'index.tsx', file)
     }
   }
   assert.ok(!registry.some((key) => key.split('/').includes('index')))
+  assert.ok(!registry.some((key) => key.split('/').includes('sections')))
   for (const file of files) {
     assert.ok(fs.existsSync(path.join(root, 'src/screen/b2b', file)), file)
     const key = file.replace(/\/index\.tsx$/, '').replace(/\.tsx$/, '')

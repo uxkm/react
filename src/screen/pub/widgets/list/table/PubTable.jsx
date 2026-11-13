@@ -87,7 +87,7 @@ export default function PubTable ({
         panel.querySelector('.col-name .folder-name') ||
         panel.querySelector('.col-name .wbs-link') ||
         panel.querySelector('.col-name .name-label') ||
-        panel.querySelector('.wbs-table__head .col-name') ||
+        panel.querySelector('.wbs-table_head .col-name') ||
         panel.querySelector('.col-name')
       if (!sample) {
         panel.style.removeProperty('--wbs-col-name-width')
@@ -179,7 +179,7 @@ export default function PubTable ({
         onBlur={ellipsis.onMouseOut}
       >
         <div className={tableClass} role="presentation">
-          <div className="wbs-table__head" role="row">
+          <div className="wbs-table_head" role="row">
             {columns.map((col) => (
               <div key={col.key} className={'col-' + col.key} role="columnheader">{col.label}</div>
             ))}
@@ -199,7 +199,7 @@ export default function PubTable ({
         <div className={tableClass} role="table" aria-label={ariaLabel}>
           {folders.length
             ? (
-              <ul className="wbs-table__list">
+              <ul className="wbs-table_list">
                 {folders.map((folder) => (
                   <PubGroupRow
                     key={folder.id}

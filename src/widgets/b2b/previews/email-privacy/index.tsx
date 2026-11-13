@@ -15,7 +15,7 @@ export default function B2bCommonEmailPrivacyPage () {
 
   return (
     <>
-      <Page page="b2b-common-email-privacy" title={pageTitle} />
+      <Page page="common-email-privacy" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

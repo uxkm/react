@@ -29,6 +29,11 @@ export default function B2bServicePlatformPage () {
       "to": "/b2b/service/bpo",
       "label": "BPO 서비스",
       "screenId": "B2B-SERVIC-005"
+    },
+    {
+      "to": "/b2b/service/platform/ai",
+      "label": "AI 서비스",
+      "screenId": "B2B-SERVICE-PLATFORM-AI"
     }
   ]
   const skeletonId = 'b2b/service/platform'
@@ -36,7 +41,7 @@ export default function B2bServicePlatformPage () {
 
   return (
     <>
-      <Page page="b2b-service-platform" title={pageTitle} />
+      <Page page="service-platform" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

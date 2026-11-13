@@ -17,7 +17,7 @@ export default function B2bCompanySustainabilityEnvironmentPage () {
     },
     {
       "to": "/b2b/company/sustainability/diversity",
-      "label": "다양성/노사",
+      "label": "다양성 / 노사",
       "screenId": "B2B-COMPANY-SUSTAINABILITY-DIVERSITY"
     },
     {
@@ -56,7 +56,7 @@ export default function B2bCompanySustainabilityEnvironmentPage () {
 
   return (
     <>
-      <Page page="b2b-company-sustainability-environment" title={pageTitle} />
+      <Page page="company-sustainability-environment" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

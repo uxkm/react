@@ -48,29 +48,29 @@
   &-skeleton {
     width: 100%;
 
-    &__stats,
-    &__tabs,
-    &__labels,
-    &__search {
+    &_stats,
+    &_tabs,
+    &_labels,
+    &_search {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
     }
 
-    &__stats {
+    &_stats {
       margin-top: 16px;
     }
 
-    &__tabs {
+    &_tabs {
       margin: 0 0 12px;
       padding: 10px 0;
     }
 
-    &__labels {
+    &_labels {
       margin: 0 0 12px;
     }
 
-    &__search {
+    &_search {
       flex: 1 1 0;
       min-width: 0;
       align-items: center;
@@ -90,13 +90,13 @@
     background-size: 200% 100%;
     animation: wbs-skel-shine 1.2s ease-in-out infinite;
 
-    &--eyebrow {
+    &_eyebrow {
       width: 120px;
       height: 12px;
       margin-bottom: 10px;
     }
 
-    &--title {
+    &_title {
       display: block;
       width: 360px;
       max-width: 70%;
@@ -104,7 +104,7 @@
       border-radius: 8px;
     }
 
-    &--desc {
+    &_desc {
       display: block;
       width: 520px;
       max-width: 90%;
@@ -112,18 +112,18 @@
       margin-top: 12px;
     }
 
-    &--label {
+    &_label {
       width: 140px;
       height: 14px;
     }
 
-    &--value {
+    &_value {
       width: 64px;
       height: 28px;
       border-radius: 8px;
     }
 
-    &--bar {
+    &_bar {
       display: block;
       width: 100%;
       height: 8px;
@@ -131,59 +131,59 @@
       border-radius: 999px;
     }
 
-    &--stat {
+    &_stat {
       width: 72px;
       height: 14px;
     }
 
-    &--tab {
+    &_tab {
       width: 88px;
       height: 32px;
       border-radius: 999px;
     }
 
-    &--chip {
+    &_chip {
       width: 96px;
       height: 28px;
     }
 
-    &--select {
+    &_select {
       width: 120px;
       height: var(--control-h);
       flex: 0 0 120px;
     }
 
-    &--input {
+    &_input {
       flex: 1 1 auto;
       height: var(--control-h);
       min-width: 120px;
     }
 
-    &--switch {
+    &_switch {
       width: 100px;
       height: var(--control-h);
       flex-shrink: 0;
     }
 
-    &--th {
+    &_th {
       width: 70%;
       height: 10px;
     }
 
-    &--toggle {
+    &_toggle {
       width: var(--control-h);
       height: var(--control-h);
       border-radius: 3px;
       flex: 0 0 var(--control-h);
     }
 
-    &--name {
+    &_name {
       height: 14px;
       max-width: 220px;
       flex: 1 1 auto;
     }
 
-    &--cell {
+    &_cell {
       width: 60%;
       height: 12px;
     }
@@ -195,7 +195,7 @@
     align-items: center;
     gap: 14px;
 
-    &__title {
+    &_title {
       margin: 0;
       color: #b42318;
       font-weight: 600;
@@ -302,7 +302,7 @@
     padding: 10px 0;
     background: transparent;
 
-    &__tabs {
+    &_tabs {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
@@ -375,7 +375,7 @@
       color: var(--color-accent-text);
     }
 
-    &__icon {
+    &_icon {
       font-size: 10px;
       line-height: 1;
       opacity: 0.7;
@@ -392,7 +392,7 @@
     flex: 1 1 auto;
     overflow: hidden;
 
-    &__sep {
+    &_sep {
       display: inline-block;
       width: 1px;
       height: 16px;
@@ -485,7 +485,7 @@
     border-radius: 999px;
     background: #e5edf2;
 
-    &__bar {
+    &_bar {
       display: block;
       height: 100%;
       border-radius: inherit;
@@ -717,7 +717,7 @@
       pointer-events: none;
     }
 
-    &__ui {
+    &_ui {
       position: relative;
       width: 36px;
       height: 20px;
@@ -739,7 +739,7 @@
       }
     }
 
-    input:checked + &__ui {
+    input:checked + &_ui {
       background: var(--color-accent);
 
       &::after {
@@ -747,7 +747,7 @@
       }
     }
 
-    &__label {
+    &_label {
       font-size: 13px;
       font-weight: 600;
       color: var(--color-text);
@@ -879,8 +879,8 @@
     width: 100%;
     min-width: min-content;
 
-    &__head,
-    &__row {
+    &_head,
+    &_row {
       display: grid;
       grid-template-columns: var(--wbs-cols);
       align-items: stretch;
@@ -903,7 +903,7 @@
         minmax(240px, 2.2fr);
     }
 
-    &__head {
+    &_head {
       // 세로 고정은 .wbs-table-head-wrap sticky 가 담당
       z-index: 5;
       background: #f3f7f9;
@@ -942,20 +942,20 @@
       }
     }
 
-    &__list,
-    &__depth2,
-    &__depth3 {
+    &_list,
+    &_depth2,
+    &_depth3 {
       margin: 0;
       padding: 0;
       list-style: none;
     }
 
-    &__group {
+    &_group {
       margin: 0;
       padding: 0;
     }
 
-    &__row {
+    &_row {
       border-bottom: 1px solid var(--wbs-row-border, #e8eef2);
       transition: background 0.2s ease;
 
@@ -1055,17 +1055,17 @@
     min-width: 0;
     white-space: nowrap;
 
-    &--child {
+    &_child {
       padding-left: 16px;
     }
 
     // Depth3 (Depth2 그룹 하위 화면)
-    &--grandchild {
+    &_grandchild {
       padding-left: 32px;
     }
   }
 
-  .wbs-table__subgroup {
+  .wbs-table_subgroup {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -1222,7 +1222,7 @@
     white-space: nowrap;
 
     code,
-    .path-link__label {
+    .path-link_label {
       display: block;
       max-width: 100%;
       overflow: hidden;
@@ -1235,7 +1235,7 @@
       font-family: var(--mono);
     }
 
-    .path-link__label {
+    .path-link_label {
       font-family: inherit;
       text-decoration: underline;
       text-underline-offset: 2px;
@@ -1332,13 +1332,13 @@
   justify-content: center;
   box-sizing: border-box;
 
-  &__backdrop {
+  &_backdrop {
     position: absolute;
     inset: 0;
     background: rgba(21, 32, 43, 0.45);
   }
 
-  &__panel {
+  &_panel {
     position: relative;
     z-index: 1;
     display: flex;
@@ -1355,7 +1355,7 @@
     animation: wbs-sheet-up 0.22s ease both;
   }
 
-  &__header {
+  &_header {
     position: relative;
     display: flex;
     align-items: center;
@@ -1365,7 +1365,7 @@
     border-bottom: 1px solid var(--color-border);
   }
 
-  &__handle {
+  &_handle {
     position: absolute;
     top: 8px;
     left: 50%;
@@ -1376,7 +1376,7 @@
     transform: translateX(-50%);
   }
 
-  &__title {
+  &_title {
     margin: 0;
     font-size: 16px;
     font-weight: 700;
@@ -1384,7 +1384,7 @@
     color: var(--color-text);
   }
 
-  &__close {
+  &_close {
     flex-shrink: 0;
     min-width: 32px;
     padding: 0;
@@ -1392,7 +1392,7 @@
     line-height: 1;
   }
 
-  &__list {
+  &_list {
     flex: 1 1 auto;
     min-height: 0;
     margin: 0;
@@ -1402,7 +1402,7 @@
     -webkit-overflow-scrolling: touch;
   }
 
-  &__item {
+  &_item {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1430,7 +1430,7 @@
     }
   }
 
-  &__count {
+  &_count {
     flex-shrink: 0;
     min-width: 24px;
     padding: 2px 8px;
@@ -1447,7 +1447,7 @@
     align-items: center;
     padding: 24px;
 
-    &__panel {
+    &_panel {
       width: 100%;
       max-width: 480px;
       max-height: #{"min(80vh, 560px)"};
@@ -1456,11 +1456,11 @@
       animation: wbs-modal-in 0.2s ease both;
     }
 
-    &__handle {
+    &_handle {
       display: none;
     }
 
-    &__header {
+    &_header {
       padding: 16px 18px 12px;
     }
   }
@@ -1500,13 +1500,13 @@
   padding: 16px;
   box-sizing: border-box;
 
-  &__backdrop {
+  &_backdrop {
     position: absolute;
     inset: 0;
     background: rgba(21, 32, 43, 0.45);
   }
 
-  &__dialog {
+  &_dialog {
     position: relative;
     z-index: 1;
     display: flex;
@@ -1522,7 +1522,7 @@
     box-sizing: border-box;
   }
 
-  &__header {
+  &_header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -1531,7 +1531,7 @@
     border-bottom: 1px solid var(--color-border);
   }
 
-  &__eyebrow {
+  &_eyebrow {
     margin: 0 0 4px;
     font-size: 11px;
     font-weight: 700;
@@ -1540,32 +1540,32 @@
     color: var(--color-accent);
   }
 
-  &__title {
+  &_title {
     margin: 0;
     font-size: 18px;
     font-weight: 700;
     letter-spacing: -0.02em;
   }
 
-  &__meta {
+  &_meta {
     margin: 4px 0 0;
     font-size: 12px;
     color: var(--color-text-muted);
     font-family: var(--mono, ui-monospace, monospace);
   }
 
-  &__close {
+  &_close {
     flex-shrink: 0;
   }
 
-  &__body {
+  &_body {
     flex: 1 1 auto;
     min-height: 0;
     overflow: auto;
     padding: 8px 12px 16px;
   }
 
-  &__empty {
+  &_empty {
     margin: 24px 8px;
     text-align: center;
     color: var(--color-text-muted);
@@ -1575,7 +1575,7 @@
   @media (min-width: 768px) {
     padding: 24px;
 
-    &__dialog {
+    &_dialog {
       max-width: 768px;
     }
   }
@@ -1586,7 +1586,7 @@
   padding: 0;
   list-style: none;
 
-  &__item {
+  &_item {
     padding: 12px 8px;
     border-bottom: 1px solid var(--color-border);
 
@@ -1595,7 +1595,7 @@
     }
   }
 
-  &__head {
+  &_head {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -1603,18 +1603,18 @@
     margin-bottom: 6px;
   }
 
-  &__date {
+  &_date {
     font-size: 12px;
     font-weight: 700;
     color: var(--color-text);
   }
 
-  &__author {
+  &_author {
     font-size: 12px;
     color: var(--color-text-muted);
   }
 
-  &__text {
+  &_text {
     margin: 0;
     font-size: 14px;
     line-height: 1.55;

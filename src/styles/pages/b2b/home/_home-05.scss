@@ -32,7 +32,7 @@
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(0,0,0,0.04);
 
-  &__brand {
+  &_brand {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -41,21 +41,21 @@
     letter-spacing: -0.03em;
   }
 
-  &__mark {
+  &_mark {
     width: 22px;
     height: 22px;
     border-radius: 50%;
     background: var(--d-orange);
   }
 
-  &__nav {
+  &_nav {
     display: flex;
     gap: 22px;
     font-size: 14px;
     font-weight: 700;
   }
 
-  &__link {
+  &_link {
     color: var(--d-muted);
     transition: color 0.2s ease;
     &:hover, &.is-active { color: var(--d-ink); }
@@ -67,21 +67,21 @@
   margin: 0 auto;
   padding: 72px 28px 56px;
 
-  &--split {
+  &_split {
     display: grid;
     grid-template-columns: 1.05fr 0.95fr;
     gap: 36px;
     align-items: center;
   }
 
-  &__eyebrow {
+  &_eyebrow {
     margin: 0 0 18px;
     color: var(--d-orange);
     font-size: 14px;
     font-weight: 800;
   }
 
-  &__title {
+  &_title {
     margin: 0 0 20px;
     font-size: 48px;
     font-weight: 800;
@@ -89,7 +89,7 @@
     line-height: 1.2;
   }
 
-  &__desc {
+  &_desc {
     margin: 0 0 28px;
     max-width: 460px;
     color: var(--d-muted);
@@ -97,7 +97,7 @@
     line-height: 1.7;
   }
 
-  &__cta {
+  &_cta {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -112,7 +112,7 @@
     &:hover { background: #ef6408; transform: translateY(-1px); }
   }
 
-  &__media {
+  &_media {
     border-radius: 28px;
     overflow: hidden;
     aspect-ratio: 4 / 5;
@@ -135,7 +135,7 @@
   color: var(--d-white);
   overflow: hidden;
 
-  &__bg {
+  &_bg {
     position: absolute;
     left: 0;
     right: 0;
@@ -152,7 +152,7 @@
     background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.72));
   }
 
-  &__body {
+  &_body {
     position: relative;
     z-index: 1;
     max-width: var(--d-max);
@@ -161,7 +161,7 @@
     padding: 64px 28px;
   }
 
-  &__eyebrow {
+  &_eyebrow {
     margin: 0 0 12px;
     font-size: 13px;
     font-weight: 800;
@@ -169,7 +169,7 @@
     color: rgba(255,255,255,0.75);
   }
 
-  &__title {
+  &_title {
     margin: 0 0 14px;
     font-size: 36px;
     font-weight: 800;
@@ -177,7 +177,7 @@
     line-height: 1.3;
   }
 
-  &__desc {
+  &_desc {
     margin: 0;
     max-width: 480px;
     color: rgba(255,255,255,0.78);
@@ -190,16 +190,16 @@
   display: grid;
   gap: 48px;
 
-  &__row {
+  &_row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 28px;
     align-items: center;
 
-    &.is-reverse .dg-story-split__copy { order: 2; }
+    &.is-reverse .dg-story-split_copy { order: 2; }
   }
 
-  &__more {
+  &_more {
     display: inline-flex;
     margin-top: 16px;
     padding: 8px 14px;
@@ -210,7 +210,7 @@
     font-weight: 700;
   }
 
-  &__media {
+  &_media {
     position: relative;
     border-radius: 24px;
     overflow: hidden;
@@ -223,7 +223,7 @@
     }
   }
 
-  &__chip {
+  &_chip {
     position: absolute;
     left: 14px;
     bottom: 14px;
@@ -243,17 +243,17 @@
   gap: 28px;
   align-items: start;
 
-  &__side {
+  &_side {
     position: sticky;
     top: 88px;
   }
 
-  &__list {
+  &_list {
     display: grid;
     gap: 12px;
   }
 
-  &__card {
+  &_card {
     display: grid;
     grid-template-columns: 64px 1fr;
     gap: 16px;
@@ -263,25 +263,25 @@
     border: 1px solid var(--d-line);
   }
 
-  &__avatar {
+  &_avatar {
     width: 64px;
     height: 64px;
     border-radius: 50%;
   }
 
-  &__name {
+  &_name {
     margin: 0 0 4px;
     font-size: 17px;
     font-weight: 800;
   }
 
-  &__role {
+  &_role {
     margin: 0 0 10px;
     color: var(--d-muted);
     font-size: 13px;
   }
 
-  &__quote {
+  &_quote {
     margin: 0;
     font-size: 15px;
     line-height: 1.55;
@@ -293,14 +293,14 @@
   margin: 0 auto;
   padding: 40px 28px 88px;
 
-  &__eyebrow {
+  &_eyebrow {
     margin: 0 0 12px;
     color: var(--d-orange);
     font-size: 14px;
     font-weight: 800;
   }
 
-  &__title {
+  &_title {
     margin: 0 0 28px;
     font-size: 32px;
     font-weight: 800;
@@ -314,7 +314,7 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
 
-  &__card {
+  &_card {
     display: grid;
     grid-template-rows: 180px auto;
     border-radius: 20px;
@@ -329,14 +329,14 @@
     }
   }
 
-  &__media {
+  &_media {
     background-size: cover;
     background-position: center;
   }
 
-  &__body { padding: 20px 20px 22px; }
+  &_body { padding: 20px 20px 22px; }
 
-  &__tag {
+  &_tag {
     display: inline-block;
     margin-bottom: 8px;
     padding: 4px 10px;
@@ -347,14 +347,14 @@
     font-weight: 800;
   }
 
-  &__name {
+  &_name {
     margin: 0 0 8px;
     font-size: 18px;
     font-weight: 800;
     letter-spacing: -0.02em;
   }
 
-  &__text {
+  &_text {
     margin: 0;
     color: var(--d-muted);
     font-size: 14px;
@@ -367,14 +367,14 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
 
-  &__item {
+  &_item {
     padding: 28px 22px;
     border-radius: 20px;
     background: var(--d-white);
     border: 1px solid var(--d-line);
   }
 
-  &__num {
+  &_num {
     margin-bottom: 14px;
     color: var(--d-orange);
     font-size: 28px;
@@ -382,13 +382,13 @@
     letter-spacing: -0.03em;
   }
 
-  &__title {
+  &_title {
     margin: 0 0 8px;
     font-size: 18px;
     font-weight: 800;
   }
 
-  &__text {
+  &_text {
     margin: 0;
     color: var(--d-muted);
     font-size: 14px;
@@ -402,7 +402,7 @@
   border-block: 1px solid var(--d-line);
   background: var(--d-white);
 
-  &__track {
+  &_track {
     display: flex;
     gap: 40px;
     width: max-content;
@@ -413,7 +413,7 @@
     color: var(--d-muted);
   }
 
-  &__item::before {
+  &_item::before {
     content: '·';
     margin-right: 40px;
     color: var(--d-orange);
@@ -434,19 +434,19 @@
   background: var(--d-ink);
   color: var(--d-white);
 
-  &__title {
+  &_title {
     margin: 0 0 12px;
     font-size: 28px;
     font-weight: 800;
     letter-spacing: -0.03em;
   }
 
-  &__desc {
+  &_desc {
     margin: 0 0 24px;
     color: rgba(255,255,255,0.65);
   }
 
-  &__btn {
+  &_btn {
     display: inline-flex;
     min-height: 46px;
     align-items: center;
@@ -466,13 +466,13 @@
 }
 
 @media (max-width: 900px) {
-  .dg-header__nav { display: none; }
-  .dg-hero--split,
-  .dg-story-split__row,
+  .dg-header_nav { display: none; }
+  .dg-hero_split,
+  .dg-story-split_row,
   .dg-experts { grid-template-columns: 1fr; }
-  .dg-hero__title { font-size: 36px; }
-  .dg-story-split__row.is-reverse .dg-story-split__copy { order: 0; }
-  .dg-experts__side { position: relative; top: 0; }
+  .dg-hero_title { font-size: 36px; }
+  .dg-story-split_row.is-reverse .dg-story-split_copy { order: 0; }
+  .dg-experts_side { position: relative; top: 0; }
   .dg-stories,
   .dg-values { grid-template-columns: 1fr; }
 }

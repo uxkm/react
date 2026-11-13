@@ -125,7 +125,7 @@ function buildProject (id) {
     if (!fs.existsSync(folder)) return
     for (const entry of fs.readdirSync(folder, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) {
       if (entry.isDirectory()) {
-        if (!['skeleton', 'widgets', 'modules', 'shared', 'data'].includes(entry.name)) walk(path.join(folder, entry.name), prefix + entry.name + '/', importBase, sourceRoot)
+        if (!['skeleton', 'sections', 'widgets', 'modules', 'shared', 'data'].includes(entry.name)) walk(path.join(folder, entry.name), prefix + entry.name + '/', importBase, sourceRoot)
         continue
       }
       if (!/\.(jsx|tsx)$/.test(entry.name)) continue

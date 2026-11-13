@@ -27,7 +27,7 @@ function SortableItem ({ id }) {
   return (
     <li
       ref={setNodeRef}
-      className="lib-demo-list__item"
+      className="lib-demo-list_item"
       style={style}
       {...attributes}
       {...listeners}
@@ -97,7 +97,7 @@ function SortableItem ({ id }) {
   const style = { transform: CSS.Transform.toString(transform), transition }
 
   return (
-    <li ref={setNodeRef} className="lib-demo-list__item" style={style} {...attributes} {...listeners}>
+    <li ref={setNodeRef} className="lib-demo-list_item" style={style} {...attributes} {...listeners}>
       {id}
     </li>
   )

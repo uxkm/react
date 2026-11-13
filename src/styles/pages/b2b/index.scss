@@ -1,2 +1,25 @@
 // 프로젝트 페이지 스타일 — /b2b/* 에서만 로드
 @use './index-partials';
+@use './navigation';
+@use './footer';
+@use './home/main';
+@use './modules/cards';
+
+// PC 디자인 기준: 좁은 창에서는 문서 전체를 가로로 스크롤합니다.
+body:has(.app-layout_main.project-content) {
+  min-width: 1440px;
+}
+
+// 본문 공통 폭. 전체 너비 섹션은 해당 본문 작업 시 별도로 구성합니다.
+.app-layout_main.project-content:not(.widget-preview) {
+  --content-max-width: 1600px;
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin-inline: auto;
+
+  // 작업용 화면에 남아 있는 공통 720px 제한을 해제합니다.
+  > .page-container {
+    width: 100%;
+    max-width: none;
+  }
+}

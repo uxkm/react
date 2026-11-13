@@ -251,7 +251,7 @@ function PanelSlideModule () {
         <article className="card card_accent color_primary card_elevated">
           <div className="card_body">
             <p className="typo_overline">이벤트</p>
-            <h3 className="card_title">신규 가입 혜택</h3>
+            <strong className="card_title">신규 가입 혜택</strong>
             <p className="card_subtitle">첫 주문 20% 할인 쿠폰을 드립니다.</p>
           </div>
         </article>
@@ -260,7 +260,7 @@ function PanelSlideModule () {
         <article className="card card_accent color_success card_elevated">
           <div className="card_body">
             <p className="typo_overline">혜택</p>
-            <h3 className="card_title">무료 배송</h3>
+            <strong className="card_title">무료 배송</strong>
             <p className="card_subtitle">3만 원 이상 구매 시 무료 배송이 적용됩니다.</p>
           </div>
         </article>
@@ -269,7 +269,7 @@ function PanelSlideModule () {
         <article className="card card_accent color_warning card_elevated">
           <div className="card_body">
             <p className="typo_overline">세일</p>
-            <h3 className="card_title">시즌 세일</h3>
+            <strong className="card_title">시즌 세일</strong>
             <p className="card_subtitle">베스트셀러를 최대 50% 할인합니다.</p>
           </div>
         </article>
@@ -687,7 +687,7 @@ const [value, setValue] = useState('overview')`
         <article className="card card_accent color_primary card_elevated">
           <div className="card_body">
             <p className="typo_overline">이벤트</p>
-            <h3 className="card_title">신규 가입 혜택</h3>
+            <strong className="card_title">신규 가입 혜택</strong>
             <p className="card_subtitle">첫 주문 20% 할인 쿠폰을 드립니다.</p>
           </div>
         </article>

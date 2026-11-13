@@ -36,7 +36,7 @@ export default function SimplebarDemoPage () {
       >
         <div className="lib-demo-scroll">
           <SimpleBar style={{ maxHeight: 180 }}>
-            <div className="lib-demo-scroll__inner">
+            <div className="lib-demo-scroll_inner">
               {lines.map((line) => (
                 <p key={line} style={{ margin: '0 0 8px' }}>{line}</p>
               ))}

@@ -8,7 +8,7 @@
       "name": "AX교육",
       "depth3": [
         {
-          "name": "AX교육 Overview",
+          "name": "Overview",
           "type": "Page",
           "id": "B2B-CORPED-001",
           "pageUrl": "/b2b/contents/ax/overview",
@@ -46,7 +46,7 @@
               "text": "역할·영역별 AI 교육과정 탐색"
             }
           ],
-          "name": "AI 교육 탐색",
+          "name": "AI교육 탐색",
           "type": "Page",
           "id": "B2B-CONTENTS-AX-AI-SEARCH",
           "pageUrl": "/b2b/contents/ax/ai-search",
@@ -69,7 +69,7 @@
               "text": "조직·개인의 AI 역량 진단과 수준별 교육 추천"
             }
           ],
-          "name": "AX 역량수준 진단",
+          "name": "AX역량수준 진단",
           "type": "Page",
           "id": "B2B-CONTENTS-AX-COMPETENCY",
           "pageUrl": "/b2b/contents/ax/competency",
@@ -138,11 +138,11 @@
               "text": "AI 과제 발굴·PoC 중심 해커톤 소개"
             }
           ],
-          "name": "AX 해커톤",
+          "name": "AX캠프",
           "type": "Page",
           "id": "B2B-CONTENTS-AX-HACKATHON",
-          "pageUrl": "/b2b/contents/ax/hackathon",
-          "filePath": "@/screen/b2b/contents/ax/hackathon/index.tsx",
+          "pageUrl": "/b2b/contents/ax/camp",
+          "filePath": "@/screen/b2b/contents/ax/camp/index.tsx",
           "priority": 2
         },
         {
@@ -439,7 +439,7 @@
           "planning": "",
           "design": "",
           "remark": [],
-          "name": "법정필수교육 서비스 특징",
+          "name": "서비스 특징",
           "type": "Page",
           "id": "B2B-CONTENTS-MANDATORY-FEATURES",
           "pageUrl": "/b2b/contents/mandatory/features",
@@ -462,7 +462,7 @@
               "text": "IA 추가 항목: 대표 과정"
             }
           ],
-          "name": "법정필수교육 대표 과정",
+          "name": "대표 과정",
           "type": "Page",
           "id": "B2B-CONTENTS-MANDATORY-COURSES",
           "pageUrl": "/b2b/contents/mandatory/courses",
@@ -485,7 +485,7 @@
               "text": "카테고리 선택 → 과정·인원 선택 → 정보 입력·견적서 받기. 법정의무/산업안전보건/금융부문/공공부문/전체필수 복수 선택"
             }
           ],
-          "name": "법정교육 간편견적",
+          "name": "간편 견적받기",
           "type": "Page",
           "id": "B2B-CONTENTS-MANDATORY-ESTIMATE",
           "pageUrl": "/b2b/contents/mandatory/estimate",
@@ -568,7 +568,7 @@
       "name": "외국어",
       "depth3": [
         {
-          "name": "외국어 교육",
+          "name": "외국어교육",
           "type": "Page",
           "id": "B2B-CORPED-006",
           "pageUrl": "/b2b/contents/language",
@@ -670,7 +670,7 @@
               "text": "메인 카드그리드와 중소기업 배너에서 연결. 기존 페이지 디자인·콘텐츠 활용"
             }
           ],
-          "name": "중소기업 인재키움 프리미엄",
+          "name": "[상생협력] 중소기업 인재키움 프리미엄",
           "type": "Page",
           "id": "B2B-CONTENTS-SMALL-BUSINESS",
           "pageUrl": "/b2b/contents/small-business",

@@ -26,7 +26,7 @@ export default function B2bContentsLeadershipExecutivePage () {
 
   return (
     <>
-      <Page page="b2b-contents-leadership-executive" title={pageTitle} />
+      <Page page="contents-leadership-executive" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

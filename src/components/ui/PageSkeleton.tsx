@@ -47,23 +47,23 @@ export function PageSkeleton ({
   if (type === 'page') {
     preset = (
       <>
-        <div className="page-skeleton__eyebrow">
+        <div className="page-skeleton_eyebrow">
           <Skeleton variant="eyebrow" />
         </div>
-        <div className="page-skeleton__title">
+        <div className="page-skeleton_title">
           <Skeleton variant="title" />
         </div>
         {showMeta && (
-          <div className="page-skeleton__meta">
+          <div className="page-skeleton_meta">
             <Skeleton variant="meta" />
           </div>
         )}
-        <div className="page-skeleton__desc">
+        <div className="page-skeleton_desc">
           <Skeleton variant="text" />
           <Skeleton variant="text-sm" />
         </div>
         {showLinks && (
-          <div className="page-skeleton__links">
+          <div className="page-skeleton_links">
             {range(linkCount).map((n) => (
               <Skeleton key={'link-' + n} variant="chip" width={72 + (n % 3) * 16} />
             ))}
@@ -74,13 +74,13 @@ export function PageSkeleton ({
   } else if (type === 'list') {
     preset = (
       <>
-        <div className="page-skeleton__title">
+        <div className="page-skeleton_title">
           <Skeleton variant="title" />
         </div>
         {range(rows).map((n) => (
-          <div key={'row-' + n} className="page-skeleton__row">
+          <div key={'row-' + n} className="page-skeleton_row">
             <Skeleton variant="avatar" />
-            <div className="page-skeleton__row-body">
+            <div className="page-skeleton_row-body">
               <Skeleton variant="text" width="55%" />
               <Skeleton variant="text-sm" width="40%" />
             </div>
@@ -91,10 +91,10 @@ export function PageSkeleton ({
   } else if (type === 'form') {
     preset = (
       <>
-        <div className="page-skeleton__title">
+        <div className="page-skeleton_title">
           <Skeleton variant="title" width="200px" />
         </div>
-        <div className="page-skeleton__form">
+        <div className="page-skeleton_form">
           {range(fields).map((n) => (
             <Skeleton key={'field-' + n} variant="meta" height="44px" />
           ))}
@@ -105,14 +105,14 @@ export function PageSkeleton ({
   } else if (type === 'card') {
     preset = (
       <>
-        <div className="page-skeleton__title">
+        <div className="page-skeleton_title">
           <Skeleton variant="title" />
         </div>
-        <div className="page-skeleton__cards">
+        <div className="page-skeleton_cards">
           {range(cards).map((n) => (
             <Skeleton
               key={'card-' + n}
-              className="page-skeleton__card"
+              className="page-skeleton_card"
               width="100%"
               height="140px"
               block

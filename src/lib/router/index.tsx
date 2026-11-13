@@ -60,6 +60,7 @@ export const Link = forwardRef<HTMLAnchorElement, AppLinkProps>(function Link (
       prefetch={prefetch}
       className={classNames(resolvedClass)}
       {...rest}
+      title={rest.target === '_blank' ? '새 창 열림' : rest.title}
     >
       {children}
     </NextLink>

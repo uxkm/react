@@ -1,38 +1,29 @@
 'use client'
 
 import { Page, PageLoading } from '@/comp'
-import { PublishingPlaceholder } from '@/screen/pub/widgets/publishing/PublishingPlaceholder'
+import Header from '@/widgets/b2b/common/Header'
 import { resolveSkeletonMode } from '@/config/skeleton'
 import GnbSkeleton from './skeleton/indexSkeleton'
 
-export const pageTitle = "GNB"
+export const pageTitle = "헤더"
+export const meta = { banner: false, header: false, footer: false, floating: false }
 
-/** IA publishing scaffold. Replace this screen body with the approved markup. */
+/** 공통 레이아웃 없이 헤더 위젯만 표시합니다. */
 export default function B2bCommonGnbPage () {
-  const links = []
   const skeletonId = 'b2b/common/gnb'
   const skeletonMode = resolveSkeletonMode(skeletonId)
 
   return (
     <>
-      <Page page="b2b-common-gnb" title={pageTitle} />
+      <Page page="common-gnb" title={pageTitle} className="project-content widget-preview" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}
         skeletonMode={skeletonMode}
         skeleton={skeletonMode === 'manual' ? <GnbSkeleton /> : undefined}
-        className="page-container"
+        className="header-preview"
       >
-        <PublishingPlaceholder
-          device="B2B"
-          folderId="common"
-          folderName="공통"
-          screenName={pageTitle}
-          screenType="Widget"
-          screenId="B2B-COMMON-001"
-          pageUrl="/b2b/common/gnb"
-          links={links}
-        />
+        <Header />
 
       </PageLoading>
     </>

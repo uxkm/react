@@ -5,6 +5,7 @@
  */
 import {
   createElement,
+  type ElementType,
   type HTMLAttributes,
   type MouseEvent,
   type ReactNode
@@ -37,10 +38,13 @@ const VALID_VARIANTS = new Set([
 export interface CardProps
   extends Omit<HTMLAttributes<HTMLElement>, 'title' | 'onClick' | 'color'> {
   variant?: CardVariant
+  /** 그림자 표시 여부. 기본 false이며 기존 shadow/elevated variant에서는 기본 true입니다. */
+  shadow?: boolean
   size?: 'sm' | 'md' | 'lg' | 'compact'
   title?: ReactNode
   subtitle?: ReactNode
-  as?: string
+  /** HTML 태그 또는 Link 등 사용자 컴포넌트. href는 링크 컴포넌트에도 전달합니다. */
+  as?: ElementType
   /** @deprecated use `as` */
   tag?: string
   href?: string
@@ -86,6 +90,7 @@ function variantClass (variant: string) {
   if (variant === 'flat' || variant === 'ghost') return 'card_ghost'
   if (variant === 'borderless') return 'card_borderless'
   if (variant === 'default' || variant === 'bordered') return ''
+  if (variant === 'shadow') return ''
   return 'card_' + variant
 }
 
@@ -95,10 +100,11 @@ function variantClass (variant: string) {
  */
 export function Card ({
   variant = 'bordered',
+  shadow,
   size = 'md',
   title,
   subtitle,
-  as = '',
+  as,
   tag = '',
   href = '',
   type = 'button',
@@ -118,9 +124,10 @@ export function Card ({
   onClick,
   tabIndex,
   ...rest
-}: CardProps) {
+}: Readonly<CardProps>) {
   const resolvedSize = VALID_SIZES.has(size) ? size : 'md'
   const resolvedVariant = VALID_VARIANTS.has(variant) ? variant : 'bordered'
+  const showShadow = shadow ?? (resolvedVariant === 'shadow' || resolvedVariant === 'elevated')
   const interactive = Boolean(href || onClick)
   const rootTag = as || tag || (href ? 'a' : onClick ? 'button' : 'article')
   const hasBuiltInHeader =
@@ -132,6 +139,7 @@ export function Card ({
   const cardClass = classNames(
     'card',
     variantClass(resolvedVariant),
+    showShadow && 'card_shadow',
     resolvedSize !== 'md' && 'card_' + resolvedSize,
     horizontal && 'card_horizontal',
     (compact || size === 'compact') && 'card_compact',
@@ -159,7 +167,7 @@ export function Card ({
       ...rest,
       className: cardClass,
       type: rootTag === 'button' ? type : undefined,
-      href: rootTag === 'a' && !disabled ? (href || undefined) : undefined,
+      href: (rootTag === 'a' || typeof rootTag !== 'string') && !disabled ? (href || undefined) : undefined,
       disabled: rootTag === 'button' ? disabled : undefined,
       'aria-disabled': interactive && disabled ? true : undefined,
       tabIndex: interactive && disabled ? -1 : tabIndex,
@@ -172,7 +180,7 @@ export function Card ({
         <div className="card_header-main">
           {header ?? (
             <>
-              {title != null && title !== '' && <h3 className="card_title">{title}</h3>}
+              {title != null && title !== '' && <strong className="card_title">{title}</strong>}
               {subtitle != null && subtitle !== '' && <p className="card_subtitle">{subtitle}</p>}
             </>
           )}
@@ -199,7 +207,7 @@ export function CardHeader ({
       <div className="card_header-main">
         {children ?? (
           <>
-            {title != null && <h3 className="card_title">{title}</h3>}
+            {title != null && <strong className="card_title">{title}</strong>}
             {subtitle != null && <p className="card_subtitle">{subtitle}</p>}
           </>
         )}

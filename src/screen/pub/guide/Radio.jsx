@@ -81,7 +81,7 @@ function PlanCard ({
           />
         )}
       >
-        <h3 className="card_title" id={titleId}>{title}</h3>
+        <strong className="card_title" id={titleId}>{title}</strong>
         <p className="card_subtitle">{subtitle}</p>
       </CardHeader>
       <CardBody id={descId}>{desc}</CardBody>
@@ -418,7 +418,7 @@ const SECTIONS = [
     code: wrapPageExample(`<div className="radio_card">
   <Card compact className="card_shadow">
     <CardHeader extra={<Radio id="…" name="…" value="basic" checked aria-labelledby="…" />}>
-      <h3 className="card_title" id="…">Basic</h3>
+      <strong className="card_title" id="…">Basic</strong>
       <p className="card_subtitle">월 9,000원</p>
     </CardHeader>
     <CardBody id="…">개인 프로젝트에 적합합니다.</CardBody>
@@ -481,7 +481,7 @@ const SECTIONS = [
                     />
                   )}
                 >
-                  <h3 className="card_title" id="radio-role-read-title">읽기</h3>
+                  <strong className="card_title" id="radio-role-read-title">읽기</strong>
                 </CardHeader>
                 <CardBody id="radio-role-read-desc">조회 권한</CardBody>
               </Card>
@@ -498,7 +498,7 @@ const SECTIONS = [
                     />
                   )}
                 >
-                  <h3 className="card_title" id="radio-role-write-title">쓰기</h3>
+                  <strong className="card_title" id="radio-role-write-title">쓰기</strong>
                 </CardHeader>
                 <CardBody id="radio-role-write-desc">수정 권한</CardBody>
               </Card>
@@ -515,7 +515,7 @@ const SECTIONS = [
                     />
                   )}
                 >
-                  <h3 className="card_title" id="radio-role-admin-title">관리</h3>
+                  <strong className="card_title" id="radio-role-admin-title">관리</strong>
                 </CardHeader>
                 <CardBody id="radio-role-admin-desc">전체 관리 권한</CardBody>
               </Card>

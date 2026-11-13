@@ -122,17 +122,17 @@ export function GuideMenu ({ className }) {
 
   return (
     <aside
-      className={classNames('comp-guide__nav', { 'is-collapsed': !navOpen }, className)}
+      className={classNames('comp-guide_nav', { 'is-collapsed': !navOpen }, className)}
       aria-label="가이드 목록"
     >
-      <div className="comp-guide__nav-body">
+      <div className="comp-guide_nav-body">
         {navOpen
           ? (
             <>
-              <div className="comp-guide__nav-head">
-                <p className="comp-guide__nav-title">가이드</p>
+              <div className="comp-guide_nav-head">
+                <p className="comp-guide_nav-title">가이드</p>
                 <Switch
-                  className="comp-guide__nav-expand"
+                  className="comp-guide_nav-expand"
                   size="sm"
                   labelEnd
                   checked={allExpanded}
@@ -143,17 +143,17 @@ export function GuideMenu ({ className }) {
                 />
               </div>
 
-              <nav id="comp-guide-list" className="comp-guide__list">
-                <div className="comp-guide__top">
+              <nav id="comp-guide-list" className="comp-guide_list">
+                <div className="comp-guide_top">
                   <Link
-                    className={classNames('comp-guide__top-link', { 'is-active': introActive })}
+                    className={classNames('comp-guide_top-link', { 'is-active': introActive })}
                     to={introHref}
                     aria-current={introActive ? 'page' : undefined}
                   >
                     {guideIntroItem.label}
                   </Link>
                   {menu?.accessibility && <Link
-                    className={classNames('comp-guide__top-link', { 'is-active': a11yActive })}
+                    className={classNames('comp-guide_top-link', { 'is-active': a11yActive })}
                     to={a11yHref}
                     aria-current={a11yActive ? 'page' : undefined}
                   >
@@ -161,10 +161,10 @@ export function GuideMenu ({ className }) {
                   </Link>}
                 </div>
 
-                <div className="comp-guide__section" data-guide-section="components">
-                  <p className="comp-guide__section-label">
+                <div className="comp-guide_section" data-guide-section="components">
+                  <p className="comp-guide_section-label">
                     <span>컴포넌트</span>
-                    <span className="comp-guide__count" aria-label={`하위 ${componentTotal}개`}>
+                    <span className="comp-guide_count" aria-label={`하위 ${componentTotal}개`}>
                       {componentTotal}
                     </span>
                   </p>
@@ -175,22 +175,22 @@ export function GuideMenu ({ className }) {
                     return (
                       <div
                         key={group.id}
-                        className={classNames('comp-guide__group', { 'is-open': expanded })}
+                        className={classNames('comp-guide_group', { 'is-open': expanded })}
                       >
                         <button
                           type="button"
-                          className="comp-guide__group-toggle"
+                          className="comp-guide_group-toggle"
                           aria-expanded={expanded ? 'true' : 'false'}
                           aria-controls={panelId}
                           onClick={() => toggleGroup(group.id)}
                         >
-                          <span className="comp-guide__toggle-label">
+                          <span className="comp-guide_toggle-label">
                             <span>{group.label}</span>
-                            <span className="comp-guide__count" aria-label={`하위 ${count}개`}>
+                            <span className="comp-guide_count" aria-label={`하위 ${count}개`}>
                               {count}
                             </span>
                           </span>
-                          <span className="comp-guide__chevron" aria-hidden="true" />
+                          <span className="comp-guide_chevron" aria-hidden="true" />
                         </button>
                         <ul id={panelId} hidden={!expanded}>
                           {group.items.map((item) => {
@@ -199,7 +199,7 @@ export function GuideMenu ({ className }) {
                             return (
                               <li key={item.id}>
                                 <Link
-                                  className={classNames('comp-guide__link', { 'is-active': active })}
+                                  className={classNames('comp-guide_link', { 'is-active': active })}
                                   to={href}
                                   aria-current={active ? 'page' : undefined}
                                 >
@@ -214,17 +214,17 @@ export function GuideMenu ({ className }) {
                   })}
                 </div>
 
-                {guideWidgetItems.length > 0 && <div className="comp-guide__section" data-guide-section="widgets">
-                  <p className="comp-guide__section-label">
+                {guideWidgetItems.length > 0 && <div className="comp-guide_section" data-guide-section="widgets">
+                  <p className="comp-guide_section-label">
                     <span>위젯</span>
-                    <span className="comp-guide__count" aria-label={`하위 ${guideWidgetItems.length}개`}>{guideWidgetItems.length}</span>
+                    <span className="comp-guide_count" aria-label={`하위 ${guideWidgetItems.length}개`}>{guideWidgetItems.length}</span>
                   </p>
-                  <ul className="comp-guide__section-list">
+                  <ul className="comp-guide_section-list">
                     {guideWidgetItems.map((item) => {
                       const href = '/pub/guide/' + item.id
                       const active = pathname === href
                       return <li key={item.id}>
-                        <Link className={classNames('comp-guide__link', { 'is-active': active })} to={href} aria-current={active ? 'page' : undefined}>
+                        <Link className={classNames('comp-guide_link', { 'is-active': active })} to={href} aria-current={active ? 'page' : undefined}>
                           {item.label}
                         </Link>
                       </li>
@@ -240,29 +240,29 @@ export function GuideMenu ({ className }) {
                     <div
                       key={group.id}
                       className={classNames(
-                        'comp-guide__section',
-                        'comp-guide__section--demo',
+                        'comp-guide_section',
+                        'comp-guide_section_demo',
                         { 'is-open': expanded }
                       )}
                     >
                       <button
                         type="button"
-                        className="comp-guide__section-toggle"
+                        className="comp-guide_section-toggle"
                         aria-expanded={expanded ? 'true' : 'false'}
                         aria-controls={panelId}
                         onClick={() => toggleGroup(group.id)}
                       >
-                        <span className="comp-guide__toggle-label">
+                        <span className="comp-guide_toggle-label">
                           <span>{group.label}</span>
-                          <span className="comp-guide__count" aria-label={`하위 ${count}개`}>
+                          <span className="comp-guide_count" aria-label={`하위 ${count}개`}>
                             {count}
                           </span>
                         </span>
-                        <span className="comp-guide__chevron" aria-hidden="true" />
+                        <span className="comp-guide_chevron" aria-hidden="true" />
                       </button>
                       <ul
                         id={panelId}
-                        className="comp-guide__section-list"
+                        className="comp-guide_section-list"
                         hidden={!expanded}
                       >
                         {group.items.map((item) => {
@@ -271,7 +271,7 @@ export function GuideMenu ({ className }) {
                           return (
                             <li key={item.id}>
                               <Link
-                                className={classNames('comp-guide__link', { 'is-active': active })}
+                                className={classNames('comp-guide_link', { 'is-active': active })}
                                 to={href}
                                 aria-current={active ? 'page' : undefined}
                               >
@@ -288,14 +288,14 @@ export function GuideMenu ({ className }) {
             </>
             )
           : (
-            <nav id="comp-guide-list" className="comp-guide__rail" aria-label="가이드 카테고리">
+            <nav id="comp-guide-list" className="comp-guide_rail" aria-label="가이드 카테고리">
               <Tooltip
                 className="tooltip_inverse"
                 placement="right"
                 content={guideIntroItem.label}
               >
                 <Link
-                  className={classNames('comp-guide__rail-btn', { 'is-active': introActive })}
+                  className={classNames('comp-guide_rail-btn', { 'is-active': introActive })}
                   to={introHref}
                   aria-label={guideIntroItem.label}
                   aria-current={introActive ? 'page' : undefined}
@@ -310,7 +310,7 @@ export function GuideMenu ({ className }) {
                 content={guideA11yItem.label}
               >
                 <Link
-                  className={classNames('comp-guide__rail-btn', { 'is-active': a11yActive })}
+                  className={classNames('comp-guide_rail-btn', { 'is-active': a11yActive })}
                   to={a11yHref}
                   aria-label={guideA11yItem.label}
                   aria-current={a11yActive ? 'page' : undefined}
@@ -331,7 +331,7 @@ export function GuideMenu ({ className }) {
                   >
                     <button
                       type="button"
-                      className={classNames('comp-guide__rail-btn', { 'is-active': active })}
+                      className={classNames('comp-guide_rail-btn', { 'is-active': active })}
                       aria-label={group.label}
                       onClick={() => openGroupFromRail(group.id)}
                     >
@@ -341,7 +341,7 @@ export function GuideMenu ({ className }) {
                 )
               })}
               {guideWidgetItems.length > 0 && <Tooltip className="tooltip_inverse" placement="right" content="위젯">
-                <button type="button" className={classNames('comp-guide__rail-btn', { 'is-active': widgetActive })} aria-label="위젯" onClick={() => setNavOpen(true)}>
+                <button type="button" className={classNames('comp-guide_rail-btn', { 'is-active': widgetActive })} aria-label="위젯" onClick={() => setNavOpen(true)}>
                   <Icon name="layout" size="sm" />
                 </button>
               </Tooltip>}
@@ -351,7 +351,7 @@ export function GuideMenu ({ className }) {
 
       <button
         type="button"
-        className="comp-guide__toggle"
+        className="comp-guide_toggle"
         aria-expanded={navOpen ? 'true' : 'false'}
         aria-controls="comp-guide-list"
         aria-label={navOpen ? '메뉴 접기' : '메뉴 펼치기'}

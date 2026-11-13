@@ -9,13 +9,19 @@ export const pageTitle = "기업교육문의"
 
 /** IA publishing scaffold. Replace this screen body with the approved markup. */
 export default function B2bContactEducationPage () {
-  const links = []
+  const links = [
+    {
+      "to": "/b2b/contact/platform",
+      "label": "플랫폼도입문의",
+      "screenId": "B2B-CONTACT-PLATFORM"
+    }
+  ]
   const skeletonId = 'b2b/contact/education'
   const skeletonMode = resolveSkeletonMode(skeletonId)
 
   return (
     <>
-      <Page page="b2b-contact-education" title={pageTitle} />
+      <Page page="contact-education" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

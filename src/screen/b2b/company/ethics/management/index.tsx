@@ -14,6 +14,11 @@ export default function B2bCompanyEthicsManagementPage () {
       "to": "/b2b/company/ethics/compliance",
       "label": "준법경영",
       "screenId": "B2B-COMPANY-ETHICS-COMPLIANCE"
+    },
+    {
+      "to": "/b2b/company/ethics/sericeo",
+      "label": "SERICEO",
+      "screenId": "B2B-COMPANY-ETHICS-SERICEO"
     }
   ]
   const skeletonId = 'b2b/company/ethics/management'
@@ -21,7 +26,7 @@ export default function B2bCompanyEthicsManagementPage () {
 
   return (
     <>
-      <Page page="b2b-company-ethics-management" title={pageTitle} />
+      <Page page="company-ethics-management" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

@@ -58,7 +58,7 @@ for (const [index, mode] of ['scss', 'css'].entries()) {
       browser = await chromium.launch({ headless: true })
       const page = await browser.newPage()
       await page.goto(baseURL + '/pub/guide/button')
-      await expect(page.locator('.app-layout--has-header')).toBeVisible()
+      await expect(page.locator('.app-layout_has-header')).toBeVisible()
       const guide = 'src/screen/pub/guide/watch-check/Example.tsx'
       const source = `'use client'
 import { useEffect, useState } from 'react'
@@ -74,7 +74,7 @@ export default function Example () {
       const guideURL = '/pub/guide/watch-check/example'
       await until(async () => (await fetch(baseURL + guideURL)).status === 200, 'new nested guide was not registered')
       // The open browser must refresh on its own and pick up the generated menu.
-      await expect(page.locator(`.comp-guide__nav a[href="${guideURL}"]`)).toHaveCount(1, { timeout: 30000 })
+      await expect(page.locator(`.comp-guide_nav a[href="${guideURL}"]`)).toHaveCount(1, { timeout: 30000 })
       const ready = page.waitForResponse((response) => response.url().endsWith('/__uxkm/watch'))
       await page.goto(baseURL + guideURL)
       await ready
@@ -116,21 +116,21 @@ export default function Example () {
       fs.unlinkSync(path.join(root, 'src/screen/pub/guide/Accessibility.jsx'))
       await until(async () => (await fetch(baseURL + '/pub/guide/accessibility')).status === 404, 'deleted accessibility route was retained')
       await page.goto(baseURL + '/pub/guide/button')
-      await expect(page.locator('.comp-guide__nav a[href="/pub/guide/accessibility"]')).toHaveCount(0)
+      await expect(page.locator('.comp-guide_nav a[href="/pub/guide/accessibility"]')).toHaveCount(0)
       if (mode === 'css') assert.equal(fs.existsSync(path.join(root, 'src/styles/css/watch-check.min.css')), false)
       // A local design skeleton is rendered only after the screen is marked manual.
       const overviewFile = 'src/screen/b2b/contents/ax/overview/index.tsx'
       const overviewSource = fs.readFileSync(path.join(root, overviewFile), 'utf8')
       write(overviewFile, overviewSource.replace('loading={false}', 'loading={true}'))
-      write('src/screen/b2b/contents/ax/overview/skeleton/indexSkeleton.tsx', 'export default function OverviewSkeleton () { return <div id="manual-b2b-skeleton">Approved design skeleton</div> }')
+      write('src/screen/b2b/contents/ax/overview/skeleton/indexSkeleton.tsx', 'export default function OverviewSkeleton () { return <div id="manual-skeleton">Approved design skeleton</div> }')
       await page.goto(baseURL + '/b2b/contents/ax/overview')
       await expect(page.locator('.page-loading[aria-busy="true"]')).toBeVisible({ timeout: 30000 })
-      await expect(page.locator('#manual-b2b-skeleton')).toHaveCount(0)
+      await expect(page.locator('#manual-skeleton')).toHaveCount(0)
       const configSource = fs.readFileSync(path.join(root, 'src/config/skeleton.ts'), 'utf8')
       write('src/config/skeleton.ts', configSource.replace('export const SKELETON_PAGE_MODE: Record<string, SkeletonMode> = {', "export const SKELETON_PAGE_MODE: Record<string, SkeletonMode> = {\n  'b2b/contents/ax/overview': 'manual',"))
-      await expect(page.locator('#manual-b2b-skeleton')).toBeVisible({ timeout: 30000 })
+      await expect(page.locator('#manual-skeleton')).toBeVisible({ timeout: 30000 })
       write('src/config/skeleton.ts', configSource)
-      await expect(page.locator('#manual-b2b-skeleton')).toHaveCount(0, { timeout: 30000 })
+      await expect(page.locator('#manual-skeleton')).toHaveCount(0, { timeout: 30000 })
       await expect(page.locator('.page-loading[aria-busy="true"]')).toBeVisible()
       assert.equal((await fetch(baseURL + '/b2b/contents/ax/overview/skeleton/index-skeleton')).status, 404)
       write(overviewFile, overviewSource)

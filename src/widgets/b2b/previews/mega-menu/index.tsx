@@ -15,7 +15,7 @@ export default function B2bCommonMegaMenuPage () {
 
   return (
     <>
-      <Page page="b2b-common-mega-menu" title={pageTitle} />
+      <Page page="common-mega-menu" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

@@ -237,7 +237,7 @@ export default function ChartDemoPage () {
       showBack
       backTo="/pub"
       backLabel="← 목록으로"
-      headerBrand={<Link className="app-header__brand" to="/pub/demo/chart">Chart</Link>}
+      headerBrand={<Link className="app-header_brand" to="/pub/demo/chart">Chart</Link>}
       headerNav={(
         <>
           <AppHeaderLink to="/pub">목록</AppHeaderLink>

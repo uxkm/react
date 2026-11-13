@@ -249,11 +249,11 @@ mkcert -key-file certificates/localhost-key.pem \
 
 B2B 페이지는 `페이지명/index.tsx` 구조로 작성합니다. 예를 들어 `src/screen/b2b/company/ethics/compliance/index.tsx`는 `/b2b/company/ethics/compliance`로 접속하며 URL에 `index`를 붙이지 않습니다. 각 페이지의 스켈레톤은 `페이지명/skeleton/indexSkeleton.tsx`에 둡니다. 위젯 프리뷰도 같은 폴더 구조를 사용합니다.
 
-프로젝트 화면은 전달된 IA의 `main`, `contents`, `service`, `insight`, `contact`, `company` 구조에 맞춘 TSX 56개로 관리합니다. 루트 `/b2b`는 `src/screen/b2b/main/index.tsx`를 사용하며, 예를 들어 AX 소개는 `/b2b/contents/ax/overview`, 기업교육문의는 `/b2b/contact/education`, 회사소개는 `/b2b/company/intro`입니다. 이전의 `corpeduc`, `about` 및 문의 화면에 사용하던 `insight` 경로는 새 분류로 변경했습니다.
+프로젝트 화면은 전체메뉴 디자인의 `main`, `contents`, `service`, `insight`, `contact`, `company` 구조에 맞춘 TSX 60개로 관리합니다. 루트 `/b2b`는 `src/screen/b2b/main/index.tsx`를 사용하며, 예를 들어 AX 소개는 `/b2b/contents/ax/overview`, 기업교육문의는 `/b2b/contact/education`, 회사소개는 `/b2b/company/intro`입니다. 이전의 `corpeduc`, `about` 및 문의 화면에 사용하던 `insight` 경로는 새 분류로 변경했습니다.
 
 공통 위젯·레이어의 작업용 프리뷰는 `src/widgets/b2b/previews`에 분리합니다. Registry는 `src/widgets/b2b/previews`를 `/b2b/common/...` 프리뷰 경로로 자동 등록하며, 이 폴더의 생성·삭제도 개발 감시기에 반영됩니다. PUB는 이 프리뷰 컴포넌트를 import하지 않고 JSON의 경로만 표시합니다. 메인 구성 요소·견적 단계·문의 입력 영역은 부모 페이지의 섹션으로 관리하고, 외부 링크와 자동 메일 연계 항목은 정적 페이지로 만들지 않습니다. 외부 링크·메일 항목의 `excludeFromStats`는 퍼블리싱 진행률 집계에서 제외합니다.
 
-프로젝트 PUB 목록은 `public/data/pub/b2b/{main,contents,service,insight,contact,common,company}.json`에 있습니다. 화면 ID·작업 정보·기획/디자인 링크·기존 비고를 대응 화면에 유지하고, 새 화면은 대기 상태로 등록했습니다. IA 이미지는 디자인 시안이므로 화면 본문은 퍼블리싱 작업용 골격이며, 실제 시안 마크업은 각 TSX 파일에서 구현합니다. `npm run test:project`로 요청된 56개 파일, 정적 라우트, PUB 내부 경로·섹션 앵커, 작업 정보 보존을 검사합니다.
+프로젝트 PUB 목록은 `public/data/pub/b2b/{main,contents,service,insight,contact,company,common}.json`에 있습니다. 화면 ID·작업 정보·기획/디자인 링크·기존 비고를 대응 화면에 유지하고, 새 화면은 대기 상태로 등록했습니다. 메뉴 계층과 화면별 경로는 `src/screen/b2b/README.md`에 정리했습니다. 전체메뉴 이미지는 메뉴 구성 시안이므로 화면 본문은 퍼블리싱 작업용 골격이며, 실제 시안 마크업은 각 TSX 파일에서 구현합니다. `npm run test:project`로 전체메뉴 기준 60개 파일, 정적 라우트, PUB 내부 경로·섹션 앵커, 작업 정보 보존을 검사합니다.
 
 각 프로젝트 화면의 수동 스켈레톤은 해당 화면과 같은 폴더의 `skeleton/`에 둡니다. 예를 들어 `main/index.tsx`는 `main/skeleton/indexSkeleton.tsx`, `contents/ax/overview/index.tsx`는 `contents/ax/overview/skeleton/indexSkeleton.tsx`를 사용합니다. 위젯 프리뷰도 각 프리뷰 폴더의 `skeleton/` 안에 파일별 스켈레톤을 둡니다. 이 파일들은 보조 컴포넌트이며 라우트로 등록하지 않습니다.
 

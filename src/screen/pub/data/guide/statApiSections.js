@@ -11,6 +11,24 @@ const columns = [
 
 const props = [
   {
+    name: 'variant',
+    type: "'default' | 'testimonial'",
+    default: 'default',
+    description: '기본 지표 또는 고객사례 카드. testimonial은 title=업종, value=인용문, description=작성자.'
+  },
+  {
+    name: 'avatar',
+    type: 'ReactNode',
+    default: 'user 아이콘',
+    description: '고객사례 유형의 원형 프로필 내용. 일반 span.profile 안에 표시.'
+  },
+  {
+    name: 'selected',
+    type: 'boolean',
+    default: 'false',
+    description: '고객사례 유형의 선택 테두리 표시.'
+  },
+  {
     name: 'title',
     type: 'string · ReactNode',
     default: '—',

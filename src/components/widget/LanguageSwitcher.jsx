@@ -78,10 +78,10 @@ export function LanguageSwitcher ({
         aria-controls={menuId}
         onClick={() => setOpen((prev) => !prev)}
       >
-        <span className="lang-switcher__label-row">
-          <span className="lang-switcher__label-text">{current.label}</span>
+        <span className="lang-switcher_label-row">
+          <span className="lang-switcher_label-text">{current.label}</span>
           {showProgress ? (
-            <span className="lang-switcher__progress" aria-live="polite">
+            <span className="lang-switcher_progress" aria-live="polite">
               {progressText}
             </span>
           ) : null}
@@ -110,7 +110,7 @@ export function LanguageSwitcher ({
         </div>
       ) : null}
       {localeError ? (
-        <div className="lang-switcher__status lang-switcher__status--error">
+        <div className="lang-switcher_status lang-switcher_status_error">
           <span role="alert">{localeError}</span>
           {locale !== 'ko' ? (
             <button type="button" onClick={retryTranslation} disabled={localeBusy}>

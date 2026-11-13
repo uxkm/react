@@ -22,7 +22,7 @@ export default function B2bCompanySustainabilityContributionPage () {
     },
     {
       "to": "/b2b/company/sustainability/diversity",
-      "label": "다양성/노사",
+      "label": "다양성 / 노사",
       "screenId": "B2B-COMPANY-SUSTAINABILITY-DIVERSITY"
     },
     {
@@ -56,7 +56,7 @@ export default function B2bCompanySustainabilityContributionPage () {
 
   return (
     <>
-      <Page page="b2b-company-sustainability-contribution" title={pageTitle} />
+      <Page page="company-sustainability-contribution" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

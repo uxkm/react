@@ -25,7 +25,7 @@ function SlideCard ({ slide, compact = false }) {
     <article className={`card card_accent color_${slide.color ?? 'primary'} card_elevated`}>
       <div className="card_body">
         <p className="typo_overline">{slide.overline ?? '슬라이드'}</p>
-        <h3 className="card_title">{slide.title}</h3>
+        <strong className="card_title">{slide.title}</strong>
         <p className={compact ? 'card_subtitle' : 'typo_lead'}>{slide.body}</p>
       </div>
     </article>
@@ -140,7 +140,7 @@ const [playing, setPlaying] = useState(true)
     <article className="card card_accent color_primary card_elevated">
       <div className="card_body">
         <p className="typo_overline">이벤트</p>
-        <h3 className="card_title">신규 가입 혜택</h3>
+        <strong className="card_title">신규 가입 혜택</strong>
         <p className="typo_lead">첫 주문 20% 할인 쿠폰을 드립니다.</p>
       </div>
     </article>

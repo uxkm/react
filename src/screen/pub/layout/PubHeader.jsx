@@ -40,7 +40,7 @@ export default function PubHeader ({
       back={back}
       brand={
         brand ?? (
-          <Link className="app-header__brand" to="/pub">{title}</Link>
+          <Link className="app-header_brand" to="/pub">{title}</Link>
         )
       }
       nav={nav}

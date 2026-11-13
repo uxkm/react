@@ -5,19 +5,19 @@ import { PublishingPlaceholder } from '@/screen/pub/widgets/publishing/Publishin
 import { resolveSkeletonMode } from '@/config/skeleton'
 import CoursesSkeleton from './skeleton/indexSkeleton'
 
-export const pageTitle = "법정필수교육 대표 과정"
+export const pageTitle = "대표 과정"
 
 /** IA publishing scaffold. Replace this screen body with the approved markup. */
 export default function B2bContentsMandatoryCoursesPage () {
   const links = [
     {
       "to": "/b2b/contents/mandatory/features",
-      "label": "법정필수교육 서비스 특징",
+      "label": "서비스 특징",
       "screenId": "B2B-CONTENTS-MANDATORY-FEATURES"
     },
     {
       "to": "/b2b/contents/mandatory/estimate",
-      "label": "법정교육 간편견적",
+      "label": "간편 견적받기",
       "screenId": "B2B-CONTENTS-MANDATORY-ESTIMATE"
     }
   ]
@@ -26,7 +26,7 @@ export default function B2bContentsMandatoryCoursesPage () {
 
   return (
     <>
-      <Page page="b2b-contents-mandatory-courses" title={pageTitle} />
+      <Page page="contents-mandatory-courses" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

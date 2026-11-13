@@ -11,12 +11,12 @@ export const pageTitle = "수상실적"
 export default function B2bCompanyPrAwardsPage () {
   const links = [
     {
-      "to": "/b2b/company/pr/news-list",
+      "to": "/b2b/company/pr/news/list",
       "label": "언론보도 목록",
       "screenId": "B2B-ABOUT-007"
     },
     {
-      "to": "/b2b/company/pr/news-detail",
+      "to": "/b2b/company/pr/news/detail",
       "label": "언론보도 상세",
       "screenId": "B2B-COMPANY-PR-NEWS-DETAIL"
     }
@@ -26,7 +26,7 @@ export default function B2bCompanyPrAwardsPage () {
 
   return (
     <>
-      <Page page="b2b-company-pr-awards" title={pageTitle} />
+      <Page page="company-pr-awards" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

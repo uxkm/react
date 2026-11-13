@@ -11,7 +11,7 @@ export const pageTitle = "재무정보"
 export default function B2bCompanyInvestorsFinancialPage () {
   const links = [
     {
-      "to": "/b2b/company/investors/stock",
+      "to": "/b2b/company/investors/shareholders",
       "label": "주주정보",
       "screenId": "B2B-COMPANY-INVESTORS-STOCK"
     },
@@ -24,6 +24,11 @@ export default function B2bCompanyInvestorsFinancialPage () {
       "to": "/b2b/company/investors/ir",
       "label": "IR 자료실",
       "screenId": "B2B-COMPANY-INVESTORS-IR"
+    },
+    {
+      "to": "/b2b/company/investors/stock-price",
+      "label": "주가정보",
+      "screenId": "B2B-COMPANY-INVESTORS-STOCK-PRICE"
     }
   ]
   const skeletonId = 'b2b/company/investors/financial'
@@ -31,7 +36,7 @@ export default function B2bCompanyInvestorsFinancialPage () {
 
   return (
     <>
-      <Page page="b2b-company-investors-financial" title={pageTitle} />
+      <Page page="company-investors-financial" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

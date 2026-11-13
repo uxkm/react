@@ -9,6 +9,32 @@ import { statApiSections } from '@/screen/pub/data/guide/statApiSections'
 
 const SECTIONS = [
   {
+    title: '고객사례 카드',
+    description: 'testimonial 유형은 업종·인용문·작성자·프로필을 표시합니다. selected는 선택 테두리, shadow는 그림자 옵션이며 프로필이 없으면 user 아이콘을 표시합니다.',
+    code: wrapPageExample(`<Stat
+  variant="testimonial"
+  title="금융"
+  value={'임원이 먼저 배우니\\n전사 AI 전환에\\n속도가 붙었습니다'}
+  description="A금융 인재개발팀 김OO 팀장"
+  selected
+/>`, {
+      name: 'StatTestimonialExample',
+      reactImports: [],
+      compImports: ['Stat']
+    }),
+    preview: (
+      <div style={{ maxWidth: 540 }}>
+        <Stat
+          variant="testimonial"
+          title="금융"
+          value={'임원이 먼저 배우니\n전사 AI 전환에\n속도가 붙었습니다'}
+          description="A금융 인재개발팀 김OO 팀장"
+          selected
+        />
+      </div>
+    )
+  },
+  {
     title: '기본',
     description: (
       <>

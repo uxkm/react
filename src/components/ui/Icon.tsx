@@ -133,6 +133,25 @@ const paths = {
       <path d="M4 21a8 8 0 0 1 16 0" />
     </>
   ),
+  naver: (
+    <>
+      <rect x="2" y="2" width="20" height="20" rx="3" fill="currentColor" stroke="none" />
+      <path d="M6.5 6.5h3.6l3.8 5.6V6.5h3.6v11h-3.6l-3.8-5.6v5.6H6.5Z" fill="#fff" stroke="none" />
+    </>
+  ),
+  youtube: (
+    <>
+      <rect x="1" y="4" width="22" height="16" rx="5" fill="currentColor" stroke="none" />
+      <path d="m10 8 6 4-6 4Z" fill="#fff" stroke="none" />
+    </>
+  ),
+  linkedin: (
+    <>
+      <circle cx="12" cy="12" r="11" fill="currentColor" stroke="none" />
+      <circle cx="7.5" cy="7" r="1.5" fill="#fff" stroke="none" />
+      <path d="M6 10h3v8H6Zm5 0h2.8v1.1c.5-.9 1.3-1.3 2.3-1.3 2 0 2.9 1.3 2.9 3.5V18h-3v-4.2c0-1.1-.3-1.7-1-1.7-.8 0-1 .6-1 1.7V18h-3Z" fill="#fff" stroke="none" />
+    </>
+  ),
   grid: (
     <>
       <rect x="4" y="4" width="6" height="6" />

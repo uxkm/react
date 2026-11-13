@@ -29,7 +29,7 @@ function boundaryElement (boundary: FloatingBoundary, floating: HTMLElement): HT
   if (boundary === 'footer') {
     const layout = floating.closest('.app-layout')
     return (layout?.querySelector<HTMLElement>('.app-footer') ||
-      layout?.querySelector<HTMLElement>(':scope > .app-layout__tree > footer') ||
+      layout?.querySelector<HTMLElement>(':scope > .app-layout_tree > footer') ||
       document.querySelector<HTMLElement>('.app-footer, footer')) ?? null
   }
   try { return document.querySelector<HTMLElement>(boundary) } catch { return null }

@@ -34,16 +34,16 @@ function renderInline (text, keyPrefix = 'i') {
       const href = link?.[1] || '#'
       if (/^(https?:|mailto:)/i.test(href)) {
         nodes.push(
-          <a key={key} href={href} target="_blank" rel="noreferrer">
+          <a key={key} href={href} target="_blank" title="새 창 열림" rel="noreferrer">
             {label}
           </a>
         )
       } else if (href.startsWith('/data/pub/docs/')) {
         // Static documents use ordinary navigation, without a Next page/RSC request.
-        nodes.push(<a key={key} className="guide-md__link" href={href}>{label}</a>)
+        nodes.push(<a key={key} className="guide-md_link" href={href}>{label}</a>)
       } else if (href.startsWith('/') || href.startsWith('#')) {
         nodes.push(
-          <Link key={key} className="guide-md__link" to={href}>
+          <Link key={key} className="guide-md_link" to={href}>
             {label}
           </Link>
         )
@@ -195,14 +195,14 @@ export function MarkdownDoc ({ source, className }) {
           const Tag = `h${block.level}`
           const id = slugify(block.text)
           return (
-            <Tag key={key} id={id} className={`guide-md__h${block.level}`}>
+            <Tag key={key} id={id} className={`guide-md_h${block.level}`}>
               {renderInline(block.text, key)}
             </Tag>
           )
         }
         if (block.type === 'p') {
           return (
-            <p key={key} className="guide-md__p">
+            <p key={key} className="guide-md_p">
               {renderInline(block.text, key)}
             </p>
           )
@@ -212,7 +212,7 @@ export function MarkdownDoc ({ source, className }) {
           return (
             <ListTag
               key={key}
-              className={classNames('guide-md__list', block.type === 'ol' && 'guide-md__list--ordered')}
+              className={classNames('guide-md_list', block.type === 'ol' && 'guide-md_list_ordered')}
             >
               {block.items.map((item, itemIndex) => (
                 <li key={`${key}-${itemIndex}`}>{renderInline(item, `${key}-${itemIndex}`)}</li>
@@ -222,15 +222,15 @@ export function MarkdownDoc ({ source, className }) {
         }
         if (block.type === 'code') {
           return (
-            <pre key={key} className="guide-md__pre" data-lang={block.lang || undefined}>
+            <pre key={key} className="guide-md_pre" data-lang={block.lang || undefined}>
               <code>{block.value}</code>
             </pre>
           )
         }
         if (block.type === 'table') {
           return (
-            <div key={key} className="guide-md__table-wrap" role="region" aria-label="문서 표" tabIndex={0}>
-              <table className="guide-md__table">
+            <div key={key} className="guide-md_table-wrap" role="region" aria-label="문서 표" tabIndex={0}>
+              <table className="guide-md_table">
                 <thead>
                   <tr>
                     {block.header.map((cell, cellIndex) => (

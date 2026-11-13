@@ -12,7 +12,7 @@ export default function B2bCompanyIntroPage () {
   const links = [
     {
       "to": "/b2b/company/ceo",
-      "label": "CEO 인사말",
+      "label": "CEO인사말",
       "screenId": "B2B-ABOUT-002"
     },
     {
@@ -26,7 +26,7 @@ export default function B2bCompanyIntroPage () {
 
   return (
     <>
-      <Page page="b2b-company-intro" title={pageTitle} />
+      <Page page="company-intro" title={pageTitle}  className="project-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}
