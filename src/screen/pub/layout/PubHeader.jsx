@@ -4,8 +4,8 @@
  * - 컴포넌트 가이드는 번역 드롭다운 옆(actions)에 배치, 새 창
  * - 숨김은 meta.header (PageLayoutVisibility). 일반 페이지는 PageHeader / Header
  */
-import { Header, AppHeaderLink } from '@/comp'
-import { Link } from '@/lib/router'
+import { Header, AppHeaderLink } from '@/comp' // comp
+import { Link } from '@/lib/router' // 클라이언트 링크
 
 const DEFAULT_BRAND = '퍼블리징 목록'
 

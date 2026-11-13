@@ -2,8 +2,8 @@
  * Flex 레이아웃.
  * direction·gap·정렬로 가로·세로 배치 상자를 만든다.
  */
-import { createElement, type HTMLAttributes, type ReactNode } from 'react'
-import { classNames } from '@/utils/classNames'
+import { createElement, type HTMLAttributes, type ReactNode } from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
 
 /** 간격 이름 → flex_gap-* 클래스 */
 const GAP_TOKEN: Record<string, string> = {

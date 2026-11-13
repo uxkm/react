@@ -4,9 +4,9 @@
  * 이름 있는 레이아웃 슬롯.
  * children 을 지정한 name 으로 LayoutContext 에 등록한다 (header, footer 등).
  */
-import type { ReactNode } from 'react'
-import { LAYOUT_SLOT_HIDDEN } from '@/comp/shared/layout-slot'
-import { useLayoutSlotSync } from './LayoutContext'
+import type { ReactNode } from 'react' // React Node 타입
+import { LAYOUT_SLOT_HIDDEN } from '@/comp/shared/layout-slot' // LAYOUT SLOT HIDDEN 컴포넌트
+import { useLayoutSlotSync } from './LayoutContext' // Layout Slot Sync 훅
 
 export { LAYOUT_SLOT_HIDDEN }
 

@@ -1,12 +1,12 @@
 'use client'
 
-import { useState } from 'react'
-import { Button, Space, Spin } from '@/comp'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
-import { GuideLayout } from '@/screen/pub/layout'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
-import { spinApiSections } from '@/screen/pub/data/guide/spinApiSections'
+import { useState } from 'react' // 상태 훅
+import { Button, Space, Spin } from '@/comp' // comp
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { spinApiSections } from '@/screen/pub/data/guide/spinApiSections' // spin Api Sections
 
 /** spinning 을 버튼으로 켜고 끄는 래퍼 예시 */
 function WrapDemo () {

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEscapeKey } from '@/hooks/useEscapeKey'
+import { useEscapeKey } from '@/hooks/useEscapeKey' // Escape Key 훅
 
 /**
  * RemarkModal

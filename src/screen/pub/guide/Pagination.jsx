@@ -1,12 +1,12 @@
 'use client'
 
-import { useState } from 'react'
-import { Pagination, Space } from '@/comp'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
-import { GuideLayout } from '@/screen/pub/layout'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
-import { paginationApiSections } from '@/screen/pub/data/guide/paginationApiSections'
+import { useState } from 'react' // 상태 훅
+import { Pagination, Space } from '@/comp' // comp
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { paginationApiSections } from '@/screen/pub/data/guide/paginationApiSections' // pagination Api Sections
 
 /** page 상태를 가진 데모 */
 function ControlledPagination (props) {

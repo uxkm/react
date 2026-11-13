@@ -13,9 +13,9 @@ import { Switch } from '@/comp/ui/Switch' // 하위 뎁스 모두 펼침/접힘
 import { Tooltip } from '@/comp/ui/Tooltip' // 접힘 시 카테고리 툴팁
 import { classNames } from '@/utils/classNames' // className 결합
 import {
-  guideAccessibilityPath,
-  guideHomePath,
-  useGuideMenu
+  guideAccessibilityPath, // guide Accessibility Path
+  guideHomePath, // guide Home Path
+  useGuideMenu // Guide Menu 훅
 } from '@/screen/pub/hooks/useGuideMenu' // 홈·접근성 경로·메뉴 JSON 훅
 
 /** 컴포넌트 그룹 id → 접힘 레일 아이콘 */

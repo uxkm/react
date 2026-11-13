@@ -4,9 +4,9 @@
  * 가이드·데모 메뉴 — JSON 분류와 자동 생성된 화면 목록을 병합.
  * 기존 분류·라벨을 유지하고 신규 화면 추가·삭제를 자동 반영.
  */
-import { useEffect, useState } from 'react'
-import { pubPages } from '@/generated/pub-pages'
-import { resolveGuideMenu } from '@/screen/pub/lib/guideMenu.mjs'
+import { useEffect, useState } from 'react' // React
+import { pubPages } from '@/generated/pub-pages' // pub Pages
+import { resolveGuideMenu } from '@/screen/pub/lib/guideMenu.mjs' // resolve Guide Menu
 
 const GUIDE_MENU_URL = '/data/pub/guide-menu.json'
 

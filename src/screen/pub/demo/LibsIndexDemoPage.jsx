@@ -1,8 +1,8 @@
 'use client'
 
-import { Link } from '@/lib/router'
-import { useGuideMenu } from '@/screen/pub/hooks/useGuideMenu'
-import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
+import { Link } from '@/lib/router' // 클라이언트 링크
+import { useGuideMenu } from '@/screen/pub/hooks/useGuideMenu' // Guide Menu 훅
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
 
 /** URL /pub/demo/libs (파일명 기본 slug 인 libs-index 대신) */
 export const routeId = 'libs'

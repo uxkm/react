@@ -6,16 +6,16 @@
  */
 
 import {
-  useId,
-  useState,
-  type AnchorHTMLAttributes,
-  type HTMLAttributes,
-  type MouseEvent,
-  type ReactNode
-} from 'react'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
-import { Icon } from './Icon'
+  useId, // 고유 id 훅
+  useState, // 상태 훅
+  type AnchorHTMLAttributes, // AnchorHTMLAttributes 타입
+  type HTMLAttributes, // HTMLAttributes 타입
+  type MouseEvent, // MouseEvent 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
+import { Icon } from './Icon' // Icon 컴포넌트
 
 /** 내비게이션 링크 한 줄 */
 export interface NavbarItem {

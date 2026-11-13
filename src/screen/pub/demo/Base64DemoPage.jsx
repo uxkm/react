@@ -1,10 +1,10 @@
 'use client'
 
-import { useMemo, useState } from 'react'
-import { encode, decode } from 'js-base64'
-import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
+import { useMemo, useState } from 'react' // React
+import { encode, decode } from 'js-base64' // Base64 인코딩
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
 
 /** js-base64 데모 */
 export default function Base64DemoPage () {

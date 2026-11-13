@@ -3,12 +3,12 @@
  * 네이티브 select에 size · fit · error · placeholder를 공통 클래스로 연결한다.
  */
 import type {
-  ChangeEvent,
-  ReactNode,
-  SelectHTMLAttributes
-} from 'react'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
+  ChangeEvent, // ChangeEvent 타입
+  ReactNode, // ReactNode 타입
+  SelectHTMLAttributes // SelectHTMLAttributes 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
 
 const VALID_SIZES = new Set(['sm', 'md', 'lg'])
 

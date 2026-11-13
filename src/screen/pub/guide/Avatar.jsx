@@ -1,11 +1,11 @@
 'use client'
 
-import { Avatar, AvatarGroup, Icon } from '@/comp'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
-import { GuideLayout } from '@/screen/pub/layout'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
-import { avatarApiSections } from '@/screen/pub/data/guide/avatarApiSections'
+import { Avatar, AvatarGroup, Icon } from '@/comp' // comp
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { avatarApiSections } from '@/screen/pub/data/guide/avatarApiSections' // avatar Api Sections
 
 const SAMPLE = '/images/icon/ico_avatar.svg'
 

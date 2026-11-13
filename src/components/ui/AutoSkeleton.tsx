@@ -5,15 +5,15 @@
  * children DOM 을 측정해 뼈대 도형을 그려 로딩 UI 를 만든다.
  */
 import {
-  useCallback,
-  useLayoutEffect,
-  useRef,
-  useState,
-  type CSSProperties,
-  type HTMLAttributes,
-  type ReactNode
-} from 'react'
-import { classNames } from '@/utils/classNames'
+  useCallback, // 콜백 메모 훅
+  useLayoutEffect, // 레이아웃 effect 훅
+  useRef, // ref 훅
+  useState, // 상태 훅
+  type CSSProperties, // CSSProperties 타입
+  type HTMLAttributes, // HTMLAttributes 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
 
 /** 측정한 뼈대 한 칸. x·y 위치, w·h 크기, r 모서리, shape 네모 또는 원 */
 export interface AutoBone {

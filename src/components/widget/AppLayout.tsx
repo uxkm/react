@@ -1,25 +1,25 @@
 'use client'
 
-import { useHydrated } from '@/hooks/useHydrated'
+import { useHydrated } from '@/hooks/useHydrated' // Hydrated 훅
 
-import { useLatestRef } from '@/hooks/useLatestRef'
+import { useLatestRef } from '@/hooks/useLatestRef' // Latest Ref 훅
 
 /**
  * 앱 공통 레이아웃 셸.
  * 헤더·본문·푸터 배치, 슬롯 병합, 스크롤 시 헤더 숨김, GlobalTranslator 연결.
  */
-import { Fragment, cloneElement, isValidElement, useCallback, useEffect, useLayoutEffect, useMemo, useRef, type HTMLAttributes, type ReactElement, type ReactNode } from 'react'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
-import { useLocaleStore } from '@/lib/localeStore'
-import { DEFAULT_LOCALE, normalizeLocale } from '@/lib/i18n'
-import { AppFooter } from './AppFooter'
-import { AppHeader, isAppHeaderLayout, type AppHeaderLayout } from './AppHeader'
-import { GlobalTranslator } from './GlobalTranslator'
-import { LayoutProvider, useLayoutSlots, usePageFloatingOptions } from '@/comp/layout/LayoutContext'
-import { isLayoutSlotHidden } from '@/comp/shared/layout-slot'
-import { Floating, type FloatingProps } from '@/comp/ui/Floating'
-import { headerAppearanceStyle, type HeaderAppearance, type HeaderStyle } from '@/comp/shared/header-appearance'
+import { Fragment, cloneElement, isValidElement, useCallback, useEffect, useLayoutEffect, useMemo, useRef, type HTMLAttributes, type ReactElement, type ReactNode } from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
+import { useLocaleStore } from '@/lib/localeStore' // 언어(locale) 전역 상태
+import { DEFAULT_LOCALE, normalizeLocale } from '@/lib/i18n' // 라이브러리/유틸 · i18n
+import { AppFooter } from './AppFooter' // App Footer 컴포넌트
+import { AppHeader, isAppHeaderLayout, type AppHeaderLayout } from './AppHeader' // AppHeader · isAppHeaderLayout · AppHeaderLayout 타입
+import { GlobalTranslator } from './GlobalTranslator' // Global Translator 컴포넌트
+import { LayoutProvider, useLayoutSlots, usePageFloatingOptions } from '@/comp/layout/LayoutContext' // 레이아웃 · Layout Context 컴포넌트
+import { isLayoutSlotHidden } from '@/comp/shared/layout-slot' // is Layout Slot Hidden
+import { Floating, type FloatingProps } from '@/comp/ui/Floating' // Floating · FloatingProps 타입
+import { headerAppearanceStyle, type HeaderAppearance, type HeaderStyle } from '@/comp/shared/header-appearance' // 공유 모듈 · header appearance
 
 /** 같은 방향으로 이만큼 누적되면 헤더 show/hide (느린 스크롤도 감지) */
 const SCROLL_TRIGGER = 8

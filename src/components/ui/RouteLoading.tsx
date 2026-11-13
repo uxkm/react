@@ -2,9 +2,9 @@
  * 라우트 전환 로딩.
  * PageLayoutVisibility(meta) + PageSkeleton 으로 본문 도착 전 UI 를 맞춘다.
  */
-import { PageLayoutVisibility } from '@/comp/layout/PageLayoutVisibility'
-import type { PageMeta } from '@/comp/shared/page-meta'
-import { PageSkeleton } from './PageSkeleton'
+import { PageLayoutVisibility } from '@/comp/layout/PageLayoutVisibility' // Page Layout Visibility 컴포넌트
+import type { PageMeta } from '@/comp/shared/page-meta' // Page Meta 타입
+import { PageSkeleton } from './PageSkeleton' // Page Skeleton 컴포넌트
 
 /** 경로 로딩이 받는 값. meta로 헤더·푸터·플로팅을 본문과 맞춘다 */
 export interface RouteLoadingProps {

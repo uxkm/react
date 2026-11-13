@@ -5,16 +5,16 @@
  * 트리거 옆에 제목·내용 패널을 띄운다. 닫기 버튼·바깥 클릭 닫기를 지원한다.
  */
 import {
-  useEffect,
-  useRef,
-  useState,
-  type HTMLAttributes,
-  type ReactNode
-} from 'react'
-import { useAutoClose } from '@/hooks/useAutoClose'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
-import { Icon } from './Icon'
+  useEffect, // effect 훅
+  useRef, // ref 훅
+  useState, // 상태 훅
+  type HTMLAttributes, // HTMLAttributes 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import { useAutoClose } from '@/hooks/useAutoClose' // Auto Close 훅
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
+import { Icon } from './Icon' // Icon 컴포넌트
 
 /** 팝오버가 받는 값 */
 export interface PopoverProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'content' | 'style'> {

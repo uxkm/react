@@ -54,6 +54,7 @@
     "node_modules",
     "out",
     "reports",
-    "test-results"
+    "test-results",
+    "tests"
   ]
 }

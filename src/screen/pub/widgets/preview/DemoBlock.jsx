@@ -4,8 +4,8 @@
  * 가이드 데모 블록.
  * 미리보기 + 코드보기 토글(복사 포함).
  */
-import { useId, useState } from 'react'
-import { classNames } from '@/utils/classNames'
+import { useId, useState } from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
 
 /**
  * @param {object} props

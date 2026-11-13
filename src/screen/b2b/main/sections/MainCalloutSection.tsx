@@ -1,5 +1,5 @@
-import MainInquiryCalloutCard from '@/widgets/b2b/main/MainInquiryCalloutCard'
-import MainNewsletterCalloutCard from '@/widgets/b2b/main/MainNewsletterCalloutCard'
+import MainInquiryCalloutCard from '@/widgets/b2b/main/MainInquiryCalloutCard' // Main Inquiry Callout Card 컴포넌트
+import MainNewsletterCalloutCard from '@/widgets/b2b/main/MainNewsletterCalloutCard' // Main Newsletter Callout Card 컴포넌트
 
 /** 네 번째 본문 섹션: 상담·뉴스레터 안내 카드 2열 배치. */
 export default function MainCalloutSection () {

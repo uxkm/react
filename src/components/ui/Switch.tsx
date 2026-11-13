@@ -3,11 +3,11 @@
  * label · labelEnd · size · ripple을 공통 클래스로 표현한다.
  */
 import type {
-  ChangeEvent,
-  InputHTMLAttributes,
-  ReactNode
-} from 'react'
-import { classNames } from '@/utils/classNames'
+  ChangeEvent, // ChangeEvent 타입
+  InputHTMLAttributes, // InputHTMLAttributes 타입
+  ReactNode // ReactNode 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
 
 const VALID_SIZES = new Set(['sm', 'md', 'lg'])
 

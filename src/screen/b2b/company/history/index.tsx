@@ -1,9 +1,9 @@
 'use client'
 
-import { Page, PageLoading } from '@/comp'
-import { PublishingPlaceholder } from '@/screen/pub/widgets/publishing/PublishingPlaceholder'
-import { resolveSkeletonMode } from '@/config/skeleton'
-import HistorySkeleton from './skeleton/indexSkeleton'
+import { Page, PageLoading } from '@/comp' // comp
+import { PublishingPlaceholder } from '@/screen/pub/widgets/publishing/PublishingPlaceholder' // Publishing Placeholder 컴포넌트
+import { resolveSkeletonMode } from '@/config/skeleton' // resolve Skeleton Mode
+import HistorySkeleton from './skeleton/indexSkeleton' // History Skeleton 컴포넌트
 
 export const pageTitle = "연혁"
 

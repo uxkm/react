@@ -1,13 +1,13 @@
 'use client'
 
-import { Link } from '@/lib/router'
-import { Header, Page, PageLayoutVisibility } from '@/comp'
+import { Link } from '@/lib/router' // 클라이언트 링크
+import { Page, PageLayoutVisibility } from '@/comp' // Page · 레이아웃 표시 제어
 
 /**
- * 오류 화면 크롬.
+ * 오류 화면 — 헤더·푸터 없이 본문만.
  */
 export const meta = {
-  header: true,
+  header: false,
   footer: false
 }
 
@@ -23,17 +23,12 @@ export default function ErrorView ({ error, reset }) {
     <>
       <Page page="error" title="Error" />
       <PageLayoutVisibility meta={meta} />
-      <Header
-        layout="inline"
-        brand={<Link className="app-header_brand" to="/">퍼블리싱 목록</Link>}
-        actions={<Link className="app-header_link" to="/pub">목록으로</Link>}
-      />
 
       <div className="page-container error-status">
         <p className="error-status_code">Error</p>
         <h1 className="error-status_title">문제가 발생했습니다</h1>
         <p className="error-status_desc">
-          화면을 표시하는 중 오류가 났습니다. 다시 시도하거나 목록으로 이동해 주세요.
+          화면을 표시하는 중 오류가 났습니다. 다시 시도하거나 메인으로 이동해 주세요.
         </p>
         {detail
           ? <pre className="error-status_detail">{detail}</pre>
@@ -50,8 +45,13 @@ export default function ErrorView ({ error, reset }) {
               </button>
               )
             : null}
-          <Link className="error-status_btn" to="/pub">
-            퍼블리시 목록
+          <Link
+            className={typeof reset === 'function'
+              ? 'error-status_btn'
+              : 'error-status_btn error-status_btn_primary'}
+            to="/"
+          >
+            메인으로 가기
           </Link>
         </div>
       </div>

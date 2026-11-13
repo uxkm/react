@@ -6,15 +6,15 @@
  */
 
 import {
-  useState,
-  type ChangeEvent,
-  type FormEvent,
-  type HTMLAttributes,
-  type KeyboardEvent,
-  type ReactNode
-} from 'react'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
+  useState, // 상태 훅
+  type ChangeEvent, // ChangeEvent 타입
+  type FormEvent, // FormEvent 타입
+  type HTMLAttributes, // HTMLAttributes 타입
+  type KeyboardEvent, // KeyboardEvent 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
 
 /** 페이지 이동이 받는 값 */
 export interface PaginationProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {

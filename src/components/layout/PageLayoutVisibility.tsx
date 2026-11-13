@@ -5,8 +5,8 @@
  * meta.banner / meta.header / meta.footer / meta.floating과 floatingItems로 표시를 제어한다.
  * AppLayout과 Floating이 레이아웃 슬롯의 표시 설정을 반영한다.
  */
-import { isLayoutSectionVisible, type PageMeta } from '@/comp/shared/page-meta'
-import { useLayoutSlotSync } from '@/comp/layout/LayoutContext'
+import { isLayoutSectionVisible, type PageMeta } from '@/comp/shared/page-meta' // 공유 모듈 · page meta
+import { useLayoutSlotSync } from '@/comp/layout/LayoutContext' // Layout Slot Sync 훅
 
 /** PageLayoutVisibility ↔ AppLayout/Floating 표시 슬롯 */
 export const META_HEADER_SLOT = 'meta-header'

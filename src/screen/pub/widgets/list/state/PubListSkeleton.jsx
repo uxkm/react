@@ -3,8 +3,8 @@
  * - PubIndex 로딩 중 실제 레이아웃과 동일한 스켈레톤 UI
  * - aria 는 SSR·하이드레이션용 원문 고정 (PubSkeletonPiece 조각 조합)
  */
-import { classNames } from '@/utils/classNames'
-import PubSkeletonPiece from './PubSkeletonPiece'
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import PubSkeletonPiece from './PubSkeletonPiece' // Pub Skeleton Piece 컴포넌트
 
 export default function PubListSkeleton ({
   columns,

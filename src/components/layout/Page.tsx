@@ -4,8 +4,8 @@
  * 본문 main 메타 슬롯.
  * data-page·className·브라우저 탭 제목(siteTitle)을 AppLayout 본문에 반영한다.
  */
-import { useLayoutSlotSync } from './LayoutContext'
-import { useSiteTitle } from '@/lib/siteTitle'
+import { useLayoutSlotSync } from './LayoutContext' // Layout Slot Sync 훅
+import { useSiteTitle } from '@/lib/siteTitle' // Site Title 훅
 
 /** 본문 main 이 받는 값. page 식별자와 탭 제목 */
 export interface PageProps {

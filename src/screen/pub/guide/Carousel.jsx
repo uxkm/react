@@ -1,12 +1,12 @@
 'use client'
 
-import { useState } from 'react'
-import { Carousel, CarouselSlide } from '@/comp'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
-import { GuideLayout } from '@/screen/pub/layout'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
-import { carouselApiSections } from '@/screen/pub/data/guide/carouselApiSections'
+import { useState } from 'react' // 상태 훅
+import { Carousel, CarouselSlide } from '@/comp' // comp
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { carouselApiSections } from '@/screen/pub/data/guide/carouselApiSections' // carousel Api Sections
 
 const SLIDES = [
   { id: 1, overline: '이벤트', title: '신규 가입 혜택', body: '첫 주문 20% 할인 쿠폰을 드립니다.', color: 'primary' },

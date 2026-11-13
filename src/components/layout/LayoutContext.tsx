@@ -5,21 +5,21 @@
  * Header/Footer/Page 등이 등록한 슬롯을 AppLayout이 읽어 헤더·본문·푸터·플로팅을 구성한다.
  */
 import {
-  createContext,
-  useCallback,
-  useContext,
-  useLayoutEffect,
-  useState,
-  type ReactNode
-} from 'react'
-import type { FloatingProps } from '@/comp/ui/Floating'
-import { usePathname } from 'next/navigation'
-import { hasNodes } from '@/utils/react'
+  createContext, // 컨텍스트 생성
+  useCallback, // 콜백 메모 훅
+  useContext, // 컨텍스트 훅
+  useLayoutEffect, // 레이아웃 effect 훅
+  useState, // 상태 훅
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import type { FloatingProps } from '@/comp/ui/Floating' // Floating Props 타입
+import { usePathname } from 'next/navigation' // 경로명 훅
+import { hasNodes } from '@/utils/react' // has Nodes
 import {
-  LAYOUT_SLOT_HIDDEN,
-  isLayoutSlotHidden,
-  type LayoutSlotHidden
-} from '@/comp/shared/layout-slot'
+  LAYOUT_SLOT_HIDDEN, // LAYOUT SLOT HIDDEN 컴포넌트
+  isLayoutSlotHidden, // is Layout Slot Hidden
+  type LayoutSlotHidden // LayoutSlotHidden 타입
+} from '@/comp/shared/layout-slot' // 공유 모듈 · layout slot
 
 /**
  * pageSlots 값: 렌더할 노드 | 숨김 마커

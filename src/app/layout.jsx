@@ -1,6 +1,6 @@
-import Script from 'next/script'
-import AppProviders from '@/comp/providers/AppProviders'
-import '@/styles/index.scss'
+import Script from 'next/script' // 스크립트 삽입
+import AppProviders from '@/comp/providers/AppProviders' // 앱 루트 Provider
+import '@/styles/index.scss' // 스타일
 
 const SCROLLBAR_MODE_SCRIPT =
   '(function(){try{var o=document.createElement("div");o.style.cssText="position:absolute;top:-9999px;width:100px;height:100px;overflow:scroll;visibility:hidden";document.documentElement.appendChild(o);document.documentElement.dataset.scrollbar=o.offsetWidth-o.clientWidth>0?"classic":"overlay";o.remove()}catch(e){}})();'

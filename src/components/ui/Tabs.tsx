@@ -6,22 +6,22 @@
  */
 
 import {
-  Children,
-  isValidElement,
-  useCallback,
-  useId,
-  useLayoutEffect,
-  useRef,
-  useState,
-  type CSSProperties,
-  type HTMLAttributes,
-  type KeyboardEvent,
-  type ReactElement,
-  type ReactNode
-} from 'react'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
-import { Icon, type IconColor } from './Icon'
+  Children, // Children 유틸
+  isValidElement, // is Valid Element
+  useCallback, // 콜백 메모 훅
+  useId, // 고유 id 훅
+  useLayoutEffect, // 레이아웃 effect 훅
+  useRef, // ref 훅
+  useState, // 상태 훅
+  type CSSProperties, // CSSProperties 타입
+  type HTMLAttributes, // HTMLAttributes 타입
+  type KeyboardEvent, // KeyboardEvent 타입
+  type ReactElement, // ReactElement 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
+import { Icon, type IconColor } from './Icon' // Icon · IconColor 타입
 
 /** 탭 값. 문자 또는 숫자 */
 export type TabValue = string | number

@@ -5,13 +5,13 @@
  * label · showValue · stepper · size · ripple을 공통 클래스로 표현한다.
  */
 import {
-  useId,
-  useState,
-  type CSSProperties,
-  type InputHTMLAttributes,
-  type ReactNode
-} from 'react'
-import { classNames } from '@/utils/classNames'
+  useId, // 고유 id 훅
+  useState, // 상태 훅
+  type CSSProperties, // CSSProperties 타입
+  type InputHTMLAttributes, // InputHTMLAttributes 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
 
 const VALID_SIZES = new Set(['sm', 'md', 'lg'])
 

@@ -4,7 +4,7 @@
  * 퍼블리싱 작업 전 안내 화면.
  * 폴더/화면 메타·하위 링크를 한글 원문으로 보여 준다.
  */
-import { Link } from '@/lib/router'
+import { Link } from '@/lib/router' // 클라이언트 링크
 
 /**
  * B2B 화면·위젯 프리뷰의 작업 전 안내 UI — 한글 원문으로 렌더.

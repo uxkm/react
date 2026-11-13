@@ -1,12 +1,12 @@
 'use client'
 
-import { useState } from 'react'
-import { Card, CardBody, CardDeck, CardHeader, Radio } from '@/comp'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
-import { GuideLayout } from '@/screen/pub/layout'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
-import { radioApiSections } from '@/screen/pub/data/guide/radioApiSections'
+import { useState } from 'react' // 상태 훅
+import { Card, CardBody, CardDeck, CardHeader, Radio } from '@/comp' // comp
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { radioApiSections } from '@/screen/pub/data/guide/radioApiSections' // radio Api Sections
 
 /** 카드 전체 클릭 → 내부 radio input */
 function onClickableCardClick (event) {

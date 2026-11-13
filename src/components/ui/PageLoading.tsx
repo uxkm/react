@@ -4,12 +4,12 @@
  * 페이지 로딩 래퍼.
  * auto 측정 스켈레톤 또는 manual PageSkeleton 으로 로딩 UI 를 표시.
  */
-import type { HTMLAttributes, ReactNode } from 'react'
-import { resolveSkeletonMode, type SkeletonMode } from '@/config/skeleton'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
-import { AutoSkeleton } from './AutoSkeleton'
-import { PageSkeleton, type PageSkeletonType } from './PageSkeleton'
+import type { HTMLAttributes, ReactNode } from 'react' // React
+import { resolveSkeletonMode, type SkeletonMode } from '@/config/skeleton' // 설정 · skeleton
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
+import { AutoSkeleton } from './AutoSkeleton' // Auto Skeleton 컴포넌트
+import { PageSkeleton, type PageSkeletonType } from './PageSkeleton' // PageSkeleton · PageSkeletonType 타입
 
 export type { SkeletonMode }
 

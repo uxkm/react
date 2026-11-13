@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useState, useSyncExternalStore } from 'react'
+import { useCallback, useState, useSyncExternalStore } from 'react' // React
 
 const DISMISSAL_EVENT = 'app:daily-dismissal'
 const serverSnapshot = () => 0

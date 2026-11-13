@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react'
-import { YouTube } from '@/lib/youtube'
-import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
+import { useState } from 'react' // 상태 훅
+import { YouTube } from '@/lib/youtube' // You Tube 컴포넌트
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
 
 /** Google IFrame API 샘플 영상 */
 const SAMPLE_ID = 'M7lc1UVf-VE'

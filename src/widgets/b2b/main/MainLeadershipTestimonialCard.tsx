@@ -1,5 +1,5 @@
-import Card from '@/modules/b2b/cards/Card'
-import type { TestimonialCardProps } from '@/modules/b2b/cards/cardTypes'
+import Card from '@/modules/b2b/cards/Card' // Card 컴포넌트
+import type { TestimonialCardProps } from '@/modules/b2b/cards/cardTypes' // Testimonial Card Props 타입
 
 /** 첨부 시안의 리더십 고객사례 카드. */
 export default function MainLeadershipTestimonialCard (props: Readonly<TestimonialCardProps>) {

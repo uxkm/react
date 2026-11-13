@@ -1,9 +1,9 @@
 'use client'
 
-import { Page, PageLoading } from '@/comp'
-import Footer from '@/widgets/b2b/common/Footer'
-import { resolveSkeletonMode } from '@/config/skeleton'
-import FooterSkeleton from './skeleton/indexSkeleton'
+import { Page, PageLoading } from '@/comp' // comp
+import Footer from '@/widgets/b2b/common/Footer' // Footer 컴포넌트
+import { resolveSkeletonMode } from '@/config/skeleton' // resolve Skeleton Mode
+import FooterSkeleton from './skeleton/indexSkeleton' // Footer Skeleton 컴포넌트
 
 export const pageTitle = "Footer"
 export const meta = { banner: false, header: false, footer: false, floating: false }

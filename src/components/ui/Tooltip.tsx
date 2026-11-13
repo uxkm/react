@@ -6,15 +6,15 @@
  */
 
 import {
-  useState,
-  type CSSProperties,
-  type FocusEvent,
-  type HTMLAttributes,
-  type MouseEvent,
-  type ReactNode
-} from 'react'
-import { useAutoClose } from '@/hooks/useAutoClose'
-import { classNames } from '@/utils/classNames'
+  useState, // 상태 훅
+  type CSSProperties, // CSSProperties 타입
+  type FocusEvent, // FocusEvent 타입
+  type HTMLAttributes, // HTMLAttributes 타입
+  type MouseEvent, // MouseEvent 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import { useAutoClose } from '@/hooks/useAutoClose' // Auto Close 훅
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
 
 /** 툴팁 방향 */
 export type TooltipPlacement = 'top' | 'bottom' | 'left' | 'right'

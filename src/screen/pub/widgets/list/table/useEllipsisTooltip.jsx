@@ -5,8 +5,8 @@
  * - 표 칸이 말줄임일 때만 hover 시 전체 문구 툴팁(포털) 표시
  * - 대상 요소에 ellipsisAttr(`data-ellipsis`)을 붙인다
  */
-import { useCallback, useLayoutEffect, useRef, useState } from 'react'
-import { createPortal } from 'react-dom'
+import { useCallback, useLayoutEffect, useRef, useState } from 'react' // React
+import { createPortal } from 'react-dom' // 포탈 생성
 
 /** 말줄임 대상 표시 */
 export const ellipsisAttr = { 'data-ellipsis': '' }

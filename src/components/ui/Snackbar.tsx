@@ -5,11 +5,11 @@
  * 하단에 잠깐 뜨는 메시지. 색·아이콘·닫기 지원.
  */
 
-import { useState, type HTMLAttributes, type ReactNode } from 'react'
-import { useAutoClose } from '@/hooks/useAutoClose'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
-import { Icon, type IconName } from './Icon'
+import { useState, type HTMLAttributes, type ReactNode } from 'react' // React
+import { useAutoClose } from '@/hooks/useAutoClose' // Auto Close 훅
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
+import { Icon, type IconName } from './Icon' // Icon · IconName 타입
 
 /** 스낵바 색 */
 export type SnackbarColor = 'info' | 'success' | 'warning' | 'error' | 'danger'

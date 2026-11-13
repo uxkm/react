@@ -1,8 +1,8 @@
 'use client'
 
-import { useLayoutEffect, type ReactNode } from 'react'
-import { useLayoutSlotSync, useSetPageFloatingOptions, type PageFloatingOptions } from './LayoutContext'
-import { FloatingItem, type FloatingSlots } from '@/comp/ui/Floating'
+import { useLayoutEffect, type ReactNode } from 'react' // React
+import { useLayoutSlotSync, useSetPageFloatingOptions, type PageFloatingOptions } from './LayoutContext' // useLayoutSlotSync · useSetPageFloatingOptions · PageFloatingOptions 타입
+import { FloatingItem, type FloatingSlots } from '@/comp/ui/Floating' // FloatingItem · FloatingSlots 타입
 
 export interface PageFloatingProps {
   /** 공통 플로팅 뒤에 추가할 페이지 전용 Floating.Item 목록 */

@@ -2,15 +2,13 @@
  * SCSS → CSS 빌드
  * - .css     : compact — 규칙마다 한 줄 + SCSS 주석 유지 (slash-comment, block-comment)
  *              예) #root {margin: 0;min-height: 100vh;}
- * - .min.css : compressed — 한 줄·주석 제거 (ui / build 호출용)
+ * - .min.css : compressed — 한 줄·주석 제거 (build 호출용)
  *
- *   node scripts/build-styles.mjs
- *   node scripts/build-styles.mjs --watch
+ *   node scripts/build/build-styles.mjs
  */
 import {
   mkdirSync,
   readFileSync,
-  watch as fsWatch,
   existsSync,
   unlinkSync
 } from 'node:fs'
@@ -18,22 +16,16 @@ import path from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import * as sass from 'sass-embedded'
 import { STYLE_ENTRIES, getStyleEntries } from './style-entries.mjs'
-import { writeIfChanged } from './write-if-changed.mjs'
+import { writeIfChanged } from '../write-if-changed.mjs'
 
-/** 이 스크립트 파일이 있는 디렉터리 (scripts/) */
+/** 이 스크립트 파일이 있는 디렉터리 (scripts/build/) */
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-/** 프로젝트 루트 (scripts/의 상위) */
-const root = path.join(__dirname, '..')
+/** 프로젝트 루트 (scripts/build/의 상위 두 단계) */
+const root = path.join(__dirname, '../..')
 /** SCSS 소스 루트 — loadPaths·엔트리 해석 기준 */
 const stylesRoot = path.join(root, 'src/styles')
 /** 컴파일 결과 CSS 출력 루트 (src/styles/css) */
 const distRoot = path.join(stylesRoot, 'css')
-
-/** 하위 호환 — STYLE_ENTRIES 와 동일 */
-export const ENTRIES = STYLE_ENTRIES
-
-/** 다른 스크립트에서 경로 상수 재사용용 */
-export { distRoot, root, stylesRoot }
 
 /**
  * 엔트리 상대경로 → 가독용 .css 출력 절대경로.
@@ -61,23 +53,6 @@ function needsGlobal (entryRel) {
   const f = entryRel.replace(/\\/g, '/')
   if (/\/styles\/(index|pub|demo)\.scss$/.test(f)) return false
   return true
-}
-
-/**
- * SCSS 절대경로 → 앱·빌드에서 쓸 압축 CSS(.min.css) 절대경로.
- * src/ 밖이면 null.
- */
-export function scssToDistCss (scssAbs) {
-  const norm = path.normalize(scssAbs)
-  let cssPath
-  if (path.dirname(norm) === stylesRoot && norm.endsWith('.scss')) {
-    cssPath = path.join(distRoot, path.basename(norm, '.scss') + '.css')
-  } else {
-    const rel = path.relative(path.join(root, 'src'), norm)
-    if (!rel || rel.startsWith('..')) return null
-    cssPath = path.join(distRoot, rel.replace(/\.scss$/i, '.css'))
-  }
-  return toDistMinCss(cssPath)
 }
 
 /**
@@ -313,12 +288,11 @@ function compileOne (entryRel) {
 }
 
 /**
- * ENTRIES 전부 컴파일.
- * @param {{ soft?: boolean }} [opts] - soft면 개별/전체 실패 시 throw 대신 로그만 남김 (watch용)
+ * 엔트리 전부 컴파일.
  * @returns {number} 성공한 엔트리 수
  */
 let previousEntries = new Set(STYLE_ENTRIES)
-export function compileAll ({ soft = false } = {}) {
+export function compileAll () {
   const entries = getStyleEntries()
   for (const entry of previousEntries) {
     if (entries.includes(entry)) continue
@@ -326,60 +300,17 @@ export function compileAll ({ soft = false } = {}) {
   }
   previousEntries = new Set(entries)
   let ok = 0
-  try {
-    for (const entry of entries) {
-      try {
-        if (compileOne(entry)) ok += 1
-      } catch (err) {
-        const msg = err?.message || String(err)
-        console.error(`[styles] fail ${entry}:`, msg)
-        if (!soft) throw err
-      }
-    }
-    if (ok > 0) {
-      console.log(`[styles] compiled ${ok}/${entries.length} (.css compact + .min.css compressed)`)
-    }
-  } catch (err) {
-    if (!soft) throw err
-    console.error('[styles] rebuild aborted (watching continues)')
+  for (const entry of entries) {
+    if (compileOne(entry)) ok += 1
+  }
+  if (ok > 0) {
+    console.log(`[styles] compiled ${ok}/${entries.length} (.css compact + .min.css compressed)`)
   }
   return ok
-}
-
-/**
- * styles·pages 하위의 .scss 변경을 감시해 debounce(120ms) 후 soft 재빌드.
- * @param {(() => void)=} onRebuild - 하나 이상 성공 시 콜백 (HMR 등)
- */
-export function watchStyles (onRebuild) {
-  let timer = null
-  /** 연속 변경을 묶어 한 번만 재빌드 */
-  const kick = () => {
-    clearTimeout(timer)
-    timer = setTimeout(() => {
-      console.log('[styles] change detected — rebuild')
-      // soft: SCSS 문법 오류가 나도 watch·서버는 유지
-      const ok = compileAll({ soft: true })
-      if (ok > 0) onRebuild?.()
-    }, 120)
-  }
-  for (const dir of [path.join(root, 'src')]) {
-    if (!existsSync(dir)) continue
-    fsWatch(dir, { recursive: true }, (_type, filename) => {
-      if (!filename) return
-      const name = String(filename)
-      if (!name.endsWith('.scss')) return
-      if (name.startsWith(['styles', 'css', ''].join(path.sep)) || name.startsWith(['styles', 'dist', ''].join(path.sep))) return
-      kick()
-    })
-  }
-  console.log('[styles] watching src/ (generated CSS excluded) …')
 }
 
 /** CLI로 직접 실행했는지 여부 (import만 한 경우는 false) */
 const isMain = process.argv[1] &&
   path.normalize(process.argv[1]) === path.normalize(fileURLToPath(import.meta.url))
 
-if (isMain) {
-  compileAll()
-  if (process.argv.includes('--watch')) watchStyles()
-}
+if (isMain) compileAll()

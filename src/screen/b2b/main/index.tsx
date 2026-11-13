@@ -1,13 +1,13 @@
 'use client'
 
-import { Page, PageLoading } from '@/comp'
-import { resolveSkeletonMode } from '@/config/skeleton'
-import MainHero from './sections/MainHero'
-import MainCardSection from './sections/MainCardSection'
-import MainInsightSection from './sections/MainInsightSection'
-import MainCaseSection from './sections/MainCaseSection'
-import MainCalloutSection from './sections/MainCalloutSection'
-import IndexSkeleton from './skeleton/indexSkeleton'
+import { Page, PageLoading } from '@/comp' // comp
+import { resolveSkeletonMode } from '@/config/skeleton' // resolve Skeleton Mode
+import MainHero from './sections/MainHero' // Main Hero 컴포넌트
+import MainCardSection from './sections/MainCardSection' // Main Card Section 컴포넌트
+import MainInsightSection from './sections/MainInsightSection' // Main Insight Section 컴포넌트
+import MainCaseSection from './sections/MainCaseSection' // Main Case Section 컴포넌트
+import MainCalloutSection from './sections/MainCalloutSection' // Main Callout Section 컴포넌트
+import IndexSkeleton from './skeleton/indexSkeleton' // Index Skeleton 컴포넌트
 
 export const pageTitle = "메인"
 

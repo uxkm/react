@@ -2,8 +2,8 @@
  * 자식 간격 유틸.
  * 자식 사이에 gap 을 넣는 간단한 배치 래퍼.
  */
-import { createElement, type HTMLAttributes, type ReactNode } from 'react'
-import { classNames } from '@/utils/classNames'
+import { createElement, type HTMLAttributes, type ReactNode } from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
 
 /** 간격 이름 → space_gap-* 클래스. md 는 기본이라 클래스 없음 */
 const GAP_TOKEN: Record<string, string> = {

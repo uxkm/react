@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, type RefObject } from 'react'
-import { useLatestRef } from './useLatestRef'
+import { useEffect, type RefObject } from 'react' // React
+import { useLatestRef } from './useLatestRef' // Latest Ref 훅
 
 /** 패널 내부에서 발생한 Escape를 처리하고 바깥 레이어로 전파하지 않는다. */
 export function useEscapeKey (ref: RefObject<HTMLElement | null>, onEscape: () => void, enabled = true) {

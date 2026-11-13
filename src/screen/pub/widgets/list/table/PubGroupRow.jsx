@@ -3,16 +3,16 @@
  * - 폴더(depth=0) / 그룹(depth=1) 공통 컨테이너 행 (+/- 토글 + 하위 목록)
  * - 리프는 PubScreenRow 로 렌더
  */
-import { classNames } from '@/utils/classNames'
-import { folderLabel } from '../lib/publishLabels'
-import { ellipsisAttr } from './useEllipsisTooltip.jsx'
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { folderLabel } from '../lib/publishLabels' // folder Label
+import { ellipsisAttr } from './useEllipsisTooltip.jsx' // ellipsis Attr
 import {
-  countLeaves,
-  groupExpandKey,
-  groupLabel,
-  isGroupNode
-} from '../lib/publishTree'
-import PubScreenRow, { screenRowKey } from './PubScreenRow'
+  countLeaves, // count Leaves
+  groupExpandKey, // group Expand Key
+  groupLabel, // group Label
+  isGroupNode // is Group Node
+} from '../lib/publishTree' // 라이브러리/유틸 · publish Tree
+import PubScreenRow, { screenRowKey } from './PubScreenRow' // Pub Screen Row 컴포넌트
 
 export default function PubGroupRow ({
   folder,

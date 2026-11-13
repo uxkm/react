@@ -1,6 +1,6 @@
 'use client'
 
-import '@/styles/index.scss'
+import '@/styles/index.scss' // 스타일
 
 /** 루트까지 깨졌을 때의 오류 화면. 레이아웃 없이 문서 전체를 직접 그린다 */
 export default function GlobalError ({ error, reset }) {
@@ -14,7 +14,7 @@ export default function GlobalError ({ error, reset }) {
       <head>
         {/* eslint-disable-next-line @next/next/no-css-tags */}
         <link rel="stylesheet" href="/fonts/pretendard/pretendard.css" />
-        <title>Error · 퍼블리싱 목록</title>
+        <title>Error</title>
       </head>
       <body>
         <main className="app-layout_main" data-page="error">
@@ -38,7 +38,7 @@ export default function GlobalError ({ error, reset }) {
               {/* global-error 는 루트 레이아웃이 깨진 상태라 Link 대신 풀 리로드 */}
               {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
               <a className="error-status_btn" href="/">
-                퍼블리시 목록
+                메인으로 가기
               </a>
             </div>
           </div>

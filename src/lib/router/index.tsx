@@ -1,13 +1,13 @@
 'use client'
 
-import NextLink from 'next/link'
-import { usePathname } from 'next/navigation'
+import NextLink from 'next/link' // Next Link 컴포넌트
+import { usePathname } from 'next/navigation' // 경로명 훅
 import {
-  forwardRef,
-  type AnchorHTMLAttributes,
-  type ReactNode
-} from 'react'
-import { classNames } from '@/utils/classNames'
+  forwardRef, // ref 전달
+  type AnchorHTMLAttributes, // AnchorHTMLAttributes 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
 
 /** `#/b2b/login` → `/b2b/login` */
 export function toAppHref (url?: string | null) {

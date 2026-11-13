@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
-import Image from 'next/image'
-import { Link } from '@/lib/router'
-import { Icon } from '@/comp/ui/Icon'
-import { Accordion, AccordionItem, AccordionPanel } from '@/comp/ui/Accordion'
-import { b2bMenu, type B2bMenuGroup, type B2bMenuLink } from './menuData'
+import { useEffect, useRef } from 'react' // React
+import Image from 'next/image' // 이미지 최적화
+import { Link } from '@/lib/router' // 클라이언트 링크
+import { Icon } from '@/comp/ui/Icon' // Icon 컴포넌트
+import { Accordion, AccordionItem, AccordionPanel } from '@/comp/ui/Accordion' // UI 컴포넌트 · Accordion 컴포넌트
+import { b2bMenu, type B2bMenuGroup, type B2bMenuLink } from './menuData' // menu Data
 
 export function B2bLogo () {
   return (

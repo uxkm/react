@@ -1,6 +1,6 @@
 'use client'
 
-import { useSyncExternalStore } from 'react'
+import { useSyncExternalStore } from 'react' // 외부 스토어 구독 훅
 
 const subscribe = () => () => {}
 const clientSnapshot = () => true

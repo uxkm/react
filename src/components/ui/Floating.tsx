@@ -8,26 +8,26 @@
  */
 
 import {
-  Children,
-  Fragment,
-  createContext,
-  isValidElement,
-  useContext,
-  useId,
-  useMemo,
-  useRef,
-  type CSSProperties,
-  type HTMLAttributes,
-  type ReactElement,
-  type ReactNode
-} from 'react'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
-import { useHydrated } from '@/hooks/useHydrated'
-import { useLayoutSlots } from '@/comp/layout/LayoutContext'
-import type { FloatingVisibilityMeta } from '@/comp/shared/page-meta'
-import { useFloatingPosition } from '@/hooks/useFloatingPosition'
-import type { FloatingBoundary, FloatingPlacement, FloatingPositionResolver } from '@/comp/shared/floating-position'
+  Children, // Children 유틸
+  Fragment, // Fragment
+  createContext, // 컨텍스트 생성
+  isValidElement, // is Valid Element
+  useContext, // 컨텍스트 훅
+  useId, // 고유 id 훅
+  useMemo, // 메모 훅
+  useRef, // ref 훅
+  type CSSProperties, // CSSProperties 타입
+  type HTMLAttributes, // HTMLAttributes 타입
+  type ReactElement, // ReactElement 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
+import { useHydrated } from '@/hooks/useHydrated' // Hydrated 훅
+import { useLayoutSlots } from '@/comp/layout/LayoutContext' // Layout Slots 훅
+import type { FloatingVisibilityMeta } from '@/comp/shared/page-meta' // Floating Visibility Meta 타입
+import { useFloatingPosition } from '@/hooks/useFloatingPosition' // Floating Position 훅
+import type { FloatingBoundary, FloatingPlacement, FloatingPositionResolver } from '@/comp/shared/floating-position' // 공유 모듈 · floating position
 
 export type { FloatingBoundary, FloatingPlacement, FloatingPositionContext, FloatingPositionResolver } from '@/comp/shared/floating-position'
 export type FloatingSlots = Record<string, ReactNode>

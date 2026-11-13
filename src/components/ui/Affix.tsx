@@ -6,18 +6,18 @@
  */
 
 import {
-  useCallback,
-  useEffect,
-  useId,
-  useLayoutEffect,
-  useRef,
-  useState,
-  type CSSProperties,
-  type HTMLAttributes,
-  type ReactNode
-} from 'react'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
+  useCallback, // 콜백 메모 훅
+  useEffect, // effect 훅
+  useId, // 고유 id 훅
+  useLayoutEffect, // 레이아웃 effect 훅
+  useRef, // ref 훅
+  useState, // 상태 훅
+  type CSSProperties, // CSSProperties 타입
+  type HTMLAttributes, // HTMLAttributes 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
 
 /** 스크롤 컨테이너. 생략 시 window(문서 뷰포트) */
 export type AffixTarget = Window | HTMLElement | null | undefined

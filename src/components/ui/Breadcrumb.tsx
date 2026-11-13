@@ -6,13 +6,13 @@
  */
 
 import {
-  useState,
-  type HTMLAttributes,
-  type MouseEvent,
-  type ReactNode
-} from 'react'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
+  useState, // 상태 훅
+  type HTMLAttributes, // HTMLAttributes 타입
+  type MouseEvent, // MouseEvent 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
 
 /** 경로 한 칸 */
 export interface BreadcrumbItem {

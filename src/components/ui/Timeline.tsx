@@ -2,8 +2,8 @@
  * 타임라인.
  * Timeline · TimelineItem으로 시간순 이벤트를 세로·가로·교차로 배치한다.
  */
-import type { HTMLAttributes, LiHTMLAttributes, ReactNode } from 'react'
-import { classNames } from '@/utils/classNames'
+import type { HTMLAttributes, LiHTMLAttributes, ReactNode } from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
 
 const VALID_TAGS = new Set(['ol', 'ul'])
 

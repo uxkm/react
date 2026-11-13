@@ -1,7 +1,7 @@
-import 'server-only'
+import 'server-only' // server-only 패키지
 
-import { notFound } from 'next/navigation'
-import { PageLayoutVisibility } from '@/comp/layout/PageLayoutVisibility'
+import { notFound } from 'next/navigation' // 404 처리
+import { PageLayoutVisibility } from '@/comp/layout/PageLayoutVisibility' // Page Layout Visibility 컴포넌트
 
 /** 서버에서 화면 모듈을 읽어 초기 HTML과 RSC 응답에 본문을 포함한다. */
 export async function RegistryPage ({ loaders, metaMap, routeKey, meta }) {

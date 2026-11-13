@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { Alert, Button, Drawer, Modal, Popover, Snackbar, Tooltip } from '@/comp'
+import { useState } from 'react' // 상태 훅
+import { Alert, Button, Drawer, Modal, Popover, Snackbar, Tooltip } from '@/comp' // comp
 
 const COMPONENTS = { Alert, Snackbar, Drawer, Popover, Tooltip, Modal }
 

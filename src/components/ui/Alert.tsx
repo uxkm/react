@@ -5,11 +5,11 @@
  * info/success/warning/danger 색과 닫기 가능한 안내 메시지.
  */
 
-import { useState, type HTMLAttributes, type MouseEvent, type ReactNode } from 'react'
-import { useAutoClose } from '@/hooks/useAutoClose'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
-import { Icon, type IconName } from './Icon'
+import { useState, type HTMLAttributes, type MouseEvent, type ReactNode } from 'react' // React
+import { useAutoClose } from '@/hooks/useAutoClose' // Auto Close 훅
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
+import { Icon, type IconName } from './Icon' // Icon · IconName 타입
 
 /** 알림 색. error 는 danger 와 같이 위험 */
 export type AlertColor = 'info' | 'success' | 'warning' | 'danger' | 'error'

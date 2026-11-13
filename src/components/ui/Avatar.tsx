@@ -4,9 +4,9 @@
  * 아바타.
  * 이니셜·이미지·아이콘으로 사용자/엔티티를 표시한다. 상태 점·그룹을 지원한다.
  */
-import { useState, type HTMLAttributes, type ReactNode } from 'react'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
+import { useState, type HTMLAttributes, type ReactNode } from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
 
 /** 아바타 크기 */
 export type AvatarSize = 'sm' | 'md' | 'lg' | 'xl'

@@ -1,9 +1,9 @@
 'use client'
 
-import { Page, PageLoading } from '@/comp'
-import { PublishingPlaceholder } from '@/screen/pub/widgets/publishing/PublishingPlaceholder'
-import { resolveSkeletonMode } from '@/config/skeleton'
-import DiversitySkeleton from './skeleton/indexSkeleton'
+import { Page, PageLoading } from '@/comp' // comp
+import { PublishingPlaceholder } from '@/screen/pub/widgets/publishing/PublishingPlaceholder' // Publishing Placeholder 컴포넌트
+import { resolveSkeletonMode } from '@/config/skeleton' // resolve Skeleton Mode
+import DiversitySkeleton from './skeleton/indexSkeleton' // Diversity Skeleton 컴포넌트
 
 export const pageTitle = "다양성 / 노사"
 

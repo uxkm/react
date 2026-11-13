@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect } from 'react' // effect 훅
 
 /**
  * ref 바깥 클릭 시 handler 호출

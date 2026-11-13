@@ -2,8 +2,8 @@
  * FolderFilterBar
  * - 화면명 필터 트리거 버튼과, 선택된 폴더의 하위 리프 바로가기 목록
  */
-import { classNames } from '@/utils/classNames'
-import { toAppHref } from '../table/PathLinkCell'
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { toAppHref } from '../table/PathLinkCell' // to App Href
 
 export default function FolderFilterBar ({
   active,

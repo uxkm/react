@@ -1,5 +1,5 @@
-import Card from '@/modules/b2b/cards/Card'
-import type { CardMediaProps } from '@/modules/b2b/cards/cardTypes'
+import Card from '@/modules/b2b/cards/Card' // Card 컴포넌트
+import type { CardMediaProps } from '@/modules/b2b/cards/cardTypes' // Card Media Props 타입
 
 /** 진단추천의 문구·연결·이미지는 이 위젯 호출부에서 관리합니다. */
 export default function MainDiagnosisCard ({

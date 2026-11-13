@@ -3,7 +3,7 @@
  * - PageUrl / 파일 경로 / 기획·디자인 칸용 링크 셀
  * - toAppHref·resolveLinkField·linkFieldSearchText 헬퍼도 함께 제공
  */
-import { ellipsisAttr } from './useEllipsisTooltip.jsx'
+import { ellipsisAttr } from './useEllipsisTooltip.jsx' // ellipsis Attr
 
 /** `#/b2b/login` → `/b2b/login` */
 export function toAppHref (url) {

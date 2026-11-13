@@ -1,21 +1,21 @@
 'use client'
 
-import { useState } from 'react'
+import { useState } from 'react' // 상태 훅
 import {
-  DndContext,
-  closestCenter,
-  PointerSensor,
-  useSensor,
-  useSensors,
-  SortableContext,
-  useSortable,
-  arrayMove,
-  verticalListSortingStrategy,
-  CSS
-} from '@/lib/dnd'
-import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
+  DndContext, // Dnd Context 컴포넌트
+  closestCenter, // closest Center
+  PointerSensor, // Pointer Sensor 컴포넌트
+  useSensor, // Sensor 훅
+  useSensors, // Sensors 훅
+  SortableContext, // Sortable Context 컴포넌트
+  useSortable, // Sortable 훅
+  arrayMove, // array Move
+  verticalListSortingStrategy, // vertical List Sorting Strategy
+  CSS // CSS 컴포넌트
+} from '@/lib/dnd' // 라이브러리/유틸 · dnd
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
 
 function SortableItem ({ id }) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id })

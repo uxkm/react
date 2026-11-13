@@ -29,7 +29,7 @@ Next.js 16 App Router와 React 19 기반 퍼블리싱 작업 환경입니다. �
 | Next.js | `16.4.5` · App Router |
 | React / React DOM | `19.3.1` |
 | TypeScript | `5.9.3` · JSX와 TSX 병행 |
-| 번들러 | 개발·UI·프로덕션 빌드 모두 **Turbopack** |
+| 번들러 | 개발·프로덕션 빌드 모두 **Turbopack** |
 | 스타일 | Sass Embedded + PostCSS·Autoprefixer |
 | 코드 검사 | ESLint 9 · Flat Config · 경고 허용 안 함 |
 | 브라우저 검사 | Playwright `1.65.0` · 일반 회귀 검사 |
@@ -47,13 +47,12 @@ npm ci
 npm run dev
 ```
 
-개발 주소는 `http://localhost:8090`입니다. `http://127.0.0.1:8090`도 사용할 수 있습니다. 개발·UI·정적 미리보기 서버는 기본적으로 IPv4와 IPv6를 함께 수신하며, IPv6를 지원하지 않는 환경에서는 IPv4로 실행합니다. OS의 `HOSTNAME` 환경변수는 수신 주소로 사용하지 않습니다. 특정 주소에서만 수신하려면 `BIND_HOST`를 지정합니다. 로컬 인증서가 있으면 `https://localhost:8443`도 함께 제공합니다.
+개발 주소는 `http://localhost:8090`입니다. `http://127.0.0.1:8090`도 사용할 수 있습니다. 개발·정적 미리보기 서버는 기본적으로 IPv4와 IPv6를 함께 수신하며, IPv6를 지원하지 않는 환경에서는 IPv4로 실행합니다. OS의 `HOSTNAME` 환경변수는 수신 주소로 사용하지 않습니다. 특정 주소에서만 수신하려면 `BIND_HOST`를 지정합니다. 로컬 인증서가 있으면 `https://localhost:8443`도 함께 제공합니다.
 
 | 작업 | 명령 | 동작 |
 | --- | --- | --- |
 | 일반 개발 | `npm run dev` | 레지스트리 생성 후 SCSS를 직접 읽는 Turbopack 서버 실행 |
-| CSS 출력 확인 | `npm run ui` | 레지스트리·CSS 생성 후 SCSS 감시와 개발 서버 실행 |
-| 스타일만 빌드 | `npm run build:styles` | SCSS를 일반 CSS와 압축 CSS로 변환 |
+| 스타일만 빌드 | `npm run build:styles` | SCSS를 일반 CSS와 압축 CSS로 변환 (프로덕션용) |
 | 화면 레지스트리 갱신 | `npm run generate:registry` | 화면 로더·주소 목록·제목 생성 |
 | 프로덕션 빌드 | `npm run build` | 레지스트리·스타일 생성 후 Turbopack으로 정적 사이트 빌드 |
 | 빌드 미리보기 | `npm run start` | `out/`을 HTTP와 선택적 HTTPS로 제공 |
@@ -61,7 +60,7 @@ npm run dev
 | 전체 코드 검사 | `npm run lint` | React·Next.js 규칙 검사 · 경고도 실패 처리 |
 | 타입 검사 | `npm run typecheck` | TypeScript 검사 · 산출물 출력 없음 |
 
-`npm run dev`와 `npm run ui`는 실행 시 Registry를 생성하고 파일 감시를 계속 실행합니다. 화면·폴더를 추가·삭제·이름 변경하면 라우트와 메뉴를 자동 갱신합니다. 이미지·JSON 등 정적 파일 변경도 브라우저에 자동 반영합니다. 라우트 구조·설정·SCSS 진입점이 바뀌면 감시기가 개발 서버를 자동 재시작합니다.
+`npm run dev`는 실행 시 Registry를 생성하고 파일 감시를 계속 실행합니다. 화면·폴더를 추가·삭제·이름 변경하면 라우트와 메뉴를 자동 갱신합니다. 이미지·JSON 등 정적 파일 변경도 브라우저에 자동 반영합니다. 라우트 구조·설정·SCSS 진입점이 바뀌면 감시기가 개발 서버를 자동 재시작합니다. 개발 중에는 SCSS를 직접 읽으며 `src/styles/css/`는 생성하지 않습니다.
 
 ## 라우트와 화면 소스
 
@@ -124,17 +123,16 @@ URL은 `src/app/`에서 정의하고, 실제 화면은 `src/screen/`에 둡니�
 
 ## 스타일 작업
 
-SCSS 원본은 `src/styles/`에 있습니다. 개발은 SCSS 직접 처리와 사전 생성 CSS 확인의 두 모드를 제공합니다.
+SCSS 원본은 `src/styles/`에 있습니다.
 
 | 모드 | 스타일 처리 |
 | --- | --- |
-| `dev` | Turbopack이 SCSS를 직접 컴파일 |
-| `ui` | SCSS를 감시·컴파일하고 생성된 `.min.css`를 Turbopack에서 사용 |
+| `dev` | Turbopack이 SCSS를 직접 컴파일 (`src/styles/css/` 미생성) |
 | `build` | 스타일을 먼저 생성하고 `.min.css`로 정적 사이트 빌드 |
 
-스타일 엔트리는 `scripts/style-entries.mjs`에서 관리합니다. 공통 `index`, `pub`, `demo`와 프로젝트 페이지 엔트리를 자동 탐색하며 출력 위치는 `src/styles/css/`입니다. 공용 변수·믹스인이 필요한 SCSS에는 `@use`를 명시합니다.
+스타일 엔트리는 `scripts/build/style-entries.mjs`에서 관리합니다. 공통 `index`, `pub`, `demo`와 프로젝트 페이지 엔트리를 자동 탐색하며 빌드 출력 위치는 `src/styles/css/`입니다. 공용 변수·믹스인이 필요한 SCSS에는 `@use`를 명시합니다.
 
-화면에서는 기존 방식으로 SCSS를 import합니다. `ui`와 `build`는 `next.config.ts`의 Turbopack 별칭을 통해 압축 CSS로 연결합니다.
+화면에서는 SCSS를 import합니다. `build`는 `next.config.ts`의 Turbopack 별칭을 통해 압축 CSS로 연결합니다.
 
 ## 퍼블리시 목록과 정적 자산
 
@@ -210,9 +208,10 @@ JS/TS 저장 시 ESLint가 수정 가능한 항목을 처리합니다. JSON·JSO
 | `postcss.config.mjs` | CSS 후처리 설정 |
 | `playwright.config.mjs` | 브라우저·테스트 서버·결과 보고서 설정 |
 | `scripts/registry.mjs` | 화면 레지스트리·정적 주소·제목 생성 |
-| `scripts/build-styles.mjs` | SCSS → CSS 변환 |
+| `scripts/build/build-styles.mjs` | SCSS → CSS 변환 |
+| `scripts/build/prepare-next.mjs` | Next 메타데이터 호환 패치 |
+| `scripts/build/style-entries.mjs` | SCSS 엔트리 목록 |
 | `scripts/serve-next.mjs` | 개발용 HTTP·HTTPS 서버 |
-| `scripts/dev-css.mjs` | 스타일 감시와 CSS 모드 개발 서버 |
 | `scripts/serve-static.mjs` | `out/` 정적 미리보기 서버 |
 
 `.mjs`는 Node.js가 ES Module로 실행하는 파일입니다. Next.js 설정은 타입 검사를 위해 `.ts`를 사용하고, 도구 설정과 실행 스크립트에는 지원되는 `.mjs` 형식을 사용합니다.
@@ -229,7 +228,7 @@ mkcert -key-file certificates/localhost-key.pem \
   localhost 127.0.0.1 ::1
 ```
 
-`certificates/localhost-key.pem`과 `certificates/localhost.pem`이 있으면 개발·UI·정적 미리보기 서버가 HTTPS 8443도 제공합니다. 인증서는 Git에서 제외합니다. 포트는 `PORT`, `HTTPS_PORT`로 변경합니다.
+`certificates/localhost-key.pem`과 `certificates/localhost.pem`이 있으면 개발·정적 미리보기 서버가 HTTPS 8443도 제공합니다. 인증서는 Git에서 제외합니다. 포트는 `PORT`, `HTTPS_PORT`로 변경합니다.
 
 ## 빌드·배포·정리
 
@@ -278,7 +277,7 @@ npm run test:project
 
 `public/data/pub/index.json`의 `b2b`에서 목록 이름·설명·표시 이름을 관리합니다. `id`와 `base`는 각각 `b2b`, `b2b/`로 고정합니다. `b2b.generated.json`과 `src/generated/b2b.js`에는 단일 프로젝트 메타데이터만 저장합니다.
 
-`src/app/b2b/page.jsx`, `layout.jsx`, `[...slug]/page.jsx`는 생성기가 관리합니다. 실제 UI는 `src/screen/b2b`에 작성하며 `main/index.tsx`를 메인으로 사용합니다. `dev`, `ui`, `build`에서 라우트와 설정을 자동 생성·검사하고 개발 중에는 파일 변경을 감시합니다.
+`src/app/b2b/page.jsx`, `layout.jsx`, `[...slug]/page.jsx`는 생성기가 관리합니다. 실제 UI는 `src/screen/b2b`에 작성하며 `main/index.tsx`를 메인으로 사용합니다. `dev`, `build`에서 라우트와 설정을 자동 생성·검사하고 개발 중에는 파일 변경을 감시합니다.
 
 PUB 구조와 공통 컴포넌트는 프로젝트에 관계없이 동일하게 유지합니다. `/pub`, `/pub/guide`, `/pub/guide/{name}`, `/pub/demo/{name}`을 제공하며, PUB는 프로젝트 화면·위젯·모듈·스타일·Registry를 가져오지 않습니다. `validate:project`가 직접·간접 의존성과 정적 배포 제약을 검사합니다. 프로젝트 스타일은 `src/styles/pages/b2b`, 이미지는 `public/assets/b2b`에서 관리합니다.
 
@@ -289,7 +288,7 @@ PUB 구조와 공통 컴포넌트는 프로젝트에 관계없이 동일하게 �
 
 ## 자동 생성 파일과 수정 위치
 
-`src/generated/`는 원본 화면과 설정으로부터 생성합니다. 직접 수정하지 않고 아래 원본을 수정한 뒤 `npm run generate:registry`로 갱신합니다. `dev`, `ui`, `build`에서도 자동 실행하며, 개발 서버의 파일 감시기는 변경 시 다시 생성합니다.
+`src/generated/`는 원본 화면과 설정으로부터 생성합니다. 직접 수정하지 않고 아래 원본을 수정한 뒤 `npm run generate:registry`로 갱신합니다. `dev`, `build`에서도 자동 실행하며, 개발 서버의 파일 감시기는 변경 시 다시 생성합니다.
 
 | 생성 파일 | 생성 함수·스크립트 | 수정할 원본과 역할 |
 | --- | --- | --- |
@@ -307,11 +306,11 @@ PUB 구조와 공통 컴포넌트는 프로젝트에 관계없이 동일하게 �
 
 ## 빈 메타데이터 컨테이너
 
-`htmlLimitedBots: /.*/`로 메타데이터 스트리밍을 비활성화한 현재 구성에서는 Next.js의 빈 `<div hidden>` 메타데이터 래퍼 대신 Fragment를 사용합니다. `scripts/prepare-next.mjs`가 설치 후 및 `dev`·`ui`·`build` 시작 전에 Next.js의 CJS·ESM 메타데이터 모듈에 동일한 호환성 패치를 적용합니다. 메타 태그와 Suspense 경계는 유지합니다. 정적 export와 메타데이터 스트리밍 비활성 설정을 전제로 하며, 해당 설정을 바꾸면 패치를 먼저 검토해야 합니다. 브라우저에서 React 소유 DOM을 사후 삭제하지 않습니다. Next.js 업데이트로 대상 코드가 달라지면 스크립트가 오류를 내므로 패치를 검토한 뒤 업데이트합니다.
+`htmlLimitedBots: /.*/`로 메타데이터 스트리밍을 비활성화한 현재 구성에서는 Next.js의 빈 `<div hidden>` 메타데이터 래퍼 대신 Fragment를 사용합니다. `scripts/build/prepare-next.mjs`가 설치 후 및 `dev`·`build` 시작 전에 Next.js의 CJS·ESM 메타데이터 모듈에 동일한 호환성 패치를 적용합니다. 메타 태그와 Suspense 경계는 유지합니다. 정적 export와 메타데이터 스트리밍 비활성 설정을 전제로 하며, 해당 설정을 바꾸면 패치를 먼저 검토해야 합니다. 브라우저에서 React 소유 DOM을 사후 삭제하지 않습니다. Next.js 업데이트로 대상 코드가 달라지면 스크립트가 오류를 내므로 패치를 검토한 뒤 업데이트합니다.
 
 ## 개발 파일 감시
 
-`npm run dev`는 SCSS 직접 로딩 모드, `npm run ui`는 CSS 컴파일 모드로 동일한 파일 감시기를 실행합니다.
+`npm run dev`는 SCSS 직접 로딩 모드로 파일 감시기를 실행합니다.
 
 | 대상 | 변경 반영 |
 | --- | --- |
@@ -334,5 +333,5 @@ PUB 구조와 공통 컴포넌트는 프로젝트에 관계없이 동일하게 �
 ```bash
 npm run test:watch          # 파일 이벤트·처리 순서·오류 복구·메뉴 검사
 npm run test:project       # 프로젝트 및 재귀 guide/demo 라우트 검사
-npm run test:watch:browser  # 격리된 dev/ui 서버에서 실제 파일·브라우저 갱신 검사
+npm run test:watch:browser  # 격리된 dev 서버에서 실제 파일·브라우저 갱신 검사
 ```

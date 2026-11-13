@@ -2,7 +2,7 @@
  * D3 차트 캔버스.
  * Chart 에 engine="d3" 를 고정해 넘긴다.
  */
-import { Chart, type ChartProps } from './Chart'
+import { Chart, type ChartProps } from './Chart' // Chart · ChartProps 타입
 
 /** D3 캔버스가 받는 값 */
 export type ChartD3Props = Omit<ChartProps, 'engine'>

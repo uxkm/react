@@ -1,14 +1,14 @@
 'use client'
 
-import { useCallback, useRef, useState, type AnchorHTMLAttributes, type CSSProperties, type HTMLAttributes, type ReactNode } from 'react'
-import type { Swiper as SwiperInstance } from 'swiper'
-import { Carousel, CarouselSlide } from '@/comp/ui/Carousel'
-import { Checkbox } from '@/comp/ui/Checkbox'
-import { Icon } from '@/comp/ui/Icon'
-import { useDailyDismissal } from '@/hooks/useDailyDismissal'
-import { useHydrated } from '@/hooks/useHydrated'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
+import { useCallback, useRef, useState, type AnchorHTMLAttributes, type CSSProperties, type HTMLAttributes, type ReactNode } from 'react' // React
+import type { Swiper as SwiperInstance } from 'swiper' // Swiper Instance 타입
+import { Carousel, CarouselSlide } from '@/comp/ui/Carousel' // UI 컴포넌트 · Carousel 컴포넌트
+import { Checkbox } from '@/comp/ui/Checkbox' // Checkbox 컴포넌트
+import { Icon } from '@/comp/ui/Icon' // Icon 컴포넌트
+import { useDailyDismissal } from '@/hooks/useDailyDismissal' // Daily Dismissal 훅
+import { useHydrated } from '@/hooks/useHydrated' // Hydrated 훅
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
 
 export interface TopBannerItem {
   id: string

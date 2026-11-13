@@ -1,10 +1,10 @@
 'use client'
 
-import { useMemo, useState } from 'react'
-import Ajv from 'ajv'
-import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
+import { useMemo, useState } from 'react' // React
+import Ajv from 'ajv' // Ajv 컴포넌트
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
 
 const schema = {
   type: 'object',

@@ -1,12 +1,12 @@
 'use client'
 
-import { useState } from 'react'
-import { Avatar, Button, Card, CardBody, CardDeck, CardFooter, CardHeader, Link, Stat, Tag, TagGroup } from '@/comp'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
-import { GuideLayout } from '@/screen/pub/layout'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
-import { cardApiSections } from '@/screen/pub/data/guide/cardApiSections'
+import { useState } from 'react' // 상태 훅
+import { Avatar, Button, Card, CardBody, CardDeck, CardFooter, CardHeader, Link, Stat, Tag, TagGroup } from '@/comp' // comp
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { cardApiSections } from '@/screen/pub/data/guide/cardApiSections' // card Api Sections
 
 const MediaIcon = (
   <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">

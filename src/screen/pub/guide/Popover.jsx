@@ -1,14 +1,14 @@
 'use client'
 
-import { useState } from 'react'
-import { Button, Popover } from '@/comp'
-import { LoadOpenOverlayDemo } from '@/screen/pub/widgets/preview/LoadOpenOverlayDemo'
-import { TimedOverlayDemo } from '@/screen/pub/widgets/preview/TimedOverlayDemo'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
-import { GuideLayout } from '@/screen/pub/layout'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
-import { popoverApiSections } from '@/screen/pub/data/guide/popoverApiSections'
+import { useState } from 'react' // 상태 훅
+import { Button, Popover } from '@/comp' // comp
+import { LoadOpenOverlayDemo } from '@/screen/pub/widgets/preview/LoadOpenOverlayDemo' // Load Open Overlay Demo 컴포넌트
+import { TimedOverlayDemo } from '@/screen/pub/widgets/preview/TimedOverlayDemo' // Timed Overlay Demo 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { popoverApiSections } from '@/screen/pub/data/guide/popoverApiSections' // popover Api Sections
 
 /** 배치 변형 — 값과 붙일 클래스 (기본은 트리거 아래 · 왼쪽 정렬) */
 const PLACEMENTS = [

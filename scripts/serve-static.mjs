@@ -120,7 +120,7 @@ const httpServer = createHttpServer((req, res) => {
 
 listenServer(httpServer, HTTP_PORT).then(() => {
   console.log('')
-  console.log('  ▲ 퍼블리싱 목록 (static out/)')
+  console.log('  ▲ 실행 결과 (static out/)')
   console.log(`  - Local HTTP:    http://localhost:${HTTP_PORT}`)
   if (lan) console.log(`  - Network HTTP:  http://${lan}:${HTTP_PORT}`)
 }).catch(onListenError)

@@ -1,11 +1,11 @@
 'use client'
 
-import { useState } from 'react'
-import { TopBanner } from '@/comp'
-import { GuideLayout } from '@/screen/pub/layout'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
-import { topBannerApiSections } from '@/screen/pub/data/guide/topBannerApiSections'
+import { useState } from 'react' // 상태 훅
+import { TopBanner } from '@/comp' // Top Banner 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
+import { topBannerApiSections } from '@/screen/pub/data/guide/topBannerApiSections' // top Banner Api Sections
 
 export const guideLabel = 'TopBanner · 상단 배너'
 export const pageTitle = 'TopBanner'

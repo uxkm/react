@@ -7,24 +7,24 @@
  * adaptive 이면 ≥BP 가운데 모달형, <BP 하단 시트로 전환한다.
  */
 import {
-  useEffect,
-  useRef,
-  useState,
-  type HTMLAttributes,
-  type PointerEvent as ReactPointerEvent,
-  type ReactNode,
-  type TransitionEvent
-} from 'react'
-import { useAutoClose } from '@/hooks/useAutoClose'
-import { useMinWidth } from '@/hooks/useMediaQuery'
+  useEffect, // effect 훅
+  useRef, // ref 훅
+  useState, // 상태 훅
+  type HTMLAttributes, // HTMLAttributes 타입
+  type PointerEvent as ReactPointerEvent, // PointerEvent 타입
+  type ReactNode, // ReactNode 타입
+  type TransitionEvent // TransitionEvent 타입
+} from 'react' // React
+import { useAutoClose } from '@/hooks/useAutoClose' // Auto Close 훅
+import { useMinWidth } from '@/hooks/useMediaQuery' // Min Width 훅
 import {
-  ADAPTIVE_BREAKPOINT_DEFAULT,
-  resolveAdaptiveBreakpoint,
-  type AdaptiveBreakpoint
-} from '@/lib/breakpoints'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
-import { Icon } from './Icon'
+  ADAPTIVE_BREAKPOINT_DEFAULT, // ADAPTIVE BREAKPOINT DEFAULT 컴포넌트
+  resolveAdaptiveBreakpoint, // resolve Adaptive Breakpoint
+  type AdaptiveBreakpoint // AdaptiveBreakpoint 타입
+} from '@/lib/breakpoints' // 라이브러리/유틸 · breakpoints
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
+import { Icon } from './Icon' // Icon 컴포넌트
 
 /** 서랍이 붙는 방향 */
 export type DrawerPlacement = 'left' | 'right' | 'top' | 'bottom'

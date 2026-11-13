@@ -4,14 +4,14 @@
  * CardHeader · CardBody · CardFooter · CardDeck과 함께 쓴다.
  */
 import {
-  createElement,
-  type ElementType,
-  type HTMLAttributes,
-  type MouseEvent,
-  type ReactNode
-} from 'react'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
+  createElement, // 엘리먼트 생성
+  type ElementType, // ElementType 타입
+  type HTMLAttributes, // HTMLAttributes 타입
+  type MouseEvent, // MouseEvent 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
 
 /** 카드 모양 */
 export type CardVariant =

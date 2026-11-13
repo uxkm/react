@@ -2,8 +2,8 @@
  * 그리드 레이아웃.
  * 열 개수(cols)·간격으로 격자 배치를 만든다.
  */
-import { createElement, type HTMLAttributes, type ReactNode } from 'react'
-import { classNames } from '@/utils/classNames'
+import { createElement, type HTMLAttributes, type ReactNode } from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
 
 /** 간격 이름 → grid_gap-* 클래스 */
 const GAP_TOKEN: Record<string, string> = {

@@ -1,12 +1,12 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
-import { Link } from '@/lib/router'
-import { AppHeaderLink } from '@/comp'
-import { GuideLayout } from '@/screen/pub/layout'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
-import { am5, am5xy, am5percent, am5themes_Animated } from '@/lib/amcharts'
+import { useEffect, useRef } from 'react' // React
+import { Link } from '@/lib/router' // 클라이언트 링크
+import { AppHeaderLink } from '@/comp' // App Header Link 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { am5, am5xy, am5percent, am5themes_Animated } from '@/lib/amcharts' // 라이브러리/유틸 · amcharts
 
 /** 막대 차트 데이터. category 축 이름, value 값 */
 const columnData = [

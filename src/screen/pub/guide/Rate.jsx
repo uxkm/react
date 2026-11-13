@@ -1,12 +1,12 @@
 'use client'
 
-import { useState } from 'react'
-import { Rate } from '@/comp'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
-import { GuideLayout } from '@/screen/pub/layout'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
-import { rateApiSections } from '@/screen/pub/data/guide/rateApiSections'
+import { useState } from 'react' // 상태 훅
+import { Rate } from '@/comp' // Rate 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { rateApiSections } from '@/screen/pub/data/guide/rateApiSections' // rate Api Sections
 
 /** value · onChange 로 부모가 별점을 소유하는 제어 예시 */
 function ControlledDemo () {

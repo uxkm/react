@@ -1,21 +1,21 @@
 'use client'
 
-import { useEscapeKey } from '@/hooks/useEscapeKey'
+import { useEscapeKey } from '@/hooks/useEscapeKey' // Escape Key 훅
 
 /**
  * 날짜 선택.
  * 트리거 입력과 달력 패널로 YYYY-MM-DD 값을 고른다.
  */
 import {
-  useEffect,
-  useId,
-  useMemo,
-  useRef,
-  useState,
-  type InputHTMLAttributes,
-  type ReactNode
-} from 'react'
-import { classNames } from '@/utils/classNames'
+  useEffect, // effect 훅
+  useId, // 고유 id 훅
+  useMemo, // 메모 훅
+  useRef, // ref 훅
+  useState, // 상태 훅
+  type InputHTMLAttributes, // InputHTMLAttributes 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
 
 const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토']
 const pad = (value: number) => String(value).padStart(2, '0')

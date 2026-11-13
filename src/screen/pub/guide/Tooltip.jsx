@@ -1,14 +1,14 @@
 'use client'
 
-import { useState } from 'react'
-import { Button, Tooltip } from '@/comp'
-import { LoadOpenOverlayDemo } from '@/screen/pub/widgets/preview/LoadOpenOverlayDemo'
-import { TimedOverlayDemo } from '@/screen/pub/widgets/preview/TimedOverlayDemo'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
-import { GuideLayout } from '@/screen/pub/layout'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
-import { tooltipApiSections } from '@/screen/pub/data/guide/tooltipApiSections'
+import { useState } from 'react' // 상태 훅
+import { Button, Tooltip } from '@/comp' // comp
+import { LoadOpenOverlayDemo } from '@/screen/pub/widgets/preview/LoadOpenOverlayDemo' // Load Open Overlay Demo 컴포넌트
+import { TimedOverlayDemo } from '@/screen/pub/widgets/preview/TimedOverlayDemo' // Timed Overlay Demo 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { tooltipApiSections } from '@/screen/pub/data/guide/tooltipApiSections' // tooltip Api Sections
 
 /** 배치 변형 — placement prop 과 추가로 붙일 클래스 (기본은 트리거 아래 · 가운데) */
 const PLACEMENTS = [

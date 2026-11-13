@@ -1,10 +1,10 @@
 'use client'
 
-import type { ReactNode } from 'react'
-import { Carousel, CarouselSlide } from '@/comp/ui/Carousel'
-import MainHrTrendCard from '@/widgets/b2b/main/MainHrTrendCard'
-import MainAxInsightCard from '@/widgets/b2b/main/MainAxInsightCard'
-import MainLeadershipInsightCard from '@/widgets/b2b/main/MainLeadershipInsightCard'
+import type { ReactNode } from 'react' // React Node 타입
+import { Carousel, CarouselSlide } from '@/comp/ui/Carousel' // UI 컴포넌트 · Carousel 컴포넌트
+import MainHrTrendCard from '@/widgets/b2b/main/MainHrTrendCard' // Main Hr Trend Card 컴포넌트
+import MainAxInsightCard from '@/widgets/b2b/main/MainAxInsightCard' // Main Ax Insight Card 컴포넌트
+import MainLeadershipInsightCard from '@/widgets/b2b/main/MainLeadershipInsightCard' // Main Leadership Insight Card 컴포넌트
 
 interface MainInsightSectionProps {
   readonly children?: ReactNode

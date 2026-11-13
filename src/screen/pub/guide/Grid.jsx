@@ -1,11 +1,11 @@
 'use client'
 
-import { Grid } from '@/comp'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
-import { GuideLayout } from '@/screen/pub/layout'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
-import { gridApiSections } from '@/screen/pub/data/guide/gridApiSections'
+import { Grid } from '@/comp' // Grid 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { gridApiSections } from '@/screen/pub/data/guide/gridApiSections' // grid Api Sections
 
 const cells = (count, label = (index) => String(index + 1)) =>
   Array.from({ length: count }, (_, index) => (

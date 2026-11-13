@@ -1,16 +1,16 @@
 'use client'
 
-import { Suspense } from 'react'
-import { useSearchParams } from 'next/navigation'
-import { Page, PageLoading } from '@/comp'
-import { resolveSkeletonMode } from '@/config/skeleton'
-import MainHero from '@/screen/b2b/main/sections/MainHero'
-import MainCardSection from '@/screen/b2b/main/sections/MainCardSection'
-import MainInsightSection from '@/screen/b2b/main/sections/MainInsightSection'
-import MainCaseSection from '@/screen/b2b/main/sections/MainCaseSection'
-import MainCalloutSection from '@/screen/b2b/main/sections/MainCalloutSection'
-import MainNewsletterCalloutCard from '@/widgets/b2b/main/MainNewsletterCalloutCard'
-import IndexSkeleton from './skeleton/indexSkeleton'
+import { Suspense } from 'react' // Suspense
+import { useSearchParams } from 'next/navigation' // 검색 파라미터 훅
+import { Page, PageLoading } from '@/comp' // comp
+import { resolveSkeletonMode } from '@/config/skeleton' // resolve Skeleton Mode
+import MainHero from '@/screen/b2b/main/sections/MainHero' // Main Hero 컴포넌트
+import MainCardSection from '@/screen/b2b/main/sections/MainCardSection' // Main Card Section 컴포넌트
+import MainInsightSection from '@/screen/b2b/main/sections/MainInsightSection' // Main Insight Section 컴포넌트
+import MainCaseSection from '@/screen/b2b/main/sections/MainCaseSection' // Main Case Section 컴포넌트
+import MainCalloutSection from '@/screen/b2b/main/sections/MainCalloutSection' // Main Callout Section 컴포넌트
+import MainNewsletterCalloutCard from '@/widgets/b2b/main/MainNewsletterCalloutCard' // Main Newsletter Callout Card 컴포넌트
+import IndexSkeleton from './skeleton/indexSkeleton' // Index Skeleton 컴포넌트
 
 export const pageTitle = '메인 섹션 프리뷰'
 export const meta = { banner: false, header: false, footer: false, floating: false }

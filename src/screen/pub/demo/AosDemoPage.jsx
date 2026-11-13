@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect } from 'react'
-import AOS from 'aos'
-import 'aos/dist/aos.css'
-import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
+import { useEffect } from 'react' // effect 훅
+import AOS from 'aos' // AOS 컴포넌트
+import 'aos/dist/aos.css' // aos 패키지
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
 
 const cards = [
   { anim: 'fade-up', label: 'fade-up' },

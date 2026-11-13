@@ -1,10 +1,10 @@
 'use client'
 
-import { Carousel, CarouselSlide } from '@/comp/ui/Carousel'
-import { useMediaQuery } from '@/hooks/useMediaQuery'
-import MainFinanceTestimonialCard from '@/widgets/b2b/main/MainFinanceTestimonialCard'
-import MainLeadershipTestimonialCard from '@/widgets/b2b/main/MainLeadershipTestimonialCard'
-import MainManufacturingTestimonialCard from '@/widgets/b2b/main/MainManufacturingTestimonialCard'
+import { Carousel, CarouselSlide } from '@/comp/ui/Carousel' // UI 컴포넌트 · Carousel 컴포넌트
+import { useMediaQuery } from '@/hooks/useMediaQuery' // Media Query 훅
+import MainFinanceTestimonialCard from '@/widgets/b2b/main/MainFinanceTestimonialCard' // Main Finance Testimonial Card 컴포넌트
+import MainLeadershipTestimonialCard from '@/widgets/b2b/main/MainLeadershipTestimonialCard' // Main Leadership Testimonial Card 컴포넌트
+import MainManufacturingTestimonialCard from '@/widgets/b2b/main/MainManufacturingTestimonialCard' // Main Manufacturing Testimonial Card 컴포넌트
 
 const coverflowEffect = {
   rotate: 0,

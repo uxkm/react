@@ -1,6 +1,6 @@
 'use client'
 
-import { demoHomePath } from '@/screen/pub/hooks/useGuideMenu'
+import { demoHomePath } from '@/screen/pub/hooks/useGuideMenu' // demo Home Path
 import { Link } from '@/lib/router' // 앱 라우터 Link (브랜드 등)
 import { AppHeaderLink } from '@/comp' // 헤더 네비 링크
 import { GuideLayout } from './GuideLayout' // 가이드·데모 공통 레이아웃

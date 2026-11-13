@@ -1,9 +1,9 @@
 'use client'
 
-import { Page, PageLoading } from '@/comp'
-import Header from '@/widgets/b2b/common/Header'
-import { resolveSkeletonMode } from '@/config/skeleton'
-import GnbSkeleton from './skeleton/indexSkeleton'
+import { Page, PageLoading } from '@/comp' // comp
+import Header from '@/widgets/b2b/common/Header' // Header 컴포넌트
+import { resolveSkeletonMode } from '@/config/skeleton' // resolve Skeleton Mode
+import GnbSkeleton from './skeleton/indexSkeleton' // Gnb Skeleton 컴포넌트
 
 export const pageTitle = "헤더"
 export const meta = { banner: false, header: false, footer: false, floating: false }

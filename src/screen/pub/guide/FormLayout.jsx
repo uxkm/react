@@ -1,11 +1,11 @@
 'use client'
 
-import { Button, FormActions, FormField, FormLayout, Input, Select, Textarea } from '@/comp'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
-import { GuideLayout } from '@/screen/pub/layout'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
-import { formLayoutApiSections } from '@/screen/pub/data/guide/formLayoutApiSections'
+import { Button, FormActions, FormField, FormLayout, Input, Select, Textarea } from '@/comp' // comp
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { formLayoutApiSections } from '@/screen/pub/data/guide/formLayoutApiSections' // form Layout Api Sections
 
 function Fields () {
   return (

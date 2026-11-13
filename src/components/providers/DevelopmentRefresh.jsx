@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect } from 'react' // effect 훅
 
 /** Refresh fetch-once JSON and cached static assets after filesystem changes. */
 export default function DevelopmentRefresh () {

@@ -1,12 +1,12 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { Button, Progress, Space } from '@/comp'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
-import { GuideLayout } from '@/screen/pub/layout'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
-import { progressApiSections } from '@/screen/pub/data/guide/progressApiSections'
+import { useEffect, useState } from 'react' // React
+import { Button, Progress, Space } from '@/comp' // comp
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { progressApiSections } from '@/screen/pub/data/guide/progressApiSections' // progress Api Sections
 
 /** 원형 진행률 — React Progress 는 막대만 렌더링하므로 HTML 마크업 그대로 보여준다 */
 function CircleProgress ({ percent, className, children }) {

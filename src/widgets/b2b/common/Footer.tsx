@@ -1,16 +1,16 @@
 'use client'
 
-import { useState } from 'react'
-import Image from 'next/image'
-import { Dropdown } from '@/comp/ui/Dropdown'
-import { Button } from '@/comp/ui/Button'
-import { Link } from '@/lib/router'
+import { useState } from 'react' // 상태 훅
+import Image from 'next/image' // 이미지 최적화
+import { Dropdown } from '@/comp/ui/Dropdown' // Dropdown 컴포넌트
+import { Button } from '@/comp/ui/Button' // Button 컴포넌트
+import { Link } from '@/lib/router' // 클라이언트 링크
 import {
-  familySites,
-  footerLinks,
-  footerSocials,
-  footerCertifications
-} from './footerData'
+  familySites, // family Sites
+  footerLinks, // footer Links
+  footerSocials, // footer Socials
+  footerCertifications // footer Certifications
+} from './footerData' // footer Data
 
 /** 고객센터 안내부터 시작하는 B2B 공통 푸터. */
 export default function Footer () {

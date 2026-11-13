@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react'
-import { copyText } from '@/lib/clipboard'
-import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
+import { useState } from 'react' // 상태 훅
+import { copyText } from '@/lib/clipboard' // copy Text
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
 
 /** clipboard-copy 데모 */
 export default function ClipboardDemoPage () {

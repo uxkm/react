@@ -6,15 +6,15 @@
  */
 
 import {
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  type ButtonHTMLAttributes,
-  type HTMLAttributes,
-  type ReactNode
-} from 'react'
-import { classNames } from '@/utils/classNames'
+  useEffect, // effect 훅
+  useMemo, // 메모 훅
+  useRef, // ref 훅
+  useState, // 상태 훅
+  type ButtonHTMLAttributes, // ButtonHTMLAttributes 타입
+  type HTMLAttributes, // HTMLAttributes 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
 
 const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토']
 

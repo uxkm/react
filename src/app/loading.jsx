@@ -1,4 +1,4 @@
-import { PageSkeleton } from '@/comp/ui/PageSkeleton'
+import { PageSkeleton } from '@/comp/ui/PageSkeleton' // Page Skeleton 컴포넌트
 
 /** App Router가 다음 경로를 준비하는 동안 표시하는 공통 로딩 UI. */
 export default function Loading () {

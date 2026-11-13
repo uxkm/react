@@ -17,7 +17,7 @@ const targets = [
   ['dist/esm/lib/metadata/metadata.js', 'React.Fragment'],
   ['dist/esm/lib/metadata/metadata-parallel.js', 'React.Fragment']
 ]
-const config = fs.readFileSync(new URL('../next.config.ts', import.meta.url), 'utf8')
+const config = fs.readFileSync(new URL('../../next.config.ts', import.meta.url), 'utf8')
 if (!config.includes("output: 'export'") || !config.includes('htmlLimitedBots: /.*/')) {
   throw new Error('The metadata patch requires static export and htmlLimitedBots: /.*/. Review it before enabling streaming metadata.')
 }

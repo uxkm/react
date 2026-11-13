@@ -2,9 +2,9 @@
  * 차트 캔버스 자리.
  * engine(amcharts/us/echarts/highcharts/d3) 이름과 높이·제목을 둔다.
  */
-import type { HTMLAttributes, ReactNode } from 'react'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
+import type { HTMLAttributes, ReactNode } from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
 
 /** 차트 캔버스가 받는 값. 엔진 이름과 높이, 제목 */
 export interface ChartProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {

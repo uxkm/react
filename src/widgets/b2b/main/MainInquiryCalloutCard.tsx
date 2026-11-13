@@ -1,7 +1,7 @@
-import { Button } from '@/comp/ui/Button'
-import { Icon } from '@/comp/ui/Icon'
-import Card from '@/modules/b2b/cards/Card'
-import type { CardAppearanceProps } from '@/modules/b2b/cards/cardTypes'
+import { Button } from '@/comp/ui/Button' // Button 컴포넌트
+import { Icon } from '@/comp/ui/Icon' // Icon 컴포넌트
+import Card from '@/modules/b2b/cards/Card' // Card 컴포넌트
+import type { CardAppearanceProps } from '@/modules/b2b/cards/cardTypes' // Card Appearance Props 타입
 
 /** 기업교육 문의와 간편 진단 안내 카드. */
 export default function MainInquiryCalloutCard ({ shadow = false }: Readonly<CardAppearanceProps>) {

@@ -1,7 +1,7 @@
-import MainPromotionBanner from '@/widgets/b2b/main/MainPromotionBanner'
-import MainConsultationCard from '@/widgets/b2b/main/MainConsultationCard'
-import MainDiagnosisCard from '@/widgets/b2b/main/MainDiagnosisCard'
-import MainQuickLinks from '@/widgets/b2b/main/MainQuickLinks'
+import MainPromotionBanner from '@/widgets/b2b/main/MainPromotionBanner' // Main Promotion Banner 컴포넌트
+import MainConsultationCard from '@/widgets/b2b/main/MainConsultationCard' // Main Consultation Card 컴포넌트
+import MainDiagnosisCard from '@/widgets/b2b/main/MainDiagnosisCard' // Main Diagnosis Card 컴포넌트
+import MainQuickLinks from '@/widgets/b2b/main/MainQuickLinks' // Main Quick Links 컴포넌트
 
 /** 섹션은 영역 배치만 담당하고 각 레이아웃 안에서 해당 위젯을 호출합니다. */
 export default function MainCardSection () {

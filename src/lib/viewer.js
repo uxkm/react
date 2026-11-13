@@ -1,5 +1,5 @@
-import Viewer from 'viewerjs'
-import 'viewerjs/dist/viewer.css'
+import Viewer from 'viewerjs' // Viewer 컴포넌트
+import 'viewerjs/dist/viewer.css' // viewerjs 패키지
 
 /** viewerjs — 이미지 컨테이너에 Viewer 연결 */
 export function createViewer (element, options = {}) {

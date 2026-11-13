@@ -6,13 +6,13 @@
  */
 
 import {
-  useState,
-  type HTMLAttributes,
-  type LiHTMLAttributes,
-  type MouseEvent,
-  type ReactNode
-} from 'react'
-import { classNames } from '@/utils/classNames'
+  useState, // 상태 훅
+  type HTMLAttributes, // HTMLAttributes 타입
+  type LiHTMLAttributes, // LiHTMLAttributes 타입
+  type MouseEvent, // MouseEvent 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
 
 /** Tree 루트 props */
 export interface TreeProps extends HTMLAttributes<HTMLUListElement> {

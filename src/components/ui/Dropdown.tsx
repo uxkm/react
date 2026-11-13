@@ -6,17 +6,17 @@
  */
 
 import {
-  useEffect,
-  useId,
-  useRef,
-  useState,
-  type CSSProperties,
-  type HTMLAttributes,
-  type ReactNode
-} from 'react'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
-import { Button, type ButtonSize, type ButtonVariant } from './Button'
+  useEffect, // effect 훅
+  useId, // 고유 id 훅
+  useRef, // ref 훅
+  useState, // 상태 훅
+  type CSSProperties, // CSSProperties 타입
+  type HTMLAttributes, // HTMLAttributes 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
+import { Button, type ButtonSize, type ButtonVariant } from './Button' // Button · ButtonSize 타입 · ButtonVariant 타입
 
 /** 드롭다운 항목 · 구분선 */
 export interface DropdownItem {

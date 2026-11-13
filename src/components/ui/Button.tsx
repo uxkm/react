@@ -3,14 +3,14 @@
  * variant·color·size, 아이콘·loading·disabled. button/a/div/span 태그 선택 가능.
  */
 import {
-  createElement,
-  type HTMLAttributes,
-  type KeyboardEvent,
-  type MouseEvent,
-  type ReactNode
-} from 'react'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
+  createElement, // 엘리먼트 생성
+  type HTMLAttributes, // HTMLAttributes 타입
+  type KeyboardEvent, // KeyboardEvent 타입
+  type MouseEvent, // MouseEvent 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
 
 /** 버튼 모양. filled 채움, outline 테두리, ghost 옅은 배경, text 글자만, select 선택됨 */
 export type ButtonVariant = 'filled' | 'outline' | 'ghost' | 'text' | 'select'

@@ -1,4 +1,4 @@
-import copy from 'clipboard-copy'
+import copy from 'clipboard-copy' // copy
 
 /** 클립보드 복사 헬퍼 */
 export async function copyText (text) {

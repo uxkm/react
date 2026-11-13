@@ -4,11 +4,11 @@
  * 전역 언어 전환 드롭다운.
  * 라벨은 한글 고정, 번역 중 진행률 표시. data-no-translate 로 번역 제외.
  */
-import { useId, useRef, useState } from 'react'
-import { Button } from '../ui/Button.tsx'
-import { useClickOutside } from '@/hooks/useClickOutside'
-import { useLocale } from '@/hooks/useLocale'
-import { classNames } from '@/utils/classNames'
+import { useId, useRef, useState } from 'react' // React
+import { Button } from '../ui/Button.tsx' // Button 컴포넌트
+import { useClickOutside } from '@/hooks/useClickOutside' // Click Outside 훅
+import { useLocale } from '@/hooks/useLocale' // Locale 훅
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
 
 /**
  * 전역 언어 전환 버튼.

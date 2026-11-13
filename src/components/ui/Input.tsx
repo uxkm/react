@@ -5,16 +5,16 @@
  * size · clearable · prefix/suffix · error 상태를 공통 클래스로 표현한다.
  */
 import {
-  useMemo,
-  useRef,
-  useState,
-  type ChangeEvent,
-  type ClipboardEvent,
-  type InputHTMLAttributes,
-  type ReactNode
-} from 'react'
-import { classNames } from '@/utils/classNames'
-import { Icon } from './Icon'
+  useMemo, // 메모 훅
+  useRef, // ref 훅
+  useState, // 상태 훅
+  type ChangeEvent, // ChangeEvent 타입
+  type ClipboardEvent, // ClipboardEvent 타입
+  type InputHTMLAttributes, // InputHTMLAttributes 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { Icon } from './Icon' // Icon 컴포넌트
 
 const VALID_SIZES = new Set(['sm', 'md', 'lg'])
 

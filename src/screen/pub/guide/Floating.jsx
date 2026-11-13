@@ -1,12 +1,12 @@
 'use client'
 
-import { useRef, useState } from 'react'
-import { BackTop, Button, Floating, Icon, Space } from '@/comp'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
-import { GuideLayout } from '@/screen/pub/layout'
-import { ensurePageModule, wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
-import { floatingApiSections } from '@/screen/pub/data/guide/floatingApiSections'
+import { useRef, useState } from 'react' // React
+import { BackTop, Button, Floating, Icon, Space } from '@/comp' // comp
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
+import { ensurePageModule, wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // 라이브러리/유틸 · page Example Code
+import { floatingApiSections } from '@/screen/pub/data/guide/floatingApiSections' // floating Api Sections
 
 // 문서 기준 플로팅의 푸터 경계 동작을 확인할 수 있도록 이 가이드에서는 푸터를 표시한다.
 export const meta = { footer: true }

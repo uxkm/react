@@ -1,9 +1,9 @@
 // @generated-project-route
-import { RegistryPage } from '@/lib/RegistryPage'
-import { b2bStaticParams } from '@/lib/staticParams'
-import { routeMetadata } from '@/lib/routeMetadata'
-import { indexLoaders, screenLoaders, indexMeta, screenMeta } from '@/generated/registry-b2b'
-import RouteRedirect from '@/comp/providers/RouteRedirect'
+import { RegistryPage } from '@/lib/RegistryPage' // 레지스트리 페이지 렌더
+import { b2bStaticParams } from '@/lib/staticParams' // B2B 정적 경로 파라미터
+import { routeMetadata } from '@/lib/routeMetadata' // 라우트 메타데이터
+import { indexLoaders, screenLoaders, indexMeta, screenMeta } from '@/generated/registry-b2b' // B2B 화면 레지스트리
+import RouteRedirect from '@/comp/providers/RouteRedirect' // 라우트 리다이렉트
 
 export const dynamicParams = false
 export function generateStaticParams () { return b2bStaticParams() }

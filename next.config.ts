@@ -1,6 +1,6 @@
 import type { NextConfig } from 'next'
 import path from 'node:path'
-import { STYLE_ENTRIES } from './scripts/style-entries.mjs'
+import { STYLE_ENTRIES } from './scripts/build/style-entries.mjs'
 
 const projectRoot = typeof __dirname === 'string' ? __dirname : process.cwd()
 const useCompiledCss = process.env.STYLE_MODE === 'css'
@@ -12,7 +12,7 @@ const srcRoot = path.join(projectRoot, 'src')
 const isProdBuild = process.env.NODE_ENV === 'production'
 
 /**
- * STYLE_MODE=css (ui / build) — Turbopack CSS 별칭.
+ * STYLE_MODE=css (build) — Turbopack CSS 별칭.
  * JS에서 import 하는 SCSS 엔트리 → 컴파일된 .min.css
  */
 function compiledCssAliases (): Record<string, string> {

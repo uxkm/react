@@ -4,7 +4,7 @@
  * 가이드·데모 브라우저 탭 제목 모음.
  * 화면은 `@/screen/pub/hooks/useGuideTitle` 로 import.
  */
-import { useSiteTitle } from '@/lib/siteTitle'
+import { useSiteTitle } from '@/lib/siteTitle' // Site Title 훅
 
 /** 퍼블리싱 가이드·데모 구간의 탭 섹션명 */
 export const GUIDE_SECTION = '퍼블리싱가이드'

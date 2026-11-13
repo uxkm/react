@@ -1,8 +1,8 @@
-import { Button } from '@/comp/ui/Button'
-import { Icon } from '@/comp/ui/Icon'
-import { Link } from '@/lib/router'
-import Card from '@/modules/b2b/cards/Card'
-import type { CardAppearanceProps } from '@/modules/b2b/cards/cardTypes'
+import { Button } from '@/comp/ui/Button' // Button 컴포넌트
+import { Icon } from '@/comp/ui/Icon' // Icon 컴포넌트
+import { Link } from '@/lib/router' // 클라이언트 링크
+import Card from '@/modules/b2b/cards/Card' // Card 컴포넌트
+import type { CardAppearanceProps } from '@/modules/b2b/cards/cardTypes' // Card Appearance Props 타입
 
 /** 멀캠ON 뉴스레터 구독과 공식 소셜 채널 안내 카드. */
 export default function MainNewsletterCalloutCard ({ shadow = false }: Readonly<CardAppearanceProps>) {

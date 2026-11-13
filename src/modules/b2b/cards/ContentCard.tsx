@@ -1,8 +1,8 @@
-import { Card as BaseCard, CardBody } from '@/comp/ui/Card'
-import { Tag } from '@/comp/ui/Tag'
-import { Link } from '@/lib/router'
-import CardBackground from './CardBackground'
-import type { CardMediaProps, ContentCardData } from './cardTypes'
+import { Card as BaseCard, CardBody } from '@/comp/ui/Card' // UI 컴포넌트 · Card 컴포넌트
+import { Tag } from '@/comp/ui/Tag' // Tag 컴포넌트
+import { Link } from '@/lib/router' // 클라이언트 링크
+import CardBackground from './CardBackground' // Card Background 컴포넌트
+import type { CardMediaProps, ContentCardData } from './cardTypes' // card Types
 
 /** 섹션과 독립적으로 사용하는 썸네일·카테고리형 콘텐츠 카드. */
 export default function ContentCard ({

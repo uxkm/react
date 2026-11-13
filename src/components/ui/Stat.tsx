@@ -2,9 +2,9 @@
  * 통계 지표.
  * title · value · prefix/suffix · trend · description을 카드·크기로 조합한다.
  */
-import type { HTMLAttributes, ReactNode } from 'react'
-import { classNames } from '@/utils/classNames'
-import { Icon } from './Icon'
+import type { HTMLAttributes, ReactNode } from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { Icon } from './Icon' // Icon 컴포넌트
 
 const TrendIcon = () => (
   <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">

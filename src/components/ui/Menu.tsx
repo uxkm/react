@@ -6,17 +6,17 @@
  */
 
 import {
-  createContext,
-  useContext,
-  useId,
-  useState,
-  type HTMLAttributes,
-  type MouseEvent,
-  type ReactNode
-} from 'react'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
-import { Icon } from './Icon'
+  createContext, // 컨텍스트 생성
+  useContext, // 컨텍스트 훅
+  useId, // 고유 id 훅
+  useState, // 상태 훅
+  type HTMLAttributes, // HTMLAttributes 타입
+  type MouseEvent, // MouseEvent 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
+import { Icon } from './Icon' // Icon 컴포넌트
 
 /** 메뉴 항목 · 구분선 · 그룹 */
 export interface MenuItem {

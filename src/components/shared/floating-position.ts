@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react'
+import type { CSSProperties } from 'react' // CSSProperties 타입
 
 export type FloatingPlacement = 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left'
 

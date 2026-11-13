@@ -2,10 +2,10 @@
  * 수동 페이지 스켈레톤.
  * page/list/form/card 프리셋으로 로딩 뼈대를 그린다.
  */
-import type { HTMLAttributes, ReactNode } from 'react'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
-import { Skeleton } from './Skeleton'
+import type { HTMLAttributes, ReactNode } from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
+import { Skeleton } from './Skeleton' // Skeleton 컴포넌트
 
 /** 수동 스켈레톤 모양. page 일반, list 목록, form 입력, card 카드 */
 export type PageSkeletonType = 'page' | 'list' | 'form' | 'card'

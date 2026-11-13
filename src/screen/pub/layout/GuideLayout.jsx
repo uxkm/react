@@ -11,7 +11,7 @@
 import { Link } from '@/lib/router' // 앱 라우터 Link
 import { Container } from '@/comp/ui/Container' // 본문 폭·패딩 컨테이너
 import { Header } from '@/comp/layout/Header' // 상단 헤더 슬롯
-import { LayoutSlot } from '@/comp/layout/LayoutSlot'
+import { LayoutSlot } from '@/comp/layout/LayoutSlot' // Layout Slot 컴포넌트
 import { hasNodes } from '@/utils/react' // children 유무 판별
 import { classNames } from '@/utils/classNames' // className 결합
 import { GUIDE_SECTION, useGuideTitle } from '@/screen/pub/hooks/useGuideTitle' // 탭 섹션·가이드 타이틀

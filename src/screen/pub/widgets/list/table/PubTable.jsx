@@ -6,12 +6,12 @@
  * - 폴더 PubGroupRow 를 나열하고, 화면명 열 너비를 최장 텍스트에 맞춤
  * - depth2 그룹 / 리프까지 이름 폭 측정에 포함
  */
-import { useCallback, useEffect, useLayoutEffect, useRef } from 'react'
-import { classNames } from '@/utils/classNames'
-import PubGroupRow from './PubGroupRow'
-import { folderLabel, itemLabel } from '../lib/publishLabels'
-import { countLeaves, groupLabel, isGroupNode } from '../lib/publishTree'
-import { useEllipsisTooltip } from './useEllipsisTooltip.jsx'
+import { useCallback, useEffect, useLayoutEffect, useRef } from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import PubGroupRow from './PubGroupRow' // Pub Group Row 컴포넌트
+import { folderLabel, itemLabel } from '../lib/publishLabels' // 라이브러리/유틸 · publish Labels
+import { countLeaves, groupLabel, isGroupNode } from '../lib/publishTree' // 라이브러리/유틸 · publish Tree
+import { useEllipsisTooltip } from './useEllipsisTooltip.jsx' // Ellipsis Tooltip 훅
 
 /** 화면명 열 최대 너비 */
 const NAME_COL_MAX = 240

@@ -1,11 +1,11 @@
 'use client'
 
-import { useCallback, useRef, useState } from 'react'
-import { useClickOutside } from '@/hooks/useClickOutside'
-import { classNames } from '@/utils/classNames'
-import { GuideLayout } from '@/screen/pub/layout'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
+import { useCallback, useRef, useState } from 'react' // React
+import { useClickOutside } from '@/hooks/useClickOutside' // Click Outside 훅
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
 
 /** 정렬 기준 목록 */
 const sortList = ['최신순', '인기순', '이름순', '오래된순']

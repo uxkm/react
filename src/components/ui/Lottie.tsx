@@ -6,18 +6,18 @@
  * name 으로 public/images/lottie JSON을 넣고, controls 로 재생·정지 버튼을 켠다.
  */
 import {
-  useEffect,
-  useRef,
-  useState,
-  useSyncExternalStore,
-  type CSSProperties,
-  type HTMLAttributes
-} from 'react'
-import lottie, { type AnimationItem, type RendererType } from 'lottie-web'
-import { Button } from './Button'
-import { Icon } from './Icon'
-import { classNames } from '@/utils/classNames'
-import { imgLottie } from '@/utils/images'
+  useEffect, // effect 훅
+  useRef, // ref 훅
+  useState, // 상태 훅
+  useSyncExternalStore, // 외부 스토어 구독 훅
+  type CSSProperties, // CSSProperties 타입
+  type HTMLAttributes // HTMLAttributes 타입
+} from 'react' // React
+import lottie, { type AnimationItem, type RendererType } from 'lottie-web' // Lottie 애니메이션
+import { Button } from './Button' // Button 컴포넌트
+import { Icon } from './Icon' // Icon 컴포넌트
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { imgLottie } from '@/utils/images' // img Lottie
 
 /**
  * Lottie 경로 해석 (Icon resolveIconSrc 와 동일 규칙).

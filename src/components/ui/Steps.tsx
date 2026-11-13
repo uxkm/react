@@ -5,10 +5,10 @@
  * current 기준으로 진행 단계(title·desc)를 나열한다.
  */
 
-import { useState, type HTMLAttributes, type ReactNode } from 'react'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
-import { Icon } from './Icon'
+import { useState, type HTMLAttributes, type ReactNode } from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
+import { Icon } from './Icon' // Icon 컴포넌트
 
 /** 단계 상태 */
 export type StepStatus = 'wait' | 'process' | 'finish' | 'error'

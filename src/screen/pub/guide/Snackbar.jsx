@@ -1,14 +1,14 @@
 'use client'
 
-import { useState } from 'react'
-import { Button, Icon, Snackbar } from '@/comp'
-import { LoadOpenOverlayDemo } from '@/screen/pub/widgets/preview/LoadOpenOverlayDemo'
-import { TimedOverlayDemo } from '@/screen/pub/widgets/preview/TimedOverlayDemo'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
-import { GuideLayout } from '@/screen/pub/layout'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
-import { snackbarApiSections } from '@/screen/pub/data/guide/snackbarApiSections'
+import { useState } from 'react' // 상태 훅
+import { Button, Icon, Snackbar } from '@/comp' // comp
+import { LoadOpenOverlayDemo } from '@/screen/pub/widgets/preview/LoadOpenOverlayDemo' // Load Open Overlay Demo 컴포넌트
+import { TimedOverlayDemo } from '@/screen/pub/widgets/preview/TimedOverlayDemo' // Timed Overlay Demo 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { snackbarApiSections } from '@/screen/pub/data/guide/snackbarApiSections' // snackbar Api Sections
 
 /** open · onOpenChange 로 표시를 제어하는 예시 */
 function ControlledDemo () {

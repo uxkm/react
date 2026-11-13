@@ -1,12 +1,12 @@
 'use client'
 
-import { useState } from 'react'
-import { Switch } from '@/comp'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
-import { GuideLayout } from '@/screen/pub/layout'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
-import { switchApiSections } from '@/screen/pub/data/guide/switchApiSections'
+import { useState } from 'react' // 상태 훅
+import { Switch } from '@/comp' // Switch 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { switchApiSections } from '@/screen/pub/data/guide/switchApiSections' // switch Api Sections
 
 /** checked · onChange 로 부모가 켜짐 상태를 관리하는 예시 */
 function ControlledDemo () {

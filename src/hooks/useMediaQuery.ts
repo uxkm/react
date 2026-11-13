@@ -1,6 +1,6 @@
 'use client'
 
-import { useSyncExternalStore } from 'react'
+import { useSyncExternalStore } from 'react' // 외부 스토어 구독 훅
 
 function subscribeMediaQuery (query: string, onStoreChange: () => void) {
   const mql = window.matchMedia(query)

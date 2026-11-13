@@ -4,12 +4,12 @@
  * 공통 상단 헤더 UI.
  * inline/stacked 배치, 기본 네비·언어 전환. 문구는 한글 원문(전역 번역기가 처리).
  */
-import type { AnchorHTMLAttributes, HTMLAttributes, ReactNode } from 'react'
-import { Link, NavLink } from '@/lib/router'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
-import { LanguageSwitcher } from './LanguageSwitcher'
-import { headerAppearanceStyle, type HeaderAppearance, type HeaderStyle } from '@/comp/shared/header-appearance'
+import type { AnchorHTMLAttributes, HTMLAttributes, ReactNode } from 'react' // React
+import { Link, NavLink } from '@/lib/router' // 라이브러리/유틸 · router
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
+import { LanguageSwitcher } from './LanguageSwitcher' // Language Switcher 컴포넌트
+import { headerAppearanceStyle, type HeaderAppearance, type HeaderStyle } from '@/comp/shared/header-appearance' // 공유 모듈 · header appearance
 
 /** 헤더 메뉴 링크 한 줄. to 와 label */
 export interface AppHeaderLinkProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href' | 'className'> {

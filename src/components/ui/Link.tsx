@@ -3,13 +3,13 @@
  * href 또는 버튼형 클릭. 색·크기 조절.
  */
 import {
-  createElement,
-  type HTMLAttributes,
-  type MouseEvent,
-  type ReactNode
-} from 'react'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
+  createElement, // 엘리먼트 생성
+  type HTMLAttributes, // HTMLAttributes 타입
+  type MouseEvent, // MouseEvent 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
 
 /** 링크 글자 색 */
 export type LinkColor = 'primary' | 'muted' | 'success' | 'warning' | 'danger' | 'info'

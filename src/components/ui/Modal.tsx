@@ -6,17 +6,17 @@
  * adaptive 이면 브레이크포인트 미만에서 하단 바텀시트로 전환한다.
  */
 
-import { useState, type HTMLAttributes, type ReactNode } from 'react'
-import { useAutoClose } from '@/hooks/useAutoClose'
-import { useMinWidth } from '@/hooks/useMediaQuery'
+import { useState, type HTMLAttributes, type ReactNode } from 'react' // React
+import { useAutoClose } from '@/hooks/useAutoClose' // Auto Close 훅
+import { useMinWidth } from '@/hooks/useMediaQuery' // Min Width 훅
 import {
-  ADAPTIVE_BREAKPOINT_DEFAULT,
-  resolveAdaptiveBreakpoint,
-  type AdaptiveBreakpoint
-} from '@/lib/breakpoints'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
-import { Icon } from './Icon'
+  ADAPTIVE_BREAKPOINT_DEFAULT, // ADAPTIVE BREAKPOINT DEFAULT 컴포넌트
+  resolveAdaptiveBreakpoint, // resolve Adaptive Breakpoint
+  type AdaptiveBreakpoint // AdaptiveBreakpoint 타입
+} from '@/lib/breakpoints' // 라이브러리/유틸 · breakpoints
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
+import { Icon } from './Icon' // Icon 컴포넌트
 
 /** 모달이 받는 값. open 일 때만 보인다 */
 export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {

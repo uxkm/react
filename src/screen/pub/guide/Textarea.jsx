@@ -1,12 +1,12 @@
 'use client'
 
-import { useState } from 'react'
-import { Button, Textarea } from '@/comp'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
-import { GuideLayout } from '@/screen/pub/layout'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
-import { textareaApiSections } from '@/screen/pub/data/guide/textareaApiSections'
+import { useState } from 'react' // 상태 훅
+import { Button, Textarea } from '@/comp' // comp
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { textareaApiSections } from '@/screen/pub/data/guide/textareaApiSections' // textarea Api Sections
 
 function Field ({ id, label, hint, children }) {
   return (

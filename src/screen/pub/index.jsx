@@ -1,41 +1,41 @@
 'use client'
 
-import { useLatestRef } from '@/hooks/useLatestRef'
+import { useLatestRef } from '@/hooks/useLatestRef' // Latest Ref 훅
 
 /**
  * PubIndex
  * - JSON 기반 퍼블리시 화면 목록 (화면명 필터 / 검색 / 폴더 펼침)
  * - 스타일: wbs-* (pages/pub → pub.scss) / 언어: AppLayout 전역 번역
  */
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
-import { AutoSkeleton, PageLayoutVisibility } from '@/comp'
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react' // React
+import { AutoSkeleton, PageLayoutVisibility } from '@/comp' // comp
 import {
-  PubFilterSheet,
-  FolderFilterBar,
-  folderFilterLabel,
-  folderLabel,
-  remarkHasContent,
-  remarkItems,
-  remarkSearchText,
-  itemLabel,
-  typeLabel,
-  statusLabel,
-  PubProgressSummary,
-  PubLoadError,
-  PubListSkeleton,
-  PubSearchBar,
-  PubTable,
-  RemarkModal,
-  collectExpandKeys,
-  collectLeaves,
-  countLeaves,
-  filterDepthTree,
-  linkFieldSearchText
-} from '@/screen/pub/widgets/list'
-import { PubHeader } from '@/screen/pub/layout'
-import { b2b } from '@/generated/b2b'
-import { resolveSkeletonMode } from '@/config/skeleton'
-import { useSiteTitle } from '@/lib/siteTitle'
+  PubFilterSheet, // Pub Filter Sheet 컴포넌트
+  FolderFilterBar, // Folder Filter Bar 컴포넌트
+  folderFilterLabel, // folder Filter Label
+  folderLabel, // folder Label
+  remarkHasContent, // remark Has Content
+  remarkItems, // remark Items
+  remarkSearchText, // remark Search Text
+  itemLabel, // item Label
+  typeLabel, // type Label
+  statusLabel, // status Label
+  PubProgressSummary, // Pub Progress Summary 컴포넌트
+  PubLoadError, // Pub Load Error 컴포넌트
+  PubListSkeleton, // Pub List Skeleton 컴포넌트
+  PubSearchBar, // Pub Search Bar 컴포넌트
+  PubTable, // Pub Table 컴포넌트
+  RemarkModal, // Remark Modal 컴포넌트
+  collectExpandKeys, // collect Expand Keys
+  collectLeaves, // collect Leaves
+  countLeaves, // count Leaves
+  filterDepthTree, // filter Depth Tree
+  linkFieldSearchText // link Field Search Text
+} from '@/screen/pub/widgets/list' // 위젯 · list
+import { PubHeader } from '@/screen/pub/layout' // Pub Header 컴포넌트
+import { b2b } from '@/generated/b2b' // b2b
+import { resolveSkeletonMode } from '@/config/skeleton' // resolve Skeleton Mode
+import { useSiteTitle } from '@/lib/siteTitle' // Site Title 훅
 
 /** 스켈레톤 설정 키 — 디자인 확정 시 src/config/skeleton.ts 에 'pub/index': 'manual' */
 const PUB_SKELETON_ID = 'pub/index'

@@ -1,29 +1,29 @@
 'use client'
 
-import { useState } from 'react'
+import { useState } from 'react' // 상태 훅
 import {
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Carousel,
-  CarouselSlide,
-  FormActions,
-  FormField,
-  FormLayout,
-  Icon,
-  Input,
-  Space,
-  Tab,
-  TabPanel,
-  Tabs
-} from '@/comp'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
-import { GuideLayout } from '@/screen/pub/layout'
-import { pageExampleCode, pageExampleReturn } from '@/screen/pub/lib/pageExampleCode'
-import { tabsApiSections } from '@/screen/pub/data/guide/tabsApiSections'
+  Button, // Button 컴포넌트
+  Card, // Card 컴포넌트
+  CardBody, // Card Body 컴포넌트
+  CardFooter, // Card Footer 컴포넌트
+  CardHeader, // Card Header 컴포넌트
+  Carousel, // Carousel 컴포넌트
+  CarouselSlide, // Carousel Slide 컴포넌트
+  FormActions, // Form Actions 컴포넌트
+  FormField, // Form Field 컴포넌트
+  FormLayout, // Form Layout 컴포넌트
+  Icon, // Icon 컴포넌트
+  Input, // Input 컴포넌트
+  Space, // Space 컴포넌트
+  Tab, // Tab 컴포넌트
+  TabPanel, // Tab Panel 컴포넌트
+  Tabs // Tabs 컴포넌트
+} from '@/comp' // comp
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
+import { pageExampleCode, pageExampleReturn } from '@/screen/pub/lib/pageExampleCode' // 라이브러리/유틸 · page Example Code
+import { tabsApiSections } from '@/screen/pub/data/guide/tabsApiSections' // tabs Api Sections
 
 const BASIC_TABS = [
   { value: 'overview', label: '개요' },

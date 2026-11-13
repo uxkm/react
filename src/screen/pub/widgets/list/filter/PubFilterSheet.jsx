@@ -1,13 +1,13 @@
 'use client'
 
-import { useEscapeKey } from '@/hooks/useEscapeKey'
+import { useEscapeKey } from '@/hooks/useEscapeKey' // Escape Key 훅
 
 /**
  * PubFilterSheet
  * - 모바일/좁은 화면용 화면명(폴더) 필터 버텀시트
  * - 전체 또는 특정 폴더 선택
  */
-import { classNames } from '@/utils/classNames'
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
 
 export default function PubFilterSheet ({
   title,

@@ -1,12 +1,12 @@
 'use client'
 
-import { useState } from 'react'
-import { Keyword, Keywords } from '@/comp'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
-import { GuideLayout } from '@/screen/pub/layout'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
-import { keywordApiSections } from '@/screen/pub/data/guide/keywordApiSections'
+import { useState } from 'react' // 상태 훅
+import { Keyword, Keywords } from '@/comp' // comp
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { keywordApiSections } from '@/screen/pub/data/guide/keywordApiSections' // keyword Api Sections
 
 const SAMPLE = [
   'React', 'Next.js', 'TypeScript', 'SCSS', 'Accessibility',

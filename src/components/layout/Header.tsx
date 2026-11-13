@@ -8,12 +8,12 @@
  * - /pub 목록: `@/screen/pub/layout` 의 PubHeader
  * - 보이기/숨기기: `export const meta = { header: true | false }` (PageLayoutVisibility)
  */
-import type { ReactNode } from 'react'
-import { hasNodes } from '@/utils/react'
-import { isAppHeaderLayout, type AppHeaderLayout } from '@/comp/widget/AppHeader'
-import { LAYOUT_SLOT_HIDDEN } from '@/comp/shared/layout-slot'
-import { useLayoutSlotSync } from './LayoutContext'
-import type { HeaderAppearance } from '@/comp/shared/header-appearance'
+import type { ReactNode } from 'react' // React Node 타입
+import { hasNodes } from '@/utils/react' // has Nodes
+import { isAppHeaderLayout, type AppHeaderLayout } from '@/comp/widget/AppHeader' // isAppHeaderLayout · AppHeaderLayout 타입
+import { LAYOUT_SLOT_HIDDEN } from '@/comp/shared/layout-slot' // LAYOUT SLOT HIDDEN 컴포넌트
+import { useLayoutSlotSync } from './LayoutContext' // Layout Slot Sync 훅
+import type { HeaderAppearance } from '@/comp/shared/header-appearance' // Header Appearance 타입
 
 /**
  * 슬롯 값 정규화

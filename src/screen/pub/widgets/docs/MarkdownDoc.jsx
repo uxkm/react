@@ -4,9 +4,9 @@
  * README 등 프로젝트 마크다운을 가이드 소개·문서용으로 렌더.
  * 의존성 없이 제목·문단·목록(ul/ol)·표·코드·인라인 서식만 처리한다.
  */
-import { Fragment } from 'react'
-import { Link } from '@/lib/router'
-import { classNames } from '@/utils/classNames'
+import { Fragment } from 'react' // Fragment
+import { Link } from '@/lib/router' // 클라이언트 링크
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
 
 /** `**bold**` · `` `code` `` · `[label](href)` */
 function renderInline (text, keyPrefix = 'i') {

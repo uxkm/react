@@ -1,10 +1,10 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import Hls from 'hls.js'
-import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
+import { useEffect, useRef, useState } from 'react' // React
+import Hls from 'hls.js' // Hls 컴포넌트
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
 
 // Shaka 공식 샘플: 매니페스트에 영어 등 WebVTT 자막 트랙이 포함되어 있다.
 const STREAM_URL = 'https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8'

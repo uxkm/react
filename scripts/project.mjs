@@ -56,11 +56,11 @@ export function syncProject () {
   if (b2b) {
     const { id } = b2b
     const route = `src/app/${id}/[...slug]/page.jsx`
-    write(route, marker + `import { RegistryPage } from '@/lib/RegistryPage'
-import { b2bStaticParams } from '@/lib/staticParams'
-import { routeMetadata } from '@/lib/routeMetadata'
-import { indexLoaders, screenLoaders, indexMeta, screenMeta } from '@/generated/registry-${id}'
-import RouteRedirect from '@/comp/providers/RouteRedirect'
+    write(route, marker + `import { RegistryPage } from '@/lib/RegistryPage' // 레지스트리 페이지 렌더
+import { b2bStaticParams } from '@/lib/staticParams' // B2B 정적 경로 파라미터
+import { routeMetadata } from '@/lib/routeMetadata' // 라우트 메타데이터
+import { indexLoaders, screenLoaders, indexMeta, screenMeta } from '@/generated/registry-${id}' // B2B 화면 레지스트리
+import RouteRedirect from '@/comp/providers/RouteRedirect' // 라우트 리다이렉트
 
 export const dynamicParams = false
 export function generateStaticParams () { return b2bStaticParams() }
@@ -76,13 +76,15 @@ export async function generateMetadata ({ params }) {
 }
 `)
     // These root shells contain no project-specific implementation.
-    write(`src/app/${id}/page.jsx`, marker + `import { RegistryPage } from '@/lib/RegistryPage'
-import { indexLoaders, indexMeta } from '@/generated/registry-${id}'
-import { routeMetadata } from '@/lib/routeMetadata'
+    write(`src/app/${id}/page.jsx`, marker + `import { RegistryPage } from '@/lib/RegistryPage' // 레지스트리 페이지 렌더
+import { indexLoaders, indexMeta } from '@/generated/registry-${id}' // B2B 화면 레지스트리
+import { routeMetadata } from '@/lib/routeMetadata' // 라우트 메타데이터
 export const metadata = routeMetadata('/${id}')
 export default function Page () { return <RegistryPage loaders={indexLoaders} metaMap={indexMeta} routeKey="main" /> }
 `)
-    const styleImport = fs.existsSync(path.join(root, `src/styles/pages/${id}/index.scss`)) ? `import '@/styles/pages/${id}/index.scss'\n` : ''
+    const styleImport = fs.existsSync(path.join(root, `src/styles/pages/${id}/index.scss`))
+      ? `import '@/styles/pages/${id}/index.scss' // B2B 페이지 스타일\n`
+      : ''
     write(`src/app/${id}/layout.jsx`, marker + `${styleImport}export default function Layout ({ children }) { return children }
 `)
   }

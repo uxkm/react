@@ -1,10 +1,10 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import { client as createStompClient } from 'webstomp-client'
-import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
+import { useEffect, useRef, useState } from 'react' // React
+import { client as createStompClient } from 'webstomp-client' // create Stomp Client
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
 
 /** 로컬/데모용 기본 엔드포인트 (브로커 없으면 실패가 정상) */
 const DEFAULT_WS = 'ws://127.0.0.1:15674/ws'

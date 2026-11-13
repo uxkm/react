@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { discoverProject, root } from './project.mjs'
+import { discoverProject, root } from '../project.mjs'
 
 /** Discover standalone SCSS entries, including entries created after startup. */
 export function getStyleEntries () {

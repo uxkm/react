@@ -3,13 +3,13 @@
  * vertical · horizontal · inline 레이아웃으로 FormField를 묶는다.
  */
 import {
-  createElement,
-  type ElementType,
-  type FormHTMLAttributes,
-  type HTMLAttributes,
-  type ReactNode
-} from 'react'
-import { classNames } from '@/utils/classNames'
+  createElement, // 엘리먼트 생성
+  type ElementType, // ElementType 타입
+  type FormHTMLAttributes, // FormHTMLAttributes 타입
+  type HTMLAttributes, // HTMLAttributes 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
 
 const LAYOUTS = new Set(['vertical', 'horizontal', 'inline'])
 const LABEL_WIDTHS = new Set(['', 'sm', 'lg'])

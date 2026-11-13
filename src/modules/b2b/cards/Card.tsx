@@ -1,10 +1,10 @@
-import ContentCard from './ContentCard'
-import PromotionCard from './PromotionCard'
-import ImageCard from './ImageCard'
-import QuickLinkCard from './QuickLinkCard'
-import TestimonialCard from './TestimonialCard'
-import CalloutCard from './CalloutCard'
-import type { CardProps } from './cardTypes'
+import ContentCard from './ContentCard' // Content Card 컴포넌트
+import PromotionCard from './PromotionCard' // Promotion Card 컴포넌트
+import ImageCard from './ImageCard' // Image Card 컴포넌트
+import QuickLinkCard from './QuickLinkCard' // Quick Link Card 컴포넌트
+import TestimonialCard from './TestimonialCard' // Testimonial Card 컴포넌트
+import CalloutCard from './CalloutCard' // Callout Card 컴포넌트
+import type { CardProps } from './cardTypes' // Card Props 타입
 
 /** type에 따라 필요한 카드 데이터가 결정되는 B2B 카드 공통 입구. */
 export default function Card (props: Readonly<CardProps>) {

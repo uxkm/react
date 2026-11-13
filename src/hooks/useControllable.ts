@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react' // React
 
 /**
  * value 가 주어지면 controlled, 없으면(undefined) 내부 state 로 동작

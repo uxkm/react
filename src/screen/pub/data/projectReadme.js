@@ -2,7 +2,7 @@
  * 루트 README.md 원문.
  * 가이드 소개(/pub/guide)가 이 내용을 렌더한다.
  */
-import readme from '../../../../README.md'
+import readme from '../../../../README.md' // readme
 
 export const projectReadme = String(readme || '')
 

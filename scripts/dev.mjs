@@ -1,11 +1,11 @@
-/** One lifecycle for registry generation, styles, static refresh, and Next dev. */
+/** One lifecycle for registry generation, static refresh, and Next dev (SCSS). */
 import fs from 'node:fs'
 import path from 'node:path'
 import { spawn, execFile } from 'node:child_process'
 import { promisify } from 'node:util'
 import { fileURLToPath } from 'node:url'
 import { root } from './project.mjs'
-import { getStyleEntries } from './style-entries.mjs'
+import { getStyleEntries } from './build/style-entries.mjs'
 import { watchSourceFiles } from './watch-files.mjs'
 import { syncLottieList } from './lottie-list.mjs'
 
@@ -30,7 +30,7 @@ function registrySnapshot () {
   const file = path.join(root, 'src/generated/registry-ids.js')
   return fs.existsSync(file) ? fs.readFileSync(file, 'utf8') : ''
 }
-export async function startDevelopment ({ styleMode = 'scss' } = {}) {
+export async function startDevelopment () {
   let child = null
   let closing = false
   let topology = sourceTopology()
@@ -39,8 +39,6 @@ export async function startDevelopment ({ styleMode = 'scss' } = {}) {
   let ownsDevCache = false
   let refreshTimer
   const expectedExit = new WeakSet()
-  const styles = styleMode === 'css' ? await import('./build-styles.mjs') : null
-  if (styles) styles.compileAll()
   // 기동 시점에 lottie 폴더 목록을 맞춰 둔다 (watch 코드 반영 전 추가분 포함)
   syncLottieList()
 
@@ -48,7 +46,7 @@ export async function startDevelopment ({ styleMode = 'scss' } = {}) {
     if (child || closing) return
     const current = spawn(process.execPath, [path.join(root, 'scripts/serve-next.mjs'), '--dev'], {
       cwd: root,
-      env: { ...process.env, STYLE_MODE: styles ? 'css' : 'scss' },
+      env: { ...process.env, STYLE_MODE: 'scss' },
       stdio: ['inherit', 'inherit', 'inherit', 'ipc']
     })
     child = current
@@ -97,7 +95,6 @@ export async function startDevelopment ({ styleMode = 'scss' } = {}) {
       const nextRegistry = registrySnapshot()
       if (nextRegistry !== registry) restart = true
       if (restart) await stopServer()
-      if (styles && (restart || paths.some((file) => file.endsWith('.scss')))) styles.compileAll()
       // lottie JSON 추가·삭제 시 목록만 갱신 (Next 재시작 불필요)
       if (paths.some((file) => file === 'public/images/lottie' || file.startsWith('public/images/lottie/'))) {
         const files = syncLottieList()
@@ -133,5 +130,5 @@ export async function startDevelopment ({ styleMode = 'scss' } = {}) {
   return { close }
 }
 if (process.argv[1] && fs.realpathSync(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  await startDevelopment({ styleMode: process.argv.includes('--css') ? 'css' : 'scss' })
+  await startDevelopment()
 }

@@ -1,9 +1,9 @@
 'use client'
 
-import { Page, PageLoading } from '@/comp'
-import { FullMenuContent } from '@/widgets/b2b/common/FullMenu'
-import { resolveSkeletonMode } from '@/config/skeleton'
-import FullMenuSkeleton from './skeleton/indexSkeleton'
+import { Page, PageLoading } from '@/comp' // comp
+import { FullMenuContent } from '@/widgets/b2b/common/FullMenu' // Full Menu Content 컴포넌트
+import { resolveSkeletonMode } from '@/config/skeleton' // resolve Skeleton Mode
+import FullMenuSkeleton from './skeleton/indexSkeleton' // Full Menu Skeleton 컴포넌트
 
 export const pageTitle = "전체메뉴"
 export const meta = { banner: false, header: false, footer: false, floating: false }

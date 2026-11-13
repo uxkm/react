@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect } from 'react' // effect 훅
 
 /** 브라우저 탭 기본 사이트명 */
 export const SITE_NAME = '멀티캠퍼스 기업교육'

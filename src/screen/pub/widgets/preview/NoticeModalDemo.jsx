@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
-import { Button, Checkbox, Flex, Modal } from '@/comp'
-import { useDailyDismissal } from '@/hooks/useDailyDismissal'
-import { useHydrated } from '@/hooks/useHydrated'
+import { useState } from 'react' // 상태 훅
+import { Button, Checkbox, Flex, Modal } from '@/comp' // comp
+import { useDailyDismissal } from '@/hooks/useDailyDismissal' // Daily Dismissal 훅
+import { useHydrated } from '@/hooks/useHydrated' // Hydrated 훅
 
 /** 공지사항 모달 예시. 하루 숨김은 공통 배너와 같은 자정 만료 로직을 사용한다. */
 export function NoticeModalDemo () {

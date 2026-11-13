@@ -6,20 +6,20 @@
  */
 
 import {
-  Children,
-  isValidElement,
-  useId,
-  useLayoutEffect,
-  useRef,
-  useState,
-  type HTMLAttributes,
-  type ReactElement,
-  type ReactNode,
-  type TransitionEvent
-} from 'react'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
-import { Icon } from './Icon'
+  Children, // Children 유틸
+  isValidElement, // is Valid Element
+  useId, // 고유 id 훅
+  useLayoutEffect, // 레이아웃 effect 훅
+  useRef, // ref 훅
+  useState, // 상태 훅
+  type HTMLAttributes, // HTMLAttributes 타입
+  type ReactElement, // ReactElement 타입
+  type ReactNode, // ReactNode 타입
+  type TransitionEvent // TransitionEvent 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
+import { Icon } from './Icon' // Icon 컴포넌트
 
 /** 접기 패널 값 */
 export type CollapseValue = string | number

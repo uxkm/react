@@ -5,14 +5,14 @@
  * label · button · indeterminate · labelEnd를 공통 클래스로 표현한다.
  */
 import {
-  useEffect,
-  useId,
-  useRef,
-  type ChangeEvent,
-  type InputHTMLAttributes,
-  type ReactNode
-} from 'react'
-import { classNames } from '@/utils/classNames'
+  useEffect, // effect 훅
+  useId, // 고유 id 훅
+  useRef, // ref 훅
+  type ChangeEvent, // ChangeEvent 타입
+  type InputHTMLAttributes, // InputHTMLAttributes 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
 
 /** 체크박스가 받는 값 */
 export interface CheckboxProps

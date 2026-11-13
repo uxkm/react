@@ -1,12 +1,12 @@
 'use client'
 
-import { useRef, useState } from 'react'
-import { Affix, Button, Link, Space } from '@/comp'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
-import { GuideLayout } from '@/screen/pub/layout'
-import { ensurePageModule, pageExampleCode, wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
-import { affixApiSections } from '@/screen/pub/data/guide/affixApiSections'
+import { useRef, useState } from 'react' // React
+import { Affix, Button, Link, Space } from '@/comp' // comp
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
+import { ensurePageModule, pageExampleCode, wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // 라이브러리/유틸 · page Example Code
+import { affixApiSections } from '@/screen/pub/data/guide/affixApiSections' // affix Api Sections
 
 const DEMO_PARAS = Array.from({ length: 10 }, (_, index) => (
   <p key={index}>

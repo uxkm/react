@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import type { ReactNode } from 'react' // React Node 타입
 
 /** children / 슬롯 노드에 렌더할 내용이 있는지 */
 export function hasNodes (node: unknown): boolean {

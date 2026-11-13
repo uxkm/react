@@ -1,11 +1,11 @@
 'use client'
 
-import { Avatar, Button, Icon, List, ListItem } from '@/comp'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
-import { GuideLayout } from '@/screen/pub/layout'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
-import { listApiSections } from '@/screen/pub/data/guide/listApiSections'
+import { Avatar, Button, Icon, List, ListItem } from '@/comp' // comp
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { listApiSections } from '@/screen/pub/data/guide/listApiSections' // list Api Sections
 
 const SECTIONS = [
   {

@@ -2,7 +2,7 @@
  * Highcharts 차트 캔버스.
  * Chart 에 engine="highcharts" 를 고정해 넘긴다.
  */
-import { Chart, type ChartProps } from './Chart'
+import { Chart, type ChartProps } from './Chart' // Chart · ChartProps 타입
 
 /** Highcharts 캔버스가 받는 값 */
 export type ChartHighchartsProps = Omit<ChartProps, 'engine'>

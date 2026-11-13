@@ -1,11 +1,11 @@
 'use client'
 
-import { useState } from 'react'
-import { AppHeader, AppHeaderLink } from '@/comp'
-import { GuideLayout } from '@/screen/pub/layout'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'
-import { headerApiSections } from '@/screen/pub/data/guide/headerApiSections'
+import { useState } from 'react' // 상태 훅
+import { AppHeader, AppHeaderLink } from '@/comp' // comp
+import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
+import { headerApiSections } from '@/screen/pub/data/guide/headerApiSections' // header Api Sections
 
 export const guideLabel = 'Header · 헤더'
 export const pageTitle = 'Header'

@@ -1,9 +1,9 @@
 'use client'
 
-import { useState, type HTMLAttributes } from 'react'
-import { Link } from '@/lib/router'
-import { Icon } from '@/comp/ui/Icon'
-import { B2bLogo, FullMenu } from './FullMenu'
+import { useState, type HTMLAttributes } from 'react' // React
+import { Link } from '@/lib/router' // 클라이언트 링크
+import { Icon } from '@/comp/ui/Icon' // Icon 컴포넌트
+import { B2bLogo, FullMenu } from './FullMenu' // Full Menu 컴포넌트
 
 /** B2B 공통 헤더. Header 슬롯을 통해 모든 프로젝트 화면에서 사용합니다. */
 export default function Header ({ className, ...rest }: Readonly<HTMLAttributes<HTMLElement>>) {

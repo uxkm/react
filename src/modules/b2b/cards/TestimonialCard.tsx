@@ -1,6 +1,6 @@
-import { Stat } from '@/comp/ui/Stat'
-import CardBackground from './CardBackground'
-import type { TestimonialCardProps, TestimonialCardData } from './cardTypes'
+import { Stat } from '@/comp/ui/Stat' // Stat 컴포넌트
+import CardBackground from './CardBackground' // Card Background 컴포넌트
+import type { TestimonialCardProps, TestimonialCardData } from './cardTypes' // card Types
 
 /** 인용문과 작성자 정보를 강조하는 고객사례 카드. */
 export default function TestimonialCard ({

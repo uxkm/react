@@ -2,9 +2,9 @@
  * 타이포그래피.
  * 문단·제목·코드·인용 등 글 종류·색·크기를 통일한다.
  */
-import { createElement, type HTMLAttributes, type ReactNode } from 'react'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
+import { createElement, type HTMLAttributes, type ReactNode } from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
 
 /** 글 종류. 문단, 리드, 캡션, 코드, 인용 등 */
 export type TypographyVariant =

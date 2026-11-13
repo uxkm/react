@@ -153,7 +153,7 @@ const label = isDev ? 'development · turbopack' : 'production'
 listenServer(httpServer, HTTP_PORT).then(() => {
   if (isDev && process.connected) process.send({ type: 'server-ready' })
   console.log('')
-  console.log(`  ▲ 퍼블리싱 목록 (${label})`)
+  console.log(`  ▲ 실행 결과 (${label})`)
   console.log(`  - Local HTTP:    http://localhost:${HTTP_PORT}`)
   if (lan) console.log(`  - Network HTTP:  http://${lan}:${HTTP_PORT}`)
 

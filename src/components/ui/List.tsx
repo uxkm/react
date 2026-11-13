@@ -5,14 +5,14 @@
  * List · ListItem으로 불릿·번호·정의·카드형 항목을 조합한다.
  */
 import {
-  createContext,
-  Fragment,
-  useContext,
-  type CSSProperties,
-  type HTMLAttributes,
-  type ReactNode
-} from 'react'
-import { classNames } from '@/utils/classNames'
+  createContext, // 컨텍스트 생성
+  Fragment, // Fragment
+  useContext, // 컨텍스트 훅
+  type CSSProperties, // CSSProperties 타입
+  type HTMLAttributes, // HTMLAttributes 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
 
 const VARIANT_TAG = {
   default: 'ul',

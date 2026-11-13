@@ -1,23 +1,23 @@
 'use client'
 
-import { useLatestRef } from '@/hooks/useLatestRef'
+import { useLatestRef } from '@/hooks/useLatestRef' // Latest Ref 훅
 
 /**
  * 파일 업로드.
  * button · drag · list · picture-card · avatar 변형을 공통 클래스로 표현한다.
  */
 import {
-  useCallback,
-  useEffect,
-  useId,
-  useRef,
-  useState,
-  type DragEvent,
-  type InputHTMLAttributes,
-  type KeyboardEvent,
-  type ReactNode
-} from 'react'
-import { classNames } from '@/utils/classNames'
+  useCallback, // 콜백 메모 훅
+  useEffect, // effect 훅
+  useId, // 고유 id 훅
+  useRef, // ref 훅
+  useState, // 상태 훅
+  type DragEvent, // DragEvent 타입
+  type InputHTMLAttributes, // InputHTMLAttributes 타입
+  type KeyboardEvent, // KeyboardEvent 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
 
 /** 업로드 목록 항목 */
 export interface UploadFileItem {

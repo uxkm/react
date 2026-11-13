@@ -27,7 +27,8 @@
   "js/ts.tsdk.promptToUseWorkspaceVersion": true,
   "files.exclude": {
     "**/.next": false,
-    "**/.DS_Store": true
+    "**/.DS_Store": true,
+    "**/tests": true
   },
   "files.watcherExclude": {
     "**/node_modules/**": true,
@@ -35,6 +36,7 @@
     "**/out/**": true,
     "**/reports/**": true,
     "**/test-results/**": true,
+    "**/tests/**": true,
     "**/src/styles/css/**": true
   },
   "search.exclude": {
@@ -43,6 +45,7 @@
     "**/out/**": true,
     "**/reports/**": true,
     "**/test-results/**": true,
+    "**/tests/**": true,
     "**/src/generated/**": true,
     "**/src/styles/css/**": true,
     "**/*.tsbuildinfo": true,

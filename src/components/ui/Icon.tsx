@@ -5,20 +5,20 @@
  * 등록 stroke SVG · images 폴더 .svg(img/embed) · 커스텀 도형.
  */
 import {
-  useEffect,
-  useState,
-  type CSSProperties,
-  type HTMLAttributes,
-  type MouseEvent,
-  type ReactNode,
-  type SVGAttributes
-} from 'react'
-import { classNames } from '@/utils/classNames'
-import { imgIcon } from '@/utils/images'
+  useEffect, // effect 훅
+  useState, // 상태 훅
+  type CSSProperties, // CSSProperties 타입
+  type HTMLAttributes, // HTMLAttributes 타입
+  type MouseEvent, // MouseEvent 타입
+  type ReactNode, // ReactNode 타입
+  type SVGAttributes // SVGAttributes 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { imgIcon } from '@/utils/images' // img Icon
 import {
-  loadEmbeddedSvg,
-  type EmbeddedSvgData
-} from '@/utils/embedSvg'
+  loadEmbeddedSvg, // load Embedded Svg
+  type EmbeddedSvgData // EmbeddedSvgData 타입
+} from '@/utils/embedSvg' // 유틸 · embed Svg
 
 /**
  * images 경로 해석.

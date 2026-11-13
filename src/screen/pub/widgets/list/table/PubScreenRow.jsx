@@ -3,17 +3,17 @@
  * - depth2/depth3 최종 항목 한 줄 (이름·유형·ID·경로·일정·상태·기획/디자인·비고)
  * - level=1: Depth1 직속 리프 / level=2: Depth2 그룹 하위 리프
  */
-import { classNames } from '@/utils/classNames'
-import PathLinkCell, { resolveLinkField, toAppHref } from './PathLinkCell'
-import { ellipsisAttr } from './useEllipsisTooltip.jsx'
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import PathLinkCell, { resolveLinkField, toAppHref } from './PathLinkCell' // Path Link Cell 컴포넌트
+import { ellipsisAttr } from './useEllipsisTooltip.jsx' // ellipsis Attr
 import {
-  remarkItems,
-  remarkPreview,
-  itemLabel,
-  typeLabel,
-  statusColor,
-  statusLabel
-} from '../lib/publishLabels'
+  remarkItems, // remark Items
+  remarkPreview, // remark Preview
+  itemLabel, // item Label
+  typeLabel, // type Label
+  statusColor, // status Color
+  statusLabel // status Label
+} from '../lib/publishLabels' // 라이브러리/유틸 · publish Labels
 
 export default function PubScreenRow ({
   folder,

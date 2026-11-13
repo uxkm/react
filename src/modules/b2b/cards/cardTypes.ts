@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from 'react'
+import type { CSSProperties, ReactNode } from 'react' // React
 
 /** 경로·대체 텍스트·표시 크기·이미지 맞춤 방식은 호출 측에서 지정합니다. */
 export interface CardImageData {

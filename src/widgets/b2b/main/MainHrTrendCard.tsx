@@ -1,5 +1,5 @@
-import Card from '@/modules/b2b/cards/Card'
-import type { CardMediaProps } from '@/modules/b2b/cards/cardTypes'
+import Card from '@/modules/b2b/cards/Card' // Card 컴포넌트
+import type { CardMediaProps } from '@/modules/b2b/cards/cardTypes' // Card Media Props 타입
 
 /** 콘텐츠 데이터는 위젯에서 관리하고 표현은 공통 카드 모듈에 위임합니다. */
 export default function MainHrTrendCard ({

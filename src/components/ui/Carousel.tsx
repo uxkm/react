@@ -1,6 +1,6 @@
 'use client'
 
-import { useLatestRef } from '@/hooks/useLatestRef'
+import { useLatestRef } from '@/hooks/useLatestRef' // Latest Ref 훅
 
 /**
  * Swiper 기반 캐러셀.
@@ -8,22 +8,22 @@ import { useLatestRef } from '@/hooks/useLatestRef'
  */
 
 import {
-  Children,
-  isValidElement,
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-  type CSSProperties,
-  type HTMLAttributes,
-  type ReactNode
-} from 'react'
-import Swiper from 'swiper'
-import type { Swiper as SwiperInstance } from 'swiper'
-import { carouselSwiperModules } from '@/lib/swiper'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
+  Children, // Children 유틸
+  isValidElement, // is Valid Element
+  useCallback, // 콜백 메모 훅
+  useEffect, // effect 훅
+  useLayoutEffect, // 레이아웃 effect 훅
+  useRef, // ref 훅
+  useState, // 상태 훅
+  type CSSProperties, // CSSProperties 타입
+  type HTMLAttributes, // HTMLAttributes 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import Swiper from 'swiper' // Swiper 컴포넌트
+import type { Swiper as SwiperInstance } from 'swiper' // Swiper Instance 타입
+import { carouselSwiperModules } from '@/lib/swiper' // carousel Swiper Modules
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
 
 /** 커버플로우 좌우 노출 */
 export type CoverflowSides = 1 | 1.5 | 2 | 'auto'

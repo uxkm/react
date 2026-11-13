@@ -1,9 +1,9 @@
 'use client'
 
-import { SimpleBar } from '@/lib/simplebar'
-import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
+import { SimpleBar } from '@/lib/simplebar' // Simple Bar 컴포넌트
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
 
 const lines = Array.from({ length: 24 }, (_, i) => (
   `라인 ${i + 1} — SimpleBar 커스텀 스크롤 영역 예시입니다.`

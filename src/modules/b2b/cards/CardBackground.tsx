@@ -1,6 +1,6 @@
-import { preload } from 'react-dom'
-import type { CSSProperties, ReactNode } from 'react'
-import type { CardImageData, CardImageSource } from './cardTypes'
+import { preload } from 'react-dom' // preload
+import type { CSSProperties, ReactNode } from 'react' // React
+import type { CardImageData, CardImageSource } from './cardTypes' // card Types
 
 interface CardBackgroundProps {
   readonly as?: 'div' | 'span'

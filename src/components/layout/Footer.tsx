@@ -5,9 +5,9 @@
  * AppLayout 공통 푸터 영역에 내용을 넘긴다.
  * 보이기/숨기기는 `export const meta = { footer: true | false }` (PageLayoutVisibility).
  */
-import type { ReactNode } from 'react'
-import { hasNodes } from '@/utils/react'
-import { useLayoutSlotSync } from './LayoutContext'
+import type { ReactNode } from 'react' // React Node 타입
+import { hasNodes } from '@/utils/react' // has Nodes
+import { useLayoutSlotSync } from './LayoutContext' // Layout Slot Sync 훅
 
 /** 화면이 푸터 슬롯에 넣는 값. 표시 여부는 meta.footer */
 export interface FooterProps {

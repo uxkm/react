@@ -1,10 +1,10 @@
 'use client'
 
-import { useMemo, useState } from 'react'
-import filterXss from 'xss'
-import { DemoLayout } from '@/screen/pub/layout/DemoLayout'
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
+import { useMemo, useState } from 'react' // React
+import filterXss from 'xss' // filter Xss
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
 
 const SAMPLE_LINE = `const SAMPLE = '<p>안녕 <script>alert(1)</script><b onclick="evil()">강조</b></p>'`
 const SAMPLE_IMPORT = '\n' + SAMPLE_LINE

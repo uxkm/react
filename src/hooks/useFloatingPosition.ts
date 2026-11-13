@@ -1,7 +1,7 @@
 'use client'
 
-import { useLayoutEffect, useState, type CSSProperties, type RefObject } from 'react'
-import type { FloatingBoundary, FloatingPlacement, FloatingPositionResolver } from '@/comp/shared/floating-position'
+import { useLayoutEffect, useState, type CSSProperties, type RefObject } from 'react' // React
+import type { FloatingBoundary, FloatingPlacement, FloatingPositionResolver } from '@/comp/shared/floating-position' // 공유 모듈 · floating position
 
 interface FloatingPositionOptions {
   enabled: boolean

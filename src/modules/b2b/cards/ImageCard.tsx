@@ -1,8 +1,8 @@
-import { Card as BaseCard } from '@/comp/ui/Card'
-import CardBackground from './CardBackground'
-import { Link } from '@/lib/router'
-import { Icon } from '@/comp/ui/Icon'
-import type { CardMediaProps, ImageCardData } from './cardTypes'
+import { Card as BaseCard } from '@/comp/ui/Card' // Base Card 컴포넌트
+import CardBackground from './CardBackground' // Card Background 컴포넌트
+import { Link } from '@/lib/router' // 클라이언트 링크
+import { Icon } from '@/comp/ui/Icon' // Icon 컴포넌트
+import type { CardMediaProps, ImageCardData } from './cardTypes' // card Types
 
 /** 호출부의 이미지 prop·슬롯을 사용하는 카드 모듈. */
 export default function ImageCard ({

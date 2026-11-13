@@ -1,5 +1,5 @@
-import '@/styles/demo.scss'
-import { PageLayoutVisibility } from '@/comp/layout/PageLayoutVisibility'
+import '@/styles/demo.scss' // demo 스타일
+import { PageLayoutVisibility } from '@/comp/layout/PageLayoutVisibility' // Page Layout Visibility 컴포넌트
 
 /**
  * /pub/guide · /pub/guide/:name 공통.

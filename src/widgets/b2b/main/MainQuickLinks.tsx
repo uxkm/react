@@ -1,9 +1,9 @@
-import Card from '@/modules/b2b/cards/Card'
-import { Icon } from '@/comp/ui/Icon'
+import Card from '@/modules/b2b/cards/Card' // Card 컴포넌트
+import { Icon } from '@/comp/ui/Icon' // Icon 컴포넌트
 import type {
-  CardAppearanceProps,
-  QuickLinkCardData
-} from '@/modules/b2b/cards/cardTypes'
+  CardAppearanceProps, // CardAppearanceProps 타입
+  QuickLinkCardData // QuickLinkCardData 타입
+} from '@/modules/b2b/cards/cardTypes' // 카드 · card Types
 
 /** 바로가기 내용은 사용하는 위젯 안에서 관리합니다. */
 export default function MainQuickLinks ({ shadow = false }: Readonly<CardAppearanceProps>) {

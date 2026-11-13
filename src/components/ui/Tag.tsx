@@ -6,14 +6,14 @@
  */
 
 import {
-  createElement,
-  useState,
-  type HTMLAttributes,
-  type MouseEvent,
-  type ReactNode
-} from 'react'
-import { classNames } from '@/utils/classNames'
-import { hasNodes } from '@/utils/react'
+  createElement, // 엘리먼트 생성
+  useState, // 상태 훅
+  type HTMLAttributes, // HTMLAttributes 타입
+  type MouseEvent, // MouseEvent 타입
+  type ReactNode // ReactNode 타입
+} from 'react' // React
+import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { hasNodes } from '@/utils/react' // has Nodes
 
 /** 태그 색 */
 export type TagColor = 'primary' | 'default' | 'success' | 'warning' | 'danger' | 'info' | 'muted'
