@@ -1,11 +1,10 @@
-/* 퍼블리시 화면 공통 — .page-container 를 쓰는 화면만 적용 */
+/* 화면 공통 — .page-container 를 쓰는 화면만 적용 */
 .page-container {
   min-height: 100%;
-  background: #f3f3f3;
   color: #333;
   font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
   text-align: left;
-  max-width: 720px;
+  max-width: 1920px;
   margin: 0 auto;
   padding: 40px 20px 64px;
 

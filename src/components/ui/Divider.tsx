@@ -3,7 +3,7 @@
  * 가로·세로, dashed, 가운데/좌우 라벨을 지원한다.
  */
 import { createElement, type HTMLAttributes, type ReactNode } from 'react' // React
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { hasNodes } from '@/utils/react' // has Nodes
 
 /** 구분선. 가로가 기본, vertical 이면 세로 */

@@ -1,27 +1,20 @@
 'use client'
 
 import { Page, PageLoading } from '@/comp' // comp
-import { PublishingPlaceholder } from '@/screen/pub/widgets/publishing/PublishingPlaceholder' // Publishing Placeholder 컴포넌트
+import ComingSoon from '@/widgets/b2b/common/ComingSoon' // Coming Soon 컴포넌트
 import { resolveSkeletonMode } from '@/config/skeleton' // resolve Skeleton Mode
 import LanguageLifeSkeleton from './skeleton/indexSkeleton' // Language Life Skeleton 컴포넌트
 
 export const pageTitle = "외국어생활관"
 
-/** IA publishing scaffold. Replace this screen body with the approved markup. */
+/** 미작업 화면 — ComingSoon. 시안 반영 시 본문을 교체한다. */
 export default function B2bContentsLanguageLanguageLifePage () {
-  const links = [
-    {
-      "to": "/b2b/contents/language/ai-language",
-      "label": "AI 외국어",
-      "screenId": "B2B-CONTENTS-LANGUAGE-AI-LANGUAGE"
-    }
-  ]
   const skeletonId = 'b2b/contents/language/language-life'
   const skeletonMode = resolveSkeletonMode(skeletonId)
 
   return (
     <>
-      <Page page="contents-language-language-life" title={pageTitle}  className="project-content" />
+      <Page page="contents-language-language-life" title={pageTitle}  className="p-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}
@@ -29,16 +22,7 @@ export default function B2bContentsLanguageLanguageLifePage () {
         skeleton={skeletonMode === 'manual' ? <LanguageLifeSkeleton /> : undefined}
         className="page-container"
       >
-        <PublishingPlaceholder
-          device="B2B"
-          folderId="contents"
-          folderName="기업교육"
-          screenName={pageTitle}
-          screenType="Page"
-          screenId="B2B-CONTENTS-LANGUAGE-LANGUAGE-LIFE"
-          pageUrl="/b2b/contents/language/language-life"
-          links={links}
-        />
+        <ComingSoon />
 
       </PageLoading>
     </>

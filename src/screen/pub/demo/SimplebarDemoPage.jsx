@@ -1,6 +1,6 @@
 'use client'
 
-import { SimpleBar } from '@/lib/simplebar' // Simple Bar 컴포넌트
+import { SimpleBar } from '@/lib/vendor/simplebar' // Simple Bar 컴포넌트
 import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
 import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
 import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
@@ -14,7 +14,7 @@ export default function SimplebarDemoPage () {
   return (
     <DemoLayout
       title="SimpleBar"
-      description="simplebar-react — 커스텀 스크롤바 (@/lib/simplebar)"
+      description="simplebar-react — 커스텀 스크롤바 (@/lib/vendor/simplebar)"
       slug="simplebar"
     >
       <DemoBlock
@@ -31,7 +31,7 @@ export default function SimplebarDemoPage () {
           name: 'SimplebarExample',
           reactImports: [],
           compImports: [],
-          extraImports: ["import { SimpleBar } from '@/lib/simplebar'"]
+          extraImports: ["import { SimpleBar } from '@/lib/vendor/simplebar'"]
         })}
       >
         <div className="lib-demo-scroll">

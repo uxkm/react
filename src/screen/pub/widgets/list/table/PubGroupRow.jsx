@@ -3,7 +3,7 @@
  * - 폴더(depth=0) / 그룹(depth=1) 공통 컨테이너 행 (+/- 토글 + 하위 목록)
  * - 리프는 PubScreenRow 로 렌더
  */
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { folderLabel } from '../lib/publishLabels' // folder Label
 import { ellipsisAttr } from './useEllipsisTooltip.jsx' // ellipsis Attr
 import {

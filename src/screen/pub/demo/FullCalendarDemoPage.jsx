@@ -7,7 +7,7 @@ import {
   timeGridPlugin, // time Grid Plugin
   interactionPlugin, // interaction Plugin
   formatDate // format Date
-} from '@/lib/fullcalendar' // 라이브러리/유틸 · fullcalendar
+} from '@/lib/vendor/fullcalendar' // 라이브러리/유틸 · fullcalendar
 import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
 import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
 import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
@@ -26,7 +26,7 @@ export default function FullCalendarDemoPage () {
   return (
     <DemoLayout
       title="FullCalendar"
-      description="@fullcalendar/react + daygrid/timegrid/interaction (@/lib/fullcalendar)"
+      description="@fullcalendar/react + daygrid/timegrid/interaction (@/lib/vendor/fullcalendar)"
       slug="fullcalendar"
     >
       <DemoBlock
@@ -80,7 +80,7 @@ const [lastAction, setLastAction] = useState('')
   timeGridPlugin,
   interactionPlugin,
   formatDate
-} from '@/lib/fullcalendar'`
+} from '@/lib/vendor/fullcalendar'`
           ]
         })}
       >

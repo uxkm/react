@@ -1,18 +1,18 @@
 'use client'
 
-import { useHydrated } from '@/hooks/useHydrated' // Hydrated 훅
+import { useHydrated } from '@/hooks/react/useHydrated' // Hydrated 훅
 
-import { useLatestRef } from '@/hooks/useLatestRef' // Latest Ref 훅
+import { useLatestRef } from '@/hooks/react/useLatestRef' // Latest Ref 훅
 
 /**
  * 앱 공통 레이아웃 셸.
  * 헤더·본문·푸터 배치, 슬롯 병합, 스크롤 시 헤더 숨김, GlobalTranslator 연결.
  */
 import { Fragment, cloneElement, isValidElement, useCallback, useEffect, useLayoutEffect, useMemo, useRef, type HTMLAttributes, type ReactElement, type ReactNode } from 'react' // React
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { hasNodes } from '@/utils/react' // has Nodes
-import { useLocaleStore } from '@/lib/localeStore' // 언어(locale) 전역 상태
-import { DEFAULT_LOCALE, normalizeLocale } from '@/lib/i18n' // 라이브러리/유틸 · i18n
+import { useLocaleStore } from '@/lib/i18n/localeStore' // 언어(locale) 전역 상태
+import { DEFAULT_LOCALE, normalizeLocale } from '@/lib/i18n/i18n' // 라이브러리/유틸 · i18n
 import { AppFooter } from './AppFooter' // App Footer 컴포넌트
 import { AppHeader, isAppHeaderLayout, type AppHeaderLayout } from './AppHeader' // AppHeader · isAppHeaderLayout · AppHeaderLayout 타입
 import { GlobalTranslator } from './GlobalTranslator' // Global Translator 컴포넌트
@@ -97,8 +97,11 @@ function AppLayoutInner ({
   const locale = useLocaleStore((s) => normalizeLocale(s.locale || DEFAULT_LOCALE))
   const treeKey = locale === 'ko' ? 'ko' : 'xlate'
   /**
-   * 기본 헤더/푸터는 마운트 후에만 — SSR·첫 페인트에서 기본 헤더가 먼저 뜨는 깜빡임 방지.
-   * (페이지의 Header/Footer 슬롯은 useLayoutEffect 로 그 전에 등록됨)
+   * 기본 AppHeader/AppFooter 표시 시기.
+   * false: SSR·하이드레이션 직전 — 슬롯 전에 기본 헤더가 잠깐 보이는 깜빡임 방지
+   * true: 슬롯이 없을 때만 기본 헤더/푸터 사용
+   * 슬롯은 useLayoutEffect 등록이라 SSR HTML 에 없음.
+   * 새로고침 시 본문 점프를 막으려면 header/footer prop 으로 첫 렌더부터 넘긴다.
    */
   const defaultsReady = useHydrated()
 
@@ -137,6 +140,12 @@ function AppLayoutInner ({
   const metaHeaderVisible = pageSlots['meta-header'] !== 'false'
   const metaFooterVisible = pageSlots['meta-footer'] !== 'false'
 
+  /*
+   * 헤더 결정 우선순위
+   * 1) header prop — SSR부터 DOM 포함, 레이아웃 점프 없음
+   * 2) header 슬롯 — useLayoutEffect 등록, SSR엔 비어 있음
+   * 3) defaultsReady 후 AppHeader — 슬롯·prop 없을 때 기본 헤더
+   */
   let headerNode: ReactNode = null
   if (header !== undefined && header !== null && header !== false) {
     headerNode = header
@@ -167,6 +176,7 @@ function AppLayoutInner ({
     })
   }
 
+  /** 푸터: prop(SSR 포함) > 슬롯 > defaultsReady 후 기본 AppFooter */
   let footerNode: ReactNode = null
   if (footer !== undefined && footer !== null && footer !== false) {
     footerNode = footer
@@ -356,6 +366,12 @@ function AppLayoutInner ({
       <GlobalTranslator rootRef={layoutRef} />
       <div key={treeKey} className="app-layout_tree">
         {defaultsReady && pageSlots['meta-banner'] !== 'false' && pick('banner', banner)}
+        {/*
+          <span class="app-header-anchor" aria-hidden="true" />
+          sticky 헤더 바로 앞의 높이 0 기준점.
+          - 앵커 top 과 헤더 sticky top 을 비교해 is-scrolled 판별
+          - previousElementSibling 로 TopBanner 를 찾아 헤더 높이 재측정
+        */}
         {hasHeader && <span ref={headerAnchorRef} className="app-header-anchor" aria-hidden="true" />}
         {headerNode}
         <main

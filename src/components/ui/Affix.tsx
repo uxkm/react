@@ -16,7 +16,7 @@ import {
   type HTMLAttributes, // HTMLAttributes 타입
   type ReactNode // ReactNode 타입
 } from 'react' // React
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { hasNodes } from '@/utils/react' // has Nodes
 
 /** 스크롤 컨테이너. 생략 시 window(문서 뷰포트) */

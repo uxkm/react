@@ -1,4 +1,4 @@
-import { routeMetadata } from '@/lib/routeMetadata' // route Metadata
+import { routeMetadata } from '@/lib/page/routeMetadata' // route Metadata
 import GuideIndex from '@/screen/pub/guide/index.jsx' // Guide Index 컴포넌트
 
 /**

@@ -1,6 +1,6 @@
-import { routeMetadata } from '@/lib/routeMetadata' // route Metadata
-import { demoStaticParams } from '@/lib/staticParams' // demo Static Params
-import { RegistryPage } from '@/lib/RegistryPage' // Registry Page 컴포넌트
+import { routeMetadata } from '@/lib/page/routeMetadata' // route Metadata
+import { demoStaticParams } from '@/lib/page/staticParams' // demo Static Params
+import { RegistryPage } from '@/lib/page/RegistryPage' // Registry Page 컴포넌트
 import { demoLoaders, demoMeta } from '@/generated/registry-demo' // registry demo
 
 // 정적 export에 등록되지 않은 경로는 개발 환경에서도 404로 처리한다.

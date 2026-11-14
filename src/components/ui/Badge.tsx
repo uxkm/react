@@ -3,7 +3,7 @@
  * 짧은 상태·수치 라벨을 색상별로 표시한다. BadgeWrap으로 요소 위에 겹친다.
  */
 import type { HTMLAttributes, ReactNode } from 'react' // React
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { hasNodes } from '@/utils/react' // has Nodes
 
 /** 배지 색 */

@@ -6,7 +6,7 @@ import { AppHeaderLink } from '@/comp' // App Header Link 컴포넌트
 import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
 import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
 import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
-import { am5, am5xy, am5percent, am5themes_Animated } from '@/lib/amcharts' // 라이브러리/유틸 · amcharts
+import { am5, am5xy, am5percent, am5themes_Animated } from '@/lib/vendor/amcharts' // 라이브러리/유틸 · amcharts
 
 /** 막대 차트 데이터. category 축 이름, value 값 */
 const columnData = [
@@ -232,7 +232,7 @@ export default function ChartDemoPage () {
     <GuideLayout
       category="데모"
       title="Chart (amCharts 5)"
-      description="@amcharts/amcharts5 — Column / Line / Pie 샘플 (@/lib/amcharts)"
+      description="@amcharts/amcharts5 — Column / Line / Pie 샘플 (@/lib/vendor/amcharts)"
       headerLayout="stacked"
       showBack
       backTo="/pub"
@@ -301,7 +301,7 @@ useEffect(() => {
           reactImports: ['useEffect', 'useRef'],
           compImports: [],
           extraImports: [
-            "import { am5, am5xy, am5themes_Animated } from '@/lib/amcharts'\n\nconst columnData = [\n  { category: '1월', value: 120 },\n  { category: '2월', value: 98 }\n]"
+            "import { am5, am5xy, am5themes_Animated } from '@/lib/vendor/amcharts'\n\nconst columnData = [\n  { category: '1월', value: 120 },\n  { category: '2월', value: 98 }\n]"
           ]
         })}
       >
@@ -368,7 +368,7 @@ useEffect(() => {
           reactImports: ['useEffect', 'useRef'],
           compImports: [],
           extraImports: [
-            "import { am5, am5xy, am5themes_Animated } from '@/lib/amcharts'\n\nconst lineData = [\n  { category: '1월', value: 42 },\n  { category: '2월', value: 55 }\n]"
+            "import { am5, am5xy, am5themes_Animated } from '@/lib/vendor/amcharts'\n\nconst lineData = [\n  { category: '1월', value: 42 },\n  { category: '2월', value: 55 }\n]"
           ]
         })}
       >
@@ -418,7 +418,7 @@ useEffect(() => {
           reactImports: ['useEffect', 'useRef'],
           compImports: [],
           extraImports: [
-            "import { am5, am5percent, am5themes_Animated } from '@/lib/amcharts'\n\nconst pieData = [\n  { category: '온라인', value: 45 },\n  { category: '오프라인', value: 28 }\n]"
+            "import { am5, am5percent, am5themes_Animated } from '@/lib/vendor/amcharts'\n\nconst pieData = [\n  { category: '온라인', value: 45 },\n  { category: '오프라인', value: 28 }\n]"
           ]
         })}
       >

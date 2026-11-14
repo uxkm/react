@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react' // 상태 훅
-import { copyText } from '@/lib/clipboard' // copy Text
+import { copyText } from '@/lib/vendor/clipboard' // copy Text
 import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
 import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
 import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
@@ -23,7 +23,7 @@ export default function ClipboardDemoPage () {
   return (
     <DemoLayout
       title="Clipboard"
-      description="clipboard-copy — 텍스트 클립보드 복사 (@/lib/clipboard)"
+      description="clipboard-copy — 텍스트 클립보드 복사 (@/lib/vendor/clipboard)"
       slug="clipboard"
     >
       <DemoBlock
@@ -55,7 +55,7 @@ const onCopy = async () => {
           name: 'ClipboardExample',
           reactImports: ['useState'],
           compImports: [],
-          extraImports: ["import { copyText } from '@/lib/clipboard'"]
+          extraImports: ["import { copyText } from '@/lib/vendor/clipboard'"]
         })}
       >
         <div className="demo-stack">

@@ -13,12 +13,12 @@ import {
   type ReactNode, // ReactNode 타입
   type SVGAttributes // SVGAttributes 타입
 } from 'react' // React
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
-import { imgIcon } from '@/utils/images' // img Icon
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
+import { imgIcon } from '@/utils/media/images' // img Icon
 import {
   loadEmbeddedSvg, // load Embedded Svg
   type EmbeddedSvgData // EmbeddedSvgData 타입
-} from '@/utils/embedSvg' // 유틸 · embed Svg
+} from '@/utils/media/embedSvg' // 유틸 · embed Svg
 
 /**
  * images 경로 해석.
@@ -168,12 +168,8 @@ const paths = {
     </>
   ),
   star: <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z" />,
-  external: (
-    <>
-      <path d="M14 4h6v6M20 4l-9 9" />
-      <path d="M18 13v7H4V6h7" />
-    </>
-  ),
+  /** 새 창/외부 링크 — Navercorp btn-outlink-nav2 형태 */
+  external: <path d="M7 17L16 8M7 7H17V17" strokeLinecap="square" />,
   refresh: (
     <>
       <path d="M20 7v5h-5" />

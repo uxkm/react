@@ -6,7 +6,7 @@
  */
 import { Fragment } from 'react' // Fragment
 import { Link } from '@/lib/router' // 클라이언트 링크
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 
 /** `**bold**` · `` `code` `` · `[label](href)` */
 function renderInline (text, keyPrefix = 'i') {

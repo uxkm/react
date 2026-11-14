@@ -1,23 +1,11 @@
 'use client'
 
-import { usePathname } from 'next/navigation' // 경로명 훅
-import { Header as HeaderSlot } from '@/comp/layout/Header' // Header Slot 컴포넌트
-import { Footer as FooterSlot } from '@/comp/layout/Footer' // Footer Slot 컴포넌트
-import Footer from '@/widgets/b2b/common/Footer' // Footer 컴포넌트
-import Header from '@/widgets/b2b/common/Header' // Header 컴포넌트
-
-/** 경로 전환 시 재등록하여 프로젝트 공통 헤더·푸터 슬롯을 유지합니다. */
+/**
+ * 프로젝트 template.
+ * 헤더·푸터는 HeaderSlot 이 아니라 AppProviders AppShell 의
+ * AppLayout header/footer prop 으로 SSR 첫 페인트부터 포함한다.
+ * (슬롯 등록은 useLayoutEffect 라 새로고침 시 본문 레이아웃 점프가 난다.)
+ */
 export default function Template ({ children }) {
-  const pathname = usePathname()
-  return (
-    <>
-      <HeaderSlot key={pathname}>
-        <Header />
-      </HeaderSlot>
-      {children}
-      <FooterSlot key={`footer-${pathname}`}>
-        <Footer />
-      </FooterSlot>
-    </>
-  )
+  return children
 }

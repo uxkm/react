@@ -10,10 +10,10 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { listenServer } from './listen-server.mjs'
 
-/** 이 스크립트 파일이 있는 디렉터리 (scripts/) */
+/** 이 스크립트 파일이 있는 디렉터리 (scripts/serve/) */
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 /** 프로젝트 루트 */
-const root = path.join(__dirname, '..')
+const root = path.join(__dirname, '../..')
 /** Next 정적 export 출력 폴더 (out/) */
 const outDir = path.join(root, 'out')
 

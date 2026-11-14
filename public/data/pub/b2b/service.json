@@ -10,8 +10,8 @@
         {
           "name": "러닝플랫폼",
           "type": "Page",
-          "id": "B2B-SERVIC-001",
-          "pageUrl": "/b2b/service/platform",
+          "id": "platform",
+          "pageUrl": "/service/platform",
           "filePath": "@/screen/b2b/service/platform/index.tsx",
           "owner": "",
           "start": "",
@@ -27,8 +27,8 @@
         {
           "name": "AI 서비스",
           "type": "Page",
-          "id": "B2B-SERVICE-PLATFORM-AI",
-          "pageUrl": "/b2b/service/platform/ai",
+          "id": "ai",
+          "pageUrl": "/service/platform/ai",
           "filePath": "@/screen/b2b/service/platform/ai/index.tsx",
           "owner": "",
           "start": "",
@@ -53,8 +53,8 @@
           "remark": [],
           "name": "플랫폼 활용 컨설팅",
           "type": "Page",
-          "id": "B2B-SERVICE-PLATFORM-CONSULTING",
-          "pageUrl": "/b2b/service/platform/consulting",
+          "id": "consulting",
+          "pageUrl": "/service/platform/consulting",
           "filePath": "@/screen/b2b/service/platform/consulting/index.tsx",
           "priority": 2
         }
@@ -67,8 +67,8 @@
         {
           "name": "러닝 서비스",
           "type": "Page",
-          "id": "B2B-SERVIC-002",
-          "pageUrl": "/b2b/service/learning",
+          "id": "learning",
+          "pageUrl": "/service/learning",
           "filePath": "@/screen/b2b/service/learning/index.tsx",
           "owner": "",
           "start": "",
@@ -96,8 +96,8 @@
         {
           "name": "진단 서비스",
           "type": "Page",
-          "id": "B2B-SERVIC-003",
-          "pageUrl": "/b2b/service/diagnosis",
+          "id": "diagnosis",
+          "pageUrl": "/service/diagnosis",
           "filePath": "@/screen/b2b/service/diagnosis/index.tsx",
           "owner": "",
           "start": "",
@@ -125,8 +125,8 @@
         {
           "name": "컨설팅 서비스",
           "type": "Page",
-          "id": "B2B-SERVIC-004",
-          "pageUrl": "/b2b/service/consulting",
+          "id": "consulting-01",
+          "pageUrl": "/service/consulting",
           "filePath": "@/screen/b2b/service/consulting/index.tsx",
           "owner": "",
           "start": "",
@@ -154,8 +154,8 @@
         {
           "name": "BPO 서비스",
           "type": "Page",
-          "id": "B2B-SERVIC-005",
-          "pageUrl": "/b2b/service/bpo",
+          "id": "bpo",
+          "pageUrl": "/service/bpo",
           "filePath": "@/screen/b2b/service/bpo/index.tsx",
           "owner": "",
           "start": "",

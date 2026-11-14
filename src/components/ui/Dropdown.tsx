@@ -14,7 +14,7 @@ import {
   type HTMLAttributes, // HTMLAttributes 타입
   type ReactNode // ReactNode 타입
 } from 'react' // React
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { hasNodes } from '@/utils/react' // has Nodes
 import { Button, type ButtonSize, type ButtonVariant } from './Button' // Button · ButtonSize 타입 · ButtonVariant 타입
 

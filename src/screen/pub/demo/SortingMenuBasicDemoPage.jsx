@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react' // React
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
 import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
 import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
@@ -116,7 +116,7 @@ const current = selectedItem || sortList[0]
           reactImports: ['useEffect', 'useRef', 'useState'],
           compImports: [],
           extraImports: [
-          "import { classNames } from '@/utils/classNames'\n\nconst sortList = ['최신순', '인기순', '이름순', '오래된순']"
+          "import { classNames } from '@/utils/style/classNames'\n\nconst sortList = ['최신순', '인기순', '이름순', '오래된순']"
           ]
         })}
       >

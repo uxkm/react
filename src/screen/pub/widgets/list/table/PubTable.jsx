@@ -7,7 +7,7 @@
  * - depth2 그룹 / 리프까지 이름 폭 측정에 포함
  */
 import { useCallback, useEffect, useLayoutEffect, useRef } from 'react' // React
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import PubGroupRow from './PubGroupRow' // Pub Group Row 컴포넌트
 import { folderLabel, itemLabel } from '../lib/publishLabels' // 라이브러리/유틸 · publish Labels
 import { countLeaves, groupLabel, isGroupNode } from '../lib/publishTree' // 라이브러리/유틸 · publish Tree

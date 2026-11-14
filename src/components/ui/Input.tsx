@@ -13,7 +13,7 @@ import {
   type InputHTMLAttributes, // InputHTMLAttributes 타입
   type ReactNode // ReactNode 타입
 } from 'react' // React
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { Icon } from './Icon' // Icon 컴포넌트
 
 const VALID_SIZES = new Set(['sm', 'md', 'lg'])

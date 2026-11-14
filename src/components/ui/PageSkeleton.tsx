@@ -3,7 +3,7 @@
  * page/list/form/card 프리셋으로 로딩 뼈대를 그린다.
  */
 import type { HTMLAttributes, ReactNode } from 'react' // React
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { hasNodes } from '@/utils/react' // has Nodes
 import { Skeleton } from './Skeleton' // Skeleton 컴포넌트
 

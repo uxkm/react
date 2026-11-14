@@ -4,6 +4,7 @@ import { useState } from 'react' // 상태 훅
 import Image from 'next/image' // 이미지 최적화
 import { Dropdown } from '@/comp/ui/Dropdown' // Dropdown 컴포넌트
 import { Button } from '@/comp/ui/Button' // Button 컴포넌트
+import { Icon } from '@/comp/ui/Icon' // Icon 컴포넌트
 import { Link } from '@/lib/router' // 클라이언트 링크
 import {
   familySites, // family Sites
@@ -100,6 +101,8 @@ export default function Footer () {
                 alt="multicampus"
                 width={104}
                 height={18}
+                // 헤더와 동일 src — lazy 이면 Next LCP 경고가 헤더 eager 를 덮어씀
+                loading="eager"
               />
             </Link>
             {footerLinks.map((item) => {
@@ -115,6 +118,14 @@ export default function Footer () {
                   rel={external ? 'noopener noreferrer' : undefined}
                 >
                   {item.label}
+                  {external && (
+                    <Icon
+                      name="external"
+                      size={12}
+                      className="footer_external"
+                      aria-hidden
+                    />
+                  )}
                 </Link>
               )
             })}

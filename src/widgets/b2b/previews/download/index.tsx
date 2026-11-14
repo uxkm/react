@@ -1,21 +1,20 @@
 'use client'
 
 import { Page, PageLoading } from '@/comp' // comp
-import { PublishingPlaceholder } from '@/screen/pub/widgets/publishing/PublishingPlaceholder' // Publishing Placeholder 컴포넌트
+import ComingSoon from '@/widgets/b2b/common/ComingSoon' // Coming Soon 컴포넌트
 import { resolveSkeletonMode } from '@/config/skeleton' // resolve Skeleton Mode
 import DownloadSkeleton from './skeleton/indexSkeleton' // Download Skeleton 컴포넌트
 
 export const pageTitle = "자료 다운로드 팝업"
 
-/** IA publishing scaffold. Replace this screen body with the approved markup. */
+/** 미작업 화면 — ComingSoon. 시안 반영 시 본문을 교체한다. */
 export default function B2bCommonDownloadPage () {
-  const links = []
   const skeletonId = 'b2b/common/download'
   const skeletonMode = resolveSkeletonMode(skeletonId)
 
   return (
     <>
-      <Page page="common-download" title={pageTitle}  className="project-content" />
+      <Page page="common-download" title={pageTitle}  className="p-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}
@@ -23,16 +22,7 @@ export default function B2bCommonDownloadPage () {
         skeleton={skeletonMode === 'manual' ? <DownloadSkeleton /> : undefined}
         className="page-container"
       >
-        <PublishingPlaceholder
-          device="B2B"
-          folderId="common"
-          folderName="공통"
-          screenName={pageTitle}
-          screenType="Layer"
-          screenId="B2B-COMMON-DOWNLOAD"
-          pageUrl="/b2b/common/download"
-          links={links}
-        />
+        <ComingSoon />
 
       </PageLoading>
     </>

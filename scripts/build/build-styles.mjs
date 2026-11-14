@@ -16,7 +16,7 @@ import path from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import * as sass from 'sass-embedded'
 import { STYLE_ENTRIES, getStyleEntries } from './style-entries.mjs'
-import { writeIfChanged } from '../write-if-changed.mjs'
+import { writeIfChanged } from '../lib/write-if-changed.mjs'
 
 /** 이 스크립트 파일이 있는 디렉터리 (scripts/build/) */
 const __dirname = path.dirname(fileURLToPath(import.meta.url))

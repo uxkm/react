@@ -2,7 +2,7 @@
  * PubProgressSummary
  * - 상단 전체 진행률 바와 상태별(완료/진행중/대기/지연) 건수 요약
  */
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { statusColor } from '../lib/publishLabels' // status Color
 
 export default function PubProgressSummary ({

@@ -1,6 +1,6 @@
 'use client'
 
-import { useHydrated } from '@/hooks/useHydrated' // Hydrated 훅
+import { useHydrated } from '@/hooks/react/useHydrated' // Hydrated 훅
 
 import { useCallback, useState } from 'react' // React
 import {
@@ -8,9 +8,9 @@ import {
   DEFAULT_LOCALE, // 기본 언어 코드
   normalizeLocale, // normalize Locale
   setAppLocale // set App Locale
-} from '@/lib/i18n' // 라이브러리/유틸 · i18n
-import { useLocaleStore } from '@/lib/localeStore' // 언어(locale) 전역 상태
-import { resetTranslationService } from '@/lib/pageTranslate' // reset Translation Service
+} from '@/lib/i18n/i18n' // 라이브러리/유틸 · i18n
+import { useLocaleStore } from '@/lib/i18n/localeStore' // 언어(locale) 전역 상태
+import { resetTranslationService } from '@/lib/i18n/pageTranslate' // reset Translation Service
 
 /**
  * 현재 언어 + 전환 API.

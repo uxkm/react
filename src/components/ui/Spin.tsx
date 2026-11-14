@@ -3,7 +3,7 @@
  * spinning 중 회전 표시. tip · 크기 · 색 · 인라인 · 래퍼 오버레이 지원.
  */
 import type { HTMLAttributes, ReactNode } from 'react' // React
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { hasNodes } from '@/utils/react' // has Nodes
 
 /** 로딩 표시가 받는 값 */

@@ -7,7 +7,7 @@ import type {
   InputHTMLAttributes, // InputHTMLAttributes 타입
   ReactNode // ReactNode 타입
 } from 'react' // React
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 
 const VALID_SIZES = new Set(['sm', 'md', 'lg'])
 

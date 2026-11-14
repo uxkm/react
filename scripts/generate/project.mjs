@@ -1,11 +1,11 @@
 /** Single project metadata and generated route lifecycle. */
 import fs from 'node:fs'
-import { writeIfChanged } from './write-if-changed.mjs'
+import { writeIfChanged } from '../lib/write-if-changed.mjs'
 import { execFileSync } from 'node:child_process'
 import path from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
-export const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
+export const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const marker = '// @generated-project-route\n'
 /** The application owns one project; PUB remains an independent shared tool. */
 export function discoverProject (base = root) {
@@ -23,7 +23,13 @@ export function discoverProject (base = root) {
     .filter((entry) => entry.isDirectory() && !['b2b', 'pub', 'error'].includes(entry.name))
   if (extra.length) throw new Error('Only src/screen/b2b is supported: ' + extra.map((entry) => entry.name).join(', '))
   return fs.existsSync(path.join(screens, 'b2b'))
-    ? { id: 'b2b', label: b2b.label || 'B2B', base: 'b2b/' }
+    ? {
+      id: 'b2b',
+      label: b2b.label || 'B2B',
+      base: 'b2b/',
+      // 퍼블 목록 pageUrl 앞에 붙는 앱 경로. 운영이 /b2b/kr 이면 "/b2b/kr" 로 바꾼다.
+      urlBase: typeof b2b.urlBase === 'string' && b2b.urlBase ? b2b.urlBase.replace(/\/+$/, '') : '/b2b'
+    }
     : null
 }
 function write (relative, content) {
@@ -56,9 +62,9 @@ export function syncProject () {
   if (b2b) {
     const { id } = b2b
     const route = `src/app/${id}/[...slug]/page.jsx`
-    write(route, marker + `import { RegistryPage } from '@/lib/RegistryPage' // 레지스트리 페이지 렌더
-import { b2bStaticParams } from '@/lib/staticParams' // B2B 정적 경로 파라미터
-import { routeMetadata } from '@/lib/routeMetadata' // 라우트 메타데이터
+    write(route, marker + `import { RegistryPage } from '@/lib/page/RegistryPage' // 레지스트리 페이지 렌더
+import { b2bStaticParams } from '@/lib/page/staticParams' // B2B 정적 경로 파라미터
+import { routeMetadata } from '@/lib/page/routeMetadata' // 라우트 메타데이터
 import { indexLoaders, screenLoaders, indexMeta, screenMeta } from '@/generated/registry-${id}' // B2B 화면 레지스트리
 import RouteRedirect from '@/comp/providers/RouteRedirect' // 라우트 리다이렉트
 
@@ -76,9 +82,9 @@ export async function generateMetadata ({ params }) {
 }
 `)
     // These root shells contain no project-specific implementation.
-    write(`src/app/${id}/page.jsx`, marker + `import { RegistryPage } from '@/lib/RegistryPage' // 레지스트리 페이지 렌더
+    write(`src/app/${id}/page.jsx`, marker + `import { RegistryPage } from '@/lib/page/RegistryPage' // 레지스트리 페이지 렌더
 import { indexLoaders, indexMeta } from '@/generated/registry-${id}' // B2B 화면 레지스트리
-import { routeMetadata } from '@/lib/routeMetadata' // 라우트 메타데이터
+import { routeMetadata } from '@/lib/page/routeMetadata' // 라우트 메타데이터
 export const metadata = routeMetadata('/${id}')
 export default function Page () { return <RegistryPage loaders={indexLoaders} metaMap={indexMeta} routeKey="main" /> }
 `)
@@ -89,7 +95,7 @@ export default function Page () { return <RegistryPage loaders={indexLoaders} me
 `)
   }
   write(output, JSON.stringify({ b2b }, null, 2) + '\n')
-  write('src/generated/b2b.js', `/** scripts/project.mjs가 자동 생성하는 B2B 정보입니다. 화면 모듈은 가져오지 않습니다. */\nexport const b2b = ${JSON.stringify(b2b, null, 2)}\n`)
+  write('src/generated/b2b.js', `/** scripts/generate/project.mjs가 자동 생성하는 B2B 정보입니다. 화면 모듈은 가져오지 않습니다. */\nexport const b2b = ${JSON.stringify(b2b, null, 2)}\n`)
   // 이전 다중 프로젝트 및 project 이름으로 만들었던 메타데이터를 정리합니다.
   for (const legacy of ['src/generated/projects.js', 'src/generated/project.js', 'public/data/pub/projects.generated.json', 'public/data/pub/project.generated.json']) {
     const file = path.join(root, legacy)
@@ -100,5 +106,5 @@ export default function Page () { return <RegistryPage loaders={indexLoaders} me
 if (process.argv[1] && import.meta.url === pathToFileURL(fs.realpathSync(process.argv[1])).href) {
   const [command = 'sync'] = process.argv.slice(2)
   if (command !== 'sync') throw new Error('Usage: project.mjs [sync]. Only one project is supported.')
-  execFileSync(process.execPath, [path.join(root, 'scripts/registry.mjs')], { stdio: 'inherit' })
+  execFileSync(process.execPath, [path.join(root, 'scripts/generate/registry.mjs')], { stdio: 'inherit' })
 }

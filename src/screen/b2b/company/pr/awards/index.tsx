@@ -1,32 +1,20 @@
 'use client'
 
 import { Page, PageLoading } from '@/comp' // comp
-import { PublishingPlaceholder } from '@/screen/pub/widgets/publishing/PublishingPlaceholder' // Publishing Placeholder 컴포넌트
+import ComingSoon from '@/widgets/b2b/common/ComingSoon' // Coming Soon 컴포넌트
 import { resolveSkeletonMode } from '@/config/skeleton' // resolve Skeleton Mode
 import AwardsSkeleton from './skeleton/indexSkeleton' // Awards Skeleton 컴포넌트
 
 export const pageTitle = "수상실적"
 
-/** IA publishing scaffold. Replace this screen body with the approved markup. */
+/** 미작업 화면 — ComingSoon. 시안 반영 시 본문을 교체한다. */
 export default function B2bCompanyPrAwardsPage () {
-  const links = [
-    {
-      "to": "/b2b/company/pr/news/list",
-      "label": "언론보도 목록",
-      "screenId": "B2B-ABOUT-007"
-    },
-    {
-      "to": "/b2b/company/pr/news/detail",
-      "label": "언론보도 상세",
-      "screenId": "B2B-COMPANY-PR-NEWS-DETAIL"
-    }
-  ]
   const skeletonId = 'b2b/company/pr/awards'
   const skeletonMode = resolveSkeletonMode(skeletonId)
 
   return (
     <>
-      <Page page="company-pr-awards" title={pageTitle}  className="project-content" />
+      <Page page="company-pr-awards" title={pageTitle}  className="p-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}
@@ -34,16 +22,7 @@ export default function B2bCompanyPrAwardsPage () {
         skeleton={skeletonMode === 'manual' ? <AwardsSkeleton /> : undefined}
         className="page-container"
       >
-        <PublishingPlaceholder
-          device="B2B"
-          folderId="company"
-          folderName="회사소개"
-          screenName={pageTitle}
-          screenType="Page"
-          screenId="B2B-COMPANY-PR-AWARDS"
-          pageUrl="/b2b/company/pr/awards"
-          links={links}
-        />
+        <ComingSoon />
 
       </PageLoading>
     </>

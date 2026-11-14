@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react' // React
-import { bindHomeScrollEffects, createStickyProgress } from '@/utils/scrollEffects' // 유틸 · scroll Effects
+import { bindHomeScrollEffects, createStickyProgress } from '@/utils/dom/scrollEffects' // 유틸 · scroll Effects
 
 /**
  * Home 랜딩 스크롤 인터랙션 훅

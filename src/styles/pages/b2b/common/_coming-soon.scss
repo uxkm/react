@@ -1,0 +1,39 @@
+// B2B 미작업 화면 — 준비중 안내
+.coming-soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: max(480px, calc(100vh - 280px));
+  padding: 48px 24px;
+  text-align: center;
+  color: #667788;
+}
+
+.coming-soon_icon {
+  flex-shrink: 0;
+  opacity: 0.72;
+}
+
+.coming-soon_text {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: #556677;
+}
+
+// 퍼블리시 scaffold(.page-container) 안에 둘 때 작업용 회색·720 제한 해제
+.page-container:has(> .coming-soon) {
+  display: flex;
+  align-items: stretch;
+  max-width: none;
+  min-height: max(480px, calc(100vh - 280px));
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}

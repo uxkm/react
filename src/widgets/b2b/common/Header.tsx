@@ -21,6 +21,7 @@ export default function Header ({ className, ...rest }: Readonly<HTMLAttributes<
           <Link to="/b2b/contents/ax/overview">AX교육</Link>
           <Link to="/b2b/contents/job">직무교육</Link>
           <Link to="/b2b/contents/leadership">리더십</Link>
+          {/* 메인 고객사례 섹션(id=cases). /b2b#cases → 메인 이동 후 앵커 스크롤 */}
           <Link to="/b2b#cases">고객사례</Link>
           <Link to="/b2b/insight/on/list" className="header_on" aria-label="멀캠ON">
             멀캠

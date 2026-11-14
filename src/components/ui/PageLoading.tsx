@@ -6,7 +6,7 @@
  */
 import type { HTMLAttributes, ReactNode } from 'react' // React
 import { resolveSkeletonMode, type SkeletonMode } from '@/config/skeleton' // 설정 · skeleton
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { hasNodes } from '@/utils/react' // has Nodes
 import { AutoSkeleton } from './AutoSkeleton' // Auto Skeleton 컴포넌트
 import { PageSkeleton, type PageSkeletonType } from './PageSkeleton' // PageSkeleton · PageSkeletonType 타입
@@ -20,10 +20,13 @@ export interface PageLoadingProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * auto(기본): children UI 를 측정해 자동 스켈레톤
    * manual: skeleton 으로 넘긴 수동 디자인 사용
-   * 생략 시 src/config/skeleton.ts 의 페이지 맵 → 전역 기본값
+   * 페이지에서 직접 지정하는 것을 권장. 생략 시 config 페이지 맵 → 전역 기본값
    */
   skeletonMode?: SkeletonMode
-  /** auto 캐시·설정 키 (예: 'b2b/user-page') */
+  /**
+   * auto 캐시·설정 키. 생략하면 className 을 쓴다.
+   * 페이지마다 따로 부여할 필요 없음 — className 으로 구분
+   */
   skeletonId?: string
   /**
    * manual 모드: 수동 스켈레톤

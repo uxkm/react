@@ -1,4 +1,4 @@
-import { routeMetadata } from '@/lib/routeMetadata' // route Metadata
+import { routeMetadata } from '@/lib/page/routeMetadata' // route Metadata
 import '@/styles/pub.scss' // pub 스타일
 import PubIndex from '@/screen/pub/index' // Pub Index 컴포넌트
 

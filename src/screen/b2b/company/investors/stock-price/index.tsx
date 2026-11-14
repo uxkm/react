@@ -1,21 +1,20 @@
 'use client'
 
 import { Page, PageLoading } from '@/comp' // comp
-import { PublishingPlaceholder } from '@/screen/pub/widgets/publishing/PublishingPlaceholder' // Publishing Placeholder 컴포넌트
+import ComingSoon from '@/widgets/b2b/common/ComingSoon' // Coming Soon 컴포넌트
 import { resolveSkeletonMode } from '@/config/skeleton' // resolve Skeleton Mode
 import IndexSkeleton from './skeleton/indexSkeleton' // Index Skeleton 컴포넌트
 
 export const pageTitle = "주가정보"
 
-/** IA publishing scaffold. Replace this screen body with the approved markup. */
+/** 미작업 화면 — ComingSoon. 시안 반영 시 본문을 교체한다. */
 export default function B2bCompanyInvestorsStockPricePage () {
-  const links = []
   const skeletonId = 'b2b/company/investors/stock-price'
   const skeletonMode = resolveSkeletonMode(skeletonId)
 
   return (
     <>
-      <Page page="company-investors-stock-price" title={pageTitle}  className="project-content" />
+      <Page page="company-investors-stock-price" title={pageTitle}  className="p-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}
@@ -23,16 +22,7 @@ export default function B2bCompanyInvestorsStockPricePage () {
         skeleton={skeletonMode === 'manual' ? <IndexSkeleton /> : undefined}
         className="page-container"
       >
-        <PublishingPlaceholder
-          device="B2B"
-          folderId="company"
-          folderName="회사소개"
-          screenName={pageTitle}
-          screenType="Page"
-          screenId="B2B-COMPANY-INVESTORS-STOCK-PRICE"
-          pageUrl="/b2b/company/investors/stock-price"
-          links={links}
-        />
+        <ComingSoon />
 
       </PageLoading>
     </>

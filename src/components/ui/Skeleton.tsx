@@ -3,7 +3,7 @@
  * variant · size · width 토큰으로 로딩 뼈대 조각을 그린다.
  */
 import type { CSSProperties, HTMLAttributes } from 'react' // React
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 
 /** SCSS 형태 클래스에 대응하는 variant. avatar 등은 별칭 */
 export type SkeletonVariant =

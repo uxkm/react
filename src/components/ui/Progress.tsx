@@ -3,7 +3,7 @@
  * 0~100% 표시, 줄무늬·애니메이션·indeterminate 지원.
  */
 import type { HTMLAttributes } from 'react' // HTMLAttributes 타입
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 
 /** 진행 막대가 받는 값. value 는 0~100 */
 export interface ProgressProps extends Omit<HTMLAttributes<HTMLDivElement>, 'color'> {

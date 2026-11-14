@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react' // React
-import { createViewer } from '@/lib/viewer' // create Viewer
+import { createViewer } from '@/lib/vendor/viewer' // create Viewer
 import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
 import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
 import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
@@ -30,7 +30,7 @@ export default function ViewerDemoPage () {
   return (
     <DemoLayout
       title="Viewer.js"
-      description="viewerjs — 이미지 갤러리 확대 (@/lib/viewer)"
+      description="viewerjs — 이미지 갤러리 확대 (@/lib/vendor/viewer)"
       slug="viewer"
     >
       <DemoBlock
@@ -59,7 +59,7 @@ useEffect(() => {
           reactImports: ['useEffect', 'useRef'],
           compImports: [],
           extraImports: [
-            `import { createViewer } from '@/lib/viewer'
+            `import { createViewer } from '@/lib/vendor/viewer'
 
 const images = [
   { src: 'https://picsum.photos/id/1015/800/600', alt: '산' },

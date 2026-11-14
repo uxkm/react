@@ -32,7 +32,7 @@ export default defineConfig({
   ],
   // 기본 명령은 먼저 정적 빌드를 생성한다. 외부 검증 서버도 지정할 수 있다.
   webServer: process.env.BROWSER_TEST_BASE_URL ? undefined : {
-    command: 'node scripts/serve-static.mjs',
+    command: 'node scripts/serve/serve-static.mjs',
     url: baseURL,
     reuseExistingServer: false,
     timeout: 30_000,

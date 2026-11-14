@@ -3,7 +3,7 @@
  * - B2B / WEB / MOBILE 등 퍼블리시 데이터 탭 전환
  * - 탭이 1개 이하면 전체 숨김 (컴포넌트 가이드는 상단 헤더에서 새 창으로 제공)
  */
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 
 export default function PubTabs ({
   tabs,

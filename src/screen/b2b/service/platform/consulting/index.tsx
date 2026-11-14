@@ -1,21 +1,20 @@
 'use client'
 
 import { Page, PageLoading } from '@/comp' // comp
-import { PublishingPlaceholder } from '@/screen/pub/widgets/publishing/PublishingPlaceholder' // Publishing Placeholder 컴포넌트
+import ComingSoon from '@/widgets/b2b/common/ComingSoon' // Coming Soon 컴포넌트
 import { resolveSkeletonMode } from '@/config/skeleton' // resolve Skeleton Mode
 import ConsultingSkeleton from './skeleton/indexSkeleton' // Consulting Skeleton 컴포넌트
 
 export const pageTitle = "플랫폼 활용 컨설팅"
 
-/** IA publishing scaffold. Replace this screen body with the approved markup. */
+/** 미작업 화면 — ComingSoon. 시안 반영 시 본문을 교체한다. */
 export default function B2bServicePlatformConsultingPage () {
-  const links = []
   const skeletonId = 'b2b/service/platform/consulting'
   const skeletonMode = resolveSkeletonMode(skeletonId)
 
   return (
     <>
-      <Page page="service-platform-consulting" title={pageTitle}  className="project-content" />
+      <Page page="service-platform-consulting" title={pageTitle}  className="p-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}
@@ -23,16 +22,7 @@ export default function B2bServicePlatformConsultingPage () {
         skeleton={skeletonMode === 'manual' ? <ConsultingSkeleton /> : undefined}
         className="page-container"
       >
-        <PublishingPlaceholder
-          device="B2B"
-          folderId="service"
-          folderName="서비스"
-          screenName={pageTitle}
-          screenType="Page"
-          screenId="B2B-SERVICE-PLATFORM-CONSULTING"
-          pageUrl="/b2b/service/platform/consulting"
-          links={links}
-        />
+        <ComingSoon />
 
       </PageLoading>
     </>

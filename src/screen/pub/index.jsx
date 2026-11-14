@@ -1,6 +1,6 @@
 'use client'
 
-import { useLatestRef } from '@/hooks/useLatestRef' // Latest Ref 훅
+import { useLatestRef } from '@/hooks/react/useLatestRef' // Latest Ref 훅
 
 /**
  * PubIndex
@@ -35,7 +35,7 @@ import {
 import { PubHeader } from '@/screen/pub/layout' // Pub Header 컴포넌트
 import { b2b } from '@/generated/b2b' // b2b
 import { resolveSkeletonMode } from '@/config/skeleton' // resolve Skeleton Mode
-import { useSiteTitle } from '@/lib/siteTitle' // Site Title 훅
+import { useSiteTitle } from '@/lib/page/siteTitle' // Site Title 훅
 
 /** 스켈레톤 설정 키 — 디자인 확정 시 src/config/skeleton.ts 에 'pub/index': 'manual' */
 const PUB_SKELETON_ID = 'pub/index'

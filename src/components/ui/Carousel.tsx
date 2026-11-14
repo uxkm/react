@@ -1,6 +1,6 @@
 'use client'
 
-import { useLatestRef } from '@/hooks/useLatestRef' // Latest Ref 훅
+import { useLatestRef } from '@/hooks/react/useLatestRef' // Latest Ref 훅
 
 /**
  * Swiper 기반 캐러셀.
@@ -21,8 +21,8 @@ import {
 } from 'react' // React
 import Swiper from 'swiper' // Swiper 컴포넌트
 import type { Swiper as SwiperInstance } from 'swiper' // Swiper Instance 타입
-import { carouselSwiperModules } from '@/lib/swiper' // carousel Swiper Modules
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { carouselSwiperModules } from '@/lib/vendor/swiper' // carousel Swiper Modules
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { hasNodes } from '@/utils/react' // has Nodes
 
 /** 커버플로우 좌우 노출 */

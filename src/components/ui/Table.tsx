@@ -3,7 +3,7 @@
  * thead·tbody children과 스킨·스크롤·고정 열을 조합한다.
  */
 import type { CSSProperties, HTMLAttributes, ReactNode } from 'react' // React
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 
 const VALID_STICKY_COLS = new Set([1, 2, 3, 4])
 

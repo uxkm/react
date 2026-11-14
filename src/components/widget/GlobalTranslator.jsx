@@ -1,9 +1,9 @@
 'use client'
 
 import { useEffect } from 'react' // effect 훅
-import { useLocaleStore } from '@/lib/localeStore' // 언어(locale) 전역 상태
-import { DEFAULT_LOCALE, normalizeLocale } from '@/lib/i18n' // 라이브러리/유틸 · i18n
-import { applyPageTranslation, hasTranslatableMutation } from '@/lib/pageTranslate' // 라이브러리/유틸 · page Translate
+import { useLocaleStore } from '@/lib/i18n/localeStore' // 언어(locale) 전역 상태
+import { DEFAULT_LOCALE, normalizeLocale } from '@/lib/i18n/i18n' // 라이브러리/유틸 · i18n
+import { applyPageTranslation, hasTranslatableMutation } from '@/lib/i18n/pageTranslate' // 라이브러리/유틸 · page Translate
 
 /** 한글 렌더 후 번역한다. 장애 시 원문과 재시도 상태를 유지한다. */
 export function GlobalTranslator ({ rootRef }) {

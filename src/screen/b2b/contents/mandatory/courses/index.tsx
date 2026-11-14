@@ -1,32 +1,20 @@
 'use client'
 
 import { Page, PageLoading } from '@/comp' // comp
-import { PublishingPlaceholder } from '@/screen/pub/widgets/publishing/PublishingPlaceholder' // Publishing Placeholder 컴포넌트
+import ComingSoon from '@/widgets/b2b/common/ComingSoon' // Coming Soon 컴포넌트
 import { resolveSkeletonMode } from '@/config/skeleton' // resolve Skeleton Mode
 import CoursesSkeleton from './skeleton/indexSkeleton' // Courses Skeleton 컴포넌트
 
 export const pageTitle = "대표 과정"
 
-/** IA publishing scaffold. Replace this screen body with the approved markup. */
+/** 미작업 화면 — ComingSoon. 시안 반영 시 본문을 교체한다. */
 export default function B2bContentsMandatoryCoursesPage () {
-  const links = [
-    {
-      "to": "/b2b/contents/mandatory/features",
-      "label": "서비스 특징",
-      "screenId": "B2B-CONTENTS-MANDATORY-FEATURES"
-    },
-    {
-      "to": "/b2b/contents/mandatory/estimate",
-      "label": "간편 견적받기",
-      "screenId": "B2B-CONTENTS-MANDATORY-ESTIMATE"
-    }
-  ]
   const skeletonId = 'b2b/contents/mandatory/courses'
   const skeletonMode = resolveSkeletonMode(skeletonId)
 
   return (
     <>
-      <Page page="contents-mandatory-courses" title={pageTitle}  className="project-content" />
+      <Page page="contents-mandatory-courses" title={pageTitle}  className="p-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}
@@ -34,16 +22,7 @@ export default function B2bContentsMandatoryCoursesPage () {
         skeleton={skeletonMode === 'manual' ? <CoursesSkeleton /> : undefined}
         className="page-container"
       >
-        <PublishingPlaceholder
-          device="B2B"
-          folderId="contents"
-          folderName="기업교육"
-          screenName={pageTitle}
-          screenType="Page"
-          screenId="B2B-CONTENTS-MANDATORY-COURSES"
-          pageUrl="/b2b/contents/mandatory/courses"
-          links={links}
-        />
+        <ComingSoon />
 
       </PageLoading>
     </>

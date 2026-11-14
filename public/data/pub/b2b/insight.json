@@ -25,8 +25,8 @@
           ],
           "name": "멀캠ON 목록",
           "type": "Page",
-          "id": "B2B-INSIGHT-ON-LIST",
-          "pageUrl": "/b2b/insight/on/list",
+          "id": "list",
+          "pageUrl": "/insight/on/list",
           "filePath": "@/screen/b2b/insight/on/list/index.tsx",
           "priority": 2
         },
@@ -48,8 +48,8 @@
           ],
           "name": "멀캠ON 상세",
           "type": "Page",
-          "id": "B2B-INSIGHT-ON-DETAIL",
-          "pageUrl": "/b2b/insight/on/detail",
+          "id": "detail",
+          "pageUrl": "/insight/on/detail",
           "filePath": "@/screen/b2b/insight/on/detail/index.tsx",
           "priority": 2
         }
@@ -77,8 +77,8 @@
           ],
           "name": "자료실 목록",
           "type": "Page",
-          "id": "B2B-INSIGHT-RESOURCES-LIST",
-          "pageUrl": "/b2b/insight/resources/list",
+          "id": "list-01",
+          "pageUrl": "/insight/resources/list",
           "filePath": "@/screen/b2b/insight/resources/list/index.tsx",
           "priority": 2
         },
@@ -100,8 +100,8 @@
           ],
           "name": "자료실 상세",
           "type": "Page",
-          "id": "B2B-INSIGHT-RESOURCES-DETAIL",
-          "pageUrl": "/b2b/insight/resources/detail",
+          "id": "detail-01",
+          "pageUrl": "/insight/resources/detail",
           "filePath": "@/screen/b2b/insight/resources/detail/index.tsx",
           "priority": 2
         }
@@ -129,8 +129,8 @@
           ],
           "name": "자료 다운로드 팝업",
           "type": "Layer",
-          "id": "B2B-COMMON-DOWNLOAD",
-          "pageUrl": "/b2b/common/download",
+          "id": "download",
+          "pageUrl": "/common/download",
           "filePath": "@/widgets/b2b/previews/download/index.tsx",
           "priority": 2
         }

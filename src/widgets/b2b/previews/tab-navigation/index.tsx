@@ -1,21 +1,20 @@
 'use client'
 
 import { Page, PageLoading } from '@/comp' // comp
-import { PublishingPlaceholder } from '@/screen/pub/widgets/publishing/PublishingPlaceholder' // Publishing Placeholder 컴포넌트
+import ComingSoon from '@/widgets/b2b/common/ComingSoon' // Coming Soon 컴포넌트
 import { resolveSkeletonMode } from '@/config/skeleton' // resolve Skeleton Mode
 import TabNavigationSkeleton from './skeleton/indexSkeleton' // Tab Navigation Skeleton 컴포넌트
 
 export const pageTitle = "하위 탭 네비게이션"
 
-/** IA publishing scaffold. Replace this screen body with the approved markup. */
+/** 미작업 화면 — ComingSoon. 시안 반영 시 본문을 교체한다. */
 export default function B2bCommonTabNavigationPage () {
-  const links = []
   const skeletonId = 'b2b/common/tab-navigation'
   const skeletonMode = resolveSkeletonMode(skeletonId)
 
   return (
     <>
-      <Page page="common-tab-navigation" title={pageTitle}  className="project-content" />
+      <Page page="common-tab-navigation" title={pageTitle}  className="p-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}
@@ -23,16 +22,7 @@ export default function B2bCommonTabNavigationPage () {
         skeleton={skeletonMode === 'manual' ? <TabNavigationSkeleton /> : undefined}
         className="page-container"
       >
-        <PublishingPlaceholder
-          device="B2B"
-          folderId="common"
-          folderName="공통"
-          screenName={pageTitle}
-          screenType="Widget"
-          screenId="B2B-COMMON-TAB-NAVIGATION"
-          pageUrl="/b2b/common/tab-navigation"
-          links={links}
-        />
+        <ComingSoon />
 
       </PageLoading>
     </>

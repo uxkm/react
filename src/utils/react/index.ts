@@ -16,4 +16,4 @@ export function firstNodes (...nodes: ReactNode[]): ReactNode {
 }
 
 // 기존 import 경로를 유지하면서 훅의 클라이언트 경계를 분리한다.
-export { useControllable } from '@/hooks/useControllable'
+export { useControllable } from '@/hooks/react/useControllable'

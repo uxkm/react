@@ -1,27 +1,20 @@
 'use client'
 
 import { Page, PageLoading } from '@/comp' // comp
-import { PublishingPlaceholder } from '@/screen/pub/widgets/publishing/PublishingPlaceholder' // Publishing Placeholder 컴포넌트
+import ComingSoon from '@/widgets/b2b/common/ComingSoon' // Coming Soon 컴포넌트
 import { resolveSkeletonMode } from '@/config/skeleton' // resolve Skeleton Mode
 import ListSkeleton from './skeleton/indexSkeleton' // List Skeleton 컴포넌트
 
 export const pageTitle = "멀캠ON 목록"
 
-/** IA publishing scaffold. Replace this screen body with the approved markup. */
+/** 미작업 화면 — ComingSoon. 시안 반영 시 본문을 교체한다. */
 export default function B2bInsightOnListPage () {
-  const links = [
-    {
-      "to": "/b2b/insight/on/detail",
-      "label": "멀캠ON 상세",
-      "screenId": "B2B-INSIGHT-ON-DETAIL"
-    }
-  ]
   const skeletonId = 'b2b/insight/on/list'
   const skeletonMode = resolveSkeletonMode(skeletonId)
 
   return (
     <>
-      <Page page="insight-on-list" title={pageTitle}  className="project-content" />
+      <Page page="insight-on-list" title={pageTitle}  className="p-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}
@@ -29,16 +22,7 @@ export default function B2bInsightOnListPage () {
         skeleton={skeletonMode === 'manual' ? <ListSkeleton /> : undefined}
         className="page-container"
       >
-        <PublishingPlaceholder
-          device="B2B"
-          folderId="insight"
-          folderName="HR인사이트"
-          screenName={pageTitle}
-          screenType="Page"
-          screenId="B2B-INSIGHT-ON-LIST"
-          pageUrl="/b2b/insight/on/list"
-          links={links}
-        />
+        <ComingSoon />
 
       </PageLoading>
     </>

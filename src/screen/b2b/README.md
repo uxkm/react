@@ -43,7 +43,7 @@
 
 변경된 경로는 AX캠프 `contents/ax/camp`, 주주정보 `company/investors/shareholders`, 언론보도 `company/pr/news/{list,detail}`입니다. 기존 경로 대신 새 경로를 사용합니다. 주가정보는 `stock-price`로 분리했습니다. 공통 전체메뉴 프리뷰는 `src/widgets/b2b/previews/full-menu/`에 유지하며, 회사소개는 해당 메뉴의 아코디언을 펼쳐 확인합니다.
 
-첨부된 스타일 수치(헤더 높이 68px, 메뉴 패널 가로 패딩 30px·간격 8px·모서리 12px, 제목 20px/700·항목 18px/400)를 전체메뉴 스타일에 반영했습니다. `src/app/b2b/template.jsx`가 공통 헤더를 등록하고, 헤더의 메뉴 버튼은 전체메뉴 모달을 엽니다. 실제 로고 파일명은 `/images/common/logo_black.png`입니다. 메뉴 데이터는 `navigation/menuData.ts`, 스타일은 `src/styles/pages/b2b/_navigation.scss`에서 관리합니다.
+첨부된 스타일 수치(헤더 높이 68px, 메뉴 패널 가로 패딩 30px·간격 8px·모서리 12px, 제목 20px/700·항목 18px/400)를 전체메뉴 스타일에 반영했습니다. `src/app/b2b/template.jsx`가 공통 헤더를 등록하고, 헤더의 메뉴 버튼은 전체메뉴 모달을 엽니다. 실제 로고 파일명은 `/images/common/logo_black.png`입니다. 메뉴 데이터는 `navigation/menuData.ts`, 스타일은 `src/styles/pages/b2b/common/_header.scss`에서 관리합니다.
 
 공통 푸터는 `src/widgets/b2b/common/Footer.tsx`에서 고객센터·SNS·패밀리사이트, 인증 마크, 하단 링크·회사 정보를 렌더링합니다. `template.jsx`의 Footer 슬롯으로 등록하며, 작업 프리뷰 `/b2b/common/footer`에서는 같은 위젯을 한 번만 표시합니다. 이미지 출처는 `public/images/common/footer/README.md`에 정리했습니다.
 

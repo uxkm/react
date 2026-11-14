@@ -105,7 +105,10 @@ export function useLayoutSetSlot (): SetPageSlot | null {
 }
 
 /**
- * 슬롯 등록 헬퍼 — 매 렌더 후 동기화, 언마운트 시 정리
+ * 슬롯 등록 헬퍼 — 매 렌더 후(useLayoutEffect) 동기화, 언마운트 시 정리.
+ * effect 이후라 SSR·첫 HTML 에는 슬롯이 비어 있다.
+ * 헤더/푸터는 AppLayout header/footer prop 으로 첫 페인트부터 넣는 편이
+ * 본문 레이아웃 점프를 피할 수 있다.
  *
  * @param sync   현재 props 기준으로 setSlot 호출
  * @param names  언마운트 시 비울 슬롯 이름

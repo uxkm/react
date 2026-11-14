@@ -4,8 +4,8 @@
  * - HTTPS: HTTPS_PORT (기본 8443), certificates/localhost*.pem
  *
  * 사용:
- *   node scripts/serve-next.mjs --dev   # 개발 (HMR)
- *   node scripts/serve-next.mjs         # 프로덕션 (next build 후)
+ *   node scripts/serve/serve-next.mjs --dev   # 개발 (HMR)
+ *   node scripts/serve/serve-next.mjs         # 프로덕션 (next build 후)
  */
 import { createServer as createHttpServer } from 'node:http'
 import { createServer as createHttpsServer } from 'node:https'
@@ -40,10 +40,10 @@ function parseRequestUrl (requestUrl) {
   }
 }
 
-/** 이 스크립트 파일이 있는 디렉터리 (scripts/) */
+/** 이 스크립트 파일이 있는 디렉터리 (scripts/serve/) */
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 /** 프로젝트 루트 — Next dir */
-const root = path.join(__dirname, '..')
+const root = path.join(__dirname, '../..')
 
 /** --dev 플래그: 개발(HMR) vs 프로덕션 */
 const isDev = process.argv.includes('--dev')

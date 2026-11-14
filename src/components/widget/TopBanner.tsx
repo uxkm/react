@@ -5,9 +5,9 @@ import type { Swiper as SwiperInstance } from 'swiper' // Swiper Instance 타입
 import { Carousel, CarouselSlide } from '@/comp/ui/Carousel' // UI 컴포넌트 · Carousel 컴포넌트
 import { Checkbox } from '@/comp/ui/Checkbox' // Checkbox 컴포넌트
 import { Icon } from '@/comp/ui/Icon' // Icon 컴포넌트
-import { useDailyDismissal } from '@/hooks/useDailyDismissal' // Daily Dismissal 훅
-import { useHydrated } from '@/hooks/useHydrated' // Hydrated 훅
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { useDailyDismissal } from '@/hooks/interaction/useDailyDismissal' // Daily Dismissal 훅
+import { useHydrated } from '@/hooks/react/useHydrated' // Hydrated 훅
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { hasNodes } from '@/utils/react' // has Nodes
 
 export interface TopBannerItem {

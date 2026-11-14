@@ -1,6 +1,6 @@
 'use client'
 
-import { Swiper, SwiperSlide, defaultSwiperModules } from '@/lib/swiper' // 라이브러리/유틸 · swiper
+import { Swiper, SwiperSlide, defaultSwiperModules } from '@/lib/vendor/swiper' // 라이브러리/유틸 · swiper
 import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
 import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
 import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
@@ -17,7 +17,7 @@ export default function SwiperDemoPage () {
   return (
     <DemoLayout
       title="Swiper"
-      description="swiper — Navigation / Pagination / Autoplay (@/lib/swiper)"
+      description="swiper — Navigation / Pagination / Autoplay (@/lib/vendor/swiper)"
       slug="swiper"
     >
       <DemoBlock
@@ -40,7 +40,7 @@ export default function SwiperDemoPage () {
           reactImports: [],
           compImports: [],
           extraImports: [
-            `import { Swiper, SwiperSlide, defaultSwiperModules } from '@/lib/swiper'
+            `import { Swiper, SwiperSlide, defaultSwiperModules } from '@/lib/vendor/swiper'
 
 const slides = [
   { label: 'Slide 1', color: '#1f6feb' },

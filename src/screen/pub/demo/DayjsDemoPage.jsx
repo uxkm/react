@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react' // React
-import { dayjs } from '@/lib/dayjs' // dayjs
+import { dayjs } from '@/lib/vendor/dayjs' // dayjs
 import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
 import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
 import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
@@ -15,7 +15,7 @@ export default function DayjsDemoPage () {
   return (
     <DemoLayout
       title="Day.js"
-      description="dayjs + utc/timezone/relativeTime/customParseFormat (@/lib/dayjs)"
+      description="dayjs + utc/timezone/relativeTime/customParseFormat (@/lib/vendor/dayjs)"
       slug="dayjs"
     >
       <DemoBlock
@@ -44,7 +44,7 @@ const parsed = useMemo(() => dayjs(input, 'YYYY-MM-DD HH:mm'), [input])
           name: 'DayjsExample',
           reactImports: ['useMemo', 'useState'],
           compImports: [],
-          extraImports: ["import { dayjs } from '@/lib/dayjs'"]
+          extraImports: ["import { dayjs } from '@/lib/vendor/dayjs'"]
         })}
       >
         <div className="demo-stack">

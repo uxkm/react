@@ -3,7 +3,7 @@
  * 데이터 없을 때 아이콘·설명·푸터 액션을 보여 준다.
  */
 import type { HTMLAttributes, ReactNode } from 'react' // React
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { hasNodes } from '@/utils/react' // has Nodes
 
 /** 빈 상태가 받는 값 */

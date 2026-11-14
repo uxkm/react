@@ -15,14 +15,14 @@ import {
   type ReactNode, // ReactNode 타입
   type TransitionEvent // TransitionEvent 타입
 } from 'react' // React
-import { useAutoClose } from '@/hooks/useAutoClose' // Auto Close 훅
-import { useMinWidth } from '@/hooks/useMediaQuery' // Min Width 훅
+import { useAutoClose } from '@/hooks/interaction/useAutoClose' // Auto Close 훅
+import { useMinWidth } from '@/hooks/layout/useMediaQuery' // Min Width 훅
 import {
   ADAPTIVE_BREAKPOINT_DEFAULT, // ADAPTIVE BREAKPOINT DEFAULT 컴포넌트
   resolveAdaptiveBreakpoint, // resolve Adaptive Breakpoint
   type AdaptiveBreakpoint // AdaptiveBreakpoint 타입
-} from '@/lib/breakpoints' // 라이브러리/유틸 · breakpoints
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+} from '@/lib/layout/breakpoints' // 라이브러리/유틸 · breakpoints
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { hasNodes } from '@/utils/react' // has Nodes
 import { Icon } from './Icon' // Icon 컴포넌트
 

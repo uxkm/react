@@ -74,16 +74,21 @@ URL은 `src/app/`에서 정의하고, 실제 화면은 `src/screen/`에 둡니�
 │   ├── widgets/            # common/ 및 프로젝트별 위젯
 │   ├── modules/            # common/ 및 프로젝트별 기능 영역
 │   ├── components/         # 공통 UI·레이아웃·Provider
-│   ├── hooks/              # 상태·hydration·키보드·DOM 관련 훅
-│   ├── lib/                # 라우팅·정적 경로·외부 라이브러리 연동
+│   ├── hooks/              # react · interaction · layout · i18n · scroll
+│   ├── lib/                # page · i18n · vendor · layout · router
 │   ├── generated/          # 화면 레지스트리 생성물
 │   ├── styles/             # SCSS 원본과 CSS 생성물
 │   ├── config/             # 스켈레톤 등 공통 설정
-│   ├── utils/              # 문자열·이미지·DOM 등 유틸리티
+│   ├── utils/              # style · media · dom · react 역할별 유틸
 │   └── assets/             # 번들에 포함할 소량 에셋
 ├── public/                 # 폰트·이미지·퍼블리시 목록 JSON·가이드 문서
 │   └── data/pub/docs/       # 접근성 참고 문서·수동 체크리스트
-├── scripts/                # 코드 생성·스타일 빌드·로컬 서버·검사
+├── scripts/
+│   ├── build/              # 스타일·Next 준비
+│   ├── generate/           # 레지스트리·프로젝트 sync·검증
+│   ├── dev/                # 개발 감시 사이클
+│   ├── serve/              # HTTP/HTTPS 서버
+│   └── lib/                # 공용 유틸
 ├── tests/browser/          # 라우팅·번역·메타데이터 등 일반 회귀 검사
 └── .vscode/                # 편집 도구 설정(settings.json)
 ```
@@ -158,11 +163,11 @@ SCSS 원본은 `src/styles/`에 있습니다.
 
 ## 언어 전환
 
-한국어 원문을 기본으로 태국어·베트남어·러시아어·영어를 선택할 수 있습니다. 화면 문구 번역은 `GlobalTranslator`와 `src/lib/pageTranslate.js`가 브라우저에서 처리합니다.
+한국어 원문을 기본으로 태국어·베트남어·러시아어·영어를 선택할 수 있습니다. 화면 문구 번역은 `GlobalTranslator`와 `src/lib/i18n/pageTranslate.js`가 브라우저에서 처리합니다.
 
-- 언어 상태·지원 목록: `src/lib/i18n.js`
+- 언어 상태·지원 목록: `src/lib/i18n/i18n.js`
 - 언어 선택 UI: `src/components/widget/LanguageSwitcher.jsx`
-- 상태와 전환 API: `src/hooks/useLocale.js`, `src/lib/localeStore.js`
+- 상태와 전환 API: `src/hooks/i18n/useLocale.js`, `src/lib/i18n/localeStore.js`
 
 선택한 언어는 `localStorage`에 저장하며 마운트 후 복원합니다. `html`의 `lang`과 `data-locale`도 선택에 맞춰 변경합니다. 원문으로 전환하면 한국어 UI를 다시 표시합니다.
 
@@ -207,12 +212,15 @@ JS/TS 저장 시 ESLint가 수정 가능한 항목을 처리합니다. JSON·JSO
 | `eslint.config.mjs` | React·Next.js 코드 검사 규칙 |
 | `postcss.config.mjs` | CSS 후처리 설정 |
 | `playwright.config.mjs` | 브라우저·테스트 서버·결과 보고서 설정 |
-| `scripts/registry.mjs` | 화면 레지스트리·정적 주소·제목 생성 |
+| `scripts/generate/registry.mjs` | 화면 레지스트리·정적 주소·제목 생성 |
+| `scripts/generate/project.mjs` | B2B 메타·라우트 셸 sync |
+| `scripts/generate/validate-project.mjs` | 프로젝트·PUB 경계 검증 |
 | `scripts/build/build-styles.mjs` | SCSS → CSS 변환 |
 | `scripts/build/prepare-next.mjs` | Next 메타데이터 호환 패치 |
 | `scripts/build/style-entries.mjs` | SCSS 엔트리 목록 |
-| `scripts/serve-next.mjs` | 개발용 HTTP·HTTPS 서버 |
-| `scripts/serve-static.mjs` | `out/` 정적 미리보기 서버 |
+| `scripts/dev/dev.mjs` | 개발 서버·파일 감시 사이클 |
+| `scripts/serve/serve-next.mjs` | 개발용 HTTP·HTTPS 서버 |
+| `scripts/serve/serve-static.mjs` | `out/` 정적 미리보기 서버 |
 
 `.mjs`는 Node.js가 ES Module로 실행하는 파일입니다. Next.js 설정은 타입 검사를 위해 `.ts`를 사용하고, 도구 설정과 실행 스크립트에는 지원되는 `.mjs` 형식을 사용합니다.
 
@@ -292,13 +300,13 @@ PUB 구조와 공통 컴포넌트는 프로젝트에 관계없이 동일하게 �
 
 | 생성 파일 | 생성 함수·스크립트 | 수정할 원본과 역할 |
 | --- | --- | --- |
-| `src/generated/b2b.js` | `scripts/project.mjs` → `syncProject()` | `public/data/pub/index.json`의 `b2b`, `src/screen/b2b/` 존재 여부. 단일 B2B 메타데이터이며 화면 폴더가 없으면 `null`입니다. |
-| `src/generated/registry-b2b.js` | `scripts/registry.mjs` → `buildProject()` | `src/screen/b2b/`, `src/widgets/b2b/previews/`. 화면 import와 `meta`를 등록합니다. |
-| `src/generated/registry-component.js` | `scripts/registry.mjs` → `buildPubPages('guide')` | `src/screen/pub/guide/`. 공통 컴포넌트 가이드 import와 `meta`를 등록합니다. |
-| `src/generated/registry-demo.js` | `scripts/registry.mjs` → `buildPubPages('demo')` | `src/screen/pub/demo/`. 데모 import와 `meta`를 등록합니다. |
-| `src/generated/registry-ids.js` | `scripts/registry.mjs` | 위 화면들의 B2B 경로 배열 `b2bRoutes`, 가이드·데모 ID와 제목입니다. 화면 파일명, `pageTitle`, `routeId`를 원본에서 수정합니다. |
-| `src/generated/pub-pages.js` | `scripts/registry.mjs` | 가이드·데모 화면 목록과 `guideLabel`. 메뉴 분류·순서는 `public/data/pub/guide-menu.json`에서 관리합니다. |
-| `src/generated/registry.js` | `scripts/registry.mjs` | 가이드·데모 레지스트리만 묶는 공통 진입점입니다. 생성 방식을 바꾸려면 해당 스크립트를 수정합니다. |
+| `src/generated/b2b.js` | `scripts/generate/project.mjs` → `syncProject()` | `public/data/pub/index.json`의 `b2b`, `src/screen/b2b/` 존재 여부. 단일 B2B 메타데이터이며 화면 폴더가 없으면 `null`입니다. |
+| `src/generated/registry-b2b.js` | `scripts/generate/registry.mjs` → `buildProject()` | `src/screen/b2b/`, `src/widgets/b2b/previews/`. 화면 import와 `meta`를 등록합니다. |
+| `src/generated/registry-component.js` | `scripts/generate/registry.mjs` → `buildPubPages('guide')` | `src/screen/pub/guide/`. 공통 컴포넌트 가이드 import와 `meta`를 등록합니다. |
+| `src/generated/registry-demo.js` | `scripts/generate/registry.mjs` → `buildPubPages('demo')` | `src/screen/pub/demo/`. 데모 import와 `meta`를 등록합니다. |
+| `src/generated/registry-ids.js` | `scripts/generate/registry.mjs` | 위 화면들의 B2B 경로 배열 `b2bRoutes`, 가이드·데모 ID와 제목입니다. 화면 파일명, `pageTitle`, `routeId`를 원본에서 수정합니다. |
+| `src/generated/pub-pages.js` | `scripts/generate/registry.mjs` | 가이드·데모 화면 목록과 `guideLabel`. 메뉴 분류·순서는 `public/data/pub/guide-menu.json`에서 관리합니다. |
+| `src/generated/registry.js` | `scripts/generate/registry.mjs` | 가이드·데모 레지스트리만 묶는 공통 진입점입니다. 생성 방식을 바꾸려면 해당 스크립트를 수정합니다. |
 
 `public/data/pub/b2b.generated.json`과 `src/app/b2b/{page.jsx,layout.jsx,[...slug]/page.jsx}`도 `syncProject()`가 생성합니다. 실제 화면은 `src/screen/b2b`에서 수정합니다. 루트 `index.jsx` 또는 `index.tsx`가 있으면 메인으로 우선 사용하고, 없으면 `main/index.tsx`를 사용합니다. 두 방식 모두 `/b2b`로 열며 `/b2b/main`은 `/b2b`로 이동합니다.
 

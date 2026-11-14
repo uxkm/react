@@ -6,8 +6,8 @@
  */
 
 import { useState, type HTMLAttributes, type MouseEvent, type ReactNode } from 'react' // React
-import { useAutoClose } from '@/hooks/useAutoClose' // Auto Close 훅
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { useAutoClose } from '@/hooks/interaction/useAutoClose' // Auto Close 훅
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { hasNodes } from '@/utils/react' // has Nodes
 import { Icon, type IconName } from './Icon' // Icon · IconName 타입
 

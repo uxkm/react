@@ -5,10 +5,10 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { writeIfChanged } from './write-if-changed.mjs'
+import { writeIfChanged } from '../lib/write-if-changed.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const root = path.join(__dirname, '..')
+const root = path.join(__dirname, '../..')
 const lottieRoot = path.join(root, 'public/images/lottie')
 const outFile = path.join(root, 'public/data/pub/lottie.json')
 

@@ -6,7 +6,7 @@
  */
 import type { AnchorHTMLAttributes, HTMLAttributes, ReactNode } from 'react' // React
 import { Link, NavLink } from '@/lib/router' // 라이브러리/유틸 · router
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { hasNodes } from '@/utils/react' // has Nodes
 import { LanguageSwitcher } from './LanguageSwitcher' // Language Switcher 컴포넌트
 import { headerAppearanceStyle, type HeaderAppearance, type HeaderStyle } from '@/comp/shared/header-appearance' // 공유 모듈 · header appearance

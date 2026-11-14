@@ -11,7 +11,7 @@ import { Link } from '@/lib/router' // 앱 라우터 Link
 import { Icon } from '@/comp/ui/Icon' // 접힘 레일·토글 아이콘
 import { Switch } from '@/comp/ui/Switch' // 하위 뎁스 모두 펼침/접힘
 import { Tooltip } from '@/comp/ui/Tooltip' // 접힘 시 카테고리 툴팁
-import { classNames } from '@/utils/classNames' // className 결합
+import { classNames } from '@/utils/style/classNames' // className 결합
 import {
   guideAccessibilityPath, // guide Accessibility Path
   guideHomePath, // guide Home Path

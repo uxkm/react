@@ -1,42 +1,20 @@
 'use client'
 
 import { Page, PageLoading } from '@/comp' // comp
-import { PublishingPlaceholder } from '@/screen/pub/widgets/publishing/PublishingPlaceholder' // Publishing Placeholder 컴포넌트
+import ComingSoon from '@/widgets/b2b/common/ComingSoon' // Coming Soon 컴포넌트
 import { resolveSkeletonMode } from '@/config/skeleton' // resolve Skeleton Mode
 import IndexSkeleton from './skeleton/indexSkeleton' // Index Skeleton 컴포넌트
 
 export const pageTitle = "진단 서비스"
 
-/** IA publishing scaffold. Replace this screen body with the approved markup. */
+/** 미작업 화면 — ComingSoon. 시안 반영 시 본문을 교체한다. */
 export default function B2bServiceDiagnosisPage () {
-  const links = [
-    {
-      "to": "/b2b/service/platform",
-      "label": "러닝플랫폼",
-      "screenId": "B2B-SERVIC-001"
-    },
-    {
-      "to": "/b2b/service/learning",
-      "label": "러닝 서비스",
-      "screenId": "B2B-SERVIC-002"
-    },
-    {
-      "to": "/b2b/service/consulting",
-      "label": "컨설팅 서비스",
-      "screenId": "B2B-SERVIC-004"
-    },
-    {
-      "to": "/b2b/service/bpo",
-      "label": "BPO 서비스",
-      "screenId": "B2B-SERVIC-005"
-    }
-  ]
   const skeletonId = 'b2b/service/diagnosis'
   const skeletonMode = resolveSkeletonMode(skeletonId)
 
   return (
     <>
-      <Page page="service-diagnosis" title={pageTitle}  className="project-content" />
+      <Page page="service-diagnosis" title={pageTitle}  className="p-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}
@@ -44,16 +22,7 @@ export default function B2bServiceDiagnosisPage () {
         skeleton={skeletonMode === 'manual' ? <IndexSkeleton /> : undefined}
         className="page-container"
       >
-        <PublishingPlaceholder
-          device="B2B"
-          folderId="service"
-          folderName="서비스"
-          screenName={pageTitle}
-          screenType="Page"
-          screenId="B2B-SERVIC-003"
-          pageUrl="/b2b/service/diagnosis"
-          links={links}
-        />
+        <ComingSoon />
 
       </PageLoading>
     </>

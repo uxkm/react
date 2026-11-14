@@ -41,7 +41,7 @@ import { Icon } from '@/comp/ui/Icon'
 
 제목과 설명의 `\n`은 줄바꿈으로 표시합니다. 이미지형 톤은 `mint`, `lavender`, 바로가기형 톤은 `cream`, `gray`, `sage`입니다. `icon`에는 ReactNode를 전달합니다. `priority`는 프로모션형과 이미지형 이미지에만 적용합니다.
 
-카드 높이·그리드 배치·여러 카드의 조합·Carousel 제어는 호출하는 위젯에서 담당합니다. 프로모션 기본 최소 높이는 568px이며 이미지형과 바로가기형은 부모 그리드 높이에 맞춥니다. 공통 외형 스타일은 `src/styles/pages/b2b/modules/_cards.scss`, 메인 배치는 `src/styles/pages/b2b/home/_main.scss`, 카드별 문구·이미지·링크는 각 `src/widgets/b2b/main/` 위젯의 카드 호출부에서 관리합니다.
+카드 높이·그리드 배치·여러 카드의 조합·Carousel 제어는 호출하는 위젯에서 담당합니다. 프로모션 기본 최소 높이는 568px이며 이미지형과 바로가기형은 부모 그리드 높이에 맞춥니다. 공통 외형 스타일은 `src/styles/pages/b2b/modules/_cards.scss`, 메인 배치는 `src/styles/pages/b2b/main/_main.scss`, 카드별 문구·이미지·링크는 각 `src/widgets/b2b/main/` 위젯의 카드 호출부에서 관리합니다.
 
 ## 호출 위치에서 이미지 제어
 

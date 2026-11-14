@@ -1,6 +1,6 @@
 'use client'
 
-import { useLatestRef } from '@/hooks/useLatestRef' // Latest Ref 훅
+import { useLatestRef } from '@/hooks/react/useLatestRef' // Latest Ref 훅
 
 /**
  * 파일 업로드.
@@ -17,7 +17,7 @@ import {
   type KeyboardEvent, // KeyboardEvent 타입
   type ReactNode // ReactNode 타입
 } from 'react' // React
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 
 /** 업로드 목록 항목 */
 export interface UploadFileItem {

@@ -1,32 +1,20 @@
 'use client'
 
 import { Page, PageLoading } from '@/comp' // comp
-import { PublishingPlaceholder } from '@/screen/pub/widgets/publishing/PublishingPlaceholder' // Publishing Placeholder 컴포넌트
+import ComingSoon from '@/widgets/b2b/common/ComingSoon' // Coming Soon 컴포넌트
 import { resolveSkeletonMode } from '@/config/skeleton' // resolve Skeleton Mode
 import CertificationSkeleton from './skeleton/indexSkeleton' // Certification Skeleton 컴포넌트
 
 export const pageTitle = "자격대비"
 
-/** IA publishing scaffold. Replace this screen body with the approved markup. */
+/** 미작업 화면 — ComingSoon. 시안 반영 시 본문을 교체한다. */
 export default function B2bContentsJobCertificationPage () {
-  const links = [
-    {
-      "to": "/b2b/contents/job/professional",
-      "label": "직무 전문 역량",
-      "screenId": "B2B-CONTENTS-JOB-PROFESSIONAL"
-    },
-    {
-      "to": "/b2b/contents/job/industry",
-      "label": "산업 전문 역량",
-      "screenId": "B2B-CONTENTS-JOB-INDUSTRY"
-    }
-  ]
   const skeletonId = 'b2b/contents/job/certification'
   const skeletonMode = resolveSkeletonMode(skeletonId)
 
   return (
     <>
-      <Page page="contents-job-certification" title={pageTitle}  className="project-content" />
+      <Page page="contents-job-certification" title={pageTitle}  className="p-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}
@@ -34,16 +22,7 @@ export default function B2bContentsJobCertificationPage () {
         skeleton={skeletonMode === 'manual' ? <CertificationSkeleton /> : undefined}
         className="page-container"
       >
-        <PublishingPlaceholder
-          device="B2B"
-          folderId="contents"
-          folderName="기업교육"
-          screenName={pageTitle}
-          screenType="Page"
-          screenId="B2B-CONTENTS-JOB-CERTIFICATION"
-          pageUrl="/b2b/contents/job/certification"
-          links={links}
-        />
+        <ComingSoon />
 
       </PageLoading>
     </>

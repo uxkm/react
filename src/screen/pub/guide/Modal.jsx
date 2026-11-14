@@ -152,7 +152,7 @@ const close = () => {
       name: 'NoticeModalExample',
       reactImports: ['useState'],
       compImports: ['Button', 'Checkbox', 'Flex', 'Modal'],
-      extraImports: ["import { useDailyDismissal } from '@/hooks/useDailyDismissal'", "import { useHydrated } from '@/hooks/useHydrated'"]
+      extraImports: ["import { useDailyDismissal } from '@/hooks/interaction/useDailyDismissal'", "import { useHydrated } from '@/hooks/react/useHydrated'"]
     }),
     preview: <NoticeModalDemo />
   },

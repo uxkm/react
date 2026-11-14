@@ -2,6 +2,7 @@
   "b2b": {
     "id": "b2b",
     "label": "B2B",
-    "base": "b2b/"
+    "base": "b2b/",
+    "urlBase": "/b2b"
   }
 }

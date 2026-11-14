@@ -4,6 +4,9 @@
  * - auto   : 실제 UI DOM 을 측정해 자동으로 뼈대 그림 (기본)
  * - manual : 페이지에서 넘긴 수동 스켈레톤(디자인 확정본) 사용
  *
+ * 권장: 각 페이지 PageLoading 의 skeletonMode prop 으로 지정
+ *   <PageLoading skeletonMode="manual" skeleton={<IndexSkeleton />} ... />
+ *
  * 우선순위: PageLoading 의 skeletonMode prop > 여기 페이지 맵 > DEFAULT_MODE
  */
 
@@ -13,18 +16,13 @@ export type SkeletonMode = 'auto' | 'manual'
 export const SKELETON_DEFAULT_MODE: SkeletonMode = 'auto'
 
 /**
- * 디자인 확정 후 수동 스켈레톤을 쓸 페이지
- * key = skeletonId (PageLoading 의 skeletonId)
+ * (선택) 여러 페이지를 한곳에서 덮어쓸 때만 사용.
+ * 일반 화면은 PageLoading 의 skeletonMode prop 을 우선한다.
  *
- * @example
- * 'b2b/user-page': 'manual',
- * 'pub/index': 'manual',
+ * key = PageLoading 의 skeletonId 또는 className
  */
 export const SKELETON_PAGE_MODE: Record<string, SkeletonMode> = {
-  // 디자인 나온 페이지는 여기에 'manual' 로 등록
-  // 'b2b/main': 'manual',
-  // 'b2b/contents/ax/overview': 'manual',
-  // 'pub/index': 'manual',
+  // 예) 'main': 'manual',
 }
 
 /**

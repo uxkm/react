@@ -12,7 +12,7 @@ import {
   arrayMove, // array Move
   verticalListSortingStrategy, // vertical List Sorting Strategy
   CSS // CSS 컴포넌트
-} from '@/lib/dnd' // 라이브러리/유틸 · dnd
+} from '@/lib/vendor/dnd' // 라이브러리/유틸 · dnd
 import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
 import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
 import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
@@ -55,7 +55,7 @@ export default function DndDemoPage () {
   return (
     <DemoLayout
       title="DnD Kit"
-      description="@dnd-kit/core · sortable · utilities — 목록 드래그 정렬 (@/lib/dnd)"
+      description="@dnd-kit/core · sortable · utilities — 목록 드래그 정렬 (@/lib/vendor/dnd)"
       slug="dnd"
     >
       <DemoBlock
@@ -90,7 +90,7 @@ const onDragEnd = ({ active, over }) => {
   arrayMove,
   verticalListSortingStrategy,
   CSS
-} from '@/lib/dnd'
+} from '@/lib/vendor/dnd'
 
 function SortableItem ({ id }) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id })

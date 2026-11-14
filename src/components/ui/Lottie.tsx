@@ -16,8 +16,8 @@ import {
 import lottie, { type AnimationItem, type RendererType } from 'lottie-web' // Lottie 애니메이션
 import { Button } from './Button' // Button 컴포넌트
 import { Icon } from './Icon' // Icon 컴포넌트
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
-import { imgLottie } from '@/utils/images' // img Lottie
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
+import { imgLottie } from '@/utils/media/images' // img Lottie
 
 /**
  * Lottie 경로 해석 (Icon resolveIconSrc 와 동일 규칙).

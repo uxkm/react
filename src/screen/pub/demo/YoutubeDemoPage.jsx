@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react' // 상태 훅
-import { YouTube } from '@/lib/youtube' // You Tube 컴포넌트
+import { YouTube } from '@/lib/vendor/youtube' // You Tube 컴포넌트
 import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
 import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
 import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
@@ -16,7 +16,7 @@ export default function YoutubeDemoPage () {
   return (
     <DemoLayout
       title="YouTube"
-      description="react-youtube — iframe 플레이어 (@/lib/youtube)"
+      description="react-youtube — iframe 플레이어 (@/lib/vendor/youtube)"
       slug="youtube"
     >
       <DemoBlock
@@ -41,7 +41,7 @@ export default function YoutubeDemoPage () {
           name: 'YoutubeExample',
           reactImports: ['useState'],
           compImports: [],
-          extraImports: ["import { YouTube } from '@/lib/youtube'"]
+          extraImports: ["import { YouTube } from '@/lib/vendor/youtube'"]
         })}
       >
         <p style={{ margin: '0 0 12px', fontSize: 13, color: 'var(--color-text-muted)' }}>

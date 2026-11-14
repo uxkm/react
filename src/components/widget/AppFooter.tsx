@@ -3,7 +3,7 @@
  * children 이 있으면 그 내용, 없으면 기본 문구(@Publish Guide).
  */
 import type { HTMLAttributes, ReactNode } from 'react' // React
-import { classNames } from '@/utils/classNames' // 조건부 className 조합
+import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { hasNodes } from '@/utils/react' // has Nodes
 
 /** 앱 푸터가 받는 값 */

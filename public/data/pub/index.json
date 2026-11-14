@@ -4,6 +4,7 @@
     "description": "퍼블리시 목록과 컴포넌트 가이드",
     "id": "b2b",
     "label": "B2B",
-    "base": "b2b/"
+    "base": "b2b/",
+    "urlBase": "/b2b"
   }
 }

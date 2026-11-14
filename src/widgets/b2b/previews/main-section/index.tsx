@@ -39,7 +39,7 @@ function MainSectionPreview () {
 
   return (
     <>
-      <Page page={`main-section-${key}`} title={title} className="project-content" />
+      <Page page={`main-section-${key}`} title={title} className="p-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}

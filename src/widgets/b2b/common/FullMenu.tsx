@@ -15,7 +15,9 @@ export function B2bLogo () {
         alt="multicampus"
         width={152}
         height={26}
-        priority
+        // LCP(헤더 로고): lazy 금지. 동일 src 가 푸터에도 있어 eager 로 맞춰 경고 방지
+        loading="eager"
+        fetchPriority="high"
       />
     </Link>
   )
@@ -32,7 +34,14 @@ function MenuLink ({ label, href }: Readonly<B2bMenuLink>) {
       rel={external ? 'noopener noreferrer' : undefined}
     >
       {label}
-      {external && <span aria-hidden="true" className="full-menu-content_external">↗</span>}
+      {external && (
+        <Icon
+          name="external"
+          size={14}
+          className="full-menu-content_external"
+          aria-hidden
+        />
+      )}
     </Link>
   )
 }

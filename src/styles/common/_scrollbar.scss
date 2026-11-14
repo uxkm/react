@@ -65,7 +65,7 @@ html[data-scrollbar='classic'] {
   }
 }
 
-// ----- 커스텀 오버레이 썸 (utils/overlayScrollbar.js)
+// ----- 커스텀 오버레이 썸 (utils/dom/overlayScrollbar.js)
 // host 는 전체 화면 덮개를 쓰지 않는다 — fixed inset:0 이면 app-header backdrop-filter 가 가려질 수 있다.
 .osb-host {
   position: absolute;

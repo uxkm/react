@@ -1,21 +1,20 @@
 'use client'
 
 import { Page, PageLoading } from '@/comp' // comp
-import { PublishingPlaceholder } from '@/screen/pub/widgets/publishing/PublishingPlaceholder' // Publishing Placeholder 컴포넌트
+import ComingSoon from '@/widgets/b2b/common/ComingSoon' // Coming Soon 컴포넌트
 import { resolveSkeletonMode } from '@/config/skeleton' // resolve Skeleton Mode
 import IndexSkeleton from './skeleton/indexSkeleton' // Index Skeleton 컴포넌트
 
 export const pageTitle = "플랫폼도입문의"
 
-/** IA publishing scaffold. Replace this screen body with the approved markup. */
+/** 미작업 화면 — ComingSoon. 시안 반영 시 본문을 교체한다. */
 export default function B2bContactPlatformPage () {
-  const links = []
   const skeletonId = 'b2b/contact/platform'
   const skeletonMode = resolveSkeletonMode(skeletonId)
 
   return (
     <>
-      <Page page="contact-platform" title={pageTitle}  className="project-content" />
+      <Page page="contact-platform" title={pageTitle}  className="p-content" />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}
@@ -23,16 +22,7 @@ export default function B2bContactPlatformPage () {
         skeleton={skeletonMode === 'manual' ? <IndexSkeleton /> : undefined}
         className="page-container"
       >
-        <PublishingPlaceholder
-          device="B2B"
-          folderId="contact"
-          folderName="문의하기"
-          screenName={pageTitle}
-          screenType="Page"
-          screenId="B2B-CONTACT-PLATFORM"
-          pageUrl="/b2b/contact/platform"
-          links={links}
-        />
+        <ComingSoon />
 
       </PageLoading>
     </>

@@ -4,10 +4,10 @@ import path from 'node:path'
 import { spawn, execFile } from 'node:child_process'
 import { promisify } from 'node:util'
 import { fileURLToPath } from 'node:url'
-import { root } from './project.mjs'
-import { getStyleEntries } from './build/style-entries.mjs'
+import { root } from '../generate/project.mjs'
+import { getStyleEntries } from '../build/style-entries.mjs'
 import { watchSourceFiles } from './watch-files.mjs'
-import { syncLottieList } from './lottie-list.mjs'
+import { syncLottieList } from '../generate/lottie-list.mjs'
 
 const execute = promisify(execFile)
 function sourceTopology () {
@@ -44,7 +44,7 @@ export async function startDevelopment () {
 
   function startServer () {
     if (child || closing) return
-    const current = spawn(process.execPath, [path.join(root, 'scripts/serve-next.mjs'), '--dev'], {
+    const current = spawn(process.execPath, [path.join(root, 'scripts/serve/serve-next.mjs'), '--dev'], {
       cwd: root,
       env: { ...process.env, STYLE_MODE: 'scss' },
       stdio: ['inherit', 'inherit', 'inherit', 'ipc']
@@ -71,8 +71,8 @@ export async function startDevelopment () {
     if (child === current) child = null
   }
   async function regenerate () {
-    const { stdout } = await execute(process.execPath, [path.join(root, 'scripts/registry.mjs')], { cwd: root })
-    const { stdout: validation } = await execute(process.execPath, [path.join(root, 'scripts/validate-project.mjs')], { cwd: root })
+    const { stdout } = await execute(process.execPath, [path.join(root, 'scripts/generate/registry.mjs')], { cwd: root })
+    const { stdout: validation } = await execute(process.execPath, [path.join(root, 'scripts/generate/validate-project.mjs')], { cwd: root })
     process.stdout.write(stdout + validation)
   }
   function refreshBrowser () {

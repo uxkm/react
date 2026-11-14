@@ -1,18 +1,19 @@
 'use client'
 
 import { Carousel, CarouselSlide } from '@/comp/ui/Carousel' // UI 컴포넌트 · Carousel 컴포넌트
-import { useMediaQuery } from '@/hooks/useMediaQuery' // Media Query 훅
+import { useMediaQuery } from '@/hooks/layout/useMediaQuery' // Media Query 훅
 import MainFinanceTestimonialCard from '@/widgets/b2b/main/MainFinanceTestimonialCard' // Main Finance Testimonial Card 컴포넌트
 import MainLeadershipTestimonialCard from '@/widgets/b2b/main/MainLeadershipTestimonialCard' // Main Leadership Testimonial Card 컴포넌트
 import MainManufacturingTestimonialCard from '@/widgets/b2b/main/MainManufacturingTestimonialCard' // Main Manufacturing Testimonial Card 컴포넌트
 
+/** Swiper coverflow 효과 옵션. 가운데 슬라이드를 강조하고 좌우를 축소합니다. */
 const coverflowEffect = {
-  rotate: 0,
-  stretch: 0,
-  depth: 0,
-  scale: 0.84,
-  modifier: 1,
-  slideShadows: false
+  rotate: 0, // 좌우 슬라이드의 Y축 회전 각도(deg). 0이면 기울이지 않음
+  stretch: 0, // 슬라이드 간 가로 간격 보정(px). 0이면 기본 spaceBetween만 사용
+  depth: 0, // 좌우 슬라이드의 Z축 깊이(px). 0이면 앞뒤로 밀지 않음
+  scale: 0.84, // 비활성(좌우) 슬라이드 크기 비율. 0.84 = 84%
+  modifier: 1, // 효과 강도 배수. 1이면 위 값을 그대로 적용
+  slideShadows: false // 슬라이드 그림자 표시 여부
 }
 
 /** 세 번째 본문 섹션의 고객사례 카드 배치. */
