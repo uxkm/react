@@ -28,4 +28,4 @@
 
 `RegistryPage`는 서버 전용입니다. 상태·이벤트와 브라우저 API가 필요한 UI에서는 클라이언트 경계를 명시하고, 브라우저 라이브러리 초기화·해제는 커밋 후에 처리합니다.
 
-실제 예제는 [라이브러리 데모](/pub/demo/libs), [공통 UI 가이드](/pub/guide/button), [접근성 가이드](/pub/guide/accessibility)에서 확인할 수 있습니다.
+실제 예제는 [라이브러리 데모](/pub/demo/libs), [공통 UI 가이드](/pub/guide/button), [접근성 가이드](/pub/guide/a11y)에서 확인할 수 있습니다.

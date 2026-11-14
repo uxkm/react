@@ -537,8 +537,8 @@
       "state": "rendered"
     },
     {
-      "route": "/pub/guide/accessibility",
-      "source": "src/screen/pub/guide/Accessibility.jsx",
+      "route": "/pub/guide/a11y",
+      "source": "src/screen/pub/guide/A11y.jsx",
       "state": "rendered"
     },
     {
@@ -1987,7 +1987,7 @@
       "category": "ui"
     },
     {
-      "path": "src/screen/pub/widgets/preview/OverlayAccessibilityDemo.jsx",
+      "path": "src/screen/pub/widgets/preview/OverlayA11yDemo.jsx",
       "category": "ui"
     },
     {

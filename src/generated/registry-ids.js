@@ -83,7 +83,7 @@ export const b2bRoutes = [
   "common/terms"
 ]
 export const componentNames = [
-  "accessibility",
+  "a11y",
   "accordion",
   "affix",
   "alert",
@@ -246,7 +246,7 @@ export const routeTitles = {
   "/b2b/common/quick-links": "퀵링크",
   "/b2b/common/tab-navigation": "하위 탭 네비게이션",
   "/b2b/common/terms": "이용약관",
-  "/pub/guide/accessibility": "접근성 - 퍼블리싱가이드",
+  "/pub/guide/a11y": "접근성 - 퍼블리싱가이드",
   "/pub/guide/accordion": "Accordion - 퍼블리싱가이드",
   "/pub/guide/affix": "Affix - 퍼블리싱가이드",
   "/pub/guide/alert": "Alert - 퍼블리싱가이드",

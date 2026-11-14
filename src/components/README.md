@@ -202,7 +202,7 @@ import { Button, Floating, PageFloating } from '@/comp'
 
 ## 전체 접근성 검토
 
-공통 UI 64개 파일과 widget·layout의 검토 결과는 [컴포넌트별 검토 문서](../../public/data/pub/docs/a11y/component-review-2026-11-14.md)에 있습니다. 가이드 `/pub/guide/accessibility`에서도 문서를 열 수 있습니다.
+공통 UI 64개 파일과 widget·layout의 검토 결과는 [컴포넌트별 검토 문서](../../public/data/pub/docs/a11y/component-review-2026-11-14.md)에 있습니다. 가이드 `/pub/guide/a11y`에서도 문서를 열 수 있습니다.
 
 
 ## 페이지 하단 스낵바

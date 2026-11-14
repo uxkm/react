@@ -15,9 +15,9 @@ export function mergeGuideGroups (groups, pages, { exclude = [] } = {}) {
   return result
 }
 
-/** The separately rendered accessibility entry must follow source deletion too. */
+/** The separately rendered a11y entry must follow source deletion too. */
 export function resolveGuideMenu (data, pages, defaults) {
-  const accessibility = data.accessibility || defaults.accessibility
+  const a11y = data.a11y || defaults.a11y
   const available = new Set(pages.guide.map((page) => page.id))
   const widgetIds = new Set()
   const guideWidgetItems = (data.widgetItems || []).filter((item) => {
@@ -27,8 +27,8 @@ export function resolveGuideMenu (data, pages, defaults) {
   })
   return {
     intro: data.intro || defaults.intro,
-    accessibility: pages.guide.some((page) => page.id === accessibility.id) ? accessibility : null,
-    guideMenu: mergeGuideGroups(data.componentGroups, pages.guide, { exclude: [accessibility.id, ...widgetIds] }),
+    a11y: pages.guide.some((page) => page.id === a11y.id) ? a11y : null,
+    guideMenu: mergeGuideGroups(data.componentGroups, pages.guide, { exclude: [a11y.id, ...widgetIds] }),
     guideWidgetItems,
     guideDemoMenu: mergeGuideGroups(data.demoGroups, pages.demo)
   }

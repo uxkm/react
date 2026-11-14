@@ -3,7 +3,7 @@
 export const pubPages = {
   "guide": [
     {
-      "id": "accessibility",
+      "id": "a11y",
       "label": "접근성"
     },
     {

@@ -3,7 +3,7 @@
 import { useState } from 'react' // 상태 훅
 import { Button, Modal } from '@/comp' // comp
 import { LoadOpenOverlayDemo } from '@/screen/pub/widgets/preview/LoadOpenOverlayDemo' // Load Open Overlay Demo 컴포넌트
-import { OverlayAccessibilityDemo } from '@/screen/pub/widgets/preview/OverlayAccessibilityDemo' // 키보드·중첩 접근성 예시
+import { OverlayA11yDemo } from '@/screen/pub/widgets/preview/OverlayA11yDemo' // 키보드·중첩 접근성 예시
 import { TimedOverlayDemo } from '@/screen/pub/widgets/preview/TimedOverlayDemo' // Timed Overlay Demo 컴포넌트
 import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
 import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
@@ -100,7 +100,7 @@ const SECTIONS = [
   {
     title: '키보드와 스크린리더',
     description: '열면 지정한 입력란에 초점을 둡니다. Tab·Shift+Tab은 내부를 순환하며, Escape는 맨 위 대화상자만 닫고 열기 버튼으로 초점을 돌립니다. 제목은 접근성 이름으로 연결되며, 배경은 모달이 닫힐 때까지 접근할 수 없습니다.',
-    preview: <OverlayAccessibilityDemo component="Modal" />
+    preview: <OverlayA11yDemo component="Modal" />
   },
   {
     title: '배경 dim 숨기기',

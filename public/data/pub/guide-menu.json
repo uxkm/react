@@ -3,8 +3,8 @@
     "id": "intro",
     "label": "소개"
   },
-  "accessibility": {
-    "id": "accessibility",
+  "a11y": {
+    "id": "a11y",
     "label": "접근성"
   },
   "componentGroups": [

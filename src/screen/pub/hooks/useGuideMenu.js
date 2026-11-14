@@ -13,8 +13,8 @@ const GUIDE_MENU_URL = '/data/pub/guide-menu.json'
 /** 가이드 홈 경로 (/pub/guide) — JSON intro 는 라벨용 */
 export const guideHomePath = '/pub/guide'
 
-/** 접근성 가이드 경로 (/pub/guide/accessibility) */
-export const guideAccessibilityPath = '/pub/guide/accessibility'
+/** 접근성 가이드 경로 (/pub/guide/a11y) */
+export const guideA11yPath = '/pub/guide/a11y'
 
 export const demoHomePath = pubPages.demo.some((page) => page.id === 'libs') ? '/pub/demo/libs' : '/pub'
 
@@ -23,7 +23,7 @@ export const guideHomeId = 'intro'
 
 const EMPTY = {
   intro: { id: guideHomeId, label: '소개' },
-  accessibility: { id: 'accessibility', label: '접근성' },
+  a11y: { id: 'a11y', label: '접근성' },
   guideMenu: [],
   guideWidgetItems: [],
   guideDemoMenu: []

@@ -1,12 +1,20 @@
+import checklist from '../../../../public/data/pub/docs/a11y/kwcag-2.2-checklist.md'
+
+// 접근성 본문의 하위 절로 표시하도록 원본 제목을 생략하고 절 제목을 한 단계 내립니다.
+const checklistBody = checklist
+  .replace(/^# [^\n]+\r?\n/, '')
+  .replace(/^(#{2,}) /gm, '$1# ')
+  .trim()
+
 /**
- * 가이드 접근성(/pub/guide/accessibility) 본문.
+ * 가이드 접근성(/pub/guide/a11y) 본문.
  * KWCAG 2.2(KS X OT0003) 검사기준 안내.
  */
 
-export const accessibilitySummary =
+export const a11ySummary =
   'KWCAG 2.2(한국형 웹 콘텐츠 접근성 지침) 검사기준과 검사 체크리스트입니다.'
 
-export const accessibilityBody = `
+export const a11yBody = `
 ## 기준 개요
 
 **KWCAG 2.2**는 방송통신표준 **KS X OT0003**(2022.12.28 개정)입니다. WCAG 2.1/2.2를 반영해 **4개 원칙 · 14개 지침 · 33개 검사항목**으로 구성됩니다.
@@ -116,7 +124,9 @@ KWCAG 2.1(24항) 대비 **9개**가 추가되었습니다. 신규 항목은 우�
 
 ## 수동 체크리스트
 
-[KWCAG 2.2 수동 체크리스트](/data/pub/docs/a11y/kwcag-2.2-checklist.md)의 33개 항목을 화면별로 기록합니다.
+KWCAG 2.2 수동 체크리스트의 33개 항목을 화면별로 기록합니다.
+
+${checklistBody}
 
 ## 검수 흐름 (권장)
 
@@ -129,4 +139,4 @@ KWCAG 2.1(24항) 대비 **9개**가 추가되었습니다. 신규 항목은 우�
 표준 원문·해설은 [한국형 웹 콘텐츠 접근성 지침(KWCAG) 2.2](https://a11ykr.github.io/kwcag22/) 및 국립전파연구원 KS X OT0003을 참고하세요.
 `.trim()
 
-export default accessibilityBody
+export default a11yBody

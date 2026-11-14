@@ -48,7 +48,7 @@
 - `tests/browser/site-keyboard.spec.mjs`: 전체메뉴·PUB 레이어·DnD·정렬·일정·차트·320px 회귀.
 - 기존 공통 키보드·dialog·알림·타이머 회귀 검사.
 
-전체 페이지 결과 JSON은 `reports/accessibility/site/`에 저장됩니다. 쿼리 프리뷰·테마·기기 조합을 파일명으로 구분합니다.
+전체 페이지 결과 JSON은 `reports/a11y/site/`에 저장됩니다. 쿼리 프리뷰·테마·기기 조합을 파일명으로 구분합니다.
 
 ## 한계와 후속 확인
 

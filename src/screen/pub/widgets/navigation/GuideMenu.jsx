@@ -13,7 +13,7 @@ import { Switch } from '@/comp/ui/Switch' // 하위 뎁스 모두 펼침/접힘
 import { Tooltip } from '@/comp/ui/Tooltip' // 접힘 시 카테고리 툴팁
 import { classNames } from '@/utils/style/classNames' // className 결합
 import {
-  guideAccessibilityPath, // guide Accessibility Path
+  guideA11yPath, // guide A11y Path
   guideHomePath, // guide Home Path
   useGuideMenu // Guide Menu 훅
 } from '@/screen/pub/hooks/useGuideMenu' // 홈·접근성 경로·메뉴 JSON 훅
@@ -73,7 +73,7 @@ export function GuideMenu ({ className }) {
     : {})
 
   const guideIntroItem = menu?.intro || { id: 'intro', label: '소개' }
-  const guideA11yItem = menu?.accessibility || { id: 'accessibility', label: '접근성' }
+  const guideA11yItem = menu?.a11y || { id: 'a11y', label: '접근성' }
   const guideMenu = useMemo(() => menu?.guideMenu || [], [menu])
   const guideWidgetItems = useMemo(() => menu?.guideWidgetItems || [], [menu])
   const guideDemoMenu = useMemo(() => menu?.guideDemoMenu || [], [menu])
@@ -85,8 +85,8 @@ export function GuideMenu ({ className }) {
   const allExpanded = allGroupIds.length > 0 && allGroupIds.every((id) => !!openGroups[id])
   const introHref = guideHomePath
   const introActive = pathname === guideHomePath || pathname === '/pub/guide/'
-  const a11yHref = guideAccessibilityPath
-  const a11yActive = pathname === guideAccessibilityPath
+  const a11yHref = guideA11yPath
+  const a11yActive = pathname === guideA11yPath
   const activeGroupId = findComponentGroupId(pathname, guideMenu)
   const widgetActive = guideWidgetItems.some((item) => pathname === '/pub/guide/' + item.id)
 
@@ -152,7 +152,7 @@ export function GuideMenu ({ className }) {
                   >
                     {guideIntroItem.label}
                   </Link>
-                  {menu?.accessibility && <Link
+                  {menu?.a11y && <Link
                     className={classNames('comp-guide_top-link', { 'is-active': a11yActive })}
                     to={a11yHref}
                     aria-current={a11yActive ? 'page' : undefined}

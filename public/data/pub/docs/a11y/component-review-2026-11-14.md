@@ -93,10 +93,10 @@
 - 프로젝트 검사 16개, 전체 ESLint, 스타일 생성 및 Next.js webpack 프로덕션 빌드를 통과했습니다.
 - axe의 incomplete는 총 256개 검사 그룹입니다. 이미지·SVG 및 겹침에 따른 대비, 조건부 패널 연결, 기호 버튼 등 수동 판정이 필요한 결과이며 통과 건수에 포함하지 않았습니다. 실제 스크린리더 음성 출력과 운영 데이터 검증은 별도로 필요합니다.
 
-테스트: `tests/browser/component-audit.spec.mjs`, `component-keyboard.spec.mjs`, `dialog-accessibility.spec.mjs`, `overlay-timing.spec.mjs`, `modal-notice.spec.mjs`.
+테스트: `tests/browser/component-audit.spec.mjs`, `component-keyboard.spec.mjs`, `dialog-a11y.spec.mjs`, `overlay-timing.spec.mjs`, `modal-notice.spec.mjs`.
 검사 엔진: axe-core 4.14.0. 테마 전환 애니메이션의 중간 색상 대신 정지 상태의 대비를 검사합니다.
 
-개별 axe 결과: `reports/accessibility/*-{light,dark}-{desktop,mobile}-chromium.json`. `incomplete` 결과는 수동 판정 대상이며 오류가 없다는 의미로 처리하지 않습니다.
+개별 axe 결과: `reports/a11y/*-{light,dark}-{desktop,mobile}-chromium.json`. `incomplete` 결과는 수동 판정 대상이며 오류가 없다는 의미로 처리하지 않습니다.
 
 ## 유지할 호출 규칙
 

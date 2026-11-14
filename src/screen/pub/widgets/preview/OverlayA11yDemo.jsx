@@ -4,7 +4,7 @@ import { useId, useRef, useState } from 'react' // React
 import { Button, Drawer, Modal } from '@/comp' // comp
 
 /** 초기 초점과 서로 다른 대화상자 중첩을 키보드로 확인하는 공통 예시. */
-export function OverlayAccessibilityDemo ({ component }) {
+export function OverlayA11yDemo ({ component }) {
   const [open, setOpen] = useState(false)
   const [nested, setNested] = useState(false)
   const [backdrop, setBackdrop] = useState(true)
@@ -16,7 +16,7 @@ export function OverlayAccessibilityDemo ({ component }) {
   const Child = component === 'Drawer' ? Modal : Drawer
 
   return (
-    <div data-overlay-accessibility-demo={component}>
+    <div data-overlay-a11y-demo={component}>
       <label><input type="checkbox" checked={backdrop} onChange={(event) => setBackdrop(event.target.checked)} /> 배경 dim 표시</label>
       <label><input type="checkbox" checked={showTitle} onChange={event => setShowTitle(event.target.checked)} /> 제목 표시</label>
       <label><input type="checkbox" checked={customFocus} onChange={event => setCustomFocus(event.target.checked)} /> 초기 초점을 입력으로 지정</label>
