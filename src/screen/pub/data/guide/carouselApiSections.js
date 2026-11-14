@@ -120,7 +120,7 @@ const layoutProps = [
     name: 'centered',
     type: 'boolean',
     default: 'false',
-    description: '활성 슬라이드를 가운데 정렬합니다. coverflow 이면 자동으로 켜집니다.'
+    description: '활성 슬라이드를 가운데 정렬합니다. coverflow 이면 자동으로 켜집니다. thumbsControl과 함께 사용하면 메인 선택을 따라 썸네일 목록이 가운데로 이동하고, 양 끝은 목록 경계에 맞춥니다.'
   },
   {
     name: 'gridRows',

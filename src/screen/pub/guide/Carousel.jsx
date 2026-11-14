@@ -88,6 +88,7 @@ function ThumbsGalleryDemo () {
         pagination={false}
         navigation={false}
         thumbsControl
+        centered
         watchSlidesProgress
         onSwiper={setThumbs}
       >
@@ -550,6 +551,7 @@ const [playing, setPlaying] = useState(true)
       <>
         메인 캐러셀에 <code>thumbs</code>로 썸네일 Swiper를 연결합니다.
         썸네일 쪽은 <code>thumbsControl</code> · <code>onSwiper</code>를 사용합니다.
+        <code>centered</code>를 지정하면 선택한 썸네일이 가운데로 이동하며, 양 끝에서는 목록 경계까지만 이동합니다.
       </>
     ),
     code: wrapPageExample(`const [thumbs, setThumbs] = useState(null)
@@ -566,6 +568,7 @@ const [playing, setPlaying] = useState(true)
     pagination={false}
     navigation={false}
     thumbsControl
+    centered
     watchSlidesProgress
     onSwiper={setThumbs}
   >

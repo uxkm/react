@@ -20,7 +20,6 @@
   --carousel-dot-size: 0.5rem;
   --carousel-dot-size-active: 1.25rem;
   --carousel-dot-bg: var(--color-border);
-  --carousel-dot-bg-hover: var(--color-text-muted);
   --carousel-dot-bg-active: var(--color-accent);
   --carousel-dots-padding-y: var(--space-md);
   --carousel-dots-padding-x: var(--space-md);
@@ -217,10 +216,6 @@
       width $transition-fast;
     @include focus-ring;
 
-    &:hover {
-      background: var(--carousel-dot-bg-hover);
-    }
-
     &.is-active {
       width: var(--carousel-dot-size-active);
       background: var(--carousel-dot-bg-active);
@@ -348,9 +343,7 @@
       width $transition-fast,
       transform $transition-fast;
 
-    &:hover {
-      background: var(--carousel-dot-bg-hover);
-    }
+    // 24px는 투명한 조작 영역입니다. 호버로 채우지 않고 초점 테두리만 표시합니다.
   }
 
   .swiper-pagination-bullet-active {
@@ -546,7 +539,7 @@
     }
 
     .swiper-wrapper {
-      // 시작 위치 좌측 정렬 — centeredSlides 여백으로 인한 잘림 방지
+      // 항목의 기본 배치는 시작점. 활성 항목의 중앙 이동·경계 보정은 Swiper가 처리합니다.
       justify-content: flex-start;
     }
 

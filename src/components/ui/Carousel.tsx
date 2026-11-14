@@ -74,7 +74,7 @@ export interface CarouselProps extends Omit<HTMLAttributes<HTMLDivElement>, 'chi
   slidesPerGroup?: number
   /** 슬라이드 간격(px) */
   spaceBetween?: number
-  /** 활성 슬라이드 가운데 정렬 */
+  /** 활성 슬라이드 가운데 정렬. 썸네일 컨트롤에서는 연결된 메인 선택을 따라가며 양 끝은 목록 경계에 맞춥니다. */
   centered?: boolean
   /** 페이지네이션 */
   pagination?: CarouselPagination
@@ -398,6 +398,11 @@ export function Carousel ({
 
     if (freeMode) options.freeMode = true
     if (thumbsControl) options.slideToClickedSlide = true
+    if (thumbsControl && centered && !canLoop) {
+      options.centeredSlidesBounds = true
+      // 경계에서 여러 snap 위치가 같아져도 선택 인덱스를 다른 항목으로 보정하지 않습니다.
+      options.normalizeSlideIndex = false
+    }
     if (thumbs && !thumbs.destroyed) options.thumbs = { swiper: thumbs }
 
     if (effect === 'fade') {
@@ -421,6 +426,22 @@ export function Carousel ({
 
     const swiper = new Swiper(host, options)
     instanceRef.current = swiper
+    // Thumbs 기본 동작은 화면 밖 항목만 보이게 합니다. 가운데 정렬 모드는
+    // 이미 보이는 항목으로 바뀌어도 메인 선택을 따라 목록을 이동합니다.
+    const alignThumbs = (duration: number) => {
+      const control = swiper.thumbs?.swiper
+      if (swiper.destroyed || !control || control.destroyed || !control.params.centeredSlides) return
+      if (control.params.loop) control.slideToLoop(swiper.realIndex, duration, false)
+      else control.slideTo(swiper.realIndex, duration, false)
+    }
+    const followThumbSelection = () => alignThumbs(swiper.thumbs?.swiper?.params.speed ?? 0)
+    const resizeThumbSelection = () => alignThumbs(0)
+    const thumbControl = swiper.thumbs?.swiper
+    swiper.on('slideChange', followThumbSelection)
+    swiper.on('update', resizeThumbSelection)
+    swiper.on('resize', resizeThumbSelection)
+    thumbControl?.on('update', resizeThumbSelection)
+    thumbControl?.on('resize', resizeThumbSelection)
     const originals = new Map<HTMLElement, { inert: boolean; hidden: string | null }>()
     const syncSlideAccessibility = () => {
       if (swiper.destroyed) return
@@ -469,6 +490,7 @@ export function Carousel ({
     const raf = window.requestAnimationFrame(() => {
       if (swiper.destroyed) return
       swiper.update()
+      alignThumbs(0)
       syncSlideAccessibility()
       if (canLoop && typeof swiper.slideToLoop === 'function') {
         swiper.slideToLoop(startIndex, 0, false)
@@ -484,6 +506,11 @@ export function Carousel ({
         else slide.setAttribute('aria-hidden', original.hidden)
       }
       swiper.off('slideChange', emitIndex)
+      swiper.off('slideChange', followThumbSelection)
+      swiper.off('update', resizeThumbSelection)
+      swiper.off('resize', resizeThumbSelection)
+      thumbControl?.off('update', resizeThumbSelection)
+      thumbControl?.off('resize', resizeThumbSelection)
       swiper.destroy(true, true)
       if (instanceRef.current === swiper) instanceRef.current = null
     }
