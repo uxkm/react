@@ -1,6 +1,6 @@
 'use client'
 
-import { Page, PageLoading, useSiteTitle, usePageData } from '@/comp' // 페이지 공통
+import { Page, PageBanner, PageLoading, useSiteTitle, usePageData } from '@/comp' // 페이지 공통
 import { useScrollToHash } from '@/hooks/react/useScrollToHash' // URL 해시 스크롤
 import {
   MainHero,
@@ -9,6 +9,7 @@ import {
   MainCaseSection,
   MainCalloutSection
 } from './sections' // 메인 섹션
+import InquirySnackbar from '@/widgets/b2b/common/InquirySnackbar'
 import IndexSkeleton from './skeleton/indexSkeleton' // Index Skeleton 컴포넌트
 
 /** 메인 화면은 sections의 섹션을 호출하고, 각 섹션은 widgets의 개별 콘텐츠를 배치합니다. */
@@ -60,6 +61,15 @@ export default function B2bMainPage () {
             <Page page="contents-it" title={pageTitle} className="p-content" />
       */}
       <Page page="main" className="p-content" />
+      <PageBanner
+        variant="notice"
+        storageKey="b2b-main-notices"
+        innerMaxWidth={1200}
+        items={[
+          { id: 'education', content: '기업교육의 새로운 소식과 주요 안내를 확인하세요.', href: '/b2b/common/notice-detail?id=education' },
+          { id: 'service', content: '멀티캠퍼스 교육 서비스 이용 안내를 확인하세요.', href: '/b2b/common/notice-detail?id=service' }
+        ]}
+      />
       <PageLoading
         loading={loading}
         // manual: 수동 스켈레톤(IndexSkeleton). auto 로 바꾸면 DOM 측정 자동 뼈대
@@ -82,6 +92,7 @@ export default function B2bMainPage () {
         {/* 다음 본문 시안 작업을 위한 기존 앵커를 유지합니다. */}
         <div id="search" hidden />
       </PageLoading>
+      <InquirySnackbar />
     </>
   )
 }

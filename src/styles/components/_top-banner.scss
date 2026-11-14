@@ -94,3 +94,56 @@
     &_actions { width: 100%; justify-content: flex-end; padding-bottom: 0.5rem; }
   }
 }
+
+// 공지형: 오른쪽에는 닫기만 두고 공지 링크에서 키보드로 롤링을 제어한다.
+.top-banner_notice {
+  color: #fff;
+  background: #171717;
+  border-bottom: 0;
+  font-size: 14px;
+  line-height: 1.5;
+
+  .top-banner_inner { flex-wrap: nowrap; gap: 1rem; }
+  .top-banner_body { flex-basis: auto; }
+  .top-banner_content {
+    display: grid;
+    justify-content: stretch;
+    padding: 10px 2px;
+    overflow: hidden;
+    text-align: left;
+    outline-offset: -2px;
+  }
+  .top-banner_notice-text, .top-banner_notice-previous { display: block; grid-area: 1 / 1; }
+  .top-banner_notice-previous { animation: notice-roll-out 400ms ease-out forwards; pointer-events: none; }
+  &:focus-within .top-banner_notice-previous { visibility: hidden; }
+  &[data-count]:not([data-count='1']) .top-banner_notice-text { animation: notice-roll-up 400ms ease-out; }
+  &:focus-within .top-banner_notice-text { animation: none; }
+  .top-banner_close {
+    width: 32px;
+    height: 32px;
+    &:hover { background: #383838; }
+  }
+  .top-banner_notice-help {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .top-banner_notice-text { animation: none !important; }
+    .top-banner_notice-previous { display: none; }
+  }
+}
+
+@keyframes notice-roll-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes notice-roll-out {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-100%); opacity: 0; }
+}

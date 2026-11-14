@@ -71,6 +71,16 @@ export const meta = { banner: true }
   <strong>지정한 너비 안에서 가운데 정렬된 배너</strong>
 </TopBanner>`}
         ><TopBanner width={960} innerMaxWidth={720} height={96} contentAlign="left" storageKey="guide-top-banner-width">지정한 너비 안에서 가운데 정렬된 배너</TopBanner></DemoBlock>
+        <DemoBlock title="텍스트 공지 · 수직 롤링" description="검정 배경의 공지형은 오른쪽에 닫기만 제공합니다. 2개 이상이면 위로 롤링하며, 포커스 진입 시 멈추고 영역을 벗어나면 다시 롤링합니다. 공지에서 ↑·↓, Home·End로 전환하고 Space로 정지·재생, Enter로 이동합니다. 동작 줄이기 환경에서는 자동 롤링하지 않습니다."
+          code={`<PageBanner variant="notice" items={notices} interval={5000} />`}
+        >
+          <div data-notice-banner-demo="">
+            <TopBanner variant="notice" items={SAMPLE_BANNERS} storageKey="guide-notice-banner" />
+          </div>
+          <div data-notice-banner-single="">
+            <TopBanner variant="notice" items={SAMPLE_BANNERS.slice(0, 1)} storageKey="guide-notice-single" />
+          </div>
+        </DemoBlock>
         <GuideApiDocs sections={topBannerApiSections} />
       </GuideLayout>
     </>

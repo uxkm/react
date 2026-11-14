@@ -62,6 +62,7 @@ export function Snackbar ({
   children,
   onOpenChange,
   onClose,
+  role,
   ...rest
 }: SnackbarProps) {
   const controlled = open !== undefined
@@ -84,7 +85,7 @@ export function Snackbar ({
     <div
       {...rest}
       className={classNames('snackbar', 'color_' + resolved, round && 'snackbar_round', className)}
-      role={resolved === 'error' ? 'alert' : 'status'}
+      role={role ?? (resolved === 'error' ? 'alert' : 'status')}
     >
       {showIcon && (
         <span className="snackbar_icon" aria-hidden="true">

@@ -1,0 +1,104 @@
+// 우측 상단 서비스 바로가기. 좌표·푸터 경계는 공통 Floating이 관리합니다.
+.b2b-quick-floating {
+  --floating-z-index: 25;
+  width: 112px;
+  max-height: calc(100dvh - 196px);
+  overflow: auto;
+  scrollbar-width: thin;
+  font-family: Pretendard, sans-serif;
+
+  .floating_item { width: 100%; }
+}
+
+.quick-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  padding: 4px;
+  box-sizing: border-box;
+  color: #333;
+
+  svg { stroke-width: 1.5; }
+
+  &_link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    color: inherit;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 8px;
+    background: #fff;
+  }
+
+  &_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    flex-shrink: 0;
+    border: 1px solid #e6e6e6;
+    border-radius: 50%;
+    background: #fff;
+    transition: border-color 160ms ease, background-color 160ms ease;
+  }
+
+  &_label { font-size: 13px; font-weight: 500; line-height: 1.5; letter-spacing: -0.5px; }
+  &_link:hover { color: #5e3bb7; }
+  &_link:hover &_icon { border-color: #8060d9; background: #f8f5ff; }
+  &_link:focus-visible, .quick-menu_top:focus-visible { outline: 2px solid #7950e8; outline-offset: 2px; }
+
+  .quick-menu_top.back_top_btn {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 64px;
+    height: 64px;
+    margin-top: 4px;
+    padding: 0;
+    border: 1px solid #e6e6e6;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: none;
+    color: #333;
+    font-size: 12px;
+    font-weight: 500;
+    &:hover { border-color: #8060d9; color: #5e3bb7; background: #f8f5ff; }
+  }
+}
+
+// 본문 우측에 퀵메뉴 공간을 확보합니다. 독립 위젯 프리뷰에는 적용하지 않습니다.
+.app-layout:has(.b2b-quick-floating) .app-layout_main.p-content:not(.widget-preview) {
+  max-width: min(1600px, calc(100% - 272px));
+  .main-hero h1 { flex-wrap: wrap; white-space: normal; }
+}
+
+@media (max-width: 1439px) {
+  .b2b-quick-floating { width: 96px; }
+  .quick-menu { gap: 20px; }
+  .quick-menu_icon { width: 60px; height: 60px; }
+  .quick-menu_label { font-size: 12px; }
+  .app-layout:has(.b2b-quick-floating) .app-layout_main.p-content:not(.widget-preview) {
+    max-width: calc(100% - 144px);
+    margin-left: 0;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 767px), (max-height: 640px) {
+  .b2b-quick-floating { width: 72px; right: 8px !important; }
+  .quick-menu { gap: 14px; }
+  .quick-menu_icon { width: 48px; height: 48px; .icon { width: 24px; height: 24px; } }
+  .quick-menu_label { font-size: 11px; word-break: keep-all; }
+  .quick-menu .quick-menu_top.back_top_btn { width: 48px; height: 48px; margin-top: 0; font-size: 10px; gap: 0; }
+  .app-layout:has(.b2b-quick-floating) .app-layout_main.p-content:not(.widget-preview) { max-width: calc(100% - 88px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quick-menu_icon { transition: none; }
+}

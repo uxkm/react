@@ -98,7 +98,15 @@ export function FullMenuContent ({
           value="business"
           className="full-menu-content_panel"
           label={
-            <>기업교육 <span>서비스</span> <span>HR인사이트</span> <span>문의하기</span></>
+            <>
+              기업교육
+              <span aria-hidden="true">/</span>
+              <span>서비스</span>
+              <span aria-hidden="true">/</span>
+              <span>HR인사이트</span>
+              <span aria-hidden="true">/</span>
+              <span>문의하기</span>
+            </>
           }
         />
         <AccordionPanel value="business">

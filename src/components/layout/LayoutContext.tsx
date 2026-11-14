@@ -23,7 +23,7 @@ import {
 
 /**
  * pageSlots 값: 렌더할 노드 | 숨김 마커
- * 지원 name: meta-banner, meta-header, meta-footer, meta-floating, meta-floating-items, banner, floating-items, header, header-layout, header-hide-nav-on-scroll, header-back, header-brand, header-nav, header-actions, footer, footer-content, main-page, main-class
+ * 지원 name: meta-banner, meta-header, meta-footer, meta-floating, meta-floating-items, banner, snackbar, floating-items, header, header-layout, header-hide-nav-on-scroll, header-back, header-brand, header-nav, header-actions, footer, footer-content, main-page, main-class
  */
 /** 슬롯 하나. 그릴 노드이거나 숨김 표시 */
 export type LayoutSlotValue = ReactNode | LayoutSlotHidden

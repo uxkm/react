@@ -1,5 +1,6 @@
 'use client'
 
+import { NoticeTopBanner } from './NoticeTopBanner'
 import { useCallback, useRef, useState, type AnchorHTMLAttributes, type CSSProperties, type HTMLAttributes, type ReactNode } from 'react' // React
 import type { Swiper as SwiperInstance } from 'swiper' // Swiper Instance 타입
 import { Carousel, CarouselSlide } from '@/comp/ui/Carousel' // UI 컴포넌트 · Carousel 컴포넌트
@@ -18,6 +19,8 @@ export interface TopBannerItem {
 }
 
 export interface TopBannerProps extends Omit<HTMLAttributes<HTMLElement>, 'children' | 'onClose'> {
+  /** notice: 검정 배경 텍스트 공지. 닫기만 표시하고 키보드로 수직 롤링을 제어한다. */
+  variant?: 'default' | 'notice'
   /** 여러 배너. 생략하면 children을 단일 배너로 사용한다. */
   items?: TopBannerItem[]
   children?: ReactNode
@@ -40,7 +43,15 @@ export interface TopBannerProps extends Omit<HTMLAttributes<HTMLElement>, 'child
 }
 
 /** 헤더 위 공통 배너. 1개는 정적 콘텐츠, 2개 이상만 Carousel로 전환한다. */
-export function TopBanner ({
+export function TopBanner ({ variant = 'default', ...props }: TopBannerProps) {
+  if (variant === 'notice') {
+    const { effect: _effect, showTodayOption: _showTodayOption, ...noticeProps } = props
+    return <NoticeTopBanner {...noticeProps} />
+  }
+  return <DefaultTopBanner {...props} />
+}
+
+function DefaultTopBanner ({
   items,
   children,
   width = '100%',

@@ -203,3 +203,23 @@ import { Button, Floating, PageFloating } from '@/comp'
 ## 전체 접근성 검토
 
 공통 UI 64개 파일과 widget·layout의 검토 결과는 [컴포넌트별 검토 문서](../../public/data/pub/docs/a11y/component-review-2026-11-14.md)에 있습니다. 가이드 `/pub/guide/accessibility`에서도 문서를 열 수 있습니다.
+
+
+## 페이지 하단 스낵바
+
+어느 페이지에서든 `PageSnackbar`를 호출하면 공통 `AppLayout`의 마지막 슬롯에 하단 중앙으로 표시합니다. 페이지 이동 시 정리되며, 한 페이지에는 하나만 호출합니다. 본문 안에 직접 배치하는 `Snackbar`도 계속 사용할 수 있습니다.
+
+```jsx
+import { PageSnackbar } from '@/comp'
+
+<PageSnackbar openOnLoad message="저장되었습니다." closable />
+// 동적 호출: open={open} onOpenChange={setOpen}
+```
+
+B2B 문의 디자인은 `@/widgets/b2b/common/InquirySnackbar`에 있습니다. 현재 자동 호출은 메인에만 등록되어 있습니다. 다른 B2B 페이지도 `<InquirySnackbar />`로 호출할 수 있습니다.
+
+표시 시 현재 초점을 유지합니다. 레이아웃의 본문·푸터·퀵메뉴 다음에 스낵바 링크 → 닫기 순으로 Tab 이동합니다. 스낵바 안에서 닫으면 진입 전 요소로 복원하고, 해당 요소가 없으면 페이지 본문으로 복원합니다. 양수 tabindex나 autofocus는 사용하지 않습니다.
+
+WCAG가 스낵바를 반드시 처음/마지막에 놓도록 정한 것은 아닙니다. 이 프로젝트에서는 하단의 보조 안내라는 의미에 맞춰 마지막 순서를 선택했습니다. 일반 상태 알림은 기본 `status`, 오류는 `alert`를 사용합니다. 현재 문의 홍보는 상태 변화가 아니므로 `role="region" aria-label="기업교육 문의 안내"`를 사용하며 자동으로 읽도록 강제하지 않습니다.
+
+근거: [WCAG 2.4.3 초점 순서](https://www.w3.org/WAI/WCAG22/Understanding/focus-order.html), [WCAG 4.1.3 상태 메시지](https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html).

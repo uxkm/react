@@ -53,6 +53,8 @@ export interface AppLayoutProps extends Omit<HTMLAttributes<HTMLDivElement>, 'ch
   floating?: ReactNode
   /** 공통 플로팅의 위치·정렬·기본 표시 설정 */
   floatingProps?: Omit<FloatingProps, 'children'>
+  /** 페이지별 PageSnackbar가 우선하는 공통 하단 스낵바. */
+  snackbar?: ReactNode
   children?: ReactNode
 }
 
@@ -74,6 +76,7 @@ function AppLayoutInner ({
   footerContent,
   floating,
   floatingProps,
+  snackbar,
   children,
   className,
   ...rest
@@ -391,6 +394,7 @@ function AppLayoutInner ({
             {slotNodes('floating-items')}
           </Floating>
         )}
+        {defaultsReady && pick('snackbar', snackbar)}
       </div>
     </div>
   )

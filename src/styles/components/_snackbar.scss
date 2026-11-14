@@ -391,3 +391,6 @@
     }
   }
 }
+
+// PageSnackbar는 페이지 호출 위치와 관계없이 레이아웃 마지막에 표시합니다.
+.page-snackbar { --snackbar-region-inset-block-end: calc(16px + env(safe-area-inset-bottom, 0px)); }

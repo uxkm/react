@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react' // 상태 훅
-import { Button, Icon, Snackbar } from '@/comp' // comp
+import { Button, Icon, Snackbar, PageSnackbar } from '@/comp' // comp
 import { LoadOpenOverlayDemo } from '@/screen/pub/widgets/preview/LoadOpenOverlayDemo' // Load Open Overlay Demo 컴포넌트
 import { TimedOverlayDemo } from '@/screen/pub/widgets/preview/TimedOverlayDemo' // Timed Overlay Demo 컴포넌트
 import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
@@ -34,7 +34,36 @@ function ControlledDemo () {
   )
 }
 
+/** 공통 하단 영역은 어느 페이지에서든 명시적으로 호출한다. */
+function PageSnackbarDemo () {
+  const [open, setOpen] = useState(false)
+  return (
+    <>
+      <Button label="공통 스낵바 호출" onClick={() => setOpen(true)} />
+      <PageSnackbar
+        open={open}
+        onOpenChange={setOpen}
+        message="어느 페이지에서든 호출하는 공통 하단 스낵바입니다."
+        aria-label="공통 스낵바 예시"
+        closable
+      />
+    </>
+  )
+}
+
 const SECTIONS = [
+  {
+    title: '페이지 공통 호출 · 초점 순서',
+    description: 'PageSnackbar는 호출 위치와 관계없이 레이아웃 마지막의 하단 중앙 영역에 표시합니다. 표시할 때 초점을 이동하지 않습니다. Tab은 기존 페이지 요소 다음에 스낵바 내부의 링크·버튼 순서로 이동합니다. 스낵바 안에서 닫으면 들어오기 전 요소로 초점을 복원합니다. 페이지 이동 시 정리되며, 한 페이지에는 하나만 호출합니다. 일반 상태 알림은 기본 status, 홍보 안내는 role="region"과 aria-label을 사용합니다.',
+    code: `import { PageSnackbar } from '@/comp'
+
+<PageSnackbar openOnLoad message="저장되었습니다." closable />
+
+// 기업교육 문의 시안은 B2B 공통 위젯으로 호출합니다.
+import InquirySnackbar from '@/widgets/b2b/common/InquirySnackbar'
+<InquirySnackbar />`,
+    preview: <PageSnackbarDemo />
+  },
   {
     title: '페이지 로드 시 열림 · 자동 닫힘 없음',
     description: 'openOnLoad 만 지정하여 페이지 로드 시 열립니다. autoCloseDelay 를 생략하므로 시간 경과로 닫히지 않습니다. 각 컴포넌트의 기본 닫기 동작은 유지됩니다. 예시 다시 불러오기로 초기 상태를 다시 확인할 수 있습니다.',

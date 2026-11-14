@@ -9,6 +9,7 @@ export const topBannerApiSections = [{
   title: 'API · TopBanner / PageBanner',
   description: 'TopBanner는 실제 배너 UI, PageBanner는 해당 페이지의 배너를 공통 헤더 위에 등록하는 슬롯 컴포넌트입니다. props는 동일합니다.',
   tables: [{ columns, rows: [
+    { name: 'variant', type: 'default | notice', default: 'default', description: 'notice는 검정 배경 텍스트 공지입니다. 기본 높이 44px, 왼쪽 정렬, 닫기만 표시합니다. 2개 이상이면 수직 롤링하며 포커스 진입 시 멈추고 영역을 벗어나면 다시 롤링합니다. ↑·↓와 Home·End로 전환, Space로 정지·재생합니다. 동작 줄이기 설정에서는 자동 롤링하지 않습니다. effect와 showTodayOption은 적용하지 않습니다.' },
     { name: 'items', type: '{ id, content, href?, target? }[]', default: '—', description: '배너 목록입니다. id는 고유하게 지정하며 content에는 원하는 React UI를 넣습니다. 1개면 슬라이더를 생성하지 않습니다.' },
     { name: 'children', type: 'ReactNode', default: '—', description: 'items를 생략하면 단일 배너 콘텐츠로 사용합니다. 콘텐츠가 없으면 영역을 만들지 않습니다.' },
     { name: 'width', type: 'CSS width', default: '100%', description: '바깥 너비입니다. 숫자는 px이며 최대 너비는 부모 영역을 넘지 않습니다.' },

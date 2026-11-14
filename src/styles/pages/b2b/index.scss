@@ -2,7 +2,9 @@
 @use './common/header';
 @use './common/footer';
 @use './common/coming-soon';
+@use './common/quick-menu';
 @use './main/main';
+@use './common/inquiry-snackbar';
 @use './modules/cards';
 
 // PC 디자인 기준: 좁은 창에서는 문서 전체를 가로로 스크롤합니다.
