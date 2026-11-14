@@ -22,6 +22,7 @@ export default function B2bContentsLeadershipMbaPage () {
         skeleton={skeletonMode === 'manual' ? <MbaSkeleton /> : undefined}
         className="page-container"
       >
+        <h1 className="visually-hidden">{pageTitle}</h1>
         <ComingSoon />
 
       </PageLoading>

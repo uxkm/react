@@ -156,7 +156,7 @@ const tokens = [
 export const datePickerApiSections = [
   {
     title: 'API · Props',
-    description: 'React · Next.js DatePicker props입니다.',
+    description: 'React · Next.js DatePicker props입니다. 입력에서 Enter·Space·아래 방향키로 엽니다. 날짜 방향키·Home·End·PageUp/Down(Shift는 연도 이동)과 Escape 초점 복귀를 지원합니다.',
     tables: [{ columns, rows: props }]
   },
   {

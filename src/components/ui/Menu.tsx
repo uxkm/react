@@ -129,7 +129,7 @@ function MenuItemNode ({
   const active = item.active || (selectedKey != null && selectedKey === item.key)
 
   if (item.type === 'divider') {
-    return <li className="menu_divider" role="separator" />
+    return <li className="menu_divider" aria-hidden="true" />
   }
 
   if (item.type === 'group') {
@@ -153,6 +153,7 @@ function MenuItemNode ({
         className={classNames(
           'menu_item',
           'menu_item-submenu',
+          open && 'is-open',
           item.disabled && 'is-disabled'
         )}
       >
@@ -171,7 +172,7 @@ function MenuItemNode ({
             arrow
           />
         </button>
-        <ul className="menu_submenu" id={subId}>
+        <ul className="menu_submenu" id={subId} hidden={!open}>
           <MenuItems items={item.children!} idPrefix={subId} />
         </ul>
       </li>

@@ -20,7 +20,7 @@ const props = [
     name: 'avatar',
     type: 'ReactNode',
     default: 'user 아이콘',
-    description: '고객사례 유형의 원형 프로필 내용. 일반 span.profile 안에 표시.'
+    description: '고객사례 유형의 프로필 내용. 공통 Avatar 안에 표시하며 생략하면 user 아이콘을 사용합니다.'
   },
   {
     name: 'selected',

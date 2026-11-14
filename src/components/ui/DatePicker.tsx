@@ -146,6 +146,7 @@ export function DatePicker ({
     ? (toMonthDate(displayMonth) || innerMonth)
     : innerMonth
   const rootRef = useRef<HTMLDivElement>(null)
+  const [focusedDay, setFocusedDay] = useState<string | null>(null)
   const cells = useMemo(() => getCells(month), [month])
   const today = toValue(new Date())
 
@@ -207,7 +208,10 @@ export function DatePicker ({
   const moveMonth = (offset: number) =>
     setMonth((current) => new Date(current.getFullYear(), current.getMonth() + offset, 1))
 
-  useEscapeKey(rootRef, () => setOpen(false), open)
+  useEscapeKey(rootRef, () => {
+    setOpen(false)
+    rootRef.current?.querySelector<HTMLElement>('.date_picker_input')?.focus()
+  }, open)
 
   const classes = classNames(
     'date_picker',
@@ -243,6 +247,14 @@ export function DatePicker ({
           aria-expanded={open}
           aria-controls={panelId}
           aria-invalid={error || undefined}
+          onKeyDown={(event) => {
+            props.onKeyDown?.(event)
+            if (event.defaultPrevented || disabled) return
+            if (['Enter', ' ', 'ArrowDown'].includes(event.key)) {
+              event.preventDefault()
+              setOpen(true)
+            }
+          }}
           onClick={(event) => {
             if (!disabled) setOpen(true)
             onClick?.(event)
@@ -255,7 +267,10 @@ export function DatePicker ({
               className="date_picker_clear"
               type="button"
               aria-label="날짜 지우기"
-              onClick={() => commit('')}
+              onClick={() => {
+                commit('')
+                rootRef.current?.querySelector<HTMLElement>('.date_picker_input')?.focus()
+              }}
             >
               <svg
                 className="icon"
@@ -299,6 +314,7 @@ export function DatePicker ({
         aria-modal="false"
         aria-label={ariaLabel}
         aria-hidden={!open}
+        hidden={!open}
       >
         <div className="calendar calendar_borderless">
           <div className="calendar_header">
@@ -329,13 +345,38 @@ export function DatePicker ({
               </span>
             ))}
           </div>
-          <div className="calendar_grid">
+          <div className="calendar_grid" onKeyDown={(event) => {
+            const button = (event.target as HTMLElement).closest<HTMLButtonElement>('[data-date]')
+            if (!button || event.altKey || event.metaKey) return
+            const date = parseValue(button.dataset.date)
+            if (!date) return
+            const key = event.key
+            if (key === 'ArrowLeft') date.setDate(date.getDate() - 1)
+            else if (key === 'ArrowRight') date.setDate(date.getDate() + 1)
+            else if (key === 'ArrowUp') date.setDate(date.getDate() - 7)
+            else if (key === 'ArrowDown') date.setDate(date.getDate() + 7)
+            else if (key === 'Home') date.setDate(date.getDate() - date.getDay())
+            else if (key === 'End') date.setDate(date.getDate() + 6 - date.getDay())
+            else if (key === 'PageUp' || key === 'PageDown') {
+              const day = date.getDate()
+              date.setDate(1)
+              date.setMonth(date.getMonth() + (key === 'PageUp' ? -1 : 1) * (event.shiftKey ? 12 : 1))
+              date.setDate(Math.min(day, new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()))
+            } else return
+            event.preventDefault()
+            const next = toValue(date)
+            if ((min && next < min) || (max && next > max)) return
+            setFocusedDay(next)
+            setMonth(new Date(date.getFullYear(), date.getMonth(), 1))
+            requestAnimationFrame(() => rootRef.current?.querySelector<HTMLElement>(`[data-date="${next}"]`)?.focus())
+          }}>
             {cells.map((cell) => {
               const unavailable =
                 Boolean(min && cell.value < min) || Boolean(max && cell.value > max)
               return (
                 <button
                   key={cell.value}
+                  data-date={cell.value}
                   type="button"
                   className={classNames(
                     'calendar_day',
@@ -344,6 +385,8 @@ export function DatePicker ({
                     cell.value === selectedValue && 'is-selected'
                   )}
                   disabled={unavailable}
+                  tabIndex={cell.value === (focusedDay ?? (selectedValue || today)) ? 0 : -1}
+                  onFocus={() => setFocusedDay(cell.value)}
                   aria-current={cell.value === today ? 'date' : undefined}
                   aria-pressed={cell.value === selectedValue || undefined}
                   aria-label={formatValue(cell.value, locale)}
@@ -358,6 +401,7 @@ export function DatePicker ({
             <button
               type="button"
               className="btn btn_text color_primary btn_sm"
+              disabled={Boolean((min && today < min) || (max && today > max))}
               onClick={() => select(today)}
             >
               오늘

@@ -716,8 +716,8 @@ const [region, setRegion] = useState(null)
   </button>
   <div class="dropdown_menu" role="menu">
     <div class="menu menu_vertical menu_compact" role="none">
-      <ul class="menu_list">
-        <li class="menu_item"><button type="button" class="menu_link" role="menuitem">프로필</button></li>
+      <ul class="menu_list" role="none">
+        <li class="menu_item" role="none"><button type="button" class="menu_link" role="menuitem">프로필</button></li>
       </ul>
     </div>
   </div>
@@ -735,18 +735,18 @@ const [region, setRegion] = useState(null)
           </button>
           <div className="dropdown_menu" role="menu">
             <div className="menu menu_vertical menu_compact" role="none">
-              <ul className="menu_list">
-                <li className="menu_item">
+              <ul className="menu_list" role="none">
+                <li className="menu_item" role="none">
                   <button type="button" className="menu_link" role="menuitem">
                     <span className="menu_label">프로필</span>
                   </button>
                 </li>
-                <li className="menu_item">
+                <li className="menu_item" role="none">
                   <button type="button" className="menu_link" role="menuitem">
                     <span className="menu_label">설정</span>
                   </button>
                 </li>
-                <li className="menu_item">
+                <li className="menu_item" role="none">
                   <button type="button" className="menu_link" role="menuitem">
                     <span className="menu_label">로그아웃</span>
                   </button>

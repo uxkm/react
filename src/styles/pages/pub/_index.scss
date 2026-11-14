@@ -218,7 +218,7 @@
     cursor: pointer;
 
     &:hover {
-      background: #f3f7f9;
+      background: var(--color-surface-raised);
     }
 
     &.is-ghost {
@@ -710,6 +710,7 @@
     gap: 8px;
     cursor: pointer;
     user-select: none;
+    min-height: 32px;
 
     input {
       position: absolute;
@@ -747,6 +748,11 @@
       }
     }
 
+    input:focus-visible + &_ui {
+      outline: 2px solid var(--color-accent-text);
+      outline-offset: 3px;
+    }
+
     &_label {
       font-size: 13px;
       font-weight: 600;
@@ -764,7 +770,7 @@
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     border-radius: 8px 8px 0 0;
-    background: #f3f7f9;
+    background: var(--color-surface-raised);
     border-bottom: 1px solid var(--wbs-row-border, #e8eef2);
     // 스크롤바는 본문에만 두고 헤더는 동기화
     --osb-skip: 1;
@@ -906,7 +912,7 @@
     &_head {
       // 세로 고정은 .wbs-table-head-wrap sticky 가 담당
       z-index: 5;
-      background: #f3f7f9;
+      background: var(--color-surface-raised);
 
       > [role="columnheader"] {
         display: flex;
@@ -918,7 +924,7 @@
         color: var(--color-text-muted);
         white-space: nowrap;
         text-align: left;
-        background: #f3f7f9;
+        background: var(--color-surface-raised);
 
         &:not(.col-name) {
           position: relative;
@@ -934,7 +940,7 @@
         position: sticky;
         left: 0;
         z-index: 6;
-        background: #f3f7f9;
+        background: var(--color-surface-raised);
 
         &::before {
           @include wbs-col-line;
@@ -991,11 +997,11 @@
       }
 
       &:hover {
-        background: #f3f7f9;
+        background: var(--color-surface-raised);
 
         > [role="cell"],
         .col-name {
-          background: #f3f7f9;
+          background: var(--color-surface-raised);
         }
       }
 
@@ -1017,11 +1023,11 @@
         }
 
         &:hover {
-          background: #f3f7f9;
+          background: var(--color-surface-raised);
 
           > [role="cell"],
           .col-name {
-            background: #f3f7f9;
+            background: var(--color-surface-raised);
           }
         }
       }
@@ -1091,7 +1097,7 @@
     cursor: pointer;
 
     &:hover {
-      background: #f3f7f9;
+      background: var(--color-surface-raised);
     }
   }
 
@@ -1421,7 +1427,7 @@
     cursor: pointer;
 
     &:hover {
-      background: #f3f7f9;
+      background: var(--color-surface-raised);
     }
 
     &.is-active {
@@ -1638,7 +1644,7 @@
   text-align: left;
   white-space: normal;
   overflow-wrap: anywhere;
-  pointer-events: none;
+  pointer-events: auto;
   box-shadow: 0 8px 24px rgba(21, 32, 43, 0.28);
 }
 
@@ -1672,4 +1678,11 @@
   100% {
     background-position: -100% 0;
   }
+}
+
+// 목록 전용 레이어의 네이티브 dialog 기본 치수를 초기화합니다.
+dialog.wbs-bottom-sheet, dialog.remark-modal {
+  width: 100%; height: 100%; max-width: none; max-height: none;
+  margin: 0; border: 0; background: transparent; color: var(--color-text);
+  &::backdrop { background: transparent; }
 }

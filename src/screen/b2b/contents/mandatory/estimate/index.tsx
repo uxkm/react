@@ -22,6 +22,7 @@ export default function B2bContentsMandatoryEstimatePage () {
         skeleton={skeletonMode === 'manual' ? <EstimateSkeleton /> : undefined}
         className="page-container"
       >
+        <h1 className="visually-hidden">{pageTitle}</h1>
         <ComingSoon />
 
         <section id="category"><h2>STEP 01 카테고리 선택</h2><p>법정의무·산업안전보건·금융부문·공공부문·전체필수 카테고리 선택</p></section>

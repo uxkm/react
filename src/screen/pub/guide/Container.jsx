@@ -80,16 +80,16 @@ const SECTIONS = [
   },
   {
     title: '시맨틱 루트',
-    code: wrapPageExample(`<Container as="main" size="lg">
-  <div className="container_demo-fill">main 요소로 렌더링</div>
+    code: wrapPageExample(`<Container as="article" size="lg">
+  <div className="container_demo-fill">article 요소로 렌더링</div>
 </Container>`, {
       name: 'ContainerAsExample',
       reactImports: [],
       compImports: ['Container']
     }),
     preview: (
-      <Container as="main" size="lg">
-        <Fill>main 요소로 렌더링</Fill>
+      <Container as="article" size="lg">
+        <Fill>article 요소로 렌더링</Fill>
       </Container>
     )
   }

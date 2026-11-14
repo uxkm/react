@@ -201,6 +201,11 @@ export const b2bMenu: B2bMenuData = {
   ],
   "insights": [
     {
+      "label": "고객사례",
+      "href": "/b2b#cases",
+      "links": []
+    },
+    {
       "label": "멀캠ON",
       "href": "/b2b/insight/on/list",
       "links": []

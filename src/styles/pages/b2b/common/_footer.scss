@@ -1,7 +1,7 @@
 // OOCSS: footer 구조 + footer_* 파트 + footer_default 스킨.
 .footer_default {
   background: #f7f7f8;
-  color: #74747a;
+  color: #626269;
 
   .footer_support {
     background: #f0f0f2;
@@ -104,6 +104,8 @@
       background-color: transparent;
       color: #222;
       font: inherit;
+
+      .btn_label { color: #222; }
     }
 
     .dropdown_menu {

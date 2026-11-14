@@ -17,7 +17,7 @@ const cards = [
 /** aos 스크롤 등장 데모 */
 export default function AosDemoPage () {
   useEffect(() => {
-    AOS.init({ duration: 700, once: false, easing: 'ease-out-cubic' })
+    AOS.init({ duration: 700, once: false, easing: 'ease-out-cubic', disable: () => window.matchMedia('(prefers-reduced-motion: reduce)').matches })
     AOS.refresh()
   }, [])
 
@@ -30,7 +30,7 @@ export default function AosDemoPage () {
       <DemoBlock
         title="스크롤하여 확인"
         code={wrapPageExample(`useEffect(() => {
-  AOS.init({ duration: 700, once: false, easing: 'ease-out-cubic' })
+  AOS.init({ duration: 700, once: false, easing: 'ease-out-cubic', disable: () => window.matchMedia('(prefers-reduced-motion: reduce)').matches })
   AOS.refresh()
 }, [])
 

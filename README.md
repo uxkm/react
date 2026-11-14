@@ -39,15 +39,30 @@ Next.js 16 App Router와 React 19 기반 퍼블리싱 작업 환경입니다. �
 
 ## 시작하기
 
-프로젝트 루트에서 실행합니다. 다음 명령은 macOS·Linux 셸 기준입니다.
+macOS와 Windows에서 Node.js `24.11.1`과 npm `10` 이상을 설치한 뒤 프로젝트 루트에서 실행합니다. npm 스크립트는 macOS 셸·Windows PowerShell·명령 프롬프트에서 같은 명령을 사용합니다.
+
+macOS에서 nvm을 사용한다면 `nvm use`로 버전을 선택합니다. Windows에서 nvm-windows를 사용한다면 `nvm install 24.11.1`, `nvm use 24.11.1`을 실행합니다. nvm-windows에서는 `.nvmrc`를 자동으로 읽는다고 가정하지 않습니다.
 
 ```bash
-nvm use
-npm ci
+npm install
 npm run dev
 ```
 
+현재 `package-lock.json`은 Git에서 제외되어 있습니다. 처음 받은 작업 폴더에서는 `npm install`을 사용하고, 로컬 lock 파일이 이미 있다면 `npm ci`로 재설치할 수 있습니다. OS를 옮길 때 `node_modules`를 복사하지 말고 대상 OS에서 다시 설치합니다. Next.js·Sass의 네이티브 패키지는 OS와 CPU별로 다릅니다.
+
+PowerShell에서 `npm.ps1` 실행 정책 오류가 나면 같은 명령을 `npm.cmd install`, `npm.cmd run dev` 형태로 실행합니다.
+
 개발 주소는 `http://localhost:8090`입니다. `http://127.0.0.1:8090`도 사용할 수 있습니다. 개발·정적 미리보기 서버는 기본적으로 IPv4와 IPv6를 함께 수신하며, IPv6를 지원하지 않는 환경에서는 IPv4로 실행합니다. OS의 `HOSTNAME` 환경변수는 수신 주소로 사용하지 않습니다. 특정 주소에서만 수신하려면 `BIND_HOST`를 지정합니다. 로컬 인증서가 있으면 `https://localhost:8443`도 함께 제공합니다.
+
+환경변수 지정 문법은 셸마다 다릅니다. 다음은 포트 변경 예시입니다 (`HTTPS_PORT`, `BIND_HOST`, `BROWSER_TEST_BASE_URL`도 같은 방식).
+
+| 셸 | 명령 |
+| --- | --- |
+| macOS / Linux | `PORT=8091 npm run dev` |
+| Windows PowerShell | `$env:PORT='8091'; npm run dev` |
+| Windows 명령 프롬프트 | `set "PORT=8091" && npm run dev` |
+
+`.gitattributes`는 텍스트를 LF로 유지하며, TypeScript는 import 경로의 대소문자 일치를 검사합니다. 개발 서버는 Windows에서도 사용할 수 있는 IPC로 정상 종료를 요청하고 종료를 기다린 뒤 재시작합니다. 8초 동안 종료하지 않으면 강제 종료합니다.
 
 | 작업 | 명령 | 동작 |
 | --- | --- | --- |
@@ -216,6 +231,8 @@ JS/TS 저장 시 ESLint가 수정 가능한 항목을 처리합니다. JSON·JSO
 | `scripts/generate/project.mjs` | B2B 메타·라우트 셸 sync |
 | `scripts/generate/validate-project.mjs` | 프로젝트·PUB 경계 검증 |
 | `scripts/build/build-styles.mjs` | SCSS → CSS 변환 |
+| `scripts/build/build-next.mjs` | 로컬 Next CLI를 CSS 모드로 실행 |
+| `scripts/build/clean.mjs` | OS 공통 산출물·캐시·의존성 정리 |
 | `scripts/build/prepare-next.mjs` | Next 메타데이터 호환 패치 |
 | `scripts/build/style-entries.mjs` | SCSS 엔트리 목록 |
 | `scripts/dev/dev.mjs` | 개발 서버·파일 감시 사이클 |
@@ -226,14 +243,12 @@ JS/TS 저장 시 ESLint가 수정 가능한 항목을 처리합니다. JSON·JSO
 
 ## 로컬 HTTPS
 
-인증서가 없으면 HTTP만 실행합니다. HTTPS가 필요하면 프로젝트 루트에서 해당 PC용 인증서를 생성합니다.
+인증서가 없으면 HTTP만 실행합니다. HTTPS가 필요하면 mkcert를 설치하고 프로젝트 루트에서 해당 PC용 인증서를 생성합니다. 아래 명령은 macOS·Windows 공통이며, 폴더도 Node.js로 생성합니다.
 
 ```bash
 mkcert -install
-mkdir -p certificates
-mkcert -key-file certificates/localhost-key.pem \
-  -cert-file certificates/localhost.pem \
-  localhost 127.0.0.1 ::1
+node -e "require('node:fs').mkdirSync('certificates', { recursive: true })"
+mkcert -key-file certificates/localhost-key.pem -cert-file certificates/localhost.pem localhost 127.0.0.1 ::1
 ```
 
 `certificates/localhost-key.pem`과 `certificates/localhost.pem`이 있으면 개발·정적 미리보기 서버가 HTTPS 8443도 제공합니다. 인증서는 Git에서 제외합니다. 포트는 `PORT`, `HTTPS_PORT`로 변경합니다.
@@ -254,7 +269,7 @@ mkcert -key-file certificates/localhost-key.pem \
 
 ## 단일 프로젝트와 PUB 독립성
 
-B2B 페이지는 `페이지명/index.tsx` 구조로 작성합니다. 예를 들어 `src/screen/b2b/company/ethics/compliance/index.tsx`는 `/b2b/company/ethics/compliance`로 접속하며 URL에 `index`를 붙이지 않습니다. 각 페이지의 스켈레톤은 `페이지명/skeleton/indexSkeleton.tsx`에 둡니다. 위젯 프리뷰도 같은 폴더 구조를 사용합니다.
+B2B 페이지는 `페이지명/index.tsx` 구조로 작성합니다. 예를 들어 `src/screen/b2b/company/ethics/compliance/index.tsx`는 `/b2b/company/ethics/compliance`로 접속하며 URL에 `index`를 붙이지 않습니다. 각 페이지의 스켈레톤은 `페이지명/skeleton/indexSkeleton.tsx`에 둡니다. 위젯 프리뷰는 `index.tsx`만 사용하며 스켈레톤을 연결하지 않습니다.
 
 프로젝트 화면은 전체메뉴 디자인의 `main`, `contents`, `service`, `insight`, `contact`, `company` 구조에 맞춘 TSX 60개로 관리합니다. 루트 `/b2b`는 `src/screen/b2b/main/index.tsx`를 사용하며, 예를 들어 AX 소개는 `/b2b/contents/ax/overview`, 기업교육문의는 `/b2b/contact/education`, 회사소개는 `/b2b/company/intro`입니다. 이전의 `corpeduc`, `about` 및 문의 화면에 사용하던 `insight` 경로는 새 분류로 변경했습니다.
 
@@ -262,7 +277,7 @@ B2B 페이지는 `페이지명/index.tsx` 구조로 작성합니다. 예를 들�
 
 프로젝트 PUB 목록은 `public/data/pub/b2b/{main,contents,service,insight,contact,company,common}.json`에 있습니다. 화면 ID·작업 정보·기획/디자인 링크·기존 비고를 대응 화면에 유지하고, 새 화면은 대기 상태로 등록했습니다. 메뉴 계층과 화면별 경로는 `src/screen/b2b/README.md`에 정리했습니다. 전체메뉴 이미지는 메뉴 구성 시안이므로 화면 본문은 퍼블리싱 작업용 골격이며, 실제 시안 마크업은 각 TSX 파일에서 구현합니다. `npm run test:project`로 전체메뉴 기준 60개 파일, 정적 라우트, PUB 내부 경로·섹션 앵커, 작업 정보 보존을 검사합니다.
 
-각 프로젝트 화면의 수동 스켈레톤은 해당 화면과 같은 폴더의 `skeleton/`에 둡니다. 예를 들어 `main/index.tsx`는 `main/skeleton/indexSkeleton.tsx`, `contents/ax/overview/index.tsx`는 `contents/ax/overview/skeleton/indexSkeleton.tsx`를 사용합니다. 위젯 프리뷰도 각 프리뷰 폴더의 `skeleton/` 안에 파일별 스켈레톤을 둡니다. 이 파일들은 보조 컴포넌트이며 라우트로 등록하지 않습니다.
+각 프로젝트 화면의 수동 스켈레톤은 해당 화면과 같은 폴더의 `skeleton/`에 둡니다. 예를 들어 `main/index.tsx`는 `main/skeleton/indexSkeleton.tsx`, `contents/ax/overview/index.tsx`는 `contents/ax/overview/skeleton/indexSkeleton.tsx`를 사용합니다. 이 파일들은 보조 컴포넌트이며 라우트로 등록하지 않습니다. `src/widgets/b2b/previews`는 로딩 처리 없이 프리뷰를 바로 표시하므로 `PageLoading`과 스켈레톤 파일·설정을 사용하지 않습니다.
 
 기본은 `auto` 모드입니다. 새 디자인이 확정되면 해당 스켈레톤 파일의 레이아웃을 수정하고 `src/config/skeleton.ts`에 해당 화면을 `manual`로 등록합니다. 각 화면은 `manual`일 때만 전용 스켈레톤을 전달하므로 자동 모드의 첫 방문 폴백에서도 전용 디자인을 사용하지 않습니다. 실제 표시는 `PageLoading`의 `loading` 상태에 따릅니다. 현재 작업용 화면의 `loading={false}`는 실제 데이터 로딩 상태가 생길 때 연결합니다.
 

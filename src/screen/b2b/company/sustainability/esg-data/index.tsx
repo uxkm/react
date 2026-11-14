@@ -22,6 +22,7 @@ export default function B2bCompanySustainabilityEsgDataPage () {
         skeleton={skeletonMode === 'manual' ? <EsgDataSkeleton /> : undefined}
         className="page-container"
       >
+        <h1 className="visually-hidden">{pageTitle}</h1>
         <ComingSoon />
 
       </PageLoading>

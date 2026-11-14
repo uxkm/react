@@ -5,7 +5,7 @@
  * - 표 칸이 말줄임일 때만 hover 시 전체 문구 툴팁(포털) 표시
  * - 대상 요소에 ellipsisAttr(`data-ellipsis`)을 붙인다
  */
-import { useCallback, useLayoutEffect, useRef, useState } from 'react' // React
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react' // React
 import { createPortal } from 'react-dom' // 포탈 생성
 
 /** 말줄임 대상 표시 */
@@ -26,7 +26,7 @@ export function useEllipsisTooltip () {
   }, [])
 
   const onMouseOver = useCallback((event) => {
-    const el = event.target.closest('[data-ellipsis]')
+    const el = event.target.closest('[data-ellipsis]') || event.target.querySelector('[data-ellipsis]')
     if (!el || !event.currentTarget.contains(el)) {
       if (current.current) hide()
       return
@@ -61,9 +61,16 @@ export function useEllipsisTooltip () {
     const el = current.current
     if (!el) return
     const next = event.relatedTarget
-    if (next instanceof Node && el.contains(next)) return
+    if (next instanceof Node && (el.contains(next) || tipRef.current?.contains(next))) return
     hide()
   }, [hide])
+
+  useEffect(() => {
+    if (!tip) return
+    const dismiss = event => { if (event.key === 'Escape') { event.stopPropagation(); hide() } }
+    document.addEventListener('keydown', dismiss, true)
+    return () => document.removeEventListener('keydown', dismiss, true)
+  }, [tip, hide])
 
   useLayoutEffect(() => {
     const node = tipRef.current
@@ -88,6 +95,7 @@ export function useEllipsisTooltip () {
         ref={tipRef}
         className="wbs-ellipsis-tip"
         role="tooltip"
+        onMouseLeave={hide}
         style={{ left: tip.left, top: tip.top, maxWidth: tip.maxWidth }}
       >{tip.text}</div>,
       document.body

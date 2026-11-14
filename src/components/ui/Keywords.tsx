@@ -290,6 +290,7 @@ export function Keywords ({
         ref={listRef}
         id={listId}
         className="keywords_list"
+        tabIndex={0}
       >
         {children}
       </div>
@@ -300,7 +301,7 @@ export function Keywords ({
           className={resolvedToggleClassName}
           aria-expanded={effectivelyExpanded}
           aria-controls={listId}
-          aria-label={effectivelyExpanded ? '키워드 접기' : '키워드 펼침'}
+          aria-label={!hasNodes(toggle) ? (effectivelyExpanded ? '키워드 접기' : '키워드 펼침') : undefined}
           onClick={toggleExpanded}
         >
           {hasNodes(toggle) ? toggle : <Icon name="chevron-down" size="sm" />}

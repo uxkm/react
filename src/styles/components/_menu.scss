@@ -54,7 +54,7 @@
   &_item {
     min-width: 0;
 
-    &.menu_item-submenu[aria-expanded="false"] > .menu_submenu {
+    &.menu_item-submenu:not(.is-open) > .menu_submenu {
       display: none;
     }
 
@@ -133,7 +133,7 @@
     transform: rotate(90deg);
     transition: transform $transition-fast;
 
-    .menu_item-submenu[aria-expanded="true"] > .menu_link & {
+    .menu_item-submenu.is-open > .menu_link & {
       transform: rotate(270deg);
     }
   }

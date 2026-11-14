@@ -48,7 +48,8 @@ export interface ImageCardData {
   readonly image?: CardImageSource
   readonly href: string
   readonly action: string
-  readonly label: string
+  /** @deprecated 링크 이름은 보이는 제목·설명·동작 문구로 계산합니다. 기존 데이터 호환용. */
+  readonly label?: string
   readonly tone: 'mint' | 'lavender'
 }
 
@@ -68,6 +69,19 @@ export interface ContentCardData {
   readonly description: string
   readonly href: string
   readonly image?: CardImageSource
+}
+
+/** 교육방식 배지·썸네일·제목·상세보기로 구성하는 교육과정 카드. */
+export interface CourseCardData {
+  readonly id: string
+  readonly title: string
+  readonly format: string
+  /** 교육방식 아이콘. 생략하면 사람 그룹 아이콘, null이면 숨깁니다. */
+  readonly icon?: ReactNode
+  readonly href: string
+  readonly image?: CardImageSource
+  /** 기본값은 '상세보기'입니다. */
+  readonly action?: string
 }
 
 /** 업종·고객 인용문·작성자로 구성하는 고객사례 카드. image는 원형 프로필입니다. */
@@ -95,4 +109,5 @@ export type CardProps =
   | ({ type: 'promotion'; card: PromotionCardData } & CardMediaProps)
   | ({ type: 'image'; card: ImageCardData } & CardMediaProps)
   | ({ type: 'content'; card: ContentCardData } & CardMediaProps)
+  | ({ type: 'course'; card: CourseCardData } & CardMediaProps)
   | ({ type: 'quick-link'; card: QuickLinkCardData } & CardAppearanceProps)

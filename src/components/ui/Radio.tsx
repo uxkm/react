@@ -66,6 +66,7 @@ export function Radio ({
       {...props}
       id={id}
       type="radio"
+      aria-label={props['aria-label'] ?? ariaLabel}
       className="radio_input"
       name={name}
       value={value}
@@ -79,7 +80,6 @@ export function Radio ({
     return (
       <label
         className={classNames('radio_control', className)}
-        aria-label={ariaLabel}
         {...rippleAttrs}
       >
         {input}

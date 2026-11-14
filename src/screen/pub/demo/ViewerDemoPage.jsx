@@ -15,13 +15,17 @@ const images = [
 /** viewerjs 데모 */
 export default function ViewerDemoPage () {
   const galleryRef = useRef(null)
+  const viewerRef = useRef(null)
+  const openerRef = useRef(null)
 
   useEffect(() => {
     const viewer = createViewer(galleryRef.current, {
       toolbar: true,
       navbar: true,
-      title: true
+      title: true,
+      hidden: () => openerRef.current?.focus()
     })
+    viewerRef.current = viewer
     return () => {
       if (viewer) viewer.destroy()
     }
@@ -69,9 +73,12 @@ const images = [
         })}
       >
         <ul ref={galleryRef} className="lib-demo-gallery">
-          {images.map((img) => (
+          {images.map((img, index) => (
             <li key={img.src}>
-              <img src={img.src} alt={img.alt} />
+              <button type="button" aria-label={`${img.alt} 이미지 확대`} onClick={event => {
+                openerRef.current = event.currentTarget
+                viewerRef.current?.view(index)
+              }}><img src={img.src} alt={img.alt} /></button>
             </li>
           ))}
         </ul>

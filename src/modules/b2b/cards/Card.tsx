@@ -1,4 +1,5 @@
 import ContentCard from './ContentCard' // Content Card 컴포넌트
+import CourseCard from './CourseCard' // Course Card 컴포넌트
 import PromotionCard from './PromotionCard' // Promotion Card 컴포넌트
 import ImageCard from './ImageCard' // Image Card 컴포넌트
 import QuickLinkCard from './QuickLinkCard' // Quick Link Card 컴포넌트
@@ -9,6 +10,17 @@ import type { CardProps } from './cardTypes' // Card Props 타입
 /** type에 따라 필요한 카드 데이터가 결정되는 B2B 카드 공통 입구. */
 export default function Card (props: Readonly<CardProps>) {
   switch (props.type) {
+    case 'course':
+      return (
+        <CourseCard
+          card={props.card}
+          shadow={props.shadow}
+          image={props.image}
+          imageProps={props.imageProps}
+          slots={props.slots}
+          priority={props.priority}
+        />
+      )
     case 'callout':
       return <CalloutCard card={props.card} actions={props.actions} shadow={props.shadow} />
     case 'testimonial':

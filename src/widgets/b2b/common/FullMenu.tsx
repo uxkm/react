@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useRef } from 'react' // React
+import { useRef } from 'react' // React
+import { useModalDialog } from '@/hooks/interaction/useModalDialog'
 import Image from 'next/image' // 이미지 최적화
 import { Link } from '@/lib/router' // 클라이언트 링크
 import { Icon } from '@/comp/ui/Icon' // Icon 컴포넌트
@@ -80,6 +81,7 @@ export function FullMenuContent ({
       }}
     >
       <Accordion
+        headingLevel={2}
         className="full-menu-content_accordion"
         defaultValue={initialSection}
         skin="flush"
@@ -156,23 +158,14 @@ export function FullMenu ({
 }>) {
   const dialog = useRef<HTMLDialogElement>(null)
 
-  useEffect(() => {
-    const node = dialog.current
-    if (!open || !node) return
-    const previousOverflow = document.body.style.overflow
-    node.showModal()
-    document.body.style.overflow = 'hidden'
-    return () => {
-      node.close()
-      document.body.style.overflow = previousOverflow
-    }
-  }, [open])
+  const handleKeyDown = useModalDialog(dialog, open)
 
   return (
     <dialog
       ref={dialog}
       className="full-menu full-menu_default"
       aria-label="전체메뉴"
+      onKeyDown={handleKeyDown}
       onCancel={(event) => {
         event.preventDefault()
         onClose()
@@ -181,7 +174,7 @@ export function FullMenu ({
         if (event.target === event.currentTarget) onClose()
       }}
     >
-      <div className="full-menu_surface">
+      <div className="full-menu_surface" data-dialog-panel="" tabIndex={-1}>
         <div className="full-menu_header">
           <div
             onClick={(event) => {
@@ -204,7 +197,6 @@ export function FullMenu ({
               type="button"
               aria-label="전체메뉴 닫기"
               onClick={onClose}
-              autoFocus
             >
               <Icon name="close" size={24} />
             </button>

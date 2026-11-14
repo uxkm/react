@@ -37,7 +37,7 @@ const encoded = useMemo(() => encode(plain), [plain])
     onChange={(e) => setPlain(e.target.value)}
     aria-label="원문"
   />
-  <pre className="lib-demo-pre">{encoded}</pre>
+  <pre tabIndex={0} className="lib-demo-pre">{encoded}</pre>
 </div>`, {
           name: 'Base64EncodeExample',
           reactImports: ['useMemo', 'useState'],
@@ -55,7 +55,7 @@ const encoded = useMemo(() => encode(plain), [plain])
             }}
             aria-label="원문"
           />
-          <pre className="lib-demo-pre">{encoded}</pre>
+          <pre tabIndex={0} className="lib-demo-pre">{encoded}</pre>
         </div>
       </DemoBlock>
       <DemoBlock
@@ -77,7 +77,7 @@ const decoded = useMemo(() => {
     onChange={(e) => setEncoded(e.target.value)}
     aria-label="Base64"
   />
-  <pre className="lib-demo-pre">{decoded}</pre>
+  <pre tabIndex={0} className="lib-demo-pre">{decoded}</pre>
 </div>`, {
           name: 'Base64DecodeExample',
           reactImports: ['useMemo', 'useState'],
@@ -92,7 +92,7 @@ const decoded = useMemo(() => {
             onChange={(e) => setEncoded(e.target.value)}
             aria-label="Base64"
           />
-          <pre className="lib-demo-pre">{decoded}</pre>
+          <pre tabIndex={0} className="lib-demo-pre">{decoded}</pre>
         </div>
       </DemoBlock>
     </DemoLayout>

@@ -74,6 +74,7 @@ export function Checkbox ({
       ref={inputRef}
       id={standalone ? id : inputId}
       type="checkbox"
+      aria-label={props['aria-label'] ?? ariaLabel}
       className="checkbox_input"
       disabled={disabled}
       {...checkedProps}
@@ -89,7 +90,6 @@ export function Checkbox ({
     return (
       <label
         className={classNames('checkbox_control', className)}
-        aria-label={ariaLabel}
         {...rippleAttrs}
       >
         {input}

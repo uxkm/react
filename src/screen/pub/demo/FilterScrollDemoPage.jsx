@@ -81,7 +81,7 @@ useEffect(() => {
     </button>
     <div className="wbs-filter-selected">
       <span className="wbs-filter-selected_sep" aria-hidden="true" />
-      <ul ref={subsRef} className="wbs-filter-subs" aria-label="선택한 화면명 하위 목록">
+      <ul ref={subsRef} className="wbs-filter-subs" aria-label="선택한 화면명 하위 목록" tabIndex={0}>
         {Array.from({ length: chipCount }, (_, i) => i + 1).map((n) => (
           <li key={'chip-' + n}>
             <span className="wbs-filter-sub is-static">로그인 화면 {n}</span>
@@ -116,7 +116,7 @@ useEffect(() => {
               <ul
                 ref={subsRef}
                 className="wbs-filter-subs"
-                aria-label="선택한 화면명 하위 목록"
+                aria-label="선택한 화면명 하위 목록" tabIndex={0}
               >
                 {Array.from({ length: chipCount }, (_, i) => i + 1).map((n) => (
                   <li key={'chip-' + n}>

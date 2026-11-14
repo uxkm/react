@@ -33,7 +33,7 @@ function ScrollBackTopDemo ({
 
   return (
     <div className="back_top_demo-wrap">
-      <div className="back_top_demo-scroll" ref={scrollerRef}>
+      <div className="back_top_demo-scroll" tabIndex={0} ref={scrollerRef}>
         <div className="back_top_demo-content">
           <p>
             아래로 스크롤하면 우하단에 버튼이 나타납니다.
@@ -97,7 +97,7 @@ function ControlledVisibleDemo () {
         </span>
       </div>
       <div className="back_top_demo-wrap">
-        <div className="back_top_demo-scroll" ref={scrollerRef}>
+        <div className="back_top_demo-scroll" tabIndex={0} ref={scrollerRef}>
           <div className="back_top_demo-content">
             <p>
               <code>visible</code> · <code>onVisibleChange</code>로 표시를 제어합니다.
@@ -162,7 +162,7 @@ const [visible, setVisible] = useState(false)
 
 return (
   <div className="back_top_demo-wrap">
-    <div className="back_top_demo-scroll" ref={scrollerRef}>
+    <div className="back_top_demo-scroll" tabIndex={0} ref={scrollerRef}>
       <div className="back_top_demo-content">
         <p>
           아래로 스크롤하면 우하단에 버튼이 나타납니다.
@@ -272,7 +272,7 @@ const [visible, setVisible] = useState(false)
 
 return (
   <div className="back_top_demo-wrap">
-    <div className="back_top_demo-scroll" ref={scrollerRef}>
+    <div className="back_top_demo-scroll" tabIndex={0} ref={scrollerRef}>
       <div className="back_top_demo-content">
         <p>
           아래로 스크롤하면 우하단에 버튼이 나타납니다.
@@ -304,7 +304,7 @@ const [visible, setVisible] = useState(false)
 
 return (
   <div className="back_top_demo-wrap">
-    <div className="back_top_demo-scroll" ref={scrollerRef}>
+    <div className="back_top_demo-scroll" tabIndex={0} ref={scrollerRef}>
       <div className="back_top_demo-content">
         <p>
           아래로 스크롤하면 우하단에 버튼이 나타납니다.
@@ -360,7 +360,7 @@ const [visible, setVisible] = useState(false)
 
 return (
   <div className="back_top_demo-wrap">
-    <div className="back_top_demo-scroll" ref={scrollerRef}>
+    <div className="back_top_demo-scroll" tabIndex={0} ref={scrollerRef}>
       <div className="back_top_demo-content">
         <p>
           아래로 스크롤하면 우하단에 버튼이 나타납니다.

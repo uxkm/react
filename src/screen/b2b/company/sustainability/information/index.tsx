@@ -22,6 +22,7 @@ export default function B2bCompanySustainabilityInformationPage () {
         skeleton={skeletonMode === 'manual' ? <InformationSkeleton /> : undefined}
         className="page-container"
       >
+        <h1 className="visually-hidden">{pageTitle}</h1>
         <ComingSoon />
 
       </PageLoading>

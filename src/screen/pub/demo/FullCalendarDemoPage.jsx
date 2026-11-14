@@ -84,7 +84,7 @@ const [lastAction, setLastAction] = useState('')
           ]
         })}
       >
-        <p style={{ margin: '0 0 12px', fontSize: 13, color: 'var(--color-text-muted)' }}>
+        <p role="status" style={{ margin: '0 0 12px', fontSize: 13, color: 'var(--color-text-muted)' }}>
           today: {formatDate(new Date(), { month: 'long', year: 'numeric', day: 'numeric', locale: 'ko' })}
           <br />
           {lastAction}
@@ -98,6 +98,10 @@ const [lastAction, setLastAction] = useState('')
               center: 'title',
               right: 'dayGridMonth,timeGridWeek'
             }}
+            buttonIcons={false}
+            buttonText={{ prev: '이전', next: '다음', today: '오늘', month: '월', week: '주' }}
+            eventInteractive
+            dayCellDidMount={({ el }) => el.removeAttribute('aria-labelledby')}
             editable
             selectable
             events={events}
@@ -118,6 +122,24 @@ const [lastAction, setLastAction] = useState('')
             }}
           />
         </div>
+        <fieldset className="calendar-event-editor">
+          <legend>키보드로 일정 추가·이동</legend>
+          <label>새 일정 날짜 <input type="date" aria-label="새 일정 날짜" onChange={event => {
+            if (!event.target.value) return
+            const start = event.target.value
+            const title = `새 일정 ${events.length + 1}`
+            setEvents(previous => [...previous, { id: String(Date.now()), title, start }])
+            setLastAction(`추가: ${title} (${start})`)
+          }} /></label>
+          {events.map(item => (
+            <label key={item.id}>{item.title} 날짜 <input type="date" value={item.start.slice(0, 10)} onChange={event => {
+              if (!event.target.value) return
+              const start = event.target.value + item.start.slice(10)
+              setEvents(previous => previous.map(row => row.id === item.id ? { ...row, start, end: undefined } : row))
+              setLastAction(`이동: ${item.title} → ${start}`)
+            }} /></label>
+          ))}
+        </fieldset>
       </DemoBlock>
     </DemoLayout>
   )

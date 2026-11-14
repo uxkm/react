@@ -29,6 +29,8 @@ import {
   collectExpandKeys, // collect Expand Keys
   collectLeaves, // collect Leaves
   countLeaves, // count Leaves
+  countPages,
+  isLinkNode,
   filterDepthTree, // filter Depth Tree
   linkFieldSearchText // link Field Search Text
 } from '@/screen/pub/widgets/list' // 위젯 · list
@@ -289,12 +291,12 @@ export default function PubIndex () {
   /** 하나라도 펼쳐져 있으면 true (모두 접기/펼치기 스위치) */
   const hasExpanded = Object.keys(expanded).some((id) => !!expanded[id])
 
-  /** B2B 최종 리프 flat 목록 — 진행률·통계용 (excludeFromStats 폴더 제외) */
+  /** B2B 최종 리프 flat 목록 — 진행률·통계용 (링크 및 excludeFromStats 제외) */
   const allLeaves = useMemo(
     () => folders
       .filter((folder) => !folder.excludeFromStats)
       .flatMap((folder) => collectLeaves(folder))
-      .filter((item) => !item.excludeFromStats),
+      .filter((item) => !item.excludeFromStats && !isLinkNode(item)),
     [folders]
   )
   /** 전체 진행률 평균(%) */
@@ -410,14 +412,6 @@ export default function PubIndex () {
       el.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
     }
   })
-
-  // 다이얼로그 열릴 때 포커스 (Esc 등)
-  useEffect(() => {
-    if (filterSheetOpen && filterSheetRef.current) filterSheetRef.current.focus()
-  }, [filterSheetOpen])
-  useEffect(() => {
-    if (remarkModal.open && remarkDialogRef.current) remarkDialogRef.current.focus()
-  }, [remarkModal.open])
 
   /* ---------- 핸들러 ---------- */
   /** Enter: 검색 적용 (결과 폴더·그룹은 자동 펼침) */
@@ -637,6 +631,7 @@ export default function PubIndex () {
     <div ref={rootRef} className="wbs">
       {/* pub 전용 헤더 (일반 페이지는 PageHeader / Header) */}
       <PageLayoutVisibility meta={{ footer: false }} />
+      <h1 className="visually-hidden">퍼블리싱 목록</h1>
       <PubHeader projectName={projectName} />
 
       {/* 로딩 / 오류 / 목록 */}
@@ -651,7 +646,7 @@ export default function PubIndex () {
           allLabel="전체"
           folders={folders}
           activeId={activeFolderId}
-          countOf={(folder) => countLeaves(folder)}
+          countOf={(folder) => countPages(folder)}
           labelOf={(folder) => folderLabel(folder)}
           onClose={closeFilterSheet}
           onPick={pickFilterFolder}

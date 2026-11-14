@@ -2,6 +2,7 @@
 // 에러 상태 화면 (.error-status) — 404 · 500 등
 // =============================================================================
 .error-status {
+  background: var(--color-surface);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -90,4 +91,9 @@
     word-break: break-word;
     white-space: pre-wrap;
   }
+}
+
+.page-container.error-status { color: var(--color-text);
+  > p:first-child { color: var(--color-accent-text); }
+  > h1 ~ p { color: var(--color-text-muted); }
 }

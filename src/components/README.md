@@ -1,5 +1,15 @@
 # 컴포넌트 구조
 
+## Modal·Drawer 접근성
+
+실제 오버레이는 네이티브 `<dialog>`를 `showModal()`로 열어 배경의 키보드·포인터·접근성 탐색을 차단합니다. `title`은 자동으로 `aria-labelledby`에 연결하며, 제목이 없으면 호출부에서 구체적인 `aria-label`을 지정합니다. 단순한 설명은 `aria-describedby`로 연결할 수 있습니다.
+
+기본 초기 초점은 제목이며, 제목이 없으면 전체 패널입니다. 제목·전체 패널은 `tabIndex={-1}`로 열릴 때만 초점을 받고 일반 Tab 순서에는 추가하지 않습니다. 특정 입력란 등에 먼저 초점을 두려면 내부 요소의 ref를 `initialFocusRef`로 전달합니다. 대상이 없거나 숨겨진 경우에는 기본 제목·패널로 복귀합니다. Tab·Shift+Tab은 현재 보이는 활성 요소 사이를 순환하고, Escape는 최상위 대화상자만 닫습니다. 닫힌 뒤에는 살아 있는 열기 요소로 초점을 복귀합니다.
+
+Drawer는 닫기 애니메이션이 끝날 때까지 모달 상태와 스크롤 잠금을 유지합니다. `backdrop={false}`도 모달이며 dim만 생략합니다. `staticDemo`는 비모달 문서 예시로, 초점과 배경을 잠그지 않습니다. 드래그 핸들은 Enter·Space로 확장·축소할 수 있습니다.
+
+가이드 `/pub/guide/modal`, `/pub/guide/drawer`의 ‘키보드와 스크린리더’ 예시에서 제목 유무·초기 초점 지정·중첩·배경 dim 옵션을 확인할 수 있습니다.
+
 ## OOCSS 클래스 규칙
 
 공통 UI·레이아웃·위젯은 구조, 파트, 스킨·배치, 상태를 구분합니다. 파트와 변형은 `_`로 연결하고, 상태는 `is-*`로 표현합니다.
@@ -189,3 +199,7 @@ import { Button, Floating, PageFloating } from '@/comp'
 ```
 
 `PageFloating.floatingProps`는 해당 페이지에서만 공통 배치 설정을 덮어쓰며, 페이지 이동 시 초기화됩니다. 기존 `style` prop은 계산 결과보다 우선하므로 직접 좌표를 고정하면 자동 경계 조정도 해당 좌표를 덮어쓰지 않습니다.
+
+## 전체 접근성 검토
+
+공통 UI 64개 파일과 widget·layout의 검토 결과는 [컴포넌트별 검토 문서](../../public/data/pub/docs/a11y/component-review-2026-11-14.md)에 있습니다. 가이드 `/pub/guide/accessibility`에서도 문서를 열 수 있습니다.

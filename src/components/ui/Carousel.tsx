@@ -257,6 +257,20 @@ export function Carousel ({
   )
   const playing = playingControlled ? playingProp : innerPlaying
   const playingRef = useLatestRef(playing)
+  const onPlayingChangeRef = useLatestRef(onPlayingChange)
+  useEffect(() => {
+    const query = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const sync = () => {
+      if (instanceRef.current) instanceRef.current.params.speed = query.matches ? 0 : Math.max(0, speed)
+      if (!query.matches) return
+      setInnerPlaying(false)
+      instanceRef.current?.autoplay?.stop()
+      onPlayingChangeRef.current?.(false)
+    }
+    sync()
+    query.addEventListener('change', sync)
+    return () => query.removeEventListener('change', sync)
+  }, [speed, onPlayingChangeRef])
   /** DOM 기준 장 수 — <Slides /> 같은 래퍼는 Children 으로는 1로 보이므로 layout 후 센다 */
   const [slideCount, setSlideCount] = useState(0)
 
@@ -329,7 +343,7 @@ export function Carousel ({
 
     const options: Record<string, unknown> = {
       modules: carouselSwiperModules,
-      speed: Math.max(0, speed),
+      speed: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : Math.max(0, speed),
       initialSlide: startIndex,
       slidesPerView: view,
       slidesPerGroup,
@@ -337,7 +351,7 @@ export function Carousel ({
       centeredSlides: centered || isCoverflow,
       loop: canLoop,
       grabCursor: hasControls,
-      keyboard: { enabled: hasControls },
+      keyboard: { enabled: false, onlyInViewport: true },
       a11y: {
         prevSlideMessage: '이전 슬라이드',
         nextSlideMessage: '다음 슬라이드',
@@ -350,7 +364,7 @@ export function Carousel ({
       // 부모 감시가 전환 도중 slideToLoop(..., 0)를 호출하지 않도록 끕니다.
       // 실제 크기 변화는 Swiper와 아래 ResizeObserver에서 처리합니다.
       observeParents: false,
-      watchSlidesProgress: !!(watchSlidesProgress || thumbsControl || isCoverflow)
+      watchSlidesProgress: true
     }
 
     if (showNavigation) {
@@ -407,6 +421,25 @@ export function Carousel ({
 
     const swiper = new Swiper(host, options)
     instanceRef.current = swiper
+    const originals = new Map<HTMLElement, { inert: boolean; hidden: string | null }>()
+    const syncSlideAccessibility = () => {
+      if (swiper.destroyed) return
+      const viewport = host.getBoundingClientRect()
+      for (const slide of swiper.slides) {
+        if (!originals.has(slide)) originals.set(slide, { inert: slide.inert, hidden: slide.getAttribute('aria-hidden') })
+        const original = originals.get(slide)!
+        const rect = slide.getBoundingClientRect()
+        const visible = effect === 'fade'
+          ? slide === swiper.slides[swiper.activeIndex]
+          : rect.right > viewport.left + 1 && rect.left < viewport.right - 1 &&
+            rect.bottom > viewport.top + 1 && rect.top < viewport.bottom - 1
+        slide.inert = original.inert || !visible
+        if (!visible) slide.setAttribute('aria-hidden', 'true')
+        else if (original.hidden === null) slide.removeAttribute('aria-hidden')
+        else slide.setAttribute('aria-hidden', original.hidden)
+      }
+    }
+    for (const event of ['transitionEnd', 'resize', 'update'] as const) swiper.on(event, syncSlideAccessibility)
     // autoplay 모듈은 켰지만 playing 이 false 면 즉시 정지(autoplayToggle 전용 등)
     if (enableAutoplay && !playingRef.current) {
       swiper.autoplay?.stop()
@@ -436,6 +469,7 @@ export function Carousel ({
     const raf = window.requestAnimationFrame(() => {
       if (swiper.destroyed) return
       swiper.update()
+      syncSlideAccessibility()
       if (canLoop && typeof swiper.slideToLoop === 'function') {
         swiper.slideToLoop(startIndex, 0, false)
       }
@@ -443,6 +477,12 @@ export function Carousel ({
 
     return () => {
       window.cancelAnimationFrame(raf)
+      for (const event of ['transitionEnd', 'resize', 'update'] as const) swiper.off(event, syncSlideAccessibility)
+      for (const [slide, original] of originals) {
+        slide.inert = original.inert
+        if (original.hidden === null) slide.removeAttribute('aria-hidden')
+        else slide.setAttribute('aria-hidden', original.hidden)
+      }
       swiper.off('slideChange', emitIndex)
       swiper.destroy(true, true)
       if (instanceRef.current === swiper) instanceRef.current = null
@@ -548,6 +588,16 @@ export function Carousel ({
       data-component="Carousel"
       data-count={slideCount}
       data-single={multiSlide ? undefined : ''}
+      onFocusCapture={(event) => {
+        rest.onFocusCapture?.(event)
+        if (multiSlide) instanceRef.current?.keyboard?.enable()
+        // 조작 중인 콘텐츠가 자동으로 바뀌지 않도록 초점 진입 시 재생을 멈춥니다.
+        if (enableAutoplay && playing) setPlaying(false)
+      }}
+      onBlurCapture={(event) => {
+        rest.onBlurCapture?.(event)
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) instanceRef.current?.keyboard?.disable()
+      }}
     >
       <div
         ref={swiperRef}

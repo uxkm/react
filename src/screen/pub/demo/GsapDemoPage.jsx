@@ -14,6 +14,7 @@ export default function GsapDemoPage () {
   useEffect(() => {
     const el = boxRef.current
     if (!el) return undefined
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
 
     tweenRef.current = gsap.to(el, {
       x: 160,
@@ -22,10 +23,14 @@ export default function GsapDemoPage () {
       duration: 1.4,
       ease: 'power2.inOut',
       yoyo: true,
-      repeat: -1
+      repeat: -1,
+      paused: motion.matches
     })
 
+    const onMotion = () => { if (motion.matches) tweenRef.current?.pause(0) }
+    motion.addEventListener('change', onMotion)
     return () => {
+      motion.removeEventListener('change', onMotion)
       tweenRef.current?.kill()
       gsap.set(el, { clearProps: 'all' })
     }
@@ -80,6 +85,7 @@ useEffect(() => {
           <div style={{ height: 140, display: 'flex', alignItems: 'center' }}>
             <div ref={boxRef} className="lib-demo-box">GSAP</div>
           </div>
+          <button type="button" onClick={() => tweenRef.current?.pause()}>일시정지</button>
           <button type="button" onClick={replay} style={{ width: 'fit-content', padding: '8px 12px', cursor: 'pointer' }}>
             다시 시작
           </button>

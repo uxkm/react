@@ -12,6 +12,7 @@ import {
   useState, // 상태 훅
   type CSSProperties, // CSSProperties 타입
   type HTMLAttributes, // HTMLAttributes 타입
+  type KeyboardEvent as ReactKeyboardEvent, // 키보드 메뉴 탐색
   type ReactNode // ReactNode 타입
 } from 'react' // React
 import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
@@ -171,6 +172,7 @@ export function Dropdown ({
   ...rest
 }: DropdownProps) {
   const rootRef = useRef<HTMLDivElement>(null)
+  const edgeRef = useRef<'first' | 'last'>('first')
   const autoId = useId()
   const triggerId = `dropdown-trigger-${autoId}`
   const menuId = `dropdown-menu-${autoId}`
@@ -205,6 +207,7 @@ export function Dropdown ({
     onSelect?.(item.key, item)
     item.onSelect?.()
     close()
+    rootRef.current?.querySelector<HTMLElement>('.dropdown_trigger')?.focus()
   }
 
   // 바깥 클릭 시 닫기
@@ -219,17 +222,40 @@ export function Dropdown ({
     return () => document.removeEventListener('pointerdown', onPointerDown, true)
   }, [shown, closeOnOutsideClick, open, onOpenChange])
 
-  // Escape 로 닫기
+  // 메뉴가 열리면 선택 항목 또는 키보드로 요청한 끝 항목으로 초점을 옮깁니다.
   useEffect(() => {
     if (!shown) return
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key !== 'Escape') return
-      if (open === undefined) setInnerOpen(false)
-      onOpenChange?.(false)
-    }
-    document.addEventListener('keydown', onKeyDown)
-    return () => document.removeEventListener('keydown', onKeyDown)
-  }, [shown, open, onOpenChange])
+    const choices = rootRef.current?.querySelectorAll<HTMLElement>('.menu_link:not(:disabled)')
+    const selected = rootRef.current?.querySelector<HTMLElement>('[aria-checked="true"]:not(:disabled)')
+    const target = edgeRef.current === 'last' ? choices?.[choices.length - 1] : selected ?? choices?.[0]
+    target?.focus()
+  }, [shown])
+
+  const handleMenuKey = (event: ReactKeyboardEvent<HTMLDivElement>) => {
+    const choices = Array.from(event.currentTarget.querySelectorAll<HTMLElement>('.menu_link:not(:disabled)'))
+    const index = choices.indexOf(document.activeElement as HTMLElement)
+    let next = index
+    if (event.key === 'ArrowDown') next = (index + 1) % choices.length
+    else if (event.key === 'ArrowUp') next = (index - 1 + choices.length) % choices.length
+    else if (event.key === 'Home') next = 0
+    else if (event.key === 'End') next = choices.length - 1
+    else if (event.key === 'Escape' || event.key === 'Tab') {
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+      close()
+      rootRef.current?.querySelector<HTMLElement>('.dropdown_trigger')?.focus()
+      return
+    } else if (event.key.length === 1 && !event.ctrlKey && !event.metaKey && event.key !== ' ') {
+      const ordered = [...choices.slice(index + 1), ...choices.slice(0, index + 1)]
+      const match = ordered.find((item) => item.textContent?.trim().toLocaleLowerCase().startsWith(event.key.toLocaleLowerCase()))
+      if (match) { event.preventDefault(); match.focus() }
+      return
+    } else return
+    event.preventDefault()
+    choices[next]?.focus()
+  }
 
   const scrollable = typeof maxVisibleItems === 'number' && maxVisibleItems > 0
 
@@ -271,9 +297,20 @@ export function Dropdown ({
         expanded={shown}
         disabled={disabled}
         placeholder={isPlaceholder}
-        aria-controls={menuId}
+        aria-controls={shown ? menuId : undefined}
         label={typeof triggerLabel === 'string' ? triggerLabel : undefined}
         onClick={toggle}
+        onKeyDown={(event) => {
+          if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+            event.preventDefault()
+            edgeRef.current = event.key === 'ArrowUp' ? 'last' : 'first'
+            setShown(true)
+          } else if (event.key === 'Escape' && shown) {
+            event.preventDefault()
+            event.stopPropagation()
+            close()
+          }
+        }}
       >
         {typeof triggerLabel === 'string' ? undefined : triggerLabel}
       </Button>
@@ -283,9 +320,10 @@ export function Dropdown ({
           className={classNames('dropdown_menu', scrollable && 'dropdown_menu-scrollable')}
           role="menu"
           aria-labelledby={triggerId}
+          onKeyDown={handleMenuKey}
         >
           <div className="menu menu_vertical menu_compact" role="none">
-            <ul className="menu_list" role={selectable ? 'group' : undefined}>
+            <ul className="menu_list" role="none">
               {items.map((item) => {
                 if (item.type === 'divider') {
                   return <li key={item.key} className="menu_divider" role="separator" />
@@ -295,6 +333,7 @@ export function Dropdown ({
 
                 return (
                   <li
+                    role="none"
                     key={item.key}
                     className={classNames('menu_item', item.disabled && 'is-disabled')}
                   >
@@ -309,6 +348,7 @@ export function Dropdown ({
                       role={selectable ? 'menuitemradio' : 'menuitem'}
                       aria-checked={selectable ? active : undefined}
                       disabled={item.disabled}
+                      tabIndex={-1}
                       onClick={() => handleItemClick(item)}
                     >
                       {hasNodes(item.icon) && (

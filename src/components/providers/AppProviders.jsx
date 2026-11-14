@@ -17,8 +17,6 @@ import { initDetectEnvironment } from '@/utils/dom/detectEnvironment' // OS·브
 import { initOverlayScrollbar } from '@/utils/dom/overlayScrollbar' // classic 스크롤바 OS용 오버레이 스크롤
 import { initRipple } from '@/utils/dom/ripple' // data-ripple 클릭 파장 효과
 import DevelopmentRefresh from './DevelopmentRefresh' // 개발 모드 핫리프레시 보조
-import Header from '@/widgets/b2b/common/Header' // B2B Header
-import Footer from '@/widgets/b2b/common/Footer' // B2B Footer
 
 /** soft nav 시 중복 bootstrap 방지 */
 let localeBootstrapped = false
@@ -81,23 +79,14 @@ function DetectBootstrap ({ children }) {
 }
 
 /**
- * 프로젝트 헤더·푸터를 AppLayout prop 으로 연결한다.
- * HeaderSlot 은 useLayoutEffect 등록이라 SSR 첫 HTML 에 없어
- * 새로고침 시 본문이 위로 붙었다가 내려가므로, prop 으로 첫 렌더부터 포함한다.
- * /b2b* 외 경로는 prop 을 비워 슬롯·기본 AppHeader 경로를 쓴다.
+ * B2B 라우트는 자체 레이아웃에서 AppLayout을 구성한다.
+ * 나머지 경로는 공통 AppLayout의 슬롯·기본 헤더를 사용한다.
  */
 function AppShell ({ children }) {
   const pathname = usePathname() || ''
   const isB2b = pathname === '/b2b' || pathname.startsWith('/b2b/')
 
-  return (
-    <AppLayout
-      header={isB2b ? <Header /> : undefined}
-      footer={isB2b ? <Footer /> : undefined}
-    >
-      {children}
-    </AppLayout>
-  )
+  return isB2b ? children : <AppLayout>{children}</AppLayout>
 }
 
 /** 앱 레이아웃으로 화면을 감싼다 */

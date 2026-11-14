@@ -141,14 +141,14 @@ const SECTIONS = [
         <code>allowHalf</code>를 추가하면 별 왼쪽 절반 클릭으로 0.5 단위 선택이 가능합니다.
       </>
     ),
-    code: wrapPageExample(`<Rate allowHalf legend="정밀 평가 — rate_allow-half" value={3.5} name="rate-half" />`, {
+    code: wrapPageExample(`<Rate allowHalf legend="정밀 평가 — rate_allow-half" defaultValue={3.5} name="rate-half" />`, {
   name: 'RateExample4',
   reactImports: [],
   compImports: ['Rate']
 }),
     preview: (
       <div className="demo-stack">
-        <Rate allowHalf legend="정밀 평가 — rate_allow-half" value={3.5} name="rate-half" />
+        <Rate allowHalf legend="정밀 평가 — rate_allow-half" defaultValue={3.5} name="rate-half" />
         <p className="rate_hint">
           별 왼쪽을 클릭하면 반별, 오른쪽을 클릭하면 정수 점수가 선택됩니다.
         </p>

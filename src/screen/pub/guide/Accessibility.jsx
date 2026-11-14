@@ -21,6 +21,7 @@ export default function GuideAccessibility () {
       title="접근성"
       description={accessibilitySummary}
     >
+      <p><a href="/data/pub/docs/a11y/site-review-2026-11-14.md">전체 페이지·컴포넌트·위젯·모듈 접근성 검토 결과 (2026-11-14)</a></p>
       <MarkdownDoc source={accessibilityBody} />
     </GuideLayout>
   )

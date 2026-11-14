@@ -45,7 +45,7 @@ export default function AjvDemoPage () {
     >
       <DemoBlock
         title="스키마"
-        code={wrapPageExample(`<pre className="lib-demo-pre">{JSON.stringify(schema, null, 2)}</pre>`, {
+        code={wrapPageExample(`<pre tabIndex={0} className="lib-demo-pre">{JSON.stringify(schema, null, 2)}</pre>`, {
           name: 'AjvSchemaExample',
           reactImports: [],
           compImports: [],
@@ -63,7 +63,7 @@ export default function AjvDemoPage () {
           ]
         })}
       >
-        <pre className="lib-demo-pre">{JSON.stringify(schema, null, 2)}</pre>
+        <pre tabIndex={0} className="lib-demo-pre">{JSON.stringify(schema, null, 2)}</pre>
       </DemoBlock>
       <DemoBlock
         title="입력 JSON"
@@ -88,7 +88,7 @@ const result = useMemo(() => {
     onChange={(e) => setJsonText(e.target.value)}
     aria-label="검증할 JSON"
   />
-  <pre className="lib-demo-pre">
+  <pre tabIndex={0} className="lib-demo-pre">
     {result.ok ? 'OK — ' + result.message : 'FAIL\\n' + result.message}
   </pre>
 </div>`, {
@@ -117,7 +117,7 @@ const schema = {
             onChange={(e) => setJsonText(e.target.value)}
             aria-label="검증할 JSON"
           />
-          <pre className="lib-demo-pre">
+          <pre tabIndex={0} className="lib-demo-pre">
             {result.ok ? `OK — ${result.message}` : `FAIL\n${result.message}`}
           </pre>
         </div>

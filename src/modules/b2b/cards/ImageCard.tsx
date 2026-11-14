@@ -19,7 +19,6 @@ export default function ImageCard ({
       as={Link}
       href={card.href}
       className={`card_image card_${card.tone}`}
-      aria-label={card.label}
     >
       <p>{card.description}</p>
       <h2>{card.title}</h2>

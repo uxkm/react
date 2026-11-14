@@ -22,6 +22,7 @@ export default function B2bContentsAxAiSearchPage () {
         skeleton={skeletonMode === 'manual' ? <AiSearchSkeleton /> : undefined}
         className="page-container"
       >
+        <h1 className="visually-hidden">{pageTitle}</h1>
         <ComingSoon />
 
       </PageLoading>

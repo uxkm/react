@@ -7,12 +7,23 @@
 
 import {
   useState, // 상태 훅
+  useEffect, // 초기 roving 초점
+  useRef, // 트리 루트
+  useId, // 노드 이름
+  createContext, // 단일 선택 상태
+  useContext, // 트리 선택 계약
   type HTMLAttributes, // HTMLAttributes 타입
   type LiHTMLAttributes, // LiHTMLAttributes 타입
   type MouseEvent, // MouseEvent 타입
   type ReactNode // ReactNode 타입
 } from 'react' // React
 import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
+
+const TreeSelection = createContext<{
+  selected: string | null
+  select: (id: string) => void
+  multiple: boolean
+} | null>(null)
 
 /** Tree 루트 props */
 export interface TreeProps extends HTMLAttributes<HTMLUListElement> {
@@ -36,11 +47,21 @@ export function Tree ({
   ariaLabel,
   multiselectable = false,
   className,
+  onKeyDown,
+  onFocus,
   ...rest
 }: TreeProps) {
+  const ref = useRef<HTMLUListElement>(null)
+  const [selectedNode, selectNode] = useState<string | null>(null)
+  useEffect(() => {
+    const first = ref.current?.querySelector<HTMLElement>('[role="treeitem"][aria-selected="true"]') ?? ref.current?.querySelector<HTMLElement>('[role="treeitem"]')
+    if (first) first.tabIndex = 0
+  }, [])
   return (
+    <TreeSelection.Provider value={{ selected: selectedNode, select: selectNode, multiple: multiselectable }}>
     <ul
       {...rest}
+      ref={ref}
       className={classNames(
         'tree',
         bordered && 'tree_bordered',
@@ -49,11 +70,48 @@ export function Tree ({
         className
       )}
       role="tree"
-      aria-label={ariaLabel}
+      aria-label={ariaLabel ?? rest['aria-label'] ?? '트리 목록'}
       aria-multiselectable={multiselectable || undefined}
+      onFocus={(event) => {
+        onFocus?.(event)
+        const item = (event.target as HTMLElement).closest<HTMLElement>('[role="treeitem"]')
+        if (!item) return
+        for (const node of event.currentTarget.querySelectorAll<HTMLElement>('[role="treeitem"]')) node.tabIndex = node === item ? 0 : -1
+      }}
+      onKeyDown={(event) => {
+        onKeyDown?.(event)
+        if (event.defaultPrevented) return
+        const item = (event.target as HTMLElement).closest<HTMLElement>('[role="treeitem"]')
+        if (!item) return
+        const nodes = Array.from(event.currentTarget.querySelectorAll<HTMLElement>('[role="treeitem"]'))
+          .filter((node) => node.getClientRects().length > 0 && !node.closest('[hidden]'))
+        const index = nodes.indexOf(item)
+        const toggle = item.querySelector<HTMLButtonElement>(':scope > .tree_toggle')
+        let target: HTMLElement | undefined
+        if (event.key === 'ArrowDown') target = nodes[Math.min(index + 1, nodes.length - 1)]
+        else if (event.key === 'ArrowUp') target = nodes[Math.max(0, index - 1)]
+        else if (event.key === 'Home') target = nodes[0]
+        else if (event.key === 'End') target = nodes[nodes.length - 1]
+        else if (event.key === 'ArrowRight') {
+          if (item.getAttribute('aria-expanded') === 'false') toggle?.click()
+          else target = item.nextElementSibling?.querySelector<HTMLElement>('[role="treeitem"]') ?? undefined
+        } else if (event.key === 'ArrowLeft') {
+          if (item.getAttribute('aria-expanded') === 'true') toggle?.click()
+          else target = item.parentElement?.parentElement?.closest('li')?.querySelector<HTMLElement>(':scope > [role="treeitem"]') ?? undefined
+        } else if ((event.key === 'Enter' || event.key === ' ') && event.target === item) {
+          item.querySelector<HTMLButtonElement>(':scope > .tree_link')?.click()
+          if (!item.querySelector(':scope > .tree_link')) toggle?.click()
+        } else if (event.key.length === 1 && event.key !== ' ' && !event.ctrlKey && !event.metaKey) {
+          target = [...nodes.slice(index + 1), ...nodes.slice(0, index + 1)].find((node) =>
+            node.querySelector('.tree_label')?.textContent?.trim().toLocaleLowerCase().startsWith(event.key.toLocaleLowerCase()))
+        } else return
+        event.preventDefault()
+        target?.focus()
+      }}
     >
       {children}
     </ul>
+    </TreeSelection.Provider>
   )
 }
 
@@ -114,6 +172,10 @@ export function TreeNode ({
   onSelect,
   ...rest
 }: TreeNodeProps) {
+  const labelId = useId()
+  const groupId = useId()
+  const metaId = useId()
+  const tree = useContext(TreeSelection)
   const hasChildren = Boolean(children)
   const showToggle = expandable || hasChildren
   const controlledExpand = expanded !== undefined
@@ -123,7 +185,8 @@ export function TreeNode ({
   const isExpanded = controlledExpand ? expanded !== false : innerExpanded
   const selectedControlled = selectedProp !== undefined
   const [innerSelected, setInnerSelected] = useState(defaultSelected)
-  const selected = selectedControlled ? !!selectedProp : innerSelected
+  const selected = selectedControlled ? !!selectedProp
+    : tree && !tree.multiple && tree.selected !== null ? tree.selected === labelId : innerSelected
 
   const toggle = () => {
     const next = !isExpanded
@@ -135,11 +198,12 @@ export function TreeNode ({
     if (disabled) return
     const next = !selected
     if (!selectedControlled) setInnerSelected(next)
+    if (!selectedControlled && tree && !tree.multiple) tree.select(next ? labelId : '')
     onSelectedChange?.(next, event)
     onSelect?.(value, event)
   }
 
-  const labelContent = labelSlot ?? <span className="tree_label">{label}</span>
+  const labelContent = <span id={labelId} className="tree_label">{labelSlot ?? label}</span>
   const metaContent = metaSlot ?? meta
   const selectable = link || onSelect != null || onSelectedChange != null
 
@@ -147,18 +211,24 @@ export function TreeNode ({
     <li
       {...rest}
       className={classNames('tree_item', className)}
-      role="treeitem"
-      aria-expanded={showToggle ? isExpanded : undefined}
-      aria-selected={selected || undefined}
+      role="none"
+      data-expanded={showToggle ? isExpanded : undefined}
     >
-      <div className={classNames('tree_row', selected && 'is-selected', disabled && 'is-disabled')}>
+      <div className={classNames('tree_row', selected && 'is-selected', disabled && 'is-disabled')}
+        role="treeitem" tabIndex={-1}
+        aria-labelledby={`${labelId}${metaContent != null && metaContent !== '' ? ` ${metaId}` : ''}`}
+        aria-owns={hasChildren ? groupId : undefined}
+        aria-disabled={disabled || undefined}
+        aria-expanded={showToggle ? isExpanded : undefined}
+        aria-selected={selectable ? selected : undefined}>
         {showToggle
           ? (
             <button
               type="button"
               className={classNames('tree_toggle', plusToggle && 'tree_toggle-plus')}
               aria-expanded={isExpanded}
-              aria-label={toggleLabel}
+              aria-label={toggleLabel || (isExpanded ? '하위 항목 접기' : '하위 항목 펼치기')}
+              tabIndex={-1}
               disabled={disabled || undefined}
               onClick={toggle}
             />
@@ -179,6 +249,7 @@ export function TreeNode ({
             <button
               type="button"
               className="tree_link"
+              tabIndex={-1}
               disabled={disabled || undefined}
               onClick={handleSelect}
             >
@@ -188,13 +259,13 @@ export function TreeNode ({
           : labelContent}
         {metaContent != null && metaContent !== ''
           ? (
-            <span className="tree_meta">{metaContent}</span>
+            <span id={metaId} className="tree_meta">{' '}{metaContent}</span>
             )
           : null}
       </div>
       {hasChildren
         ? (
-          <ul className="tree" role="group" hidden={!isExpanded}>
+          <ul id={groupId} className="tree" role="group" hidden={!isExpanded}>
             {children}
           </ul>
           )

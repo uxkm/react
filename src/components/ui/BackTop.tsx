@@ -72,13 +72,14 @@ function getScrollTop (scrollParent: Window | HTMLElement) {
 }
 
 function scrollToTop (scrollParent: Window | HTMLElement) {
+  const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'
   if (isWindow(scrollParent)) {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    window.scrollTo({ top: 0, behavior })
     return
   }
   // Element.scrollTo({ behavior: 'smooth' }) 가 no-op 인 환경이 있어 auto 후 보정
   if (typeof scrollParent.scrollTo === 'function') {
-    scrollParent.scrollTo({ top: 0, behavior: 'smooth' })
+    scrollParent.scrollTo({ top: 0, behavior })
     requestAnimationFrame(() => {
       if (scrollParent.scrollTop > 0) scrollParent.scrollTo(0, 0)
     })
@@ -195,6 +196,17 @@ export function BackTop ({
         onClick={(event) => {
           const scrollParent = resolveTarget(target)
           if (scrollParent) scrollToTop(scrollParent)
+          if (scrollParent && event.detail === 0) {
+            const destination = isWindow(scrollParent) ? document.querySelector<HTMLElement>('main') : scrollParent
+            if (destination) {
+              const previous = destination.getAttribute('tabindex')
+              if (previous === null) {
+                destination.tabIndex = -1
+                destination.addEventListener('blur', () => destination.removeAttribute('tabindex'), { once: true })
+              }
+              destination.focus({ preventScroll: true })
+            }
+          }
           onClick?.(event)
         }}
       >

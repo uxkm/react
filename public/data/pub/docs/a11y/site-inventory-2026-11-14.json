@@ -1,0 +1,2094 @@
+{
+  "date": "2026-11-14",
+  "routes": [
+    {
+      "route": "/404",
+      "source": "src/screen/error/NotFound.jsx",
+      "state": "error"
+    },
+    {
+      "route": "/_not-found",
+      "source": "src/screen/error/NotFound.jsx",
+      "state": "error"
+    },
+    {
+      "route": "/b2b/common/back-top",
+      "source": "src/widgets/b2b/previews/back-top/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/common/contact-us",
+      "source": "src/widgets/b2b/previews/contact-us/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/common/download",
+      "source": "src/widgets/b2b/previews/download/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/common/education-diagnosis",
+      "source": "src/widgets/b2b/previews/education-diagnosis/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/common/email-privacy",
+      "source": "src/widgets/b2b/previews/email-privacy/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/common/family-site",
+      "source": "src/widgets/b2b/previews/family-site/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/common/footer",
+      "source": "src/widgets/b2b/previews/footer/index.tsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/b2b/common/full-menu",
+      "source": "src/widgets/b2b/previews/full-menu/index.tsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/b2b/common/gnb",
+      "source": "src/widgets/b2b/previews/gnb/index.tsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/b2b/common/integrated-search-results",
+      "source": "src/widgets/b2b/previews/integrated-search-results/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/common/integrated-search",
+      "source": "src/widgets/b2b/previews/integrated-search/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/common/main-section",
+      "source": "src/widgets/b2b/previews/main-section/index.tsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/b2b/common/mega-menu",
+      "source": "src/widgets/b2b/previews/mega-menu/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/common/notice-detail",
+      "source": "src/widgets/b2b/previews/notice-detail/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/common/notice-list",
+      "source": "src/widgets/b2b/previews/notice-list/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/common/privacy",
+      "source": "src/widgets/b2b/previews/privacy/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/common/quick-links",
+      "source": "src/widgets/b2b/previews/quick-links/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/common/tab-navigation",
+      "source": "src/widgets/b2b/previews/tab-navigation/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/common/terms",
+      "source": "src/widgets/b2b/previews/terms/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/common",
+      "source": "src/widgets/b2b/previews/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/company/ceo",
+      "source": "src/screen/b2b/company/ceo/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/company/ethics/compliance",
+      "source": "src/screen/b2b/company/ethics/compliance/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/company/ethics/management",
+      "source": "src/screen/b2b/company/ethics/management/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/company/ethics/sericeo",
+      "source": "src/screen/b2b/company/ethics/sericeo/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/company/history",
+      "source": "src/screen/b2b/company/history/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/company/intro",
+      "source": "src/screen/b2b/company/intro/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/company/investors/disclosure",
+      "source": "src/screen/b2b/company/investors/disclosure/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/company/investors/financial",
+      "source": "src/screen/b2b/company/investors/financial/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/company/investors/ir",
+      "source": "src/screen/b2b/company/investors/ir/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/company/investors/shareholders",
+      "source": "src/screen/b2b/company/investors/shareholders/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/company/investors/stock-price",
+      "source": "src/screen/b2b/company/investors/stock-price/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/company/pr/awards",
+      "source": "src/screen/b2b/company/pr/awards/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/company/pr/news/detail",
+      "source": "src/screen/b2b/company/pr/news/detail/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/company/pr/news/list",
+      "source": "src/screen/b2b/company/pr/news/list/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/company/sustainability/consumer",
+      "source": "src/screen/b2b/company/sustainability/consumer/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/company/sustainability/contribution",
+      "source": "src/screen/b2b/company/sustainability/contribution/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/company/sustainability/diversity",
+      "source": "src/screen/b2b/company/sustainability/diversity/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/company/sustainability/environment",
+      "source": "src/screen/b2b/company/sustainability/environment/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/company/sustainability/esg-data",
+      "source": "src/screen/b2b/company/sustainability/esg-data/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/company/sustainability/esg",
+      "source": "src/screen/b2b/company/sustainability/esg/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/company/sustainability/human-rights",
+      "source": "src/screen/b2b/company/sustainability/human-rights/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/company/sustainability/information",
+      "source": "src/screen/b2b/company/sustainability/information/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/company/sustainability/safety",
+      "source": "src/screen/b2b/company/sustainability/safety/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/contact/education",
+      "source": "src/screen/b2b/contact/education/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/contact/platform",
+      "source": "src/screen/b2b/contact/platform/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/contents/ax/ai-search",
+      "source": "src/screen/b2b/contents/ax/ai-search/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/contents/ax/ai-studio",
+      "source": "src/screen/b2b/contents/ax/ai-studio/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/contents/ax/camp",
+      "source": "src/screen/b2b/contents/ax/camp/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/contents/ax/competency",
+      "source": "src/screen/b2b/contents/ax/competency/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/contents/ax/overview",
+      "source": "src/screen/b2b/contents/ax/overview/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/contents/ax/workshop",
+      "source": "src/screen/b2b/contents/ax/workshop/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/contents/it",
+      "source": "src/screen/b2b/contents/it/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/contents/job/certification",
+      "source": "src/screen/b2b/contents/job/certification/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/contents/job/industry",
+      "source": "src/screen/b2b/contents/job/industry/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/contents/job/professional",
+      "source": "src/screen/b2b/contents/job/professional/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/contents/job",
+      "source": "src/screen/b2b/contents/job/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/contents/language/ai-language",
+      "source": "src/screen/b2b/contents/language/ai-language/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/contents/language/language-life",
+      "source": "src/screen/b2b/contents/language/language-life/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/contents/language",
+      "source": "src/screen/b2b/contents/language/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/contents/leadership/assessment",
+      "source": "src/screen/b2b/contents/leadership/assessment/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/contents/leadership/executive",
+      "source": "src/screen/b2b/contents/leadership/executive/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/contents/leadership/mba",
+      "source": "src/screen/b2b/contents/leadership/mba/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/contents/leadership",
+      "source": "src/screen/b2b/contents/leadership/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/contents/mandatory/courses",
+      "source": "src/screen/b2b/contents/mandatory/courses/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/contents/mandatory/estimate",
+      "source": "src/screen/b2b/contents/mandatory/estimate/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/contents/mandatory/features",
+      "source": "src/screen/b2b/contents/mandatory/features/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/contents/mandatory",
+      "source": "src/screen/b2b/contents/mandatory/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/contents/small-business",
+      "source": "src/screen/b2b/contents/small-business/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/insight/on/detail",
+      "source": "src/screen/b2b/insight/on/detail/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/insight/on/list",
+      "source": "src/screen/b2b/insight/on/list/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/insight/resources/detail",
+      "source": "src/screen/b2b/insight/resources/detail/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/insight/resources/list",
+      "source": "src/screen/b2b/insight/resources/list/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/main",
+      "source": "src/screen/b2b/main/index.tsx",
+      "state": "redirect"
+    },
+    {
+      "route": "/b2b/service/bpo",
+      "source": "src/screen/b2b/service/bpo/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/service/consulting",
+      "source": "src/screen/b2b/service/consulting/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/service/diagnosis",
+      "source": "src/screen/b2b/service/diagnosis/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/service/learning",
+      "source": "src/screen/b2b/service/learning/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/service/platform/ai",
+      "source": "src/screen/b2b/service/platform/ai/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/service/platform/consulting",
+      "source": "src/screen/b2b/service/platform/consulting/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b/service/platform",
+      "source": "src/screen/b2b/service/platform/index.tsx",
+      "state": "placeholder"
+    },
+    {
+      "route": "/b2b",
+      "source": "src/screen/b2b/main/index.tsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/",
+      "source": "src/app/page.jsx",
+      "state": "redirect"
+    },
+    {
+      "route": "/pub/demo/ajv",
+      "source": "src/screen/pub/demo/AjvDemoPage.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/demo/aos",
+      "source": "src/screen/pub/demo/AosDemoPage.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/demo/base64",
+      "source": "src/screen/pub/demo/Base64DemoPage.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/demo/chart",
+      "source": "src/screen/pub/demo/ChartDemoPage.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/demo/clipboard",
+      "source": "src/screen/pub/demo/ClipboardDemoPage.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/demo/dayjs",
+      "source": "src/screen/pub/demo/DayjsDemoPage.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/demo/dnd",
+      "source": "src/screen/pub/demo/DndDemoPage.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/demo/filesize",
+      "source": "src/screen/pub/demo/FilesizeDemoPage.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/demo/filter-scroll",
+      "source": "src/screen/pub/demo/FilterScrollDemoPage.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/demo/fullcalendar",
+      "source": "src/screen/pub/demo/FullCalendarDemoPage.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/demo/gsap",
+      "source": "src/screen/pub/demo/GsapDemoPage.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/demo/hls",
+      "source": "src/screen/pub/demo/HlsDemoPage.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/demo/libs",
+      "source": "src/screen/pub/demo/LibsIndexDemoPage.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/demo/lodash",
+      "source": "src/screen/pub/demo/LodashDemoPage.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/demo/lottie",
+      "source": "src/screen/pub/demo/LottieDemoPage.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/demo/simplebar",
+      "source": "src/screen/pub/demo/SimplebarDemoPage.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/demo/sorting-menu-basic",
+      "source": "src/screen/pub/demo/SortingMenuBasicDemoPage.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/demo/sorting-menu",
+      "source": "src/screen/pub/demo/SortingMenuDemoPage.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/demo/swiper",
+      "source": "src/screen/pub/demo/SwiperDemoPage.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/demo/viewer",
+      "source": "src/screen/pub/demo/ViewerDemoPage.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/demo/webstomp",
+      "source": "src/screen/pub/demo/WebstompDemoPage.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/demo/xss",
+      "source": "src/screen/pub/demo/XssDemoPage.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/demo/youtube",
+      "source": "src/screen/pub/demo/YoutubeDemoPage.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/accessibility",
+      "source": "src/screen/pub/guide/Accessibility.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/accordion",
+      "source": "src/screen/pub/guide/Accordion.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/affix",
+      "source": "src/screen/pub/guide/Affix.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/alert",
+      "source": "src/screen/pub/guide/Alert.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/avatar",
+      "source": "src/screen/pub/guide/Avatar.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/back-top",
+      "source": "src/screen/pub/guide/BackTop.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/badge",
+      "source": "src/screen/pub/guide/Badge.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/breadcrumb",
+      "source": "src/screen/pub/guide/Breadcrumb.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/button",
+      "source": "src/screen/pub/guide/Button.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/calendar",
+      "source": "src/screen/pub/guide/Calendar.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/card",
+      "source": "src/screen/pub/guide/Card.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/carousel",
+      "source": "src/screen/pub/guide/Carousel.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/checkbox",
+      "source": "src/screen/pub/guide/Checkbox.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/collapse",
+      "source": "src/screen/pub/guide/Collapse.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/container",
+      "source": "src/screen/pub/guide/Container.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/date-picker",
+      "source": "src/screen/pub/guide/DatePicker.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/divider",
+      "source": "src/screen/pub/guide/Divider.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/drawer",
+      "source": "src/screen/pub/guide/Drawer.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/dropdown",
+      "source": "src/screen/pub/guide/Dropdown.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/empty",
+      "source": "src/screen/pub/guide/Empty.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/flex",
+      "source": "src/screen/pub/guide/Flex.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/floating",
+      "source": "src/screen/pub/guide/Floating.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/form-layout",
+      "source": "src/screen/pub/guide/FormLayout.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/grid",
+      "source": "src/screen/pub/guide/Grid.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/header",
+      "source": "src/screen/pub/guide/Header.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/icon",
+      "source": "src/screen/pub/guide/Icon.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/input",
+      "source": "src/screen/pub/guide/Input.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/keyword",
+      "source": "src/screen/pub/guide/Keyword.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/link",
+      "source": "src/screen/pub/guide/Link.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/list",
+      "source": "src/screen/pub/guide/List.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/menu",
+      "source": "src/screen/pub/guide/Menu.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/modal",
+      "source": "src/screen/pub/guide/Modal.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/navbar",
+      "source": "src/screen/pub/guide/Navbar.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/pagination",
+      "source": "src/screen/pub/guide/Pagination.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/popover",
+      "source": "src/screen/pub/guide/Popover.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/progress",
+      "source": "src/screen/pub/guide/Progress.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/radio",
+      "source": "src/screen/pub/guide/Radio.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/rate",
+      "source": "src/screen/pub/guide/Rate.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/select",
+      "source": "src/screen/pub/guide/Select.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/skeleton",
+      "source": "src/screen/pub/guide/Skeleton.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/slider",
+      "source": "src/screen/pub/guide/Slider.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/snackbar",
+      "source": "src/screen/pub/guide/Snackbar.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/space",
+      "source": "src/screen/pub/guide/Space.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/spin",
+      "source": "src/screen/pub/guide/Spin.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/stat",
+      "source": "src/screen/pub/guide/Stat.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/steps",
+      "source": "src/screen/pub/guide/Steps.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/switch",
+      "source": "src/screen/pub/guide/Switch.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/table",
+      "source": "src/screen/pub/guide/Table.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/tabs",
+      "source": "src/screen/pub/guide/Tabs.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/tag",
+      "source": "src/screen/pub/guide/Tag.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/textarea",
+      "source": "src/screen/pub/guide/Textarea.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/timeline",
+      "source": "src/screen/pub/guide/Timeline.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/tooltip",
+      "source": "src/screen/pub/guide/Tooltip.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/top-banner",
+      "source": "src/screen/pub/guide/TopBanner.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/tree",
+      "source": "src/screen/pub/guide/Tree.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/typography",
+      "source": "src/screen/pub/guide/Typography.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide/upload",
+      "source": "src/screen/pub/guide/Upload.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub/guide",
+      "source": "src/screen/pub/guide/index.jsx",
+      "state": "rendered"
+    },
+    {
+      "route": "/pub",
+      "source": "src/screen/pub/index.jsx",
+      "state": "rendered"
+    }
+  ],
+  "extraQueryPreviews": [
+    "/b2b/common/main-section?section=hero",
+    "/b2b/common/main-section?section=cards",
+    "/b2b/common/main-section?section=insights",
+    "/b2b/common/main-section?section=cases",
+    "/b2b/common/main-section?section=callouts",
+    "/b2b/common/main-section?section=newsletter",
+    "/b2b/common/main-section?section=courses"
+  ],
+  "sourceFiles": [
+    {
+      "path": "src/components/index.js",
+      "category": "support"
+    },
+    {
+      "path": "src/components/layout/Footer.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/layout/Header.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/layout/LayoutContext.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/layout/LayoutSlot.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/layout/Page.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/layout/PageBanner.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/layout/PageFloating.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/layout/PageHeader.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/layout/PageLayoutVisibility.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/providers/AppProviders.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/providers/DevelopmentRefresh.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/providers/RouteRedirect.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/shared/floating-position.ts",
+      "category": "support"
+    },
+    {
+      "path": "src/components/shared/header-appearance.ts",
+      "category": "support"
+    },
+    {
+      "path": "src/components/shared/layout-slot.ts",
+      "category": "support"
+    },
+    {
+      "path": "src/components/shared/page-meta.ts",
+      "category": "support"
+    },
+    {
+      "path": "src/components/ui/Accordion.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Affix.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Alert.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/AutoSkeleton.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Avatar.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/BackTop.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Badge.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Breadcrumb.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Button.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Calendar.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Card.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Carousel.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Chart.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/ChartD3.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/ChartEcharts.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/ChartHighcharts.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/ChartUs.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Checkbox.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Collapse.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Container.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/DatePicker.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Divider.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Drawer.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Dropdown.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Empty.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Flex.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Floating.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/FormLayout.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Grid.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Icon.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Input.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Keywords.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Link.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/List.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Lottie.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Menu.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Modal.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Navbar.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/PageLoading.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/PageSkeleton.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Pagination.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Popover.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Progress.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Radio.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Rate.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/RouteLoading.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Select.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Skeleton.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Slider.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Snackbar.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Space.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Spin.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Stat.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Steps.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Switch.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Table.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Tabs.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Tag.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Textarea.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Timeline.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Tooltip.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Tree.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Typography.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/ui/Upload.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/widget/AppFooter.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/widget/AppHeader.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/widget/AppLayout.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/widget/GlobalTranslator.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/widget/LanguageSwitcher.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/components/widget/TopBanner.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/modules/b2b/cards/CalloutCard.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/modules/b2b/cards/Card.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/modules/b2b/cards/CardBackground.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/modules/b2b/cards/ContentCard.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/modules/b2b/cards/CourseCard.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/modules/b2b/cards/ImageCard.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/modules/b2b/cards/PromotionCard.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/modules/b2b/cards/QuickLinkCard.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/modules/b2b/cards/TestimonialCard.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/modules/b2b/cards/cardTypes.ts",
+      "category": "support"
+    },
+    {
+      "path": "src/widgets/b2b/ProjectLayout.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/common/ComingSoon.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/common/Footer.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/common/FullMenu.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/common/Header.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/common/footerData.ts",
+      "category": "support"
+    },
+    {
+      "path": "src/widgets/b2b/common/menuData.ts",
+      "category": "support"
+    },
+    {
+      "path": "src/widgets/b2b/main/MainAxInsightCard.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/main/MainConsultationCard.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/main/MainDiagnosisCard.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/main/MainFinanceTestimonialCard.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/main/MainHrTrendCard.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/main/MainInquiryCalloutCard.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/main/MainLeadershipInsightCard.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/main/MainLeadershipTestimonialCard.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/main/MainManufacturingTestimonialCard.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/main/MainNewsletterCalloutCard.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/main/MainPromotionBanner.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/main/MainQuickLinks.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/previews/back-top/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/previews/contact-us/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/previews/download/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/previews/education-diagnosis/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/previews/email-privacy/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/previews/family-site/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/previews/footer/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/previews/full-menu/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/previews/gnb/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/previews/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/previews/integrated-search/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/previews/integrated-search-results/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/previews/main-section/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/previews/mega-menu/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/previews/notice-detail/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/previews/notice-list/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/previews/privacy/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/previews/quick-links/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/previews/tab-navigation/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/widgets/b2b/previews/terms/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/company/ceo/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/company/ceo/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/company/ethics/compliance/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/company/ethics/compliance/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/company/ethics/management/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/company/ethics/management/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/company/ethics/sericeo/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/company/ethics/sericeo/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/company/history/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/company/history/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/company/intro/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/company/intro/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/company/investors/disclosure/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/company/investors/disclosure/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/company/investors/financial/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/company/investors/financial/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/company/investors/ir/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/company/investors/ir/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/company/investors/shareholders/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/company/investors/shareholders/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/company/investors/stock-price/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/company/investors/stock-price/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/company/pr/awards/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/company/pr/awards/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/company/pr/news/detail/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/company/pr/news/detail/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/company/pr/news/list/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/company/pr/news/list/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/company/sustainability/consumer/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/company/sustainability/consumer/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/company/sustainability/contribution/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/company/sustainability/contribution/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/company/sustainability/diversity/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/company/sustainability/diversity/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/company/sustainability/environment/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/company/sustainability/environment/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/company/sustainability/esg/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/company/sustainability/esg/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/company/sustainability/esg-data/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/company/sustainability/esg-data/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/company/sustainability/human-rights/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/company/sustainability/human-rights/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/company/sustainability/information/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/company/sustainability/information/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/company/sustainability/safety/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/company/sustainability/safety/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/contact/education/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/contact/education/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/contact/platform/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/contact/platform/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/contents/ax/ai-search/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/contents/ax/ai-search/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/contents/ax/ai-studio/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/contents/ax/ai-studio/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/contents/ax/camp/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/contents/ax/camp/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/contents/ax/competency/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/contents/ax/competency/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/contents/ax/overview/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/contents/ax/overview/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/contents/ax/workshop/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/contents/ax/workshop/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/contents/it/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/contents/it/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/contents/job/certification/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/contents/job/certification/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/contents/job/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/contents/job/industry/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/contents/job/industry/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/contents/job/professional/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/contents/job/professional/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/contents/job/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/contents/language/ai-language/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/contents/language/ai-language/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/contents/language/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/contents/language/language-life/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/contents/language/language-life/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/contents/language/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/contents/leadership/assessment/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/contents/leadership/assessment/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/contents/leadership/executive/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/contents/leadership/executive/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/contents/leadership/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/contents/leadership/mba/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/contents/leadership/mba/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/contents/leadership/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/contents/mandatory/courses/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/contents/mandatory/courses/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/contents/mandatory/estimate/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/contents/mandatory/estimate/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/contents/mandatory/features/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/contents/mandatory/features/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/contents/mandatory/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/contents/mandatory/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/contents/small-business/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/contents/small-business/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/insight/on/detail/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/insight/on/detail/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/insight/on/list/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/insight/on/list/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/insight/resources/detail/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/insight/resources/detail/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/insight/resources/list/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/insight/resources/list/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/main/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/main/sections/MainCalloutSection.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/main/sections/MainCardSection.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/main/sections/MainCaseSection.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/main/sections/MainHero.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/main/sections/MainInsightSection.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/main/sections/index.ts",
+      "category": "support"
+    },
+    {
+      "path": "src/screen/b2b/main/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/service/bpo/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/service/bpo/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/service/consulting/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/service/consulting/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/service/diagnosis/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/service/diagnosis/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/service/learning/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/service/learning/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/service/platform/ai/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/service/platform/ai/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/service/platform/consulting/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/service/platform/consulting/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/b2b/service/platform/index.tsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/b2b/service/platform/skeleton/indexSkeleton.tsx",
+      "category": "skeleton"
+    },
+    {
+      "path": "src/screen/pub/widgets/docs/GuideApiDocs.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/widgets/docs/MarkdownDoc.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/widgets/list/LanguageSwitcher.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/widgets/list/filter/FolderFilterBar.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/widgets/list/filter/PubFilterSheet.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/widgets/list/filter/PubSearchBar.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/widgets/list/index.js",
+      "category": "support"
+    },
+    {
+      "path": "src/screen/pub/widgets/list/lib/publishLabels.js",
+      "category": "support"
+    },
+    {
+      "path": "src/screen/pub/widgets/list/lib/publishTree.js",
+      "category": "support"
+    },
+    {
+      "path": "src/screen/pub/widgets/list/state/PubListSkeleton.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/widgets/list/state/PubLoadError.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/widgets/list/state/PubSkeletonPiece.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/widgets/list/summary/PubProgressSummary.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/widgets/list/summary/PubTabs.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/widgets/list/table/PathLinkCell.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/widgets/list/table/PubGroupRow.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/widgets/list/table/PubScreenRow.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/widgets/list/table/PubTable.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/widgets/list/table/RemarkModal.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/widgets/list/table/useEllipsisTooltip.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/widgets/navigation/GuideMenu.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/widgets/preview/DemoBlock.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/widgets/preview/LoadOpenOverlayDemo.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/widgets/preview/NoticeModalDemo.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/widgets/preview/OverlayAccessibilityDemo.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/widgets/preview/TimedOverlayDemo.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/widgets/publishing/PublishingPlaceholder.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/demo/AjvDemoPage.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/demo/AosDemoPage.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/demo/Base64DemoPage.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/demo/ChartDemoPage.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/demo/ClipboardDemoPage.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/demo/DayjsDemoPage.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/demo/DndDemoPage.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/demo/FilesizeDemoPage.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/demo/FilterScrollDemoPage.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/demo/FullCalendarDemoPage.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/demo/GsapDemoPage.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/demo/HlsDemoPage.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/demo/LibsIndexDemoPage.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/demo/LodashDemoPage.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/demo/LottieDemoPage.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/demo/SimplebarDemoPage.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/demo/SortingMenuBasicDemoPage.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/demo/SortingMenuDemoPage.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/demo/SwiperDemoPage.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/demo/ViewerDemoPage.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/demo/WebstompDemoPage.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/demo/XssDemoPage.jsx",
+      "category": "ui"
+    },
+    {
+      "path": "src/screen/pub/demo/YoutubeDemoPage.jsx",
+      "category": "ui"
+    }
+  ]
+}

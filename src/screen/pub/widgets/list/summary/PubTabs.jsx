@@ -17,14 +17,13 @@ export default function PubTabs ({
 
   return (
     <div className="wbs-tabs-bar">
-      <div className="wbs-tabs-bar_tabs" role="tablist" aria-label={ariaLabel}>
+      <div className="wbs-tabs-bar_tabs" role="group" aria-label={ariaLabel}>
         {tabs.map((tab) => (
           <button
             key={tab.id}
             type="button"
             className={classNames('wbs-tab', { 'is-active': activeTab === tab.id })}
-            role="tab"
-            aria-selected={activeTab === tab.id ? 'true' : 'false'}
+            aria-pressed={activeTab === tab.id}
             onClick={() => onSelect(tab.id)}
           >{labelOf(tab)}</button>
         ))}

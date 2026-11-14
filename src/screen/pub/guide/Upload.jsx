@@ -39,7 +39,7 @@ function AttachmentForm () {
             <span className="form_field-required-text">필수 항목</span>
           </span>
         </p>
-        <div aria-labelledby="attachments-label">
+        <div role="group" aria-labelledby="attachments-label">
           <Upload
             files={files}
             onChange={setFiles}

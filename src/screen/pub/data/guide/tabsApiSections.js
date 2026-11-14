@@ -98,7 +98,7 @@ const props = [
     name: 'navSelect',
     type: 'boolean',
     default: 'false',
-    description: 'layout=\"scroll\" 일 때 이전/다음(Icon button) 클릭으로 인접 활성 탭을 선택합니다. false(기본)면 목록만 가로 스크롤합니다.'
+    description: 'layout=\"scroll\" 일 때 이전/다음(Icon button) 클릭으로 인접 활성 탭을 선택합니다. false(기본)면 목록만 가로 스크롤하며 버튼 이름도 ‘탭 목록 왼쪽/오른쪽으로 스크롤’로 구분합니다. true이면 ‘이전 탭/다음 탭’으로 읽히며 Enter·Space로 선택합니다.'
   },
   {
     name: 'navVariant',
@@ -301,7 +301,7 @@ export const tabsApiSections = [
   },
   {
     title: 'API · TabPanel',
-    description: 'Tabs 자식 TabPanel 입니다. value 가 같은 탭의 패널로 등록됩니다.',
+    description: 'Tabs 자식 TabPanel 입니다. value 가 같은 탭의 패널로 등록됩니다. 방향키·Home·End로 선택하며, 닫기 가능한 탭은 Delete 키로 닫습니다. 닫기 아이콘은 탭 안의 중첩 버튼 대신 같은 동작의 포인터 장식입니다.',
     tables: [{ columns, rows: tabPanelProps }]
   },
   {

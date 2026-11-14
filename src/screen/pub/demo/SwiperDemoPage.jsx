@@ -1,6 +1,6 @@
 'use client'
 
-import { Swiper, SwiperSlide, defaultSwiperModules } from '@/lib/vendor/swiper' // 라이브러리/유틸 · swiper
+import { Carousel, CarouselSlide } from '@/comp/ui/Carousel'
 import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
 import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
 import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
@@ -51,22 +51,13 @@ const slides = [
         })}
       >
         <div className="lib-demo-swiper">
-          <Swiper
-            modules={defaultSwiperModules}
-            navigation
-            pagination={{ clickable: true }}
-            autoplay={{ delay: 2800, disableOnInteraction: false }}
-            loop
-            spaceBetween={0}
-          >
-            {slides.map((slide) => (
-              <SwiperSlide key={slide.label}>
-                <div style={{ background: slide.color, width: '100%', minHeight: 180, display: 'grid', placeItems: 'center' }}>
-                  {slide.label}
-                </div>
-              </SwiperSlide>
+          <Carousel ariaLabel="라이브러리 데모 슬라이더" pagination="bullets" autoplay delay={2800} autoplayToggle loop>
+            {slides.map(slide => (
+              <CarouselSlide key={slide.label}>
+                <div style={{ background: slide.color, color: '#fff', minHeight: 180, display: 'grid', placeItems: 'center' }}>{slide.label}</div>
+              </CarouselSlide>
             ))}
-          </Swiper>
+          </Carousel>
         </div>
       </DemoBlock>
     </DemoLayout>

@@ -6,12 +6,15 @@
  */
 import {
   useEffect, // effect 훅
+  useId, // 패널·제목 연결
   useRef, // ref 훅
   useState, // 상태 훅
   type HTMLAttributes, // HTMLAttributes 타입
   type ReactNode // ReactNode 타입
 } from 'react' // React
 import { useAutoClose } from '@/hooks/interaction/useAutoClose' // Auto Close 훅
+import { focusDialogContent } from '@/hooks/interaction/useModalDialog'
+import { useEscapeKey } from '@/hooks/interaction/useEscapeKey' // 내부 Escape 처리
 import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { hasNodes } from '@/utils/react' // has Nodes
 import { Icon } from './Icon' // Icon 컴포넌트
@@ -63,9 +66,14 @@ export function Popover ({
   style,
   children,
   onOpenChange,
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
+  'aria-describedby': ariaDescribedBy,
   ...rest
 }: PopoverProps) {
   const rootRef = useRef<HTMLDivElement>(null)
+  const panelId = useId()
+  const titleId = useId()
   const [inner, setInner] = useState(openOnLoad ?? defaultOpen)
   const shown = open ?? inner
 
@@ -75,7 +83,18 @@ export function Popover ({
   }
 
   const toggle = () => setShown(!shown)
-  const close = () => setShown(false)
+  const close = () => {
+    if (rootRef.current?.querySelector('.popover_panel')?.contains(document.activeElement)) {
+      rootRef.current.querySelector<HTMLElement>('.popover_trigger')?.focus()
+    }
+    setShown(false)
+  }
+  useEscapeKey(rootRef, close, shown)
+  useEffect(() => {
+    if (!shown || document.activeElement !== rootRef.current?.querySelector('.popover_trigger')) return
+    const panel = rootRef.current?.querySelector<HTMLElement>('.popover_panel')
+    if (panel) focusDialogContent(panel)
+  }, [shown])
 
   useAutoClose(shown, autoCloseDelay, close)
 
@@ -116,17 +135,22 @@ export function Popover ({
         type="button"
         className="btn btn_outline color_default popover_trigger"
         aria-expanded={shown}
+        aria-haspopup="dialog"
+        aria-controls={shown ? panelId : undefined}
         onClick={toggle}
       >
         <span className="btn_label">{trigger ?? '자세히'}</span>
       </button>
       {shown && (
-        <div className="popover_panel" role="dialog">
+        <div id={panelId} className="popover_panel" data-dialog-panel="" role="dialog" tabIndex={-1}
+          aria-labelledby={ariaLabelledBy || (!ariaLabel && hasNodes(title) ? titleId : undefined)}
+          aria-describedby={ariaDescribedBy}
+          aria-label={ariaLabel || (!ariaLabelledBy && !hasNodes(title) ? (typeof trigger === 'string' ? trigger : '추가 정보') : undefined)}>
           {arrow && <span className="popover_arrow" aria-hidden="true" />}
           {showHeader && (
             <div className="popover_header">
               {hasNodes(title)
-                ? <span className="popover_title">{title}</span>
+                ? <span id={titleId} className="popover_title" role="heading" aria-level={2} data-dialog-title="" tabIndex={-1}>{title}</span>
                 : <span className="popover_title" />}
               {closable && (
                 <button

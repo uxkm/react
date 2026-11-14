@@ -11,10 +11,22 @@ const columns = [
 
 const props = [
   {
+    name: 'initialFocusRef',
+    type: 'RefObject<HTMLElement | null>',
+    default: '제목 → 전체 패널',
+    description: '열릴 때 초점을 둘 내부 요소의 ref입니다. 생략하면 제목, 제목이 없으면 전체 패널로 이동합니다. Tab·Shift+Tab은 내부를 순환하고 Escape는 맨 위 대화상자만 닫습니다. 닫힌 뒤 열기 요소로 초점이 돌아갑니다.'
+  },
+  {
+    name: 'aria-label · aria-labelledby · aria-describedby',
+    type: 'string',
+    default: 'title을 aria-labelledby로 연결',
+    description: '호출부에서 접근성 이름·설명을 지정할 수 있습니다. 제목이 없으면 aria-label로 구체적인 이름을 제공하세요. 복잡한 본문 전체를 자동 설명으로 연결하지 않습니다.'
+  },
+  {
     name: 'backdrop',
     type: 'boolean',
     default: 'true',
-    description: '배경 dim 표시 여부입니다. false 이면 dim 을 렌더링하지 않으며 배경 클릭으로 닫히지 않습니다. 닫기 버튼과 자동 닫힘은 유지됩니다.'
+    description: '배경 dim 표시 여부입니다. false 이면 dim 을 렌더링하지 않으며 배경 클릭으로 닫히지 않습니다. 닫기 버튼·Escape·자동 닫힘은 유지되며, dim이 없어도 배경 접근은 차단합니다.'
   },
   {
     name: 'openOnLoad',
@@ -78,9 +90,9 @@ const props = [
   },
   {
     name: 'className · ...props',
-    type: 'div attributes',
+    type: 'dialog attributes',
     default: '—',
-    description: '루트 클래스와 네이티브 div 속성입니다. role="dialog" · aria-modal="true" 는 자동 지정됩니다.'
+    description: '루트 클래스와 네이티브 dialog 속성입니다. 실제 오버레이는 showModal()로 배경 접근을 차단합니다. staticDemo는 비모달이며 배경과 초점을 잠그지 않습니다.'
   }
 ]
 
@@ -89,7 +101,7 @@ const events = [
     name: 'onClose',
     type: '() => void',
     default: '—',
-    description: '오버레이·닫기 버튼·자동 닫힘 시 호출됩니다. 제어 모드에서는 부모에서 open 을 false 로 갱신합니다.'
+    description: '오버레이·닫기 버튼·Escape·자동 닫힘 시 호출됩니다. 제어 모드에서는 부모에서 open 을 false 로 갱신합니다.'
   },
   {
     name: 'onOpenChange',
@@ -116,7 +128,7 @@ const classes = [
     name: 'modal_header · modal_title · modal_close',
     type: 'class',
     default: '—',
-    description: '헤더 영역, 제목(HTML 마크업용 클래스), 닫기 버튼입니다. React Modal 은 제목을 strong 으로 그리고, 닫기 버튼 안에는 Icon close 가 들어갑니다.'
+    description: '헤더 영역, 제목(HTML 마크업용 클래스), 닫기 버튼입니다. React Modal 은 제목을 h2로 그리고, 닫기 버튼 안에는 Icon close 가 들어갑니다.'
   },
   {
     name: 'modal_body · modal_footer',

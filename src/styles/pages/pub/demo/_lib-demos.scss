@@ -227,3 +227,25 @@
     font-size: 13px;
   }
 }
+
+.chart-data-table { width: 100%; border-collapse: collapse;
+  caption { text-align: left; font-weight: 700; }
+  th, td { padding: 8px; border: 1px solid var(--color-border); text-align: left; }
+}
+.calendar-event-editor { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px;
+  label { display: flex; flex-direction: column; gap: 4px; }
+  input { color: var(--color-text); background: var(--color-surface); border: 1px solid var(--color-border); padding: 8px; }
+}
+.lib-demo-calendar {
+  --fc-event-bg-color: #245b9f; --fc-event-border-color: #245b9f;
+  .fc-day-other .fc-daygrid-day-top { opacity: 1; }
+  .fc-daygrid-day-number, .fc-col-header-cell-cushion { color: var(--color-text); }
+}
+.lib-demo-list_item > button { width: 100%; min-height: 32px; border: 0; background: transparent; color: inherit; font: inherit; text-align: left; cursor: grab; }
+
+.lib-demo-calendar .fc-col-header { background: var(--color-surface); }
+
+.lib-demo-list_item { display: flex; flex-wrap: wrap; gap: 8px;
+  > button:first-child { flex: 1 0 100%; }
+  > button:not(:first-child) { width: auto; border: 1px solid var(--color-border); padding: 4px 12px; cursor: pointer; }
+}

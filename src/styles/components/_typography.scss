@@ -107,6 +107,7 @@
   }
 
   &_mark {
+    color: var(--color-text);
     padding: var(--typo-code-padding-y) 0.25em;
     background: var(--typo-mark-bg);
     border-radius: var(--typo-code-radius);

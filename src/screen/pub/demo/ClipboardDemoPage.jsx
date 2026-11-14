@@ -69,7 +69,7 @@ const onCopy = async () => {
             <button type="button" onClick={onCopy} style={{ padding: '8px 12px', cursor: 'pointer' }}>
               클립보드에 복사
             </button>
-            {status ? <span style={{ fontSize: 13 }}>{status}</span> : null}
+            {status ? <span role="status" style={{ fontSize: 13 }}>{status}</span> : null}
           </div>
         </div>
       </DemoBlock>

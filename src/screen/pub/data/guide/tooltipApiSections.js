@@ -237,7 +237,7 @@ const tokens = [
 export const tooltipApiSections = [
   {
     title: 'API · Props',
-    description: 'React · Next.js Tooltip props입니다. 기본은 포인터 · 포커스로 열리고, open · onOpenChange 로 페이지에서 표시를 제어할 수 있습니다.',
+    description: 'React · Next.js Tooltip props입니다. 기본은 포인터 · 포커스로 열리고, open · onOpenChange 로 페이지에서 표시를 제어할 수 있습니다. 실제 초점 대상에 aria-describedby를 연결하며 일반 텍스트에도 초점 진입점을 제공합니다. Escape로 닫을 수 있습니다.',
     tables: [{ columns, rows: props }]
   },
   {

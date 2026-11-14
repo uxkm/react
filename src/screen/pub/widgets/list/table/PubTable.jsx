@@ -10,7 +10,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef } from 'react' // React
 import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import PubGroupRow from './PubGroupRow' // Pub Group Row 컴포넌트
 import { folderLabel, itemLabel } from '../lib/publishLabels' // 라이브러리/유틸 · publish Labels
-import { countLeaves, groupLabel, isGroupNode } from '../lib/publishTree' // 라이브러리/유틸 · publish Tree
+import { countPages, groupLabel, isGroupNode } from '../lib/publishTree' // 라이브러리/유틸 · publish Tree
 import { useEllipsisTooltip } from './useEllipsisTooltip.jsx' // Ellipsis Tooltip 훅
 
 /** 화면명 열 최대 너비 */
@@ -110,14 +110,14 @@ export default function PubTable ({
       }
 
       folders.forEach((folder) => {
-        const fText = `${folderLabel(folder)} (${countLeaves(folder)})`
+        const fText = `${folderLabel(folder)} (${countPages(folder)})`
         maxContent = Math.max(
           maxContent,
           controlH + toggleMargin + measureTextWidth(fText, font)
         )
         ;(folder.depth2 || []).forEach((node) => {
           if (isGroupNode(node)) {
-            const gText = `${groupLabel(node)} (${countLeaves(node)})`
+            const gText = `${groupLabel(node)} (${countPages(node)})`
             maxContent = Math.max(
               maxContent,
               controlH + toggleMargin + childPad + measureTextWidth(gText, font)
@@ -168,11 +168,11 @@ export default function PubTable ({
   }, [folders, syncScrollFrom, syncScrolledX])
 
   return (
-    <section ref={panelRef} className="wbs-panel" aria-label={ariaLabel}>
+    <div ref={panelRef} className="wbs-panel" role="table" aria-label={ariaLabel}>
       {/* 컬럼 헤더: body 스크롤 시 탭/검색 아래 고정, 가로는 본문과 동기화 */}
       <div
         ref={headWrapRef}
-        className="wbs-table-head-wrap"
+        className="wbs-table-head-wrap" role="rowgroup" tabIndex={0}
         onMouseOver={ellipsis.onMouseOver}
         onFocus={ellipsis.onMouseOver}
         onMouseOut={ellipsis.onMouseOut}
@@ -189,17 +189,17 @@ export default function PubTable ({
 
       <div
         ref={bodyWrapRef}
-        className="wbs-table-body-wrap"
+        className="wbs-table-body-wrap" role="rowgroup" tabIndex={0}
         onMouseOver={ellipsis.onMouseOver}
         onFocus={ellipsis.onMouseOver}
         onMouseOut={ellipsis.onMouseOut}
         onBlur={ellipsis.onMouseOut}
         onScroll={ellipsis.onScroll}
       >
-        <div className={tableClass} role="table" aria-label={ariaLabel}>
+        <div className={tableClass} role="presentation">
           {folders.length
             ? (
-              <ul className="wbs-table_list">
+              <ul className="wbs-table_list" role="presentation">
                 {folders.map((folder) => (
                   <PubGroupRow
                     key={folder.id}
@@ -218,10 +218,10 @@ export default function PubTable ({
                 ))}
               </ul>
             )
-            : <div className="wbs-empty">{emptyLabel}</div>}
+            : <div className="wbs-empty" role="row"><div role="cell">{emptyLabel}</div></div>}
         </div>
       </div>
       {ellipsis.node}
-    </section>
+    </div>
   )
 }

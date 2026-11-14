@@ -22,6 +22,7 @@ export default function B2bContentsJobProfessionalPage () {
         skeleton={skeletonMode === 'manual' ? <ProfessionalSkeleton /> : undefined}
         className="page-container"
       >
+        <h1 className="visually-hidden">{pageTitle}</h1>
         <ComingSoon />
 
       </PageLoading>

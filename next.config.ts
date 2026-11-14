@@ -52,6 +52,11 @@ const nextConfig: NextConfig = {
     // `:root` 선택자가 `\\ufeff:root` 로 깨지며 토큰·컴포넌트 스타일이 전부 무효화됨
     charset: false
   },
+  // Turbopack을 사용할 수 없는 환경의 webpack 빌드에서도 문서를 문자열로 읽습니다.
+  webpack: (config) => {
+    config.module.rules.push({ test: /\.md$/, use: 'raw-loader' })
+    return config
+  },
   turbopack: {
     rules: {
       '*.md': {

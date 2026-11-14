@@ -3,6 +3,7 @@ export {
   DndContext,
   closestCenter,
   PointerSensor,
+  KeyboardSensor,
   useSensor,
   useSensors,
   DragOverlay
@@ -10,6 +11,7 @@ export {
 export {
   SortableContext,
   useSortable,
+  sortableKeyboardCoordinates,
   arrayMove,
   verticalListSortingStrategy,
   horizontalListSortingStrategy

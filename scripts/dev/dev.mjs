@@ -8,6 +8,7 @@ import { root } from '../generate/project.mjs'
 import { getStyleEntries } from '../build/style-entries.mjs'
 import { watchSourceFiles } from './watch-files.mjs'
 import { syncLottieList } from '../generate/lottie-list.mjs'
+import { stopChild } from '../lib/stop-child.mjs'
 
 const execute = promisify(execFile)
 function sourceTopology () {
@@ -63,11 +64,7 @@ export async function startDevelopment () {
     const current = child
     if (!current) return
     expectedExit.add(current)
-    await new Promise((resolve) => {
-      const timer = setTimeout(() => current.kill('SIGKILL'), 3000)
-      current.once('exit', () => { clearTimeout(timer); resolve() })
-      current.kill('SIGTERM')
-    })
+    await stopChild(current)
     if (child === current) child = null
   }
   async function regenerate () {
@@ -127,6 +124,11 @@ export async function startDevelopment () {
     await stopServer()
   }
   for (const signal of ['SIGINT', 'SIGTERM']) process.once(signal, () => { close().then(() => process.exit(0)) })
+  if (process.connected) {
+    const shutdown = () => { close().then(() => process.exit(0)) }
+    process.on('message', (message) => { if (message?.type === 'shutdown') shutdown() })
+    process.once('disconnect', shutdown)
+  }
   return { close }
 }
 if (process.argv[1] && fs.realpathSync(process.argv[1]) === fileURLToPath(import.meta.url)) {

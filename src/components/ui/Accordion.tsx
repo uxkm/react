@@ -64,6 +64,8 @@ export interface AccordionProps extends Omit<HTMLAttributes<HTMLDivElement>, 'on
   /** bordered(기본) · flush · card → accordion_bordered · accordion_flush · accordion_card */
   skin?: 'bordered' | 'flush' | 'card'
   size?: 'sm' | 'md' | 'lg'
+  /** 페이지 제목 구조에 맞춘 트리거 제목 수준. 기본 3. */
+  headingLevel?: 1 | 2 | 3 | 4 | 5 | 6
   /** 다시 눌러 모두 접기. 기본 true */
   collapsible?: boolean
   /** slide 이면 data-effect="slide" */
@@ -311,6 +313,7 @@ export function Accordion ({
   items = [],
   skin = 'bordered',
   size = 'md',
+  headingLevel = 3,
   collapsible = true,
   effect = 'none',
   renderItem,
@@ -434,7 +437,7 @@ export function Accordion ({
               item.className
             )}
           >
-            <div className="accordion_heading" role="heading" aria-level={3}>
+            <div className="accordion_heading" role="heading" aria-level={headingLevel}>
               <button
                 type="button"
                 id={triggerId}

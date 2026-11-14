@@ -13,6 +13,7 @@
 | `promotion` | `PromotionCard` | 큰 제목, 설명, 이미지, 하단 CTA |
 | `image` | `ImageCard` | 안내 문구, 제목, 이미지, 카드 전체 링크, CTA |
 | `content` | `ContentCard` | 썸네일 배경, 카테고리, 제목, 설명, 카드 전체 링크 |
+| `course` | `CourseCard` | 썸네일 위 교육방식 배지, 두 줄 제목, 상세보기, 카드 전체 링크 |
 | `quick-link` | `QuickLinkCard` | 제목, 아이콘, 카드 전체 링크 |
 
 ```tsx
@@ -42,6 +43,28 @@ import { Icon } from '@/comp/ui/Icon'
 제목과 설명의 `\n`은 줄바꿈으로 표시합니다. 이미지형 톤은 `mint`, `lavender`, 바로가기형 톤은 `cream`, `gray`, `sage`입니다. `icon`에는 ReactNode를 전달합니다. `priority`는 프로모션형과 이미지형 이미지에만 적용합니다.
 
 카드 높이·그리드 배치·여러 카드의 조합·Carousel 제어는 호출하는 위젯에서 담당합니다. 프로모션 기본 최소 높이는 568px이며 이미지형과 바로가기형은 부모 그리드 높이에 맞춥니다. 공통 외형 스타일은 `src/styles/pages/b2b/modules/_cards.scss`, 메인 배치는 `src/styles/pages/b2b/main/_main.scss`, 카드별 문구·이미지·링크는 각 `src/widgets/b2b/main/` 위젯의 카드 호출부에서 관리합니다.
+
+## 교육과정 카드
+
+화면 프리뷰: `/b2b/common/main-section?section=courses`. 짧은 제목·긴 제목을 비교하며, `image` prop과 `card.image` 두 가지 호출 예시는 `src/widgets/b2b/previews/main-section/index.tsx`의 `CoursePreview`에 있습니다.
+
+첨부 시안의 썸네일·교육방식 배지·제목·테두리형 CTA 구성은 `type="course"`로 호출합니다.
+제목은 최대 두 줄까지 표시하며 카드 전체가 하나의 상세 링크입니다. CTA는 중첩 링크 없이 같은 이동을 안내합니다.
+
+```tsx
+<Card type="course" card={{
+  id: 'python-intro',
+  title: '파이썬 입문',
+  format: '대면',
+  image: '/images/courses/python-intro.png', // 실제 과정 썸네일 경로로 교체
+  href: '/b2b/courses/python-intro' // 실제 상세 페이지 경로로 교체
+}} />
+```
+
+`format`은 교육방식 배지 문구입니다. `icon`은 생략하면 사람 그룹 아이콘이며, ReactNode로 교체하거나 `null`로 숨길 수 있습니다.
+`action` 기본 문구는 `상세보기`입니다. `image`, `imageProps`, `slots.image`, `priority`, `shadow`는 기존 미디어 카드와 동일하게 지원합니다.
+썸네일은 기본 16:9이며 상단 모서리만 둥글게 표시합니다. 이미지 안의 과정명·그래픽은 전달한 썸네일을 그대로 사용합니다.
+실제 데이터와 목록·그리드·캐러셀 배치는 호출부에서 관리합니다.
 
 ## 호출 위치에서 이미지 제어
 
@@ -158,7 +181,7 @@ import { Icon } from '@/comp/ui/Icon'
 />
 ```
 
-`image`·`imageProps`·`slots.image`로 원형 프로필을 교체할 수 있습니다. `Stat` 직접 호출 시에는 `avatar`로 프로필 내용을 전달합니다. 원형 틀은 일반 `<span className="profile">`로 구성하고, 프로필 이미지가 없으면 내부에 기존 공통 `<Icon name="user" />`를 표시합니다. 인용문은 `strong.stat_value`와 `blockquote.stat_quote`로 표시합니다.
+`image`·`imageProps`·`slots.image`로 원형 프로필을 교체할 수 있습니다. `Stat` 직접 호출 시에는 `avatar`로 프로필 내용을 전달합니다. 원형 틀은 공통 `<Avatar className="stat_avatar">`로 구성하고, 프로필 이미지가 없으면 내부에 기존 공통 `<Icon name="user" />`를 표시합니다. 크기·배경색은 Stat 스타일에서 지정하며, 원형 처리·정렬·이미지 클리핑은 Avatar 스타일을 사용합니다. 인용문은 `strong.stat_value`와 `blockquote.stat_quote`로 표시합니다.
 
 ### 상담·구독 안내 카드
 

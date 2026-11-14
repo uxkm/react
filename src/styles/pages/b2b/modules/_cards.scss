@@ -1,5 +1,5 @@
 // B2B 카드 모듈: 섹션 배치와 분리한 카드 타입.
-.card:is(.card_promotion, .card_image, .card_quick-link, .card_content, .card_callout) {
+.card:is(.card_promotion, .card_image, .card_quick-link, .card_content, .card_course, .card_callout) {
   box-sizing: border-box;
   width: 100%;
   min-width: 0;
@@ -272,7 +272,7 @@
     min-height: 32px;
     padding: 3px 16px;
     border-color: #efbda8;
-    color: #de8769;
+    color: #a24e32;
     font-size: 15px;
     font-weight: 400;
     line-height: 24px;
@@ -289,7 +289,7 @@
 
   p {
     margin-top: 14px;
-    color: #74747a;
+    color: #626269;
     font-size: 16px;
     line-height: 24px;
     letter-spacing: -0.3px;
@@ -297,6 +297,107 @@
 
   &:hover {
     --card-border-color: #c8c8cc;
+  }
+}
+
+.card.card_course {
+  height: 100%;
+  border-radius: 20px;
+  background: #fff;
+  color: #30383e;
+  text-decoration: none;
+  --card-radius: 20px;
+
+  .card_course-media {
+    position: relative;
+    flex-shrink: 0;
+    overflow: hidden;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 20px 20px 0 0;
+    background: #f0edf8;
+  }
+
+  .card_course-thumbnail {
+    width: var(--card-background-width, 100%);
+    height: var(--card-background-height, 100%);
+    margin: auto;
+    transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .tag.card_course-format {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 36px;
+    padding: 6px 14px;
+    border: 0;
+    background: #fff;
+    color: #30383e;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+  }
+
+  .card_course-format-icon {
+    display: inline-flex;
+    align-items: center;
+    color: #e77991;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  .card_course-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 24px 32px 32px;
+    color: inherit;
+  }
+
+  .card_course-title {
+    display: -webkit-box;
+    overflow: hidden;
+    width: 100%;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    min-height: 2.8em;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.6px;
+    white-space: pre-line;
+  }
+
+  .card_course-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 36px;
+    margin-top: auto;
+    padding: 5px 18px;
+    border: 1px solid #d9d9d9;
+    border-radius: 40px;
+    color: inherit;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  &:is(:hover, :focus-visible) {
+    .card_course-thumbnail {
+      transform: scale(1.05);
+    }
+
+    .card_course-action {
+      border-color: currentColor;
+    }
   }
 }
 
@@ -383,7 +484,7 @@
   .card_callout-brand > span {
     padding: 0 12px;
     border-radius: 40px;
-    background: #f57659;
+    background: #b74428;
     color: #fff;
     font-weight: 400;
   }
@@ -421,12 +522,13 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .card_content .card_content-thumbnail {
+  .card_content .card_content-thumbnail,
+  .card_course .card_course-thumbnail {
     transition: none;
   }
 }
 
 // Carousel의 기본 카드 모서리 대신 각 프로젝트 카드의 디자인 토큰을 사용합니다.
-.carousel .swiper .swiper-slide > .card:is(.card_promotion, .card_content) {
+.carousel .swiper .swiper-slide > .card:is(.card_promotion, .card_content, .card_course) {
   border-radius: var(--card-radius);
 }

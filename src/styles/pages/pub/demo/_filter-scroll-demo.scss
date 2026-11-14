@@ -33,11 +33,11 @@
       font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
 
       &.is-ok {
-        color: #067647;
+        color: var(--color-success-text);
       }
 
       &.is-fail {
-        color: #b42318;
+        color: var(--color-danger-text);
       }
     }
   }

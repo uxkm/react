@@ -3,7 +3,8 @@ import path from 'node:path'
 
 /** Generated files never feed back into the source watcher. */
 export function isWatchedPath (relative) {
-  const parts = relative.replaceAll('\\', '/').split('/')
+  relative = relative.replaceAll('\\', '/')
+  const parts = relative.split('/')
   if (['node_modules', '.git', '.next', 'out', 'reports', 'test-results'].includes(parts[0])) return false
   if (parts.includes('node_modules') || parts.includes('.git')) return false
   if (parts[0] === 'src' && (parts[1] === 'generated' || (parts[1] === 'styles' && ['css', 'dist'].includes(parts[2])))) return false

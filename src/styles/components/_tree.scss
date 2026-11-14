@@ -5,7 +5,7 @@
   --tree-indent: 1.25rem;
   --tree-row-height: 2rem;
   --tree-font-size: var(--text-size-sm);
-  --tree-toggle-size: 1.25rem;
+  --tree-toggle-size: 1.5rem;
   --tree-gap: 2px;
   --tree-line-color: var(--color-border);
 }
@@ -42,12 +42,13 @@
   &_item {
     min-width: 0;
 
-    &[aria-expanded="false"] > .tree {
+    &[data-expanded="false"] > .tree {
       display: none;
     }
   }
 
   &_row {
+    &:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
     display: flex;
     align-items: center;
     gap: $space-xs;
@@ -255,3 +256,6 @@
     }
   }
 }
+
+.tree_check { display: inline-flex; align-items: center; justify-content: center; min-width: 24px; min-height: 24px; }
+.tree .tree_check input { min-width: 24px; min-height: 24px; width: 24px; height: 24px; margin: 0; }

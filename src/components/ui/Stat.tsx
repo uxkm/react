@@ -5,6 +5,7 @@
 import type { HTMLAttributes, ReactNode } from 'react' // React
 import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { Icon } from './Icon' // Icon 컴포넌트
+import { Avatar } from './Avatar' // Avatar 컴포넌트
 
 const TrendIcon = () => (
   <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -16,7 +17,7 @@ const TrendIcon = () => (
 export interface StatProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'prefix'> {
   /** testimonial: 업종·인용문·작성자·프로필로 구성하는 고객사례 유형. */
   variant?: 'default' | 'testimonial'
-  /** 고객사례 프로필. 생략하면 user 아이콘을 표시합니다. */
+  /** 고객사례 Avatar에 표시할 내용. 생략하면 user 아이콘을 표시합니다. */
   avatar?: ReactNode
   /** 고객사례 선택 테두리 표시 여부. */
   selected?: boolean
@@ -101,9 +102,9 @@ export function Stat ({
         </blockquote>
         <div className="stat_footer">
           <span className="stat_desc">{resolvedDescription}</span>
-          <span className="profile" aria-hidden="true">
+          <Avatar className="stat_avatar" ariaHidden>
             {avatar ?? <Icon name="user" size={44} />}
-          </span>
+          </Avatar>
         </div>
         {children}
       </div>

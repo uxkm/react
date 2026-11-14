@@ -32,5 +32,7 @@ export {
   collectExpandKeys,
   collectLeaves,
   countLeaves,
+  countPages,
+  isLinkNode,
   filterDepthTree
 } from './lib/publishTree.js'

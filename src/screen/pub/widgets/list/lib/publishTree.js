@@ -4,6 +4,11 @@
  * - 그룹: depth3[] 배열을 가진 노드 / 리프: 화면 필드만 있는 노드
  */
 
+/** 진행 상태를 관리하지 않는 링크 항목 여부 */
+export function isLinkNode (node) {
+  return String(node?.type || '').toLowerCase() === 'link'
+}
+
 /** Depth2 그룹 노드 여부 (하위에 depth3[]) */
 export function isGroupNode (node) {
   return !!(node && Array.isArray(node.depth3))
@@ -44,6 +49,11 @@ export function collectLeaves (node) {
 /** 폴더/그룹의 최종 리프 수 (뱃지·통계용) */
 export function countLeaves (node) {
   return collectLeaves(node).length
+}
+
+/** 링크를 제외한 페이지 수 (목록·필터의 개수 표시용) */
+export function countPages (node) {
+  return collectLeaves(node).filter((item) => !isLinkNode(item)).length
 }
 
 /**

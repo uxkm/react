@@ -156,6 +156,7 @@ export function Rate ({
                     className="rate_input rate_input-half"
                     name={groupName}
                     value={star - 0.5}
+                    aria-label={`${star - 0.5}점`}
                     checked={currentValue === star - 0.5}
                     disabled={disabled}
                     onChange={() => update(star - 0.5)}
@@ -167,6 +168,7 @@ export function Rate ({
                 className="rate_input"
                 name={groupName}
                 value={star}
+                aria-label={`${star}점`}
                 checked={currentValue === star}
                 disabled={disabled}
                 onChange={() => update(star)}
@@ -213,6 +215,7 @@ export function Rate ({
               className="rate_clear"
               {...rippleAttr}
               aria-label="별점 초기화"
+              disabled={disabled}
               title="초기화"
               onClick={() => update(null)}
             >

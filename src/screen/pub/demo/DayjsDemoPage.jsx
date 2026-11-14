@@ -30,7 +30,7 @@ const parsed = useMemo(() => dayjs(input, 'YYYY-MM-DD HH:mm'), [input])
     onChange={(e) => setInput(e.target.value)}
     aria-label="날짜 입력"
   />
-  <pre className="lib-demo-pre">
+  <pre tabIndex={0} className="lib-demo-pre">
     {parsed.isValid()
       ? [
           'ISO: ' + parsed.toISOString(),
@@ -54,7 +54,7 @@ const parsed = useMemo(() => dayjs(input, 'YYYY-MM-DD HH:mm'), [input])
             onChange={(e) => setInput(e.target.value)}
             aria-label="날짜 입력"
           />
-          <pre className="lib-demo-pre">
+          <pre tabIndex={0} className="lib-demo-pre">
             {valid
               ? [
                   `ISO: ${parsed.toISOString()}`,

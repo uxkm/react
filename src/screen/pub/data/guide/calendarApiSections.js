@@ -213,7 +213,7 @@ const tokens = [
 export const calendarApiSections = [
   {
     title: 'API · Calendar Props',
-    description: 'React · Next.js Calendar props입니다.',
+    description: 'React · Next.js Calendar props입니다. 휠 listbox는 방향키·Home·End로 선택하며 한 개의 Tab 진입점을 유지합니다.',
     tables: [{ columns, rows: calendarProps }]
   },
   {

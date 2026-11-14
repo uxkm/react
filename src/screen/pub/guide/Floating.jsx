@@ -53,7 +53,7 @@ function ScrollFloatingDemo ({
 
   return (
     <div className="floating_demo-wrap">
-      <div className="floating_demo-scroll" ref={scrollerRef}>
+      <div className="floating_demo-scroll" tabIndex={0} ref={scrollerRef}>
         <div className="floating_demo-content">
           <p>
             우측 Floating 스택(컨테이너). BackTop 표시: <code>{String(visible)}</code>
@@ -346,7 +346,7 @@ function FloatingScrollExample () {
 
   return (
     <div className="floating_demo-wrap">
-      <div className="floating_demo-scroll" ref={scrollerRef}>
+      <div className="floating_demo-scroll" tabIndex={0} ref={scrollerRef}>
         <div className="floating_demo-content">
           <p>
             우측 Floating 스택(컨테이너). BackTop 표시: {String(visible)}
@@ -446,7 +446,7 @@ function ScrollFloatingDemo ({ order, showHelp = false }) {
 
   return (
     <div className="floating_demo-wrap">
-      <div className="floating_demo-scroll" ref={scrollerRef}>
+      <div className="floating_demo-scroll" tabIndex={0} ref={scrollerRef}>
         <div className="floating_demo-content">
           <p>
             우측 Floating 스택(컨테이너). BackTop 표시: {String(visible)}
@@ -532,7 +532,7 @@ function FloatingDirectionExample () {
 
   return (
     <div className="floating_demo-wrap">
-      <div className="floating_demo-scroll" ref={scrollerRef}>
+      <div className="floating_demo-scroll" tabIndex={0} ref={scrollerRef}>
         <div className="floating_demo-content">
           <p>
             우측 Floating 스택(컨테이너). BackTop 표시: {String(visible)}

@@ -75,7 +75,8 @@ function resolveFile (urlPath) {
   ]
 
   for (const file of candidates) {
-    if (!file.startsWith(outDir)) continue
+    const relative = path.relative(outDir, file)
+    if (relative === '..' || relative.startsWith('..' + path.sep) || path.isAbsolute(relative)) continue
     if (existsSync(file) && statSync(file).isFile()) return file
   }
   const fallback = path.join(outDir, '404.html')

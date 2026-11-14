@@ -8,7 +8,7 @@ import { useLatestRef } from '@/hooks/react/useLatestRef' // Latest Ref 훅
  * 앱 공통 레이아웃 셸.
  * 헤더·본문·푸터 배치, 슬롯 병합, 스크롤 시 헤더 숨김, GlobalTranslator 연결.
  */
-import { Fragment, cloneElement, isValidElement, useCallback, useEffect, useLayoutEffect, useMemo, useRef, type HTMLAttributes, type ReactElement, type ReactNode } from 'react' // React
+import { Fragment, cloneElement, isValidElement, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useId, type HTMLAttributes, type ReactElement, type ReactNode } from 'react' // React
 import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { hasNodes } from '@/utils/react' // has Nodes
 import { useLocaleStore } from '@/lib/i18n/localeStore' // 언어(locale) 전역 상태
@@ -78,6 +78,7 @@ function AppLayoutInner ({
   className,
   ...rest
 }: AppLayoutProps) {
+  const mainId = useId()
   const pageSlots = useLayoutSlots()
   const headerSlot = pageSlots.header
   const appearanceSlot = pageSlots['header-appearance']
@@ -147,7 +148,7 @@ function AppLayoutInner ({
    * 3) defaultsReady 후 AppHeader — 슬롯·prop 없을 때 기본 헤더
    */
   let headerNode: ReactNode = null
-  if (header !== undefined && header !== null && header !== false) {
+  if (metaHeaderVisible && !isSlotHidden('header') && header !== undefined && header !== null && header !== false) {
     headerNode = header
   } else if (hasPageContent && metaHeaderVisible && !isSlotHidden('header')) {
     if (hasSlotNodes('header')) {
@@ -178,7 +179,7 @@ function AppLayoutInner ({
 
   /** 푸터: prop(SSR 포함) > 슬롯 > defaultsReady 후 기본 AppFooter */
   let footerNode: ReactNode = null
-  if (footer !== undefined && footer !== null && footer !== false) {
+  if (metaFooterVisible && !isSlotHidden('footer') && footer !== undefined && footer !== null && footer !== false) {
     footerNode = footer
   } else if (hasPageContent && metaFooterVisible && !isSlotHidden('footer')) {
     if (hasSlotNodes('footer')) {
@@ -365,6 +366,7 @@ function AppLayoutInner ({
       {/* 헤더·본문·푸터 전체 DOM 을 선택 언어로 번역 (locales 폴더 불필요) */}
       <GlobalTranslator rootRef={layoutRef} />
       <div key={treeKey} className="app-layout_tree">
+        <a className="app-layout_skip" href={`#${mainId}`} onClick={() => document.getElementById(mainId)?.focus()}>본문 바로가기</a>
         {defaultsReady && pageSlots['meta-banner'] !== 'false' && pick('banner', banner)}
         {/*
           <span class="app-header-anchor" aria-hidden="true" />
@@ -375,6 +377,8 @@ function AppLayoutInner ({
         {hasHeader && <span ref={headerAnchorRef} className="app-header-anchor" aria-hidden="true" />}
         {headerNode}
         <main
+          id={mainId}
+          tabIndex={-1}
           className={classNames('app-layout_main', mainClass)}
           data-page={mainPage || undefined}
         >

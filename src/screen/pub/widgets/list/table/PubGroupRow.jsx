@@ -8,6 +8,7 @@ import { folderLabel } from '../lib/publishLabels' // folder Label
 import { ellipsisAttr } from './useEllipsisTooltip.jsx' // ellipsis Attr
 import {
   countLeaves, // count Leaves
+  countPages,
   groupExpandKey, // group Expand Key
   groupLabel, // group Label
   isGroupNode // is Group Node
@@ -32,12 +33,13 @@ export default function PubGroupRow ({
   const children = node[childrenKey] || []
   const expandId = isRoot ? node.id : groupExpandKey(folder.id, node)
   const leafCount = countLeaves(node)
+  const pageCount = countPages(node)
   const showToggle = isRoot || leafCount > 0
   const label = isRoot ? folderLabel(node) : groupLabel(node)
   const rootFolder = isRoot ? node : folder
 
   return (
-    <li
+    <li role="presentation"
       id={isRoot ? ('wbs-folder-' + node.id) : undefined}
       className={isRoot ? 'wbs-table_group' : 'wbs-table_subgroup'}
     >
@@ -69,13 +71,13 @@ export default function PubGroupRow ({
                   onClick={() => onToggle(expandId)}
                 >
                   <span className="folder-name-label" {...ellipsisAttr}>{label}</span>
-                  <span className="wbs-badge is-muted is-count folder-count">{leafCount}</span>
+                  <span className="wbs-badge is-muted is-count folder-count">{pageCount}</span>
                 </button>
               )
               : (
                 <span className="folder-name">
                   <span className="folder-name-label" {...ellipsisAttr}>{label}</span>
-                  <span className="wbs-badge is-muted is-count folder-count">{leafCount}</span>
+                  <span className="wbs-badge is-muted is-count folder-count">{pageCount}</span>
                 </span>
               )}
           </span>
@@ -84,7 +86,7 @@ export default function PubGroupRow ({
           <div key={col.key} className={'col-' + col.key} role="cell" />
         ))}
       </div>
-      <ul
+      <ul role="presentation"
         className={isRoot ? 'wbs-table_depth2' : 'wbs-table_depth3'}
         style={open ? undefined : { display: 'none' }}
       >

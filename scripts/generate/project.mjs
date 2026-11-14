@@ -91,7 +91,14 @@ export default function Page () { return <RegistryPage loaders={indexLoaders} me
     const styleImport = fs.existsSync(path.join(root, `src/styles/pages/${id}/index.scss`))
       ? `import '@/styles/pages/${id}/index.scss' // B2B 페이지 스타일\n`
       : ''
-    write(`src/app/${id}/layout.jsx`, marker + `${styleImport}export default function Layout ({ children }) { return children }
+    // 프로젝트 레이아웃은 선택 사항이다. 위젯 폴더가 없어도 공통 셸로 렌더한다.
+    const projectLayout = ['tsx', 'jsx', 'ts', 'js']
+      .map((ext) => `src/widgets/${id}/ProjectLayout.${ext}`)
+      .find((file) => fs.existsSync(path.join(root, file)))
+    const layoutImport = projectLayout
+      ? `import ProjectLayout from '@/${projectLayout.slice(4)}' // B2B 전용 레이아웃\n`
+      : `import { AppLayout as ProjectLayout } from '@/comp/widget/AppLayout' // 공통 앱 레이아웃\n`
+    write(`src/app/${id}/layout.jsx`, marker + `${styleImport}${layoutImport}export default function Layout ({ children }) { return <ProjectLayout>{children}</ProjectLayout> }
 `)
   }
   write(output, JSON.stringify({ b2b }, null, 2) + '\n')

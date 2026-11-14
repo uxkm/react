@@ -56,7 +56,7 @@ export default function PubSearchBar ({
               type="button"
               className="wbs-input-clear"
               aria-label={clearLabel}
-              onClick={onClear}
+              onClick={() => { onClear(); document.getElementById(inputId)?.focus() }}
             >×</button>
           )}
         </div>

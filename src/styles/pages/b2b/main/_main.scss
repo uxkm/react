@@ -324,7 +324,7 @@
   &_brand > span {
     padding: 14px 24px;
     border-radius: 80px;
-    background: #f57659;
+    background: #b74428;
     color: #fff;
     font-weight: 400;
   }
@@ -448,6 +448,25 @@
 
   .main-section-preview_card {
     width: calc((100% - 28px) / 2);
+  }
+
+  .main-section-preview_courses {
+    width: 100%;
+    max-width: 1000px;
+    margin-inline: auto;
+
+    h1 {
+      margin: 0 0 32px;
+      color: #30383e;
+      font-size: 32px;
+      font-weight: 700;
+    }
+  }
+
+  .main-section-preview_course-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
   }
 }
 

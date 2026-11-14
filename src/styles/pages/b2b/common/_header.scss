@@ -67,12 +67,12 @@
     }
 
     > a:hover {
-      color: #f16759;
+      color: #bd4035;
     }
   }
 
   &_nav > &_on {
-    color: #f16759;
+    color: #bd4035;
   }
 
   &_on-badge {
@@ -83,7 +83,7 @@
     width: 40px;
     height: 26px;
     border-radius: 20px;
-    background: #f16759;
+    background: #bd4035;
     color: #fff;
     font-size: 16px;
     font-weight: 400;
@@ -98,7 +98,7 @@
       width: 1px;
       height: 7px;
       background: #fff;
-      box-shadow: 0 0 0 2px #f16759;
+      box-shadow: 0 0 0 2px #bd4035;
     }
   }
 
@@ -136,7 +136,7 @@
 
   a.header_inquiry {
     min-width: 156px;
-    background: linear-gradient(100deg, #a460f4 0%, #d569db 48%, #ff7e80 100%);
+    background: linear-gradient(100deg, #7134b7 0%, #9d377f 48%, #b9383b 100%);
     color: #fff;
 
     &:hover {

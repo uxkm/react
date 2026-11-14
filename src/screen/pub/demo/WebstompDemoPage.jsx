@@ -123,7 +123,7 @@ useEffect(() => disconnect, [])
     <button type="button" onClick={disconnect}>해제</button>
     <span>{status}</span>
   </div>
-  <pre className="lib-demo-pre">{log.join('\\n') || '(로그 없음)'}</pre>
+  <pre tabIndex={0} className="lib-demo-pre">{log.join('\\n') || '(로그 없음)'}</pre>
 </div>`, {
           name: 'WebstompExample',
           reactImports: ['useEffect', 'useRef', 'useState'],
@@ -145,9 +145,9 @@ useEffect(() => disconnect, [])
             <button type="button" onClick={disconnect} style={{ padding: '8px 12px', cursor: 'pointer' }}>
               해제
             </button>
-            <span style={{ fontSize: 13 }}>{status}</span>
+            <span role="status" style={{ fontSize: 13 }}>{status}</span>
           </div>
-          <pre className="lib-demo-pre">{log.join('\n') || '(로그 없음)'}</pre>
+          <pre tabIndex={0} className="lib-demo-pre">{log.join('\n') || '(로그 없음)'}</pre>
         </div>
       </DemoBlock>
     </DemoLayout>

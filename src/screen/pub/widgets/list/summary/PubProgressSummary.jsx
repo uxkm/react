@@ -35,7 +35,7 @@ export default function PubProgressSummary ({
             <li key={stat.key}>
               <span
                 className={classNames('wbs-badge is-dot', 'is-' + statusColor(stat.key))}
-                aria-label={stat.label}
+                aria-hidden="true"
               />{' '}
               {stat.label} {stat.count}
             </li>

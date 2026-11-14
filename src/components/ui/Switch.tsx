@@ -66,7 +66,6 @@ export function Switch ({
   return (
     <label
       className={classes}
-      aria-label={!hasLabel ? ariaLabel : undefined}
       {...(ripple ? { 'data-ripple': 'true' as const } : {})}
     >
       {hasLabel && labelEnd && <span className="switch_label">{content}</span>}

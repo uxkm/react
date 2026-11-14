@@ -222,14 +222,14 @@ export function MarkdownDoc ({ source, className }) {
         }
         if (block.type === 'code') {
           return (
-            <pre key={key} className="guide-md_pre" data-lang={block.lang || undefined}>
+            <pre key={key} className="guide-md_pre" tabIndex={0} data-lang={block.lang || undefined}>
               <code>{block.value}</code>
             </pre>
           )
         }
         if (block.type === 'table') {
           return (
-            <div key={key} className="guide-md_table-wrap" role="region" aria-label="문서 표" tabIndex={0}>
+            <div key={key} className="guide-md_table-wrap" role="region" aria-label={`문서 표 ${index + 1}`} tabIndex={0}>
               <table className="guide-md_table">
                 <thead>
                   <tr>

@@ -52,14 +52,14 @@ export default function XssDemoPage () {
         code={wrapPageExample(`const [raw] = useState(SAMPLE)
 const cleaned = useMemo(() => filterXss(raw), [raw])
 
-<pre className="lib-demo-pre">{cleaned}</pre>`, {
+<pre tabIndex={0} className="lib-demo-pre">{cleaned}</pre>`, {
           name: 'XssFilterExample',
           reactImports: ['useMemo', 'useState'],
           compImports: [],
           extraImports: [FILTER_IMPORT]
         })}
       >
-        <pre className="lib-demo-pre">{cleaned}</pre>
+        <pre tabIndex={0} className="lib-demo-pre">{cleaned}</pre>
       </DemoBlock>
       <DemoBlock
         title="안전 렌더 (dangerouslySetInnerHTML)"

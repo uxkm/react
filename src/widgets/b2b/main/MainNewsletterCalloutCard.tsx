@@ -24,12 +24,11 @@ export default function MainNewsletterCalloutCard ({ shadow = false }: Readonly<
             color="default"
             className="card_callout-subscribe"
             round
-            ariaLabel="멀캠ON 구독하기"
           >
-            <span className="card_callout-brand">
+            <span className="card_callout-brand" aria-hidden="true">
               멀캠 <span>⏻N</span>
             </span>
-            {' '}구독하기
+            <span className="visually-hidden">멀캠ON </span>구독하기
           </Button>
           <div className="card_callout-socials" aria-label="공식 소셜 채널">
             <Link

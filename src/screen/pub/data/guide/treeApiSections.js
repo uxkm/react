@@ -192,7 +192,7 @@ const tokens = [
 export const treeApiSections = [
   {
     title: 'API · Tree Props',
-    description: 'React · Next.js Tree props입니다.',
+    description: 'React · Next.js Tree props입니다. treeitem은 행에 배치하고 자식 group을 aria-owns로 연결합니다. 한 개의 Tab 진입점, 방향키·Home·End·문자 탐색을 제공하며 단일 선택에서는 다른 비제어 선택을 해제합니다.',
     tables: [{ columns, rows: treeProps }]
   },
   {

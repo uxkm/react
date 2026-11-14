@@ -114,7 +114,7 @@ export function Calendar ({
   wheel = false,
   size = '',
   className,
-  role = 'application',
+  role = 'group',
   ...rest
 }: CalendarProps) {
   const classes = classNames(
@@ -718,8 +718,20 @@ export function CalendarWheelColumn ({
           </button>
           )
         : null}
-      <ul ref={listRef} className="calendar_wheel-list" role="listbox" aria-label={label}>
-        {items.map((item) => (
+      <ul ref={listRef} className="calendar_wheel-list" role="listbox" aria-label={label}
+        onKeyDown={(event) => {
+          const key = event.key
+          let next = index
+          if (key === 'ArrowDown') next = Math.min(index + 1, items.length - 1)
+          else if (key === 'ArrowUp') next = Math.max(index - 1, 0)
+          else if (key === 'Home') next = 0
+          else if (key === 'End') next = items.length - 1
+          else return
+          event.preventDefault()
+          if (items[next] !== undefined) setActive(items[next])
+          listRef.current?.querySelectorAll<HTMLElement>('[role="option"]')[next]?.focus()
+        }}>
+        {items.map((item, itemIndex) => (
           <li key={String(item)} role="presentation">
             <button
               type="button"
@@ -728,7 +740,8 @@ export function CalendarWheelColumn ({
                 'calendar_wheel-item',
                 String(item) === String(active) && 'is-selected'
               )}
-              aria-selected={String(item) === String(active) || undefined}
+              aria-selected={String(item) === String(active)}
+              tabIndex={itemIndex === index ? 0 : -1}
               onClick={() => setActive(item)}
             >
               {String(item)}

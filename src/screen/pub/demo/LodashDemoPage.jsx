@@ -49,7 +49,7 @@ const chunks = useMemo(() => chunk(unique, 3), [unique])
     onChange={(e) => setCsv(e.target.value)}
     aria-label="쉼표 구분 값"
   />
-  <pre className="lib-demo-pre">
+  <pre tabIndex={0} className="lib-demo-pre">
     {'uniq → ' + JSON.stringify(unique) + '\\nchunk(3) → ' + JSON.stringify(chunks)}
   </pre>
 </div>`, {
@@ -66,7 +66,7 @@ const chunks = useMemo(() => chunk(unique, 3), [unique])
             onChange={(e) => setCsv(e.target.value)}
             aria-label="쉼표 구분 값"
           />
-          <pre className="lib-demo-pre">
+          <pre tabIndex={0} className="lib-demo-pre">
             {`uniq → ${JSON.stringify(unique)}\nchunk(3) → ${JSON.stringify(chunks)}`}
           </pre>
         </div>
@@ -90,7 +90,7 @@ useEffect(() => {
     placeholder="입력 후 잠시 기다려 보세요"
     aria-label="디바운스 입력"
   />
-  <pre className="lib-demo-pre">즉시: {query || '(비어 있음)'}{'\\n'}지연: {debounced || '(비어 있음)'}</pre>
+  <pre tabIndex={0} className="lib-demo-pre">즉시: {query || '(비어 있음)'}{'\\n'}지연: {debounced || '(비어 있음)'}</pre>
 </div>`, {
           name: 'LodashDebounceExample',
           reactImports: ['useEffect', 'useState'],
@@ -106,7 +106,7 @@ useEffect(() => {
             placeholder="입력 후 잠시 기다려 보세요"
             aria-label="디바운스 입력"
           />
-          <pre className="lib-demo-pre">즉시: {query || '(비어 있음)'}{'\n'}지연: {debounced || '(비어 있음)'}</pre>
+          <pre tabIndex={0} className="lib-demo-pre">즉시: {query || '(비어 있음)'}{'\n'}지연: {debounced || '(비어 있음)'}</pre>
         </div>
       </DemoBlock>
     </DemoLayout>

@@ -85,7 +85,9 @@ function lanAddress () {
 function onListenError (label, port, err) {
   if (err?.code === 'EADDRINUSE') {
     console.error(`[serve] ${label} 포트 ${port} 사용 중 — 기존 node 서버를 종료한 뒤 다시 실행하세요.`)
-    console.error(`[serve]   예) lsof -ti:${port} | xargs kill`)
+    console.error(process.platform === 'win32'
+      ? `[serve]   PowerShell 확인: Get-NetTCPConnection -LocalPort ${port} | Select-Object OwningProcess`
+      : `[serve]   프로세스 확인: lsof -nP -iTCP:${port} -sTCP:LISTEN`)
   } else {
     console.error(`[serve] ${label}`, err)
   }
@@ -129,6 +131,8 @@ if (isDev) {
   }
   process.once('SIGINT', shutdown)
   process.once('SIGTERM', shutdown)
+  process.on('message', (message) => { if (message?.type === 'shutdown') shutdown() })
+  if (process.connected) process.once('disconnect', shutdown)
 }
 
 /** Next 요청 핸들러 */

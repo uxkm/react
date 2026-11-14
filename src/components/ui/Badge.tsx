@@ -64,8 +64,8 @@ export function Badge ({
         !dotOnly && count && 'badge_count',
         className
       )}
-      role={dotOnly ? 'status' : undefined}
-      aria-label={ariaLabel || undefined}
+      role={rest.role ?? (dotOnly ? 'status' : (ariaLabel || rest['aria-label']) ? 'img' : undefined)}
+      aria-label={ariaLabel || rest['aria-label'] || undefined}
     >
       {dotOnly ? null : (hasNodes(children) ? children : label)}
     </span>
@@ -85,7 +85,8 @@ export function BadgeWrap ({
     <span
       {...rest}
       className={classNames('badge_wrap', className)}
-      aria-label={ariaLabel || undefined}
+      role={rest.role ?? ((ariaLabel || rest['aria-label']) ? 'group' : undefined)}
+      aria-label={ariaLabel || rest['aria-label'] || undefined}
     >
       {children}
     </span>

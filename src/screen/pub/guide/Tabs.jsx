@@ -1146,9 +1146,11 @@ const [value, setValue] = useState('doc-1')`
       <>
         스타일 계약은 <code>tabs</code> · <code>tabs_bar</code> · <code>tabs_list</code> · <code>tabs_tab</code> ·
         <code>tabs_panel</code>입니다. 기본 스킨은 <code>tabs_line</code>입니다.
+        화면 프리뷰는 실제 Tabs 컴포넌트로 동작합니다. 아래 HTML은 구조 참고용이며, 단독 사용 시 선택·키보드 이벤트를 JavaScript로 구현해야 합니다.
       </>
     ),
-    code: `<div class="tabs tabs_line">
+    code: `<!-- 정적 구조 예시: 단독 HTML에는 선택 상태와 키보드 이동을 처리하는 JavaScript가 필요합니다. -->
+<div class="tabs tabs_line">
   <div class="tabs_bar">
     <div class="tabs_list-wrap">
       <div class="tabs_list" role="tablist" aria-label="섹션">
@@ -1170,47 +1172,7 @@ const [value, setValue] = useState('doc-1')`
     </div>
   </div>
 </div>`,
-    preview: (
-      <div className="tabs tabs_line">
-        <div className="tabs_bar">
-          <div className="tabs_list-wrap">
-            <div className="tabs_list" role="tablist" aria-label="섹션">
-              <button
-                type="button"
-                className="tabs_tab is-active"
-                role="tab"
-                aria-selected="true"
-              >
-                <span className="tabs_label">개요</span>
-              </button>
-              <button
-                type="button"
-                className="tabs_tab"
-                role="tab"
-                aria-selected="false"
-                tabIndex={-1}
-              >
-                <span className="tabs_label">설정</span>
-              </button>
-              <button
-                type="button"
-                className="tabs_tab"
-                role="tab"
-                aria-selected="false"
-                tabIndex={-1}
-              >
-                <span className="tabs_label">활동</span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="tabs_panels">
-          <div className="tabs_panel" role="tabpanel">
-            <p className="tabs_panel-placeholder">개요 패널</p>
-          </div>
-        </div>
-      </div>
-    )
+    preview: <ControlledTabs label="HTML 구조 예시 탭" panelPrefix="HTML" />
   },
   {
     title: '접근성',
@@ -1219,6 +1181,9 @@ const [value, setValue] = useState('doc-1')`
         <code>tablist</code>에 <code>aria-label</code>(기본 &quot;섹션&quot;)을 둡니다.
         활성 탭은 <code>aria-selected=&quot;true&quot;</code>, 비활성 탭은 <code>tabIndex=-1</code>입니다.
         세로일 때는 <code>aria-orientation=&quot;vertical&quot;</code>입니다.
+        Tab은 선택한 탭으로 진입한 뒤 패널·다음 조작 요소로 나갑니다.
+        탭 사이는 가로 방향키(세로형은 위·아래)로 이동하면서 바로 선택합니다.
+        Enter·Space로도 초점이 있는 탭을 선택할 수 있습니다.
       </>
     ),
     code: compoundCode({

@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react' // 훅
+import { useEffect, useState } from 'react' // 훅
+import { useLatestRef } from './useLatestRef' // 커밋된 콜백 참조
 import { usePageLoading } from './usePageLoading' // 페이지 로딩 훅
 
 export type UsePageDataOptions = {
@@ -31,8 +32,7 @@ export function usePageData (options: UsePageDataOptions = {}) {
   const { loading, run, setLoading } = usePageLoading(enabled)
   const [data, setData] = useState<unknown>(null)
   const [error, setError] = useState<unknown>(null)
-  const loadRef = useRef(options.load)
-  loadRef.current = options.load
+  const loadRef = useLatestRef(options.load)
 
   useEffect(() => {
     if (!enabled) {
@@ -63,7 +63,7 @@ export function usePageData (options: UsePageDataOptions = {}) {
     return () => {
       cancelled = true
     }
-  }, [enabled, run, setLoading])
+  }, [enabled, run, setLoading, loadRef])
 
   return { loading, data, error }
 }

@@ -6,8 +6,9 @@
  * adaptive 이면 브레이크포인트 미만에서 하단 바텀시트로 전환한다.
  */
 
-import { useState, type HTMLAttributes, type ReactNode } from 'react' // React
+import { useId, useRef, useState, type DialogHTMLAttributes, type ReactNode, type RefObject } from 'react' // React
 import { useAutoClose } from '@/hooks/interaction/useAutoClose' // Auto Close 훅
+import { useModalDialog } from '@/hooks/interaction/useModalDialog' // 모달 초점·스크롤 관리
 import { useMinWidth } from '@/hooks/layout/useMediaQuery' // Min Width 훅
 import {
   ADAPTIVE_BREAKPOINT_DEFAULT, // ADAPTIVE BREAKPOINT DEFAULT 컴포넌트
@@ -19,7 +20,7 @@ import { hasNodes } from '@/utils/react' // has Nodes
 import { Icon } from './Icon' // Icon 컴포넌트
 
 /** 모달이 받는 값. open 일 때만 보인다 */
-export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
+export interface ModalProps extends Omit<DialogHTMLAttributes<HTMLDialogElement>, 'title'> {
   open?: boolean
   /** 비제어 초기 열림 */
   defaultOpen?: boolean
@@ -28,6 +29,8 @@ export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'
   /** 열린 후 자동 닫힘 시간(ms). 생략하거나 0 이하이면 사용하지 않는다 */
   autoCloseDelay?: number
   title?: ReactNode
+  /** 초기 초점 대상. 생략하면 제목, 제목이 없으면 전체 패널에 초점을 둡니다. */
+  initialFocusRef?: RefObject<HTMLElement | null>
   footer?: ReactNode
   size?: 'sm' | 'md' | 'lg'
   /**
@@ -60,6 +63,7 @@ export function Modal ({
   openOnLoad,
   autoCloseDelay,
   title,
+  initialFocusRef,
   footer,
   size = 'md',
   adaptive = false,
@@ -70,8 +74,14 @@ export function Modal ({
   children,
   onOpenChange,
   onClose,
+  onKeyDown,
+  onCancel,
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
   ...rest
 }: ModalProps) {
+  const dialogRef = useRef<HTMLDialogElement>(null)
+  const titleId = useId()
   const controlled = openProp !== undefined
   const [innerOpen, setInnerOpen] = useState(openOnLoad ?? defaultOpen)
   const open = controlled ? openProp : innerOpen
@@ -87,12 +97,15 @@ export function Modal ({
   }
 
   useAutoClose(open, autoCloseDelay, requestClose)
+  const handleKeyDown = useModalDialog(dialogRef, open && !staticDemo, initialFocusRef)
 
   if (!open) return null
 
   return (
-    <div
+    <dialog
       {...rest}
+      ref={dialogRef}
+      open={staticDemo || undefined}
       className={classNames(
         'modal',
         'is-open',
@@ -104,25 +117,38 @@ export function Modal ({
         className
       )}
       role="dialog"
-      aria-modal="true"
+      aria-modal={staticDemo ? undefined : true}
+      aria-labelledby={ariaLabelledBy || (!ariaLabel && hasNodes(title) ? titleId : undefined)}
+      aria-label={ariaLabel || (!ariaLabelledBy && !hasNodes(title) ? '대화상자' : undefined)}
+      onKeyDown={(event) => {
+        onKeyDown?.(event)
+        handleKeyDown(event)
+      }}
+      onCancel={(event) => {
+        if (event.target !== event.currentTarget) return
+        onCancel?.(event)
+        if (event.defaultPrevented) return
+        event.preventDefault()
+        requestClose()
+      }}
       data-modal-backdrop={backdrop}
       data-adaptive={adaptive || undefined}
       data-adaptive-breakpoint={adaptive ? String(bpPx) : undefined}
     >
       {backdrop && <div className="modal_backdrop" aria-hidden="true" onClick={requestClose} />}
-      <div className="modal_dialog">
+      <div className="modal_dialog" data-dialog-panel="" tabIndex={-1}>
         <div className="modal_header">
           {hasNodes(title)
-            ? <strong className="modal_title">{title}</strong>
+            ? <h2 id={titleId} className="modal_title" data-dialog-title="" tabIndex={-1}>{title}</h2>
             : <span className="modal_title" />}
           <button type="button" className="modal_close" aria-label="닫기" onClick={requestClose}>
             <Icon name="close" size="var(--modal-close-icon-size)" />
           </button>
         </div>
-        <div className="modal_body" role="region" aria-label="대화상자 내용" tabIndex={0}>{children}</div>
+        <div className="modal_body" tabIndex={0}>{children}</div>
         {hasNodes(footer) && <div className="modal_footer modal_footer-end">{footer}</div>}
       </div>
-    </div>
+    </dialog>
   )
 }
 

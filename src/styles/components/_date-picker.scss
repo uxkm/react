@@ -134,7 +134,7 @@
     }
 
     &:has(.date_picker_clear) .date_picker_input {
-      padding-right: calc(var(--date-picker-input-padding-x) + 1.25rem);
+      padding-right: calc(var(--date-picker-input-padding-x) + 1.5rem);
     }
 
     .date_picker_clear {
@@ -151,7 +151,7 @@
       cursor: pointer;
       transform: translateY(-50%);
       @include focus-ring;
-      @include square-size(1.25rem);
+      @include square-size(1.5rem);
 
       .icon {
         width: 0.875rem;

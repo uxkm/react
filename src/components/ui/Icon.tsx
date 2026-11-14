@@ -446,7 +446,7 @@ export function Icon ({
 }: IconProps) {
   const resolvedLabel = ariaLabel || title || undefined
   // onClick 만 넘긴 경우에도 클릭 가능하도록 button 래퍼로 취급
-  const asButton = Boolean(button || (onClick && !circle && !square))
+  const asButton = Boolean(button || onClick)
   const hasWrapper = Boolean(asButton || circle || square)
   const customCssSize = toIconCssSize(size)
   const namedSize = !customCssSize && typeof size === 'string' && iconSizes.includes(size as IconSize)

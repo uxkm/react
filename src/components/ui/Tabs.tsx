@@ -549,7 +549,7 @@ export function Tabs ({
             size="sm"
             color={navColor || undefined}
             className={navButtonClass('prev')}
-            ariaLabel="이전 탭"
+            ariaLabel={navSelect ? '이전 탭' : '탭 목록 왼쪽으로 스크롤'}
             disabled={prevDisabled}
             onClick={() => handleNav(-1)}
           />
@@ -561,6 +561,30 @@ export function Tabs ({
             role="tablist"
             aria-label={label}
             aria-orientation={vertical ? 'vertical' : 'horizontal'}
+            onKeyDown={(event: KeyboardEvent<HTMLDivElement>) => {
+              const target = (event.target as HTMLElement).closest<HTMLElement>('[role="tab"]')
+              if (!target) return
+              const choices = Array.from(event.currentTarget.querySelectorAll<HTMLButtonElement>('[role="tab"]:not(:disabled)'))
+              const index = choices.indexOf(target as HTMLButtonElement)
+              let next = index
+              if (event.key === (vertical ? 'ArrowDown' : 'ArrowRight')) next = (index + 1) % choices.length
+              else if (event.key === (vertical ? 'ArrowUp' : 'ArrowLeft')) next = (index - 1 + choices.length) % choices.length
+              else if (event.key === 'Home') next = 0
+              else if (event.key === 'End') next = choices.length - 1
+              else if (event.key === 'Delete' && onClose) {
+                const tab = normalizedTabs.find((item) => String(item.value) === target.dataset.value)
+                if (tab && (closable || tab.closable)) {
+                  event.preventDefault()
+                  const neighbor = choices[index + 1] ?? choices[index - 1]
+                  onClose(tab.value)
+                  requestAnimationFrame(() => { if (neighbor?.isConnected) neighbor.focus() })
+                }
+                return
+              } else return
+              event.preventDefault()
+              choices[next]?.focus()
+              choices[next]?.click()
+            }}
           >
             {indicatorSlide && (
               <span
@@ -574,16 +598,7 @@ export function Tabs ({
               const active = tab.value === value
               const showClose = closable || tab.closable
               const tabId = `${uid}-tab-${index}`
-              const panelId = `${uid}-panel-${index}`
-
-              /** Enter·Space 로 탭 닫기 */
-              const handleCloseKey = (event: KeyboardEvent<HTMLElement>) => {
-                if (event.key === 'Enter' || event.key === ' ') {
-                  event.preventDefault()
-                  event.stopPropagation()
-                  onClose?.(tab.value)
-                }
-              }
+              const panelId = hasMultiPanel ? `${uid}-panel-${index}` : `${uid}-panel-active`
 
               const select = () => {
                 if (tab.disabled) return
@@ -591,7 +606,15 @@ export function Tabs ({
               }
 
               const close = showClose
-                ? () => onClose?.(tab.value)
+                ? () => {
+                    const current = document.getElementById(tabId)
+                    const buttons = Array.from(current?.closest('[role="tablist"]')?.querySelectorAll<HTMLButtonElement>('[role="tab"]:not(:disabled)') ?? [])
+                    const index = buttons.indexOf(current as HTMLButtonElement)
+                    const neighbor = buttons[index + 1] ?? buttons[index - 1]
+                    const restore = current?.contains(document.activeElement)
+                    onClose?.(tab.value)
+                    if (restore) requestAnimationFrame(() => { if (neighbor?.isConnected) neighbor.focus() })
+                  }
                 : undefined
 
               const inner = renderTab
@@ -609,26 +632,12 @@ export function Tabs ({
                     {hasNodes(tab.custom)
                       ? tab.custom
                       : <span className="tabs_label">{tab.label}</span>}
-                    {showClose && (
-                      // <button> 중첩 방지를 위해 span[role=button]
-                      <span
-                        role="button"
-                        tabIndex={0}
-                        className="tabs_close"
-                        aria-label={tab.closeLabel || '탭 닫기'}
-                        onClick={(event) => {
-                          event.stopPropagation()
-                          onClose?.(tab.value)
-                        }}
-                        onKeyDown={handleCloseKey}
-                      >
-                        ×
-                      </span>
-                    )}
+                    {showClose && <span className="tabs_close" aria-hidden="true"
+                      onClick={(event) => { event.stopPropagation(); close?.() }}>×</span>}
                   </>
                   )
 
-              return (
+              const tabButton = (
                 <button
                   key={String(tab.value)}
                   id={tabId}
@@ -641,16 +650,19 @@ export function Tabs ({
                     tab.className
                   )}
                   role="tab"
+                  aria-keyshortcuts={showClose ? 'Delete' : undefined}
+                  aria-description={showClose ? `${tab.closeLabel || '탭 닫기'}: Delete 키 사용` : undefined}
                   aria-selected={active}
                   aria-controls={showPanels ? panelId : undefined}
                   aria-disabled={tab.disabled || undefined}
-                  tabIndex={active ? 0 : -1}
+                  tabIndex={active || (activeEnabledIndex < 0 && tab.value === fallbackValue) ? 0 : -1}
                   disabled={tab.disabled}
                   onClick={select}
                 >
                   {inner}
                 </button>
               )
+              return tabButton
             })}
           </div>
         </div>
@@ -661,7 +673,7 @@ export function Tabs ({
             size="sm"
             color={navColor || undefined}
             className={navButtonClass('next')}
-            ariaLabel="다음 탭"
+            ariaLabel={navSelect ? '다음 탭' : '탭 목록 오른쪽으로 스크롤'}
             disabled={nextDisabled}
             onClick={() => handleNav(1)}
           />
@@ -688,6 +700,7 @@ export function Tabs ({
                     mapped?.className || tab.panelClassName
                   )}
                   role="tabpanel"
+                  tabIndex={0}
                   aria-labelledby={`${uid}-tab-${index}`}
                   hidden={!active}
                 >
@@ -700,6 +713,8 @@ export function Tabs ({
                 id={`${uid}-panel-active`}
                 className="tabs_panel is-active"
                 role="tabpanel"
+                tabIndex={0}
+                aria-labelledby={`${uid}-tab-${normalizedTabs.findIndex((tab) => tab.value === value)}`}
               >
                 {singlePanelContent}
               </div>

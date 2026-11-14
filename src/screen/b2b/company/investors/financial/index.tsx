@@ -22,6 +22,7 @@ export default function B2bCompanyInvestorsFinancialPage () {
         skeleton={skeletonMode === 'manual' ? <FinancialSkeleton /> : undefined}
         className="page-container"
       >
+        <h1 className="visually-hidden">{pageTitle}</h1>
         <ComingSoon />
 
       </PageLoading>

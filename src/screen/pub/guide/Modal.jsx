@@ -3,6 +3,7 @@
 import { useState } from 'react' // 상태 훅
 import { Button, Modal } from '@/comp' // comp
 import { LoadOpenOverlayDemo } from '@/screen/pub/widgets/preview/LoadOpenOverlayDemo' // Load Open Overlay Demo 컴포넌트
+import { OverlayAccessibilityDemo } from '@/screen/pub/widgets/preview/OverlayAccessibilityDemo' // 키보드·중첩 접근성 예시
 import { TimedOverlayDemo } from '@/screen/pub/widgets/preview/TimedOverlayDemo' // Timed Overlay Demo 컴포넌트
 import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
 import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
@@ -96,6 +97,11 @@ function AdaptiveDemo () {
 }
 
 const SECTIONS = [
+  {
+    title: '키보드와 스크린리더',
+    description: '열면 지정한 입력란에 초점을 둡니다. Tab·Shift+Tab은 내부를 순환하며, Escape는 맨 위 대화상자만 닫고 열기 버튼으로 초점을 돌립니다. 제목은 접근성 이름으로 연결되며, 배경은 모달이 닫힐 때까지 접근할 수 없습니다.',
+    preview: <OverlayAccessibilityDemo component="Modal" />
+  },
   {
     title: '배경 dim 숨기기',
     description: 'backdrop 의 기본값은 true 입니다. false 를 지정하면 배경 dim 없이 표시하고 배경 클릭으로 닫히지 않습니다. 닫기 버튼은 그대로 사용할 수 있습니다. 미리보기는 프레임 안에 표시합니다.',
@@ -345,7 +351,7 @@ const close = () => {
     description: (
       <>
         루트에 <code>role=&quot;dialog&quot;</code> · <code>aria-modal=&quot;true&quot;</code>가 자동 지정되고, 닫기 버튼에는 <code>aria-label=&quot;닫기&quot;</code>가 있습니다.
-        <code>aria-label</code> 등 네이티브 div 속성은 루트로 전달됩니다.
+        <code>aria-label</code> 등 네이티브 dialog 속성은 루트로 전달됩니다.
       </>
     ),
     code: wrapPageExample(`<Modal open title="확인" aria-label="확인 대화상자" onClose={close}>

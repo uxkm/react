@@ -49,7 +49,7 @@ export default function HeaderGuide () {
         code={`<AppHeader background="transparent" scrolledBackground="var(--color-header-bg-scrolled)" />
 <AppHeader className="is-scrolled" background="transparent" scrolledBackground="var(--color-header-bg-scrolled)" />`}
       >
-        <div style={{ background: 'linear-gradient(120deg, #dbeafe, #fce7f3)', padding: 16 }}>
+        <div style={{ background: 'linear-gradient(120deg, var(--color-bg), var(--color-surface-raised))', padding: 16 }}>
           <AppHeader brand={<strong>기본: 투명 배경</strong>} nav={null} showLanguageSwitcher={false} background="transparent" scrolledBackground={SCROLLED_BG} style={{ position: 'relative', backdropFilter: 'none', WebkitBackdropFilter: 'none' }} />
           <AppHeader brand={<strong>스크롤: 테마 스크롤 배경</strong>} nav={null} showLanguageSwitcher={false} className="is-scrolled" background="transparent" scrolledBackground={SCROLLED_BG} style={{ position: 'relative', backdropFilter: 'none', WebkitBackdropFilter: 'none' }} />
         </div>

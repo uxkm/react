@@ -16,6 +16,7 @@ export default function PubListSkeleton ({
   return (
     <div
       className="wbs-skeleton"
+      role="status"
       aria-busy="true"
       aria-label="목록을 불러오는 중"
       suppressHydrationWarning

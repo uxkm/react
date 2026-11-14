@@ -219,7 +219,7 @@ const tokens = [
 export const dropdownApiSections = [
   {
     title: 'API · Props',
-    description: 'React · Next.js Dropdown props입니다. items 로 메뉴를 구성하고, placement · block · maxVisibleItems 로 형태를 바꿉니다.',
+    description: 'React · Next.js Dropdown props입니다. items 로 메뉴를 구성하고, placement · block · maxVisibleItems 로 형태를 바꿉니다. 열면 메뉴 항목으로 초점을 옮깁니다. 방향키·Home·End·문자 탐색, Escape·Tab 닫기, 선택 후 트리거 초점 복귀를 지원합니다.',
     tables: [{ columns, rows: props }]
   },
   {

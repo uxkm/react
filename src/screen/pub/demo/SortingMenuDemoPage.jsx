@@ -2,6 +2,7 @@
 
 import { useCallback, useRef, useState } from 'react' // React
 import { useClickOutside } from '@/hooks/interaction/useClickOutside' // Click Outside 훅
+import { useEscapeKey } from '@/hooks/interaction/useEscapeKey'
 import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
 import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
@@ -18,6 +19,10 @@ export default function SortingMenuDemoPage() {
   const [isSortingOpen, setIsSortingOpen] = useState(false)
   const [selectedItem, setSelectedItem] = useState('')
   const sortingWrapRef = useRef(null)
+  useEscapeKey(sortingWrapRef, () => {
+    setIsSortingOpen(false)
+    sortingWrapRef.current?.querySelector('.sort-btn')?.focus()
+  }, isSortingOpen)
 
   const close = useCallback(() => setIsSortingOpen(false), [])
   useClickOutside(sortingWrapRef, close, isSortingOpen)
@@ -78,6 +83,7 @@ const current = selectedItem || sortList[0]
                     onClick={(e) => {
                       e.stopPropagation()
                       setSelectedItem(item)
+                      sortingWrapRef.current?.querySelector('.sort-btn')?.focus()
                       setIsSortingOpen(false)
                     }}
                   >
@@ -137,6 +143,7 @@ const current = selectedItem || sortList[0]
                             onClick={(e) => {
                               e.stopPropagation()
                               setSelectedItem(item)
+                      sortingWrapRef.current?.querySelector('.sort-btn')?.focus()
                               setIsSortingOpen(false)
                             }}
                           >

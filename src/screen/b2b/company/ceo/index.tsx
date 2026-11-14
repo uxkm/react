@@ -22,6 +22,7 @@ export default function B2bCompanyCeoPage () {
         skeleton={skeletonMode === 'manual' ? <CeoSkeleton /> : undefined}
         className="page-container"
       >
+        <h1 className="visually-hidden">{pageTitle}</h1>
         <ComingSoon />
 
       </PageLoading>

@@ -8,14 +8,17 @@
  */
 import {
   useEffect, // effect 훅
+  useId, // 접근성 제목 ID
   useRef, // ref 훅
   useState, // 상태 훅
-  type HTMLAttributes, // HTMLAttributes 타입
+  type DialogHTMLAttributes, // HTMLAttributes 타입
   type PointerEvent as ReactPointerEvent, // PointerEvent 타입
   type ReactNode, // ReactNode 타입
+  type RefObject, // 초기 초점 대상
   type TransitionEvent // TransitionEvent 타입
 } from 'react' // React
 import { useAutoClose } from '@/hooks/interaction/useAutoClose' // Auto Close 훅
+import { useModalDialog } from '@/hooks/interaction/useModalDialog' // 모달 초점·스크롤 관리
 import { useMinWidth } from '@/hooks/layout/useMediaQuery' // Min Width 훅
 import {
   ADAPTIVE_BREAKPOINT_DEFAULT, // ADAPTIVE BREAKPOINT DEFAULT 컴포넌트
@@ -49,7 +52,7 @@ const DISMISS_VELOCITY = 0.5
 const EXPAND_DISTANCE = 72
 
 /** 서랍이 받는 값 */
-export interface DrawerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
+export interface DrawerProps extends Omit<DialogHTMLAttributes<HTMLDialogElement>, 'title'> {
   open?: boolean
   /** 비제어 초기 열림 */
   defaultOpen?: boolean
@@ -58,6 +61,8 @@ export interface DrawerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title
   /** 열린 후 자동 닫힘 시간(ms). 생략하거나 0 이하이면 사용하지 않는다 */
   autoCloseDelay?: number
   title?: ReactNode
+  /** 초기 초점 대상. 생략하면 제목, 제목이 없으면 전체 패널에 초점을 둡니다. */
+  initialFocusRef?: RefObject<HTMLElement | null>
   footer?: ReactNode
   placement?: DrawerPlacement
   /**
@@ -98,6 +103,7 @@ export function Drawer ({
   openOnLoad,
   autoCloseDelay,
   title,
+  initialFocusRef,
   footer,
   placement = 'right',
   adaptive = false,
@@ -112,8 +118,14 @@ export function Drawer ({
   className,
   children,
   onClose,
+  onKeyDown,
+  onCancel,
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
   ...rest
 }: DrawerProps) {
+  const dialogRef = useRef<HTMLDialogElement>(null)
+  const titleId = useId()
   const panelRef = useRef<HTMLDivElement>(null)
   /** 닫힘 애니메이션 동안 placement 가 기본값으로 바뀌어도 열렸던 방향 유지 */
   const [retainedPlacement, setRetainedPlacement] = useState<DrawerActivePlacement>(placement)
@@ -191,10 +203,16 @@ export function Drawer ({
   // enter-start → 다음 프레임에 is-open 을 붙여 슬라이드 인
   useEffect(() => {
     if (phase !== 'enter-start') return
+    let nextFrame = 0
     const id = requestAnimationFrame(() => {
-      requestAnimationFrame(() => setPhase('enter'))
+      nextFrame = requestAnimationFrame(() => {
+        setPhase((current) => current === 'enter-start' ? 'enter' : current)
+      })
     })
-    return () => cancelAnimationFrame(id)
+    return () => {
+      cancelAnimationFrame(id)
+      cancelAnimationFrame(nextFrame)
+    }
   }, [phase])
 
   // leave: 드래그 닫기는 현재 위치에서 translateY(100%) 로 이어 그림 (0으로 리셋하면 깜빡임)
@@ -374,6 +392,8 @@ export function Drawer ({
     }
   }
 
+  const handleKeyDown = useModalDialog(dialogRef, phase !== 'hidden' && !staticDemo, initialFocusRef)
+
   if (phase === 'hidden') return null
 
   const dragHandlers = canDrag
@@ -386,8 +406,10 @@ export function Drawer ({
     : undefined
 
   return (
-    <div
+    <dialog
       {...rest}
+      ref={dialogRef}
+      open={staticDemo || undefined}
       className={classNames(
         'drawer',
         (phase === 'enter' || phase === 'shown') && 'is-open',
@@ -402,11 +424,26 @@ export function Drawer ({
       data-adaptive={adaptive || undefined}
       data-adaptive-breakpoint={adaptive ? String(bpPx) : undefined}
       role="dialog"
-      aria-modal="true"
+      aria-modal={staticDemo ? undefined : true}
+      aria-labelledby={ariaLabelledBy || (!ariaLabel && hasNodes(title) ? titleId : undefined)}
+      aria-label={ariaLabel || (!ariaLabelledBy && !hasNodes(title) ? '서랍 패널' : undefined)}
+      onKeyDown={(event) => {
+        onKeyDown?.(event)
+        handleKeyDown(event)
+      }}
+      onCancel={(event) => {
+        if (event.target !== event.currentTarget) return
+        onCancel?.(event)
+        if (event.defaultPrevented) return
+        event.preventDefault()
+        if (open) requestClose()
+      }}
     >
       {backdrop && <div className="drawer_backdrop" aria-hidden="true" onClick={requestClose} />}
       <div
         ref={panelRef}
+        data-dialog-panel=""
+        tabIndex={-1}
         className={classNames(
           'drawer_panel',
           'drawer_placement-' + activePlacement,
@@ -420,8 +457,16 @@ export function Drawer ({
           <button
             type="button"
             className="drawer_handle"
-            aria-label="서랍 끌어 조절"
+            aria-label={expanded ? '서랍 축소' : '서랍 확장'}
             aria-expanded={expanded}
+            onClick={(event) => {
+              // 포인터로 끈 직후 발생하는 click은 드래그 결과를 뒤집지 않습니다.
+              if (event.detail > 0 && Math.abs(dragRef.current.dy) > 5) {
+                dragRef.current.dy = 0
+                return
+              }
+              setExpanded(!expanded)
+            }}
             {...dragHandlers}
           >
             <span className="drawer_handle-bar" />
@@ -429,16 +474,16 @@ export function Drawer ({
         )}
         <div className="drawer_header" {...(canDrag ? dragHandlers : undefined)}>
           {hasNodes(title)
-            ? <strong className="drawer_title">{title}</strong>
+            ? <h2 id={titleId} className="drawer_title" data-dialog-title="" tabIndex={-1}>{title}</h2>
             : <span className="drawer_title" />}
           <button type="button" className="drawer_close" aria-label="닫기" onClick={requestClose}>
             <Icon name="close" size="var(--drawer-close-icon-size)" />
           </button>
         </div>
-        <div className="drawer_body">{children}</div>
+        <div className="drawer_body" tabIndex={0}>{children}</div>
         {hasNodes(footer) && <div className="drawer_footer drawer_footer-end">{footer}</div>}
       </div>
-    </div>
+    </dialog>
   )
 }
 

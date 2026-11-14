@@ -246,7 +246,7 @@ const tokens = [
 export const popoverApiSections = [
   {
     title: 'API · Props',
-    description: 'React · Next.js Popover props입니다.',
+    description: 'React · Next.js Popover props입니다. 제목을 패널 이름에 연결합니다. 버튼으로 열면 제목, 제목이 없으면 전체 패널로 초점을 옮기고 Escape로 닫아 트리거로 복귀합니다. 배경을 차단하지 않는 비모달 패널입니다.',
     tables: [{ columns, rows: props }]
   },
   {

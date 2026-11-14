@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react' // React
+import { useEscapeKey } from '@/hooks/interaction/useEscapeKey'
 import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
 import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
@@ -17,6 +18,10 @@ export default function SortingMenuBasicDemoPage() {
   const [isSortingOpen, setIsSortingOpen] = useState(false)
   const [selectedItem, setSelectedItem] = useState('')
   const sortingWrapRef = useRef(null)
+  useEscapeKey(sortingWrapRef, () => {
+    setIsSortingOpen(false)
+    sortingWrapRef.current?.querySelector('.sort-btn')?.focus()
+  }, isSortingOpen)
 
   // document click 으로 외부 클릭 시 닫기
   useEffect(() => {
@@ -93,6 +98,7 @@ const current = selectedItem || sortList[0]
                     onClick={(e) => {
                       e.stopPropagation()
                       setSelectedItem(item)
+                      sortingWrapRef.current?.querySelector('.sort-btn')?.focus()
                       setIsSortingOpen(false)
                     }}
                   >
@@ -151,6 +157,7 @@ const current = selectedItem || sortList[0]
                             onClick={(e) => {
                               e.stopPropagation()
                               setSelectedItem(item)
+                      sortingWrapRef.current?.querySelector('.sort-btn')?.focus()
                               setIsSortingOpen(false)
                             }}
                           >

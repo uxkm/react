@@ -104,6 +104,14 @@ export function Navbar ({
   return (
     <header
       {...rest}
+      onKeyDown={(event) => {
+        rest.onKeyDown?.(event)
+        if (event.defaultPrevented || event.key !== 'Escape' || !isOpen) return
+        event.preventDefault()
+        event.stopPropagation()
+        setOpen(false)
+        event.currentTarget.querySelector<HTMLButtonElement>('.navbar_toggle')?.focus()
+      }}
       className={classNames(
         'navbar',
         sticky && 'navbar_sticky',

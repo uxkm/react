@@ -135,6 +135,7 @@ export function Typography ({
     resolvedTag,
     {
       ...rest,
+      tabIndex: rest.tabIndex ?? (resolvedTag === 'pre' ? 0 : undefined),
       className: typoClass,
       href: href || undefined,
       htmlFor: htmlFor || undefined,

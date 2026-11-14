@@ -7,6 +7,7 @@
 
 import {
   useState, // 상태 훅
+  useRef, // 펼침 후 초점 유지
   type HTMLAttributes, // HTMLAttributes 타입
   type MouseEvent, // MouseEvent 타입
   type ReactNode // ReactNode 타입
@@ -64,6 +65,7 @@ export function Breadcrumb ({
   className,
   ...rest
 }: BreadcrumbProps) {
+  const rootRef = useRef<HTMLElement>(null)
   const controlled = expandedProp !== undefined
   const [innerExpanded, setInnerExpanded] = useState(defaultExpanded)
   const expanded = controlled ? expandedProp : innerExpanded
@@ -102,6 +104,7 @@ export function Breadcrumb ({
   return (
     <nav
       {...rest}
+      ref={rootRef}
       className={classNames(
         'breadcrumb',
         separator === 'slash' && 'breadcrumb_sep-slash',
@@ -121,7 +124,10 @@ export function Breadcrumb ({
                   type="button"
                   className="breadcrumb_ellipsis"
                   aria-label="경로 펼치기"
-                  onClick={() => setExpanded(true)}
+                  onClick={() => {
+                    setExpanded(true)
+                    requestAnimationFrame(() => rootRef.current?.querySelector<HTMLElement>('.breadcrumb_item:nth-child(2) a')?.focus())
+                  }}
                 >
                   …
                 </button>

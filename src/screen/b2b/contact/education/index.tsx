@@ -22,6 +22,7 @@ export default function B2bContactEducationPage () {
         skeleton={skeletonMode === 'manual' ? <EducationSkeleton /> : undefined}
         className="page-container"
       >
+        <h1 className="visually-hidden">{pageTitle}</h1>
         <ComingSoon />
 
         <section id="inquiry"><h2>문의 정보</h2><p>문의구분, 교육인원, 교육일정, 교육방식, 문의내용, 상담 필요 여부</p></section>

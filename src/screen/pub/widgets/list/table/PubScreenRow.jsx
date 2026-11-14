@@ -6,6 +6,7 @@
 import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import PathLinkCell, { resolveLinkField, toAppHref } from './PathLinkCell' // Path Link Cell 컴포넌트
 import { ellipsisAttr } from './useEllipsisTooltip.jsx' // ellipsis Attr
+import { isLinkNode } from '../lib/publishTree'
 import {
   remarkItems, // remark Items
   remarkPreview, // remark Preview
@@ -23,11 +24,12 @@ export default function PubScreenRow ({
   onRemark
 }) {
   const remarks = remarkItems(item.remark)
+  const isLink = isLinkNode(item)
   const rowLevel = level === 1 ? 'level-1' : 'level-2'
 
   return (
     <li
-      className={classNames('wbs-table_row', rowLevel, 'status-' + (item.status || 'pending'))}
+      className={classNames('wbs-table_row', rowLevel, !isLink && 'status-' + (item.status || 'pending'))}
       role="row"
     >
       <div className="col-name" role="cell">
@@ -67,12 +69,16 @@ export default function PubScreenRow ({
           <div className="col-expected" role="cell">{item.expected || '-'}</div>
           <div className="col-end" role="cell">{item.end || '-'}</div>
           <div className="col-status" role="cell">
-            <span className={classNames('wbs-badge', 'is-' + statusColor(item.status))}>
-              {statusLabel(item.status)}
-            </span>
+            {isLink
+              ? '-'
+              : (
+                <span className={classNames('wbs-badge', 'is-' + statusColor(item.status))}>
+                  {statusLabel(item.status)}
+                </span>
+              )}
           </div>
           <div className="col-progress" role="cell">
-            <span className="pct">{item.progress || 0}%</span>
+            {isLink ? '-' : <span className="pct">{item.progress || 0}%</span>}
           </div>
         </>
       )}

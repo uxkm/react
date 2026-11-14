@@ -11,10 +11,22 @@ const columns = [
 
 const props = [
   {
+    name: 'initialFocusRef',
+    type: 'RefObject<HTMLElement | null>',
+    default: '제목 → 전체 패널',
+    description: '열릴 때 초점을 둘 내부 요소의 ref입니다. 생략하면 제목, 제목이 없으면 전체 패널로 이동합니다. Tab·Shift+Tab은 내부를 순환하고 Escape는 맨 위 대화상자만 닫습니다. 닫힌 뒤 열기 요소로 초점이 돌아갑니다.'
+  },
+  {
+    name: 'aria-label · aria-labelledby · aria-describedby',
+    type: 'string',
+    default: 'title을 aria-labelledby로 연결',
+    description: '호출부에서 접근성 이름·설명을 지정할 수 있습니다. 제목이 없으면 aria-label로 구체적인 이름을 제공하세요. 복잡한 본문 전체를 자동 설명으로 연결하지 않습니다.'
+  },
+  {
     name: 'backdrop',
     type: 'boolean',
     default: 'true',
-    description: '배경 dim 표시 여부입니다. false 이면 dim 을 렌더링하지 않으며 배경 클릭으로 닫히지 않습니다. 닫기 버튼과 자동 닫힘은 유지됩니다.'
+    description: '배경 dim 표시 여부입니다. false 이면 dim 을 렌더링하지 않으며 배경 클릭으로 닫히지 않습니다. 닫기 버튼·Escape·자동 닫힘은 유지되며, dim이 없어도 배경 접근은 차단합니다.'
   },
   {
     name: 'openOnLoad',
@@ -56,7 +68,7 @@ const props = [
     name: 'draggable',
     type: 'boolean',
     default: 'false',
-    description: 'effective placement 가 bottom 일 때만 유효합니다(일반 bottom 또는 adaptive <BP). true 이면 상단 핸들 바(drawer_handle)를 표시하고 드래그로 닫기·확장하며 상단 좌우 모서리를 둥글게 표시합니다. false 이면 핸들을 숨기고 상단 좌우 radius 를 0 으로 표시합니다.'
+    description: 'effective placement 가 bottom 일 때만 유효합니다(일반 bottom 또는 adaptive <BP). true 이면 상단 핸들 바(drawer_handle)를 표시하고 드래그로 닫기·확장하며 상단 좌우 모서리를 둥글게 표시합니다. 핸들 버튼의 Enter·Space로도 확장·축소할 수 있습니다. false 이면 핸들을 숨기고 상단 좌우 radius 를 0 으로 표시합니다.'
   },
   {
     name: 'expanded',
@@ -96,9 +108,9 @@ const props = [
   },
   {
     name: 'className · ...props',
-    type: 'div attributes',
+    type: 'dialog attributes',
     default: '—',
-    description: '루트 클래스와 네이티브 div 속성입니다. 크기 변형(drawer_sm · drawer_lg)은 className 으로 붙입니다. role="dialog" · aria-modal="true" 는 자동 지정됩니다.'
+    description: '루트 클래스와 네이티브 dialog 속성입니다. 크기 변형(drawer_sm · drawer_lg)은 className 으로 붙입니다. 실제 오버레이는 showModal()로 배경 접근을 차단합니다. staticDemo는 비모달이며 배경과 초점을 잠그지 않습니다.'
   }
 ]
 
@@ -107,7 +119,7 @@ const events = [
     name: 'onClose',
     type: '() => void',
     default: '—',
-    description: '오버레이·닫기 버튼·(bottom+draggable) 아래로 드래그·자동 닫힘 시 호출됩니다. 제어 모드에서는 부모에서 open 을 false 로 갱신합니다.'
+    description: '오버레이·닫기 버튼·Escape·(bottom+draggable) 아래로 드래그·자동 닫힘 시 호출됩니다. 제어 모드에서는 부모에서 open 을 false 로 갱신합니다.'
   },
   {
     name: 'onOpenChange',
@@ -119,7 +131,7 @@ const events = [
     name: 'onExpandedChange',
     type: '(expanded: boolean) => void',
     default: '—',
-    description: 'bottom + draggable 에서 확장 상태가 바뀔 때 호출됩니다(드래그·페이지 토글). Drawer 가 닫힐 때도 false 로 호출되어 확장 상태를 초기화합니다. 제어 모드에서는 부모에서 expanded 를 바꿔야 합니다.'
+    description: 'bottom + draggable 에서 확장 상태가 바뀔 때 호출됩니다(드래그·핸들 버튼·페이지 토글). Drawer 가 닫힐 때도 false 로 호출되어 확장 상태를 초기화합니다. 제어 모드에서는 부모에서 expanded 를 바꿔야 합니다.'
   }
 ]
 

@@ -110,7 +110,13 @@ export const Link = forwardRef<HTMLAnchorElement, AppLinkProps>(function Link (
         const el = document.getElementById(hash)
         if (!el) return
         event.preventDefault()
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        el.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' })
+        if (!el.hasAttribute('tabindex')) {
+          el.setAttribute('tabindex', '-1')
+          el.addEventListener('blur', () => el.removeAttribute('tabindex'), { once: true })
+        }
+        // 메뉴 dialog의 같은 클릭에서 닫힘이 반영된 뒤 목적지로 이동합니다.
+        requestAnimationFrame(() => { if (el.isConnected) el.focus({ preventScroll: true }) })
         const next = `${targetPath}#${hash}`
         if (`${window.location.pathname}${window.location.hash}` !== next) {
           window.history.pushState(null, '', next)
@@ -122,7 +128,12 @@ export const Link = forwardRef<HTMLAnchorElement, AppLinkProps>(function Link (
   )
 })
 
-/** NavLink 별칭 */
-export const NavLink = Link
+/** 현재 경로의 시각적 활성 표시와 보조기기에 제공하는 현재 페이지 상태를 일치시킵니다. */
+export const NavLink = forwardRef<HTMLAnchorElement, AppLinkProps>(function NavLink (props, ref) {
+  const pathname = usePathname() || '/'
+  const target = splitAppHref(props.to ?? props.href)
+  return <Link {...props} ref={ref} aria-current={props['aria-current'] ??
+    (!target.hash && pathname === target.pathname ? 'page' : undefined)} />
+})
 
 export default Link

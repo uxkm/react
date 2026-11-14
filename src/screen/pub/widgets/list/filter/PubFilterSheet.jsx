@@ -1,6 +1,7 @@
 'use client'
 
-import { useEscapeKey } from '@/hooks/interaction/useEscapeKey' // Escape Key 훅
+import { useId } from 'react'
+import { useModalDialog } from '@/hooks/interaction/useModalDialog'
 
 /**
  * PubFilterSheet
@@ -22,23 +23,25 @@ export default function PubFilterSheet ({
   onPick,
   panelRef
 }) {
-  useEscapeKey(panelRef, onClose)
+  const titleId = useId()
+  const handleKeyDown = useModalDialog(panelRef, true)
   return (
-    <div
+    <dialog
+      ref={panelRef}
       className="wbs-bottom-sheet"
+      aria-labelledby={titleId}
+      onKeyDown={handleKeyDown}
+      onCancel={event => { event.preventDefault(); onClose() }}
     >
       <div className="wbs-bottom-sheet_backdrop" aria-hidden="true" onClick={onClose} />
       <div
-        ref={panelRef}
         className="wbs-bottom-sheet_panel"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="wbs-filter-sheet-title"
+        data-dialog-panel=""
         tabIndex={-1}
       >
         <header className="wbs-bottom-sheet_header">
           <div className="wbs-bottom-sheet_handle" aria-hidden="true" />
-          <h2 id="wbs-filter-sheet-title" className="wbs-bottom-sheet_title">{title}</h2>
+          <h2 data-dialog-title="" tabIndex={-1} id={titleId} className="wbs-bottom-sheet_title">{title}</h2>
           <button
             type="button"
             className="wbs-btn is-ghost wbs-bottom-sheet_close"
@@ -46,11 +49,12 @@ export default function PubFilterSheet ({
             onClick={onClose}
           >×</button>
         </header>
-        <ul className="wbs-bottom-sheet_list" role="listbox" aria-label={ariaLabel}>
-          <li role="option" aria-selected={!activeId ? 'true' : 'false'}>
+        <ul className="wbs-bottom-sheet_list" aria-label={ariaLabel}>
+          <li>
             <button
               type="button"
               className={classNames('wbs-bottom-sheet_item', { 'is-active': !activeId })}
+              aria-pressed={!activeId}
               onClick={() => onPick(null)}
             >
               <span>{allLabel}</span>
@@ -60,12 +64,11 @@ export default function PubFilterSheet ({
           {folders.map((folder) => (
             <li
               key={'filter-' + folder.id}
-              role="option"
-              aria-selected={activeId === folder.id ? 'true' : 'false'}
             >
               <button
                 type="button"
                 className={classNames('wbs-bottom-sheet_item', { 'is-active': activeId === folder.id })}
+                aria-pressed={activeId === folder.id}
                 onClick={() => onPick(folder.id)}
               >
                 <span>{labelOf(folder)}</span>
@@ -75,6 +78,6 @@ export default function PubFilterSheet ({
           ))}
         </ul>
       </div>
-    </div>
+    </dialog>
   )
 }

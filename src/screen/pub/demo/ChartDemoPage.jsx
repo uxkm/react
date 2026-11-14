@@ -306,6 +306,11 @@ useEffect(() => {
         })}
       >
         <div ref={columnRef} style={{ width: '100%', height: 320 }} />
+        <table className="chart-data-table">
+          <caption>월별 수강 신청</caption>
+          <thead><tr><th scope="col">항목</th><th scope="col">값 (건)</th></tr></thead>
+          <tbody>{columnData.map(row => <tr key={row.category}><th scope="row">{row.category}</th><td>{row.value}</td></tr>)}</tbody>
+        </table>
       </DemoBlock>
 
       <DemoBlock
@@ -373,6 +378,11 @@ useEffect(() => {
         })}
       >
         <div ref={lineRef} style={{ width: '100%', height: 320 }} />
+        <table className="chart-data-table">
+          <caption>월별 완료율</caption>
+          <thead><tr><th scope="col">항목</th><th scope="col">값 (%)</th></tr></thead>
+          <tbody>{lineData.map(row => <tr key={row.category}><th scope="row">{row.category}</th><td>{row.value}</td></tr>)}</tbody>
+        </table>
       </DemoBlock>
 
       <DemoBlock
@@ -423,6 +433,11 @@ useEffect(() => {
         })}
       >
         <div ref={pieRef} style={{ width: '100%', height: 360 }} />
+        <table className="chart-data-table">
+          <caption>교육방식별 비율</caption>
+          <thead><tr><th scope="col">항목</th><th scope="col">값 (%)</th></tr></thead>
+          <tbody>{pieData.map(row => <tr key={row.category}><th scope="row">{row.category}</th><td>{row.value}</td></tr>)}</tbody>
+        </table>
       </DemoBlock>
     </GuideLayout>
   )

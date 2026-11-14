@@ -327,7 +327,7 @@ export const carouselApiSections = [
   },
   {
     title: 'API · CarouselSlide',
-    description: '한 장입니다. 생략하면 children 을 자동으로 swiper-slide 로 감쌉니다.',
+    description: '한 장입니다. 생략하면 children 을 자동으로 swiper-slide 로 감쌉니다. 초점이 들어오면 자동재생을 멈추고 방향키는 내부 초점에만 적용합니다. 화면 밖 슬라이드는 inert로 제외하며 동작 줄이기 설정을 반영합니다.',
     tables: [{ columns, rows: slideProps }]
   },
   {

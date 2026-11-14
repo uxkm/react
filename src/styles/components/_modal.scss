@@ -61,6 +61,20 @@
 //   .is-stack-covered — 중첩 시 하위 레이어 (백드롭 숨김)
 
 .modal {
+  // 네이티브 dialog의 기본 박스·배경을 초기화하고 기존 내부 패널 디자인을 사용합니다.
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  overflow: auto;
+
+  &::backdrop { background: transparent; }
+
   position: fixed;
   inset: 0;
   z-index: calc(var(--modal-z-index) + var(--modal-stack-level, 0) * 10);
@@ -180,6 +194,7 @@
   &_body {
     flex: 1;
     min-height: 0;
+    overflow-y: auto;
     padding: var(--modal-body-padding-y) var(--modal-body-padding-x);
     font-size: var(--modal-body-font-size);
     line-height: 1.6;

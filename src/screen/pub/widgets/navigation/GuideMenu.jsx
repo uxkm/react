@@ -137,7 +137,7 @@ export function GuideMenu ({ className }) {
                   labelEnd
                   checked={allExpanded}
                   disabled={allGroupIds.length === 0}
-                  ariaLabel="하위 메뉴 모두 펼침"
+                  ariaLabel={allExpanded ? '하위 메뉴 모두 접기' : '하위 메뉴 모두 펼침'}
                   label={allExpanded ? '모두 접기' : '모두 펼침'}
                   onChange={(event) => setAllGroupsExpanded(event.target.checked)}
                 />
@@ -164,7 +164,7 @@ export function GuideMenu ({ className }) {
                 <div className="comp-guide_section" data-guide-section="components">
                   <p className="comp-guide_section-label">
                     <span>컴포넌트</span>
-                    <span className="comp-guide_count" aria-label={`하위 ${componentTotal}개`}>
+                    <span className="comp-guide_count" role="img" aria-label={`하위 ${componentTotal}개`}>
                       {componentTotal}
                     </span>
                   </p>
@@ -186,7 +186,7 @@ export function GuideMenu ({ className }) {
                         >
                           <span className="comp-guide_toggle-label">
                             <span>{group.label}</span>
-                            <span className="comp-guide_count" aria-label={`하위 ${count}개`}>
+                            <span className="comp-guide_count" role="img" aria-label={`하위 ${count}개`}>
                               {count}
                             </span>
                           </span>
@@ -217,7 +217,7 @@ export function GuideMenu ({ className }) {
                 {guideWidgetItems.length > 0 && <div className="comp-guide_section" data-guide-section="widgets">
                   <p className="comp-guide_section-label">
                     <span>위젯</span>
-                    <span className="comp-guide_count" aria-label={`하위 ${guideWidgetItems.length}개`}>{guideWidgetItems.length}</span>
+                    <span className="comp-guide_count" role="img" aria-label={`하위 ${guideWidgetItems.length}개`}>{guideWidgetItems.length}</span>
                   </p>
                   <ul className="comp-guide_section-list">
                     {guideWidgetItems.map((item) => {
@@ -254,7 +254,7 @@ export function GuideMenu ({ className }) {
                       >
                         <span className="comp-guide_toggle-label">
                           <span>{group.label}</span>
-                          <span className="comp-guide_count" aria-label={`하위 ${count}개`}>
+                          <span className="comp-guide_count" role="img" aria-label={`하위 ${count}개`}>
                             {count}
                           </span>
                         </span>

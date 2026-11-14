@@ -10,6 +10,7 @@ const columns = [
 ]
 
 const props = [
+  { name: 'headingLevel', type: '1 | 2 | 3 | 4 | 5 | 6', default: '3', description: '현재 페이지의 제목 구조에 맞춰 트리거의 제목 수준을 지정합니다.' },
   {
     name: 'items',
     type: 'AccordionItemData[]',

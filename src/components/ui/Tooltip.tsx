@@ -7,6 +7,9 @@
 
 import {
   useState, // 상태 훅
+  useId, // 설명 ID
+  useRef, // 트리거 참조
+  useLayoutEffect, // 실제 초점 대상에 설명 연결
   type CSSProperties, // CSSProperties 타입
   type FocusEvent, // FocusEvent 타입
   type HTMLAttributes, // HTMLAttributes 타입
@@ -14,6 +17,7 @@ import {
   type ReactNode // ReactNode 타입
 } from 'react' // React
 import { useAutoClose } from '@/hooks/interaction/useAutoClose' // Auto Close 훅
+import { useEscapeKey } from '@/hooks/interaction/useEscapeKey' // 툴팁 닫기
 import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 
 /** 툴팁 방향 */
@@ -69,6 +73,9 @@ export function Tooltip ({
   onBlur,
   ...rest
 }: TooltipProps) {
+  const id = useId()
+  const rootRef = useRef<HTMLSpanElement>(null)
+  const triggerRef = useRef<HTMLSpanElement>(null)
   const controlled = open !== undefined
   const [innerOpen, setInnerOpen] = useState(openOnLoad ?? defaultOpen)
   const [hovered, setHovered] = useState(false)
@@ -81,6 +88,20 @@ export function Tooltip ({
   }
 
   useAutoClose(shown, autoCloseDelay, () => setShown(false))
+  useEscapeKey(rootRef, () => setShown(false), shown)
+
+  useLayoutEffect(() => {
+    const container = triggerRef.current
+    if (!container) return
+    const target = container.querySelector<HTMLElement>('button, a[href], input, select, textarea, [tabindex]') ?? container
+    const original = target.getAttribute('aria-describedby')
+    target.setAttribute('aria-describedby', [original, id].filter(Boolean).join(' '))
+    if (target === container) container.tabIndex = 0
+    return () => {
+      if (original === null) target.removeAttribute('aria-describedby')
+      else target.setAttribute('aria-describedby', original)
+    }
+  }, [id, trigger, children])
 
   /** hover · focus 중 하나라도 있으면 열림 유지 */
   const syncPointerOpen = (nextHovered: boolean, nextFocused: boolean) => {
@@ -96,6 +117,8 @@ export function Tooltip ({
   return (
     <span
       {...rest}
+      role={rest.role ?? (rest['aria-label'] ? 'group' : undefined)}
+      ref={rootRef}
       className={classNames(
         'tooltip',
         shown && 'is-open',
@@ -125,8 +148,8 @@ export function Tooltip ({
         onBlur?.(event)
       }}
     >
-      <span className="tooltip_trigger">{trigger ?? children}</span>
-      <span className="tooltip_bubble" role="tooltip">
+      <span ref={triggerRef} className="tooltip_trigger">{trigger ?? children}</span>
+      <span id={id} className="tooltip_bubble" role="tooltip" aria-hidden={!shown && !className?.split(' ').includes('is-open')}>
         {arrow && <span className="tooltip_arrow" aria-hidden="true" />}
         {content}
       </span>

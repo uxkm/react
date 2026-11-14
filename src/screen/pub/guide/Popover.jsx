@@ -26,6 +26,7 @@ function BasicDemo () {
   return (
     <div className="popover_demo-stage">
       <Popover trigger="자세히" title="안내" content="추가 설명이 이 영역에 표시됩니다." />
+      <Popover trigger="제목 없는 안내" content="제목이 없으면 패널 전체로 초점이 이동합니다." />
     </div>
   )
 }

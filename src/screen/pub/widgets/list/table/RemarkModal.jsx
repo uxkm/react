@@ -1,6 +1,7 @@
 'use client'
 
-import { useEscapeKey } from '@/hooks/interaction/useEscapeKey' // Escape Key 훅
+import { useId } from 'react'
+import { useModalDialog } from '@/hooks/interaction/useModalDialog'
 
 /**
  * RemarkModal
@@ -17,24 +18,26 @@ export default function RemarkModal ({
   onClose,
   dialogRef
 }) {
-  useEscapeKey(dialogRef, onClose)
+  const titleId = useId()
+  const handleKeyDown = useModalDialog(dialogRef, true)
   return (
-    <div
+    <dialog
+      ref={dialogRef}
       className="remark-modal"
+      aria-labelledby={titleId}
+      onKeyDown={handleKeyDown}
+      onCancel={event => { event.preventDefault(); onClose() }}
     >
       <div className="remark-modal_backdrop" aria-hidden="true" onClick={onClose} />
       <div
-        ref={dialogRef}
         className="remark-modal_dialog"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="remark-modal-title"
+        data-dialog-panel=""
         tabIndex={-1}
       >
         <header className="remark-modal_header">
           <div>
             <p className="remark-modal_eyebrow">{historyLabel}</p>
-            <h2 id="remark-modal-title" className="remark-modal_title">
+            <h2 data-dialog-title="" tabIndex={-1} id={titleId} className="remark-modal_title">
               {itemName || detailLabel}
             </h2>
             {itemId && (
@@ -68,6 +71,6 @@ export default function RemarkModal ({
             : <div className="remark-modal_empty">{emptyLabel}</div>}
         </div>
       </div>
-    </div>
+    </dialog>
   )
 }

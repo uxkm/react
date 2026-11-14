@@ -33,7 +33,7 @@ const formatted = useMemo(() => filesize(bytes, { base: 2, standard: 'jedec' }),
     onChange={(e) => setBytes(Number(e.target.value) || 0)}
     aria-label="바이트"
   />
-  <pre className="lib-demo-pre">{bytes} bytes → {formatted}</pre>
+  <pre tabIndex={0} className="lib-demo-pre">{bytes} bytes → {formatted}</pre>
   <div className="demo-row">
     {presets.map((value) => (
       <button key={value} type="button" onClick={() => setBytes(value)}>
@@ -59,7 +59,7 @@ const formatted = useMemo(() => filesize(bytes, { base: 2, standard: 'jedec' }),
             onChange={(e) => setBytes(Number(e.target.value) || 0)}
             aria-label="바이트"
           />
-          <pre className="lib-demo-pre">{bytes} bytes → {formatted}</pre>
+          <pre tabIndex={0} className="lib-demo-pre">{bytes} bytes → {formatted}</pre>
           <div className="demo-row">
             {presets.map((value) => (
               <button

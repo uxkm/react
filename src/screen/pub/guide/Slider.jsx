@@ -409,7 +409,6 @@ const SECTIONS = [
             </label>
             <Slider
               id="slider-form-zoom"
-              label="현재 값"
               value={125}
               min={50}
               max={200}

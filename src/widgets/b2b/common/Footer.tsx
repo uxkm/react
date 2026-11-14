@@ -68,7 +68,7 @@ export default function Footer () {
                 color="default"
                 className="footer_family-go"
                 disabled={!familySite}
-                ariaLabel="선택한 패밀리사이트로 이동"
+                ariaLabel="GO: 선택한 패밀리사이트로 이동"
                 title="새 창 열림"
                 onClick={() => {
                   if (familySite) window.open(familySite, '_blank', 'noopener,noreferrer')
@@ -89,6 +89,7 @@ export default function Footer () {
                 width={item.width}
                 height={item.height}
                 alt={item.alt}
+                loading={item.image === 'cert-isms.png' ? 'eager' : 'lazy'}
               />
             </li>
           ))}

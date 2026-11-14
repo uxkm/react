@@ -1,5 +1,6 @@
 'use client'
 
+import { useId } from 'react' // 필드 인스턴스별 ID
 import { Button, FormActions, FormField, FormLayout, Input, Select, Textarea } from '@/comp' // comp
 import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
 import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
@@ -8,13 +9,14 @@ import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page 
 import { formLayoutApiSections } from '@/screen/pub/data/guide/formLayoutApiSections' // form Layout Api Sections
 
 function Fields () {
+  const id = useId()
   return (
     <>
-      <FormField label="이름" htmlFor="form-name" required hint="실명을 입력해 주세요.">
-        <Input id="form-name" placeholder="홍길동" required />
+      <FormField label="이름" htmlFor={`${id}-name`} required hint={<span id={`${id}-hint`}>실명을 입력해 주세요.</span>}>
+        <Input id={`${id}-name`} aria-describedby={`${id}-hint`} placeholder="홍길동" required />
       </FormField>
-      <FormField label="이메일" htmlFor="form-email">
-        <Input id="form-email" type="email" placeholder="name@example.com" />
+      <FormField label="이메일" htmlFor={`${id}-email`}>
+        <Input id={`${id}-email`} type="email" placeholder="name@example.com" />
       </FormField>
     </>
   )

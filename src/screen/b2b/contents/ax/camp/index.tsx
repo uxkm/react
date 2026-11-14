@@ -22,6 +22,7 @@ export default function B2bContentsAxCampPage () {
         skeleton={skeletonMode === 'manual' ? <CampSkeleton /> : undefined}
         className="page-container"
       >
+        <h1 className="visually-hidden">{pageTitle}</h1>
         <ComingSoon />
 
       </PageLoading>

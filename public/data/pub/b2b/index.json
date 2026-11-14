@@ -1,6 +1,11 @@
 {
   "folders": [
     {
+      "id": "common",
+      "name": "공통",
+      "file": "common.json"
+    },
+    {
       "id": "main",
       "name": "메인",
       "file": "main.json"
@@ -29,11 +34,6 @@
       "id": "company",
       "name": "회사소개",
       "file": "company.json"
-    },
-    {
-      "id": "common",
-      "name": "공통",
-      "file": "common.json"
     }
   ]
 }

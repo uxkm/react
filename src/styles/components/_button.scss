@@ -455,6 +455,12 @@
     @include btn-skin-ghost;
   }
 
+  &_outline {
+    color: var(--color-text);
+    background: transparent;
+    border-color: var(--color-border);
+  }
+
   &_outline.color_primary {
     @include btn-skin-outline;
   }

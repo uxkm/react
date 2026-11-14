@@ -20,11 +20,11 @@ const DEFAULT_COLUMNS = [
 /**
  * @param {{ columns?: ApiColumn[], rows: ApiRow[], codeColumn?: string }} props
  */
-function ApiTable ({ columns = DEFAULT_COLUMNS, rows, codeColumn = 'name' }) {
+function ApiTable ({ label, columns = DEFAULT_COLUMNS, rows, codeColumn = 'name' }) {
   if (!rows?.length) return null
 
   return (
-    <div className="guide-api_table-wrap" role="region" aria-label="API 표" tabIndex={0}>
+    <div className="guide-api_table-wrap" role="region" aria-label={label} tabIndex={0}>
       <table className="guide-api_table">
         <thead>
           <tr>
@@ -76,7 +76,7 @@ export function GuideApiDocs ({ sections, className }) {
             ? <p className="guide-api_desc">{section.description}</p>
             : null}
           {section.tables.map((table, tableIndex) => (
-            <ApiTable key={tableIndex} {...table} />
+            <ApiTable key={tableIndex} {...table} label={`${section.title} 표 ${tableIndex + 1}`} />
           ))}
         </section>
       ))}

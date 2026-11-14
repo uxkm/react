@@ -1,4 +1,18 @@
 .app-layout {
+  &_skip {
+    position: fixed;
+    z-index: 10000;
+    top: 8px;
+    left: 8px;
+    padding: 12px 20px;
+    border: 2px solid var(--color-accent);
+    border-radius: 4px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    transform: translateY(-180%);
+
+    &:focus { transform: none; }
+  }
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -209,3 +223,18 @@
     font-size: 12px;
   }
 }
+
+// 화면 제목 등 시각적으로 숨기되 보조기기에 제공하는 텍스트.
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+a.app-header_brand { display: inline-flex; align-items: center; min-height: 24px; }

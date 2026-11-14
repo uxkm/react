@@ -4,7 +4,7 @@
  * 전역 언어 전환 드롭다운.
  * 라벨은 한글 고정, 번역 중 진행률 표시. data-no-translate 로 번역 제외.
  */
-import { useId, useRef, useState } from 'react' // React
+import { useEffect, useId, useRef, useState } from 'react' // React
 import { Button } from '../ui/Button.tsx' // Button 컴포넌트
 import { useClickOutside } from '@/hooks/interaction/useClickOutside' // Click Outside 훅
 import { useLocale } from '@/hooks/i18n/useLocale' // Locale 훅
@@ -36,6 +36,14 @@ export function LanguageSwitcher ({
   /** 드롭다운 열림 */
   const [open, setOpen] = useState(false)
   const rootRef = useRef(null)
+  const edgeRef = useRef('first')
+  useEffect(() => {
+    if (!open) return
+    const items = rootRef.current?.querySelectorAll('[role="menuitemradio"]:not(:disabled)')
+    const selected = rootRef.current?.querySelector('[aria-checked="true"]:not(:disabled)')
+    const target = edgeRef.current === 'last' ? items?.[items.length - 1] : selected ?? items?.[0]
+    target?.focus()
+  }, [open])
 
   /** 바깥 클릭 시 메뉴 닫기 */
   useClickOutside(rootRef, () => setOpen(false), open)
@@ -47,6 +55,7 @@ export function LanguageSwitcher ({
   /** 언어 선택. 번역 중이거나 동일 언어면 무시 */
   const onSelect = (code) => {
     setOpen(false)
+    rootRef.current?.querySelector('.dropdown_trigger')?.focus()
     if ((localeBusy && code !== 'ko') || code === locale) return
     void setLocale(code).catch(() => {})
   }
@@ -75,8 +84,15 @@ export function LanguageSwitcher ({
         haspopup="menu"
         expanded={open}
         ariaLabel={showProgress ? `${current.label} 언어 선택 ${progressText}` : `${current.label} 언어 선택`}
-        aria-controls={menuId}
+        aria-controls={open ? menuId : undefined}
         onClick={() => setOpen((prev) => !prev)}
+        onKeyDown={(event) => {
+          if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+            event.preventDefault()
+            edgeRef.current = event.key === 'ArrowUp' ? 'last' : 'first'
+            setOpen(true)
+          }
+        }}
       >
         <span className="lang-switcher_label-row">
           <span className="lang-switcher_label-text">{current.label}</span>
@@ -93,6 +109,23 @@ export function LanguageSwitcher ({
           className="dropdown_menu"
           role="menu"
           aria-labelledby={triggerId}
+          onKeyDown={(event) => {
+            const items = Array.from(event.currentTarget.querySelectorAll('[role="menuitemradio"]:not(:disabled)'))
+            const index = items.indexOf(document.activeElement)
+            let next = index
+            if (event.key === 'ArrowDown') next = (index + 1) % items.length
+            else if (event.key === 'ArrowUp') next = (index - 1 + items.length) % items.length
+            else if (event.key === 'Home') next = 0
+            else if (event.key === 'End') next = items.length - 1
+            else if (event.key === 'Escape' || event.key === 'Tab') {
+              if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation() }
+              setOpen(false)
+              rootRef.current?.querySelector('.dropdown_trigger')?.focus()
+              return
+            } else return
+            event.preventDefault()
+            items[next]?.focus()
+          }}
         >
           {locales.map((item) => (
             <button
@@ -102,6 +135,7 @@ export function LanguageSwitcher ({
               aria-checked={locale === item.code}
               className={classNames('menu_link', locale === item.code && 'is-active')}
               disabled={localeBusy && item.code !== 'ko'}
+              tabIndex={-1}
               onClick={() => onSelect(item.code)}
             >
               {item.label}
