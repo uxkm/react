@@ -2,8 +2,8 @@
 
 import { useMediaQuery } from '@/hooks/layout/useMediaQuery' // Media Query 훅
 import { Carousel, CarouselSlide } from '@/comp/ui/Carousel' // UI 컴포넌트 · Carousel 컴포넌트
-import Card from '@/modules/b2b/cards/Card' // Card 컴포넌트
-import type { CardMediaProps, PromotionCardData } from '@/modules/b2b/cards/cardTypes' // 카드 · card Types
+import Card from '@/comp/ui/Card' // Card 컴포넌트
+import type { CardMediaProps, PromotionCardData } from '@/comp/ui/Card' // 카드 · card Types
 
 const promotionCard: PromotionCardData = {
   id: 'ax-assessment',

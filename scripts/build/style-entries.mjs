@@ -13,7 +13,8 @@ export function getStyleEntries () {
       const file = path.join(folder, entry.name)
       const relative = path.relative(root, file).split(path.sep).join('/')
       const owner = relative.match(/^src\/styles\/pages\/([^/]+)\//)?.[1] ||
-        relative.match(/^src\/(?:screen|widgets|modules)\/([^/]+)\//)?.[1]
+        relative.match(/^src\/(?:screen|widgets)\/([^/]+)\//)?.[1] ||
+        relative.match(/^src\/components\/modules\/([^/]+)\//)?.[1]
       if (owner && !['pub', 'error', 'common'].includes(owner) && owner !== b2b?.id) continue
       if (entry.isDirectory()) walk(file)
       else if (entry.name.endsWith('.scss') && !entry.name.startsWith('_')) entries.push(relative)

@@ -1,9 +1,11 @@
 # 소스 분류 규칙
 
 - 퍼블리싱 목록·가이드·데모·작업 전 안내 등 PUB 전용 구현은 `src/screen/pub/`에 모은다. 내부의 `layout/`, `widgets/`, `hooks/`, `lib/`, `data/`로 역할을 나눈다.
-- 최상위 `src/widgets/`, `src/modules/`, `src/hooks/`, `src/lib/`에 PUB 전용 `pub/` 폴더를 만들지 않는다.
+- 최상위 `src/widgets/`, `src/hooks/`, `src/lib/`에 PUB 전용 `pub/` 폴더를 만들지 않는다.
+- 최상위 `src/modules/`는 사용하지 않는다. 기능 모듈이 실제로 필요할 때만 `src/components/modules/` 안에 생성한다. 공통 모듈은 `common/`, B2B 전용 모듈은 `b2b/`로 구분하며 빈 작업 폴더는 미리 만들지 않는다.
 - 일반 페이지에서도 재사용하는 UI·레이아웃·훅·유틸리티는 공통 위치를 유지한다. 가이드나 데모에서 사용한다는 이유만으로 공통 기능을 PUB로 옮기지 않는다.
-- 프로젝트 디자인·업무에 종속된 구현은 `screen/b2b/`, `widgets/b2b/`, `modules/b2b/` 등 프로젝트 영역에 둔다.
+- 프로젝트 디자인·업무에 종속된 구현은 `screen/b2b/`, `widgets/b2b/`, `components/modules/b2b/` 등 프로젝트 영역에 둔다.
+- 프로젝트 위젯·모듈·미리보기는 현재 화면에서 실제 사용하는 구현만 유지한다. 작업 예정인 기능의 빈 파일·준비중 미리보기·메뉴를 미리 만들지 않고, 해당 화면을 진행할 때 추가한다.
 - Next.js 라우트, 정적 공개 자산, 스타일 진입점, 빌드 스크립트 등 위치에 제약이 있는 파일은 기존 구조를 따른다. 이동 시 실제 import와 문서·예제의 경로도 함께 수정한다.
 
 - PUB 화면의 전체 배치·헤더 구성은 `screen/pub/layout/`, 개별 UI는 `screen/pub/widgets/`의 역할별 하위 폴더에 둔다. 코드 예제 생성 등 UI가 아닌 함수는 `screen/pub/lib/`에 둔다.

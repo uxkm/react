@@ -13,6 +13,7 @@
 | `i18n/` | `@/lib/i18n/i18n` | 지원 언어·선택 저장·문서 언어 동기화 |
 | `i18n/` | `@/lib/i18n/pageTranslate` | 브라우저 DOM 문구 번역·캐시·진행률 처리 |
 | `layout/` | `@/lib/layout/breakpoints` | 반응형 브레이크포인트 |
+| `vendor/` | `@/lib/vendor/aos` | AOS CSS와 단일 초기화·재탐색 연동 |
 | `vendor/` | `@/lib/vendor/fullcalendar` | FullCalendar React 연동 |
 | `vendor/` | `@/lib/vendor/swiper` | Swiper React 컴포넌트·모듈·스타일 |
 | `vendor/` | `@/lib/vendor/lottie` | Lottie React·Web 연동 |

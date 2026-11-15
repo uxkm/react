@@ -6,7 +6,7 @@ Next.js 16 App Router와 React 19 기반 퍼블리싱 작업 환경입니다. B2
 
 - **화면 작업**: 단일 프로젝트 화면과 스켈레톤을 `src/screen/`에서 관리합니다.
 - **UI 가이드**: 공통 컴포넌트의 사용 예제·속성·디자인 토큰을 확인합니다.
-- **퍼블리시 목록**: 화면별 경로·작업 상태·비고를 JSON으로 관리합니다.
+- **퍼블리싱 목록**: 화면별 경로·작업 상태·비고를 JSON으로 관리합니다.
 - **검사 도구**: ESLint, TypeScript와 Playwright 기반 일반 회귀 검사를 사용합니다.
 
 | 경로 | 용도 |
@@ -15,7 +15,7 @@ Next.js 16 App Router와 React 19 기반 퍼블리싱 작업 환경입니다. B2
 | [접근성](/pub/guide/a11y) | KWCAG 2.2 검사 항목과 검수 흐름 |
 | [컴포넌트 예제](/pub/guide/button) | 공통 UI 가이드의 시작 화면 |
 | [라이브러리 데모](/pub/demo/libs) | 외부 라이브러리 사용 예제 |
-| [퍼블리시 목록](/pub) | 화면 목록·진행 상태 |
+| [퍼블리싱 목록](/pub) | 화면 목록·진행 상태 |
 | `/b2b` | 프로젝트 메인과 하위 화면 |
 
 ## 문서 안내
@@ -29,7 +29,7 @@ Next.js 16 App Router와 React 19 기반 퍼블리싱 작업 환경입니다. B2
 | [PUB 상세 구조](src/screen/pub/README.md) | 퍼블리싱 도구의 폴더와 파일별 역할, JSON·메뉴·화면 연결 |
 | [B2B 화면 구조](src/screen/b2b/README.md) | 업무 메뉴별 화면 폴더와 프로젝트 마크업 규칙 |
 | [공통 컴포넌트](src/components/README.md) | UI·레이아웃·슬롯 구성과 사용법 |
-| [B2B 카드 모듈](src/modules/b2b/cards/README.md) | 카드 유형·이미지·슬롯·위젯 조합 |
+| [공통 Card 유형](src/components/ui/card/README.md) | 카드 유형·이미지·슬롯·위젯 조합 |
 | [라이브러리 연동](src/lib/README.md) | 라우팅·언어·외부 라이브러리 래퍼 |
 
 ## 개발 환경
@@ -114,10 +114,7 @@ URL은 `src/app/`에서 정의하고, 실제 화면은 `src/screen/`에 둡니�
 │   │   └── shared/                # 공통 타입·계약
 │   ├── widgets/                   # 디자인·문구·데이터가 적용된 UI 조합
 │   │   ├── common/                # 프로젝트 간 재사용 위젯용 빈 작업 폴더
-│   │   └── b2b/                   # ProjectLayout·common·main·previews
-│   ├── modules/                   # 재사용 가능한 프로젝트 기능·구조
-│   │   ├── common/                # 공통 모듈용 빈 작업 폴더
-│   │   └── b2b/cards/             # B2B 카드 유형·미디어·타입 정의
+│   │   └── b2b/                   # ProjectLayout·common·main
 │   ├── hooks/                     # i18n·interaction·layout·react·scroll
 │   ├── lib/                       # i18n·layout·page·router·vendor 연동
 │   ├── utils/                     # dom·media·react·style 유틸리티
@@ -153,7 +150,7 @@ URL은 `src/app/`에서 정의하고, 실제 화면은 `src/screen/`에 둡니�
 | 가이드·데모 | `src/screen/pub/guide/`, `src/screen/pub/demo/`에서 예제를 관리합니다. |
 | 공통 컴포넌트 | `src/components/`에서 TSX 기반 UI를 작성하고 `@/comp`로 가져옵니다. |
 | 레이아웃 기반 | `src/components/layout/`에서 Header·Footer·Page와 레이아웃 슬롯을 관리합니다. |
-| 기능 모듈 | `src/modules/common/`, `src/modules/b2b/`에서 입력·상태·검증을 묶은 기능 영역을 관리합니다. |
+| 기능 모듈 | 필요할 때만 `src/components/modules/common/` 또는 `src/components/modules/b2b/`에 입력·상태·검증을 묶은 기능 영역을 만듭니다. 현재는 사용하지 않아 폴더를 두지 않습니다. |
 | PUB 전용 코드 | `src/screen/pub/` 안에 화면·위젯·모듈·훅·메뉴 처리 로직을 모읍니다. 공통 UI·레이아웃·페이지에서 재사용할 기능은 기존 공통 폴더에 둡니다. |
 | 생성물 | `src/generated/registry-*.js`는 스크립트로 생성하며 직접 편집하지 않습니다. |
 
@@ -224,9 +221,9 @@ URL은 `src/app/`에서 정의하고, 실제 화면은 `src/screen/`에 둡니�
 
 개별 UI의 옵션·예제는 `/pub/guide/{name}`과 [컴포넌트 README](src/components/README.md)를 확인합니다.
 
-### 4. `src/widgets/`와 `src/modules/` — 프로젝트 UI 조합
+### 4. `src/widgets/`와 공통 Card — 프로젝트 UI 조합
 
-현재 `widgets/common/`, `modules/common/`은 빈 작업 폴더입니다. B2B 고유 구현은 각각 `b2b/`에 둡니다.
+현재 `widgets/common/`은 빈 작업 폴더입니다. B2B 고유 위젯은 `widgets/b2b/`에 둡니다. 기능 모듈이 필요하면 `components/modules/` 안에 생성하며, 최상위 `src/modules/`나 미사용 모듈 폴더는 만들지 않습니다.
 
 | 폴더·파일 | 상세 역할 |
 | --- | --- |
@@ -238,12 +235,12 @@ URL은 `src/app/`에서 정의하고, 실제 화면은 `src/screen/`에 둡니�
 | `widgets/b2b/common/InquirySnackbar.tsx` | 기업교육 문의용 하단 안내입니다. 현재 메인에서 호출합니다. |
 | `widgets/b2b/common/ComingSoon.tsx` | 아직 준비 중인 기능의 안내 UI입니다. |
 | `widgets/b2b/main/` | 프로모션·상담·진단·인사이트·고객사례·문의·구독 카드의 문구·이미지·링크를 관리합니다. |
-| `widgets/b2b/previews/` | 위젯 단독 확인 화면입니다. 각 `index.tsx`가 `/b2b/common/...`으로 등록됩니다. |
-| `modules/b2b/cards/Card.tsx` | `type`에 따라 B2B 카드 유형을 선택하는 공개 입구입니다. |
-| `modules/b2b/cards/*Card.tsx` | Promotion·Image·Content·Course·QuickLink·Testimonial·Callout 유형의 재사용 마크업입니다. |
-| `modules/b2b/cards/CardBackground.tsx`, `cardTypes.ts` | 카드 배경 미디어와 데이터·옵션 타입을 관리합니다. |
+| `screen/pub/preview/b2b/` | 위젯 단독 확인 화면입니다. 각 `index.tsx`가 `/pub/preview/b2b/...`으로 등록됩니다. |
+| `components/ui/Card.tsx` | 기본 카드와 6개 데이터 기반 유형을 제공하는 공통 공개 입구입니다. |
+| `components/ui/card/*Card.tsx` | Promotion·Image·Content·QuickLink·Testimonial·Callout 유형의 재사용 마크업입니다. |
+| `components/ui/card/CardBackground.tsx`, `cardTypes.ts` | 카드 배경 미디어와 데이터·옵션 타입을 관리합니다. |
 
-메인 변경 흐름은 `화면 index → sections의 배치 → widgets의 콘텐츠 → modules의 카드 구조 → components의 공통 UI`입니다. 카드 상세 계약은 [카드 README](src/modules/b2b/cards/README.md)에 있습니다.
+메인 변경 흐름은 `화면 index → sections의 배치 → widgets의 콘텐츠 → components의 공통 Card 유형`입니다. 카드 상세 계약은 [카드 README](src/components/ui/card/README.md)에 있습니다.
 
 ### 5. `src/hooks/`, `src/lib/`, `src/utils/` — 동작과 연동
 
@@ -278,7 +275,7 @@ URL은 `src/app/`에서 정의하고, 실제 화면은 `src/screen/`에 둡니�
 | `layouts/` | `_app.scss`, `_page.scss`의 앱·본문 배치를 `_index.scss`로 묶습니다. |
 | `pages/b2b/index.scss` | B2B 공통·메인·카드 스타일과 화면 크기별 재배치를 연결합니다. |
 | `pages/b2b/common/` | 헤더·푸터·퀵메뉴·준비 중 안내·문의 스낵바 스타일입니다. |
-| `pages/b2b/main/_main.scss`, `pages/b2b/modules/_cards.scss` | 메인 배치와 B2B 카드 외형을 나누어 관리합니다. |
+| `pages/b2b/main/_main.scss` | 메인 섹션과 카드 내부 브랜드·소셜 그룹의 배치를 관리합니다. 카드·버튼·아바타·배지의 유형 스킨은 각 공통 컴포넌트 스타일에 둡니다. |
 | `pages/pub/`, `pages/pub/demo/`, `pages/error/` | 목록, 가이드·데모, 오류 화면 전용 스타일입니다. |
 | `css/` | 빌드한 CSS·압축 CSS가 생기는 출력 폴더입니다. 직접 수정하지 않습니다. |
 
@@ -331,7 +328,7 @@ URL은 `src/app/`에서 정의하고, 실제 화면은 `src/screen/`에 둡니�
 | B2B 페이지 본문 추가·변경 | `screen/b2b/{메뉴}/{화면}/index.tsx` → 필요 시 같은 폴더의 skeleton → 목록 JSON → Registry 갱신 |
 | 페이지의 로딩 형태 변경 | 화면의 `skeleton/indexSkeleton.tsx` → `config/skeleton.ts`의 manual 등록 → 실제 loading 상태 연결 |
 | 메인 섹션 순서·배치 변경 | `screen/b2b/main/index.tsx`, `sections/` → `styles/pages/b2b/main/_main.scss` |
-| 메인 카드 문구·링크·이미지 변경 | `widgets/b2b/main/`의 해당 위젯. 카드 공통 구조는 `modules/b2b/cards/` |
+| 메인 카드 문구·링크·이미지 변경 | `widgets/b2b/main/`의 해당 위젯. 카드 공통 구조는 `components/ui/card/` |
 | B2B 헤더·전체메뉴 변경 | `widgets/b2b/common/Header.tsx`, `FullMenu.tsx`, `menuData.ts` → `_header.scss` |
 | B2B 푸터 변경 | `widgets/b2b/common/Footer.tsx`, `footerData.ts` → `_footer.scss` |
 | 공통 UI 동작·스타일 변경 | `components/ui/{이름}.tsx` → `styles/components/_{이름}.scss` → 해당 PUB 가이드·API 설명 |
@@ -355,7 +352,7 @@ URL은 `src/app/`에서 정의하고, 실제 화면은 `src/screen/`에 둡니�
 | `/pub/guide/a11y` | 접근성 가이드 |
 | `/pub/guide/{name}` | 컴포넌트 가이드 |
 | `/pub/demo/{name}` | 라이브러리·패턴 데모 |
-| `/pub` | 퍼블리시 목록 |
+| `/pub` | 퍼블리싱 목록 |
 
 `device` 표시는 `B2B`이며 모든 화면은 `/b2b` 아래에 있습니다. `/b2b/main`처럼 프로젝트 경로 뒤에 `main`이 오는 주소는 프로젝트 루트로 이동합니다.
 
@@ -372,7 +369,7 @@ SCSS 원본은 `src/styles/`에 있습니다.
 
 화면에서는 SCSS를 import합니다. `build`는 `next.config.ts`의 Turbopack 별칭을 통해 압축 CSS로 연결합니다.
 
-## 퍼블리시 목록과 정적 자산
+## 퍼블리싱 목록과 정적 자산
 
 - 프로젝트 설정: `public/data/pub/index.json`
 - 화면 목록·상태·비고: `public/data/pub/b2b/`의 JSON
@@ -380,7 +377,7 @@ SCSS 원본은 `src/styles/`에 있습니다.
 - 폰트·이미지: `public/fonts/`, `public/images/`
 - 예시·샘플·데모용 이미지: `public/images/@dummy/`에 보관하고 `/images/@dummy/파일명`으로 참조합니다.
 
-퍼블리시 목록 JSON과 화면 파일 레지스트리는 별도로 관리합니다. 목록·메뉴 데이터는 브라우저에서 읽으며, 화면 추가 시 목록과 레지스트리에 필요한 내용을 각각 반영합니다.
+퍼블리싱 목록 JSON과 화면 파일 레지스트리는 별도로 관리합니다. 목록·메뉴 데이터는 브라우저에서 읽으며, 화면 추가 시 목록과 레지스트리에 필요한 내용을 각각 반영합니다.
 
 ## 페이지별 공통 영역 표시
 
@@ -491,11 +488,11 @@ B2B 페이지는 `페이지명/index.tsx` 구조로 작성합니다. 예를 들�
 
 프로젝트 화면은 전체메뉴 디자인의 `main`, `contents`, `service`, `insight`, `contact`, `company` 구조에 맞춘 TSX 60개로 관리합니다. 루트 `/b2b`는 `src/screen/b2b/main/index.tsx`를 사용하며, 예를 들어 AX 소개는 `/b2b/contents/ax/overview`, 기업교육문의는 `/b2b/contact/education`, 회사소개는 `/b2b/company/intro`입니다. 이전의 `corpeduc`, `about` 및 문의 화면에 사용하던 `insight` 경로는 새 분류로 변경했습니다.
 
-공통 위젯·레이어의 작업용 프리뷰는 `src/widgets/b2b/previews`에 분리합니다. Registry는 `src/widgets/b2b/previews`를 `/b2b/common/...` 프리뷰 경로로 자동 등록하며, 이 폴더의 생성·삭제도 개발 감시기에 반영됩니다. PUB는 이 프리뷰 컴포넌트를 import하지 않고 JSON의 경로만 표시합니다. 메인 구성 요소·견적 단계·문의 입력 영역은 부모 페이지의 섹션으로 관리하고, 외부 링크와 자동 메일 연계 항목은 정적 페이지로 만들지 않습니다. 외부 링크·메일 항목의 `excludeFromStats`는 퍼블리싱 진행률 집계에서 제외합니다.
+공통 위젯·레이어의 작업용 프리뷰는 `src/screen/pub/preview/b2b`에 분리합니다. Registry는 `src/screen/pub/preview/b2b`를 `/pub/preview/b2b/...` 프리뷰 경로로 자동 등록하며, 이 폴더의 생성·삭제도 개발 감시기에 반영됩니다. 가이드 좌측 위젯 메뉴에서 현재 메인에 사용 중인 공통 위젯·메인 섹션의 미리보기 링크만 제공합니다. 작업 예정인 위젯의 빈 미리보기 파일은 미리 만들지 않습니다. 퍼블리싱 목록에서는 미리보기 항목을 제외하고, 공통은 header·footer·allmenu·quickmenu·topbanner·snackbar의 소스 경로만 링크 없이 표시합니다. 목록에서 옮긴 항목의 작업 정보는 `public/data/pub/preview/b2b.json`에 보관합니다. 프로젝트 미리보기 진입점만 B2B UI를 재사용하고, 공통 가이드·목록은 프로젝트 화면 로더를 가져오지 않습니다. 메인 구성 요소·견적 단계·문의 입력 영역은 부모 페이지의 섹션으로 관리하고, 외부 링크와 자동 메일 연계 항목은 정적 페이지로 만들지 않습니다. 외부 링크·메일 항목의 `excludeFromStats`는 퍼블리싱 진행률 집계에서 제외합니다.
 
 프로젝트 PUB 목록은 `public/data/pub/b2b/{main,contents,service,insight,contact,company,common}.json`에 있습니다. 화면 ID·작업 정보·기획/디자인 링크·기존 비고를 대응 화면에 유지하고, 새 화면은 대기 상태로 등록했습니다. 메뉴 계층과 화면별 경로는 `src/screen/b2b/README.md`에 정리했습니다. 전체메뉴 이미지는 메뉴 구성 시안이므로 화면 본문은 퍼블리싱 작업용 골격이며, 실제 시안 마크업은 각 TSX 파일에서 구현합니다. `npm run test:project`로 전체메뉴 기준 60개 파일, 정적 라우트, PUB 내부 경로·섹션 앵커, 작업 정보 보존을 검사합니다.
 
-각 프로젝트 화면의 수동 스켈레톤은 해당 화면과 같은 폴더의 `skeleton/`에 둡니다. 예를 들어 `main/index.tsx`는 `main/skeleton/indexSkeleton.tsx`, `contents/ax/overview/index.tsx`는 `contents/ax/overview/skeleton/indexSkeleton.tsx`를 사용합니다. 이 파일들은 보조 컴포넌트이며 라우트로 등록하지 않습니다. `src/widgets/b2b/previews`는 로딩 처리 없이 프리뷰를 바로 표시하므로 `PageLoading`과 스켈레톤 파일·설정을 사용하지 않습니다.
+각 프로젝트 화면의 수동 스켈레톤은 해당 화면과 같은 폴더의 `skeleton/`에 둡니다. 예를 들어 `main/index.tsx`는 `main/skeleton/indexSkeleton.tsx`, `contents/ax/overview/index.tsx`는 `contents/ax/overview/skeleton/indexSkeleton.tsx`를 사용합니다. 이 파일들은 보조 컴포넌트이며 라우트로 등록하지 않습니다. `src/screen/pub/preview/b2b`는 로딩 처리 없이 프리뷰를 바로 표시하므로 `PageLoading`과 스켈레톤 파일·설정을 사용하지 않습니다.
 
 기본은 `auto` 모드입니다. 새 디자인이 확정되면 해당 스켈레톤 파일의 레이아웃을 수정하고 `src/config/skeleton.ts`에 해당 화면을 `manual`로 등록합니다. 각 화면은 `manual`일 때만 전용 스켈레톤을 전달하므로 자동 모드의 첫 방문 폴백에서도 전용 디자인을 사용하지 않습니다. 실제 표시는 `PageLoading`의 `loading` 상태에 따릅니다. 현재 작업용 화면의 `loading={false}`는 실제 데이터 로딩 상태가 생길 때 연결합니다.
 
@@ -512,16 +509,15 @@ npm run validate:project
 npm run test:project
 ```
 
-단일 프로젝트의 폴더는 `src/app/b2b`, `src/screen/b2b`, `src/widgets/b2b`, `src/modules/b2b`, `src/styles/pages/b2b`, `public/data/pub/b2b`, `public/assets/b2b`입니다. 작업용 빈 폴더는 그대로 유지하며, 없는 공통 위젯·모듈·이미지 폴더와 B2B 위젯·모듈·자산 폴더는 Registry 생성 시 자동으로 만듭니다.
+단일 프로젝트의 폴더는 `src/app/b2b`, `src/screen/b2b`, `src/widgets/b2b`, `src/styles/pages/b2b`, `public/data/pub/b2b`, `public/assets/b2b`입니다. 작업용 빈 폴더는 그대로 유지하며, 없는 공통 위젯·이미지 폴더와 B2B 위젯·자산 폴더는 Registry 생성 시 자동으로 만듭니다. 모듈 폴더는 자동 생성하지 않으며 실제 구현이 필요할 때 `src/components/modules/` 안에 추가합니다.
 
-공통 컴포넌트는 `src/components`, 공통 위젯·모듈은 각 `common/` 폴더에 둡니다. 프로젝트 추가·삭제 명령과 기기별 프로젝트 탭은 사용하지 않습니다.
+공통 컴포넌트는 `src/components`, 공통 위젯은 `src/widgets/common/`에 둡니다. 기능 모듈을 추가할 때는 `src/components/modules/common/`과 `b2b/`로 범위를 구분합니다. 프로젝트 추가·삭제 명령과 기기별 프로젝트 탭은 사용하지 않습니다.
 
 `public/data/pub/index.json`의 `b2b`에서 목록 이름·설명·표시 이름을 관리합니다. `id`와 `base`는 각각 `b2b`, `b2b/`로 고정합니다. `b2b.generated.json`과 `src/generated/b2b.js`에는 단일 프로젝트 메타데이터만 저장합니다.
 
 `src/app/b2b/page.jsx`, `layout.jsx`, `[...slug]/page.jsx`는 생성기가 관리합니다. 실제 UI는 `src/screen/b2b`에 작성하며 `main/index.tsx`를 메인으로 사용합니다. `dev`, `build`에서 라우트와 설정을 자동 생성·검사하고 개발 중에는 파일 변경을 감시합니다.
 
 PUB 구조와 공통 컴포넌트는 프로젝트에 관계없이 동일하게 유지합니다. `/pub`, `/pub/guide`, `/pub/guide/{name}`, `/pub/demo/{name}`을 제공하며, PUB는 프로젝트 화면·위젯·모듈·스타일·Registry를 가져오지 않습니다. `validate:project`가 직접·간접 의존성과 정적 배포 제약을 검사합니다. 프로젝트 스타일은 `src/styles/pages/b2b`, 이미지는 `public/assets/b2b`에서 관리합니다.
-
 
 정적 export의 동적 경로는 `generateStaticParams`로 열거하고 `dynamicParams = false`로 제한합니다. 서버의 `params`는 Promise이므로 `await`한 뒤 사용합니다. 서버에서 요청 시점의 `searchParams`를 읽으면 정적 export를 할 수 없으므로, 쿼리가 필요한 UI는 클라이언트에서 읽습니다. `useSearchParams`는 `Suspense`로 감쌉니다. Server Actions, 요청 시점의 cookies/headers, 런타임 API·동적 라우트는 사용하지 않습니다. 빌드 시 실행되는 Server Component와 Registry의 서버 렌더링은 유지합니다.
 
@@ -534,7 +530,8 @@ PUB 구조와 공통 컴포넌트는 프로젝트에 관계없이 동일하게 �
 | 생성 파일 | 생성 함수·스크립트 | 수정할 원본과 역할 |
 | --- | --- | --- |
 | `src/generated/b2b.js` | `scripts/generate/project.mjs` → `syncProject()` | `public/data/pub/index.json`의 `b2b`, `src/screen/b2b/` 존재 여부. 단일 B2B 메타데이터이며 화면 폴더가 없으면 `null`입니다. |
-| `src/generated/registry-b2b.js` | `scripts/generate/registry.mjs` → `buildProject()` | `src/screen/b2b/`, `src/widgets/b2b/previews/`. 화면 import와 `meta`를 등록합니다. |
+| `src/generated/registry-b2b.js` | `scripts/generate/registry.mjs` → `buildProject()` | `src/screen/b2b/`. 화면 import와 `meta`를 등록합니다. |
+| `src/generated/registry-preview-b2b.js` | `scripts/generate/registry.mjs` → `buildPubPages('preview/b2b')` | `src/screen/pub/preview/b2b/`. PUB 전용 미리보기 import와 `meta`를 등록합니다. |
 | `src/generated/registry-component.js` | `scripts/generate/registry.mjs` → `buildPubPages('guide')` | `src/screen/pub/guide/`. 공통 컴포넌트 가이드 import와 `meta`를 등록합니다. |
 | `src/generated/registry-demo.js` | `scripts/generate/registry.mjs` → `buildPubPages('demo')` | `src/screen/pub/demo/`. 데모 import와 `meta`를 등록합니다. |
 | `src/generated/registry-ids.js` | `scripts/generate/registry.mjs` | 위 화면들의 B2B 경로 배열 `b2bRoutes`, 가이드·데모 ID와 제목입니다. 화면 파일명, `pageTitle`, `routeId`를 원본에서 수정합니다. |
@@ -557,7 +554,7 @@ PUB 구조와 공통 컴포넌트는 프로젝트에 관계없이 동일하게 �
 | --- | --- |
 | `src/screen/pub/guide`, `src/screen/pub/demo` | 하위 JSX·TSX 화면 생성·삭제·이름 변경 시 Registry·정적 경로·메뉴 갱신 |
 | `src/app`, 프로젝트 화면 폴더 | 라우트·프로젝트 추가·삭제 감지 및 개발 서버 자동 재시작 |
-| `src/components`, `hooks`, `lib`, `widgets`, `modules` 등 | Next Fast Refresh로 코드 변경 반영 |
+| `src/components`, `hooks`, `lib`, `widgets` 등 | Next Fast Refresh로 코드 변경 반영 |
 | `src/styles`와 소스 폴더의 SCSS | 신규 진입점 자동 발견. UI 모드는 CSS 재컴파일 및 삭제된 CSS 산출물 정리 |
 | `public` 전체 | 이미지·폰트·동영상·아이콘·CSS·JSON 등의 생성·수정·삭제·이름 변경 후 브라우저 새로고침 |
 | 소스에 포함된 이미지·JSON 등 정적 에셋 | 브라우저 새로고침으로 변경 반영 |

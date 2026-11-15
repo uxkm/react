@@ -69,6 +69,13 @@ export function toIconCssSize (size: IconSize | number | string | undefined | nu
 
 /** 등록된 stroke SVG 아이콘 이름 → 도형. viewBox 0 0 24 24, stroke-width 2 */
 const paths = {
+  image: (
+    <>
+      <rect x="3" y="3" width="18" height="18" rx="2" />
+      <circle cx="8.5" cy="8.5" r="1.5" />
+      <path d="M21 15l-5-5L5 21" />
+    </>
+  ),
   plus: (
     <>
       <path d="M12 5v14M5 12h14" />
@@ -77,6 +84,14 @@ const paths = {
   download: (
     <>
       <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14" />
+    </>
+  ),
+  receipt: <path d="M8 16V3l1.5 1L11 3l1.5 1L14 3l1.5 1L17 3l1.5 1L20 3v15a3 3 0 0 1-6 0v-2H3v2a3 3 0 0 0 3 3h11" />,
+  'clipboard-check': <path d="M13 3H7a4 4 0 0 0-4 4v10a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4v-6M8 11l4 4L21 5" />,
+  'cloud-download': (
+    <>
+      <path d="M6 19a4 4 0 0 1-1-7.9A6 6 0 0 1 16.7 9a5 5 0 0 1 1.3 10H6Z" />
+      <path d="M12 10v6m-2-2 2 2 2-2" />
     </>
   ),
   trash: (
@@ -95,6 +110,8 @@ const paths = {
   'chevron-left': <path d="m15 6-6 6 6 6" />,
   'chevron-right': <path d="m9 6 6 6-6 6" />,
   'chevron-down': <path d="m6 9 6 6 6-6" />,
+  'caret-down': <path d="m6 9 6 6 6-6Z" fill="currentColor" stroke="none" />,
+  'chevron-up': <path d="m4 15 8-7 8 7" />,
   search: (
     <>
       <circle cx="11" cy="11" r="7" />
@@ -223,6 +240,9 @@ const paths = {
   heart: (
     <path d="M20.8 5a5.5 5.5 0 0 0-7.8 0L12 6l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.2A5.5 5.5 0 0 0 20.8 5Z" />
   ),
+  'heart-filled': (
+    <path fill="currentColor" d="M20.8 5a5.5 5.5 0 0 0-7.8 0L12 6l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.2A5.5 5.5 0 0 0 20.8 5Z" />
+  ),
   mail: (
     <>
       <rect x="3" y="5" width="18" height="14" rx="2" />
@@ -248,6 +268,7 @@ const paths = {
     </>
   ),
   'arrow-left': <path d="M19 12H5m7 7-7-7 7-7" />,
+  'arrow-right': <path d="M5 12h14m-7-7 7 7-7 7" />,
   layers: (
     <>
       <path d="M12 2 2 7l10 5 10-5-10-5Z" />

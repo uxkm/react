@@ -32,7 +32,7 @@ const props = [
     name: 'children · Tab · TabPanel',
     type: 'ReactNode',
     default: '—',
-    description: '메뉴는 tabs.map → Tab 반복을 권장합니다. Tab 에 label 을 주고 children 을 넣으면 탭별 패널 슬롯입니다(또는 panel prop · TabPanel). label 없이 Tab children 은 메뉴 커스텀입니다. 패널 슬롯이 하나도 없으면 남은 children 이 활성 공통 패널로 쓰입니다. Tabs.Tab · Tabs.Panel 별칭도 같습니다.'
+    description: '메뉴는 tabs.map → Tab 반복을 권장합니다. Tab 에 label 을 주고 children 을 넣으면 탭별 패널 슬롯입니다(또는 panel prop · TabPanel). 패널에 Tabs를 넣으면 이중 탭으로 구성할 수 있으며 각 그룹의 label·value·onChange를 별도로 지정합니다. label 없이 Tab children 은 메뉴 커스텀입니다. 패널 슬롯이 하나도 없으면 남은 children 이 활성 공통 패널로 쓰입니다. Tabs.Tab · Tabs.Panel 별칭도 같습니다.'
   },
   {
     name: 'value · defaultValue',
@@ -54,9 +54,9 @@ const props = [
   },
   {
     name: 'variant',
-    type: "'line' | 'card' | 'pill'",
+    type: "'line' | 'card' | 'pill' | 'keyword'",
     default: "'line'",
-    description: '스킨입니다. tabs_line · tabs_card · tabs_pill 이 붙습니다.'
+    description: '스킨입니다. tabs_line · tabs_card · tabs_pill · tabs_keyword가 붙습니다. keyword는 키워드 모양·선택 채움·가운데 정렬이며 기본 배치에서 줄바꿈합니다. Tab 패널 안에 다시 keyword Tabs를 넣으면 가운데 정렬 이중 키워드 탭이 됩니다.'
   },
   {
     name: 'size',
@@ -86,7 +86,7 @@ const props = [
     name: 'indicatorSlide',
     type: 'boolean',
     default: 'false',
-    description: 'true 이면 tabs_indicator-slide 와 tabs_indicator 가 붙고, 활성 탭을 따라 인디케이터가 이동합니다. line(밑줄·세로면 옆줄) · pill(배경)에 맞습니다.'
+    description: 'true 이면 tabs_indicator-slide 와 tabs_indicator 가 붙고, 활성 탭을 따라 인디케이터가 이동합니다. line(밑줄·세로면 옆줄) · pill·keyword(배경)에 맞습니다.'
   },
   {
     name: 'navFade',
@@ -218,16 +218,16 @@ const classes = [
     description: '패널 묶음과 본문 영역입니다.'
   },
   {
-    name: 'tabs_line · tabs_card · tabs_pill',
+    name: 'tabs_line · tabs_card · tabs_pill · tabs_keyword',
     type: 'class',
     default: '—',
-    description: '라인 · 카드 · 필 스킨입니다.'
+    description: '라인 · 카드 · 필 · 가운데 정렬 키워드 스킨입니다.'
   },
   {
     name: 'tabs_indicator-slide · tabs_indicator',
     type: 'class',
     default: '—',
-    description: '슬라이딩 인디케이터 모드와 이동 막대입니다. line · pill 스킨과 함께 씁니다.'
+    description: '슬라이딩 인디케이터 모드와 이동 막대입니다. line · pill · keyword 스킨과 함께 씁니다.'
   },
   {
     name: 'tabs_scroll-nav · tabs_scroll-viewport · tabs_nav',

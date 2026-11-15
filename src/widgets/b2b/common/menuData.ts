@@ -233,7 +233,7 @@ export const b2bMenu: B2bMenuData = {
       },
       {
         "label": "진단&맞춤추천",
-        "href": "/b2b/common/education-diagnosis"
+        "href": "/b2b/service/diagnosis"
       }
     ]
   },

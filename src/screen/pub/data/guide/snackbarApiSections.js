@@ -10,6 +10,9 @@ const columns = [
 ]
 
 const props = [
+  { name: 'reserveFooterSpace (PageSnackbar)', type: 'boolean', default: 'false', description: '표시 중 스낵바 높이와 화면 하단 간격만큼 푸터 아래 공간을 확보합니다. 크기 변경 시 다시 계산하고, 닫기·페이지 이동 시 제거합니다. 메인 문의 스낵바는 이 옵션을 사용합니다.' },
+  { name: 'variant', type: "'default' | 'promotion'", default: "'default'", description: 'promotion은 메인의 홍보 안내형 스낵바입니다. 기본적으로 round=true, showIcon=false, role=region을 사용하며 aria-label로 안내 이름을 지정합니다. PageSnackbar에서도 동일하게 사용합니다.' },
+  { name: 'action', type: 'ReactNode', default: '—', description: '문구 옆의 링크·버튼입니다. promotion 유형은 캡슐 모양과 그라데이션 배경을 제공합니다. 내부 Icon으로 아이콘을 지정할 수 있습니다.' },
   {
     name: 'openOnLoad',
     type: 'boolean',
@@ -38,13 +41,13 @@ const props = [
     name: 'round',
     type: 'boolean',
     default: 'false',
-    description: 'true 이면 알약(pill) 모양의 둥근 모서리로 표시합니다.'
+    description: 'true 이면 알약(pill) 모양의 둥근 모서리로 표시합니다. promotion의 기본값은 true입니다.'
   },
   {
     name: 'showIcon · icon',
     type: 'boolean · ReactNode',
     default: 'true · —',
-    description: '앞 아이콘 표시 여부와 사용자 정의 아이콘입니다. icon 이 없으면 색별 Icon(info · check-circle · warning · x-circle)을 씁니다.'
+    description: '앞 아이콘 표시 여부와 사용자 정의 아이콘입니다. icon 이 없으면 색별 Icon(info · check-circle · warning · x-circle)을 씁니다. promotion은 기본적으로 앞 아이콘을 숨깁니다.'
   },
   {
     name: 'closable',

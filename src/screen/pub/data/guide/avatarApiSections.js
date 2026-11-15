@@ -10,6 +10,8 @@ const columns = [
 ]
 
 const props = [
+  { name: 'variant', type: 'default | testimonial', default: 'default', description: 'testimonial은 고객사례용 80px 프로필·분홍 배경·기본 user 아이콘을 제공합니다. 이미지 실패 시 fallback으로 복구합니다.' },
+  { name: 'imageFit · imagePosition · priority', type: 'object-fit · object-position · boolean', default: 'cover · center · false', description: '프로필 이미지 맞춤·위치·우선 로딩을 Avatar에서 관리합니다.' },
   {
     name: 'src',
     type: 'string',

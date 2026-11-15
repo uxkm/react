@@ -60,33 +60,10 @@ export const indexLoaders = {
   'service/learning': () => import('@/screen/b2b/service/learning/index.tsx'),
   'service/platform/ai': () => import('@/screen/b2b/service/platform/ai/index.tsx'),
   'service/platform/consulting': () => import('@/screen/b2b/service/platform/consulting/index.tsx'),
-  'service/platform': () => import('@/screen/b2b/service/platform/index.tsx'),
-  'common/back-top': () => import('@/widgets/b2b/previews/back-top/index.tsx'),
-  'common/contact-us': () => import('@/widgets/b2b/previews/contact-us/index.tsx'),
-  'common/download': () => import('@/widgets/b2b/previews/download/index.tsx'),
-  'common/education-diagnosis': () => import('@/widgets/b2b/previews/education-diagnosis/index.tsx'),
-  'common/email-privacy': () => import('@/widgets/b2b/previews/email-privacy/index.tsx'),
-  'common/family-site': () => import('@/widgets/b2b/previews/family-site/index.tsx'),
-  'common/footer': () => import('@/widgets/b2b/previews/footer/index.tsx'),
-  'common/full-menu': () => import('@/widgets/b2b/previews/full-menu/index.tsx'),
-  'common/gnb': () => import('@/widgets/b2b/previews/gnb/index.tsx'),
-  'common': () => import('@/widgets/b2b/previews/index.tsx'),
-  'common/integrated-search': () => import('@/widgets/b2b/previews/integrated-search/index.tsx'),
-  'common/integrated-search-results': () => import('@/widgets/b2b/previews/integrated-search-results/index.tsx'),
-  'common/main-section': () => import('@/widgets/b2b/previews/main-section/index.tsx'),
-  'common/mega-menu': () => import('@/widgets/b2b/previews/mega-menu/index.tsx'),
-  'common/notice-detail': () => import('@/widgets/b2b/previews/notice-detail/index.tsx'),
-  'common/notice-list': () => import('@/widgets/b2b/previews/notice-list/index.tsx'),
-  'common/privacy': () => import('@/widgets/b2b/previews/privacy/index.tsx'),
-  'common/quick-links': () => import('@/widgets/b2b/previews/quick-links/index.tsx'),
-  'common/tab-navigation': () => import('@/widgets/b2b/previews/tab-navigation/index.tsx'),
-  'common/terms': () => import('@/widgets/b2b/previews/terms/index.tsx')
+  'service/platform': () => import('@/screen/b2b/service/platform/index.tsx')
 }
 export const indexMeta = {
-  'common/footer': {"banner":false,"header":false,"footer":false,"floating":false},
-  'common/full-menu': {"banner":false,"header":false,"footer":false,"floating":false},
-  'common/gnb': {"banner":false,"header":false,"footer":false,"floating":false},
-  'common/main-section': {"banner":false,"header":false,"footer":false,"floating":false}
+
 }
 export const screenLoaders = {
 

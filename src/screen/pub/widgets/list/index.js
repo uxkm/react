@@ -1,5 +1,5 @@
 /**
- * /pub 퍼블리시 목록(Index) 전용 위젯.
+ * /pub 퍼블리싱 목록(Index) 전용 위젯.
  * 화면은 `@/screen/pub/widgets/list` 로 import.
  */
 export { default as PubTabs } from './summary/PubTabs.jsx'

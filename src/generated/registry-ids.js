@@ -60,27 +60,7 @@ export const b2bRoutes = [
   "service/learning",
   "service/platform/ai",
   "service/platform/consulting",
-  "service/platform",
-  "common/back-top",
-  "common/contact-us",
-  "common/download",
-  "common/education-diagnosis",
-  "common/email-privacy",
-  "common/family-site",
-  "common/footer",
-  "common/full-menu",
-  "common/gnb",
-  "common",
-  "common/integrated-search",
-  "common/integrated-search-results",
-  "common/main-section",
-  "common/mega-menu",
-  "common/notice-detail",
-  "common/notice-list",
-  "common/privacy",
-  "common/quick-links",
-  "common/tab-navigation",
-  "common/terms"
+  "service/platform"
 ]
 export const componentNames = [
   "a11y",
@@ -166,6 +146,12 @@ export const demoNames = [
   "xss",
   "youtube"
 ]
+export const previewNames = [
+  "footer",
+  "full-menu",
+  "gnb",
+  "main-section"
+]
 export const routeTitles = {
   "/b2b/company/ceo": "CEO인사말",
   "/b2b/company/ethics/compliance": "준법경영",
@@ -226,26 +212,6 @@ export const routeTitles = {
   "/b2b/service/platform/ai": "AI 서비스",
   "/b2b/service/platform/consulting": "플랫폼 활용 컨설팅",
   "/b2b/service/platform": "러닝플랫폼",
-  "/b2b/common/back-top": "TOP 버튼",
-  "/b2b/common/contact-us": "Contact us",
-  "/b2b/common/download": "자료 다운로드 팝업",
-  "/b2b/common/education-diagnosis": "진단&맞춤추천",
-  "/b2b/common/email-privacy": "알기쉬운 개인정보처리방침",
-  "/b2b/common/family-site": "Family Site",
-  "/b2b/common/footer": "Footer",
-  "/b2b/common/full-menu": "전체메뉴",
-  "/b2b/common/gnb": "헤더",
-  "/b2b/common": "공통 위젯 프리뷰 목록",
-  "/b2b/common/integrated-search": "통합검색",
-  "/b2b/common/integrated-search-results": "통합검색 결과",
-  "/b2b/common/main-section": "메인 섹션 프리뷰",
-  "/b2b/common/mega-menu": "메가메뉴",
-  "/b2b/common/notice-detail": "공지사항 상세",
-  "/b2b/common/notice-list": "공지사항 목록",
-  "/b2b/common/privacy": "개인정보처리방침",
-  "/b2b/common/quick-links": "퀵링크",
-  "/b2b/common/tab-navigation": "하위 탭 네비게이션",
-  "/b2b/common/terms": "이용약관",
   "/pub/guide/a11y": "접근성 - 퍼블리싱가이드",
   "/pub/guide/accordion": "Accordion - 퍼블리싱가이드",
   "/pub/guide/affix": "Affix - 퍼블리싱가이드",
@@ -327,5 +293,9 @@ export const routeTitles = {
   "/pub/demo/xss": "xss - 퍼블리싱가이드",
   "/pub/demo/youtube": "YouTube - 퍼블리싱가이드",
   "/pub/guide": "소개 - 퍼블리싱가이드",
-  "/pub": "퍼블리시 목록"
+  "/pub": "퍼블리싱 목록",
+  "/pub/preview/b2b/footer": "Footer",
+  "/pub/preview/b2b/full-menu": "전체메뉴",
+  "/pub/preview/b2b/gnb": "헤더",
+  "/pub/preview/b2b/main-section": "메인 섹션 프리뷰"
 }

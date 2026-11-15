@@ -18,7 +18,8 @@ export function validateProject (base = root) {
   const errors = []
   const b2b = discoverProject(base)
   // 화면 외에 남아 있는 이전 프로젝트 전용 폴더도 검사합니다.
-  for (const folder of ['src/app', 'src/widgets', 'src/modules', 'src/styles/pages', 'public/assets', 'public/data/pub']) {
+  if (fs.existsSync(path.join(base, 'src/modules'))) errors.push('src/modules is not supported; create modules under src/components/modules only when needed')
+  for (const folder of ['src/app', 'src/widgets', 'src/components/modules', 'src/styles/pages', 'public/assets', 'public/data/pub']) {
     for (const legacy of ['web', 'mobile', 'project']) {
       if (fs.existsSync(path.join(base, folder, legacy))) errors.push(`Legacy project directory: ${folder}/${legacy}`)
     }
@@ -40,7 +41,9 @@ export function validateProject (base = root) {
   }
   const owner = (file) => {
     const rel = path.relative(base, file).split(path.sep).join('/')
-    const match = rel.match(/^src\/(?:screen|app|widgets|modules)\/([^/]+)\//) || rel.match(/^src\/styles\/pages\/([^/]+)\//)
+    // Project previews are isolated PUB entry points and may reuse their project's UI.
+    if (/^src\/(?:screen|app)\/pub\/preview\/b2b\//.test(rel)) return 'b2b'
+    const match = rel.match(/^src\/(?:screen|app|widgets)\/([^/]+)\//) || rel.match(/^src\/components\/modules\/([^/]+)\//) || rel.match(/^src\/styles\/pages\/([^/]+)\//)
     return match && !['pub', 'guide', 'demo', 'error', 'common'].includes(match[1]) ? match[1] : null
   }
   function resolveLocal (file, specifier) {
@@ -87,10 +90,10 @@ export function validateProject (base = root) {
     graph.set(file, dependencies)
     for (const dependency of dependencies) {
       const generatedOwner = path.basename(file).match(/^registry-(.+)\.js$/)?.[1]
-      const from = owner(file) || (generatedOwner && !['component', 'demo', 'ids'].includes(generatedOwner) ? generatedOwner : null)
+      const from = owner(file) || (generatedOwner === 'preview-b2b' ? 'b2b' : generatedOwner && !['component', 'demo', 'ids'].includes(generatedOwner) ? generatedOwner : null)
       const to = owner(dependency)
       const generated = path.relative(base, dependency).match(/^src[/\\]generated[/\\]registry-(.+?)(?:\.js)?$/)?.[1]
-      const projectTarget = to || (generated && !['component', 'demo', 'ids'].includes(generated) ? generated : null)
+      const projectTarget = to || (generated === 'preview-b2b' ? 'b2b' : generated && !['component', 'demo', 'ids'].includes(generated) ? generated : null)
       if (projectTarget && from !== projectTarget) errors.push(`${rel}: project dependency is forbidden: ${path.relative(base, dependency)}`)
     }
   }
@@ -102,7 +105,7 @@ export function validateProject (base = root) {
     if (owner(file)) { errors.push(`PUB depends on a project through ${path.relative(base, file)}`); return }
     for (const dependency of graph.get(file) || []) visitCore(dependency)
   }
-  for (const file of files.filter((file) => /src[/\\](?:screen[/\\]pub|app[/\\](?:pub|guide|demo))[/\\]/.test(file))) visitCore(file)
+  for (const file of files.filter((file) => /src[/\\](?:screen[/\\]pub|app[/\\](?:pub|guide|demo))[/\\]/.test(file) && !owner(file))) visitCore(file)
   if (errors.length) throw new Error([...new Set(errors)].join('\n'))
   return b2b
 }

@@ -11,3 +11,11 @@
 - leadership-ai.png: AI는 인류에게 위협일까, 기회일까?
 
 공식 목록의 썸네일을 사용했습니다. 각 위젯의 image prop 또는 slots.image로 교체할 수 있습니다.
+
+네이버 기업 사이트 카드 유형 가이드용 샘플 (2026-11-15 확인):
+
+- naver-story.jpg: [We the Navigators 스토리 썸네일](https://www.navercorp.com/main)의 공개 이미지
+- naver-service.png: https://www.navercorp.com/img/pc/main-service-visual.png
+- naver-tech.png: https://www.navercorp.com/img/pc/main-tech-visual.png
+
+위 이미지는 가이드용이며 예제 제목·설명은 프로젝트에서 작성한 샘플입니다.

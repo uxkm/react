@@ -1,8 +1,7 @@
 import { Button } from '@/comp/ui/Button' // Button 컴포넌트
-import { Icon } from '@/comp/ui/Icon' // Icon 컴포넌트
-import { Link } from '@/lib/router' // 클라이언트 링크
-import Card from '@/modules/b2b/cards/Card' // Card 컴포넌트
-import type { CardAppearanceProps } from '@/modules/b2b/cards/cardTypes' // Card Appearance Props 타입
+import { Tag } from '@/comp/ui/Tag'
+import Card from '@/comp/ui/Card' // Card 컴포넌트
+import type { CardAppearanceProps } from '@/comp/ui/Card' // Card Appearance Props 타입
 
 /** 멀캠ON 뉴스레터 구독과 공식 소셜 채널 안내 카드. */
 export default function MainNewsletterCalloutCard ({ shadow = false }: Readonly<CardAppearanceProps>) {
@@ -20,44 +19,44 @@ export default function MainNewsletterCalloutCard ({ shadow = false }: Readonly<
           <Button
             tag="a"
             href="https://bit.ly/HeyMate_subscribe"
-            variant="outline"
+            variant="soft-outline"
+            size="lg"
             color="default"
-            className="card_callout-subscribe"
             round
           >
             <span className="card_callout-brand" aria-hidden="true">
-              멀캠 <span>⏻N</span>
+              멀캠 <Tag variant="brand">⏻N</Tag>
             </span>
             <span className="visually-hidden">멀캠ON </span>구독하기
           </Button>
           <div className="card_callout-socials" aria-label="공식 소셜 채널">
-            <Link
-              to="https://blog.naver.com/multicampus_official"
-              className="card_callout-social card_callout-social_naver"
+            <Button
+              tag="a"
+              variant="social"
+              href="https://blog.naver.com/multicampus_official"
+              channel="naver"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="네이버 블로그"
-            >
-              <Icon name="naver" size={28} />
-            </Link>
-            <Link
-              to="https://www.youtube.com/multicampus_official"
-              className="card_callout-social card_callout-social_youtube"
+            />
+            <Button
+              tag="a"
+              variant="social"
+              href="https://www.youtube.com/multicampus_official"
+              channel="youtube"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="유튜브"
-            >
-              <Icon name="youtube" size={28} />
-            </Link>
-            <Link
-              to="https://www.linkedin.com/company/multicampus-korea/"
-              className="card_callout-social card_callout-social_linkedin"
+            />
+            <Button
+              tag="a"
+              variant="social"
+              href="https://www.linkedin.com/company/multicampus-korea/"
+              channel="linkedin"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="링크드인"
-            >
-              <Icon name="linkedin" size={28} />
-            </Link>
+            />
           </div>
         </>
       }

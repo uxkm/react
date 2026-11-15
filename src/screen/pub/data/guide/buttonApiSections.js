@@ -10,9 +10,13 @@ const columns = [
 ]
 
 const props = [
+  { name: 'arrowIcon', type: 'ReactNode', default: '<Icon name="arrow-right" size={20} />', description: 'arrow·arrow-pill의 원형 아이콘을 교체합니다. <Icon name="search" />처럼 지정하며 null 또는 false면 원형 영역을 숨깁니다.' },
+  { name: 'presentation', type: 'boolean', default: 'false', description: '시각 표현 전용 span. role·tabIndex·href·이벤트 핸들러를 제거하므로 링크 카드 안에서 중첩 인터랙션 없이 사용합니다.' },
+  { name: 'as · target · rel', type: 'ElementType · string · string', default: '—', description: 'as={Link}로 클라이언트 링크를 사용합니다. target="_blank"는 새 창 title과 noopener noreferrer를 기본 제공합니다.' },
+  { name: 'tone · channel', type: 'blue | lavender · naver | youtube | linkedin', default: 'blue · —', description: 'tone은 arrow-pill 색상, channel은 social 로고·색상입니다. 소셜 버튼에는 ariaLabel을 지정합니다.' },
   {
     name: 'variant',
-    type: "'filled' | 'outline' | 'ghost' | 'text' | 'select'",
+    type: "'filled' | 'outline' | 'ghost' | 'text' | 'select' | 'arrow' | 'arrow-pill' | 'gradient' | 'soft-outline' | 'social'",
     default: 'filled',
     description: '버튼 스킨. select는 셀렉트 박스형 트리거.'
   },
@@ -24,7 +28,7 @@ const props = [
   },
   {
     name: 'size',
-    type: "'sm' | 'md' | 'lg'",
+    type: "'sm' | 'md' | 'lg' | 'xl'",
     default: 'md',
     description: '크기. md는 크기 클래스 없음.'
   },

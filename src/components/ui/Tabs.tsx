@@ -72,8 +72,8 @@ export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChang
   /** 비제어 초기 활성 탭. 생략 시 첫 사용 가능 탭 */
   defaultValue?: TabValue
   tabs?: TabItem[]
-  /** line(기본) · card · pill → tabs_line · tabs_card · tabs_pill */
-  variant?: 'line' | 'card' | 'pill'
+  /** line(기본) · card · pill · keyword(가운데 정렬 키워드) */
+  variant?: 'line' | 'card' | 'pill' | 'keyword'
   size?: 'sm' | 'md' | 'lg'
   /** auto · equal(균등) · scroll(이전/다음 네비 스크롤) */
   layout?: 'auto' | 'equal' | 'scroll'
@@ -83,7 +83,7 @@ export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChang
   scrollable?: boolean
   /**
    * 슬라이딩 인디케이터(tabs_indicator-slide).
-   * line · pill 에서 활성 탭을 따라 이동하는 tabs_indicator 를 쓴다.
+   * line · pill · keyword 에서 활성 탭을 따라 이동하는 tabs_indicator 를 쓴다.
    */
   indicatorSlide?: boolean
   /**
@@ -382,7 +382,7 @@ export function Tabs ({
         const appearing = !indicatorReadyRef.current
         if (appearing) indicator.style.transition = 'none'
 
-        if (variant === 'pill') {
+        if (variant === 'pill' || variant === 'keyword') {
           indicator.style.width = `${tabRect.width}px`
           indicator.style.height = `${tabRect.height}px`
           indicator.style.transform = `translate3d(${left}px, ${top}px, 0)`
@@ -506,6 +506,7 @@ export function Tabs ({
     variant === 'line' && 'tabs_line',
     variant === 'card' && 'tabs_card',
     variant === 'pill' && 'tabs_pill',
+    variant === 'keyword' && 'tabs_keyword',
     vertical && 'tabs_vertical',
     size === 'sm' && 'tabs_sm',
     size === 'lg' && 'tabs_lg',

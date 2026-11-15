@@ -4,9 +4,10 @@
  * 아바타.
  * 이니셜·이미지·아이콘으로 사용자/엔티티를 표시한다. 상태 점·그룹을 지원한다.
  */
-import { useState, type HTMLAttributes, type ReactNode } from 'react' // React
+import { useState, type HTMLAttributes, type ReactNode, type CSSProperties } from 'react' // React
 import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { hasNodes } from '@/utils/react' // has Nodes
+import { Icon } from './Icon'
 
 /** 아바타 크기 */
 export type AvatarSize = 'sm' | 'md' | 'lg' | 'xl'
@@ -17,6 +18,10 @@ const VALID_SIZES = new Set(['sm', 'md', 'lg', 'xl'])
 
 /** 아바타가 받는 값 */
 export interface AvatarProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'color'> {
+  variant?: 'default' | 'testimonial'
+  imageFit?: CSSProperties['objectFit']
+  imagePosition?: CSSProperties['objectPosition']
+  priority?: boolean
   size?: AvatarSize
   color?: AvatarColor | ''
   square?: boolean
@@ -44,6 +49,10 @@ export interface AvatarGroupProps extends HTMLAttributes<HTMLDivElement> {
  * src 이미지 → 실패/없으면 icon · children · initials 순.
  */
 export function Avatar ({
+  variant = 'default',
+  imageFit = 'cover',
+  imagePosition = 'center',
+  priority = false,
   size = 'md',
   color = '',
   square = false,
@@ -66,7 +75,7 @@ export function Avatar ({
     ? icon
     : hasNodes(children)
       ? children
-      : (initials ?? label)
+      : (initials ?? label ?? (variant === 'testimonial' ? <Icon name="user" size={44} /> : null))
 
   const [previousSrc, setPreviousSrc] = useState(src)
   if (previousSrc !== src) {
@@ -79,6 +88,7 @@ export function Avatar ({
       {...rest}
       className={classNames(
         'avatar',
+        variant === 'testimonial' && 'avatar_testimonial',
         color && 'color_' + color,
         resolvedSize !== 'md' && 'avatar_' + resolvedSize,
         square && 'avatar_square',
@@ -89,9 +99,16 @@ export function Avatar ({
       {showImage
         ? (
           <img
+            ref={(node) => {
+              // 정적 HTML의 이미지가 hydration 전에 실패한 경우도 fallback으로 복구합니다.
+              if (node?.complete && node.currentSrc && node.naturalWidth === 0) setImageError(true)
+            }}
             className="avatar_image"
             src={src}
             alt={alt}
+            style={{ objectFit: imageFit, objectPosition: imagePosition }}
+            loading={priority ? 'eager' : undefined}
+            fetchPriority={priority ? 'high' : undefined}
             onError={() => setImageError(true)}
           />
           )

@@ -10,18 +10,20 @@ export default function InquirySnackbar () {
     <PageSnackbar
       className="inquiry-snackbar"
       regionClassName="inquiry-snackbar-region"
+      reserveFooterSpace
       role="region"
       aria-label="기업교육 문의 안내"
       openOnLoad
-      round
-      showIcon={false}
+      variant="promotion"
       closable
+      action={(
+        <Link className="inquiry-snackbar_action" to="/b2b/contact/education">
+          지금 바로 문의하기
+          <Icon name="chevron-right" size={16} />
+        </Link>
+      )}
     >
-      <span className="inquiry-snackbar_text">대기업의 <strong>96%</strong>가 함께하는 멀티캠퍼스 기업교육</span>
-      <Link className="inquiry-snackbar_action" to="/b2b/contact/education">
-        지금 바로 문의하기
-        <Icon name="chevron-right" size={16} />
-      </Link>
+      대기업의 <strong>96%</strong>가 함께하는 멀티캠퍼스 기업교육
     </PageSnackbar>
   )
 }

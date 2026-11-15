@@ -10,6 +10,7 @@ const columns = [
 ]
 
 const props = [
+  { name: 'avatarProps', type: 'AvatarProps', default: '—', description: '고객사례 프로필의 이미지·맞춤·로딩 설정. 크기·색·fallback은 Avatar testimonial 유형에서 관리합니다.' },
   {
     name: 'variant',
     type: "'default' | 'testimonial'",

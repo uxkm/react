@@ -45,16 +45,16 @@ export const footerLinks = [
   },
   {
     label: '이용약관',
-    href: '/b2b/common/terms'
+    href: ''
   },
   {
     label: '개인정보처리방침',
-    href: '/b2b/common/privacy',
+    href: '',
     strong: true
   },
   {
     label: '공지사항',
-    href: '/b2b/common/notice-list'
+    href: ''
   },
   {
     label: '찾아오시는 길(본사/멀티캠퍼스 선릉·세종대·역삼)',
@@ -70,7 +70,7 @@ export const footerLinks = [
   },
   {
     label: 'Contact us',
-    href: '/b2b/common/contact-us'
+    href: ''
   }
 ]
 

@@ -234,7 +234,7 @@ function filterFolders (folders, query, category) {
 /* ------------------------------------------------------------------ */
 
 export default function PubIndex () {
-  useSiteTitle({ page: '퍼블리시 목록' })
+  useSiteTitle({ page: '퍼블리싱 목록' })
 
   /* ---------- 상태 ---------- */
   const [loading, setLoading] = useState(true) // 설정과 목록을 불러오는 동안 표시

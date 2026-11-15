@@ -1,7 +1,7 @@
 import { Button } from '@/comp/ui/Button' // Button 컴포넌트
 import { Icon } from '@/comp/ui/Icon' // Icon 컴포넌트
-import Card from '@/modules/b2b/cards/Card' // Card 컴포넌트
-import type { CardAppearanceProps } from '@/modules/b2b/cards/cardTypes' // Card Appearance Props 타입
+import Card from '@/comp/ui/Card' // Card 컴포넌트
+import type { CardAppearanceProps } from '@/comp/ui/Card' // Card Appearance Props 타입
 
 /** 기업교육 문의와 간편 진단 안내 카드. */
 export default function MainInquiryCalloutCard ({ shadow = false }: Readonly<CardAppearanceProps>) {
@@ -18,7 +18,8 @@ export default function MainInquiryCalloutCard ({ shadow = false }: Readonly<Car
           <Button
             tag="a"
             href="/b2b/contact/education"
-            className="card_callout-primary"
+            variant="gradient"
+            size="xl"
             round
             iconAfter={<Icon name="chevron-right" size={20} />}
           >
@@ -26,8 +27,9 @@ export default function MainInquiryCalloutCard ({ shadow = false }: Readonly<Car
           </Button>
           <Button
             tag="a"
-            href="/b2b/common/education-diagnosis"
-            variant="outline"
+            href="/b2b/service/diagnosis"
+            variant="soft-outline"
+            size="xl"
             color="default"
             round
           >

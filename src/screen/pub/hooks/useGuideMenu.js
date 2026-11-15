@@ -26,6 +26,7 @@ const EMPTY = {
   a11y: { id: 'a11y', label: '접근성' },
   guideMenu: [],
   guideWidgetItems: [],
+  guidePreviewMenu: [],
   guideDemoMenu: []
 }
 

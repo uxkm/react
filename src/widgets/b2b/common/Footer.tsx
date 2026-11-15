@@ -107,6 +107,7 @@ export default function Footer () {
               />
             </Link>
             {footerLinks.map((item) => {
+              if (!item.href) return <span key={item.label} className={item.strong ? 'footer_privacy' : undefined}>{item.label}</span>
               const external = item.href.startsWith('https://')
 
               return (

@@ -4,8 +4,7 @@
  */
 import type { HTMLAttributes, ReactNode } from 'react' // React
 import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
-import { Icon } from './Icon' // Icon 컴포넌트
-import { Avatar } from './Avatar' // Avatar 컴포넌트
+import { Avatar, type AvatarProps } from './Avatar' // Avatar 컴포넌트
 
 const TrendIcon = () => (
   <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -19,6 +18,7 @@ export interface StatProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title' 
   variant?: 'default' | 'testimonial'
   /** 고객사례 Avatar에 표시할 내용. 생략하면 user 아이콘을 표시합니다. */
   avatar?: ReactNode
+  avatarProps?: Omit<AvatarProps, 'children'>
   /** 고객사례 선택 테두리 표시 여부. */
   selected?: boolean
   title?: ReactNode
@@ -48,6 +48,7 @@ export interface StatProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title' 
 export function Stat ({
   variant = 'default',
   avatar,
+  avatarProps,
   selected = false,
   title,
   value,
@@ -102,8 +103,8 @@ export function Stat ({
         </blockquote>
         <div className="stat_footer">
           <span className="stat_desc">{resolvedDescription}</span>
-          <Avatar className="stat_avatar" ariaHidden>
-            {avatar ?? <Icon name="user" size={44} />}
+          <Avatar variant="testimonial" ariaHidden {...avatarProps} className="stat_avatar">
+            {avatar}
           </Avatar>
         </div>
         {children}

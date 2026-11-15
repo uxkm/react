@@ -27,6 +27,38 @@ function ClickDemo () {
 
 const SECTIONS = [
   {
+    title: '카드 CTA · 소셜 유형',
+    description: '화살표·반투명 CTA·그라데이션·소셜 스킨은 Button에서 관리합니다. arrowIcon에 Icon을 전달해 원형 아이콘을 교체하고, iconBefore·iconAfter로 일반 버튼 아이콘을 지정합니다. 소셜 아이콘은 children으로 교체할 수 있습니다. 카드 전체가 링크일 때 내부 CTA는 presentation으로 표시해 중첩 링크와 추가 포커스를 만들지 않습니다.',
+    code: wrapPageExample(`<Button tag="a" href="#button" variant="arrow" arrowIcon={<Icon name="arrow-right" size={20} />}>자세히 보기</Button>
+<Button tag="a" href="#button" variant="arrow-pill" arrowIcon={<Icon name="external" size={20} />}>살펴보기</Button>
+<Button tag="a" href="#button" variant="arrow-pill" tone="lavender" arrowIcon={<Icon name="search" size={20} />}>진단시작하기</Button>
+<Button variant="gradient" size="xl" round iconAfter={<Icon name="arrow-right" />}>기업교육문의</Button>
+<Button variant="soft-outline" size="xl" round iconBefore={<Icon name="search" />}>간편진단 탐색하기</Button>
+<Button tag="a" href="#button" variant="social" channel="naver" ariaLabel="네이버 블로그"><Icon name="naver" size={28} /></Button>
+<Button tag="a" href="#button" variant="social" channel="youtube" ariaLabel="유튜브"><Icon name="youtube" size={28} /></Button>
+<Button tag="a" href="#button" variant="social" channel="linkedin" ariaLabel="링크드인"><Icon name="linkedin" size={28} /></Button>
+<Button presentation variant="arrow-pill" arrowIcon={<Icon name="chevron-right" size={20} />}>링크 카드 내부 표시</Button>`, { name: 'ButtonCtaExample', reactImports: [], compImports: ['Button', 'Icon'] }),
+    preview: (
+      <div className="demo-stack" data-button-cta-demo="">
+        <div className="demo-row" style={{ background: '#26394b', padding: 16, borderRadius: 12 }}>
+          <Button tag="a" href="#button" variant="arrow" arrowIcon={<Icon name="arrow-right" size={20} />}>자세히 보기</Button>
+          <Button tag="a" href="#button" variant="arrow-pill" arrowIcon={<Icon name="external" size={20} />}>살펴보기</Button>
+          <Button tag="a" href="#button" variant="arrow-pill" tone="lavender" arrowIcon={<Icon name="search" size={20} />}>진단시작하기</Button>
+        </div>
+        <div className="demo-row">
+          <Button variant="gradient" size="xl" round iconAfter={<Icon name="arrow-right" />}>기업교육문의</Button>
+          <Button variant="soft-outline" size="xl" round iconBefore={<Icon name="search" />}>간편진단 탐색하기</Button>
+        </div>
+        <div className="demo-row">
+          <Button tag="a" href="#button" variant="social" channel="naver" ariaLabel="네이버 블로그"><Icon name="naver" size={28} /></Button>
+          <Button tag="a" href="#button" variant="social" channel="youtube" ariaLabel="유튜브"><Icon name="youtube" size={28} /></Button>
+          <Button tag="a" href="#button" variant="social" channel="linkedin" ariaLabel="링크드인"><Icon name="linkedin" size={28} /></Button>
+          <Button presentation variant="arrow-pill" arrowIcon={<Icon name="chevron-right" size={20} />}>링크 카드 내부 표시</Button>
+        </div>
+      </div>
+    )
+  },
+  {
     title: '기본 유형',
     description: (
       <>

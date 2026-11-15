@@ -1,19 +1,17 @@
 'use client'
 
 import { useState } from 'react' // 상태 훅
-import { Avatar, Button, Card, CardBody, CardDeck, CardFooter, CardHeader, Link, Stat, Tag, TagGroup } from '@/comp' // comp
+import { Avatar, Button, Card, CardBody, CardDeck, CardFooter, CardHeader, Icon, Link, Stat, Tag, TagGroup } from '@/comp' // comp
 import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
 import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
 import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
 import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
 import { cardApiSections } from '@/screen/pub/data/guide/cardApiSections' // card Api Sections
+import { cardTypeExamples } from '@/screen/pub/data/guide/cardTypeExamples'
+import { cardCompositionExamples } from '@/screen/pub/data/guide/cardCompositionExamples'
 
 const MediaIcon = (
-  <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-    <rect x="3" y="3" width="18" height="18" rx="2" />
-    <circle cx="8.5" cy="8.5" r="1.5" />
-    <path d="M21 15l-5-5L5 21" />
-  </svg>
+  <Icon name="image" style={{ strokeWidth: 1.5 }} />
 )
 
 const DocIcon = (
@@ -505,8 +503,25 @@ export default function CardGuide () {
     <GuideLayout
       category="데이터 표시"
       title="Card"
-      description="콘텐츠를 그룹화하여 표시합니다. Header·Body·Footer·Deck과 스킨·크기·미디어를 조합합니다."
+      description="Header·Body·Footer·Deck으로 카드를 조합하고, 교육과정·프로모션·이미지·콘텐츠·바로가기·고객사례·안내·오버레이·뉴스·웹진·분할 소개 유형을 선택합니다."
     >
+      <section id="card-types" aria-labelledby="card-types-title">
+        <h2 id="card-types-title">카드 유형</h2>
+        <p>공통 <code>Card</code>에 <code>type</code>과 <code>card</code>를 전달합니다. 문구·링크·이미지는 사용하는 화면에서 지정합니다.</p>
+        {cardTypeExamples.map((example) => (
+          <DemoBlock key={example.type} title={example.title} description={example.description} code={example.code} fileName="CardTypeExample.jsx">
+            <div className={`demo-card-type demo-card-type_${example.type}`} data-card-type={example.type}>{example.preview}</div>
+          </DemoBlock>
+        ))}
+      </section>
+      <section id="card-composition" aria-labelledby="card-composition-title">
+        <h2 id="card-composition-title">조합 예제</h2>
+        {cardCompositionExamples.map(example => (
+          <DemoBlock key={example.id} title={example.title} description={example.description} code={example.code} fileName="CardCompositionExample.jsx">
+            <div className={`demo-card-composition demo-card-composition_${example.id}`} data-card-composition={example.id}>{example.preview}</div>
+          </DemoBlock>
+        ))}
+      </section>
       {SECTIONS.map((section) => (
         <DemoBlock
           key={section.title}

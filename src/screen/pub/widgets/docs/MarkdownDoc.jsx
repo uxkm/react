@@ -2,11 +2,12 @@
 
 /**
  * README 등 프로젝트 마크다운을 가이드 소개·문서용으로 렌더.
- * 의존성 없이 제목·문단·목록(ul/ol)·표·코드·인라인 서식만 처리한다.
+ * 제목·문단·목록·표·인라인 서식을 처리하고 코드 예제는 공통 포맷터로 표시한다.
  */
 import { Fragment } from 'react' // Fragment
 import { Link } from '@/lib/router' // 클라이언트 링크
 import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
+import { FormattedCodeBlock } from './FormattedCodeBlock'
 
 /** `**bold**` · `` `code` `` · `[label](href)` */
 function renderInline (text, keyPrefix = 'i') {
@@ -222,9 +223,7 @@ export function MarkdownDoc ({ source, className }) {
         }
         if (block.type === 'code') {
           return (
-            <pre key={key} className="guide-md_pre" tabIndex={0} data-lang={block.lang || undefined}>
-              <code>{block.value}</code>
-            </pre>
+            <FormattedCodeBlock key={key} code={block.value} language={block.lang} />
           )
         }
         if (block.type === 'table') {

@@ -18,9 +18,9 @@ import { hasNodes } from '@/utils/react' // has Nodes
 /** 태그 색 */
 export type TagColor = 'primary' | 'default' | 'success' | 'warning' | 'danger' | 'info' | 'muted'
 /** 태그 모양. filled 채움, outline 테두리, borderless 테두리 없음 */
-export type TagVariant = 'filled' | 'solid' | 'outline' | 'borderless'
+export type TagVariant = 'filled' | 'solid' | 'outline' | 'borderless' | 'category' | 'brand'
 
-const VALID_VARIANTS = new Set(['filled', 'solid', 'outline', 'borderless'])
+const VALID_VARIANTS = new Set(['filled', 'solid', 'outline', 'borderless', 'category', 'brand'])
 const VALID_SIZES = new Set(['sm', 'md', 'lg'])
 
 /** 태그가 받는 값. 닫기 버튼이 있으면 onClose */
@@ -105,6 +105,7 @@ export function Tag ({
 
   const tagClass = classNames(
     'tag',
+    (resolvedVariant === 'category' || resolvedVariant === 'brand') && 'tag_' + resolvedVariant,
     resolvedColor && 'color_' + resolvedColor,
     resolvedVariant !== 'filled' && 'tag_' + resolvedVariant,
     resolvedSize !== 'md' && 'tag_' + resolvedSize,

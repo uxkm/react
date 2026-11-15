@@ -450,24 +450,6 @@
     width: calc((100% - 28px) / 2);
   }
 
-  .main-section-preview_courses {
-    width: 100%;
-    max-width: 1000px;
-    margin-inline: auto;
-
-    h1 {
-      margin: 0 0 32px;
-      color: #30383e;
-      font-size: 32px;
-      font-weight: 700;
-    }
-  }
-
-  .main-section-preview_course-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 28px;
-  }
 }
 
 // 메인 수동 스켈레톤 — 캐러셀 자리만 실제 슬라이드 간격·크기로 맞춤
@@ -494,3 +476,29 @@
     border-radius: 24px;
   }
 }
+
+// AOS는 메인 본문의 section에만 적용합니다. 캐러셀의 내부 transform은 유지합니다.
+[data-main-reveal] > [data-aos='fade-up']:not(.aos-animate) {
+  transform: translate3d(0, 40px, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-main-reveal] > [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    pointer-events: auto !important;
+  }
+}
+
+@media print {
+  [data-main-reveal] > [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+// 메인 카드 안의 브랜드 문구·소셜 버튼 그룹 배치만 관리합니다.
+.card_callout-brand { display: inline-flex; align-items: center; gap: 5px; }
+.card_callout-socials { display: flex; align-items: center; gap: 16px; }

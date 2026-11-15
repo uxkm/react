@@ -193,12 +193,12 @@
     }
   }
 
-  a.footer_privacy {
+  .footer_privacy {
     color: #222;
     font-weight: 700;
   }
 
-  &_links a {
+  &_links :is(a, span.footer_privacy) {
     display: inline-flex;
     align-items: center;
     gap: 4px;

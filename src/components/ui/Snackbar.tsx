@@ -24,6 +24,9 @@ const ICON_NAME: Record<string, IconName> = {
 
 /** 짧은 알림이 받는 값 */
 export interface SnackbarProps extends HTMLAttributes<HTMLDivElement> {
+  variant?: 'default' | 'promotion'
+  /** 문구 옆에 표시할 링크·버튼. */
+  action?: ReactNode
   color?: SnackbarColor
   message?: ReactNode
   round?: boolean
@@ -48,10 +51,12 @@ export interface SnackbarProps extends HTMLAttributes<HTMLDivElement> {
  * color 종류, message 문구. open · onOpenChange 로 페이지에서 표시를 제어한다.
  */
 export function Snackbar ({
+  variant = 'default',
+  action,
   color = 'info',
   message,
-  round = false,
-  showIcon = true,
+  round = variant === 'promotion',
+  showIcon = variant !== 'promotion',
   icon,
   closable = false,
   open,
@@ -84,8 +89,8 @@ export function Snackbar ({
   return (
     <div
       {...rest}
-      className={classNames('snackbar', 'color_' + resolved, round && 'snackbar_round', className)}
-      role={role ?? (resolved === 'error' ? 'alert' : 'status')}
+      className={classNames('snackbar', variant === 'promotion' ? 'snackbar_promotion' : 'color_' + resolved, round && 'snackbar_round', className)}
+      role={role ?? (variant === 'promotion' ? 'region' : resolved === 'error' ? 'alert' : 'status')}
     >
       {showIcon && (
         <span className="snackbar_icon" aria-hidden="true">
@@ -94,7 +99,10 @@ export function Snackbar ({
             : <Icon name={defaultIconName} size="100%" />}
         </span>
       )}
-      <span className="snackbar_message">{hasNodes(children) ? children : message}</span>
+      <span className="snackbar_message">
+        <span className="snackbar_text">{hasNodes(children) ? children : message}</span>
+        {hasNodes(action) ? <span className="snackbar_action">{action}</span> : null}
+      </span>
       {closable && (
         <button
           type="button"

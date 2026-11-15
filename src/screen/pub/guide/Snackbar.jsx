@@ -9,6 +9,7 @@ import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide A
 import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
 import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
 import { snackbarApiSections } from '@/screen/pub/data/guide/snackbarApiSections' // snackbar Api Sections
+import { Link } from '@/lib/router'
 
 /** open · onOpenChange 로 표시를 제어하는 예시 */
 function ControlledDemo () {
@@ -53,11 +54,43 @@ function PageSnackbarDemo () {
 
 const SECTIONS = [
   {
+    title: '홍보 안내형 · 메인 문의 스낵바',
+    description: '메인에서 사용하는 promotion 유형입니다. 문구는 children, 링크·버튼은 action으로 지정합니다. Icon의 name을 바꿔 액션 아이콘을 교체할 수 있습니다. 하단 고정이 필요하면 Snackbar 대신 PageSnackbar를 사용하고 openOnLoad를 지정합니다.',
+    code: wrapPageExample(`<Snackbar
+  variant="promotion"
+  aria-label="기업교육 문의 안내"
+  closable
+  action={(
+    <Link to="/b2b/contact/education">
+      지금 바로 문의하기
+      <Icon name="chevron-right" size={16} />
+    </Link>
+  )}
+>
+  대기업의 <strong>96%</strong>가 함께하는 멀티캠퍼스 기업교육
+</Snackbar>`, { name: 'PromotionSnackbarExample', reactImports: [], compImports: ['Snackbar', 'Icon'], extraImports: ["import { Link } from '@/lib/router'"] }),
+    preview: (
+      <Snackbar
+        variant="promotion"
+        aria-label="기업교육 문의 안내"
+        closable
+        action={(
+          <Link to="/b2b/contact/education">
+            지금 바로 문의하기
+            <Icon name="chevron-right" size={16} />
+          </Link>
+        )}
+      >
+        대기업의 <strong>96%</strong>가 함께하는 멀티캠퍼스 기업교육
+      </Snackbar>
+    )
+  },
+  {
     title: '페이지 공통 호출 · 초점 순서',
     description: 'PageSnackbar는 호출 위치와 관계없이 레이아웃 마지막의 하단 중앙 영역에 표시합니다. 표시할 때 초점을 이동하지 않습니다. Tab은 기존 페이지 요소 다음에 스낵바 내부의 링크·버튼 순서로 이동합니다. 스낵바 안에서 닫으면 들어오기 전 요소로 초점을 복원합니다. 페이지 이동 시 정리되며, 한 페이지에는 하나만 호출합니다. 일반 상태 알림은 기본 status, 홍보 안내는 role="region"과 aria-label을 사용합니다.',
     code: `import { PageSnackbar } from '@/comp'
 
-<PageSnackbar openOnLoad message="저장되었습니다." closable />
+<PageSnackbar openOnLoad reserveFooterSpace message="저장되었습니다." closable />
 
 // 기업교육 문의 시안은 B2B 공통 위젯으로 호출합니다.
 import InquirySnackbar from '@/widgets/b2b/common/InquirySnackbar'

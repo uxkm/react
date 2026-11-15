@@ -70,6 +70,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  [data-aos],
   .fx-reveal,
   [data-fx] {
     opacity: 1 !important;

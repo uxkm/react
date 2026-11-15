@@ -11,6 +11,13 @@ const SAMPLE = '/images/icon/ico_avatar.svg'
 
 const SECTIONS = [
   {
+    title: '고객사례 유형',
+    description: 'variant="testimonial"이 80px 크기·배경색·기본 사용자 아이콘을 관리합니다. src 로드 실패 시 같은 fallback을 표시하며, imageFit·imagePosition으로 이미지를 맞춥니다.',
+    code: wrapPageExample(`<Avatar variant="testimonial" ariaHidden />
+<Avatar variant="testimonial" src="/images/icon/ico_avatar.svg" alt="교육 담당자" imageFit="cover" imagePosition="center" />`, { name: 'AvatarTestimonialExample', reactImports: [], compImports: ['Avatar'] }),
+    preview: <div className="demo-row" data-avatar-testimonial-demo=""><Avatar variant="testimonial" ariaHidden /><Avatar variant="testimonial" src={SAMPLE} alt="교육 담당자" /></div>
+  },
+  {
     title: '기본',
     description: (
       <>

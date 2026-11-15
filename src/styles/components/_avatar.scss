@@ -149,3 +149,7 @@
     @include status-dot-colors();
   }
 }
+
+// 고객사례 프로필의 크기·색·이미지 맞춤은 Avatar에서 관리합니다.
+.avatar.avatar_testimonial { --avatar-size: 80px; width: 80px; height: 80px; background: #f5dfe3; color: #946d73; }
+.avatar_testimonial > :not(.avatar_badge, .icon) { width: 100%; height: 100%; }

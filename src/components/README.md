@@ -36,14 +36,14 @@ src/components/
 ## 레이아웃과 기능 모듈 구분
 
 - `src/components/layout/`: 페이지의 헤더·푸터·본문 설정과 레이아웃 슬롯을 연결하는 공통 기반 컴포넌트입니다.
-- `src/widgets/b2b/`: GNB·Footer 등 프로젝트 전용 위젯을 구현합니다. `previews/`는 위젯을 개별 주소에서 확인하는 화면입니다.
-- `src/modules/common/`, `src/modules/b2b/`: 문의 폼·견적 단계처럼 입력·상태·검증을 묶은 기능 영역을 구현합니다.
+- `src/widgets/b2b/`: GNB·Footer 등 프로젝트 전용 위젯을 구현합니다. 위젯 미리보기는 `src/screen/pub/preview/b2b/`에서 관리합니다.
+- `src/components/modules/common/`, `src/components/modules/b2b/`(필요할 때 생성): 문의 폼·견적 단계처럼 입력·상태·검증을 묶은 기능 영역을 구현합니다.
 
 화면에서는 `import { Page, Header, Footer } from '@/comp'`로 레이아웃 컴포넌트를 사용합니다.
 
 ## PUB와 공통 코드 구분
 
-퍼블리싱 도구·가이드·데모 전용 코드는 `src/screen/pub/` 아래에 모읍니다. 최상위 `widgets/`, `modules/`, `hooks/`, `lib/`에 별도의 `pub/` 폴더를 만들지 않습니다.
+퍼블리싱 도구·가이드·데모 전용 코드는 `src/screen/pub/` 아래에 모읍니다. 최상위 `widgets/`, `hooks/`, `lib/`에 별도의 `pub/` 폴더를 만들지 않습니다.
 
 - `src/screen/pub/layout/`: `PubHeader`·`GuideLayout`·`DemoLayout`의 화면 배치와 헤더 구성
 - `src/screen/pub/widgets/`: 목록·메뉴·문서·미리보기·퍼블리싱 안내 UI
@@ -52,7 +52,7 @@ src/components/
 - `src/screen/pub/data/`: 가이드·API 설명 데이터
 - `src/screen/pub/guide/`, `src/screen/pub/demo/`, `src/screen/pub/index.jsx`: PUB 화면
 
-일반 페이지에서도 사용하는 UI·레이아웃·훅·유틸리티·라이브러리 연동은 공통 위치에 둡니다. 프로젝트 디자인·업무에 종속된 화면과 위젯은 `src/screen/b2b/`, `src/widgets/b2b/`, `src/modules/b2b/`에서 관리합니다.
+일반 페이지에서도 사용하는 UI·레이아웃·훅·유틸리티·라이브러리 연동은 공통 위치에 둡니다. 프로젝트 디자인·업무에 종속된 화면과 위젯은 `src/screen/b2b/`, `src/widgets/b2b/`, `src/components/modules/b2b/`에서 관리합니다.
 
 `PublishingPlaceholder`는 프로젝트 화면 경로에서 사용하더라도 실제 UI 구현 전 화면 정보를 보여 주는 퍼블리싱 작업 도구이므로 PUB 안에 둡니다.
 
@@ -204,7 +204,6 @@ import { Button, Floating, PageFloating } from '@/comp'
 
 공통 UI 64개 파일과 widget·layout의 검토 결과는 [컴포넌트별 검토 문서](../../public/data/pub/docs/a11y/component-review-2026-11-14.md)에 있습니다. 가이드 `/pub/guide/a11y`에서도 문서를 열 수 있습니다.
 
-
 ## 페이지 하단 스낵바
 
 어느 페이지에서든 `PageSnackbar`를 호출하면 공통 `AppLayout`의 마지막 슬롯에 하단 중앙으로 표시합니다. 페이지 이동 시 정리되며, 한 페이지에는 하나만 호출합니다. 본문 안에 직접 배치하는 `Snackbar`도 계속 사용할 수 있습니다.
@@ -223,3 +222,23 @@ B2B 문의 디자인은 `@/widgets/b2b/common/InquirySnackbar`에 있습니다. 
 WCAG가 스낵바를 반드시 처음/마지막에 놓도록 정한 것은 아닙니다. 이 프로젝트에서는 하단의 보조 안내라는 의미에 맞춰 마지막 순서를 선택했습니다. 일반 상태 알림은 기본 `status`, 오류는 `alert`를 사용합니다. 현재 문의 홍보는 상태 변화가 아니므로 `role="region" aria-label="기업교육 문의 안내"`를 사용하며 자동으로 읽도록 강제하지 않습니다.
 
 근거: [WCAG 2.4.3 초점 순서](https://www.w3.org/WAI/WCAG22/Understanding/focus-order.html), [WCAG 4.1.3 상태 메시지](https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html).
+
+## Card 유형
+
+`Card`는 기존 Header·Body·Footer 조합과 `type`·`card` 데이터 기반 유형을 함께 제공합니다. 지원 유형은 `course`, `promotion`, `image`, `content`, `quick-link`, `testimonial`, `callout`, `overlay`, `news`, `feature`, `webzine`이며, 가이드의 컴포넌트 → Card에서 실행 예제·사용 코드·API를 제공합니다. 과정형은 Tag·Progress·Button 등을 슬롯으로 조합합니다. 구현과 이미지·슬롯 계약은 [Card 유형](ui/card/README.md)을 참고하세요. B2B 위젯은 콘텐츠 데이터만 보유하고 공통 Card를 호출합니다.
+
+카드 내부 CTA와 안내·소셜 버튼의 스킨은 Button, 프로필의 크기·색·fallback은 Avatar, 콘텐츠·브랜드 배지는 Tag에서 관리합니다. Card·Stat과 프로젝트 위젯에는 해당 요소의 배치와 데이터만 둡니다.
+
+최상위 `src/modules/`는 제거했습니다. 현재 모듈 구현이 없으므로 `components/modules/`도 만들지 않으며, 실제 기능 모듈을 구현할 때만 생성합니다.
+
+## Tabs 이중 탭
+
+상위 `Tab`의 패널 안에 다시 `Tabs`를 배치합니다. 각 그룹에 구체적인 `label`과 독립적인 `value`·`onChange`를 지정합니다. 하위 선택값을 상위 항목별로 관리하면 대분류 전환 후에도 선택을 유지할 수 있습니다. 그룹별 탭·패널 ID는 자동으로 구분됩니다. 방향키·Home·End는 현재 목록 안에서 이동하며 Tab·Shift+Tab으로 상위 탭·패널·하위 탭을 오갑니다.
+
+스킨·배치 스타일은 각 Tabs의 직접 하위 파트에만 적용됩니다. 상위 card와 하위 pill 등 서로 다른 variant·size·layout·indicatorSlide를 조합할 수 있습니다. 동작 예제와 정렬된 코드는 `/pub/guide/tabs`의 ‘이중 탭 · 탭 안의 탭’에 있습니다.
+
+### 키워드 탭
+
+`<Tabs variant="keyword" label="관심 키워드">`는 메뉴를 가운데 정렬하고, 선택된 키워드의 채움을 제공합니다. 기본 배치는 여러 줄에서도 각 줄을 가운데 정렬합니다. `layout="scroll"` 또는 `scrollable`이면 한 줄 스크롤을 사용하며 넘치지 않을 때 가운데 정렬합니다. 선택 상태는 기존 `aria-selected`로 전달합니다.
+
+패널 안에 다시 `variant="keyword"`인 Tabs를 넣으면 상·하위 메뉴가 각각 가운데 정렬되는 이중 키워드 탭이 됩니다. 각 그룹의 label과 선택값은 별도로 지정합니다. 단일·이중 예제와 복사 가능한 코드는 `/pub/guide/tabs`의 ‘키워드 탭 · 단일’·‘키워드 탭 · 이중’에서 확인합니다.

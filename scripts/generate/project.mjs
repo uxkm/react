@@ -41,8 +41,8 @@ export function syncProject () {
   const b2b = discoverProject()
   const output = 'public/data/pub/b2b.generated.json'
   // 빈 폴더는 유지하고, 새 체크아웃에 없는 작업 폴더만 생성합니다.
-  const folders = ['src/screen/pub/widgets', 'src/screen/pub/layout', 'src/screen/pub/hooks', 'src/screen/pub/lib', 'src/widgets/common', 'src/modules/common', 'public/images/pages', 'public/images/common', 'public/images/@dummy', 'public/images/icon', 'public/images/lottie']
-  if (b2b) folders.push('src/widgets/b2b', 'src/modules/b2b', 'public/assets/b2b')
+  const folders = ['src/screen/pub/widgets', 'src/screen/pub/layout', 'src/screen/pub/hooks', 'src/screen/pub/lib', 'src/widgets/common', 'public/images/pages', 'public/images/common', 'public/images/@dummy', 'public/images/icon', 'public/images/lottie']
+  if (b2b) folders.push('src/widgets/b2b', 'public/assets/b2b')
   for (const folder of folders) fs.mkdirSync(path.join(root, folder), { recursive: true })
   // A PUB-only checkout must not retain route shells importing removed loaders.
   if (!b2b) {

@@ -549,12 +549,29 @@
     line-height: inherit;
   }
 
+  &_icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    line-height: 1;
+
+    > .icon {
+      display: block;
+    }
+  }
+
   &_spinner {
     @include square-size(var(--btn-spinner-size));
-    border: var(--btn-spinner-border) solid currentColor;
-    border-right-color: transparent;
-    border-radius: 50%;
+    display: inline-flex;
+    flex-shrink: 0;
     animation: btn_spin var(--btn-spinner-duration) linear infinite;
+
+    > .icon {
+      width: 100%;
+      height: 100%;
+      stroke-width: var(--btn-spinner-border);
+    }
   }
 
   // -----------------------------------------------------------------------------
@@ -712,3 +729,36 @@
     transform: rotate(360deg);
   }
 }
+
+// 데이터 카드 등에서 재사용하는 CTA·소셜 유형. 카드에는 배치만 둡니다.
+.btn.btn_xl { min-height: 56px; padding: 12px 32px; font-size: 18px; line-height: 28px; }
+.btn.btn_arrow, .btn.btn_arrow-pill, .btn.btn_social { display: inline-flex; }
+.btn.btn_arrow {
+  padding: 0; gap: 16px; border: 0; background: transparent; color: #fff;
+  font-size: 16px; font-weight: 600; line-height: 24px; border-radius: 50px;
+}
+.btn_arrow-circle {
+  display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: 50%; background: rgb(255 255 255 / 75%); color: #6f798c;
+}
+.btn.btn_arrow-pill {
+  gap: 12px; padding: 4px 4px 4px 20px; border: 0; border-radius: 50px;
+  background: rgb(94 144 184 / 42%); color: #fff; font-size: 15px; line-height: 24px;
+  &.btn_tone-lavender { background: rgb(134 111 176 / 38%); }
+}
+.btn.btn_gradient, .btn.btn_gradient:hover:not(:disabled):not(.is-disabled):not(.is-loading) {
+  border: 0; background: linear-gradient(105deg, #7856df, #ed8290 80%, #f29b83); color: #fff; filter: none;
+}
+.btn.btn_soft-outline {
+  border-color: #d9d9d9; background: transparent; color: #30383e;
+  &.btn_lg { min-height: 56px; padding: 8px 20px; font-size: 18px; line-height: 28px; }
+  .btn_label { display: inline-flex; align-items: center; gap: 5px; }
+}
+.btn.btn_social {
+  width: 40px; height: 40px; padding: 0; border: 0; border-radius: 50%; background: transparent;
+  &.btn_social-naver { color: #03c75a; }
+  &.btn_social-youtube { color: #ef3041; }
+  &.btn_social-linkedin { color: #0a66c2; }
+  &:hover:not(.is-disabled) { background: rgb(0 0 0 / 4%); }
+}
+.btn.btn_presentation { cursor: inherit; }

@@ -70,29 +70,6 @@
           "filePath": "@/screen/b2b/contents/mandatory/estimate/index.tsx",
           "priority": 1,
           "excludeFromStats": true
-        },
-        {
-          "name": "진단&맞춤추천",
-          "type": "Layer",
-          "id": "education-diagnosis",
-          "pageUrl": "/common/education-diagnosis",
-          "filePath": "@/widgets/b2b/previews/education-diagnosis/index.tsx",
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [
-            {
-              "date": "",
-              "author": "IA",
-              "text": "메인 카드그리드와 퀵링크에서 진입. 진단 문항 → 개인정보 동의 → 추천 결과"
-            }
-          ],
-          "priority": 2
         }
       ]
     },
@@ -168,75 +145,6 @@
               "text": "개인정보 수집·이용 동의 안내"
             }
           ]
-        }
-      ]
-    },
-    {
-      "id": "contact/diagnosis",
-      "name": "간편 진단·맞춤교육 추천",
-      "depth3": [
-        {
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [
-            {
-              "date": "",
-              "author": "IA",
-              "text": "교육 대상·교육 규모·기업 목표·선호 교육방식에 따른 시나리오별 질문"
-            }
-          ],
-          "name": "진단 문항",
-          "type": "Section",
-          "id": "education-diagnosis-01",
-          "pageUrl": "/common/education-diagnosis",
-          "filePath": "@/widgets/b2b/previews/education-diagnosis/index.tsx",
-          "priority": 2
-        },
-        {
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [],
-          "name": "진단 개인정보 입력·동의",
-          "type": "Section",
-          "id": "education-diagnosis-02",
-          "pageUrl": "/common/education-diagnosis",
-          "filePath": "@/widgets/b2b/previews/education-diagnosis/index.tsx",
-          "priority": 2
-        },
-        {
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [
-            {
-              "date": "",
-              "author": "IA",
-              "text": "추천 과정 페이지와 교육문의 진입 연결"
-            }
-          ],
-          "name": "진단 추천 결과",
-          "type": "Section",
-          "id": "education-diagnosis-03",
-          "pageUrl": "/common/education-diagnosis",
-          "filePath": "@/widgets/b2b/previews/education-diagnosis/index.tsx",
-          "priority": 2
         }
       ]
     },

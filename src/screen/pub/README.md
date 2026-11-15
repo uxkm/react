@@ -7,6 +7,7 @@
 ```text
 src/screen/pub/
 ├── index.jsx                         # /pub 목록 화면과 상태·데이터 연결
+├── preview/b2b/                      # /pub/preview/b2b 프로젝트 위젯·모듈 미리보기
 ├── guide/                            # /pub/guide 소개·컴포넌트·접근성 화면
 ├── demo/                             # /pub/demo 라이브러리·패턴 예제
 ├── layout/                           # 목록·가이드·데모의 전체 배치
@@ -217,8 +218,8 @@ guide/ 또는 demo/ 화면 파일
 
 ## 추가·수정할 때의 규칙
 
-1. 공통 UI의 실제 동작은 `src/components/`, B2B 디자인·업무는 `screen/b2b/`·`widgets/b2b/`·`modules/b2b/`에서 수정합니다. PUB는 프로젝트 화면·위젯·모듈·스타일·화면 Registry를 import하지 않습니다. 목록에는 JSON의 경로를 표시합니다.
-2. PUB 전용 구현은 이 폴더의 역할별 하위 폴더에 둡니다. 최상위 `src/widgets`·`modules`·`hooks`·`lib`에 별도 `pub/` 폴더를 만들지 않습니다. 일반 페이지에서 재사용하는 코드는 공통 위치를 사용합니다.
+1. 공통 UI의 실제 동작은 `src/components/`, B2B 디자인·업무는 `screen/b2b/`·`widgets/b2b/`·`components/modules/b2b/`에서 수정합니다. PUB는 프로젝트 화면·위젯·모듈·스타일·화면 Registry를 import하지 않습니다. 목록에는 JSON의 경로를 표시합니다.
+2. PUB 전용 구현은 이 폴더의 역할별 하위 폴더에 둡니다. 최상위 `src/widgets`·`hooks`·`lib`에 별도 `pub/` 폴더를 만들지 않습니다. 일반 페이지에서 재사용하는 코드는 공통 위치를 사용합니다.
 3. 가이드·데모 화면에는 `GuideLayout` 또는 `DemoLayout`을 사용합니다. 예제 블록은 `DemoBlock`, API 설명은 `GuideApiDocs`로 조합합니다.
 4. 하위 화면은 재귀 등록됩니다. 예: `guide/forms/Input.tsx` → `/pub/guide/forms/input`. 하위 `index.tsx`는 폴더 주소를 사용합니다. `routeId`로 경로, `guideLabel`로 메뉴 이름을 지정할 수 있습니다.
 5. `skeleton`, `widgets`, `modules`, `shared`, `data`, 밑줄로 시작하는 보조 폴더·파일은 가이드·데모 라우트에서 제외됩니다. 화면 내부 보조 구현을 별도 파일로 뺄 때 이 규칙을 따릅니다.
@@ -239,3 +240,11 @@ export default function ExampleGuide () {
   )
 }
 ```
+
+프로젝트 위젯·모듈 미리보기는 `preview/b2b/`에서 관리하며, 링크는 가이드 좌측 위젯 메뉴에서 제공합니다. 목록의 공통 항목은 header·footer·allmenu·quickmenu·topbanner·snackbar 소스 경로만 링크 없이 표시합니다. 프로젝트 UI 의존은 `screen/pub/preview/b2b/`와 `app/pub/preview/b2b/` 진입점에만 허용합니다.
+
+## 코드보기 정렬
+
+모든 `DemoBlock`의 코드보기·복사는 `screen/pub/lib/formatExampleCode.js`의 공통 정렬을 사용합니다. 문서의 코드 블록도 같은 포맷터를 사용합니다. JSX 속성은 줄별로 분리하고, 긴 객체·중첩 요소는 2칸 들여쓰기·80자 기준으로 정리합니다. 문자열·URL의 내용은 보존하며 설명용 불완전 코드나 지원하지 않는 언어는 원문을 유지합니다.
+
+Prettier standalone과 필요한 언어 플러그인을 표시 시점에 불러옵니다. 코드보기는 정렬이 끝난 코드만 표시하고 같은 문자열을 복사합니다. 카드 예제 JSX 소스도 같은 정렬 규칙을 적용합니다.

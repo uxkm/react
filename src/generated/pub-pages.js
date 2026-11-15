@@ -324,5 +324,23 @@ export const pubPages = {
       "id": "youtube",
       "label": "youtube"
     }
+  ],
+  "preview": [
+    {
+      "id": "footer",
+      "label": "Footer"
+    },
+    {
+      "id": "full-menu",
+      "label": "전체메뉴"
+    },
+    {
+      "id": "gnb",
+      "label": "헤더"
+    },
+    {
+      "id": "main-section",
+      "label": "메인 섹션 프리뷰"
+    }
   ]
 }

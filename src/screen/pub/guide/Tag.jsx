@@ -102,6 +102,13 @@ function CheckableDemo () {
 
 const SECTIONS = [
   {
+    title: '콘텐츠 분류 · 브랜드 유형',
+    description: '카드 안의 분류 배지와 구독 브랜드 배지는 Tag 유형으로 관리합니다. category는 분류 테두리, brand는 둥근 채움 배지입니다.',
+    code: wrapPageExample(`<Tag variant="category">HR 트렌드</Tag>
+<Tag variant="brand">ON</Tag>`, { name: 'TagCategoryExample', reactImports: [], compImports: ['Tag'] }),
+    preview: <div className="demo-row" data-tag-category-demo=""><Tag variant="category">HR 트렌드</Tag><Tag variant="brand">ON</Tag></div>
+  },
+  {
     title: '기본 (Filled)',
     description: '연한 배경의 기본 태그입니다.',
     code: wrapPageExample(`<Tag color="default" label="Default" />

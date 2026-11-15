@@ -5,7 +5,6 @@
 @use './common/quick-menu';
 @use './main/main';
 @use './common/inquiry-snackbar';
-@use './modules/cards';
 
 // PC 디자인 기준: 좁은 창에서는 문서 전체를 가로로 스크롤합니다.
 // Page className="p-content" (위젯 프리뷰는 project-content 병행)
@@ -66,7 +65,6 @@ body:has(.app-layout_main.p-content, .app-layout_main.project-content) {
   .main-cases .carousel .swiper .swiper-slide { width: min(84vw, 440px); height: 600px !important; }
   .card.card_callout { padding: 28px 20px; }
   .main.main-section-preview { padding-inline: 16px; }
-  .main-section-preview_course-grid { grid-template-columns: 1fr; }
   .full-menu_surface { padding: 0 12px 20px; }
   .full-menu-content-preview { padding: 12px; }
   .full-menu-content_education, .full-menu-content_company, .full-menu-content_services,

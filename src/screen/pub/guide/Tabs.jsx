@@ -24,6 +24,8 @@ import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide A
 import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
 import { pageExampleCode, pageExampleReturn } from '@/screen/pub/lib/pageExampleCode' // 라이브러리/유틸 · page Example Code
 import { tabsApiSections } from '@/screen/pub/data/guide/tabsApiSections' // tabs Api Sections
+import NestedTabsDemo, { nestedTabsCode } from '@/screen/pub/data/guide/nestedTabsExample'
+import { KeywordTabsDemo, NestedKeywordTabsDemo, keywordTabsCode, nestedKeywordTabsCode } from '@/screen/pub/data/guide/keywordTabsExamples'
 
 const BASIC_TABS = [
   { value: 'overview', label: '개요' },
@@ -471,11 +473,29 @@ const SECTIONS = [
     preview: <ControlledTabs />
   },
   {
+    title: '키워드 탭 · 단일',
+    description: 'variant="keyword"는 가운데 정렬한 키워드 모양의 탭입니다. 선택한 키워드를 채움으로 표시하고, 좁은 화면에서는 여러 줄로 가운데 정렬합니다. 방향키·Home·End로 선택하고 연결된 패널을 표시합니다.',
+    code: keywordTabsCode,
+    preview: <div data-tabs-keyword-demo="single"><KeywordTabsDemo /></div>
+  },
+  {
+    title: '키워드 탭 · 이중',
+    description: '상위·하위 모두 키워드 탭을 사용하며 각 메뉴를 가운데 정렬합니다. 대분류마다 하위 선택을 따로 유지하고, label과 탭·패널 연결도 그룹별로 구분합니다.',
+    code: nestedKeywordTabsCode,
+    preview: <div data-tabs-keyword-demo="nested"><NestedKeywordTabsDemo /></div>
+  },
+  {
+    title: '이중 탭 · 탭 안의 탭',
+    description: '상위 Tab의 패널 안에 Tabs를 중첩합니다. 상위는 card, 하위는 pill 스킨을 사용하며 그룹마다 선택 상태와 label을 지정합니다. 상위 탭을 바꿨다가 돌아와도 각 하위 탭의 선택을 유지합니다. 방향키·Home·End는 현재 탭 목록 안에서 동작하고 Tab으로 하위 탭에 진입합니다.',
+    code: nestedTabsCode,
+    preview: <div data-tabs-nested-demo><NestedTabsDemo /></div>
+  },
+  {
     title: '변형(variant)',
     description: (
       <>
-        <code>variant</code>는 <code>line</code>(기본) · <code>card</code> · <code>pill</code>입니다.
-        각각 <code>tabs_line</code> · <code>tabs_card</code> · <code>tabs_pill</code>이 붙습니다.
+        <code>variant</code>는 <code>line</code>(기본) · <code>card</code> · <code>pill</code> · <code>keyword</code>입니다.
+        각각 <code>tabs_line</code> · <code>tabs_card</code> · <code>tabs_pill</code> · <code>tabs_keyword</code>가 붙습니다.
       </>
     ),
     code: [
@@ -1218,7 +1238,7 @@ export default function TabsGuide () {
     <GuideLayout
       category="네비게이션"
       title="Tabs"
-      description="탭 전환. 메뉴는 데이터 map으로 Tab을 돌리고, 패널은 label+children · panel prop · TabPanel 슬롯으로 탭별 내용을 제어합니다. line · card · pill · indicatorSlide · navFade · navSelect · scroll을 지원합니다."
+      description="탭 전환. 메뉴는 데이터 map으로 Tab을 돌리고, 패널은 label+children · panel prop · TabPanel 슬롯으로 탭별 내용을 제어합니다. line · card · pill · keyword · 이중 탭 · indicatorSlide · navFade · navSelect · scroll을 지원합니다."
     >
       {SECTIONS.map((section) => (
         <DemoBlock

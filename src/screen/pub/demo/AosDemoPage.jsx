@@ -1,8 +1,7 @@
 'use client'
 
 import { useEffect } from 'react' // effect 훅
-import AOS from 'aos' // AOS 컴포넌트
-import 'aos/dist/aos.css' // aos 패키지
+import { loadAos } from '@/lib/vendor/aos' // AOS 공통 초기화
 import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
 import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
 import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
@@ -17,8 +16,12 @@ const cards = [
 /** aos 스크롤 등장 데모 */
 export default function AosDemoPage () {
   useEffect(() => {
-    AOS.init({ duration: 700, once: false, easing: 'ease-out-cubic', disable: () => window.matchMedia('(prefers-reduced-motion: reduce)').matches })
-    AOS.refresh()
+    let cancelled = false
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
+    loadAos().then(AOS => {
+      if (!cancelled) AOS.refreshHard()
+    }).catch(() => {})
+    return () => { cancelled = true }
   }, [])
 
   return (

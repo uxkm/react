@@ -79,14 +79,15 @@ function DetectBootstrap ({ children }) {
 }
 
 /**
- * B2B 라우트는 자체 레이아웃에서 AppLayout을 구성한다.
+ * B2B 페이지와 PUB 프로젝트 미리보기는 자체 AppLayout을 구성한다.
  * 나머지 경로는 공통 AppLayout의 슬롯·기본 헤더를 사용한다.
  */
 function AppShell ({ children }) {
   const pathname = usePathname() || ''
   const isB2b = pathname === '/b2b' || pathname.startsWith('/b2b/')
+  const isProjectPreview = pathname === '/pub/preview/b2b' || pathname.startsWith('/pub/preview/b2b/')
 
-  return isB2b ? children : <AppLayout>{children}</AppLayout>
+  return isB2b || isProjectPreview ? children : <AppLayout>{children}</AppLayout>
 }
 
 /** 앱 레이아웃으로 화면을 감싼다 */

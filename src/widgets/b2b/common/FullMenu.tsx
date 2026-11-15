@@ -192,14 +192,14 @@ export function FullMenu ({
             <B2bLogo />
           </div>
           <div className="header_actions">
-            <Link
+            <button
+              type="button"
               className="icon-button"
-              to="/b2b/common/integrated-search"
               aria-label="통합검색"
-              onClick={onClose}
+              disabled
             >
               <Icon name="search" size={24} />
-            </Link>
+            </button>
             <button
               className="icon-button"
               type="button"

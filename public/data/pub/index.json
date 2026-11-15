@@ -1,7 +1,7 @@
 {
   "b2b": {
     "name": "퍼블리싱 목록",
-    "description": "퍼블리시 목록과 컴포넌트 가이드",
+    "description": "퍼블리싱 목록과 컴포넌트 가이드",
     "id": "b2b",
     "label": "B2B",
     "base": "b2b/",

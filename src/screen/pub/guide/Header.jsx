@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react' // 상태 훅
-import { AppHeader, AppHeaderLink } from '@/comp' // comp
+import { AppHeader } from '@/comp' // comp
 import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
 import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
 import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
@@ -21,8 +21,6 @@ export default function HeaderGuide () {
       category="위젯"
       title="Header"
       description="페이지별 헤더 배경과 스크롤 후 배경을 props·CSS 변수·SCSS로 지정합니다. 스크롤 색상 기본값은 --color-header-bg-scrolled 입니다."
-      headerLayout="stacked"
-      headerNav={<><AppHeaderLink to="/pub/guide/header">Header</AppHeaderLink><AppHeaderLink to="/pub/guide/top-banner">TopBanner</AppHeaderLink></>}
       headerAppearance={{ background, scrolledBackground, className: 'header-background-demo', style: { backdropFilter: 'none', WebkitBackdropFilter: 'none' } }}
     >
       <DemoBlock title="페이지별 배경 · 스크롤 상태" description="아래에서 배경을 선택하고 문서를 스크롤해 보세요. 헤더의 시작 위치를 지나면 is-scrolled 클래스가 붙고 스크롤 배경이 적용됩니다. 스크롤 색상은 CSS 변수로 지정합니다."

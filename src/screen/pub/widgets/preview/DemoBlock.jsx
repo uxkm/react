@@ -6,6 +6,7 @@
  */
 import { useId, useState } from 'react' // React
 import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
+import { useFormattedExampleCode } from '@/screen/pub/hooks/useFormattedExampleCode'
 
 /**
  * @param {object} props
@@ -28,10 +29,11 @@ export function DemoBlock ({
   const [expanded, setExpanded] = useState(false)
   const [copied, setCopied] = useState(false)
   const hasCode = Boolean(code && String(code).trim())
+  const formatted = useFormattedExampleCode(code, fileName, expanded)
 
   async function copyCode () {
     try {
-      await navigator.clipboard.writeText(code)
+      await navigator.clipboard.writeText(formatted.value)
       setCopied(true)
       window.setTimeout(() => setCopied(false), 1500)
     } catch {
@@ -70,11 +72,11 @@ export function DemoBlock ({
                 <div className="demo-code_body" id={panelId}>
                   <div className="demo-code_filebar">
                     <code>{fileName}</code>
-                    <button type="button" className="demo-code_copy" onClick={copyCode}>
+                    <button type="button" className="demo-code_copy" onClick={copyCode} disabled={!formatted.ready}>
                       {copied ? '복사됨' : '코드 복사'}
                     </button>
                   </div>
-                  <pre className="demo-code_pre"><code>{code}</code></pre>
+                  <pre className="demo-code_pre" aria-busy={!formatted.ready}><code>{formatted.ready ? formatted.value : '코드 불러오는 중…'}</code></pre>
                 </div>
                 )
               : null}

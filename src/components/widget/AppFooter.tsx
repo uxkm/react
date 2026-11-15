@@ -21,7 +21,7 @@ export function AppFooter ({ children, className, ...rest }: AppFooterProps) {
       <div className="app-footer_inner">
         {hasNodes(children)
           ? children
-          : <p className="app-footer_text">@Publish Guide</p>}
+          : <p className="app-footer_text">© Multicampus. All rights reserved.</p>}
       </div>
     </footer>
   )

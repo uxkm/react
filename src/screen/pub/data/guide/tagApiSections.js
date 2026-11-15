@@ -18,9 +18,9 @@ const props = [
   },
   {
     name: 'variant',
-    type: "'filled' | 'solid' | 'outline' | 'borderless'",
+    type: "'filled' | 'solid' | 'outline' | 'borderless' | 'category' | 'brand'",
     default: 'filled',
-    description: '스킨. filled는 클래스 없음.'
+    description: '스킨. category는 콘텐츠 분류용 테두리 배지, brand는 둥근 브랜드 배지입니다. filled는 클래스 없음.'
   },
   {
     name: 'size',

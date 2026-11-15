@@ -9,6 +9,7 @@ import {
   MainCaseSection,
   MainCalloutSection
 } from './sections' // 메인 섹션
+import { useMainAos } from '@/widgets/b2b/main/useMainAos'
 import InquirySnackbar from '@/widgets/b2b/common/InquirySnackbar'
 import IndexSkeleton from './skeleton/indexSkeleton' // Index Skeleton 컴포넌트
 
@@ -46,6 +47,7 @@ export default function B2bMainPage () {
    */
   // const { loading } = usePageData() // 기본: 스켈레톤 먼저 → 모듈 준비 후 본문
   const { loading } = usePageData({ enabled: false }) // 스켈레톤 선표시 없이 바로 본문
+  useMainAos(loading)
   // const loading = true // 디자인 확인용: 스켈레톤만 계속 표시
 
   return (
@@ -66,8 +68,8 @@ export default function B2bMainPage () {
         storageKey="b2b-main-notices"
         innerMaxWidth={1200}
         items={[
-          { id: 'education', content: '기업교육의 새로운 소식과 주요 안내를 확인하세요.', href: '/b2b/common/notice-detail?id=education' },
-          { id: 'service', content: '멀티캠퍼스 교육 서비스 이용 안내를 확인하세요.', href: '/b2b/common/notice-detail?id=service' }
+          { id: 'education', content: '기업교육의 새로운 소식과 주요 안내를 확인하세요.' },
+          { id: 'service', content: '멀티캠퍼스 교육 서비스 이용 안내를 확인하세요.' }
         ]}
       />
       <PageLoading
@@ -78,6 +80,7 @@ export default function B2bMainPage () {
         skeleton={<IndexSkeleton />}
         // auto 캐시 키로도 사용 (skeletonId 생략 시 className)
         className="main"
+        data-main-reveal=""
       >
         {/* 메인 타이틀 영역 */}
         <MainHero />
@@ -89,8 +92,6 @@ export default function B2bMainPage () {
         <MainCaseSection />
         {/* 교육 상담·뉴스레터 구독 섹션 */}
         <MainCalloutSection />
-        {/* 다음 본문 시안 작업을 위한 기존 앵커를 유지합니다. */}
-        <div id="search" hidden />
       </PageLoading>
       <InquirySnackbar />
     </>

@@ -4,20 +4,22 @@
  */
 import {
   createElement, // 엘리먼트 생성
-  type HTMLAttributes, // HTMLAttributes 타입
+  type HTMLAttributes,
+  type ElementType, // HTMLAttributes 타입
   type KeyboardEvent, // KeyboardEvent 타입
   type MouseEvent, // MouseEvent 타입
   type ReactNode // ReactNode 타입
 } from 'react' // React
 import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
 import { hasNodes } from '@/utils/react' // has Nodes
+import { Icon } from './Icon'
 
 /** 버튼 모양. filled 채움, outline 테두리, ghost 옅은 배경, text 글자만, select 선택됨 */
-export type ButtonVariant = 'filled' | 'outline' | 'ghost' | 'text' | 'select'
+export type ButtonVariant = 'filled' | 'outline' | 'ghost' | 'text' | 'select' | 'arrow' | 'arrow-pill' | 'gradient' | 'soft-outline' | 'social'
 /** 버튼 색. primary 가 기본 강조 */
 export type ButtonColor = 'primary' | 'default' | 'success' | 'warning' | 'danger' | 'muted'
 /** 버튼 크기. sm 작게, md 기본, lg 크게 */
-export type ButtonSize = 'sm' | 'md' | 'lg'
+export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl'
 
 /** variant 이름 → btn_* 클래스 */
 const VARIANT_CLASS: Record<string, string> = {
@@ -25,12 +27,24 @@ const VARIANT_CLASS: Record<string, string> = {
   outline: 'btn_outline',
   ghost: 'btn_ghost',
   text: 'btn_text',
-  select: 'btn_select'
+  select: 'btn_select',
+  arrow: 'btn_arrow',
+  'arrow-pill': 'btn_arrow-pill',
+  gradient: 'btn_gradient',
+  'soft-outline': 'btn_soft-outline',
+  social: 'btn_social'
 }
 
 /** 버튼이 받는 값. variant·color·size 와 라벨, 아이콘, 비활성 */
 export interface ButtonProps
   extends Omit<HTMLAttributes<HTMLElement>, 'onClick' | 'onKeyDown' | 'role' | 'color'> {
+  /** 시각 표현만 필요한 카드 내부에서는 presentation을 사용합니다. */
+  presentation?: boolean
+  as?: ElementType
+  target?: string
+  rel?: string
+  tone?: 'blue' | 'lavender'
+  channel?: 'naver' | 'youtube' | 'linkedin'
   variant?: ButtonVariant
   color?: ButtonColor
   size?: ButtonSize
@@ -63,6 +77,8 @@ export interface ButtonProps
   invalid?: boolean
   iconBefore?: ReactNode
   iconAfter?: ReactNode
+  /** arrow·arrow-pill의 원형 영역 아이콘. null 또는 false로 숨깁니다. */
+  arrowIcon?: ReactNode
   children?: ReactNode
   onClick?: (event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>) => void
   onKeyDown?: (event: KeyboardEvent<HTMLElement>) => void
@@ -75,6 +91,12 @@ export interface ButtonProps
  */
 export function Button ({
   variant = 'filled',
+  presentation = false,
+  as,
+  target,
+  rel,
+  tone = 'blue',
+  channel,
   color = 'primary',
   size = 'md',
   label = 'Button',
@@ -105,33 +127,39 @@ export function Button ({
   invalid = false,
   iconBefore,
   iconAfter,
+  arrowIcon = <Icon name="arrow-right" size={20} />,
   children,
   className,
   onClick,
   onKeyDown,
   ...rest
 }: ButtonProps) {
-  const rootTag = tag === 'a' || tag === 'div' || tag === 'span' ? tag : 'button'
+  const rootTag = presentation ? 'span' : as || (tag === 'a' || tag === 'div' || tag === 'span' ? tag : 'button')
+  const isIconOnly = iconOnly || variant === 'social'
   const resolvedType = nativeType || type
   const isDisabled = !!(disabled || ariaDisabled || loading)
   const showCaret = variant === 'select' ? true : !!selectCaret
   /** a 태그: href 미지정 시 '#' */
-  const resolvedHref = rootTag === 'a' ? (href || '#') : undefined
+  const resolvedHref = !presentation && (rootTag === 'a' || typeof rootTag !== 'string') ? (href || '#') : undefined
 
   const btnClass = classNames(
     'btn',
     variant === 'select' && selectText
       ? 'btn_select-text'
       : VARIANT_CLASS[variant] || 'btn_filled',
-    variant !== 'ghost' && 'color_' + color,
+    ['filled', 'outline', 'text', 'select'].includes(variant) && 'color_' + color,
+    variant === 'arrow-pill' && 'btn_tone-' + tone,
+    variant === 'social' && channel && 'btn_social-' + channel,
     size === 'sm' && 'btn_sm',
     size === 'lg' && 'btn_lg',
+    size === 'xl' && 'btn_xl',
+    presentation && 'btn_presentation',
     round && 'btn_round',
     block && 'btn_block',
     fit && 'btn_fit',
     (grow === true || grow === '') && 'btn_grow',
     (grow === 2 || grow === '2') && 'btn_grow-2',
-    iconOnly && 'btn_icon-only',
+    isIconOnly && 'btn_icon-only',
     vertical && 'btn_vertical',
     placeholder && 'btn_select-placeholder',
     (disabled || ariaDisabled) && 'is-disabled',
@@ -142,11 +170,13 @@ export function Button ({
   )
 
   /** div·span → role=button + tabindex=0 (a 는 href 기본 '#' 로 포커스 가능) */
-  const needsButtonRole = rootTag === 'div' || rootTag === 'span'
+  const needsButtonRole = !presentation && (rootTag === 'div' || rootTag === 'span')
   const computedRole = role || (needsButtonRole ? 'button' : undefined)
 
   let computedTabIndex: number | undefined
-  if (tabIndex !== undefined && tabIndex !== null) {
+  if (presentation) {
+    computedTabIndex = undefined
+  } else if (tabIndex !== undefined && tabIndex !== null) {
     computedTabIndex = tabIndex
   } else if (isDisabled && rootTag !== 'button') {
     computedTabIndex = -1
@@ -203,28 +233,25 @@ export function Button ({
       )}
       aria-hidden="true"
     >
-      {variant === 'select' ? (
-        <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-          <path d="M6 9l6 6 6-6" />
-        </svg>
-      ) : (
-        '▾'
-      )}
+      <Icon name={variant === 'select' ? 'chevron-down' : 'caret-down'} size="1em" />
     </span>
   ) : null
 
+  const arrow = hasNodes(arrowIcon) ? <span className="btn_arrow-circle" aria-hidden="true">{arrowIcon}</span> : null
   const content: ReactNode = (
     <>
-      {loading ? <span aria-hidden="true" className="btn_spinner" /> : null}
+      {variant === 'arrow' ? arrow : null}
+      {loading ? <span aria-hidden="true" className="btn_spinner"><Icon name="loader" /></span> : null}
       {hasNodes(iconBefore) ? (
         <span className="btn_icon btn_icon-before">{iconBefore}</span>
       ) : null}
-      {iconOnly
-        ? (hasNodes(children) ? children : null)
+      {isIconOnly
+        ? (hasNodes(children) ? children : channel ? <Icon name={channel} size={28} /> : null)
         : <span className="btn_label">{hasNodes(children) ? children : label}</span>}
       {hasNodes(iconAfter) ? (
         <span className="btn_icon btn_icon-after">{iconAfter}</span>
       ) : null}
+      {variant === 'arrow-pill' ? arrow : null}
       {caret}
     </>
   )
@@ -236,8 +263,11 @@ export function Button ({
       className: btnClass,
       type: rootTag === 'button' ? resolvedType : undefined,
       href: resolvedHref,
+      target: presentation ? undefined : target,
+      rel: presentation ? undefined : rel || (target === '_blank' ? 'noopener noreferrer' : undefined),
+      title: target === '_blank' ? '새 창 열림' : rest.title,
       disabled: rootTag === 'button' ? isDisabled : undefined,
-      role: computedRole,
+      role: presentation ? undefined : computedRole,
       tabIndex: computedTabIndex,
       'aria-busy': loading ? 'true' : undefined,
       'aria-disabled': isDisabled ? 'true' : undefined,
@@ -246,8 +276,8 @@ export function Button ({
       'aria-expanded': expandedAttr,
       'aria-invalid': (error || invalid) ? 'true' : undefined,
       'data-ripple': ripple ? 'true' : undefined,
-      onClick: handleClick,
-      onKeyDown: handleKeyDown
+      onClick: presentation ? undefined : handleClick,
+      onKeyDown: presentation ? undefined : handleKeyDown
     },
     content
   )

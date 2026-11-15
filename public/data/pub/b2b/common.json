@@ -1,441 +1,67 @@
 {
   "id": "common",
   "name": "공통",
-  "filePath": "@/widgets/b2b/previews",
+  "filePath": "@/widgets/b2b/common",
   "depth2": [
     {
-      "name": "공통 위젯 프리뷰 목록",
-      "type": "Index",
-      "id": "previews",
-      "pageUrl": "/common",
-      "filePath": "@/widgets/b2b/previews/index.tsx",
-      "owner": "",
-      "start": "",
-      "expected": "",
-      "end": "",
+      "id": "header",
+      "name": "Header",
+      "type": "Widget",
+      "pageUrl": "",
+      "filePath": "@/widgets/b2b/common/Header.tsx",
       "status": "pending",
       "progress": 0,
-      "planning": "",
-      "design": "",
-      "remark": [],
-      "priority": 2,
-      "excludeFromStats": true
+      "remark": []
     },
     {
-      "id": "common/navigation",
-      "name": "GNB·메뉴",
-      "depth3": [
-        {
-          "name": "GNB",
-          "type": "Widget",
-          "id": "gnb",
-          "pageUrl": "/common/gnb",
-          "filePath": "@/widgets/b2b/previews/gnb/index.tsx",
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [
-            {
-              "date": "",
-              "author": "IA",
-              "text": "전체 메뉴 중 상위 메뉴 노출. 우측: 통합검색·전체 사이트맵·About·기업교육문의"
-            }
-          ],
-          "priority": 2
-        },
-        {
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [
-            {
-              "date": "",
-              "author": "IA",
-              "text": "GNB 마우스 오버 시 노출. 카테고리 설명, 서브 페이지 목록, 링크 영역"
-            }
-          ],
-          "name": "메가메뉴",
-          "type": "Layer",
-          "id": "mega-menu",
-          "pageUrl": "/common/mega-menu",
-          "filePath": "@/widgets/b2b/previews/mega-menu/index.tsx",
-          "priority": 2
-        },
-        {
-          "name": "전체메뉴",
-          "type": "Layer",
-          "id": "full-menu",
-          "pageUrl": "/common/full-menu",
-          "filePath": "@/widgets/b2b/previews/full-menu/index.tsx",
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [
-            {
-              "date": "",
-              "author": "IA",
-              "text": "GNB 우측 햄버거 메뉴 클릭 시 전체 메뉴 노출"
-            }
-          ],
-          "priority": 2
-        },
-        {
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [
-            {
-              "date": "",
-              "author": "IA",
-              "text": "기업교육·서비스 하위 페이지 간 이동"
-            }
-          ],
-          "name": "하위 탭 네비게이션",
-          "type": "Widget",
-          "id": "tab-navigation",
-          "pageUrl": "/common/tab-navigation",
-          "filePath": "@/widgets/b2b/previews/tab-navigation/index.tsx",
-          "priority": 2
-        },
-        {
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [
-            {
-              "date": "",
-              "author": "IA",
-              "text": "오른쪽 플로팅 버튼: 법정필수 간편견적·진단&맞춤탐색·제안서 다운로드"
-            }
-          ],
-          "name": "퀵링크",
-          "type": "Widget",
-          "id": "quick-links",
-          "pageUrl": "/common/quick-links",
-          "filePath": "@/widgets/b2b/previews/quick-links/index.tsx",
-          "priority": 2
-        },
-        {
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [
-            {
-              "date": "",
-              "author": "IA",
-              "text": "스크롤 시 노출되는 최상단 이동 버튼"
-            }
-          ],
-          "name": "TOP 버튼",
-          "type": "Widget",
-          "id": "back-top",
-          "pageUrl": "/common/back-top",
-          "filePath": "@/widgets/b2b/previews/back-top/index.tsx",
-          "priority": 2
-        }
-      ]
-    },
-    {
-      "id": "common/search",
-      "name": "통합검색",
-      "depth3": [
-        {
-          "name": "통합검색",
-          "type": "Page",
-          "id": "integrated-search",
-          "pageUrl": "/common/integrated-search",
-          "filePath": "@/widgets/b2b/previews/integrated-search/index.tsx",
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [
-            {
-              "date": "",
-              "author": "IA",
-              "text": "검색 아이콘 클릭 시 진입. 검색 가이드 문구 및 추천 키워드 제공"
-            }
-          ],
-          "priority": 2
-        },
-        {
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [
-            {
-              "date": "",
-              "author": "IA",
-              "text": "검색어에 해당하는 페이지와 콘텐츠 결과 노출"
-            }
-          ],
-          "name": "통합검색 결과",
-          "type": "Page",
-          "id": "integrated-search-results",
-          "pageUrl": "/common/integrated-search-results",
-          "filePath": "@/widgets/b2b/previews/integrated-search-results/index.tsx",
-          "priority": 2
-        }
-      ]
-    },
-    {
-      "id": "common/footer",
+      "id": "footer",
       "name": "Footer",
-      "depth3": [
-        {
-          "name": "Footer",
-          "type": "Widget",
-          "id": "footer",
-          "pageUrl": "/common/footer",
-          "filePath": "@/widgets/b2b/previews/footer/index.tsx",
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [
-            {
-              "date": "",
-              "author": "IA",
-              "text": "페이지 하단 공통 푸터 영역"
-            }
-          ],
-          "priority": 2
-        },
-        {
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [],
-          "name": "이용약관",
-          "type": "Layer",
-          "id": "terms",
-          "pageUrl": "/common/terms",
-          "filePath": "@/widgets/b2b/previews/terms/index.tsx",
-          "priority": 2
-        },
-        {
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [],
-          "name": "개인정보처리방침",
-          "type": "Layer",
-          "id": "privacy",
-          "pageUrl": "/common/privacy",
-          "filePath": "@/widgets/b2b/previews/privacy/index.tsx",
-          "priority": 2
-        },
-        {
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [],
-          "name": "알기쉬운 개인정보처리방침",
-          "type": "Layer",
-          "id": "email-privacy",
-          "pageUrl": "/common/email-privacy",
-          "filePath": "@/widgets/b2b/previews/email-privacy/index.tsx",
-          "priority": 2
-        },
-        {
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [],
-          "name": "공지사항 목록",
-          "type": "Page",
-          "id": "notice-list",
-          "pageUrl": "/common/notice-list",
-          "filePath": "@/widgets/b2b/previews/notice-list/index.tsx",
-          "priority": 2
-        },
-        {
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [],
-          "name": "공지사항 상세",
-          "type": "Page",
-          "id": "notice-detail",
-          "pageUrl": "/common/notice-detail",
-          "filePath": "@/widgets/b2b/previews/notice-detail/index.tsx",
-          "priority": 2
-        },
-        {
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [],
-          "name": "Contact us",
-          "type": "Layer",
-          "id": "contact-us",
-          "pageUrl": "/common/contact-us",
-          "filePath": "@/widgets/b2b/previews/contact-us/index.tsx",
-          "priority": 2
-        },
-        {
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [],
-          "name": "Family Site",
-          "type": "Layer",
-          "id": "family-site",
-          "pageUrl": "/common/family-site",
-          "filePath": "@/widgets/b2b/previews/family-site/index.tsx",
-          "priority": 2
-        },
-        {
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [],
-          "name": "채용안내",
-          "type": "Link",
-          "id": "LINK-FOOTER-CAREERS",
-          "pageUrl": "https://careers.multicampus.com/ko/home",
-          "filePath": "",
-          "priority": 2,
-          "excludeFromStats": true
-        },
-        {
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [],
-          "name": "찾아오시는 길",
-          "type": "Link",
-          "id": "LINK-LOCATION",
-          "pageUrl": "https://multicampus.com/custCntr/mapMain?req=0",
-          "filePath": "",
-          "priority": 2,
-          "excludeFromStats": true
-        },
-        {
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [],
-          "name": "오픈 라이선스",
-          "type": "Link",
-          "id": "LINK-LICENSE",
-          "pageUrl": "https://www.multicampus.com/main/contents/gb/OSI/OSINotice",
-          "filePath": "",
-          "priority": 2,
-          "excludeFromStats": true
-        },
-        {
-          "owner": "",
-          "start": "",
-          "expected": "",
-          "end": "",
-          "status": "pending",
-          "progress": 0,
-          "planning": "",
-          "design": "",
-          "remark": [],
-          "name": "부정제보",
-          "type": "Link",
-          "id": "LINK-FOOTER-ETHICS",
-          "pageUrl": "https://ethics.multicampus.com/",
-          "filePath": "",
-          "priority": 2,
-          "excludeFromStats": true
-        }
-      ]
+      "type": "Widget",
+      "pageUrl": "",
+      "filePath": "@/widgets/b2b/common/Footer.tsx",
+      "status": "pending",
+      "progress": 0,
+      "remark": []
+    },
+    {
+      "id": "allmenu",
+      "name": "전체메뉴",
+      "type": "Widget",
+      "pageUrl": "",
+      "filePath": "@/widgets/b2b/common/FullMenu.tsx",
+      "status": "pending",
+      "progress": 0,
+      "remark": []
+    },
+    {
+      "id": "quickmenu",
+      "name": "퀵메뉴",
+      "type": "Widget",
+      "pageUrl": "",
+      "filePath": "@/widgets/b2b/common/QuickMenu.tsx",
+      "status": "pending",
+      "progress": 0,
+      "remark": []
+    },
+    {
+      "id": "topbanner",
+      "name": "상단배너",
+      "type": "Widget",
+      "pageUrl": "",
+      "filePath": "@/components/widget/NoticeTopBanner.tsx",
+      "status": "pending",
+      "progress": 0,
+      "remark": []
+    },
+    {
+      "id": "snackbar",
+      "name": "하단 스낵바",
+      "type": "Widget",
+      "pageUrl": "",
+      "filePath": "@/widgets/b2b/common/InquirySnackbar.tsx",
+      "status": "pending",
+      "progress": 0,
+      "remark": []
     }
   ]
 }

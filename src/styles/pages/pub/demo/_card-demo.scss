@@ -1,0 +1,50 @@
+// Card 유형 예제의 배치 크기만 지정합니다. 유형 구조·스킨은 공통 Card 스타일입니다.
+.demo-card-type {
+  width: 100%;
+  max-width: 640px;
+
+  &_image { height: 440px; }
+  &_quick-link { height: 160px; max-width: 400px; }
+  &_content { max-width: 400px; }
+  &_course { max-width: 400px; }
+  &_testimonial { max-width: 520px; }
+  &_overlay, &_news { max-width: 400px; }
+  &_feature { max-width: 800px; }
+  &_webzine { max-width: 800px; }
+  &:is(.demo-card-type_image, .demo-card-type_quick-link) > .card { height: 100%; }
+}
+
+.demo-card-composition {
+  width: 100%;
+  min-width: 0;
+  max-width: 720px;
+
+  &_recommendations { max-width: 400px; }
+  &_services .card_quick-link { min-height: 160px; }
+}
+
+.demo-corporate-feed {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
+
+  @media (max-width: 767px) { grid-template-columns: minmax(0, 1fr); }
+}
+
+.demo-card-composition_corporate-resources .card_quick-link { min-height: 160px; }
+
+@media (max-width: 767px) {
+  .demo-card-type {
+    .card_promotion { padding: 28px 20px; }
+    .card_promotion h2 { font-size: 32px; }
+    .card_image { padding: 28px 20px; }
+    .card_image p { font-size: 17px; }
+    .card_image h2 { font-size: 30px; }
+    .card_callout { padding: 28px 20px; }
+    .card_callout-title { font-size: 28px; }
+    .card_callout-description { font-size: 18px; }
+    .stat_testimonial { padding: 28px 20px; }
+    .stat_testimonial .stat_value { font-size: 28px; }
+  }
+}

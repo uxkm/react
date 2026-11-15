@@ -1,6 +1,6 @@
 /**
  * PubHeader
- * - /pub 퍼블리시 목록 전용 헤더 슬롯
+ * - /pub 퍼블리싱 목록 전용 헤더 슬롯
  * - 컴포넌트 가이드는 번역 드롭다운 옆(actions)에 배치, 새 창
  * - 숨김은 meta.header (PageLayoutVisibility). 일반 페이지는 PageHeader / Header
  */

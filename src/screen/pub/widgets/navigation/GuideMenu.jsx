@@ -76,11 +76,13 @@ export function GuideMenu ({ className }) {
   const guideA11yItem = menu?.a11y || { id: 'a11y', label: '접근성' }
   const guideMenu = useMemo(() => menu?.guideMenu || [], [menu])
   const guideWidgetItems = useMemo(() => menu?.guideWidgetItems || [], [menu])
+  const guidePreviewMenu = useMemo(() => menu?.guidePreviewMenu || [], [menu])
+  const widgetTotal = guideWidgetItems.length + guidePreviewMenu.reduce((sum, group) => sum + group.items.length, 0)
   const guideDemoMenu = useMemo(() => menu?.guideDemoMenu || [], [menu])
   /** 아코디언으로 접히는 모든 그룹 id (컴포넌트 + 데모) */
   const allGroupIds = useMemo(
-    () => [...guideMenu.map((group) => group.id), ...guideDemoMenu.map((group) => group.id)],
-    [guideMenu, guideDemoMenu]
+    () => [...guideMenu.map((group) => group.id), ...guidePreviewMenu.map((group) => group.id), ...guideDemoMenu.map((group) => group.id)],
+    [guideMenu, guidePreviewMenu, guideDemoMenu]
   )
   const allExpanded = allGroupIds.length > 0 && allGroupIds.every((id) => !!openGroups[id])
   const introHref = guideHomePath
@@ -214,10 +216,10 @@ export function GuideMenu ({ className }) {
                   })}
                 </div>
 
-                {guideWidgetItems.length > 0 && <div className="comp-guide_section" data-guide-section="widgets">
+                {widgetTotal > 0 && <div className="comp-guide_section" data-guide-section="widgets">
                   <p className="comp-guide_section-label">
                     <span>위젯</span>
-                    <span className="comp-guide_count" role="img" aria-label={`하위 ${guideWidgetItems.length}개`}>{guideWidgetItems.length}</span>
+                    <span className="comp-guide_count" role="img" aria-label={`하위 ${widgetTotal}개`}>{widgetTotal}</span>
                   </p>
                   <ul className="comp-guide_section-list">
                     {guideWidgetItems.map((item) => {
@@ -230,6 +232,36 @@ export function GuideMenu ({ className }) {
                       </li>
                     })}
                   </ul>
+                  {guidePreviewMenu.map((group) => {
+                    const expanded = !!openGroups[group.id]
+                    const panelId = 'comp-guide-group-' + group.id
+                    return (
+                      <div key={group.id} className={classNames('comp-guide_group', { 'is-open': expanded })}>
+                        <button
+                          type="button"
+                          className="comp-guide_group-toggle"
+                          aria-expanded={expanded ? 'true' : 'false'}
+                          aria-controls={panelId}
+                          onClick={() => toggleGroup(group.id)}
+                        >
+                          <span className="comp-guide_toggle-label">
+                            <span>{group.label}</span>
+                            <span className="comp-guide_count" role="img" aria-label={`하위 ${group.items.length}개`}>{group.items.length}</span>
+                          </span>
+                          <span className="comp-guide_chevron" aria-hidden="true" />
+                        </button>
+                        <ul id={panelId} hidden={!expanded}>
+                          {group.items.map((item) => (
+                            <li key={item.id}>
+                              <a className="comp-guide_link" href={item.href} target="_blank" rel="noopener noreferrer" title="새 창 열림">
+                                {item.label}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )
+                  })}
                 </div>}
 
                 {guideDemoMenu.map((group) => {
@@ -340,7 +372,7 @@ export function GuideMenu ({ className }) {
                   </Tooltip>
                 )
               })}
-              {guideWidgetItems.length > 0 && <Tooltip className="tooltip_inverse" placement="right" content="위젯">
+              {widgetTotal > 0 && <Tooltip className="tooltip_inverse" placement="right" content="위젯">
                 <button type="button" className={classNames('comp-guide_rail-btn', { 'is-active': widgetActive })} aria-label="위젯" onClick={() => setNavOpen(true)}>
                   <Icon name="layout" size="sm" />
                 </button>
