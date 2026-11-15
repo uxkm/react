@@ -1,3 +1,10 @@
+:root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --language-switcher-size-19rem: 19rem;
+  --language-switcher-size-8-5rem: 8.5rem;
+  --language-switcher-size-8-75rem: 8.75rem;
+}
+
 .lang-switcher {
   position: relative;
   display: inline-flex;
@@ -12,13 +19,13 @@
   }
 
   .dropdown_trigger.btn_select {
-    min-width: 8.75rem;
+    min-width: var(--language-switcher-size-8-75rem);
   }
 
   &_label-row {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: var(--space-6);
     min-width: 0;
   }
 
@@ -37,8 +44,8 @@
   }
 
   .dropdown_menu {
-    top: calc(100% + 6px);
-    min-width: max(100%, 8.5rem);
+    top: calc(100% + var(--space-6));
+    min-width: max(100%, var(--language-switcher-size-8-5rem));
     z-index: calc(var(--z-dropdown, 100) + 2);
   }
 
@@ -47,7 +54,7 @@
     width: 100%;
     align-items: center;
     justify-content: flex-start;
-    min-height: var(--control-height-sm, 32px);
+    min-height: var(--control-height-sm, var(--size-32));
     padding: 0 var(--space-12);
     border: 0;
     border-radius: var(--radius-md);
@@ -80,10 +87,10 @@
   &_status {
     position: absolute;
     right: 0;
-    top: calc(100% + 6px);
+    top: calc(100% + var(--space-6));
     z-index: var(--z-dropdown, 100);
-    width: 19rem;
-    max-width: calc(100vw - 32px);
+    width: var(--language-switcher-size-19rem);
+    max-width: calc(100vw - var(--size-32));
     padding: var(--space-12);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
@@ -94,9 +101,9 @@
 
     button {
       display: block;
-      min-height: 32px;
+      min-height: var(--size-32);
       margin-top: var(--space-8);
-      padding: 4px var(--space-8);
+      padding: var(--space-4) var(--space-8);
       border: 1px solid currentColor;
       border-radius: var(--radius-md);
       background: var(--color-surface);

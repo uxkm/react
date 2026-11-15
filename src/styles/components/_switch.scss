@@ -8,8 +8,8 @@
   --switch-height-sm: 1.25rem;
   --switch-width-lg: 3.25rem;
   --switch-height-lg: 1.75rem;
-  --switch-padding: 2px;
-  --switch-radius: 999px;
+  --switch-padding: var(--space-2);
+  --switch-radius: var(--radius-pill);
   --switch-gap: var(--checkbox-gap);
   --switch-gap-sm: var(--checkbox-gap-sm);
   --switch-gap-lg: var(--checkbox-gap-lg);

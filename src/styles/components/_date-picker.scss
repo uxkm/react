@@ -1,6 +1,12 @@
 @use 'common/global' as *;
 
 :root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --date-picker-size-0-875rem: 0.875rem;
+  --date-picker-size-36rem: 36rem;
+  --date-picker-size-8rem: 8rem;
+  --date-picker-space-1-5rem: 1.5rem;
+
   // ----- Date Picker — trigger · panel
   --date-picker-input-padding-y: 0.5rem;
   --date-picker-input-padding-x: 0.75rem;
@@ -134,7 +140,7 @@
     }
 
     &:has(.date_picker_clear) .date_picker_input {
-      padding-right: calc(var(--date-picker-input-padding-x) + 1.5rem);
+      padding-right: calc(var(--date-picker-input-padding-x) + var(--date-picker-space-1-5rem));
     }
 
     .date_picker_clear {
@@ -154,8 +160,8 @@
       @include square-size(1.5rem);
 
       .icon {
-        width: 0.875rem;
-        height: 0.875rem;
+        width: var(--date-picker-size-0-875rem);
+        height: var(--date-picker-size-0-875rem);
       }
 
       &:hover {
@@ -259,11 +265,11 @@
     align-items: center;
     gap: $space-sm;
     width: 100%;
-    max-width: 36rem;
+    max-width: var(--date-picker-size-36rem);
 
     .date_picker {
       flex: 1;
-      min-width: 8rem;
+      min-width: var(--date-picker-size-8rem);
       max-width: none;
     }
   }

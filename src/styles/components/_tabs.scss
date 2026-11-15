@@ -1,6 +1,14 @@
 @use 'common/global' as *;
 
 :root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --tabs-font-size-0-875rem: 0.875rem;
+  --tabs-size-1-125rem: 1.125rem;
+  --tabs-size-1-5rem: 1.5rem;
+  --tabs-size-10rem: 10rem;
+  --tabs-size-20rem: 20rem;
+  --tabs-space-0-125rem: 0.125rem;
+
   // ----- Tabs — structure
   --tabs-font-size: var(--text-size-sm);
   --tabs-font-weight: 500;
@@ -8,13 +16,13 @@
   --tabs-gap: var(--space-xs);
   --tabs-tab-padding-y: 0.625rem;
   --tabs-tab-padding-x: 1rem;
-  --tabs-indicator-height: 2px;
+  --tabs-indicator-height: var(--size-2);
   --tabs-indicator-transition: var(--transition-base);
   --tabs-bar-gap: var(--space-md);
   --tabs-panel-padding-y: var(--space-lg);
   --tabs-icon-size: 1rem;
   --tabs-badge-gap: var(--space-xs);
-  --tabs-pill-padding: 3px;
+  --tabs-pill-padding: var(--space-3);
   --tabs-nav-size: 1.75rem;
   --tabs-nav-icon-size: 0.875rem;
   --tabs-nav-icon-stroke: 1.5;
@@ -187,15 +195,15 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    width: 1.125rem;
-    height: 1.125rem;
-    margin-left: 0.125rem;
+    width: var(--tabs-size-1-125rem);
+    height: var(--tabs-size-1-125rem);
+    margin-left: var(--tabs-space-0-125rem);
     border: none;
     border-radius: $radius-sm;
     background: transparent;
     color: var(--color-text-muted);
     font: inherit;
-    font-size: 0.875rem;
+    font-size: var(--tabs-font-size-0-875rem);
     line-height: 1;
     cursor: pointer;
     transition:
@@ -208,7 +216,7 @@
     }
 
     &:focus-visible {
-      outline: 2px solid color-token(primary);
+      outline: var(--focus-outline-width) solid color-token(primary);
       outline-offset: 1px;
     }
   }
@@ -459,11 +467,11 @@
     > .tabs_bar > .tabs_list-wrap > .tabs_list {
       justify-content: center;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: var(--space-8);
     }
 
     > .tabs_bar > .tabs_list-wrap > .tabs_list > .tabs_tab {
-      gap: 4px;
+      gap: var(--space-4);
       margin: 0;
       border: 1px solid var(--color-border);
       border-radius: var(--radius-pill);
@@ -570,7 +578,7 @@
         top: 0;
         bottom: 0;
         z-index: 2;
-        width: 1.5rem;
+        width: var(--tabs-size-1-5rem);
         pointer-events: none;
         opacity: 0;
         transition: opacity var(--tabs-indicator-transition);
@@ -750,7 +758,7 @@
     > .tabs_bar > .tabs_list-wrap > .tabs_list {
       flex-direction: column;
       align-items: stretch;
-      min-width: 10rem;
+      min-width: var(--tabs-size-10rem);
     }
 
     > .tabs_bar > .tabs_list-wrap > .tabs_list > .tabs_tab {
@@ -923,7 +931,7 @@
   // ----- 데모 레이아웃
 
   &_demo-narrow {
-    max-width: 20rem;
+    max-width: var(--tabs-size-20rem);
   }
 
   &_demo-fluid {

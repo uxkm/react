@@ -1,6 +1,11 @@
 @use 'common/global' as *;
 
 :root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --floating-size-16rem: 16rem;
+  --floating-size-18rem: 18rem;
+  --floating-size-8rem: 8rem;
+
   // ----- Floating — structure
   --floating-z-index: 30;
   --floating-gap: var(--space-sm);
@@ -88,7 +93,7 @@
   }
 
   &_demo-preview {
-    min-height: 8rem;
+    min-height: var(--floating-size-8rem);
     border: 1px solid var(--color-border-subtle);
     border-radius: $radius-md;
     background: var(--color-surface);
@@ -112,7 +117,7 @@
 
   &_demo-scroll {
     width: 100%;
-    max-height: 16rem;
+    max-height: var(--floating-size-16rem);
     overflow-y: auto;
     border: 1px solid var(--color-border-subtle);
     border-radius: $radius-md;
@@ -120,7 +125,7 @@
   }
 
   &_demo-content {
-    min-height: calc(16rem + 18rem);
+    min-height: calc(var(--floating-size-16rem) + var(--floating-size-18rem));
     padding: var(--space-lg);
 
     > p {

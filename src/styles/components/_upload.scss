@@ -12,7 +12,7 @@
   --upload-item-padding-y: 0.5rem;
   --upload-item-padding-x: 0.75rem;
   --upload-item-icon-size: 1.5rem;
-  --upload-progress-height: 4px;
+  --upload-progress-height: var(--size-4);
   --upload-card-size: 6.5rem;
   --upload-card-gap: var(--space-sm);
   --upload-hint-size: var(--text-size-sm);
@@ -65,8 +65,8 @@
   }
 
   :is(.upload_trigger, .upload_dropzone, .upload_card-trigger, .upload_avatar):focus-within {
-    outline: 2px solid var(--color-accent-text);
-    outline-offset: 2px;
+    outline: var(--focus-outline-width) solid var(--color-accent-text);
+    outline-offset: var(--focus-outline-offset);
   }
 
   &_trigger {
@@ -216,7 +216,7 @@
   &_item-body {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: var(--space-4);
     flex: 1;
     min-width: 0;
   }

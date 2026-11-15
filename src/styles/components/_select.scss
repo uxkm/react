@@ -1,6 +1,11 @@
 @use 'common/global' as *;
 
 :root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --select-size-6rem: 6rem;
+  --select-space-0-25rem: 0.25rem;
+  --select-space-0-75rem: 0.75rem;
+
   // ----- Select — native caret
   --select-padding-right: 2.25rem;
   --select-padding-right-sm: 2rem;
@@ -67,18 +72,18 @@ select.input {
   }
 
   &[multiple] {
-    padding-right: 0.75rem;
-    min-height: 6rem;
+    padding-right: var(--select-space-0-75rem);
+    min-height: var(--select-size-6rem);
     background-image: none;
     cursor: default;
 
     option {
-      padding: 0.25rem 0;
+      padding: var(--select-space-0-25rem) 0;
     }
   }
 
   &[size]:not([size="1"]) {
-    padding-right: 0.75rem;
+    padding-right: var(--select-space-0-75rem);
     background-image: none;
     cursor: default;
   }

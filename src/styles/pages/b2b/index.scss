@@ -1,3 +1,5 @@
+@use 'foundations/variables' as *;
+
 // 프로젝트 페이지 스타일 — /b2b/* 에서만 로드
 @use './common/header';
 @use './common/footer';
@@ -6,10 +8,16 @@
 @use './main/main';
 @use './common/inquiry-snackbar';
 
+:root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --b2b-layout-size-132px: 132px;
+  --b2b-layout-size-552px: 552px;
+}
+
 // PC 디자인 기준: 좁은 창에서는 문서 전체를 가로로 스크롤합니다.
 // Page className="p-content" (위젯 프리뷰는 project-content 병행)
 body:has(.app-layout_main.p-content, .app-layout_main.project-content) {
-  min-width: 1440px;
+  min-width: var(--size-1440);
 }
 
 // 본문 공통 폭. 전체 너비 섹션은 해당 본문 작업 시 별도로 구성합니다.
@@ -28,21 +36,21 @@ body:has(.app-layout_main.p-content, .app-layout_main.project-content) {
 }
 
 // 확대·좁은 화면에서도 페이지 전체를 좌우로 오가지 않고 읽도록 재배치합니다.
-@media (max-width: 1439px) {
+@media (max-width: ($breakpoint-pc - 1px)) {
   body:has(.app-layout_main.p-content, .app-layout_main.project-content) { min-width: 0; }
   .header_inner, .footer, .footer_support-inner, .footer_inner { min-width: 0; }
-  .header_inner { gap: 16px; padding-inline: 16px; }
+  .header_inner { gap: var(--space-16); padding-inline: var(--space-16); }
   .header_nav { display: none; } // 같은 목적지는 전체메뉴에서 제공합니다.
-  .header_actions { gap: 8px; }
-  .footer_support-inner, .footer_inner { padding-inline: 16px; }
-  .footer_tools { flex-wrap: wrap; margin-left: 0; gap: 16px; }
-  .footer_customer { gap: 8px; }
-  .footer ul.footer_certifications { padding-inline: 0; gap: 24px; }
+  .header_actions { gap: var(--space-8); }
+  .footer_support-inner, .footer_inner { padding-inline: var(--space-16); }
+  .footer_tools { flex-wrap: wrap; margin-left: 0; gap: var(--space-16); }
+  .footer_customer { gap: var(--space-8); }
+  .footer ul.footer_certifications { padding-inline: 0; gap: var(--space-24); }
   .footer_company { overflow-wrap: anywhere; }
-  .main { padding: 40px 16px 64px; }
-  .main-hero h1 { flex-wrap: wrap; white-space: normal; font-size: clamp(28px, 4vw, 48px); }
+  .main { padding: var(--space-40) var(--space-16) var(--space-64); }
+  .main-hero h1 { flex-wrap: wrap; white-space: normal; font-size: clamp(var(--font-size-28), 4vw, var(--font-size-48)); }
   .main-hero_emoji { font-size: inherit; }
-  .main-hero p { font-size: 18px; }
+  .main-hero p { font-size: var(--font-size-2xl); }
   .main-cases .carousel { width: 100%; margin-left: 0; }
   .full-menu-content_education, .full-menu-content_company { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .full-menu-content_education > h2, .full-menu-content_company > h2 { grid-column: 1 / -1; }
@@ -50,30 +58,30 @@ body:has(.app-layout_main.p-content, .app-layout_main.project-content) {
   .full-menu-content_services { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
-@media (max-width: 767px) {
+@media (max-width: ($breakpoint-md - 1px)) {
   .header_company, .header_inquiry { display: none !important; }
-  .header .logo img { width: 132px; height: auto; }
+  .header .logo img { width: var(--b2b-layout-size-132px); height: auto; }
   .main-cards, .main-callouts, .main-quick-links { grid-template-columns: 1fr; grid-template-rows: auto; }
   .main-cards > div { grid-column: auto; grid-row: auto; }
-  .main-cards_promotion { height: 552px; }
-  .main-cards_consultation, .main-cards_diagnosis { height: 440px; }
-  .main-quick-links > .card { min-height: 96px; }
-  .main-insights, .main-cases, .main-callouts { margin-top: 64px; }
-  .main-insights h2, .main-cases > h2 { font-size: 28px; }
-  .main-insights_brand { padding-left: 12px; gap: 8px; }
-  .main-insights_brand > span { padding: 8px 12px; }
-  .main-cases .carousel .swiper .swiper-slide { width: min(84vw, 440px); height: 600px !important; }
-  .card.card_callout { padding: 28px 20px; }
-  .main.main-section-preview { padding-inline: 16px; }
-  .full-menu_surface { padding: 0 12px 20px; }
-  .full-menu-content-preview { padding: 12px; }
+  .main-cards_promotion { height: var(--b2b-layout-size-552px); }
+  .main-cards_consultation, .main-cards_diagnosis { height: var(--size-440); }
+  .main-quick-links > .card { min-height: var(--size-96); }
+  .main-insights, .main-cases, .main-callouts { margin-top: var(--space-64); }
+  .main-insights h2, .main-cases > h2 { font-size: var(--font-size-28); }
+  .main-insights_brand { padding-left: var(--space-12); gap: var(--space-8); }
+  .main-insights_brand > span { padding: var(--space-8) var(--space-12); }
+  .main-cases .carousel .swiper .swiper-slide { width: min(84vw, var(--size-440)); height: var(--size-600) !important; }
+  .card.card_callout { padding: var(--space-28) var(--space-20); }
+  .main.main-section-preview { padding-inline: var(--space-16); }
+  .full-menu_surface { padding: 0 var(--space-12) var(--space-20); }
+  .full-menu-content-preview { padding: var(--space-12); }
   .full-menu-content_education, .full-menu-content_company, .full-menu-content_services,
   .full-menu-content_insights, .full-menu-content_contact { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .full-menu-content_services > h2, .full-menu-content_insights > h2, .full-menu-content_contact > h2 { grid-column: 1 / -1; }
-  .full-menu-content_education, .full-menu-content_company, .full-menu-content_secondary { padding: 24px 16px; gap: 24px 16px; }
+  .full-menu-content_education, .full-menu-content_company, .full-menu-content_secondary { padding: var(--space-24) var(--space-16); gap: var(--space-24) var(--space-16); }
   .full-menu-content_company { min-height: 0; }
-  .full-menu-content h3 { font-size: 18px; }
-  .full-menu-content li { font-size: 16px; }
-  .full-menu-content_accordion .accordion_trigger { padding: 20px 16px; font-size: 20px; }
-  .full-menu-content_accordion .accordion_trigger > span { gap: 8px; }
+  .full-menu-content h3 { font-size: var(--font-size-2xl); }
+  .full-menu-content li { font-size: var(--font-size-xl); }
+  .full-menu-content_accordion .accordion_trigger { padding: var(--space-20) var(--space-16); font-size: var(--font-size-3xl); }
+  .full-menu-content_accordion .accordion_trigger > span { gap: var(--space-8); }
 }

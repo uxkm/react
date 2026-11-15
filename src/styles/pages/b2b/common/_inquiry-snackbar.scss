@@ -1,8 +1,10 @@
+@use 'foundations/variables' as *;
+
 .page-snackbar.inquiry-snackbar-region {
   --snackbar-region-z-index: 35;
-  --snackbar-region-inset-block-end: calc(32px + env(safe-area-inset-bottom, 0px));
+  --snackbar-region-inset-block-end: calc(var(--space-32) + env(safe-area-inset-bottom, 0px));
 }
 
-@media (max-width: 767px) {
-  .page-snackbar.inquiry-snackbar-region { inset-inline: 12px; --snackbar-region-inset-block-end: calc(16px + env(safe-area-inset-bottom, 0px)); }
+@media (max-width: ($breakpoint-md - 1px)) {
+  .page-snackbar.inquiry-snackbar-region { inset-inline: var(--space-12); --snackbar-region-inset-block-end: calc(var(--space-16) + env(safe-area-inset-bottom, 0px)); }
 }

@@ -1,8 +1,23 @@
 @use 'common/global' as *;
 
 :root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --input-offset-0-5rem: 0.5rem;
+  --input-size-11rem: 11rem;
+  --input-size-2-25rem: 2.25rem;
+  --input-size-2-5rem: 2.5rem;
+  --input-size-3rem: 3rem;
+  --input-size-7rem: 7rem;
+  --input-space-0-125rem: 0.125rem;
+  --input-space-0-3rem: 0.3rem;
+  --input-space-0-5rem: 0.5rem;
+  --input-space-0-65rem: 0.65rem;
+  --input-space-0-6rem: 0.6rem;
+  --input-space-0-75rem: 0.75rem;
+  --input-space-0-9rem: 0.9rem;
+
   // ----- Input — form_fit · input_fit 시 최대 너비
-  --input-max-width: 320px;
+  --input-max-width: var(--size-320);
   --input-clear-size: 1.5rem;
   --input-clear-icon-size: 0.875rem;
   --input-clear-offset: 0.75rem;
@@ -20,7 +35,7 @@
 .input {
   display: block;
   width: 100%;
-  padding: 0.5rem 0.75rem;
+  padding: var(--input-space-0-5rem) var(--input-space-0-75rem);
   font-size: size-token(base);
   line-height: 1.5;
   color: var(--color-text);
@@ -73,12 +88,12 @@
   }
 
   &_sm {
-    padding: 0.3rem 0.6rem;
+    padding: var(--input-space-0-3rem) var(--input-space-0-6rem);
     font-size: size-token(sm);
   }
 
   &_lg {
-    padding: 0.65rem 0.9rem;
+    padding: var(--input-space-0-65rem) var(--input-space-0-9rem);
     font-size: size-token(lg);
   }
 
@@ -102,11 +117,11 @@
     }
 
     &.is-filled:has(> .input_sm) .input {
-      padding-right: calc(0.6rem + var(--input-clear-size) + var(--input-clear-offset));
+      padding-right: calc(var(--input-space-0-6rem) + var(--input-clear-size) + var(--input-clear-offset));
     }
 
     &.is-filled:has(> .input_lg) .input {
-      padding-right: calc(0.9rem + var(--input-clear-size) + var(--input-clear-offset));
+      padding-right: calc(var(--input-space-0-9rem) + var(--input-clear-size) + var(--input-clear-offset));
     }
 
     .input[type="search"]::-webkit-search-cancel-button,
@@ -119,7 +134,7 @@
   &_clear {
     position: absolute;
     top: 50%;
-    right: var(--input-clear-offset, 0.5rem);
+    right: var(--input-clear-offset, var(--input-offset-0-5rem));
     bottom: auto;
     left: auto;
     display: inline-flex;
@@ -147,7 +162,7 @@
     &.btn {
       position: absolute;
       top: 50%;
-      right: var(--input-clear-offset, 0.5rem);
+      right: var(--input-clear-offset, var(--input-offset-0-5rem));
       bottom: auto;
       left: auto;
       gap: 0;
@@ -288,7 +303,7 @@
     select.input {
       flex: 0 0 auto;
       width: auto;
-      min-width: 7rem;
+      min-width: var(--input-size-7rem);
     }
 
     .input_group-addon {
@@ -313,11 +328,11 @@
       }
 
       &.is-filled:has(> .input_sm) > .input {
-        padding-right: calc(0.6rem + var(--input-clear-size) + var(--input-clear-offset));
+        padding-right: calc(var(--input-space-0-6rem) + var(--input-clear-size) + var(--input-clear-offset));
       }
 
       &.is-filled:has(> .input_lg) > .input {
-        padding-right: calc(0.9rem + var(--input-clear-size) + var(--input-clear-offset));
+        padding-right: calc(var(--input-space-0-9rem) + var(--input-clear-size) + var(--input-clear-offset));
       }
     }
   }
@@ -325,7 +340,7 @@
   &_group-addon {
     display: inline-flex;
     align-items: center;
-    padding: 0 0.75rem;
+    padding: 0 var(--input-space-0-75rem);
     font-size: size-token(base);
     color: var(--color-text-muted);
     background: var(--color-surface-raised);
@@ -386,9 +401,9 @@
     }
 
     .input {
-      flex: 1 1 2.5rem;
-      min-width: 2.25rem;
-      max-width: 3rem;
+      flex: 1 1 var(--input-size-2-5rem);
+      min-width: var(--input-size-2-25rem);
+      max-width: var(--input-size-3rem);
       padding-left: 0;
       padding-right: 0;
       text-align: center;
@@ -423,7 +438,7 @@
 
     > .form_field:last-child:not(:only-child) {
       flex: 2;
-      max-width: 11rem;
+      max-width: var(--input-size-11rem);
     }
   }
 }
@@ -454,7 +469,7 @@
   }
 
   &-required {
-    margin-left: 0.125rem;
+    margin-left: var(--input-space-0-125rem);
     color: var(--color-danger-text);
   }
 

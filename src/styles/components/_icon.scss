@@ -1,6 +1,9 @@
 @use 'common/global' as *;
 
 :root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --icon-size-4-5rem: 4.5rem;
+
   // ----- Icon — size (xs → 3xl)
   --icon-size-xs: 0.75rem;   // 12px
   --icon-size-sm: 1rem;      // 16px
@@ -116,7 +119,7 @@
     &::after {
       content: "";
       position: absolute;
-      inset: -2px;
+      inset: calc(-1 * var(--space-2));
       border-radius: inherit;
       border: 2px solid currentColor;
       opacity: 0.45;
@@ -132,7 +135,7 @@
 
   &_grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(4.5rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(var(--icon-size-4-5rem), 1fr));
     gap: var(--space-md);
     justify-items: center;
     align-items: start;

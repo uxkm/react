@@ -1,19 +1,22 @@
 @use 'common/global' as *;
 
 :root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --steps-size-36rem: 36rem;
+
   // ----- Steps
   --steps-gap: var(--space-md);
   --steps-head-gap: var(--space-sm);
   --steps-indicator-size: 2rem;
   --steps-indicator-font-size: var(--text-size-sm);
   --steps-indicator-font-weight: 600;
-  --steps-tail-height: 2px;
+  --steps-tail-height: var(--size-2);
   --steps-content-gap: var(--space-xs);
   --steps-title-size: var(--text-size-sm);
   --steps-title-weight: 600;
   --steps-desc-size: var(--text-size-xs);
   --steps-icon-size: 1rem;
-  --steps-dot-size: 8px;
+  --steps-dot-size: var(--size-8);
   --steps-pulse-duration: 1.5s;
 
 
@@ -216,7 +219,7 @@
   &_content {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: var(--space-2);
     min-width: 0;
     padding-right: var(--steps-gap);
   }
@@ -416,7 +419,7 @@
   // ----- Demo layout
 
   &_demo-narrow {
-    max-width: 36rem;
+    max-width: var(--steps-size-36rem);
   }
 }
 

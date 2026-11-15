@@ -4,11 +4,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: var(--space-16);
   box-sizing: border-box;
   width: 100%;
-  min-height: max(480px, calc(100vh - 280px));
-  padding: 48px 24px;
+  min-height: max(var(--size-480), calc(100vh - var(--size-280)));
+  padding: var(--space-48) var(--space-24);
   text-align: center;
   color: #667788;
 }
@@ -20,7 +20,7 @@
 
 .coming-soon_text {
   margin: 0;
-  font-size: 18px;
+  font-size: var(--font-size-2xl);
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: -0.01em;
@@ -32,7 +32,7 @@
   display: flex;
   align-items: stretch;
   max-width: none;
-  min-height: max(480px, calc(100vh - 280px));
+  min-height: max(var(--size-480), calc(100vh - var(--size-280)));
   margin: 0;
   padding: 0;
   background: transparent;

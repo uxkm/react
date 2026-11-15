@@ -1,6 +1,14 @@
 @use 'common/global' as *;
 
 :root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --badge-space-0-25rem: 0.25rem;
+  --badge-space-0-35rem: 0.35rem;
+  --badge-space-0-3rem: 0.3rem;
+  --badge-space-0-45rem: 0.45rem;
+  --badge-space-0-4rem: 0.4rem;
+  --badge-space-0-5rem: 0.5rem;
+
   // ----- Badge — structure
   --badge-padding-y: 0.15rem;
   --badge-padding-x: 0.5rem;
@@ -21,7 +29,7 @@
 
 
   // ----- Badge — dot · count
-  --badge-dot-size: 6px;
+  --badge-dot-size: var(--size-6);
   --badge-dot-size-sm: 5px;
   --badge-dot-size-lg: 7px;
   --badge-count-min-width: 1.25rem;
@@ -64,7 +72,7 @@
 
   &.badge_dot {
     gap: var(--badge-gap);
-    padding-left: 0.4rem;
+    padding-left: var(--badge-space-0-4rem);
 
     &::before {
       content: "";
@@ -80,7 +88,7 @@
     font-size: var(--badge-font-size-sm);
 
     &.badge_dot {
-      padding-left: 0.3rem;
+      padding-left: var(--badge-space-0-3rem);
 
       &::before {
         @include square-size(var(--badge-dot-size-sm));
@@ -93,7 +101,7 @@
     font-size: var(--badge-font-size-lg);
 
     &.badge_dot {
-      padding-left: 0.5rem;
+      padding-left: var(--badge-space-0-5rem);
 
       &::before {
         @include square-size(var(--badge-dot-size-lg));
@@ -103,17 +111,17 @@
 
   &_count {
     min-width: var(--badge-count-min-width);
-    padding-inline: 0.35rem;
+    padding-inline: var(--badge-space-0-35rem);
     font-variant-numeric: tabular-nums;
 
     &.badge_sm {
       min-width: var(--badge-count-min-width-sm);
-      padding-inline: 0.25rem;
+      padding-inline: var(--badge-space-0-25rem);
     }
 
     &.badge_lg {
       min-width: var(--badge-count-min-width-lg);
-      padding-inline: 0.45rem;
+      padding-inline: var(--badge-space-0-45rem);
     }
   }
 

@@ -1,6 +1,9 @@
 @use 'common/global' as *;
 
 :root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --card-size-300px: 300px;
+
   // ----- Card — structure (Bootstrap card-header/body/footer · Tailwind shadow-sm)
   --card-padding: var(--space-lg);
   --card-padding-sm: var(--space-md);
@@ -521,12 +524,12 @@
 
   &_deck {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(var(--size-240), 1fr));
     gap: $space-lg;
     width: 100%;
 
     &-2 {
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(var(--card-size-300px), 1fr));
     }
 
     &-3 {

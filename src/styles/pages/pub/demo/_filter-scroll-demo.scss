@@ -1,3 +1,8 @@
+:root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --filter-scroll-demo-size-140px: 140px;
+}
+
 // =============================================================================
 // Filter Scroll 데모 (.filter-scroll-demo) — DemoLayout 안에서 WBS 필터 스크롤 확인
 // =============================================================================
@@ -5,12 +10,12 @@
   // ----- 메타 지표 그리드
   &_meta {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 12px;
-    margin: 20px 0 0;
-    padding: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(var(--filter-scroll-demo-size-140px), 1fr));
+    gap: var(--space-12);
+    margin: var(--space-20) 0 0;
+    padding: var(--space-16);
     border: 1px solid var(--color-border);
-    border-radius: 12px;
+    border-radius: var(--radius-12);
     background: var(--color-surface);
 
     div {
@@ -18,8 +23,8 @@
     }
 
     dt {
-      margin: 0 0 4px;
-      font-size: 11px;
+      margin: 0 0 var(--space-4);
+      font-size: var(--font-size-xs);
       font-weight: 700;
       color: var(--color-text-muted);
       text-transform: uppercase;
@@ -28,7 +33,7 @@
 
     dd {
       margin: 0;
-      font-size: 16px;
+      font-size: var(--font-size-xl);
       font-weight: 700;
       font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
 
@@ -46,7 +51,7 @@
   &_actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 16px;
+    gap: var(--space-8);
+    margin-top: var(--space-16);
   }
 }

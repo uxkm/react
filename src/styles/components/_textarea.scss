@@ -2,6 +2,15 @@
 @use "input";
 
 :root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --textarea-offset-0-5rem: 0.5rem;
+  --textarea-offset-0-75rem: 0.75rem;
+  --textarea-space-0-35rem: 0.35rem;
+  --textarea-space-0-3rem: 0.3rem;
+  --textarea-space-0-65rem: 0.65rem;
+  --textarea-space-0-6rem: 0.6rem;
+  --textarea-space-0-9rem: 0.9rem;
+
   // ----- Textarea — 기본 최소 높이 (rows 미지정 시)
   --textarea-min-height: 5rem;
   --textarea-count-inset-x: 0.75rem;
@@ -116,11 +125,11 @@
   }
 
   &.textarea_clearable.is-filled:has(.textarea_sm) .textarea {
-    padding-right: calc(0.6rem + var(--input-clear-size) + var(--input-clear-offset));
+    padding-right: calc(var(--textarea-space-0-6rem) + var(--input-clear-size) + var(--input-clear-offset));
   }
 
   &.textarea_clearable.is-filled:has(.textarea_lg) .textarea {
-    padding-right: calc(0.9rem + var(--input-clear-size) + var(--input-clear-offset));
+    padding-right: calc(var(--textarea-space-0-9rem) + var(--input-clear-size) + var(--input-clear-offset));
   }
 }
 
@@ -146,18 +155,18 @@
   }
 
   &.is-filled:has(> .textarea_sm) .textarea {
-    padding-right: calc(0.6rem + var(--input-clear-size) + var(--input-clear-offset));
+    padding-right: calc(var(--textarea-space-0-6rem) + var(--input-clear-size) + var(--input-clear-offset));
   }
 
   &.is-filled:has(> .textarea_lg) .textarea {
-    padding-right: calc(0.9rem + var(--input-clear-size) + var(--input-clear-offset));
+    padding-right: calc(var(--textarea-space-0-9rem) + var(--input-clear-size) + var(--input-clear-offset));
   }
 }
 
 .textarea_clear {
   position: absolute;
-  top: calc(var(--textarea-clear-inset-y, 0.5rem) + 0.75em);
-  right: var(--textarea-clear-inset-x, 0.75rem);
+  top: calc(var(--textarea-clear-inset-y, var(--textarea-offset-0-5rem)) + 0.75em);
+  right: var(--textarea-clear-inset-x, var(--textarea-offset-0-75rem));
   bottom: auto;
   left: auto;
   display: inline-flex;
@@ -224,14 +233,14 @@
 }
 
 .textarea_show-count:has(.textarea_sm) .textarea_count {
-  padding-right: 0.6rem;
-  padding-bottom: 0.35rem;
+  padding-right: var(--textarea-space-0-6rem);
+  padding-bottom: var(--textarea-space-0-35rem);
   font-size: size-token(xs);
 }
 
 .textarea_show-count:has(.textarea_lg) .textarea_count {
-  padding-right: 0.9rem;
-  padding-bottom: 0.6rem;
+  padding-right: var(--textarea-space-0-9rem);
+  padding-bottom: var(--textarea-space-0-6rem);
   font-size: size-token(base);
 }
 
@@ -241,12 +250,12 @@
   resize: none;
 
   &_sm {
-    padding: 0.3rem 0.6rem;
+    padding: var(--textarea-space-0-3rem) var(--textarea-space-0-6rem);
     font-size: size-token(sm);
   }
 
   &_lg {
-    padding: 0.65rem 0.9rem;
+    padding: var(--textarea-space-0-65rem) var(--textarea-space-0-9rem);
     font-size: size-token(lg);
   }
 

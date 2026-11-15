@@ -1,7 +1,19 @@
 @use 'common/global' as *;
 
+:root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --top-banner-offset-0-25rem: 0.25rem;
+  --top-banner-size-2rem: 2rem;
+  --top-banner-space-0-5rem: 0.5rem;
+  --top-banner-space-0-75rem: 0.75rem;
+  --top-banner-space-1-5rem: 1.5rem;
+  --top-banner-space-1-75rem: 1.75rem;
+  --top-banner-space-1rem: 1rem;
+  --top-banner-space-2-5rem: 2.5rem;
+}
+
 .top-banner {
-  --top-banner-height: 80px;
+  --top-banner-height: var(--size-80);
   --carousel-height: var(--top-banner-height);
   --carousel-radius: 0;
   --carousel-bg: transparent;
@@ -20,11 +32,11 @@
   &_inner {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: var(--top-banner-space-1-5rem);
     width: 100%;
     min-height: var(--top-banner-height);
     margin-inline: auto;
-    padding-inline: 1rem;
+    padding-inline: var(--top-banner-space-1rem);
     box-sizing: border-box;
   }
 
@@ -37,11 +49,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
+    gap: var(--top-banner-space-0-75rem);
     width: 100%;
     min-width: 0;
     min-height: var(--top-banner-height);
-    padding-block: 0.75rem;
+    padding-block: var(--top-banner-space-0-75rem);
     box-sizing: border-box;
     overflow-wrap: anywhere;
     color: inherit;
@@ -53,12 +65,12 @@
 
   &[data-content-align='left'] &_content { justify-content: flex-start; text-align: left; }
   &[data-content-align='right'] &_content { justify-content: flex-end; text-align: right; }
-  &_multiple &_content { padding: 0.75rem 2.5rem 1.75rem; }
+  &_multiple &_content { padding: var(--top-banner-space-0-75rem) var(--top-banner-space-2-5rem) var(--top-banner-space-1-75rem); }
 
   .carousel_toggle {
     top: auto;
-    bottom: 0.25rem;
-    right: 0.25rem;
+    bottom: var(--top-banner-offset-0-25rem);
+    right: var(--top-banner-offset-0-25rem);
   }
 
   .swiper-slide { width: 100%; }
@@ -67,7 +79,7 @@
     display: flex;
     flex: 0 0 auto;
     align-items: center;
-    gap: 0.75rem;
+    gap: var(--top-banner-space-0-75rem);
     .checkbox { font-size: var(--text-size-xs); }
   }
 
@@ -76,8 +88,8 @@
     align-items: center;
     justify-content: center;
     flex: 0 0 auto;
-    width: 2rem;
-    height: 2rem;
+    width: var(--top-banner-size-2rem);
+    height: var(--top-banner-size-2rem);
     padding: 0;
     border: 0;
     border-radius: var(--radius-sm);
@@ -88,10 +100,10 @@
     &:hover { background: var(--color-surface); }
   }
 
-  @media (max-width: 639px) {
-    &_inner { flex-wrap: wrap; gap: 0; padding-inline: 0.75rem; }
+  @media (max-width: ($breakpoint-sm - 1px)) {
+    &_inner { flex-wrap: wrap; gap: 0; padding-inline: var(--top-banner-space-0-75rem); }
     &_body { flex-basis: 100%; }
-    &_actions { width: 100%; justify-content: flex-end; padding-bottom: 0.5rem; }
+    &_actions { width: 100%; justify-content: flex-end; padding-bottom: var(--top-banner-space-0-5rem); }
   }
 }
 
@@ -100,18 +112,18 @@
   color: #fff;
   background: #171717;
   border-bottom: 0;
-  font-size: 14px;
+  font-size: var(--font-size-base);
   line-height: 1.5;
 
-  .top-banner_inner { flex-wrap: nowrap; gap: 1rem; }
+  .top-banner_inner { flex-wrap: nowrap; gap: var(--top-banner-space-1rem); }
   .top-banner_body { flex-basis: auto; }
   .top-banner_content {
     display: grid;
     justify-content: stretch;
-    padding: 10px 2px;
+    padding: var(--space-10) var(--space-2);
     overflow: hidden;
     text-align: left;
-    outline-offset: -2px;
+    outline-offset: calc(-1 * var(--focus-outline-offset));
   }
   .top-banner_notice-text, .top-banner_notice-previous { display: block; grid-area: 1 / 1; }
   .top-banner_notice-previous { animation: notice-roll-out 400ms ease-out forwards; pointer-events: none; }
@@ -119,8 +131,8 @@
   &[data-count]:not([data-count='1']) .top-banner_notice-text { animation: notice-roll-up 400ms ease-out; }
   &:focus-within .top-banner_notice-text { animation: none; }
   .top-banner_close {
-    width: 32px;
-    height: 32px;
+    width: var(--size-32);
+    height: var(--size-32);
     &:hover { background: #383838; }
   }
   .top-banner_notice-help {

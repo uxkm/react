@@ -1,6 +1,10 @@
 @use 'common/global' as *;
 
 :root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --back-top-size-16rem: 16rem;
+  --back-top-size-18rem: 18rem;
+
   // ----- Back Top — structure
   --back-top-z-index: 20;
   --back-top-size-sm: 2rem;
@@ -216,7 +220,7 @@
 
   &_demo-scroll {
     width: 100%;
-    max-height: 16rem;
+    max-height: var(--back-top-size-16rem);
     overflow-y: auto;
     border: 1px solid var(--color-border-subtle);
     border-radius: $radius-md;
@@ -225,7 +229,7 @@
 
   &_demo-content {
     // 뷰포트(16rem)보다 충분히 길게 — visibility-height 스크롤 가능
-    min-height: calc(16rem + 18rem);
+    min-height: calc(var(--back-top-size-16rem) + var(--back-top-size-18rem));
     padding: var(--space-lg);
 
     > p {

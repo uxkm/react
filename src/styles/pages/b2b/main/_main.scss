@@ -1,7 +1,16 @@
+:root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --b2b-main-offset-100px: 100px;
+  --b2b-main-offset-140px: 140px;
+  --b2b-main-offset-88px: 88px;
+  --b2b-main-size-540px: 540px;
+  --b2b-main-space-86px: 86px;
+}
+
 .main {
   position: relative;
   isolation: isolate;
-  padding: 86px 0 120px;
+  padding: var(--b2b-main-space-86px) 0 var(--space-120);
   color: #222;
   font-family: Pretendard, sans-serif;
 
@@ -28,14 +37,14 @@
 }
 
 .main-hero {
-  margin-bottom: 48px;
+  margin-bottom: var(--space-48);
   text-align: center;
 
   h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 52px;
+    font-size: var(--font-size-52);
     font-weight: 700;
     line-height: 1.3;
     letter-spacing: -2.4px;
@@ -45,24 +54,24 @@
   &_emoji {
     display: inline-flex;
     align-items: center;
-    margin-inline: 4px;
-    font-size: 56px;
+    margin-inline: var(--space-4);
+    font-size: var(--font-size-56);
     letter-spacing: 0;
   }
 
   &_brand {
     display: inline-block;
-    margin-left: 16px;
-    padding: 3px 28px 7px;
+    margin-left: var(--space-16);
+    padding: var(--space-3) var(--space-28) var(--space-7);
     border: 1px solid #d6d6db;
-    border-radius: 80px;
+    border-radius: var(--radius-80);
   }
 
   p {
-    margin-top: 20px;
+    margin-top: var(--space-20);
     color: #62656a;
-    font-size: 22px;
-    line-height: 32px;
+    font-size: var(--font-size-22);
+    line-height: var(--line-height-32);
     letter-spacing: -0.6px;
   }
 
@@ -75,8 +84,8 @@
 .main-cards {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-template-rows: 440px 112px;
-  gap: 16px;
+  grid-template-rows: var(--size-440) var(--size-112);
+  gap: var(--space-16);
 
   > div {
     min-width: 0;
@@ -111,7 +120,7 @@
   height: 100%;
   min-width: 0;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: var(--radius-20);
 
   .carousel,
   .carousel_viewport,
@@ -131,10 +140,10 @@
   .swiper-button-prev,
   .swiper-button-next {
     top: auto;
-    bottom: 24px;
+    bottom: var(--space-24);
     left: auto;
-    width: 32px;
-    height: 40px;
+    width: var(--size-32);
+    height: var(--size-40);
     margin: 0;
     border: 0;
     background: rgb(16 35 65 / 26%);
@@ -144,31 +153,31 @@
   }
 
   .swiper-button-prev {
-    right: 140px;
-    border-radius: 24px 0 0 24px;
+    right: var(--b2b-main-offset-140px);
+    border-radius: var(--radius-24) 0 0 var(--radius-24);
   }
 
   .swiper-button-next {
-    right: 56px;
-    border-radius: 0 24px 24px 0;
+    right: var(--space-56);
+    border-radius: 0 var(--radius-24) var(--radius-24) 0;
   }
 
   .swiper-pagination {
     position: absolute;
     left: auto;
-    right: 88px;
-    bottom: 24px;
+    right: var(--b2b-main-offset-88px);
+    bottom: var(--space-24);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
-    width: 52px;
-    height: 40px;
+    gap: var(--space-5);
+    width: var(--size-52);
+    height: var(--size-40);
     margin: 0;
     background: rgb(16 35 65 / 26%);
     color: #a9b8cf;
-    font-size: 16px;
-    line-height: 24px;
+    font-size: var(--font-size-xl);
+    line-height: var(--line-height-24);
     z-index: 11;
   }
 
@@ -179,10 +188,10 @@
 
   .carousel_toggle {
     top: auto;
-    right: 12px;
-    bottom: 24px;
-    width: 36px;
-    height: 40px;
+    right: var(--space-12);
+    bottom: var(--space-24);
+    width: var(--size-36);
+    height: var(--size-40);
     border: 0;
     background: rgb(16 35 65 / 26%);
     color: #fff;
@@ -205,7 +214,7 @@
 .main-quick-links {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
+  gap: var(--space-12);
   height: 100%;
 }
 
@@ -290,11 +299,11 @@
 }
 
 .main-insights {
-  margin-top: 160px;
-  scroll-margin-top: 100px;
+  margin-top: var(--space-160);
+  scroll-margin-top: var(--b2b-main-offset-100px);
 
   h2 {
-    font-size: 48px;
+    font-size: var(--font-size-48);
     font-weight: 700;
     line-height: 1.4;
     letter-spacing: -1.6px;
@@ -306,24 +315,24 @@
   }
 
   &_headline {
-    margin-bottom: 14px;
-    gap: 12px;
+    margin-bottom: var(--space-14);
+    gap: var(--space-12);
   }
 
   &_brand {
     display: inline-flex;
     align-items: center;
-    gap: 16px;
-    padding-left: 28px;
+    gap: var(--space-16);
+    padding-left: var(--space-28);
     border: 1px solid #ddd;
-    border-radius: 80px;
+    border-radius: var(--radius-80);
     line-height: 1;
     white-space: nowrap;
   }
 
   &_brand > span {
-    padding: 14px 24px;
-    border-radius: 80px;
+    padding: var(--space-14) var(--space-24);
+    border-radius: var(--radius-80);
     background: #b74428;
     color: #fff;
     font-weight: 400;
@@ -334,12 +343,12 @@
     border: 0;
     border-radius: 0;
     background: transparent;
-    --carousel-nav-size: 48px;
+    --carousel-nav-size: var(--size-48);
   }
 
   .swiper {
     min-height: 0;
-    padding-top: 72px;
+    padding-top: var(--space-72);
     border-radius: 0;
   }
 
@@ -354,7 +363,7 @@
   }
 
   .swiper-button-prev {
-    right: 60px;
+    right: var(--space-60);
     left: auto;
   }
 
@@ -373,21 +382,21 @@
 }
 
 .main-cases {
-  margin-top: 160px;
-  scroll-margin-top: 100px;
+  margin-top: var(--space-160);
+  scroll-margin-top: var(--b2b-main-offset-100px);
 
   > h2 {
-    margin-bottom: 48px;
-    font-size: 48px;
+    margin-bottom: var(--space-48);
+    font-size: var(--font-size-48);
     font-weight: 700;
     line-height: 1.4;
     letter-spacing: -1.6px;
   }
 
   .carousel {
-    width: max(100vw, 1440px);
+    width: max(100vw, var(--size-1440));
     max-width: none;
-    margin-left: calc((100% - max(100vw, 1440px)) / 2);
+    margin-left: calc((100% - max(100vw, var(--size-1440))) / 2);
     border: 0;
     border-radius: 0;
     background: transparent;
@@ -395,19 +404,19 @@
 
   .carousel .swiper {
     min-height: 0;
-    padding-block: 12px;
+    padding-block: var(--space-12);
     border-radius: 0;
   }
 
   .carousel .swiper .swiper-slide {
-    width: clamp(440px, 28vw, 540px);
-    height: 600px !important;
+    width: clamp(var(--size-440), 28vw, var(--b2b-main-size-540px));
+    height: var(--size-600) !important;
     max-height: none;
     aspect-ratio: auto;
   }
 
   .carousel .swiper .swiper-slide > .card_testimonial {
-    border-radius: 24px;
+    border-radius: var(--radius-24);
   }
 
   .swiper-slide-active .card_testimonial {
@@ -422,24 +431,24 @@
   }
 
   .swiper-button-prev {
-    left: 24px;
+    left: var(--space-24);
   }
 
   .swiper-button-next {
-    right: 24px;
+    right: var(--space-24);
   }
 }
 
 .main-callouts {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 28px;
-  margin-top: 120px;
-  scroll-margin-top: 100px;
+  gap: var(--space-28);
+  margin-top: var(--space-120);
+  scroll-margin-top: var(--b2b-main-offset-100px);
 }
 
 .main.main-section-preview {
-  padding: 40px 0;
+  padding: var(--space-40) 0;
 
   :is(.main-hero, .main-insights, .main-cases, .main-callouts) {
     margin-top: 0;
@@ -447,7 +456,7 @@
   }
 
   .main-section-preview_card {
-    width: calc((100% - 28px) / 2);
+    width: calc((100% - var(--size-28)) / 2);
   }
 
 }
@@ -457,23 +466,23 @@
   &_insights-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 28px;
-    padding-top: 72px;
+    gap: var(--space-28);
+    padding-top: var(--space-72);
   }
 
   &_cases-track {
     display: flex;
     justify-content: center;
-    gap: 32px;
-    padding-block: 12px;
+    gap: var(--space-32);
+    padding-block: var(--space-12);
     overflow: hidden;
   }
 
   &_case {
-    flex: 0 0 clamp(440px, 28vw, 540px);
-    width: clamp(440px, 28vw, 540px);
-    height: 600px;
-    border-radius: 24px;
+    flex: 0 0 clamp(var(--size-440), 28vw, var(--b2b-main-size-540px));
+    width: clamp(var(--size-440), 28vw, var(--b2b-main-size-540px));
+    height: var(--size-600);
+    border-radius: var(--radius-24);
   }
 }
 
@@ -500,5 +509,5 @@
 }
 
 // 메인 카드 안의 브랜드 문구·소셜 버튼 그룹 배치만 관리합니다.
-.card_callout-brand { display: inline-flex; align-items: center; gap: 5px; }
-.card_callout-socials { display: flex; align-items: center; gap: 16px; }
+.card_callout-brand { display: inline-flex; align-items: center; gap: var(--space-5); }
+.card_callout-socials { display: flex; align-items: center; gap: var(--space-16); }

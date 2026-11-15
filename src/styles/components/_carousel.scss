@@ -1,6 +1,13 @@
 @use 'common/global' as *;
 
 :root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --carousel-size-0-25rem: 0.25rem;
+  --carousel-size-1-5rem: 1.5rem;
+  --carousel-size-18rem: 18rem;
+  --carousel-size-24rem: 24rem;
+  --carousel-size-4-5rem: 4.5rem;
+
   // ----- Carousel
   --carousel-font-size: var(--text-size-sm);
   --carousel-height: 16rem;
@@ -318,8 +325,8 @@
   }
 
   .swiper-pagination-bullet {
-    min-width: 24px;
-    min-height: 24px;
+    min-width: var(--size-24);
+    min-height: var(--size-24);
     background: transparent;
     position: relative;
     opacity: 1;
@@ -331,7 +338,7 @@
       transform: translate(-50%, -50%);
       width: var(--carousel-dot-size);
       height: var(--carousel-dot-size);
-      border-radius: 999px;
+      border-radius: var(--radius-pill);
       background: var(--carousel-dot-bg);
     }
     &.swiper-pagination-bullet-active::after {
@@ -375,7 +382,7 @@
     .swiper-pagination-progressbar {
       top: auto;
       bottom: 0;
-      height: 0.25rem;
+      height: var(--carousel-size-0-25rem);
     }
   }
 
@@ -393,8 +400,8 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 1.5rem;
-      height: 1.5rem;
+      width: var(--carousel-size-1-5rem);
+      height: var(--carousel-size-1-5rem);
       margin: 0 !important;
       border-radius: $radius-pill;
       font-size: var(--text-size-xs);
@@ -405,7 +412,7 @@
     }
 
     .swiper-pagination-bullet-active {
-      width: 1.5rem;
+      width: var(--carousel-size-1-5rem);
       color: var(--color-surface);
       background: var(--carousel-dot-bg-active);
     }
@@ -437,7 +444,7 @@
       );
       height: auto !important;
       aspect-ratio: var(--carousel-coverflow-aspect-ratio);
-      max-height: min(24rem, 75svh);
+      max-height: min(var(--carousel-size-24rem), 75svh);
       flex-shrink: 0;
       box-sizing: border-box;
       align-items: stretch;
@@ -556,14 +563,14 @@
 
       > .card {
         width: 100%;
-        min-height: 4.5rem;
+        min-height: var(--carousel-size-4-5rem);
         border-radius: $radius-md;
       }
 
       &.swiper-slide-thumb-active {
         opacity: 1;
-        outline: 2px solid var(--color-accent);
-        outline-offset: -2px;
+        outline: var(--focus-outline-width) solid var(--color-accent);
+        outline-offset: calc(-1 * var(--focus-outline-offset));
       }
     }
   }
@@ -625,7 +632,7 @@
     max-width: 100%;
 
     .swiper-slide {
-      width: min(18rem, 78%);
+      width: min(var(--carousel-size-18rem), 78%);
       height: auto;
 
       > .card {

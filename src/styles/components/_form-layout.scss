@@ -1,6 +1,9 @@
 @use 'common/global' as *;
 
 :root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --form-layout-space-0-5rem: 0.5rem;
+
   // ----- Form layout
   --form-label-width: 7.5rem;
   --form-label-width-sm: 5rem;
@@ -44,7 +47,7 @@
 
     .form_field-label {
       margin-bottom: 0;
-      padding-top: 0.5rem;
+      padding-top: var(--form-layout-space-0-5rem);
       text-align: right;
     }
 

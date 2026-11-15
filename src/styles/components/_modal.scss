@@ -1,6 +1,12 @@
 @use 'common/global' as *;
 
 :root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --modal-size-14rem: 14rem;
+  --modal-size-16rem: 16rem;
+  --modal-size-28rem: 28rem;
+  --modal-size-32rem: 32rem;
+
   // ----- Modal — structure
   --modal-z-index: 300;
   --modal-margin: var(--space-md);
@@ -370,8 +376,8 @@
     position: relative;
     flex: 1 1 100%;
     width: 100%;
-    height: 32rem;
-    min-height: 28rem;
+    height: var(--modal-size-32rem);
+    min-height: var(--modal-size-28rem);
     border: 1px solid var(--color-border-subtle);
     border-radius: $radius-md;
     overflow: hidden;
@@ -426,8 +432,8 @@
   }
 
   &_demo-frame-compact {
-    height: 16rem;
-    min-height: 14rem;
+    height: var(--modal-size-16rem);
+    min-height: var(--modal-size-14rem);
   }
 
   &_demo-stack {

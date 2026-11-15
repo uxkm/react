@@ -2,14 +2,14 @@
 
 :root {
   // ----- Slider — structure
-  --slider-track-height: 4px;
+  --slider-track-height: var(--size-4);
   --slider-track-height-sm: 3px;
-  --slider-track-height-lg: 6px;
-  --slider-thumb-size: 14px;
-  --slider-thumb-size-sm: 12px;
-  --slider-thumb-size-lg: 18px;
-  --slider-thumb-border-width: 2px;
-  --slider-radius: 999px;
+  --slider-track-height-lg: var(--size-6);
+  --slider-thumb-size: var(--size-14);
+  --slider-thumb-size-sm: var(--size-12);
+  --slider-thumb-size-lg: var(--size-18);
+  --slider-thumb-border-width: var(--size-2);
+  --slider-radius: var(--radius-pill);
   --slider-width: 100%;
   --slider-max-width: var(--input-max-width);
   --slider-gap: var(--space-sm);

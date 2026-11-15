@@ -1,50 +1,52 @@
+@use 'foundations/variables' as *;
+
 // Card 유형 예제의 배치 크기만 지정합니다. 유형 구조·스킨은 공통 Card 스타일입니다.
 .demo-card-type {
   width: 100%;
-  max-width: 640px;
+  max-width: var(--size-640);
 
-  &_image { height: 440px; }
-  &_quick-link { height: 160px; max-width: 400px; }
-  &_content { max-width: 400px; }
-  &_course { max-width: 400px; }
-  &_testimonial { max-width: 520px; }
-  &_overlay, &_news { max-width: 400px; }
-  &_feature { max-width: 800px; }
-  &_webzine { max-width: 800px; }
+  &_image { height: var(--size-440); }
+  &_quick-link { height: var(--size-160); max-width: var(--size-400); }
+  &_content { max-width: var(--size-400); }
+  &_course { max-width: var(--size-400); }
+  &_testimonial { max-width: var(--size-520); }
+  &_overlay, &_news { max-width: var(--size-400); }
+  &_feature { max-width: var(--size-800); }
+  &_webzine { max-width: var(--size-800); }
   &:is(.demo-card-type_image, .demo-card-type_quick-link) > .card { height: 100%; }
 }
 
 .demo-card-composition {
   width: 100%;
   min-width: 0;
-  max-width: 720px;
+  max-width: var(--size-720);
 
-  &_recommendations { max-width: 400px; }
-  &_services .card_quick-link { min-height: 160px; }
+  &_recommendations { max-width: var(--size-400); }
+  &_services .card_quick-link { min-height: var(--size-160); }
 }
 
 .demo-corporate-feed {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+  gap: var(--space-20);
   align-items: start;
 
-  @media (max-width: 767px) { grid-template-columns: minmax(0, 1fr); }
+  @media (max-width: ($breakpoint-md - 1px)) { grid-template-columns: minmax(0, 1fr); }
 }
 
-.demo-card-composition_corporate-resources .card_quick-link { min-height: 160px; }
+.demo-card-composition_corporate-resources .card_quick-link { min-height: var(--size-160); }
 
-@media (max-width: 767px) {
+@media (max-width: ($breakpoint-md - 1px)) {
   .demo-card-type {
-    .card_promotion { padding: 28px 20px; }
-    .card_promotion h2 { font-size: 32px; }
-    .card_image { padding: 28px 20px; }
-    .card_image p { font-size: 17px; }
-    .card_image h2 { font-size: 30px; }
-    .card_callout { padding: 28px 20px; }
-    .card_callout-title { font-size: 28px; }
-    .card_callout-description { font-size: 18px; }
-    .stat_testimonial { padding: 28px 20px; }
-    .stat_testimonial .stat_value { font-size: 28px; }
+    .card_promotion { padding: var(--space-28) var(--space-20); }
+    .card_promotion h2 { font-size: var(--font-size-5xl); }
+    .card_image { padding: var(--space-28) var(--space-20); }
+    .card_image p { font-size: var(--font-size-17); }
+    .card_image h2 { font-size: var(--font-size-30); }
+    .card_callout { padding: var(--space-28) var(--space-20); }
+    .card_callout-title { font-size: var(--font-size-28); }
+    .card_callout-description { font-size: var(--font-size-2xl); }
+    .stat_testimonial { padding: var(--space-28) var(--space-20); }
+    .stat_testimonial .stat_value { font-size: var(--font-size-28); }
   }
 }

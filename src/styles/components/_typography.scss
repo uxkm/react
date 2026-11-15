@@ -43,7 +43,7 @@
   --typo-small-size: var(--text-size-sm);
   --typo-code-padding-y: 0.1em;
   --typo-code-padding-x: 0.35em;
-  --typo-code-radius: 4px;
+  --typo-code-radius: var(--radius-sm);
   --typo-blockquote-border-width: 3px;
 
   --typo-lead-size: var(--text-size-lg);
@@ -195,7 +195,7 @@
     &:focus-visible {
       outline: var(--focus-outline-width) solid var(--color-accent);
       outline-offset: var(--focus-outline-offset);
-      border-radius: 2px;
+      border-radius: var(--radius-2);
     }
   }
 

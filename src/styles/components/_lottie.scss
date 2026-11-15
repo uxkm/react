@@ -4,7 +4,7 @@
   // ----- Lottie
   --lottie-gap: var(--space-sm);
   --lottie-stage-min-height: 8rem;
-  --lottie-stage-radius: var(--radius-panel, 12px);
+  --lottie-stage-radius: var(--radius-panel, var(--radius-12));
   --lottie-stage-bg: transparent;
   --lottie-loading-size: var(--text-size-sm);
   --lottie-loading-color: var(--color-text-muted);

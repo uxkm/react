@@ -1,6 +1,10 @@
 @use 'common/global' as *;
 
 :root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --affix-size-14rem: 14rem;
+  --affix-size-18rem: 18rem;
+
   // ----- Affix — structure
   --affix-z-index: 10;
   --affix-bar-gap: var(--space-sm);
@@ -95,7 +99,7 @@
 
   &_demo-scroll {
     width: 100%;
-    max-height: 14rem;
+    max-height: var(--affix-size-14rem);
     overflow-y: auto;
     border: 1px solid var(--color-border-subtle);
     border-radius: $radius-md;
@@ -119,7 +123,7 @@
 
   &_demo-page {
     width: 100%;
-    max-height: 18rem;
+    max-height: var(--affix-size-18rem);
     overflow-y: auto;
     border: 1px solid var(--color-border-subtle);
     border-radius: $radius-md;

@@ -1,6 +1,10 @@
 @use 'common/global' as *;
 
 :root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --tooltip-size-12rem: 12rem;
+  --tooltip-size-14rem: 14rem;
+
   // ----- Tooltip — structure
   --tooltip-max-width: 16rem;
   --tooltip-padding-x: var(--space-sm);
@@ -10,7 +14,7 @@
   --tooltip-offset-md: var(--space-xs);
   --tooltip-offset-sm: 0.125rem;
   --tooltip-offset-lg: var(--space-sm);
-  --tooltip-arrow-size: 6px;
+  --tooltip-arrow-size: var(--size-6);
   --tooltip-inverse-bg: var(--color-text);
   --tooltip-inverse-text: var(--color-surface);
   --tooltip-close-size: 1.25rem;
@@ -29,7 +33,7 @@
   --tooltip-padding-x-lg: var(--space-md);
   --tooltip-padding-y-lg: 0.5rem;
   --tooltip-font-size-lg: var(--text-size-sm);
-  --tooltip-arrow-size-lg: 8px;
+  --tooltip-arrow-size-lg: var(--size-8);
 
 }
 
@@ -542,7 +546,7 @@
     position: relative;
     flex: 1 1 100%;
     width: 100%;
-    min-height: 12rem;
+    min-height: var(--tooltip-size-12rem);
     padding: var(--space-2xl) var(--space-xl);
     border: 1px solid var(--color-border-subtle);
     border-radius: $radius-md;
@@ -564,7 +568,7 @@
     align-items: center;
     justify-items: center;
     width: 100%;
-    min-height: 14rem;
+    min-height: var(--tooltip-size-14rem);
     padding: var(--space-2xl) var(--space-xl);
   }
 

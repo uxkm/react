@@ -1,6 +1,10 @@
 @use 'common/global' as *;
 
 :root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --stat-font-size-160px: 160px;
+  --stat-size-10rem: 10rem;
+
   // ----- Stat
   --stat-gap: var(--space-xs);
   --stat-label-size: var(--text-size-sm);
@@ -45,7 +49,7 @@
   &_value-row {
     display: flex;
     align-items: baseline;
-    gap: 2px;
+    gap: var(--space-2);
     flex-wrap: wrap;
   }
 
@@ -77,7 +81,7 @@
   &_trend {
     display: inline-flex;
     align-items: center;
-    gap: 2px;
+    gap: var(--space-2);
     font-size: var(--stat-desc-size);
     font-weight: 600;
     font-variant-numeric: tabular-nums;
@@ -181,16 +185,16 @@
 
   // 고객사례 유형: 라벨·인용문·작성자·원형 프로필.
   &_testimonial {
-    box-sizing: border-box; min-width: 0; height: 100%; min-height: 560px; gap: 0;
-    padding: 52px 48px 44px; border: 1px solid transparent; border-radius: 24px;
+    box-sizing: border-box; min-width: 0; height: 100%; min-height: var(--size-560); gap: 0;
+    padding: var(--space-52) var(--space-48) var(--space-44); border: 1px solid transparent; border-radius: var(--radius-24);
     background: #fff; color: #3485e3; font-family: inherit;
     &.is-selected { border-color: #4389e5; }
-    .stat_label { color: #256bc0; font-size: 20px; line-height: 28px; }
-    .stat_quote { flex: 1; min-width: 0; margin: 36px 0 56px; }
-    .stat_quote-mark { display: block; height: 96px; font-family: Arial, sans-serif; font-size: 160px; font-weight: 700; line-height: 1; }
-    .stat_value { display: block; color: inherit; font-size: 34px; font-weight: 700; line-height: 1.5; letter-spacing: -1.2px; white-space: pre-line; }
-    .stat_footer { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-    .stat_desc { color: #6c7075; font-size: 16px; line-height: 26px; letter-spacing: -0.5px; }
+    .stat_label { color: #256bc0; font-size: var(--font-size-3xl); line-height: var(--line-height-28); }
+    .stat_quote { flex: 1; min-width: 0; margin: var(--space-36) 0 var(--space-56); }
+    .stat_quote-mark { display: block; height: var(--size-96); font-family: Arial, sans-serif; font-size: var(--stat-font-size-160px); font-weight: 700; line-height: 1; }
+    .stat_value { display: block; color: inherit; font-size: var(--font-size-34); font-weight: 700; line-height: 1.5; letter-spacing: -1.2px; white-space: pre-line; }
+    .stat_footer { display: flex; align-items: center; justify-content: space-between; gap: var(--space-20); }
+    .stat_desc { color: #6c7075; font-size: var(--font-size-xl); line-height: var(--line-height-26); letter-spacing: -0.5px; }
   }
 
   &_borderless {
@@ -206,7 +210,7 @@
   // 그룹
   &_group {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(var(--stat-size-10rem), 1fr));
     gap: var(--stat-group-gap);
     width: 100%;
   }

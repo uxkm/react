@@ -6,7 +6,7 @@
   --checkbox-size-sm: 0.875rem;
   --checkbox-size-lg: 1.125rem;
   --checkbox-border-width: 1px;
-  --checkbox-radius: 4px;
+  --checkbox-radius: var(--radius-sm);
   --checkbox-gap: var(--space-sm);
   --checkbox-gap-sm: 0.375rem;
   --checkbox-gap-lg: 0.625rem;

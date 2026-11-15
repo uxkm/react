@@ -1,6 +1,9 @@
 @use 'common/global' as *;
 
 :root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --button-space-0-35rem: 0.35rem;
+
   // ----- Button — structure
   --btn-padding-y: 0.5rem;
   --btn-padding-x: 1rem;
@@ -53,7 +56,7 @@
 
   // ----- Button — select trigger
   --btn-select-min-width: 10rem;
-  --btn-select-max-width: 320px;
+  --btn-select-max-width: var(--size-320);
   --btn-select-padding-right: 0.65rem;
   --btn-select-padding-right-sm: 0.5rem;
   --btn-select-padding-right-lg: 0.85rem;
@@ -272,7 +275,7 @@
     min-width: var(--btn-select-min-width);
     max-width: var(--btn-select-max-width);
     // 캐럿이 flex 자식이라 우측 padding 을 넓혀 테두리에 붙지 않게 함
-    padding-right: calc(var(--btn-select-padding-right) + 0.35rem);
+    padding-right: calc(var(--btn-select-padding-right) + var(--button-space-0-35rem));
     font-weight: var(--btn-font-weight-normal);
     color: var(--color-text);
     background: var(--color-bg);
@@ -296,11 +299,11 @@
     }
 
     &.btn_sm {
-      padding-right: calc(var(--btn-select-padding-right-sm) + 0.35rem);
+      padding-right: calc(var(--btn-select-padding-right-sm) + var(--button-space-0-35rem));
     }
 
     &.btn_lg {
-      padding-right: calc(var(--btn-select-padding-right-lg) + 0.35rem);
+      padding-right: calc(var(--btn-select-padding-right-lg) + var(--button-space-0-35rem));
     }
 
     &.is-open .btn_select-caret,
@@ -731,19 +734,19 @@
 }
 
 // 데이터 카드 등에서 재사용하는 CTA·소셜 유형. 카드에는 배치만 둡니다.
-.btn.btn_xl { min-height: 56px; padding: 12px 32px; font-size: 18px; line-height: 28px; }
+.btn.btn_xl { min-height: var(--size-56); padding: var(--space-12) var(--space-32); font-size: var(--font-size-2xl); line-height: var(--line-height-28); }
 .btn.btn_arrow, .btn.btn_arrow-pill, .btn.btn_social { display: inline-flex; }
 .btn.btn_arrow {
-  padding: 0; gap: 16px; border: 0; background: transparent; color: #fff;
-  font-size: 16px; font-weight: 600; line-height: 24px; border-radius: 50px;
+  padding: 0; gap: var(--space-16); border: 0; background: transparent; color: #fff;
+  font-size: var(--font-size-xl); font-weight: 600; line-height: var(--line-height-24); border-radius: var(--radius-50);
 }
 .btn_arrow-circle {
   display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center;
-  width: 44px; height: 44px; border-radius: 50%; background: rgb(255 255 255 / 75%); color: #6f798c;
+  width: var(--size-44); height: var(--size-44); border-radius: 50%; background: rgb(255 255 255 / 75%); color: #6f798c;
 }
 .btn.btn_arrow-pill {
-  gap: 12px; padding: 4px 4px 4px 20px; border: 0; border-radius: 50px;
-  background: rgb(94 144 184 / 42%); color: #fff; font-size: 15px; line-height: 24px;
+  gap: var(--space-12); padding: var(--space-4) var(--space-4) var(--space-4) var(--space-20); border: 0; border-radius: var(--radius-50);
+  background: rgb(94 144 184 / 42%); color: #fff; font-size: var(--font-size-lg); line-height: var(--line-height-24);
   &.btn_tone-lavender { background: rgb(134 111 176 / 38%); }
 }
 .btn.btn_gradient, .btn.btn_gradient:hover:not(:disabled):not(.is-disabled):not(.is-loading) {
@@ -751,11 +754,11 @@
 }
 .btn.btn_soft-outline {
   border-color: #d9d9d9; background: transparent; color: #30383e;
-  &.btn_lg { min-height: 56px; padding: 8px 20px; font-size: 18px; line-height: 28px; }
-  .btn_label { display: inline-flex; align-items: center; gap: 5px; }
+  &.btn_lg { min-height: var(--size-56); padding: var(--space-8) var(--space-20); font-size: var(--font-size-2xl); line-height: var(--line-height-28); }
+  .btn_label { display: inline-flex; align-items: center; gap: var(--space-5); }
 }
 .btn.btn_social {
-  width: 40px; height: 40px; padding: 0; border: 0; border-radius: 50%; background: transparent;
+  width: var(--size-40); height: var(--size-40); padding: 0; border: 0; border-radius: 50%; background: transparent;
   &.btn_social-naver { color: #03c75a; }
   &.btn_social-youtube { color: #ef3041; }
   &.btn_social-linkedin { color: #0a66c2; }

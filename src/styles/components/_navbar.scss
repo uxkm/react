@@ -1,6 +1,12 @@
 @use 'common/global' as *;
 
 :root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --navbar-size-1-5rem: 1.5rem;
+  --navbar-size-12rem: 12rem;
+  --navbar-size-2-25rem: 2.25rem;
+  --navbar-space-0-35rem: 0.35rem;
+
   // ----- Navbar — structure
   --navbar-height: var(--header-height);
   --navbar-height-sm: 3rem;
@@ -119,8 +125,8 @@
 
     &-icon {
       flex-shrink: 0;
-      width: 1.5rem;
-      height: 1.5rem;
+      width: var(--navbar-size-1-5rem);
+      height: var(--navbar-size-1-5rem);
       color: var(--color-accent-text);
     }
   }
@@ -129,8 +135,8 @@
     display: none;
     align-items: center;
     justify-content: center;
-    width: 2.25rem;
-    height: 2.25rem;
+    width: var(--navbar-size-2-25rem);
+    height: var(--navbar-size-2-25rem);
     padding: 0;
     color: var(--color-text);
     background: transparent;
@@ -236,8 +242,8 @@
     min-width: 0;
 
     .input {
-      padding-top: 0.35rem;
-      padding-bottom: 0.35rem;
+      padding-top: var(--navbar-space-0-35rem);
+      padding-bottom: var(--navbar-space-0-35rem);
       font-size: var(--text-size-sm);
     }
   }
@@ -252,7 +258,7 @@
   }
 
   &_demo-scroll {
-    max-height: 12rem;
+    max-height: var(--navbar-size-12rem);
     overflow-y: auto;
     margin-inline: var(--space-xl);
     border: 1px solid var(--color-border-subtle);

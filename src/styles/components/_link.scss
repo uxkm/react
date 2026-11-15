@@ -1,6 +1,9 @@
 @use 'common/global' as *;
 
 :root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --link-size-1-125rem: 1.125rem;
+
   // ----- Link
   --link-gap: var(--space-xs);
   --link-font-weight: 500;
@@ -147,8 +150,8 @@
     @include square-size(var(--link-icon-only-size));
 
     .link_icon {
-      width: 1.125rem;
-      height: 1.125rem;
+      width: var(--link-size-1-125rem);
+      height: var(--link-size-1-125rem);
     }
 
     &:hover:not(.is-disabled) {

@@ -1,6 +1,10 @@
 @use 'common/global' as *;
 
 :root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --snackbar-size-8rem: 8rem;
+  --snackbar-space-1rem: 1rem;
+
   // ----- Snackbar — structure
   --snackbar-min-width: 18rem;
   --snackbar-max-width: 36rem;
@@ -191,7 +195,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin: calc((var(--snackbar-close-size) - 1rem) * -0.25);
+    margin: calc((var(--snackbar-close-size) - var(--snackbar-space-1rem)) * -0.25);
     padding: 0;
     border: none;
     border-radius: var(--radius-sm);
@@ -341,7 +345,7 @@
 
   &-controls {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(var(--snackbar-size-8rem), 1fr));
     gap: var(--space-sm);
   }
 
@@ -353,7 +357,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: $breakpoint-xs) {
   .snackbar {
     width: 100%;
     min-width: 0;
@@ -393,7 +397,7 @@
 }
 
 // PageSnackbar는 페이지 호출 위치와 관계없이 레이아웃 마지막에 표시합니다.
-.page-snackbar { --snackbar-region-inset-block-end: calc(16px + env(safe-area-inset-bottom, 0px)); }
+.page-snackbar { --snackbar-region-inset-block-end: calc(var(--space-16) + env(safe-area-inset-bottom, 0px)); }
 
 // 고정 스낵바가 열려 있는 동안 푸터 배경 안에 추가 공간을 확보한다.
 .app-layout_tree:has(> .page-snackbar[data-reserve-footer-space] > .snackbar) > footer::after {
@@ -408,21 +412,21 @@
   width: max-content;
   min-width: 0;
   max-width: 100%;
-  gap: 12px;
-  padding: 8px 12px 8px 24px;
+  gap: var(--space-12);
+  padding: var(--space-8) var(--space-12) var(--space-8) var(--space-24);
   border: 1px solid #fff;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: #f7f8ee;
   box-shadow: 0 4px 20px rgb(0 0 0 / 12%), inset 0 0 0 1px #e5e7dc;
   color: #555;
   font-family: Pretendard, sans-serif;
-  font-size: 16px;
+  font-size: var(--font-size-xl);
   line-height: 1.5;
 
-  .snackbar_message { display: flex; align-items: center; gap: 16px; }
-  .snackbar_close { width: 32px; height: 32px; margin: 0; color: #666; }
-  .snackbar_close svg { width: 16px; height: 16px; }
-  a:focus-visible, button:focus-visible { outline: 2px solid #7950e8; outline-offset: 2px; }
+  .snackbar_message { display: flex; align-items: center; gap: var(--space-16); }
+  .snackbar_close { width: var(--size-32); height: var(--size-32); margin: 0; color: #666; }
+  .snackbar_close svg { width: var(--size-16); height: var(--size-16); }
+  a:focus-visible, button:focus-visible { outline: var(--focus-outline-width) solid #7950e8; outline-offset: var(--focus-outline-offset); }
 }
 
 .snackbar_promotion {
@@ -432,27 +436,27 @@
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    gap: 4px;
-    min-height: 44px;
-    padding: 0 20px;
-    border-radius: 999px;
+    gap: var(--space-4);
+    min-height: var(--size-44);
+    padding: 0 var(--space-20);
+    border-radius: var(--radius-pill);
     background: linear-gradient(110deg, #9864ee, #d255e4);
     color: #fff;
-    font-size: 14px;
+    font-size: var(--font-size-base);
     font-weight: 600;
     text-decoration: none;
     &:hover { background: linear-gradient(110deg, #8150d6, #b63dca); color: #fff; }
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: ($breakpoint-md - 1px)) {
   .snackbar.snackbar_promotion {
     max-width: 100%;
-    padding: 12px 8px 12px 16px;
-    border-radius: 24px;
-    font-size: 13px;
-    .snackbar_message { flex-wrap: wrap; gap: 8px; }
+    padding: var(--space-12) var(--space-8) var(--space-12) var(--space-16);
+    border-radius: var(--radius-24);
+    font-size: var(--font-size-md);
+    .snackbar_message { flex-wrap: wrap; gap: var(--space-8); }
     .snackbar_close { align-self: flex-start; }
   }
-  .snackbar_promotion .snackbar_action > a, .snackbar_promotion .snackbar_action > button { min-height: 44px; padding-inline: 16px; font-size: 13px; }
+  .snackbar_promotion .snackbar_action > a, .snackbar_promotion .snackbar_action > button { min-height: var(--size-44); padding-inline: var(--space-16); font-size: var(--font-size-md); }
 }

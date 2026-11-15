@@ -1,10 +1,15 @@
 @use 'common/global' as *;
 
 :root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --menu-size-1-25rem: 1.25rem;
+  --menu-size-10rem: 10rem;
+  --menu-size-12rem: 12rem;
+
   // ----- Menu — structure
   --menu-width: 16rem;
   --menu-padding: var(--space-sm);
-  --menu-gap: 2px;
+  --menu-gap: var(--space-2);
   --menu-font-size: var(--text-size-sm);
   --menu-item-padding-y: 0.5rem;
   --menu-item-padding-x: 0.75rem;
@@ -224,7 +229,7 @@
         top: calc(100% + #{$space-xs});
         left: 0;
         z-index: 10;
-        min-width: 10rem;
+        min-width: var(--menu-size-10rem);
         padding: $space-xs;
         border: 1px solid var(--color-border);
         border-radius: $radius-md;
@@ -235,7 +240,7 @@
 
     .menu_divider {
       width: 1px;
-      height: 1.25rem;
+      height: var(--menu-size-1-25rem);
       margin: 0 $space-xs;
     }
 
@@ -255,11 +260,11 @@
 
   &_demo-sidebar {
     flex: 0 0 var(--menu-width);
-    min-width: 12rem;
+    min-width: var(--menu-size-12rem);
   }
 
   &_demo-content {
-    flex: 1 1 12rem;
+    flex: 1 1 var(--menu-size-12rem);
     min-width: 0;
     padding: var(--space-lg);
     border: 1px solid var(--color-border-subtle);

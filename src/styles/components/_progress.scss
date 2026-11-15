@@ -1,10 +1,13 @@
 @use 'common/global' as *;
 
 :root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --progress-size-2-5rem: 2.5rem;
+
   // ----- Progress
-  --progress-height: 8px;
-  --progress-height-sm: 4px;
-  --progress-height-lg: 12px;
+  --progress-height: var(--size-8);
+  --progress-height-sm: var(--size-4);
+  --progress-height-lg: var(--size-12);
   --progress-radius: var(--radius-pill);
   --progress-max-width: var(--input-max-width);
   --progress-gap: var(--space-sm);
@@ -270,7 +273,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-width: 2.5rem;
+      min-width: var(--progress-size-2-5rem);
       min-height: var(--progress-height);
       padding: 0 var(--space-sm);
       font-size: var(--progress-inside-size);

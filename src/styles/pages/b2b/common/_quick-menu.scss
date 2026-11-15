@@ -1,8 +1,19 @@
+@use 'foundations/variables' as *;
+
+$quick-menu-collapse-height: 640px;
+
+:root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --b2b-quick-menu-size-1600px: 1600px;
+  --b2b-quick-menu-size-196px: 196px;
+  --b2b-quick-menu-size-272px: 272px;
+}
+
 // 우측 상단 서비스 바로가기. 좌표·푸터 경계는 공통 Floating이 관리합니다.
 .b2b-quick-floating {
   --floating-z-index: 25;
-  width: 112px;
-  max-height: calc(100dvh - 196px);
+  width: var(--size-112);
+  max-height: calc(100dvh - var(--b2b-quick-menu-size-196px));
   overflow: auto;
   scrollbar-width: thin;
   font-family: Pretendard, sans-serif;
@@ -14,9 +25,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: var(--space-24);
   width: 100%;
-  padding: 4px;
+  padding: var(--space-4);
   box-sizing: border-box;
   color: #333;
 
@@ -26,12 +37,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: var(--space-10);
     width: 100%;
     color: inherit;
     text-decoration: none;
     text-align: center;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     background: #fff;
   }
 
@@ -39,8 +50,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 72px;
-    height: 72px;
+    width: var(--size-72);
+    height: var(--size-72);
     flex-shrink: 0;
     border: 1px solid #e6e6e6;
     border-radius: 50%;
@@ -48,25 +59,25 @@
     transition: border-color 160ms ease, background-color 160ms ease;
   }
 
-  &_label { font-size: 13px; font-weight: 500; line-height: 1.5; letter-spacing: -0.5px; }
+  &_label { font-size: var(--font-size-md); font-weight: 500; line-height: 1.5; letter-spacing: -0.5px; }
   &_link:hover { color: #5e3bb7; }
   &_link:hover &_icon { border-color: #8060d9; background: #f8f5ff; }
-  &_link:focus-visible, .quick-menu_top:focus-visible { outline: 2px solid #7950e8; outline-offset: 2px; }
+  &_link:focus-visible, .quick-menu_top:focus-visible { outline: var(--focus-outline-width) solid #7950e8; outline-offset: var(--focus-outline-offset); }
 
   .quick-menu_top.back_top_btn {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    width: 64px;
-    height: 64px;
-    margin-top: 4px;
+    gap: var(--space-4);
+    width: var(--size-64);
+    height: var(--size-64);
+    margin-top: var(--space-4);
     padding: 0;
     border: 1px solid #e6e6e6;
     border-radius: 50%;
     background: #fff;
     box-shadow: none;
     color: #333;
-    font-size: 12px;
+    font-size: var(--font-size-sm);
     font-weight: 500;
     &:hover { border-color: #8060d9; color: #5e3bb7; background: #f8f5ff; }
   }
@@ -74,29 +85,29 @@
 
 // 본문 우측에 퀵메뉴 공간을 확보합니다. 독립 위젯 프리뷰에는 적용하지 않습니다.
 .app-layout:has(.b2b-quick-floating) .app-layout_main.p-content:not(.widget-preview) {
-  max-width: min(1600px, calc(100% - 272px));
+  max-width: min(var(--b2b-quick-menu-size-1600px), calc(100% - var(--b2b-quick-menu-size-272px)));
   .main-hero h1 { flex-wrap: wrap; white-space: normal; }
 }
 
-@media (max-width: 1439px) {
-  .b2b-quick-floating { width: 96px; }
-  .quick-menu { gap: 20px; }
-  .quick-menu_icon { width: 60px; height: 60px; }
-  .quick-menu_label { font-size: 12px; }
+@media (max-width: ($breakpoint-pc - 1px)) {
+  .b2b-quick-floating { width: var(--size-96); }
+  .quick-menu { gap: var(--space-20); }
+  .quick-menu_icon { width: var(--size-60); height: var(--size-60); }
+  .quick-menu_label { font-size: var(--font-size-sm); }
   .app-layout:has(.b2b-quick-floating) .app-layout_main.p-content:not(.widget-preview) {
-    max-width: calc(100% - 144px);
+    max-width: calc(100% - var(--size-144));
     margin-left: 0;
     margin-right: auto;
   }
 }
 
-@media (max-width: 767px), (max-height: 640px) {
-  .b2b-quick-floating { width: 72px; right: 8px !important; }
-  .quick-menu { gap: 14px; }
-  .quick-menu_icon { width: 48px; height: 48px; .icon { width: 24px; height: 24px; } }
-  .quick-menu_label { font-size: 11px; word-break: keep-all; }
-  .quick-menu .quick-menu_top.back_top_btn { width: 48px; height: 48px; margin-top: 0; font-size: 10px; gap: 0; }
-  .app-layout:has(.b2b-quick-floating) .app-layout_main.p-content:not(.widget-preview) { max-width: calc(100% - 88px); }
+@media (max-width: ($breakpoint-md - 1px)), (max-height: $quick-menu-collapse-height) {
+  .b2b-quick-floating { width: var(--size-72); right: var(--space-8) !important; }
+  .quick-menu { gap: var(--space-14); }
+  .quick-menu_icon { width: var(--size-48); height: var(--size-48); .icon { width: var(--size-24); height: var(--size-24); } }
+  .quick-menu_label { font-size: var(--font-size-xs); word-break: keep-all; }
+  .quick-menu .quick-menu_top.back_top_btn { width: var(--size-48); height: var(--size-48); margin-top: 0; font-size: var(--font-size-2xs); gap: 0; }
+  .app-layout:has(.b2b-quick-floating) .app-layout_main.p-content:not(.widget-preview) { max-width: calc(100% - var(--size-88)); }
 }
 
 @media (prefers-reduced-motion: reduce) {

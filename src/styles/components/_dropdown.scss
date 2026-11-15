@@ -1,6 +1,13 @@
 @use 'common/global' as *;
 
 :root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --dropdown-size-12rem: 12rem;
+  --dropdown-size-14rem: 14rem;
+  --dropdown-size-20rem: 20rem;
+  --dropdown-size-28rem: 28rem;
+  --dropdown-size-5-5rem: 5.5rem;
+
   // ----- Dropdown — structure
   --dropdown-min-width: 10rem;
   --dropdown-menu-width: auto;
@@ -232,7 +239,7 @@
     position: relative;
     flex: 1 1 100%;
     width: 100%;
-    min-height: 14rem;
+    min-height: var(--dropdown-size-14rem);
     padding: var(--space-2xl) var(--space-xl);
     border: 1px solid var(--color-border-subtle);
     border-radius: $radius-md;
@@ -240,7 +247,7 @@
     background: var(--color-bg);
 
     &-placement {
-      min-height: 20rem;
+      min-height: var(--dropdown-size-20rem);
     }
   }
 
@@ -249,7 +256,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    min-height: 14rem;
+    min-height: var(--dropdown-size-14rem);
     margin-top: var(--space-xl);
   }
 
@@ -274,7 +281,7 @@
   }
 
   &_demo-select-control-label {
-    flex: 0 0 5.5rem;
+    flex: 0 0 var(--dropdown-size-5-5rem);
     margin: 0;
     color: var(--color-text-muted);
     font-size: var(--text-size-sm);
@@ -286,7 +293,7 @@
     gap: var(--space-lg);
     align-items: stretch;
     width: 100%;
-    min-height: 12rem;
+    min-height: var(--dropdown-size-12rem);
     padding: var(--space-xl) 0;
 
     @media (max-width: 56rem) {
@@ -335,7 +342,7 @@
     align-items: center;
     justify-content: flex-end;
     width: 100%;
-    max-width: 28rem;
+    max-width: var(--dropdown-size-28rem);
     padding: var(--space-md);
     border: 1px solid var(--color-border-subtle);
     border-radius: $radius-md;

@@ -1,6 +1,9 @@
 @use 'common/global' as *;
 
 :root {
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --rate-size-0-875rem: 0.875rem;
+
   // ----- Rate — structure
   --rate-star-size: 1.25rem;
   --rate-star-size-sm: 1rem;
@@ -114,7 +117,7 @@
 
   &.is-error .rate_stars {
     outline: 1px solid var(--color-danger);
-    outline-offset: 2px;
+    outline-offset: var(--focus-outline-offset);
     border-radius: var(--radius-sm);
   }
 
@@ -172,7 +175,7 @@
     &:focus-visible + .rate_star-graphic {
       outline: var(--focus-outline-width) solid var(--rate-color-filled);
       outline-offset: var(--focus-outline-offset);
-      border-radius: 2px;
+      border-radius: var(--radius-2);
     }
   }
 
@@ -276,8 +279,8 @@
 
   &_clear-icon {
     display: block;
-    width: 0.875rem;
-    height: 0.875rem;
+    width: var(--rate-size-0-875rem);
+    height: var(--rate-size-0-875rem);
     pointer-events: none;
   }
 
