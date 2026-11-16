@@ -1,0 +1,110 @@
+// typeB 전체메뉴: 소개 카드와 동일한 열 기준을 공유하는 세 행.
+.full-menu.full-menu_typeB {
+  --full-menu-gutter: 30px;
+  max-width: none;
+  height: 100dvh;
+  overflow: hidden;
+
+  .full-menu_surface { display: flex; flex-direction: column; height: 100%; min-height: 0; padding: 0; overflow: hidden; }
+  .full-menu_header { flex-shrink: 0; height: 80px; padding: 0; border-bottom: 1px solid #eee; margin: 0 var(--full-menu-gutter) 24px; background: #fff; }
+  .full-menu-content_typeB { flex: 1; min-height: 0; overflow: auto; overscroll-behavior: contain; padding: 0 var(--full-menu-gutter) 40px; }
+}
+
+.full-menu-content_typeB {
+  gap: 16px;
+
+  .full-menu-content_section {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 32px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: #fff;
+  }
+
+  .full-menu-content_intro {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 220px;
+    padding: 28px 24px 100px;
+    background: #f4f5f6;
+    overflow: hidden;
+
+    h2 { position: relative; z-index: 1; margin: 0; font-size: 22px; font-weight: 700; line-height: 1.4; }
+    p { position: relative; z-index: 1; margin: 0; max-width: 14em; color: #70757b; font-size: 13px; font-weight: 400; line-height: 1.7; word-break: keep-all; }
+  }
+
+  .full-menu-content_intro-art {
+    position: absolute;
+    right: 22px;
+    bottom: 24px;
+    width: 60px;
+    height: 66px;
+    background: linear-gradient(150deg, #d8dcdd 0 45%, #c4c9cb 46% 70%, #e3e6e7 71%);
+    clip-path: polygon(0 24%, 68% 0, 100% 63%, 32% 100%);
+    transform: rotate(-12deg);
+    pointer-events: none;
+  }
+  .full-menu-content_section-services .full-menu-content_intro-art {
+    width: 56px; height: 56px;
+    clip-path: polygon(26% 0, 76% 5%, 100% 48%, 72% 94%, 20% 100%, 0 45%);
+    transform: rotate(12deg);
+  }
+  .full-menu-content_section-company .full-menu-content_intro-art {
+    width: 50px; height: 76px;
+    clip-path: polygon(12% 15%, 92% 0, 100% 88%, 0 100%);
+    transform: rotate(8deg);
+  }
+
+  .full-menu-content_columns {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 24px;
+    align-content: start;
+    padding-block: 24px;
+  }
+  .full-menu-content_group { min-width: 0; }
+  .full-menu-content_group h3 { margin: 0; font-size: 16px; font-weight: 700; line-height: 1.5; }
+  .full-menu-content_group ul { margin-top: 16px; gap: 8px; }
+  .full-menu-content_group li { color: #62676c; font-size: 14px; line-height: 1.65; }
+  .full-menu-content_group a { gap: 4px; }
+  .full-menu-content_external { flex-shrink: 0; }
+}
+
+@media (min-width: 1920px) {
+  .full-menu-content_typeB .full-menu-content_group li { font-size: 16px; }
+}
+@media (min-width: 1100px) and (max-width: 1439px) {
+  .full-menu-content_typeB {
+    .full-menu-content_section { grid-template-columns: 180px minmax(0, 1fr); gap: 24px; }
+    .full-menu-content_columns { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  }
+}
+@media (max-width: 1099px) {
+  .full-menu.full-menu_typeB {
+    --full-menu-gutter: 20px;
+    .full-menu_header { height: 64px; margin-bottom: 16px; }
+    .full-menu-content_typeB { padding-bottom: 24px; }
+  }
+  .full-menu-content_typeB {
+    gap: 32px;
+    .full-menu-content_section { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .full-menu-content_intro { min-height: 0; padding: 20px 96px 20px 20px; gap: 8px; }
+    .full-menu-content_intro p { max-width: none; }
+    .full-menu-content_intro-art { right: 20px; bottom: 16px; width: 42px; height: 48px; }
+    .full-menu-content_section-services .full-menu-content_intro-art { width: 40px; height: 40px; }
+    .full-menu-content_section-company .full-menu-content_intro-art { width: 36px; height: 52px; }
+    .full-menu-content_columns { grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 24px 0 0; gap: 28px 20px; }
+  }
+}
+@media (max-width: 767px) {
+  .full-menu-content_typeB {
+    .full-menu-content_intro h2 { font-size: 20px; }
+    .full-menu-content_columns { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 16px; }
+    .full-menu-content_group h3 { font-size: 16px; }
+    .full-menu-content_group li { font-size: 14px; }
+  }
+}

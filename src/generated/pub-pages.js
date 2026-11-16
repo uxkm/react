@@ -293,6 +293,10 @@ export const pubPages = {
       "label": "lottie"
     },
     {
+      "id": "masonry",
+      "label": "masonry"
+    },
+    {
       "id": "simplebar",
       "label": "simplebar"
     },

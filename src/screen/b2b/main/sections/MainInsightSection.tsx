@@ -1,47 +1,43 @@
 'use client'
 
-import type { ReactNode } from 'react' // React Node 타입
-import { Carousel, CarouselSlide } from '@/comp/ui/Carousel' // UI 컴포넌트 · Carousel 컴포넌트
-import MainHrTrendCard from '@/widgets/b2b/main/MainHrTrendCard' // Main Hr Trend Card 컴포넌트
-import MainAxInsightCard from '@/widgets/b2b/main/MainAxInsightCard' // Main Ax Insight Card 컴포넌트
-import MainLeadershipInsightCard from '@/widgets/b2b/main/MainLeadershipInsightCard' // Main Leadership Insight Card 컴포넌트
+import type { ReactNode } from 'react'
+import { Carousel, CarouselSlide } from '@/comp/ui/Carousel'
+import Card from '@/comp/ui/Card'
+import { useMediaQuery } from '@/hooks/layout/useMediaQuery'
+import { mainInsightContent } from '@/widgets/b2b/main/mainInsightContent'
+import MainInsightSectionTypeA from './MainInsightSectionTypeA'
 
 interface MainInsightSectionProps {
   readonly children?: ReactNode
+  readonly designType?: 'typeA' | 'typeB'
 }
 
-/** 섹션은 제목과 3열 캐러셀 배치만 담당합니다. 자식으로 슬라이드를 교체·추가합니다. */
-export default function MainInsightSection ({ children }: Readonly<MainInsightSectionProps>) {
+/** typeB는 PC 3개 묶음, 태블릿·모바일 1개씩 이동하는 비순환 인사이트 캐러셀입니다. */
+export default function MainInsightSection ({ children, designType = 'typeB' }: Readonly<MainInsightSectionProps>) {
+  const compact = useMediaQuery('(max-width: 1099px)')
+  if (designType === 'typeA') return <MainInsightSectionTypeA>{children}</MainInsightSectionTypeA>
+
   return (
-    <section id="on" className="main-insights" aria-labelledby="main-insights-title">
+    <section id="on" className="main-insights main-insights_typeB" aria-labelledby="main-insights-title">
       <h2 id="main-insights-title">
-        <span className="main-insights_headline">
-          <span className="main-insights_brand">
-            멀캠{' '}
-            <span>⏻N</span>
-          </span>
-          <span>으로 HR 인사이트 ON!</span>
-        </span>
-        <span>변화를 읽고 조직의 미래를 준비하세요</span>
+        <span>멀캠ON으로 HR 인사이트 ON!</span>
+        <span>변화를 읽고 조직의 미래를<br className="main-insights_mobile-break" />{' '}준비하세요</span>
       </h2>
       <Carousel
         ariaLabel="멀캠ON HR 인사이트"
-        slidesPerView={3}
-        spaceBetween={28}
-        pagination={false}
-        navigation
+        slidesPerView={compact ? 1.12 : 3}
+        slidesPerGroup={compact ? 1 : 3}
+        spaceBetween={compact ? 16 : 32}
+        pagination={compact}
+        dotsOutside={compact}
+        navigation={!compact}
+        loop={false}
       >
-        {children ?? [
-          <CarouselSlide key="hr-trend">
-            <MainHrTrendCard />
-          </CarouselSlide>,
-          <CarouselSlide key="ax-mind">
-            <MainAxInsightCard />
-          </CarouselSlide>,
-          <CarouselSlide key="leadership-ai">
-            <MainLeadershipInsightCard />
+        {children ?? mainInsightContent.map(card => (
+          <CarouselSlide key={card.id}>
+            <Card type="content" card={card} shadow={false} />
           </CarouselSlide>
-        ]}
+        ))}
       </Carousel>
     </section>
   )

@@ -272,6 +272,7 @@ const SECTIONS = [
   {
     title: '펄스',
     code: wrapPageExample(`<Icon name="bell" circle pulse color="primary" size="sm" />
+<Icon name="bell-off" circle color="muted" size="sm" ariaLabel="알림 없음" />
 <Icon name="heart" circle pulse color="danger" size="sm" ariaLabel="알림" />`, {
   name: 'IconExample9',
   reactImports: [],
@@ -280,6 +281,7 @@ const SECTIONS = [
     preview: (
       <div className="demo-row icon_group">
         <Icon name="bell" circle pulse color="primary" size="sm" />
+        <Icon name="bell-off" circle color="muted" size="sm" ariaLabel="알림 없음" />
         <Icon name="heart" circle pulse color="danger" size="sm" ariaLabel="알림" />
       </div>
     )

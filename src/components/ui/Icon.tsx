@@ -111,7 +111,8 @@ const paths = {
   'chevron-right': <path d="m9 6 6 6-6 6" />,
   'chevron-down': <path d="m6 9 6 6 6-6" />,
   'caret-down': <path d="m6 9 6 6 6-6Z" fill="currentColor" stroke="none" />,
-  'chevron-up': <path d="m4 15 8-7 8 7" />,
+  'caret-up': <path d="m6 15 6-6 6 6Z" fill="currentColor" stroke="none" />,
+  'chevron-up': <path d="m18 15-6-6-6 6" />,
   search: (
     <>
       <circle cx="11" cy="11" r="7" />
@@ -125,6 +126,8 @@ const paths = {
     </>
   ),
   menu: <path d="M4 6h16M4 12h16M4 18h16" />,
+  /** 가운데 줄이 짧고 들어간 햄버거 메뉴 */
+  'menu-alt': <path d="M4 6h16M7 12h10M4 18h16" />,
   edit: (
     <>
       <path d="M4 20h4L19 9l-4-4L4 16v4Z" />
@@ -169,12 +172,45 @@ const paths = {
       <path d="M6 10h3v8H6Zm5 0h2.8v1.1c.5-.9 1.3-1.3 2.3-1.3 2 0 2.9 1.3 2.9 3.5V18h-3v-4.2c0-1.1-.3-1.7-1-1.7-.8 0-1 .6-1 1.7V18h-3Z" fill="#fff" stroke="none" />
     </>
   ),
+  instagram: (
+    <>
+      <rect x="2" y="2" width="20" height="20" rx="5" fill="currentColor" stroke="none" />
+      <circle cx="12" cy="12" r="4.5" fill="none" stroke="#fff" strokeWidth="2" />
+      <circle cx="17.2" cy="6.8" r="1.3" fill="#fff" stroke="none" />
+    </>
+  ),
+  x: (
+    <path
+      d="M17.3 3H21l-6.6 7.5L21.8 21h-4.1l-4.8-6.3L7.4 21H3.6l6.9-7.9L2.8 3h4.2l4.4 5.8L17.3 3Z"
+      fill="currentColor"
+      stroke="none"
+    />
+  ),
+  kakaotalk: (
+    <>
+      <path
+        d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.8 5.3 4.6 6.7l-.9 3.3c-.1.3.3.6.6.4l3.9-2.5c.6.1 1.2.1 1.8.1 5.5 0 10-3.6 10-8S17.5 3 12 3Z"
+        fill="currentColor"
+        stroke="none"
+      />
+      <ellipse cx="8.5" cy="11" rx="1.15" ry="1.45" fill="#fff" stroke="none" />
+      <ellipse cx="12" cy="11" rx="1.15" ry="1.45" fill="#fff" stroke="none" />
+      <ellipse cx="15.5" cy="11" rx="1.15" ry="1.45" fill="#fff" stroke="none" />
+    </>
+  ),
   grid: (
     <>
       <rect x="4" y="4" width="6" height="6" />
       <rect x="14" y="4" width="6" height="6" />
       <rect x="4" y="14" width="6" height="6" />
       <rect x="14" y="14" width="6" height="6" />
+    </>
+  ),
+  /** 리스트·웹진 보기 전환용 */
+  list: (
+    <>
+      <path d="M8 6h13M8 12h13M8 18h13" />
+      <path d="M3 6h.01M3 12h.01M3 18h.01" strokeWidth="3" strokeLinecap="round" />
     </>
   ),
   cart: (
@@ -234,6 +270,14 @@ const paths = {
     <>
       <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
       <path d="M14 21h-4" />
+    </>
+  ),
+  /** 알림 없음 */
+  'bell-off': (
+    <>
+      <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
+      <path d="M14 21h-4" />
+      <path d="m4 4 16 16" />
     </>
   ),
   loader: <path d="M21 12a9 9 0 1 1-6.2-8.6" />,
@@ -302,6 +346,11 @@ const paths = {
   'more-horizontal': (
     <>
       <path d="M5 12h.01M12 12h.01M19 12h.01" strokeWidth="3" strokeLinecap="round" />
+    </>
+  ),
+  'more-vertical': (
+    <>
+      <path d="M12 5h.01M12 12h.01M12 19h.01" strokeWidth="3" strokeLinecap="round" />
     </>
   ),
   play: <path d="M8 5v14l11-7z" fill="currentColor" stroke="none" />,

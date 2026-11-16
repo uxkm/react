@@ -19,3 +19,14 @@
 - naver-tech.png: https://www.navercorp.com/img/pc/main-tech-visual.png
 
 위 이미지는 가이드용이며 예제 제목·설명은 프로젝트에서 작성한 샘플입니다.
+
+멀캠ON typeB 슬라이드 확인용 추가 썸네일 (2026-11-16 확인):
+
+출처: https://www.multicampus.com/om/about/sub/requestNsltrList
+공식 목록의 공개 썸네일을 내려받아 너비 최대 960px의 WebP로 최적화했습니다.
+
+- hr-trends-2027.webp: 데이터로 읽는 2027 트렌드 콘텐츠 (목록 번호 31)
+- hr-growth.webp: 유니콘 기업의 성장 공식 콘텐츠 (목록 번호 30)
+- ai-history.webp: 역사에서 찾는 AI 시대의 생존법 콘텐츠 (목록 번호 27)
+
+기존 썸네일 3개와 합쳐 typeB에서는 6개 콘텐츠를 사용합니다. typeA는 기존 3개를 유지합니다. 제목은 공식 목록 기준이며 카드 소개 문구는 UI 표시용 요약입니다.

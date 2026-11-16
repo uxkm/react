@@ -172,10 +172,11 @@ function compactRule (raw) {
       continue
     }
 
+    // 선언의 `color: red` 공백은 아래 공백 보존 분기가 처리한다.
+    // 여기서 강제 공백을 넣으면 `@media` 안 `li:last-child` / `:hover` 가 깨진다.
     if (ch === ':' && depth > 0 && out[out.length - 1] !== ':') {
       out += ':'
       i += 1
-      if (s[i] && s[i] !== ' ' && s[i] !== ':' && s[i] !== '/') out += ' '
       continue
     }
 

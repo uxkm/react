@@ -5,6 +5,9 @@ import { Link } from '@/lib/router' // 클라이언트 링크
 import { Icon } from '@/comp/ui/Icon' // Icon 컴포넌트
 import { B2bLogo, FullMenu } from './FullMenu' // Full Menu 컴포넌트
 import { b2bMenu } from './menuData'
+import { useMainDesignType } from '../main/useMainDesignType'
+import { usePathname } from 'next/navigation'
+import MainTopBanner from '../main/MainTopBanner'
 
 const headerMenus = [
   { label: 'AX교육', href: '/b2b/contents/ax/overview', description: '조직의 AI 전환을 이끄는 통합 교육 로드맵을 제공합니다.', links: b2bMenu.education[0].links },
@@ -14,8 +17,18 @@ const headerMenus = [
   { label: '멀캠ON', href: '/b2b/insight/on/list', description: '기업교육과 HR의 새로운 인사이트를 만나보세요.', links: [{ label: '멀캠ON', href: '/b2b/insight/on/list' }, { label: '자료실', href: '/b2b/insight/resources/list' }] }
 ]
 
+const typeBMenus = [
+  ...headerMenus.slice(0, 2),
+  { label: '외국어', href: '/b2b/contents/language', description: '글로벌 비즈니스를 위한 외국어 교육을 만나보세요.', links: b2bMenu.education.find(group => group.label === '외국어')?.links ?? [] },
+  ...headerMenus.slice(2)
+]
+
 /** B2B 공통 헤더. Header 슬롯을 통해 모든 프로젝트 화면에서 사용합니다. */
 export default function Header ({ className, ...rest }: Readonly<HTMLAttributes<HTMLElement>>) {
+  const designType = useMainDesignType()
+  const pathname = usePathname()
+  const isMain = /^\/b2b\/?$/.test(pathname ?? '')
+  const menus = designType === 'typeA' ? headerMenus : typeBMenus
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeMenu, setActiveMenu] = useState<string | null>(null)
   const menuId = useId()
@@ -24,12 +37,16 @@ export default function Header ({ className, ...rest }: Readonly<HTMLAttributes<
     <header
       {...rest}
       data-header-scroll="fixed"
-      className={`app-header header header_default ${className ?? ''}`}
+      className={`app-header header header_default header_${designType} ${className ?? ''}`}
     >
       <div className="header_inner">
-        <B2bLogo />
-        <nav className="header_nav" aria-label="주요 메뉴">
-          {headerMenus.map((item, index) => {
+        <B2bLogo adaptive={isMain && designType === 'typeB'} />
+        <nav
+          className="header_nav"
+          aria-label="주요 메뉴"
+          onMouseLeave={() => setActiveMenu(null)}
+        >
+          {menus.map((item, index) => {
             const expanded = activeMenu === item.label
             const triggerId = `${menuId}-trigger-${index}`
             const panelId = `${menuId}-panel-${index}`
@@ -38,11 +55,10 @@ export default function Header ({ className, ...rest }: Readonly<HTMLAttributes<
                 key={item.label}
                 className="header_nav-item"
                 onMouseEnter={() => setActiveMenu(item.label)}
-                onMouseLeave={(event) => {
-                  if (!event.currentTarget.contains(document.activeElement)) setActiveMenu(null)
-                }}
                 onBlur={(event) => {
-                  if (!event.currentTarget.contains(event.relatedTarget)) setActiveMenu(null)
+                  const next = event.relatedTarget as Node | null
+                  if (next && event.currentTarget.parentElement?.contains(next)) return
+                  setActiveMenu(null)
                 }}
                 onKeyDown={(event) => {
                   if (event.key === 'Escape') {
@@ -130,7 +146,12 @@ export default function Header ({ className, ...rest }: Readonly<HTMLAttributes<
           </button>
         </div>
       </div>
-      <FullMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
+      {isMain && designType === 'typeB' && <MainTopBanner />}
+      <FullMenu
+        designType={designType}
+        open={menuOpen}
+        onClose={() => setMenuOpen(false)}
+      />
     </header>
   )
 }

@@ -16,6 +16,7 @@ export const demoLoaders = {
   'libs': () => import('@/screen/pub/demo/LibsIndexDemoPage.jsx'),
   'lodash': () => import('@/screen/pub/demo/LodashDemoPage.jsx'),
   'lottie': () => import('@/screen/pub/demo/LottieDemoPage.jsx'),
+  'masonry': () => import('@/screen/pub/demo/MasonryDemoPage.jsx'),
   'simplebar': () => import('@/screen/pub/demo/SimplebarDemoPage.jsx'),
   'sorting-menu': () => import('@/screen/pub/demo/SortingMenuDemoPage.jsx'),
   'sorting-menu-basic': () => import('@/screen/pub/demo/SortingMenuBasicDemoPage.jsx'),

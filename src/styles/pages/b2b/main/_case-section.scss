@@ -1,0 +1,82 @@
+.main.main_typeB > .main-cases.main-cases_typeB {
+  width: 100%;
+  margin-inline: 0;
+}
+
+.main .main-cases.main-cases_typeB {
+  padding: 112px 0 120px;
+  background: #252d34;
+  color: #fff;
+  scroll-margin-top: var(--app-header-height, 124px);
+
+  .main-cases_heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+    width: min(1600px, calc(100% - 120px));
+    margin-inline: auto;
+    h2 { font-size: clamp(32px, 2.5vw, 44px); line-height: 1.5; font-weight: 700; letter-spacing: -0.045em; }
+    h2 > span { display: block; }
+  }
+  .main-cases_mobile-break { display: none; }
+  .main-cases_more { display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; gap: 12px; min-height: 46px; padding: 12px 22px; border-radius: 100px; background: #131d26; color: #fff; font-size: 14px; font-weight: 600; }
+  .main-cases_more:hover { background: #0d151d; }
+  .main-cases_more-mobile { display: none; }
+
+  .carousel { width: 100%; max-width: 100%; margin: 40px 0 0; --carousel-height: 0px; }
+  /* 임시: 자동재생 유지, 재생/정지 토글만 숨김 */
+  .carousel .carousel_toggle { display: none !important; }
+  .carousel .swiper { padding: 32px 0 12px; }
+  /* PC에서 카드가 좁으면 우측 여백이 과해 보이므로 뷰포트 기준으로 폭을 키웁니다. */
+  .carousel .swiper .swiper-slide { width: clamp(300px, 28vw, 400px); height: 400px !important; max-height: none; aspect-ratio: auto; }
+  .main-cases_card {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    outline: none;
+  }
+  .main-cases_card:focus-visible { box-shadow: 0 0 0 3px #fff, 0 0 0 6px #4d8bb5; }
+  .main-cases_card > [aria-hidden] { width: 100%; height: 100%; }
+  .carousel .swiper .swiper-slide .card_testimonial {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 0;
+    height: 100%;
+    padding: 28px 28px 32px;
+    border: 1px solid #d5dce0;
+    border-radius: 10px;
+    background: #eff1f2;
+    color: #26343c;
+    opacity: 0.8;
+    transform: translateY(0);
+    transition: transform 400ms ease, opacity 400ms ease, background-color 400ms ease, border-color 400ms ease;
+  }
+  .carousel .swiper .swiper-slide-active .card_testimonial { transform: translateY(-18px); background: #fff; border-color: #b8d3e4; opacity: 1; }
+  .stat_label { align-self: flex-start; padding: 4px 10px; border: 1px solid #c4cdd2; border-radius: 100px; color: #39474f; font-size: 13px; line-height: 1.5; }
+  .stat_quote { margin: 20px 0 24px; }
+  .stat_quote-mark { height: 48px; font-size: 90px; line-height: 0.95; }
+  .stat_value { color: #26343c; font-size: 23px; line-height: 1.45; letter-spacing: -0.045em; }
+  .stat_footer { gap: 14px; }
+  .stat_desc { color: #768086; font-size: 13px; line-height: 1.6; }
+  .stat_avatar { width: 48px; height: 48px; --avatar-size: 48px; background: #d7e5e6; color: #67868a; }
+}
+
+@media (max-width: 1099px) {
+  .main .main-cases.main-cases_typeB {
+    margin-top: 80px;
+    padding: 80px 0 72px;
+    .main-cases_heading { width: calc(100% - 40px); h2 { font-size: clamp(26px, 4.8vw, 34px); line-height: 1.5; } }
+    .main-cases_mobile-break { display: inline; }
+    .main-cases_more-desktop { display: none; }
+    .main-cases_more-mobile { display: flex; width: max-content; margin: 40px auto 0; }
+    .carousel { margin-top: 32px; }
+    .carousel .swiper .swiper-slide { width: min(78vw, 400px); height: 380px !important; }
+    .carousel .swiper .swiper-slide .card_testimonial { padding: 28px 26px; }
+    .stat_value { font-size: 22px; }
+  }
+}
+.main.main-section-preview .main-cases.main-cases_typeB { margin-top: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .main .main-cases.main-cases_typeB .carousel .swiper .swiper-slide .card_testimonial { transition: none; }
+}

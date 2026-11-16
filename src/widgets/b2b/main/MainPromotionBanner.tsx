@@ -19,7 +19,7 @@ const promotionCard: PromotionCardData = {
 }
 
 // 두 번째 카드는 슬라이드 동작 확인용으로 제목만 변경한 샘플입니다.
-const defaultSlides: readonly PromotionCardData[] = [
+const typeASlides: readonly PromotionCardData[] = [
   promotionCard,
   {
     ...promotionCard,
@@ -28,7 +28,20 @@ const defaultSlides: readonly PromotionCardData[] = [
   }
 ]
 
+const typeBSlides: readonly PromotionCardData[] = [
+  {
+    id: 'physical-ai',
+    title: '현실로 확장되는 AI,\nPhysical AI 교육',
+    description: '로봇·센서·현장 데이터까지, 물리 세계로 확장되는\nAI를 직접 다뤄보는 신규 과정입니다.',
+    image: { src: '/images/pages/main/physical-ai.webp', fit: 'cover' },
+    href: '/b2b/contents/ax/ai-search',
+    action: '과정보기'
+  },
+  promotionCard
+]
+
 interface MainPromotionBannerProps extends CardMediaProps {
+  readonly designType?: 'typeA' | 'typeB'
   readonly slides?: readonly PromotionCardData[]
   /** 1장일 때 하단 컨트롤 표시 여부. 기본 false. */
   readonly showControlsWhenSingle?: boolean
@@ -36,13 +49,15 @@ interface MainPromotionBannerProps extends CardMediaProps {
 
 /** 프로모션 카드 모듈을 Carousel로 조합합니다. */
 export default function MainPromotionBanner ({
-  slides = defaultSlides,
+  slides: customSlides,
+  designType = 'typeB',
   showControlsWhenSingle = false,
   image,
   imageProps,
   shadow = false,
   slots
 }: Readonly<MainPromotionBannerProps>) {
+  const slides = customSlides ?? (designType === 'typeA' ? typeASlides : typeBSlides)
   const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)')
   const multiple = slides.length > 1
 
@@ -61,7 +76,7 @@ export default function MainPromotionBanner ({
         loop={multiple}
       >
         {slides.map((card, index) => (
-          <CarouselSlide key={card.id}>
+          <CarouselSlide key={card.id} data-promotion={card.id}>
             <Card
               type="promotion"
               card={card}

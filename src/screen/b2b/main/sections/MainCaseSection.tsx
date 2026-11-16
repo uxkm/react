@@ -1,67 +1,82 @@
 'use client'
 
-import { Carousel, CarouselSlide } from '@/comp/ui/Carousel' // UI 컴포넌트 · Carousel 컴포넌트
-import { useMediaQuery } from '@/hooks/layout/useMediaQuery' // Media Query 훅
-import MainFinanceTestimonialCard from '@/widgets/b2b/main/MainFinanceTestimonialCard' // Main Finance Testimonial Card 컴포넌트
-import MainLeadershipTestimonialCard from '@/widgets/b2b/main/MainLeadershipTestimonialCard' // Main Leadership Testimonial Card 컴포넌트
-import MainManufacturingTestimonialCard from '@/widgets/b2b/main/MainManufacturingTestimonialCard' // Main Manufacturing Testimonial Card 컴포넌트
+import { useEffect, useState } from 'react'
+import { Carousel, CarouselSlide } from '@/comp/ui/Carousel'
+import Card from '@/comp/ui/Card'
+import type { TestimonialCardData } from '@/comp/ui/Card'
+import { Icon } from '@/comp/ui/Icon'
+import { Link } from '@/lib/router'
+import { useMediaQuery } from '@/hooks/layout/useMediaQuery'
+import { mainCustomerStories } from '@/widgets/b2b/main/mainCustomerStories'
+import MainCaseSectionTypeA from './MainCaseSectionTypeA'
 
-/** Swiper coverflow 효과 옵션. 가운데 슬라이드를 강조하고 좌우를 축소합니다. */
-const coverflowEffect = {
-  rotate: 0, // 좌우 슬라이드의 Y축 회전 각도(deg). 0이면 기울이지 않음
-  stretch: 0, // 슬라이드 간 가로 간격 보정(px). 0이면 기본 spaceBetween만 사용
-  depth: 0, // 좌우 슬라이드의 Z축 깊이(px). 0이면 앞뒤로 밀지 않음
-  scale: 0.84, // 비활성(좌우) 슬라이드 크기 비율. 0.84 = 84%
-  modifier: 1, // 효과 강도 배수. 1이면 위 값을 그대로 적용
-  slideShadows: false // 슬라이드 그림자 표시 여부
+function MoreCasesLink ({ className }: { className: string }) {
+  return (
+    <Link className={`main-cases_more ${className}`} to="https://www.multicampus.com/b2b/kr/service/bpo.html" target="_blank" rel="noopener noreferrer">
+      고객사례 더보기 <Icon name="arrow-right" size={18} aria-hidden />
+    </Link>
+  )
 }
 
-/** 세 번째 본문 섹션의 고객사례 카드 배치. */
-export default function MainCaseSection () {
+/** 카드 전체에만 초점을 두고, 스크린리더는 aria-label로 내용을 읽습니다. */
+function CaseStoryCard ({ card }: { card: TestimonialCardData }) {
+  const label = [card.category, card.quote.replace(/\n/g, ' '), card.author].filter(Boolean).join('. ')
+  return (
+    <div className="main-cases_card" tabIndex={0} role="group" aria-label={label}>
+      <div aria-hidden="true">
+        <Card type="testimonial" card={card} shadow={false} />
+      </div>
+    </div>
+  )
+}
+
+/** typeB는 화면 전체 너비에서 가운데 카드를 기준으로 한 개씩 자동 순환합니다. */
+export default function MainCaseSection ({ designType = 'typeB' }: { designType?: 'typeA' | 'typeB' }) {
   const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)')
+  const compact = useMediaQuery('(max-width: 1099px)')
+  const [playing, setPlaying] = useState(() => !reducedMotion)
+  useEffect(() => {
+    setPlaying(!reducedMotion)
+  }, [reducedMotion])
+  if (designType === 'typeA') return <MainCaseSectionTypeA />
 
   return (
-    <section id="cases" className="main-cases" aria-labelledby="main-cases-title">
-      <h2 id="main-cases-title">
-        1.6만개의 기업이
-        <br />
-        멀티캠퍼스와 함께 성장하고 있습니다
-      </h2>
-      {/* 전체 너비 고객사례 영역. 가운데 카드를 강조하고 좌우 카드는 축소합니다. */}
+    <section id="cases" className="main-cases main-cases_typeB" aria-labelledby="main-cases-title">
+      <div className="main-cases_heading">
+        <h2 id="main-cases-title">
+          <span>1.6만개의 기업이</span>
+          <span>멀티캠퍼스와 함께<br className="main-cases_mobile-break" />{' '}성장하고 있습니다</span>
+        </h2>
+        <MoreCasesLink className="main-cases_more-desktop" />
+      </div>
       <Carousel
         ariaLabel="고객사례"
-        effect="coverflow"
-        coverflowSides={1}
-        coverflowStyle="rise"
-        coverflowEffect={coverflowEffect}
-        initialSlide={1}
-        speed={reducedMotion ? 0 : 550}
-        spaceBetween={32}
+        slidesPerView="auto"
+        slidesPerGroup={1}
+        centered
+        initialSlide={2}
+        speed={reducedMotion ? 0 : 500}
+        spaceBetween={compact ? 20 : 24}
         loop
+        autoplay={!reducedMotion}
+        delay={5000}
+        playing={playing}
+        onPlayingChange={setPlaying}
         pagination={false}
-        navigation
+        navigation={false}
+        onBlurCapture={event => {
+          if (!event.currentTarget.contains(event.relatedTarget as Node | null) && !reducedMotion) {
+            setPlaying(true)
+          }
+        }}
       >
-        {/* 리더십·금융·제조 고객사례 카드 영역 */}
-        <CarouselSlide>
-          <MainLeadershipTestimonialCard />
-        </CarouselSlide>
-        <CarouselSlide>
-          <MainFinanceTestimonialCard />
-        </CarouselSlide>
-        <CarouselSlide>
-          <MainManufacturingTestimonialCard />
-        </CarouselSlide>
-        {/* 순환 동작 확인용 반복 카드. 최종 고객사례 확보 시 개별 위젯으로 교체합니다. */}
-        <CarouselSlide>
-          <MainLeadershipTestimonialCard />
-        </CarouselSlide>
-        <CarouselSlide>
-          <MainFinanceTestimonialCard />
-        </CarouselSlide>
-        <CarouselSlide>
-          <MainManufacturingTestimonialCard />
-        </CarouselSlide>
+        {mainCustomerStories.map((card, index) => (
+          <CarouselSlide key={`${card.category}-${index}`}>
+            <CaseStoryCard card={card} />
+          </CarouselSlide>
+        ))}
       </Carousel>
+      <MoreCasesLink className="main-cases_more-mobile" />
     </section>
   )
 }

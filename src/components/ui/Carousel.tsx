@@ -425,6 +425,7 @@ export function Carousel ({
     }
 
     const swiper = new Swiper(host, options)
+    const initializedIndex = swiper.realIndex
     instanceRef.current = swiper
     // Thumbs 기본 동작은 화면 밖 항목만 보이게 합니다. 가운데 정렬 모드는
     // 이미 보이는 항목으로 바뀌어도 메인 선택을 따라 목록을 이동합니다.
@@ -489,12 +490,14 @@ export function Carousel ({
 
     const raf = window.requestAnimationFrame(() => {
       if (swiper.destroyed) return
+      // 초기화 직후 시작한 사용자 이동을 0ms 정렬로 덮어쓰지 않습니다.
+      if (swiper.animating || swiper.realIndex !== initializedIndex || swiper.touches.diff !== 0) {
+        syncSlideAccessibility()
+        return
+      }
       swiper.update()
       alignThumbs(0)
       syncSlideAccessibility()
-      if (canLoop && typeof swiper.slideToLoop === 'function') {
-        swiper.slideToLoop(startIndex, 0, false)
-      }
     })
 
     return () => {

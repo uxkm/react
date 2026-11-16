@@ -41,7 +41,8 @@ html[data-scrollbar='classic'] {
   scrollbar-width: none;
   -ms-overflow-style: none;
 
-  * {
+  // 초기 스크립트·React 초기화의 재측정에 쓰는 요소는 숨김 대상에서 제외합니다.
+  *:not([data-scrollbar-probe]) {
     scrollbar-width: none !important;
     -ms-overflow-style: none;
 

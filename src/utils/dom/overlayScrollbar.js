@@ -36,6 +36,8 @@ function scrollbarSizePx () {
 /** 스크롤바가 레이아웃 폭을 차지하는지 측정 */
 export function isScrollbarObtrusive () {
   const outer = document.createElement('div')
+  // 초기 감지로 classic CSS가 적용된 뒤 다시 측정해도 네이티브 폭을 유지합니다.
+  outer.setAttribute('data-scrollbar-probe', '')
   outer.style.cssText =
     'position:absolute;top:-9999px;width:100px;height:100px;overflow:scroll;visibility:hidden'
   document.documentElement.appendChild(outer)

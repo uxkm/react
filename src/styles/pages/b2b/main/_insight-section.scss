@@ -1,0 +1,89 @@
+.main.main_typeB > .main-insights.main-insights_typeB {
+  /* 2번 카드 섹션과 동일한 좌우 여백 */
+  width: min(1600px, calc(100% - 120px));
+  margin-inline: auto;
+}
+
+.main .main-insights.main-insights_typeB {
+  scroll-margin-top: calc(var(--app-header-height, 124px) + 32px);
+  h2 { font-size: clamp(32px, 2.5vw, 44px); font-weight: 700; line-height: 1.5; letter-spacing: -0.045em; }
+  h2 > span { display: block; }
+  .main-insights_mobile-break { display: none; }
+  .carousel { margin-top: -32px; --carousel-nav-size: 48px; --carousel-height: 0px; }
+  .swiper { padding-top: 88px; }
+  .swiper-button-prev, .swiper-button-next { top: 0; width: 48px; height: 48px; border: 1px solid #9ba1a6; color: #333; }
+  .swiper-button-prev { right: 64px; left: auto; }
+  .swiper-button-next { right: 0; }
+  /* 활성(#333/#9ba1a6)과 구분되도록 밝은 회색 사용. 아이콘 흰 배경 대비 3.03:1 */
+  .swiper-button-prev.swiper-button-disabled,
+  .swiper-button-next.swiper-button-disabled {
+    opacity: 1;
+    color: #949494;
+    border-color: #c7cbcf;
+    cursor: default;
+  }
+  .card.card_content { border: 0; border-radius: 0; background: transparent; }
+  .card_content-media {
+    overflow: hidden;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 16px 16px 0 0;
+    background: #e8eaed;
+  }
+  /* 작은·밝은 이미지도 16:9 프레임을 cover로 동일하게 채웁니다. */
+  .card_content-thumbnail {
+    display: block;
+    width: 100%;
+    height: 100%;
+    --card-background-size: cover;
+    --card-background-position: center;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+  }
+  .card_content-body { padding: 24px 20px 8px; }
+  .card_content-title {
+    display: -webkit-box;
+    margin-top: 20px;
+    overflow: hidden;
+    font-size: 23px;
+    line-height: 1.45;
+    letter-spacing: -0.04em;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+  .card_content-body p {
+    display: -webkit-box;
+    margin-top: 12px;
+    overflow: hidden;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #72767a;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+  .tag_category { padding: 5px 12px; border: 1px solid #d1d5d8; border-radius: 100px; background: transparent; color: #434a50; font-size: 13px; }
+}
+
+@media (max-width: 1099px) {
+  .main.main_typeB > .main-insights.main-insights_typeB {
+    width: calc(100% - 40px);
+    margin-inline: auto;
+  }
+  .main .main-insights.main-insights_typeB {
+    margin-top: 80px;
+    h2 { font-size: clamp(24px, 4.8vw, 32px); line-height: 1.5; letter-spacing: -0.045em; word-break: keep-all; }
+    .main-insights_mobile-break { display: inline; }
+    .carousel { margin-top: 36px; --carousel-dot-size: 7px; --carousel-dot-size-active: 7px; --carousel-dot-bg: #d9dfe3; --carousel-dot-bg-active: #526a7b; }
+    .swiper { padding-top: 0; }
+    .card_content-body { padding: 20px 16px 8px; }
+    .card_content-title { margin-top: 20px; font-size: clamp(19px, 3vw, 24px); }
+    .card_content-body p { font-size: 15px; }
+    .carousel > .swiper-pagination { margin-top: 28px; display: flex; align-items: center; justify-content: center; gap: 0; }
+    .swiper-pagination-bullet { margin: 0; width: 24px; height: 24px; background: transparent; opacity: 1; }
+  }
+}

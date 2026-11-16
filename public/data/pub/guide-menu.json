@@ -317,6 +317,12 @@
           "label": "Swiper"
         },
         {
+          "id": "masonry",
+          "label": "Masonry",
+          "package": "masonry-layout",
+          "description": "높이가 다른 카드의 반응형 Masonry 배치"
+        },
+        {
           "id": "viewer",
           "label": "Viewer.js"
         },

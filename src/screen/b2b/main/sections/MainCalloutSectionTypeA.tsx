@@ -1,10 +1,10 @@
 import MainInquiryCalloutCard from '@/widgets/b2b/main/MainInquiryCalloutCard' // Main Inquiry Callout Card 컴포넌트
 import MainNewsletterCalloutCard from '@/widgets/b2b/main/MainNewsletterCalloutCard' // Main Newsletter Callout Card 컴포넌트
 
-/** 네 번째 본문 섹션: 상담·뉴스레터 안내 카드 2열 배치. */
-export default function MainCalloutSection () {
+/** typeA 전용 다섯 번째 섹션: 상담·뉴스레터 안내 카드 2열 배치. */
+export default function MainCalloutSectionTypeA () {
   return (
-    <section id="cta" className="main-callouts" aria-label="교육 상담 및 뉴스레터 구독">
+    <section id="cta" className="main-callouts main-callouts_typeA" aria-label="교육 상담 및 뉴스레터 구독">
       {/* 기업교육 문의·간편 진단 안내 영역 */}
       <MainInquiryCalloutCard />
       {/* 멀캠ON 구독·공식 소셜 채널 안내 영역 */}

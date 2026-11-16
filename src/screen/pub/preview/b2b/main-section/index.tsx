@@ -7,7 +7,7 @@ import MainHero from '@/screen/b2b/main/sections/MainHero' // Main Hero 컴포�
 import MainCardSection from '@/screen/b2b/main/sections/MainCardSection' // Main Card Section 컴포넌트
 import MainInsightSection from '@/screen/b2b/main/sections/MainInsightSection' // Main Insight Section 컴포넌트
 import MainCaseSection from '@/screen/b2b/main/sections/MainCaseSection' // Main Case Section 컴포넌트
-import MainCalloutSection from '@/screen/b2b/main/sections/MainCalloutSection' // Main Callout Section 컴포넌트
+import MainCalloutSectionTypeA from '@/screen/b2b/main/sections/MainCalloutSectionTypeA' // Main Callout Section 컴포넌트
 import MainNewsletterCalloutCard from '@/widgets/b2b/main/MainNewsletterCalloutCard' // Main Newsletter Callout Card 컴포넌트
 
 export const pageTitle = '메인 섹션 프리뷰'
@@ -18,7 +18,7 @@ const sections = {
   cards: { title: '추천 및 상담', Component: MainCardSection },
   insights: { title: '멀캠ON', Component: MainInsightSection },
   cases: { title: '고객사례', Component: MainCaseSection },
-  callouts: { title: '상담 및 구독', Component: MainCalloutSection },
+  callouts: { title: '상담 및 구독', Component: MainCalloutSectionTypeA },
   newsletter: { title: '뉴스레터 구독 카드', Component: MainNewsletterCalloutCard }
 }
 

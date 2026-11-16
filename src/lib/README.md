@@ -20,6 +20,7 @@
 | `vendor/` | `@/lib/vendor/clipboard` | clipboard-copy |
 | `vendor/` | `@/lib/vendor/dnd` | dnd-kit |
 | `vendor/` | `@/lib/vendor/viewer` | Viewer.js 이미지 뷰어 |
+| `vendor/` | `@/lib/vendor/masonry` | Masonry 비동기 로드·카드 배치 |
 | `vendor/` | `@/lib/vendor/simplebar` | SimpleBar React |
 | `vendor/` | `@/lib/vendor/youtube` | react-youtube |
 | `vendor/` | `@/lib/vendor/amcharts` | amcharts 5 |

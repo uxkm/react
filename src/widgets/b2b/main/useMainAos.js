@@ -10,7 +10,7 @@ export function useMainAos (loading) {
     const root = document.querySelector('[data-main-reveal]')
     if (!root) return undefined
 
-    const sections = Array.from(root.querySelectorAll(':scope > section'))
+    const sections = Array.from(root.querySelectorAll(':scope > section:not(.main-hero_typeB)'))
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
     let cancelled = false
     let aos

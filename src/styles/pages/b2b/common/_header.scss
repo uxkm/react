@@ -17,6 +17,8 @@
   flex-shrink: 0;
   align-items: center;
 
+  .logo_light { display: none; }
+
   img {
     width: var(--b2b-header-size-152px);
     height: var(--b2b-header-size-26px);
@@ -65,11 +67,25 @@
     display: flex;
     flex-shrink: 0;
     align-items: center;
-    gap: var(--space-32);
     font-size: var(--font-size-19);
     font-weight: 700;
     line-height: var(--line-height-26);
     letter-spacing: -0.5px;
+
+    // 간격은 gap/margin이 아니라 item 패딩으로 이어 호버 공백을 없앱니다.
+    &-item {
+      display: flex;
+      align-items: center;
+      padding-inline: var(--space-12);
+
+      &:first-child {
+        padding-inline-start: 0;
+      }
+
+      &:last-child {
+        padding-inline-end: 0;
+      }
+    }
 
     &-link {
       display: inline-flex;
