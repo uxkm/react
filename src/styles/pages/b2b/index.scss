@@ -168,7 +168,8 @@ body:has(.main-page_typeB) { min-width: 0; }
 
   .header_inner {
     position: relative;
-    z-index: 1;
+    // 2뎁스가 뒤에 렌더링되는 공지 배너 위로 펼쳐지도록 합니다.
+    z-index: 2;
     border-bottom: 0;
 
     &::before {
@@ -183,9 +184,14 @@ body:has(.main-page_typeB) { min-width: 0; }
     }
 
     > .logo,
-    > .header_nav,
     > .header_actions {
       position: relative;
+      z-index: 1;
+    }
+
+    > .header_nav {
+      // 절대 위치의 2뎁스는 메뉴 너비가 아닌 header_inner 전체를 기준으로 합니다.
+      position: static;
       z-index: 1;
     }
   }
