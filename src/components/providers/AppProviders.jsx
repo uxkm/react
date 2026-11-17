@@ -73,7 +73,9 @@ function ScrollbarBootstrap ({ children }) {
 /** OS·브라우저·디바이스 class를 <html>에 부여 */
 function DetectBootstrap ({ children }) {
   useEffect(() => {
-    initDetectEnvironment()
+    initDetectEnvironment().catch(error => {
+      console.warn('[environment] 환경 감지를 초기화하지 못했습니다.', error)
+    })
   }, [])
   return children
 }
