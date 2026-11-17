@@ -34,10 +34,13 @@ function CaseStoryCard ({ card }: { card: TestimonialCardData }) {
 export default function MainCaseSection ({ designType = 'typeB' }: { designType?: 'typeA' | 'typeB' }) {
   const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)')
   const compact = useMediaQuery('(max-width: 1099px)')
-  const [playing, setPlaying] = useState(() => !reducedMotion)
+  const [playing, setPlaying] = useState(true)
   useEffect(() => {
-    setPlaying(!reducedMotion)
-  }, [reducedMotion])
+    const query = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const sync = () => setPlaying(!query.matches)
+    query.addEventListener('change', sync)
+    return () => query.removeEventListener('change', sync)
+  }, [])
   if (designType === 'typeA') return <MainCaseSectionTypeA />
 
   return (
@@ -60,7 +63,7 @@ export default function MainCaseSection ({ designType = 'typeB' }: { designType?
         loop
         autoplay={!reducedMotion}
         delay={5000}
-        playing={playing}
+        playing={playing && !reducedMotion}
         onPlayingChange={setPlaying}
         pagination={false}
         navigation={false}

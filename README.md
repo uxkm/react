@@ -66,6 +66,8 @@ npm run dev
 
 PowerShell에서 `npm.ps1` 실행 정책 오류가 나면 같은 명령을 `npm.cmd install`, `npm.cmd run dev` 형태로 실행합니다.
 
+환경 감지 패키지는 브라우저에서만 로드하므로 `navigator`가 없는 Node.js에서도 사전 렌더링할 수 있습니다. 생성 라우트의 표시 주석은 LF·CRLF와 UTF-8 BOM을 모두 인식합니다. 개발 서버 재시작 시 캐시 폴더의 일시적인 파일 잠금은 재시도하며, 네트워크 어댑터 조회가 실패해도 localhost 서버는 실행합니다.
+
 개발 주소는 `http://localhost:8090`입니다. `http://127.0.0.1:8090`도 사용할 수 있습니다. 개발·정적 미리보기 서버는 기본적으로 IPv4와 IPv6를 함께 수신하며, IPv6를 지원하지 않는 환경에서는 IPv4로 실행합니다. OS의 `HOSTNAME` 환경변수는 수신 주소로 사용하지 않습니다. 특정 주소에서만 수신하려면 `BIND_HOST`를 지정합니다. 로컬 인증서가 있으면 `https://localhost:8443`도 함께 제공합니다.
 
 환경변수 지정 문법은 셸마다 다릅니다. 다음은 포트 변경 예시입니다 (`HTTPS_PORT`, `BIND_HOST`, `BROWSER_TEST_BASE_URL`도 같은 방식).

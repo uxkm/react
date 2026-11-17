@@ -100,7 +100,12 @@ export async function startDevelopment () {
       // A structural restart must not reuse manifests from the previous route graph.
       // Only clear cache after a server owned by this supervisor actually started.
       if (restart && ownsDevCache) {
-        fs.rmSync(path.join(root, '.next/dev'), { recursive: true, force: true })
+        fs.rmSync(path.join(root, '.next/dev'), {
+          recursive: true,
+          force: true,
+          maxRetries: 5,
+          retryDelay: 200
+        })
         ownsDevCache = false
       }
       topology = sourceTopology() // includes managed routes created by the registry

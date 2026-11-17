@@ -52,7 +52,7 @@ export function syncProject () {
         for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
           const file = path.join(dir, entry.name)
           if (entry.isDirectory()) prune(file)
-          else if (fs.readFileSync(file, 'utf8').startsWith(marker)) fs.unlinkSync(file)
+          else if (/^\uFEFF?\/\/ @generated-project-route\r?\n/.test(fs.readFileSync(file, 'utf8'))) fs.unlinkSync(file)
         }
         if (!fs.readdirSync(dir).length) fs.rmdirSync(dir)
       }

@@ -49,12 +49,14 @@ const MIME = {
 
 /** LAN IPv4 주소(외부 공개용). 없으면 null */
 function lanAddress () {
-  const nets = networkInterfaces()
-  for (const list of Object.values(nets)) {
-    for (const net of list || []) {
-      if (net.family === 'IPv4' && !net.internal) return net.address
+  try {
+    const nets = networkInterfaces()
+    for (const list of Object.values(nets)) {
+      for (const net of list || []) {
+        if (net.family === 'IPv4' && !net.internal) return net.address
+      }
     }
-  }
+  } catch { /* 네트워크 어댑터 조회 실패 시에도 localhost 서버는 실행합니다. */ }
   return null
 }
 
