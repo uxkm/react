@@ -62,6 +62,112 @@
   .stat_avatar { width: 48px; height: 48px; --avatar-size: 48px; background: #d7e5e6; color: #67868a; }
 }
 
+@media (min-width: 1100px) {
+  .main.main_typeB[data-main-reveal] > .main-cases_typeB {
+    position: relative;
+    z-index: 1;
+    margin-top: clamp(140px, 10.84vw, 208px);
+    padding: clamp(112px, 8.34vw, 160px) 0 clamp(112px, 8.34vw, 160px);
+    background: #3a3a3d;
+
+    .main-cases_heading {
+      width: min(1356px, calc(100% - 80px));
+      h2 { font-size: clamp(34px, 2.5vw, 48px); line-height: 1.291667; letter-spacing: 0; }
+    }
+    .main-cases_more {
+      min-height: 48px;
+      padding: 12px 12px 12px 20px;
+      background: #121214;
+      font-size: 16px;
+      font-weight: 700;
+      > svg { display: none; }
+      &::after {
+        content: '';
+        flex: 0 0 24px;
+        height: 24px;
+        background: url('/images/pages/main/ver3-home/case-arrow.svg') center no-repeat;
+      }
+      &:hover { background: #252527; }
+    }
+    .carousel { margin-top: 40px; }
+    .carousel .swiper { padding: 20px 0 0; }
+    .carousel .swiper .swiper-slide { width: max(321px, calc((100% - 144px) / 7)); height: 360px !important; }
+    .main-cases_card { border-radius: 8px; }
+    .carousel .swiper .swiper-slide .card_testimonial {
+      padding: 32px 32px 24px;
+      border: 0;
+      border-radius: 8px;
+      background: #fff;
+      color: #121214;
+      opacity: 0.5;
+    }
+    .carousel .swiper .swiper-slide-active .card_testimonial { transform: translateY(-20px); opacity: 1; }
+    .stat_label { padding: 4px 12px; border-color: #121214; color: #121214; font-size: 14px; font-weight: 700; line-height: 20px; }
+    .stat_quote { margin: 24px 0 0; }
+    .stat_quote-mark {
+      width: 32px;
+      height: 28px;
+      margin-bottom: 16px;
+      background: url('/images/pages/main/ver3-home/case-quote.svg') center no-repeat;
+      font-size: 0;
+    }
+    [data-avatar='leadership'] .stat_quote-mark { background-image: url('/images/pages/main/ver3-home/case-quote-decorated.svg'); }
+    .stat_value { color: inherit; font-size: 21px; line-height: 1.4; letter-spacing: 0; }
+    .swiper-slide-active .stat_value { font-size: 24px; }
+    .stat_footer { gap: 16px; }
+    .stat_desc { color: #74747a; font-size: 14px; line-height: 23px; letter-spacing: 0; white-space: pre-line; }
+    .stat_avatar {
+      position: relative;
+      overflow: hidden;
+      width: 62px;
+      height: 62px;
+      --avatar-size: 62px;
+      background: #ccedea;
+      > * { display: none; }
+      &::before {
+        content: '';
+        position: absolute;
+        inset: var(--case-avatar-top, 0) auto auto var(--case-avatar-left, 0);
+        width: var(--case-avatar-width);
+        height: var(--case-avatar-height);
+        background: url('/images/pages/main/ver3-home/case-avatars.png') var(--case-avatar-position) / var(--case-avatar-size) no-repeat;
+      }
+    }
+    [data-avatar='leadership'] {
+      --case-avatar-top: -1px;
+      --case-avatar-left: 3px;
+      --case-avatar-width: 58px;
+      --case-avatar-height: 63px;
+      --case-avatar-position: 67.62% top;
+      --case-avatar-size: 436.95% 200.68%;
+    }
+    [data-avatar='public'] {
+      --case-avatar-top: 10px;
+      --case-avatar-width: 62px;
+      --case-avatar-height: 57px;
+      --case-avatar-position: 35% 90.84%;
+      --case-avatar-size: 414.49% 223.99%;
+    }
+    [data-avatar='manufacturing'] {
+      --case-avatar-top: 3px;
+      --case-avatar-left: 6px;
+      --case-avatar-width: 56px;
+      --case-avatar-height: 61px;
+      --case-avatar-position: 4.27% top;
+      --case-avatar-size: 450.25% 200.23%;
+    }
+    [data-avatar='finance'] {
+      --case-avatar-top: -1px;
+      --case-avatar-left: 4px;
+      --case-avatar-width: 56px;
+      --case-avatar-height: 69px;
+      --case-avatar-position: 36.47% top;
+      --case-avatar-size: 490.06% 200.23%;
+    }
+    [data-avatar='public'] .stat_avatar, [data-avatar='finance'] .stat_avatar { background: #d4e5ff; }
+  }
+}
+
 @media (max-width: 1099px) {
   .main .main-cases.main-cases_typeB {
     margin-top: 80px;

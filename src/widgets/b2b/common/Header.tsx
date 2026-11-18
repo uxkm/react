@@ -128,7 +128,7 @@ export default function Header ({ className, ...rest }: Readonly<HTMLAttributes<
           </Link>
           <button
             type="button"
-            className="icon-button"
+            className="icon-button header_search"
             aria-label="통합검색"
             disabled
           >
@@ -136,7 +136,7 @@ export default function Header ({ className, ...rest }: Readonly<HTMLAttributes<
           </button>
           <button
             type="button"
-            className="icon-button"
+            className="icon-button header_menu-toggle"
             aria-label="전체메뉴 열기"
             aria-haspopup="dialog"
             aria-expanded={menuOpen}

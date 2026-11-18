@@ -27,14 +27,14 @@ export default function MainInsightSection ({ children, designType = 'typeB' }: 
         ariaLabel="멀캠ON HR 인사이트"
         slidesPerView={compact ? 1.12 : 3}
         slidesPerGroup={compact ? 1 : 3}
-        spaceBetween={compact ? 16 : 32}
+        spaceBetween={compact ? 16 : 30}
         pagination={compact}
         dotsOutside={compact}
         navigation={!compact}
         loop={false}
       >
         {children ?? mainInsightContent.map(card => (
-          <CarouselSlide key={card.id}>
+          <CarouselSlide key={card.id} data-insight={card.id}>
             <Card type="content" card={card} shadow={false} />
           </CarouselSlide>
         ))}

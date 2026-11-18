@@ -33,7 +33,7 @@ const typeBSlides: readonly PromotionCardData[] = [
     id: 'physical-ai',
     title: '현실로 확장되는 AI,\nPhysical AI 교육',
     description: '로봇·센서·현장 데이터까지, 물리 세계로 확장되는\nAI를 직접 다뤄보는 신규 과정입니다.',
-    image: { src: '/images/pages/main/physical-ai.webp', fit: 'cover' },
+    image: { src: '/images/pages/main/ver3-home/physical-ai.png', fit: 'cover' },
     href: '/b2b/contents/ax/ai-search',
     action: '과정보기'
   },

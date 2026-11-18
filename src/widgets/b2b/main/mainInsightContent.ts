@@ -5,21 +5,21 @@ export const mainInsightContent: readonly ContentCardData[] = [
   {
     id: 'hr-trend', category: 'HR 트렌드',
     title: 'HR 담당자를 위한 글로벌 AI 트렌드와 활용',
-    description: '글로벌 AI 트렌드와 HR 담당자를 위한 활용 인사이트를 만나보세요.',
-    image: '/images/@dummy/hr-trend.png',
+    description: '멀캠ON 10월 세미나에서 공개하는 2027 HR 트렌드의 핵심 키워드를 미리 살펴봅니다.',
+    image: '/images/pages/main/ver3-home/insight-hr.png',
     href: '/b2b/insight/on/list'
   },
   {
     id: 'ax-mind', category: 'AX',
     title: 'AI 시대, 당신의 마음은 안녕하십니까? - 정신건강의학과 윤대현 교수편',
-    description: 'AI 시대의 변화 속에서 마음의 건강을 지키는 방법을 살펴봅니다.',
-    image: '/images/@dummy/ax-mind.jpg', href: '/b2b/insight/on/list'
+    description: '직급·직무별 출발선이 다른 조직에서 AI 리터러시 교육을 설계하는 단계별 접근법을 정리했습니다.',
+    image: '/images/pages/main/ver3-home/insight-ax.png', href: '/b2b/insight/on/list'
   },
   {
     id: 'leadership-ai', category: '리더십',
     title: 'AI는 인류에게 위협일까, 기회일까? - 진화생물학자 최재천 교수편',
-    description: 'AI 시대를 바라보는 새로운 관점과 조직의 미래를 위한 인사이트를 만나보세요.',
-    image: '/images/@dummy/leadership-ai.png', href: '/b2b/insight/on/list'
+    description: '짧고 반복 가능한 학습 콘텐츠로 현업 적용률을 높인 운영 방식을 살펴봅니다.',
+    image: '/images/pages/main/ver3-home/insight-leadership.png', href: '/b2b/insight/on/list'
   },
   {
     id: 'hr-trends-2027', category: 'HR 트렌드',

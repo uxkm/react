@@ -37,7 +37,7 @@ function MainSectionPreview () {
           <div className="main-section-preview_card">
             <Component />
           </div>
-        ) : <Component />}
+        ) : key === 'hero' ? <MainHero type={params.get('type') === 'typeVideo' ? 'typeVideo' : 'typeB'} /> : <Component />}
       </div>
     </>
   )

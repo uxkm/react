@@ -70,7 +70,8 @@ B2B 헤더는 `data-header-scroll="fixed"`로 스크롤 시 숨김을 비활성�
 
 ## 메인 시안 typeA / typeB
 
-- 기본 `/b2b`는 typeB입니다. 기존 헤더·상단 공지·첫 타이틀은 `/b2b?type=typeA`에서 확인합니다.
+- 기본 `/b2b`는 typeB 레이아웃에 영상 히어로를 표시합니다. 기존 부유체 히어로는 `/b2b?type=typeB`, 이전 시안은 `/b2b?type=typeA`에서 확인합니다.
+- 영상 히어로는 `<MainHero type="typeVideo" />`, `/b2b?type=typeVideo`, 또는 `/pub/preview/b2b/main-section?section=hero&type=typeVideo`로도 호출합니다. 영상과 포스터는 `public/assets/b2b/main/`에 있습니다. PC에서 배경을 반복 재생하고, 모션 축소 시에는 포스터를 표시합니다. 태블릿·모바일에서는 기존 배경을 사용합니다.
 - typeB 공지는 `MainTopBanner`에서 헤더 아래에 배치합니다. 헤더는 hero 위의 고정 오버레이이고, hero는 상단부터 `100dvh`를 채웁니다. 헤더 자체의 `backdrop-filter: blur(24px) saturate(1.3)`와 내비 영역의 흰색 6% 표면을 조합해 실제 hero를 흐리게 비춥니다. 표준 속성은 WebKit 속성 뒤에 선언해 CSS 최적화 후에도 유지합니다. 두 번째 섹션부터 내비 표면은 흰색 78%·글자는 검정으로 전환하며, 공지 배너도 같은 반투명 표면과 상태별 글자 색상을 공유합니다.
 - PC 첫 hero 안에서 휠을 내리거나 위로 스와이프하면 추천·상담 섹션으로 이동합니다. PageDown·ArrowDown·Space와 하단 이동 버튼도 지원합니다. 이후 본문은 일반 스크롤이며, 모달 안의 스크롤과 확대 제스처는 유지합니다. 모션 축소 환경에서는 즉시 이동합니다. 태블릿·모바일(1099px 이하)은 자동 섹션 이동과 하단 스크롤 안내 없이 일반 스크롤을 사용하며, 창 크기를 바꾸면 동작도 전환됩니다.
 - PC·모바일용 배경은 시안 분위기를 참고한 생성 이미지입니다. `public/images/pages/main/hero-type-b.webp`, `hero-type-b-mobile.webp`를 실제 디자인 원본으로 교체할 수 있습니다.
@@ -85,7 +86,7 @@ PC hero의 왼쪽 하단 구체는 `main-hero_overlap`으로 분리합니다. �
 
 ### 디자인 유형별 보존 범위
 
-`useMainDesignType`의 같은 값으로 헤더·전체메뉴·공지·퀵메뉴·푸터·메인 1·2·3·4번 섹션을 함께 전환합니다. 기본 `/b2b`는 typeB, `/b2b?type=typeA`는 원본입니다. 전체메뉴 현재 시안은 `FullMenuTypeB`(기업교육·서비스·회사소개 3단), 원본은 `FullMenuTypeA`(아코디언)입니다. 단독 프리뷰 `/pub/preview/b2b/full-menu`에서 확인합니다.
+`useMainDesignType`으로 헤더·전체메뉴·공지·퀵메뉴·푸터·본문의 typeA와 typeB를 전환합니다. `useMainPageType`은 typeB 레이아웃에서 히어로 배경도 선택합니다. 전체메뉴 현재 시안은 `FullMenuTypeB`(기업교육·서비스·회사소개 3단), 원본은 `FullMenuTypeA`(아코디언)입니다. 단독 프리뷰 `/pub/preview/b2b/full-menu`에서 확인합니다.
 
 | 영역 | typeA | typeB |
 | --- | --- | --- |

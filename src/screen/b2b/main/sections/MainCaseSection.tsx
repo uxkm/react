@@ -10,6 +10,9 @@ import { useMediaQuery } from '@/hooks/layout/useMediaQuery'
 import { mainCustomerStories } from '@/widgets/b2b/main/mainCustomerStories'
 import MainCaseSectionTypeA from './MainCaseSectionTypeA'
 
+// 넓은 화면에서 Swiper가 순환 중에도 양쪽에 카드를 배치할 수 있도록 같은 순서를 한 번 더 제공합니다.
+const desktopCustomerStories = [...mainCustomerStories, ...mainCustomerStories]
+
 function MoreCasesLink ({ className }: { className: string }) {
   return (
     <Link className={`main-cases_more ${className}`} to="https://www.multicampus.com/b2b/kr/service/bpo.html" target="_blank" rel="noopener noreferrer">
@@ -19,10 +22,10 @@ function MoreCasesLink ({ className }: { className: string }) {
 }
 
 /** 카드 전체에만 초점을 두고, 스크린리더는 aria-label로 내용을 읽습니다. */
-function CaseStoryCard ({ card }: { card: TestimonialCardData }) {
-  const label = [card.category, card.quote.replace(/\n/g, ' '), card.author].filter(Boolean).join('. ')
+function CaseStoryCard ({ card }: { card: TestimonialCardData & { avatar: string } }) {
+  const label = [card.category, card.quote, card.author].filter(Boolean).join('. ').replace(/\n/g, ' ')
   return (
-    <div className="main-cases_card" tabIndex={0} role="group" aria-label={label}>
+    <div className="main-cases_card" data-avatar={card.avatar} tabIndex={0} role="group" aria-label={label}>
       <div aria-hidden="true">
         <Card type="testimonial" card={card} shadow={false} />
       </div>
@@ -73,7 +76,7 @@ export default function MainCaseSection ({ designType = 'typeB' }: { designType?
           }
         }}
       >
-        {mainCustomerStories.map((card, index) => (
+        {(compact ? mainCustomerStories : desktopCustomerStories).map((card, index) => (
           <CarouselSlide key={`${card.category}-${index}`}>
             <CaseStoryCard card={card} />
           </CarouselSlide>

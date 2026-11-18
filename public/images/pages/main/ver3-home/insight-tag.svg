@@ -1,0 +1,6 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="92" height="32" viewBox="0 0 92 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="stroke0_0_5" fill="white">
+<path d="M0 16C0 7.16344 7.16344 0 16 0H76C84.8366 0 92 7.16344 92 16C92 24.8366 84.8366 32 76 32H16C7.16345 32 0 24.8366 0 16Z" fill-rule="evenodd" clip-rule="evenodd"/>
+</mask>
+<path id="BG" d="M16 32H76C84.8366 32 92 24.8366 92 16C92 7.16344 84.8366 0 76 0H16C7.16344 0 0 7.16344 0 16C0 24.8366 7.16345 32 16 32Z" stroke-width="2" stroke="#898D9C" mask="url(#stroke0_0_5)"/>
+</svg>

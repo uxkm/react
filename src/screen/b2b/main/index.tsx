@@ -11,13 +11,14 @@ import {
 } from './sections' // 메인 섹션
 import { useMainAos } from '@/widgets/b2b/main/useMainAos'
 import InquirySnackbar from '@/widgets/b2b/common/InquirySnackbar'
-import { useMainDesignType } from '@/widgets/b2b/main/useMainDesignType'
+import { useMainPageType } from '@/widgets/b2b/main/useMainDesignType'
 import MainHeroTypeA from './sections/MainHeroTypeA'
 import IndexSkeleton from './skeleton/indexSkeleton' // Index Skeleton 컴포넌트
 
 /** 메인 화면은 sections의 섹션을 호출하고, 각 섹션은 widgets의 개별 콘텐츠를 배치합니다. */
 export default function B2bMainPage () {
-  const designType = useMainDesignType()
+  const pageType = useMainPageType()
+  const designType = pageType === 'typeA' ? 'typeA' : 'typeB'
   // 메인은 페이지명 없이 사이트명만 표시한다.
   useSiteTitle()
   // 헤더 고객사례(/b2b#cases) 등 해시로 진입 시 해당 섹션으로 스크롤
@@ -86,7 +87,7 @@ export default function B2bMainPage () {
         data-main-reveal=""
       >
         {/* 메인 타이틀 영역 */}
-        {designType === 'typeA' ? <MainHeroTypeA /> : <MainHero />}
+        {pageType === 'typeA' ? <MainHeroTypeA /> : <MainHero type={pageType} />}
         {/* 기업교육 추천 및 상담 섹션 */}
         <MainCardSection designType={designType} />
         {/* 멀캠ON 인사이트 섹션 */}

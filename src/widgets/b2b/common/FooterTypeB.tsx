@@ -45,7 +45,7 @@ export default function FooterTypeB () {
             <p className="footer-b_intro">30년간 기업의 성장을 설계해 온 Total HRD 파트너.<br />진단부터 설계·운영·성과관리까지 함께합니다.</p>
             <ul className="footer-b_socials" aria-label="공식 SNS">
               {footerTypeBSocials.map(site => (
-                <li key={site.icon}><a href={site.href} target="_blank" title="새 창 열림" rel="noopener noreferrer" aria-label={site.label}><Icon name={site.icon} size={24} aria-hidden /></a></li>
+                <li key={site.icon} className={`footer-b_social-${site.icon}`}><a href={site.href} target="_blank" title="새 창 열림" rel="noopener noreferrer" aria-label={site.label}><Icon name={site.icon} size={24} aria-hidden /></a></li>
               ))}
             </ul>
           </div>
