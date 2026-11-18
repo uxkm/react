@@ -16,6 +16,20 @@
 @use './common/inquiry-snackbar';
 
 :root {
+  --b2b-color-surface: var(--color-white);
+  --b2b-color-surface-hover: var(--color-neutral-50);
+  --b2b-color-surface-inverse: var(--color-neutral-800);
+  --b2b-color-text: var(--color-neutral-900);
+  --b2b-color-text-muted: var(--color-neutral-500);
+  --b2b-color-case-action-bg: var(--color-neutral-900);
+  --b2b-color-case-avatar-bg: var(--color-green-100);
+  --b2b-color-case-avatar-bg-alt: var(--color-blue-100);
+  --b2b-color-footer-border: var(--color-white-alpha-20);
+  --b2b-color-footer-social-hover: var(--color-white-alpha-16);
+  --b2b-color-gnb-glass: var(--color-navy-alpha-gnb-30);
+  --b2b-color-gnb-glass-border: var(--color-white-alpha-16);
+  --b2b-color-hero-action-hover: var(--color-white-alpha-20);
+
   // 고유 규격 (공통 규격은 foundations/tokens 참조)
   --b2b-layout-size-132px: 132px;
   --b2b-layout-size-552px: 552px;
@@ -282,7 +296,7 @@ body:has(.main-page_typeB) { min-width: 0; }
   .main-hero_description { margin: 18px 0 0; color: #fff; font-size: clamp(16px, 1.3vw, 22px); font-weight: 500; line-height: 1.6; letter-spacing: -0.035em; }
   .main-hero_actions { display: flex; justify-content: center; gap: 16px; margin-top: 42px; }
   .main-hero_cta { display: inline-flex; align-items: center; justify-content: center; gap: 20px; min-height: 68px; padding: 16px 32px; border: 1px solid rgb(255 255 255 / 35%); border-radius: 100px; background: rgb(255 255 255 / 10%); backdrop-filter: blur(12px); color: #fff; font-size: 18px; font-weight: 650; white-space: nowrap; transition: background 180ms ease; }
-  .main-hero_cta:hover { background: rgb(255 255 255 / 20%); }
+  .main-hero_cta:hover { background: var(--b2b-color-hero-action-hover); }
   .main-hero_cta-primary { border-color: transparent; background: linear-gradient(105deg, #af40f4, #dc4cf7); }
   .main-hero_cta-primary:hover { background: linear-gradient(105deg, #9d2ce3, #cb33ec); }
   .main-hero_scroll { position: absolute; left: 50%; transform: translateX(-50%); border: 0; background: transparent; color: #fff; font: inherit; cursor: pointer; }
@@ -345,7 +359,7 @@ body:has(.main-page_typeB) { min-width: 0; }
         background: var(--hero-cta-arrow) center no-repeat;
         transform: translateY(-50%) rotate(45deg);
       }
-      &:hover { background: rgb(255 255 255 / 20%); }
+      &:hover { background: var(--b2b-color-hero-action-hover); }
     }
     .main-hero_cta-primary {
       --hero-cta-arrow: url('/images/pages/main/ver3-home/hero-inquiry-arrow.svg');
@@ -394,7 +408,7 @@ body:has(.main-page_typeB) { min-width: 0; }
     .header_inner {
       height: var(--main-gnb-height);
       padding-inline: var(--main-gnb-gutter);
-      &::before { background: rgb(18 22 39 / 30%); border-bottom: 0; }
+      &::before { background: var(--b2b-color-gnb-glass); border-bottom: 0; }
     }
     .header_inner > .logo img { width: 150px; height: 24px; opacity: 0; }
     .header_inner > .logo::before {
@@ -423,9 +437,9 @@ body:has(.main-page_typeB) { min-width: 0; }
     .header_search { --main-gnb-icon: url('/images/pages/main/ver3-home/gnb-search.svg'); }
     .header_menu-toggle { --main-gnb-icon: url('/images/pages/main/ver3-home/gnb-menu.svg'); }
     .main-top-banner {
-      border-top: 1px solid rgb(255 255 255 / 16%);
-      border-bottom-color: rgb(255 255 255 / 16%);
-      background: rgb(18 22 39 / 30%);
+      border-top: 1px solid var(--b2b-color-gnb-glass-border);
+      border-bottom-color: var(--b2b-color-gnb-glass-border);
+      background: var(--b2b-color-gnb-glass);
       font-size: 16px;
       .top-banner_inner { padding-inline: var(--main-gnb-gutter); }
       .top-banner_content { padding-block: 0; }

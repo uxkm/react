@@ -18,7 +18,7 @@
   .footer-b_intro { margin-top: 20px; font-size: 14px; line-height: 1.8; }
   ul.footer-b_socials { display: flex; align-items: center; gap: 10px; margin-top: 24px; }
   .footer-b_socials a { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: rgb(255 255 255 / 8%); color: #77848e; }
-  .footer-b_socials a:hover { background: rgb(255 255 255 / 16%); color: #9aa6ae; }
+  .footer-b_socials a:hover { background: var(--b2b-color-footer-social-hover); color: #9aa6ae; }
   .footer-b_menu { display: flex; flex-direction: column; gap: 9px; list-style: none; }
   .footer-b_menu a { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; overflow-wrap: anywhere; }
   .footer-b_menu .icon { flex-shrink: 0; opacity: 0.7; }
@@ -41,9 +41,9 @@
 
 @media (min-width: 1100px) {
   .app-layout:has(.main-page_typeB) .footer.footer_typeB {
-    --home-footer-divider: rgb(116 116 122 / 40%);
-    background: #3a3a3d;
-    border-top-color: rgb(255 255 255 / 20%);
+    --home-footer-divider: var(--color-neutral-alpha-500-40);
+    background: var(--b2b-color-surface-inverse);
+    border-top-color: var(--b2b-color-footer-border);
     color: #aaaab2;
     font-size: 16px;
     line-height: 1.5;

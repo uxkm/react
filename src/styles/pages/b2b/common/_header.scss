@@ -222,7 +222,7 @@
     border: 1px solid #666;
 
     &:hover {
-      background: #f5f5f5;
+      background: var(--b2b-color-surface-hover);
     }
   }
 

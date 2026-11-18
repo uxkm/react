@@ -68,7 +68,7 @@
     z-index: 1;
     margin-top: clamp(140px, 10.84vw, 208px);
     padding: clamp(112px, 8.34vw, 160px) 0 clamp(112px, 8.34vw, 160px);
-    background: #3a3a3d;
+    background: var(--b2b-color-surface-inverse);
 
     .main-cases_heading {
       width: min(1356px, calc(100% - 80px));
@@ -77,7 +77,7 @@
     .main-cases_more {
       min-height: 48px;
       padding: 12px 12px 12px 20px;
-      background: #121214;
+      background: var(--b2b-color-case-action-bg);
       font-size: 16px;
       font-weight: 700;
       > svg { display: none; }
@@ -97,12 +97,12 @@
       padding: 32px 32px 24px;
       border: 0;
       border-radius: 8px;
-      background: #fff;
-      color: #121214;
+      background: var(--b2b-color-surface);
+      color: var(--b2b-color-text);
       opacity: 0.5;
     }
     .carousel .swiper .swiper-slide-active .card_testimonial { transform: translateY(-20px); opacity: 1; }
-    .stat_label { padding: 4px 12px; border-color: #121214; color: #121214; font-size: 14px; font-weight: 700; line-height: 20px; }
+    .stat_label { padding: 4px 12px; border-color: currentColor; color: var(--b2b-color-text); font-size: 14px; font-weight: 700; line-height: 20px; }
     .stat_quote { margin: 24px 0 0; }
     .stat_quote-mark {
       width: 32px;
@@ -115,14 +115,14 @@
     .stat_value { color: inherit; font-size: 21px; line-height: 1.4; letter-spacing: 0; }
     .swiper-slide-active .stat_value { font-size: 24px; }
     .stat_footer { gap: 16px; }
-    .stat_desc { color: #74747a; font-size: 14px; line-height: 23px; letter-spacing: 0; white-space: pre-line; }
+    .stat_desc { color: var(--b2b-color-text-muted); font-size: 14px; line-height: 23px; letter-spacing: 0; white-space: pre-line; }
     .stat_avatar {
       position: relative;
       overflow: hidden;
       width: 62px;
       height: 62px;
       --avatar-size: 62px;
-      background: #ccedea;
+      background: var(--b2b-color-case-avatar-bg);
       > * { display: none; }
       &::before {
         content: '';
@@ -164,7 +164,7 @@
       --case-avatar-position: 36.47% top;
       --case-avatar-size: 490.06% 200.23%;
     }
-    [data-avatar='public'] .stat_avatar, [data-avatar='finance'] .stat_avatar { background: #d4e5ff; }
+    [data-avatar='public'] .stat_avatar, [data-avatar='finance'] .stat_avatar { background: var(--b2b-color-case-avatar-bg-alt); }
   }
 }
 

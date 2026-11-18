@@ -9,23 +9,25 @@
 // 기본(첫 로드)은 라이트. data-theme 으로만 전환한다.
 // =============================================================================
 
+@use 'colors';
+
 @mixin theme-light {
   color-scheme: light;
 
-  --color-bg: #f4f6f9;
-  --color-surface: #ffffff;
-  --color-surface-raised: #eef1f6;
-  --color-border: #7d8fa6;
-  --color-border-subtle: #a8b3c4;
-  --color-text: #1a2332;
-  --color-text-muted: #4a5568;
-  --color-text-disabled: #697586;
-  --color-border-disabled: #7d8fa6;
-  --color-surface-disabled: #eef1f6;
-  --color-control-disabled: #7d8fa6;
+  --color-bg: var(--color-cool-neutral-50);
+  --color-surface: var(--color-white);
+  --color-surface-raised: var(--color-cool-neutral-100);
+  --color-border: var(--color-neutral-500);
+  --color-border-subtle: var(--color-neutral-400);
+  --color-text: var(--color-neutral-900);
+  --color-text-muted: var(--color-neutral-700);
+  --color-text-disabled: var(--color-neutral-600);
+  --color-border-disabled: var(--color-border);
+  --color-surface-disabled: var(--color-surface-raised);
+  --color-control-disabled: var(--color-border);
 
-  --color-accent-disabled: #c8d5eb;
-  --color-on-accent-disabled: #3d5080;
+  --color-accent-disabled: var(--color-blue-100);
+  --color-on-accent-disabled: var(--color-navy-800);
   --color-success-disabled: #c5ddd2;
   --color-on-success-disabled: #2d5340;
   --color-danger-disabled: #eccaca;
@@ -33,12 +35,13 @@
   --color-warning-disabled: #ecd4bc;
   --color-on-warning-disabled: #6b4220;
 
-  --color-accent: #3d66c4;
-  --color-accent-hover: #3458ad;
-  --color-accent-text: #2f4f9f;
-  --color-accent-text-hover: #2f4f9f;
-  --color-accent-muted: rgba(61, 102, 196, 0.12);
-  --color-on-accent: #ffffff;
+  // 흰 버튼 레이블과 옅은 배경 위 링크에는 Blue 600을 사용합니다.
+  --color-accent: var(--color-blue-600);
+  --color-accent-hover: var(--color-navy-800);
+  --color-accent-text: var(--color-blue-600);
+  --color-accent-text-hover: var(--color-accent-hover);
+  --color-accent-muted: var(--color-blue-50);
+  --color-on-accent: var(--color-white);
 
   --color-success: #276749;
   --color-success-hover: #22543d;
@@ -56,30 +59,30 @@
   --color-warning-text-hover: #9c4221;
   --color-on-warning: #ffffff;
 
-  --color-header-bg: rgba(244, 246, 249, 0.88);
-  --color-header-bg-scrolled: #ffffff;
+  --color-header-bg: var(--color-white-alpha-86);
+  --color-header-bg-scrolled: var(--color-surface);
   --color-overlay: rgba(15, 20, 25, 0.4);
   --shadow-sm: 0 1px 3px rgba(15, 20, 25, 0.08);
   --shadow-md: 0 8px 24px rgba(15, 20, 25, 0.1);
 
-  --color-alert-info-text: #234e96;
-  --color-alert-info-bg: rgba(61, 102, 196, 0.12);
-  --color-alert-info-border: rgba(61, 102, 196, 0.28);
+  --color-alert-info-text: var(--color-accent-text);
+  --color-alert-info-bg: var(--color-accent-muted);
+  --color-alert-info-border: var(--color-blue-100);
   --color-alert-success-text: #22543d;
-  --color-alert-success-bg: rgba(39, 103, 73, 0.12);
+  --color-alert-success-bg: var(--color-green-50);
   --color-alert-success-border: rgba(39, 103, 73, 0.28);
   --color-alert-warning-text: #7b341e;
-  --color-alert-warning-bg: rgba(192, 86, 33, 0.12);
+  --color-alert-warning-bg: var(--color-orange-50);
   --color-alert-warning-border: rgba(192, 86, 33, 0.28);
   --color-alert-error-text: #822727;
   --color-alert-error-bg: rgba(197, 48, 48, 0.12);
   --color-alert-error-border: rgba(197, 48, 48, 0.28);
 
-  --color-snackbar-info-bg: #e7eefb;
-  --color-snackbar-info-border: #7897c7;
-  --color-snackbar-success-bg: #e7f0eb;
+  --color-snackbar-info-bg: var(--color-accent-muted);
+  --color-snackbar-info-border: var(--color-blue-500);
+  --color-snackbar-success-bg: var(--color-alert-success-bg);
   --color-snackbar-success-border: #739b86;
-  --color-snackbar-warning-bg: #f8eee9;
+  --color-snackbar-warning-bg: var(--color-alert-warning-bg);
   --color-snackbar-warning-border: #bc8062;
   --color-snackbar-error-bg: #f8e7e7;
   --color-snackbar-error-border: #c77a7a;
