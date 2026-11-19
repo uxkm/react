@@ -345,6 +345,14 @@ export const pubPages = {
     {
       "id": "main-section",
       "label": "메인 섹션 프리뷰"
+    },
+    {
+      "id": "type-a/notice",
+      "label": "상단 공지"
+    },
+    {
+      "id": "type-a/quick-menu",
+      "label": "퀵메뉴"
     }
   ]
 }

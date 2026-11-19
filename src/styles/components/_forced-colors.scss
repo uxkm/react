@@ -1,0 +1,58 @@
+@media (forced-colors: active) {
+  .tabs_tab[aria-selected='true'],
+  .pagination_link[aria-current='page'],
+  .menu_link[aria-current='page'],
+  .tree_row[aria-selected='true'],
+  .calendar_day[aria-pressed='true'],
+  .calendar_wheel-item[aria-selected='true'] {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .carousel .carousel_dot,
+  .carousel .swiper-pagination-bullet::after,
+  .carousel.carousel_pagination-custom .swiper-pagination-bullet {
+    border: 1px solid CanvasText;
+  }
+
+  .carousel .carousel_dot.is-active,
+  .carousel .swiper-pagination-bullet-active::after {
+    forced-color-adjust: none;
+    background-color: Highlight;
+  }
+
+  .carousel.carousel_pagination-custom .swiper-pagination-bullet-active {
+    forced-color-adjust: none;
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .carousel.carousel_pagination-custom .swiper-pagination-bullet::after {
+    content: none;
+  }
+
+  .progress .progress_track,
+  .carousel .swiper-pagination-progressbar {
+    border: 1px solid CanvasText;
+  }
+
+  .progress .progress_track .progress_bar,
+  .carousel .swiper-pagination-progressbar-fill {
+    forced-color-adjust: none;
+    background-color: Highlight;
+  }
+
+  .progress .progress_track .progress_bar .progress_info {
+    color: HighlightText;
+  }
+
+  .progress.progress_circle .progress_circle-track {
+    forced-color-adjust: none;
+    stroke: GrayText;
+  }
+
+  .progress.progress_circle .progress_circle-bar {
+    forced-color-adjust: none;
+    stroke: Highlight;
+  }
+}

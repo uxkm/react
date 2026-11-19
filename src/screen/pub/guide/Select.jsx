@@ -13,7 +13,7 @@ function Field ({ id, label, hint, children }) {
     <div className="form_field">
       <label className="form_field-label" htmlFor={id}>{label}</label>
       {children}
-      {hint ? <p className="form_field-hint">{hint}</p> : null}
+      {hint ? <p id={`${id}-hint`} className="form_field-hint">{hint}</p> : null}
     </div>
   )
 }
@@ -91,20 +91,21 @@ const SECTIONS = [
         <code>form_field</code>와 placeholder · option children으로 구성합니다.
       </>
     ),
-    code: wrapPageExample(`<Field id="select-region" label="지역" hint="거주 지역을 선택해 주세요.">
-  <Select id="select-region" fit required placeholder="지역을 선택하세요">
+    code: wrapPageExample(`<FormField htmlFor="select-region" label="지역" required hint={<span id="select-region-hint">거주 지역을 선택해 주세요.</span>}>
+  <Select id="select-region" aria-describedby="select-region-hint" fit required placeholder="지역을 선택하세요">
     <option value="seoul">서울</option>
-    …
+    <option value="busan">부산</option>
+    <option value="jeju">제주</option>
   </Select>
-</Field>`, {
+</FormField>`, {
   name: 'SelectBasicExample',
   reactImports: [],
-  compImports: ['Field', 'Select']
+  compImports: ['FormField', 'Select']
 }),
     preview: (
       <div className="demo-stack">
         <Field id="select-region" label="지역" hint="거주 지역을 선택해 주세요.">
-          <Select id="select-region" fit required placeholder="지역을 선택하세요">
+          <Select id="select-region" aria-describedby="select-region-hint" fit required placeholder="지역을 선택하세요">
             <RegionOptions />
           </Select>
         </Field>
@@ -264,6 +265,7 @@ const SECTIONS = [
         <Field id="select-skills" label="관심 분야" hint="여러 항목을 선택할 수 있습니다.">
           <Select
             id="select-skills"
+            aria-describedby="select-skills-hint"
             multiple
             nativeSize={4}
             defaultValue={['design', 'frontend']}

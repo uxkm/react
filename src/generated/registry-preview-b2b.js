@@ -4,11 +4,15 @@ export const previewLoaders = {
   'footer': () => import('@/screen/pub/preview/b2b/footer/index.tsx'),
   'full-menu': () => import('@/screen/pub/preview/b2b/full-menu/index.tsx'),
   'gnb': () => import('@/screen/pub/preview/b2b/gnb/index.tsx'),
-  'main-section': () => import('@/screen/pub/preview/b2b/main-section/index.tsx')
+  'main-section': () => import('@/screen/pub/preview/b2b/main-section/index.tsx'),
+  'type-a/notice': () => import('@/screen/pub/preview/b2b/type-a/notice/index.tsx'),
+  'type-a/quick-menu': () => import('@/screen/pub/preview/b2b/type-a/quick-menu/index.tsx')
 }
 export const previewMeta = {
   'footer': {"banner":false,"header":false,"footer":false,"floating":false},
   'full-menu': {"banner":false,"header":false,"footer":false,"floating":false},
   'gnb': {"banner":false,"header":false,"footer":false,"floating":false},
-  'main-section': {"banner":false,"header":false,"footer":false,"floating":false}
+  'main-section': {"banner":false,"header":false,"footer":false,"floating":false},
+  'type-a/notice': {"banner":false,"header":false,"footer":false,"floating":false},
+  'type-a/quick-menu': {"banner":false,"header":false,"footer":false,"floating":false}
 }

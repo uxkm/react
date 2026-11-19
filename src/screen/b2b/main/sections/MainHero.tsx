@@ -25,9 +25,9 @@ function MainHeroDetails () {
   ))
 }
 
-function MainHeroArtwork () {
+function MainHeroArtwork ({ videoFallback }: { videoFallback: boolean }) {
   return (
-    <div className="main-hero_artwork" aria-hidden="true">
+    <div className={`main-hero_artwork${videoFallback ? ' main-hero_artwork-fallback' : ''}`} aria-hidden="true">
       <span className="main-hero_object main-hero_object-knot" />
       <span className="main-hero_object main-hero_object-wave" />
       <span className="main-hero_object main-hero_object-ribbed-sphere-lit" />
@@ -35,18 +35,20 @@ function MainHeroArtwork () {
       <span className="main-hero_object main-hero_object-bubble-right" />
       <span className="main-hero_object main-hero_object-bubble-left" />
       <span className="main-hero_object main-hero_object-flower" />
-      <MainHeroDetails />
+      {!videoFallback && <MainHeroDetails />}
     </div>
   )
 }
 
-/** 헤더·공지와 함께 첫 화면을 채우며 typeVideo 호출 시 배경 영상 레이어를 사용합니다. */
-export default function MainHero ({ type = 'typeB' }: { type?: 'typeB' | 'typeVideo' }) {
+/** 같은 그래픽으로 부유하는 도형과 영상 시안의 반응형 배경을 구성합니다. */
+export default function MainHero ({ type }: { type?: 'typeB' | 'typeVideo' }) {
   const scrollToNext = useHeroSectionScroll()
+  const isVideo = type === 'typeVideo'
 
   return (
     <section id="hero" className="main-hero main-hero_typeB" aria-labelledby="main-hero-title">
-      {type === 'typeVideo' ? <MainHeroVideoBackground><MainHeroDetails /></MainHeroVideoBackground> : <MainHeroArtwork />}
+      <MainHeroArtwork videoFallback={isVideo} />
+      {isVideo && <MainHeroVideoBackground><MainHeroDetails /></MainHeroVideoBackground>}
       <div className="main-hero_overlap" aria-hidden="true">
         <span className="main-hero_object main-hero_object-ribbed-sphere" />
       </div>
@@ -59,7 +61,7 @@ export default function MainHero ({ type = 'typeB' }: { type?: 'typeB' | 'typeVi
           <Link to="/b2b/service/diagnosis" className="main-hero_cta">진단&맞춤추천 <Icon name="arrow-right" size={20} /></Link>
         </div>
       </div>
-      <button type="button" className="main-hero_scroll" onClick={scrollToNext} aria-label="두 번째 섹션 기업교육 추천 및 상담으로 이동">
+      <button type="button" className="main-hero_scroll" onClick={scrollToNext} aria-label="아래로 스크롤 해주세요. 두 번째 섹션 기업교육 추천 및 상담으로 이동">
         <span className="main-hero_scroll-line" aria-hidden="true" />
         <span>아래로 스크롤 해주세요.</span>
       </button>

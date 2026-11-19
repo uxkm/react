@@ -295,3 +295,15 @@
     color: var(--color-text);
   }
 }
+
+@media (forced-colors: active) {
+  .switch_track,
+  .switch_thumb {
+    border: 1px solid CanvasText;
+  }
+
+  .switch_input:disabled + .switch_track,
+  .switch_input:disabled + .switch_track .switch_thumb {
+    border-color: GrayText;
+  }
+}

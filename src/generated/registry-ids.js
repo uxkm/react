@@ -151,7 +151,9 @@ export const previewNames = [
   "footer",
   "full-menu",
   "gnb",
-  "main-section"
+  "main-section",
+  "type-a/notice",
+  "type-a/quick-menu"
 ]
 export const routeTitles = {
   "/b2b/company/ceo": "CEO인사말",
@@ -299,5 +301,7 @@ export const routeTitles = {
   "/pub/preview/b2b/footer": "Footer",
   "/pub/preview/b2b/full-menu": "전체메뉴",
   "/pub/preview/b2b/gnb": "헤더",
-  "/pub/preview/b2b/main-section": "메인 섹션 프리뷰"
+  "/pub/preview/b2b/main-section": "메인 섹션 프리뷰",
+  "/pub/preview/b2b/type-a/notice": "상단 공지",
+  "/pub/preview/b2b/type-a/quick-menu": "퀵메뉴"
 }

@@ -14,6 +14,7 @@ import {
   type ReactNode // ReactNode 타입
 } from 'react' // React
 import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
+import { useFormReset } from '@/hooks/react/useFormReset'
 import { Icon } from './Icon' // Icon 컴포넌트
 
 const VALID_SIZES = new Set(['sm', 'md', 'lg'])
@@ -62,29 +63,24 @@ export function Input ({
   const {
     maxLength: maxLengthProp,
     maxlength,
+    inputMode,
+    inputmode,
     ...restProps
   } = props as Omit<InputProps, 'size' | 'prefix' | 'onChange'> & {
     maxlength?: number | string
+    inputmode?: InputProps['inputMode']
   }
   const resolvedMaxLength = Number(maxLengthProp ?? maxlength)
   const nativeMaxLength =
-    Number.isFinite(resolvedMaxLength) && resolvedMaxLength > 0 ? resolvedMaxLength : undefined
+    Number.isInteger(resolvedMaxLength) && resolvedMaxLength >= 0 ? resolvedMaxLength : undefined
+  const resolvedInputMode = inputMode ?? inputmode
 
   const resolvedSize = VALID_SIZES.has(size) ? size : 'md'
   const controlled = value !== undefined
-  const [innerValue, setInnerValue] = useState(() => value ?? defaultValue ?? '')
-  const currentValue = controlled
-    ? typeof value === 'string' || typeof value === 'number'
-      ? String(value)
-      : ''
-    : String(innerValue ?? '')
+  const [innerValue, setInnerValue] = useState(() => String(defaultValue ?? ''))
+  const currentValue = controlled ? String(value ?? '') : innerValue
   const hasAddon = prefix != null || suffix != null
-
-  const [previousValue, setPreviousValue] = useState(value)
-  if (previousValue !== value) {
-    setPreviousValue(value)
-    if (controlled) setInnerValue(value ?? '')
-  }
+  useFormReset(inputRef, controlled ? undefined : setInnerValue)
 
   const inputClasses = useMemo(
     () =>
@@ -100,62 +96,47 @@ export function Input ({
     [resolvedSize, block, error, type, currentValue, hasAddon, clearable, className]
   )
 
-  const numericOnly =
-    restProps.inputMode === 'numeric' ||
-    (restProps as { inputmode?: string }).inputmode === 'numeric'
-  const maxLengthLimit = nativeMaxLength ?? 0
-
-  function sanitize (next: string) {
-    if (numericOnly) {
-      const digits = String(next).replace(/\D/g, '')
-      return maxLengthLimit > 0 ? digits.slice(0, maxLengthLimit) : digits
-    }
-    if (type === 'number') return String(next).replace(/[a-zA-ZeE+\-]/g, '')
-    return next
-  }
-
-  function applyValue (event: ChangeEvent<HTMLInputElement>, next: string) {
-    if (next !== event.target.value) event.target.value = next
-    if (!controlled) setInnerValue(next)
-    onChange?.(event)
-  }
+  const numericOnly = resolvedInputMode === 'numeric'
 
   function handleChange (event: ChangeEvent<HTMLInputElement>) {
-    applyValue(event, sanitize(event.target.value))
+    const input = event.currentTarget
+    if (numericOnly) {
+      const digits = input.value.replace(/\D/g, '').slice(0, nativeMaxLength)
+      if (digits !== input.value) input.value = digits
+    }
+    if (!controlled) setInnerValue(input.value)
+    onChange?.(event)
   }
 
   function handlePaste (event: ClipboardEvent<HTMLInputElement>) {
     onPaste?.(event)
-    if (event.defaultPrevented || !numericOnly) return
-    event.preventDefault()
-    const pasted = (event.clipboardData?.getData('text') ?? '').replace(/\D/g, '')
-    if (!pasted) return
     const input = event.currentTarget
-    const start = input.selectionStart ?? input.value.length
-    const end = input.selectionEnd ?? input.value.length
-    const next = sanitize(`${input.value.slice(0, start)}${pasted}${input.value.slice(end)}`)
-    const synthetic = {
-      ...event,
-      target: input,
-      currentTarget: input
-    } as ChangeEvent<HTMLInputElement>
-    if (next !== input.value) input.value = next
-    if (!controlled) setInnerValue(next)
-    onChange?.(synthetic)
+    const { selectionStart: start, selectionEnd: end } = input
+    if (event.defaultPrevented || !numericOnly || disabled || readOnly || start == null || end == null) return
+    event.preventDefault()
+    const available = nativeMaxLength == null
+      ? undefined
+      : Math.max(0, nativeMaxLength - (input.value.length - (end - start)))
+    const pasted = (event.clipboardData?.getData('text') ?? '').replace(/\D/g, '').slice(0, available)
+    if (!pasted) return
+    const next = `${input.value.slice(0, start)}${pasted}${input.value.slice(end)}`
+    setInputValue(input, next)
+    input.setSelectionRange(start + pasted.length, start + pasted.length)
+    input.dispatchEvent(new InputEvent('input', { bubbles: true, inputType: 'insertFromPaste', data: pasted }))
+  }
+
+  function setInputValue (input: HTMLInputElement, next: string) {
+    const descriptor = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')
+    descriptor?.set?.call(input, next)
   }
 
   function handleClear () {
     if (disabled || readOnly) return
     const input = inputRef.current
     if (!input) return
-    const descriptor = Object.getOwnPropertyDescriptor(
-      window.HTMLInputElement.prototype,
-      'value'
-    )
-    descriptor?.set?.call(input, '')
+    setInputValue(input, '')
     input.dispatchEvent(new Event('input', { bubbles: true }))
     input.dispatchEvent(new Event('change', { bubbles: true }))
-    if (!controlled) setInnerValue('')
     onClear?.()
     input.focus()
   }
@@ -181,8 +162,9 @@ export function Input ({
       placeholder={placeholder}
       disabled={disabled}
       readOnly={readOnly}
+      inputMode={resolvedInputMode}
       maxLength={nativeMaxLength}
-      value={currentValue}
+      {...(controlled ? { value: currentValue } : { defaultValue })}
       aria-invalid={error ? 'true' : restProps['aria-invalid']}
       onChange={handleChange}
       onPaste={handlePaste}

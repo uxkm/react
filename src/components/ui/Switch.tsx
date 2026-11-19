@@ -79,7 +79,7 @@ export function Switch ({
           name={name}
           value={value}
           disabled={disabled}
-          aria-label={!hasLabel ? ariaLabel : undefined}
+          aria-label={props['aria-label'] ?? (!hasLabel ? ariaLabel : undefined)}
           {...checkedProps}
         />
         <span className="switch_track" aria-hidden="true">

@@ -65,16 +65,12 @@ export default function MainCaseSection ({ designType = 'typeB' }: { designType?
         spaceBetween={compact ? 20 : 24}
         loop
         autoplay={!reducedMotion}
+        autoplayToggle={false}
         delay={5000}
         playing={playing && !reducedMotion}
         onPlayingChange={setPlaying}
         pagination={false}
         navigation={false}
-        onBlurCapture={event => {
-          if (!event.currentTarget.contains(event.relatedTarget as Node | null) && !reducedMotion) {
-            setPlaying(true)
-          }
-        }}
       >
         {(compact ? mainCustomerStories : desktopCustomerStories).map((card, index) => (
           <CarouselSlide key={`${card.category}-${index}`}>

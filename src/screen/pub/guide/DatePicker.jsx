@@ -13,7 +13,7 @@ function Field ({ id, label, hint, children }) {
     <div className="form_field">
       <label className="form_field-label" htmlFor={id}>{label}</label>
       {children}
-      {hint ? <p className="form_field-hint">{hint}</p> : null}
+      {hint ? <p id={`${id}-hint`} className="form_field-hint">{hint}</p> : null}
     </div>
   )
 }
@@ -81,16 +81,16 @@ const SECTIONS = [
         <code>form_field</code>와 함께 사용합니다. <code>defaultValue</code>는 YYYY-MM-DD입니다.
       </>
     ),
-    code: wrapPageExample(`<Field id="date-basic" label="예약일" hint="달력에서 날짜를 선택해 주세요.">
-  <DatePicker id="date-basic" fit defaultValue="2024-06-15" />
-</Field>`, {
+    code: wrapPageExample(`<FormField htmlFor="date-basic" label="예약일" hint={<span id="date-basic-hint">달력에서 날짜를 선택해 주세요.</span>}>
+  <DatePicker id="date-basic" aria-describedby="date-basic-hint" fit defaultValue="2024-06-15" />
+</FormField>`, {
   name: 'DatePickerBasicExample',
   reactImports: [],
-  compImports: ['DatePicker', 'Field']
+  compImports: ['DatePicker', 'FormField']
 }),
     preview: (
       <Field id="date-basic" label="예약일" hint="달력에서 날짜를 선택해 주세요.">
-        <DatePicker id="date-basic" fit defaultValue="2024-06-15" />
+        <DatePicker id="date-basic" aria-describedby="date-basic-hint" fit defaultValue="2024-06-15" />
       </Field>
     )
   },

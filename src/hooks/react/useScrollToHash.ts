@@ -19,11 +19,15 @@ export function useScrollToHash () {
         el.addEventListener('blur', () => el.removeAttribute('tabindex'), { once: true })
       }
       el.focus({ preventScroll: true })
+      return el
     }
 
-    // 레이아웃·이미지 직후 한 번 더 맞춰 헤더 sticky 와 높이 변화를 흡수한다
-    const t0 = window.setTimeout(scroll, 0)
-    const t1 = window.setTimeout(scroll, 120)
+    // 레이아웃이 변한 뒤 위치를 보정하되 사용자가 옮긴 초점은 그대로 둔다.
+    let initialTarget: HTMLElement | undefined
+    const t0 = window.setTimeout(() => { initialTarget = scroll() }, 0)
+    const t1 = window.setTimeout(() => {
+      if (document.activeElement === (initialTarget ?? document.body)) scroll()
+    }, 120)
     window.addEventListener('hashchange', scroll)
     return () => {
       window.clearTimeout(t0)

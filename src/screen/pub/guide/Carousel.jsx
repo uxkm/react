@@ -107,6 +107,7 @@ const SECTIONS = [
         <code>aria-roledescription=&quot;carousel&quot;</code> · <code>ariaLabel</code>을 제공합니다.
         <code>index</code> · <code>onIndexChange</code>로 현재 슬라이드를,
         <code>playing</code> · <code>onPlayingChange</code>로 자동재생을 페이지에서 제어합니다.
+        슬라이드에 초점이 들어오면 자동재생이 멈추고, Tab과 좌우 방향키로 슬라이드 사이의 초점을 이동할 수 있습니다.
       </>
     ),
     code: wrapPageExample(`const [index, setIndex] = useState(0)

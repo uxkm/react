@@ -46,6 +46,7 @@ export function Select ({
   error = false,
   fit = false,
   placeholder,
+  multiple,
   value,
   defaultValue,
   className,
@@ -64,10 +65,11 @@ export function Select ({
     className
   )
 
+  const hasPlaceholder = placeholder != null
   const valueProps =
     value !== undefined
       ? { value }
-      : { defaultValue: defaultValue ?? (placeholder ? '' : undefined) }
+      : { defaultValue: defaultValue ?? (!multiple && hasPlaceholder ? '' : undefined) }
 
   const optionNodes = hasNodes(children)
     ? children
@@ -96,11 +98,12 @@ export function Select ({
       {...valueProps}
       className={classes}
       size={nativeSize}
+      multiple={multiple}
       disabled={disabled}
       aria-invalid={error ? 'true' : props['aria-invalid']}
       onChange={onChange}
     >
-      {placeholder != null && (
+      {hasPlaceholder && (
         <option value="" disabled>
           {placeholder}
         </option>

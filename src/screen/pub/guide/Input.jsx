@@ -13,7 +13,7 @@ function Field ({ id, label, hint, children }) {
     <div className="form_field">
       <label className="form_field-label" htmlFor={id}>{label}</label>
       {children}
-      {hint ? <p className="form_field-hint">{hint}</p> : null}
+      {hint ? <p id={`${id}-hint`} className="form_field-hint">{hint}</p> : null}
     </div>
   )
 }
@@ -51,6 +51,7 @@ function ControlledDemo () {
       <Field id="input-controlled" label="이름" hint={`현재 값: ${value || '(비어 있음)'}`}>
         <Input
           id="input-controlled"
+          aria-describedby="input-controlled-hint"
           value={value}
           onChange={(event) => setValue(event.target.value)}
           onClear={() => setValue('')}
@@ -80,17 +81,17 @@ const SECTIONS = [
         <code>form_field</code> 라벨·힌트와 함께 사용합니다. <code>clearable</code>로 지우기 버튼을 켤 수 있습니다.
       </>
     ),
-    code: wrapPageExample(`<Field id="input-name" label="이름" hint="2~20자 이내로 입력해 주세요.">
-  <Input id="input-name" placeholder="이름을 입력하세요" clearable />
-</Field>`, {
+    code: wrapPageExample(`<FormField htmlFor="input-name" label="이름" hint={<span id="input-name-hint">2~20자 이내로 입력해 주세요.</span>}>
+  <Input id="input-name" aria-describedby="input-name-hint" placeholder="이름을 입력하세요" clearable />
+</FormField>`, {
   name: 'InputBasicExample',
   reactImports: [],
-  compImports: ['Field', 'Input']
+  compImports: ['FormField', 'Input']
 }),
     preview: (
       <div className="demo-stack">
         <Field id="input-name" label="이름" hint="2~20자 이내로 입력해 주세요.">
-          <Input id="input-name" placeholder="이름을 입력하세요" clearable />
+          <Input id="input-name" aria-describedby="input-name-hint" placeholder="이름을 입력하세요" clearable />
         </Field>
       </div>
     )
@@ -262,14 +263,16 @@ const SECTIONS = [
         기본은 전체 너비, <code>form_field_fit</code> · <code>input_fit</code>으로 최대 너비를 제한합니다.
       </>
     ),
-    code: wrapPageExample(`<Field id="input-full" label="전체 너비">
+    code: wrapPageExample(`<FormField htmlFor="input-full" label="전체 너비">
   <Input id="input-full" placeholder="width: 100%" clearable />
-</Field>
-<div className="form_field form_field_fit">…</div>
-<Input className="input_fit" placeholder="애드온 그룹 최대 320px" prefix="@" clearable />`, {
+</FormField>
+<FormField htmlFor="input-fit" label="제한 너비" fit>
+  <Input id="input-fit" placeholder="최대 320px" clearable />
+</FormField>
+<Input className="input_fit" aria-label="아이디" placeholder="애드온 그룹 최대 320px" prefix="@" clearable />`, {
   name: 'InputExample6',
   reactImports: [],
-  compImports: ['Field', 'Input']
+  compImports: ['FormField', 'Input']
 }),
     preview: (
       <div className="demo-stack">

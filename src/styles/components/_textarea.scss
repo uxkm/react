@@ -70,6 +70,11 @@
       box-shadow: 0 0 0 3px var(--color-accent-muted);
     }
 
+    &:has(.textarea:focus-visible) {
+      outline: var(--focus-outline-width) solid var(--color-accent-text);
+      outline-offset: var(--focus-outline-offset);
+    }
+
     &:has(.textarea.is-error) {
       border-color: var(--color-danger);
     }

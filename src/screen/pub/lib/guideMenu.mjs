@@ -25,16 +25,39 @@ export function projectPreviewGroups (pages = []) {
     ['callouts', '상담 및 구독'],
     ['newsletter', '뉴스레터 구독 카드']
   ]
+  const previewRoot = '/pub/preview/b2b/'
+  const commonItems = pages
+    .filter(({ id }) => id !== 'main-section' && !id.startsWith('type-a/'))
+    .map(({ id, label }) => ({ id, label, href: previewRoot + id }))
+  const mainItems = pages.some(({ id }) => id === 'main-section')
+    ? mainSections.map(([id, label]) => ({ id, label, href: previewRoot + 'main-section?section=' + id }))
+    : []
+  const hero = mainItems.find(({ id }) => id === 'hero')
+  const typeACommon = new Set(['gnb', 'full-menu', 'footer'])
   return [
     {
       id: 'preview-common',
       label: '공통 위젯·레이어',
-      items: pages.filter(({ id }) => id !== 'main-section').map(({ id, label }) => ({ id, label, href: '/pub/preview/b2b/' + id }))
+      items: commonItems
     },
     {
       id: 'preview-main',
       label: '메인 섹션·모듈',
-      items: pages.some(({ id }) => id === 'main-section') ? mainSections.map(([id, label]) => ({ id, label, href: '/pub/preview/b2b/main-section?section=' + id })) : []
+      items: mainItems
+    },
+    {
+      id: 'preview-type-a',
+      label: '타입 A',
+      items: [
+        ...commonItems.filter(({ id }) => typeACommon.has(id)).map((item) => ({ ...item, href: item.href + '?type=typeA' })),
+        ...pages.filter(({ id }) => id.startsWith('type-a/')).map(({ id, label }) => ({ id, label, href: previewRoot + id })),
+        ...mainItems.map((item) => ({ ...item, href: item.href + '&type=typeA' }))
+      ]
+    },
+    {
+      id: 'preview-type-video',
+      label: '영상 타입',
+      items: hero ? [{ ...hero, label: '메인 타이틀 (영상)', href: hero.href + '&type=typeVideo' }] : []
     }
   ].filter(({ items }) => items.length)
 }

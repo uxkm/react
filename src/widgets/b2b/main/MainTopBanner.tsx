@@ -1,7 +1,17 @@
 'use client'
 
-import { TopBanner } from '@/comp/widget/TopBanner'
+import { TopBanner, type TopBannerProps } from '@/comp/widget/TopBanner'
 import { Icon } from '@/comp/ui/Icon'
+
+export const mainTypeANoticeProps = {
+  variant: 'notice',
+  storageKey: 'b2b-main-notices',
+  innerMaxWidth: 1200,
+  items: [
+    { id: 'education', content: '기업교육의 새로운 소식과 주요 안내를 확인하세요.' },
+    { id: 'service', content: '멀티캠퍼스 교육 서비스 이용 안내를 확인하세요.' }
+  ]
+} satisfies TopBannerProps
 
 /** typeB 공지는 헤더 아래에서 같은 배경 위에 표시합니다. */
 export default function MainTopBanner () {

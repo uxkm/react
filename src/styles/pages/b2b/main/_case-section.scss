@@ -25,8 +25,6 @@
   .main-cases_more-mobile { display: none; }
 
   .carousel { width: 100%; max-width: 100%; margin: 40px 0 0; --carousel-height: 0px; }
-  /* 임시: 자동재생 유지, 재생/정지 토글만 숨김 */
-  .carousel .carousel_toggle { display: none !important; }
   .carousel .swiper { padding: 32px 0 12px; }
   /* PC에서 카드가 좁으면 우측 여백이 과해 보이므로 뷰포트 기준으로 폭을 키웁니다. */
   .carousel .swiper .swiper-slide { width: clamp(300px, 28vw, 400px); height: 400px !important; max-height: none; aspect-ratio: auto; }
@@ -34,9 +32,11 @@
     width: 100%;
     height: 100%;
     border-radius: 10px;
-    outline: none;
   }
-  .main-cases_card:focus-visible { box-shadow: 0 0 0 3px #fff, 0 0 0 6px #4d8bb5; }
+  .main-cases_card:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
   .main-cases_card > [aria-hidden] { width: 100%; height: 100%; }
   .carousel .swiper .swiper-slide .card_testimonial {
     box-sizing: border-box;
@@ -46,19 +46,18 @@
     padding: 28px 28px 32px;
     border: 1px solid #d5dce0;
     border-radius: 10px;
-    background: #eff1f2;
+    background: #dbe0e3;
     color: #26343c;
-    opacity: 0.8;
     transform: translateY(0);
-    transition: transform 400ms ease, opacity 400ms ease, background-color 400ms ease, border-color 400ms ease;
+    transition: transform 400ms ease, background-color 400ms ease, border-color 400ms ease;
   }
-  .carousel .swiper .swiper-slide-active .card_testimonial { transform: translateY(-18px); background: #fff; border-color: #b8d3e4; opacity: 1; }
+  .carousel .swiper .swiper-slide-active .card_testimonial { transform: translateY(-18px); background: #fff; border-color: #b8d3e4; }
   .stat_label { align-self: flex-start; padding: 4px 10px; border: 1px solid #c4cdd2; border-radius: 100px; color: #39474f; font-size: 13px; line-height: 1.5; }
   .stat_quote { margin: 20px 0 24px; }
   .stat_quote-mark { height: 48px; font-size: 90px; line-height: 0.95; }
   .stat_value { color: #26343c; font-size: 23px; line-height: 1.45; letter-spacing: -0.045em; }
   .stat_footer { gap: 14px; }
-  .stat_desc { color: #768086; font-size: 13px; line-height: 1.6; }
+  .stat_desc { color: #505c64; font-size: 13px; line-height: 1.6; }
   .stat_avatar { width: 48px; height: 48px; --avatar-size: 48px; background: #d7e5e6; color: #67868a; }
 }
 
@@ -97,11 +96,10 @@
       padding: 32px 32px 24px;
       border: 0;
       border-radius: 8px;
-      background: var(--b2b-color-surface);
+      background: var(--color-neutral-300);
       color: var(--b2b-color-text);
-      opacity: 0.5;
     }
-    .carousel .swiper .swiper-slide-active .card_testimonial { transform: translateY(-20px); opacity: 1; }
+    .carousel .swiper .swiper-slide-active .card_testimonial { transform: translateY(-20px); background: var(--b2b-color-surface); }
     .stat_label { padding: 4px 12px; border-color: currentColor; color: var(--b2b-color-text); font-size: 14px; font-weight: 700; line-height: 20px; }
     .stat_quote { margin: 24px 0 0; }
     .stat_quote-mark {
@@ -115,7 +113,7 @@
     .stat_value { color: inherit; font-size: 21px; line-height: 1.4; letter-spacing: 0; }
     .swiper-slide-active .stat_value { font-size: 24px; }
     .stat_footer { gap: 16px; }
-    .stat_desc { color: var(--b2b-color-text-muted); font-size: 14px; line-height: 23px; letter-spacing: 0; white-space: pre-line; }
+    .stat_desc { color: var(--color-neutral-700); font-size: 14px; line-height: 23px; letter-spacing: 0; white-space: pre-line; }
     .stat_avatar {
       position: relative;
       overflow: hidden;

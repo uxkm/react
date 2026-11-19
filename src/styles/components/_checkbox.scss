@@ -182,6 +182,7 @@
 
   @each $name in primary, success, danger, warning {
     &.color_#{$name} {
+      --checkbox-button-text: #{color-token($name)};
       @include checkbox-color-variant($name);
     }
   }
@@ -404,13 +405,13 @@
 
     &:hover:not(:has(.checkbox_input:disabled)) {
       border-color: var(--color-accent);
-      color: color-token(primary);
+      color: var(--checkbox-button-text, #{color-token(primary)});
     }
 
     &:has(.checkbox_input:checked) {
       border-color: var(--color-accent);
       background: var(--color-accent-muted);
-      color: color-token(primary);
+      color: var(--checkbox-button-text, #{color-token(primary)});
     }
 
     &:has(.checkbox_input:focus-visible) {
@@ -522,5 +523,18 @@
     font-size: size-token(base);
     font-weight: 500;
     color: var(--color-text);
+  }
+}
+
+@media (forced-colors: active) {
+  .checkbox.checkbox_button:has(.checkbox_input:enabled:is(:checked, :indeterminate)) {
+    forced-color-adjust: none;
+    background-color: Highlight;
+    border-color: Highlight;
+    color: HighlightText;
+
+    &:has(.checkbox_input:focus-visible) {
+      outline-color: CanvasText;
+    }
   }
 }

@@ -12,6 +12,7 @@
 @use 'colors';
 
 @mixin theme-light {
+  --color-tag-category-text: #a24e32;
   color-scheme: light;
 
   --color-bg: var(--color-cool-neutral-50);
@@ -99,6 +100,7 @@
 }
 
 @mixin theme-dark {
+  --color-tag-category-text: #f4ad91;
   color-scheme: dark;
 
   --color-bg: #0f1419;

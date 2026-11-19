@@ -62,6 +62,11 @@
     box-shadow: 0 0 0 3px var(--color-accent-muted);
   }
 
+  &:focus-visible {
+    outline: var(--focus-outline-width) solid var(--color-accent-text);
+    outline-offset: var(--focus-outline-offset);
+  }
+
   &:read-only {
     background-color: var(--color-surface);
     cursor: default;
@@ -267,6 +272,11 @@
     &:focus-within:has(> .input:focus, > select.input:focus) {
       border-color: var(--color-accent);
       box-shadow: 0 0 0 3px var(--color-accent-muted);
+    }
+
+    &:has(.input:focus-visible) {
+      outline: var(--focus-outline-width) solid var(--color-accent-text);
+      outline-offset: var(--focus-outline-offset);
     }
 
     &:has(> .input.is-error) {

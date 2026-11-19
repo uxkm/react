@@ -13,7 +13,7 @@ function Field ({ id, label, hint, children }) {
     <div className="form_field">
       <label className="form_field-label" htmlFor={id}>{label}</label>
       {children}
-      {hint ? <p className="form_field-hint">{hint}</p> : null}
+      {hint ? <p id={`${id}-hint`} className="form_field-hint">{hint}</p> : null}
     </div>
   )
 }
@@ -58,17 +58,17 @@ const SECTIONS = [
         <code>form_field</code> 라벨·힌트와 함께 사용합니다.
       </>
     ),
-    code: wrapPageExample(`<Field id="textarea-message" label="메시지" hint="문의 내용을 자세히 작성해 주세요.">
-  <Textarea id="textarea-message" rows={4} placeholder="메시지를 입력하세요" />
-</Field>`, {
+    code: wrapPageExample(`<FormField htmlFor="textarea-message" label="메시지" hint={<span id="textarea-message-hint">문의 내용을 자세히 작성해 주세요.</span>}>
+  <Textarea id="textarea-message" aria-describedby="textarea-message-hint" rows={4} placeholder="메시지를 입력하세요" />
+</FormField>`, {
   name: 'TextareaBasicExample',
   reactImports: [],
-  compImports: ['Field', 'Textarea']
+  compImports: ['FormField', 'Textarea']
 }),
     preview: (
       <div className="demo-stack">
         <Field id="textarea-message" label="메시지" hint="문의 내용을 자세히 작성해 주세요.">
-          <Textarea id="textarea-message" rows={4} placeholder="메시지를 입력하세요" />
+          <Textarea id="textarea-message" aria-describedby="textarea-message-hint" rows={4} placeholder="메시지를 입력하세요" />
         </Field>
       </div>
     )

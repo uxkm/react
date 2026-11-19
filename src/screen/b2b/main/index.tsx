@@ -12,6 +12,7 @@ import {
 import { useMainAos } from '@/widgets/b2b/main/useMainAos'
 import InquirySnackbar from '@/widgets/b2b/common/InquirySnackbar'
 import { useMainPageType } from '@/widgets/b2b/main/useMainDesignType'
+import { mainTypeANoticeProps } from '@/widgets/b2b/main/MainTopBanner'
 import MainHeroTypeA from './sections/MainHeroTypeA'
 import IndexSkeleton from './skeleton/indexSkeleton' // Index Skeleton 컴포넌트
 
@@ -67,15 +68,7 @@ export default function B2bMainPage () {
             <Page page="contents-it" title={pageTitle} className="p-content" />
       */}
       <Page page="main" className={`p-content main-page_${designType}`} />
-      {designType === 'typeA' && <PageBanner
-        variant="notice"
-        storageKey="b2b-main-notices"
-        innerMaxWidth={1200}
-        items={[
-          { id: 'education', content: '기업교육의 새로운 소식과 주요 안내를 확인하세요.' },
-          { id: 'service', content: '멀티캠퍼스 교육 서비스 이용 안내를 확인하세요.' }
-        ]}
-      />}
+      {designType === 'typeA' && <PageBanner {...mainTypeANoticeProps} />}
       <PageLoading
         loading={loading}
         // manual: 수동 스켈레톤(IndexSkeleton). auto 로 바꾸면 DOM 측정 자동 뼈대

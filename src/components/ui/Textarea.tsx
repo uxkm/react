@@ -13,6 +13,7 @@ import {
   type TextareaHTMLAttributes // TextareaHTMLAttributes 타입
 } from 'react' // React
 import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
+import { useFormReset } from '@/hooks/react/useFormReset'
 import { Icon } from './Icon' // Icon 컴포넌트
 
 const VALID_SIZES = new Set(['sm', 'md', 'lg'])
@@ -64,13 +65,9 @@ export function Textarea ({
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const generatedId = useId().replace(/:/g, '')
   const controlled = value !== undefined
-  const [innerValue, setInnerValue] = useState(() => value ?? defaultValue ?? '')
-  const currentValue =
-    controlled && (typeof value === 'string' || typeof value === 'number')
-      ? String(value)
-      : controlled
-        ? ''
-        : String(innerValue ?? '')
+  const [innerValue, setInnerValue] = useState(() => String(defaultValue ?? ''))
+  const currentValue = controlled ? String(value ?? '') : innerValue
+  useFormReset(textareaRef, controlled ? undefined : setInnerValue)
   const resolvedSize = VALID_SIZES.has(size) ? size : 'md'
   const resolvedResize = VALID_RESIZE.has(resize) ? resize : 'none'
   const countId = `${props.id || `textarea-${generatedId}`}-count`
@@ -79,7 +76,7 @@ export function Textarea ({
   const count = String(currentValue).length
   const resolvedMaxLength = Number(maxLength)
   const nativeMaxLength =
-    Number.isFinite(resolvedMaxLength) && resolvedMaxLength > 0 ? resolvedMaxLength : undefined
+    Number.isInteger(resolvedMaxLength) && resolvedMaxLength >= 0 ? resolvedMaxLength : undefined
   const hasLimit = nativeMaxLength != null
   const showClear = clearable && count > 0 && !disabled && !readOnly
 
@@ -113,7 +110,6 @@ export function Textarea ({
     descriptor?.set?.call(textarea, '')
     textarea.dispatchEvent(new Event('input', { bubbles: true }))
     textarea.dispatchEvent(new Event('change', { bubbles: true }))
-    if (!controlled) setInnerValue('')
     onClear?.()
     textarea.focus()
   }
@@ -126,7 +122,7 @@ export function Textarea ({
       disabled={disabled}
       readOnly={readOnly}
       maxLength={nativeMaxLength}
-      value={currentValue}
+      {...(controlled ? { value: currentValue } : { defaultValue })}
       aria-invalid={error ? 'true' : props['aria-invalid']}
       aria-describedby={describedBy}
       onChange={handleChange}
@@ -166,7 +162,7 @@ export function Textarea ({
         ? (
           <span
             id={countId}
-            className={classNames('textarea_count', hasLimit && count >= (nativeMaxLength as number) && 'is-limit')}
+            className={classNames('textarea_count', nativeMaxLength != null && count >= nativeMaxLength && 'is-limit')}
             role="status"
             aria-live="polite"
             aria-atomic="true"

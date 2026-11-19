@@ -363,6 +363,27 @@
   }
 }
 
+@media (forced-colors: active) {
+  .rate_star-icon {
+    forced-color-adjust: none;
+    fill: none;
+    stroke: CanvasText;
+  }
+
+  .rate_star-icon-filled,
+  .rate_star-icon-half .rate_star-icon {
+    fill: CanvasText;
+  }
+
+  .rate:has(.rate_input:disabled) .rate_star-icon {
+    stroke: GrayText;
+  }
+
+  .rate:has(.rate_input:disabled) :is(.rate_star-icon-filled, .rate_star-icon-half .rate_star-icon) {
+    fill: GrayText;
+  }
+}
+
 @for $i from 1 through 10 {
   @include rate-filled-stars($i);
   @include rate-hover-stars($i);

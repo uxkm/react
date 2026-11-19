@@ -9,11 +9,11 @@ const subscribe = (notify: () => void) => {
 }
 const snapshot = () => {
   const type = new URLSearchParams(window.location.search).get('type')
-  return type === 'typeA' || type === 'typeB' ? type : 'typeVideo'
+  return type === 'typeA' || type === 'typeB' || type === 'typeVideo' ? type : undefined
 }
-const serverSnapshot = () => 'typeVideo' as const
+const serverSnapshot = () => undefined
 
-/** 메인은 기본 영상 배경을 사용하고, typeA와 typeB는 쿼리로 선택합니다. */
+/** 메인은 기본 도형 애니메이션을 사용하며 쿼리로 다른 시안을 선택할 수 있습니다. */
 export function useMainPageType () {
   usePathname()
   return useSyncExternalStore(subscribe, snapshot, serverSnapshot)

@@ -272,6 +272,11 @@
     height: auto;
     box-sizing: border-box;
 
+    &:focus-visible {
+      outline: var(--focus-outline-width) solid var(--color-accent-text);
+      outline-offset: calc(-1 * var(--focus-outline-width));
+    }
+
     > .card {
       width: 100%;
       min-width: 0;

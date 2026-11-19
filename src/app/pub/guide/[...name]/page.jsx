@@ -13,7 +13,7 @@ export function generateStaticParams () {
 export default async function Page ({ params }) {
   const { name: segments } = await params
   const name = segments.join('/')
-  return <RegistryPage loaders={componentLoaders} metaMap={componentMeta} routeKey={name} meta={{ ...componentMeta[name], footer: false }} />
+  return <RegistryPage loaders={componentLoaders} metaMap={componentMeta} routeKey={name} meta={{ footer: false, ...componentMeta[name] }} />
 }
 
 export async function generateMetadata ({ params }) {

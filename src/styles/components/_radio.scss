@@ -161,6 +161,7 @@
 
   @each $name in primary, success, danger, warning {
     &.color_#{$name} {
+      --radio-button-text: #{color-token($name)};
       @include radio-color-variant($name);
     }
   }
@@ -363,13 +364,13 @@
 
     &:hover:not(:has(.radio_input:disabled)) {
       border-color: var(--color-accent);
-      color: color-token(primary);
+      color: var(--radio-button-text, #{color-token(primary)});
     }
 
     &:has(.radio_input:checked) {
       border-color: var(--color-accent);
       background: var(--color-accent-muted);
-      color: color-token(primary);
+      color: var(--radio-button-text, #{color-token(primary)});
     }
 
     &:has(.radio_input:focus-visible) {
@@ -477,5 +478,27 @@
     font-size: size-token(base);
     font-weight: 500;
     color: var(--color-text);
+  }
+}
+
+@media (forced-colors: active) {
+  .radio_box::after {
+    forced-color-adjust: none;
+    background-color: CanvasText;
+  }
+
+  .radio_input:disabled + .radio_box::after {
+    background-color: GrayText;
+  }
+
+  .radio.radio_button:has(.radio_input:enabled:checked) {
+    forced-color-adjust: none;
+    background-color: Highlight;
+    border-color: Highlight;
+    color: HighlightText;
+
+    &:has(.radio_input:focus-visible) {
+      outline-color: CanvasText;
+    }
   }
 }

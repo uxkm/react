@@ -33,7 +33,9 @@ $select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000
   $size: var(--select-caret-size)
 ) {
   background-color: var(--color-bg);
-  background-image: $caret;
+  @media (forced-colors: none) {
+    background-image: $caret;
+  }
   background-repeat: no-repeat;
   background-position: right $offset center;
   background-size: $size $size;
@@ -54,7 +56,6 @@ select.input {
   &:disabled {
     cursor: not-allowed;
     background-color: var(--color-surface);
-    background-image: $select-caret-light;
     color: var(--color-text-disabled);
     border-color: var(--color-border-disabled);
   }
@@ -98,7 +99,6 @@ select.input {
 
   &:disabled {
     background-color: var(--color-surface);
-    background-image: $select-caret-dark;
   }
 }
 
@@ -108,7 +108,12 @@ select.input {
 
     &:disabled {
       background-color: var(--color-surface);
-      background-image: $select-caret-dark;
     }
+  }
+}
+
+@media (forced-colors: active) {
+  select.input {
+    appearance: auto;
   }
 }

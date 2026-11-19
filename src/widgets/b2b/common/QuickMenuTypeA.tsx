@@ -26,7 +26,7 @@ export default function QuickMenuTypeA () {
         </span>
         <span className="quick-menu_label">제안서 다운로드</span>
       </Link>
-      <BackTop visible variant="ghost" label="맨 위로 이동" className="quick-menu_top">
+      <BackTop visible variant="ghost" label="TOP 맨 위로 이동" className="quick-menu_top">
         <Icon name="chevron-up" size={24} />
         <span aria-hidden="true">TOP</span>
       </BackTop>

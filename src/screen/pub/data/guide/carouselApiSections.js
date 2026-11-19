@@ -141,7 +141,7 @@ const autoplayProps = [
     name: 'autoplay',
     type: 'boolean',
     default: 'false',
-    description: '슬라이드를 자동 재생합니다. 재생·정지 토글도 함께 표시됩니다. 슬라이드가 1장이면 자동재생·토글을 쓰지 않습니다.'
+    description: '슬라이드를 자동 재생합니다. 슬라이드가 1장이면 자동재생을 쓰지 않습니다.'
   },
   {
     name: 'delay',
@@ -152,8 +152,8 @@ const autoplayProps = [
   {
     name: 'autoplayToggle',
     type: 'boolean',
-    default: 'false',
-    description: '자동 재생이 꺼져 있어도 재생·정지 버튼(carousel_toggle)을 표시하고, 버튼·playing 으로 실제 자동재생을 켤 수 있습니다. 슬라이드가 1장이면 숨깁니다.'
+    default: 'autoplay',
+    description: '재생·정지 버튼을 표시할지 지정합니다. false로 지정하면 자동재생을 유지하면서 버튼을 숨깁니다. 슬라이드가 1장이면 숨깁니다.'
   },
   {
     name: 'coverflowStyle',

@@ -26,7 +26,7 @@ const props = [
     name: 'checked',
     type: 'boolean',
     default: '—',
-    description: '넘기면(checked !== undefined) 제어 모드입니다. 부모가 선택 상태를 관리합니다. onChange 유무와는 무관합니다.'
+    description: '부모가 관리하는 상태 값입니다. onChange에서 부모 상태를 갱신합니다. 초기 선택 상태만 지정할 때는 defaultChecked를 사용합니다.'
   },
   {
     name: 'defaultChecked',

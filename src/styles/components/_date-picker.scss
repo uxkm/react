@@ -229,6 +229,11 @@
     }
   }
 
+  &_trigger :is(.date_picker_input, .date_picker_btn, .date_picker_clear):focus-visible {
+    outline: var(--focus-outline-width) solid var(--color-accent-text);
+    outline-offset: calc(-1 * var(--focus-outline-width));
+  }
+
   &_panel {
     position: absolute;
     top: calc(100% + #{$space-xs});
@@ -279,5 +284,17 @@
     font-size: size-token(sm);
     color: var(--color-text-muted);
     user-select: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .date_picker_panel .calendar_day[aria-pressed="true"]:not(:disabled) {
+    forced-color-adjust: none;
+    background-color: Highlight;
+    color: HighlightText;
+
+    &:focus-visible {
+      outline-color: CanvasText;
+    }
   }
 }

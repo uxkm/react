@@ -17,6 +17,7 @@ import {
   useState, // 상태 훅
   type CSSProperties, // CSSProperties 타입
   type HTMLAttributes, // HTMLAttributes 타입
+  type KeyboardEvent,
   type ReactNode // ReactNode 타입
 } from 'react' // React
 import Swiper from 'swiper' // Swiper 컴포넌트
@@ -42,7 +43,7 @@ export interface CarouselProps extends Omit<HTMLAttributes<HTMLDivElement>, 'chi
   multi?: boolean
   /** 페이지네이션을 슬라이드 영역 밖 */
   dotsOutside?: boolean
-  /** 재생·정지 토글 버튼 */
+  /** 재생·정지 토글 버튼. 생략하면 autoplay를 따릅니다. */
   autoplayToggle?: boolean
   /** 1장일 때도 페이지 수와 비활성 이동·재생 버튼을 표시합니다. 기본 false. */
   readonly showControlsWhenSingle?: boolean
@@ -202,6 +203,19 @@ function countDomSlides (host: HTMLElement | null) {
   return host.querySelectorAll(':scope > .swiper-wrapper > .swiper-slide').length
 }
 
+function getSlideTabStops (slide: HTMLElement) {
+  return Array.from(slide.querySelectorAll<HTMLElement>(
+    'a[href], button, input, select, textarea, summary, [tabindex], [contenteditable], audio[controls], video[controls]'
+  )).filter((element) =>
+    element.closest('.swiper-slide') === slide &&
+    element.tabIndex >= 0 &&
+    !element.matches(':disabled') &&
+    !element.closest('[inert], [aria-hidden="true"]') &&
+    element.getClientRects().length > 0 &&
+    getComputedStyle(element).visibility === 'visible'
+  )
+}
+
 /**
  * Swiper 캐러셀.
  * children 은 CarouselSlide(또는 슬라이드를 렌더하는 자식)로 한 장씩 둔다.
@@ -214,7 +228,7 @@ export function Carousel ({
   size = 'md',
   multi = false,
   dotsOutside = false,
-  autoplayToggle = false,
+  autoplayToggle,
   showControlsWhenSingle = false,
   effect,
   speed = 300,
@@ -249,6 +263,7 @@ export function Carousel ({
   const rootRef = useRef<HTMLDivElement>(null)
   const swiperRef = useRef<HTMLDivElement>(null)
   const instanceRef = useRef<SwiperInstance | null>(null)
+  const slideKeyDownRef = useRef<((event: KeyboardEvent<HTMLDivElement>) => void) | null>(null)
   const indexRef = useLatestRef(index)
   const onIndexChangeRef = useLatestRef(onIndexChange)
   const playingControlled = playingProp !== undefined
@@ -290,9 +305,9 @@ export function Carousel ({
   const showControls = multiSlide || (slideCount === 1 && showControlsWhenSingle)
   const showPagination = showControls && pagination !== false
   const showNavigation = showControls && navigation !== false
-  const showAutoplayControls = showControls && (autoplay || autoplayToggle)
+  const showAutoplayControls = showControls && (autoplayToggle ?? autoplay)
   /** autoplay 또는 autoplayToggle 이면 Swiper autoplay 모듈을 켠다(토글만 켜도 재생 가능) */
-  const enableAutoplay = multiSlide && (autoplay || autoplayToggle)
+  const enableAutoplay = multiSlide && (autoplay || autoplayToggle === true)
 
   const syncCoverflowGap = useCallback(
     () => applyCoverflowGap(rootRef.current, swiperRef.current, isCoverflow, spaceBetween, sides),
@@ -443,12 +458,18 @@ export function Carousel ({
     swiper.on('resize', resizeThumbSelection)
     thumbControl?.on('update', resizeThumbSelection)
     thumbControl?.on('resize', resizeThumbSelection)
-    const originals = new Map<HTMLElement, { inert: boolean; hidden: string | null }>()
+    const originals = new Map<HTMLElement, { inert: boolean; hidden: string | null; tabIndex: string | null }>()
     const syncSlideAccessibility = () => {
       if (swiper.destroyed) return
       const viewport = host.getBoundingClientRect()
       for (const slide of swiper.slides) {
-        if (!originals.has(slide)) originals.set(slide, { inert: slide.inert, hidden: slide.getAttribute('aria-hidden') })
+        if (!originals.has(slide)) {
+          originals.set(slide, {
+            inert: slide.inert,
+            hidden: slide.getAttribute('aria-hidden'),
+            tabIndex: slide.getAttribute('tabindex')
+          })
+        }
         const original = originals.get(slide)!
         const rect = slide.getBoundingClientRect()
         const visible = effect === 'fade'
@@ -459,6 +480,75 @@ export function Carousel ({
         if (!visible) slide.setAttribute('aria-hidden', 'true')
         else if (original.hidden === null) slide.removeAttribute('aria-hidden')
         else slide.setAttribute('aria-hidden', original.hidden)
+        if (original.tabIndex === null) {
+          if (visible && !slide.inert && original.hidden !== 'true' && getSlideTabStops(slide).length === 0) {
+            slide.tabIndex = 0
+          } else {
+            slide.removeAttribute('tabindex')
+          }
+        }
+      }
+    }
+    let focusFrame = 0
+    let restoreTabStops: ReturnType<typeof setTimeout> | undefined
+    slideKeyDownRef.current = (event) => {
+      const target = event.target
+      const tab = event.key === 'Tab'
+      const arrow = event.key === 'ArrowLeft' || event.key === 'ArrowRight'
+      if ((!tab && !arrow) || event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey ||
+          !(target instanceof HTMLElement) || target.closest('[data-component="Carousel"]') !== event.currentTarget) return
+      const slide = target.closest<HTMLElement>('.swiper-slide')
+      if (!slide || !swiper.slides.includes(slide)) return
+      if (arrow && (event.shiftKey || target.closest('input, textarea, select, [contenteditable], [role="tablist"], [role="slider"], [role="listbox"], [role="tree"], [role="menu"]'))) return
+
+      const backward = tab ? event.shiftKey : (event.key === 'ArrowLeft') !== swiper.rtlTranslate
+      const tabStops = tab ? getSlideTabStops(slide) : []
+      // 슬라이드 안의 여러 버튼과 링크는 먼저 브라우저 기본 Tab 순서대로 탐색합니다.
+      if (tab && tabStops.length &&
+          target !== (backward ? tabStops.at(0) : tabStops.at(-1)) &&
+          !(backward && target === slide)) return
+
+      const ordered = swiper.slides.filter((item) => {
+        const original = originals.get(item)
+        return !original?.inert && original?.hidden !== 'true' && !item.classList.contains('swiper-slide-blank')
+      })
+      const indexOf = (item: HTMLElement) => swiper.params.loop
+        ? Number(item.dataset.swiperSlideIndex)
+        : swiper.slides.indexOf(item)
+      ordered.sort((left, right) => indexOf(left) - indexOf(right))
+      const next = ordered.indexOf(slide) + (backward ? -1 : 1)
+      const destination = ordered[next] ?? (!tab && swiper.params.loop ? ordered.at(backward ? -1 : 0) : undefined)
+      if (!destination || destination === slide) {
+        if (tab && swiper.params.loop) {
+          // 루프가 DOM 순서를 바꾸더라도 마지막 Tab은 캐러셀 밖으로 나갑니다.
+          for (const item of swiper.slides) {
+            if (item !== slide) item.inert = true
+          }
+          clearTimeout(restoreTabStops)
+          restoreTabStops = setTimeout(syncSlideAccessibility, 0)
+        }
+        return
+      }
+
+      event.preventDefault()
+      event.stopPropagation()
+      cancelAnimationFrame(focusFrame)
+      const focusDestination = () => {
+        if (swiper.destroyed) return
+        const active = host.ownerDocument.activeElement
+        if (active !== target && active !== host.ownerDocument.body) return
+        syncSlideAccessibility()
+        const stops = getSlideTabStops(destination)
+        const focusTarget = (tab && backward ? stops.at(-1) : stops.at(0)) ?? destination
+        focusTarget.focus({ preventScroll: true })
+      }
+      if (swiper.params.loop) {
+        swiper.slideToLoop(indexOf(destination), 0)
+        focusFrame = requestAnimationFrame(focusDestination)
+      } else {
+        const column = (destination as HTMLElement & { column?: number }).column
+        swiper.slideTo(isGrid ? (column ?? indexOf(destination)) : indexOf(destination), 0)
+        focusDestination()
       }
     }
     for (const event of ['transitionEnd', 'resize', 'update'] as const) swiper.on(event, syncSlideAccessibility)
@@ -502,11 +592,16 @@ export function Carousel ({
 
     return () => {
       window.cancelAnimationFrame(raf)
+      window.cancelAnimationFrame(focusFrame)
+      clearTimeout(restoreTabStops)
+      slideKeyDownRef.current = null
       for (const event of ['transitionEnd', 'resize', 'update'] as const) swiper.off(event, syncSlideAccessibility)
       for (const [slide, original] of originals) {
         slide.inert = original.inert
         if (original.hidden === null) slide.removeAttribute('aria-hidden')
         else slide.setAttribute('aria-hidden', original.hidden)
+        if (original.tabIndex === null) slide.removeAttribute('tabindex')
+        else slide.setAttribute('tabindex', original.tabIndex)
       }
       swiper.off('slideChange', emitIndex)
       swiper.off('slideChange', followThumbSelection)
@@ -567,10 +662,13 @@ export function Carousel ({
   // 제어 playing 이 바뀌면 autoplay API 를 맞춘다.
   useEffect(() => {
     if (!enableAutoplay) return
-    const autoplayApi = instanceRef.current?.autoplay
+    const swiper = instanceRef.current
+    const autoplayApi = swiper?.autoplay
     if (!autoplayApi) return
-    if (playing && !autoplayApi.running) autoplayApi.start()
-    if (!playing && autoplayApi.running) autoplayApi.stop()
+    const active = swiper.el.ownerDocument.activeElement
+    const canPlay = playing && !swiper.slides.some((slide) => slide.contains(active))
+    if (canPlay && !autoplayApi.running) autoplayApi.start()
+    if (!canPlay && autoplayApi.running) autoplayApi.stop()
   }, [playing, enableAutoplay])
 
   useEffect(() => {
@@ -618,11 +716,26 @@ export function Carousel ({
       data-component="Carousel"
       data-count={slideCount}
       data-single={multiSlide ? undefined : ''}
+      onKeyDown={(event) => {
+        rest.onKeyDown?.(event)
+        slideKeyDownRef.current?.(event)
+      }}
       onFocusCapture={(event) => {
         rest.onFocusCapture?.(event)
-        if (multiSlide) instanceRef.current?.keyboard?.enable()
+        const swiper = instanceRef.current
+        if (event.target.closest('[data-component="Carousel"]') !== event.currentTarget) {
+          swiper?.keyboard?.disable()
+          return
+        }
+        if (event.target.closest('.swiper-slide')) swiper?.keyboard?.disable()
+        else if (multiSlide) swiper?.keyboard?.enable()
+        // 클릭으로 토글에 초점이 들어올 때는 클릭 핸들러에서 한 번만 전환합니다.
+        if (event.target.matches('[data-carousel-autoplay-toggle]:not(:focus-visible)')) return
         // 조작 중인 콘텐츠가 자동으로 바뀌지 않도록 초점 진입 시 재생을 멈춥니다.
-        if (enableAutoplay && playing) setPlaying(false)
+        if (enableAutoplay && playing) {
+          swiper?.autoplay?.stop()
+          setPlaying(false)
+        }
       }}
       onBlurCapture={(event) => {
         rest.onBlurCapture?.(event)

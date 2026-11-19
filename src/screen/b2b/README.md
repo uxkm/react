@@ -70,17 +70,16 @@ B2B 헤더는 `data-header-scroll="fixed"`로 스크롤 시 숨김을 비활성�
 
 ## 메인 시안 typeA / typeB
 
-- 기본 `/b2b`는 typeB 레이아웃에 영상 히어로를 표시합니다. 기존 부유체 히어로는 `/b2b?type=typeB`, 이전 시안은 `/b2b?type=typeA`에서 확인합니다.
-- 영상 히어로는 `<MainHero type="typeVideo" />`, `/b2b?type=typeVideo`, 또는 `/pub/preview/b2b/main-section?section=hero&type=typeVideo`로도 호출합니다. 영상과 포스터는 `public/assets/b2b/main/`에 있습니다. PC에서 배경을 반복 재생하고, 모션 축소 시에는 포스터를 표시합니다. 태블릿·모바일에서는 기존 배경을 사용합니다.
+- 기본 `/b2b`와 `/b2b?type=typeB`는 typeB 레이아웃에 부유하는 도형을 표시합니다. 이전 시안은 `/b2b?type=typeA`에서 확인합니다.
+- 영상 히어로는 가이드 → 위젯 → 영상 타입 → 메인 타이틀 (영상) 또는 `/b2b?type=typeVideo`에서 확인합니다. 영상과 포스터는 `public/assets/b2b/main/`에 있습니다. PC에서 배경을 반복 재생하고, 모션 축소 시에는 포스터를 표시합니다. 태블릿·모바일에서는 메인과 동일한 도형 이미지를 정지 상태로 표시합니다.
 - typeB 공지는 `MainTopBanner`에서 헤더 아래에 배치합니다. 헤더는 hero 위의 고정 오버레이이고, hero는 상단부터 `100dvh`를 채웁니다. 헤더 자체의 `backdrop-filter: blur(24px) saturate(1.3)`와 내비 영역의 흰색 6% 표면을 조합해 실제 hero를 흐리게 비춥니다. 표준 속성은 WebKit 속성 뒤에 선언해 CSS 최적화 후에도 유지합니다. 두 번째 섹션부터 내비 표면은 흰색 78%·글자는 검정으로 전환하며, 공지 배너도 같은 반투명 표면과 상태별 글자 색상을 공유합니다.
 - PC 첫 hero 안에서 휠을 내리거나 위로 스와이프하면 추천·상담 섹션으로 이동합니다. PageDown·ArrowDown·Space와 하단 이동 버튼도 지원합니다. 이후 본문은 일반 스크롤이며, 모달 안의 스크롤과 확대 제스처는 유지합니다. 모션 축소 환경에서는 즉시 이동합니다. 태블릿·모바일(1099px 이하)은 자동 섹션 이동과 하단 스크롤 안내 없이 일반 스크롤을 사용하며, 창 크기를 바꾸면 동작도 전환됩니다.
-- PC·모바일용 배경은 시안 분위기를 참고한 생성 이미지입니다. `public/images/pages/main/hero-type-b.webp`, `hero-type-b-mobile.webp`를 실제 디자인 원본으로 교체할 수 있습니다.
 
-PC hero는 `MainHero`의 `main-hero_artwork` 안에서 투명 도형 8개를 따로 배치합니다. `styles/pages/b2b/main/_hero-artwork.scss`가 도형별 위치·크기·7~18초의 부유 애니메이션을 관리합니다. 화면 밖에서는 재생을 멈추며, 모션 축소 설정에서는 정지합니다. 도형은 장식 요소로 접근성 트리와 클릭 영역에서 제외합니다. 태블릿·모바일은 기존 배경 이미지를 사용합니다.
+부유체 시안은 `public/images/pages/main/ver3-home/`의 투명 도형 이미지를 사용합니다. `styles/pages/b2b/main/_hero-artwork.scss`가 화면 크기별 위치·크기와 7~18초의 부유 애니메이션을 관리합니다. 태블릿·모바일에서도 같은 도형을 사용하고, 타이틀과 버튼이 보이도록 가장자리 배치를 조정합니다. 화면 밖에서는 재생을 멈추며, 모션 축소 설정에서는 정지합니다. 도형은 장식 요소로 접근성 트리와 클릭 영역에서 제외합니다.
 
 두 번째 섹션 `MainCardSection`은 typeB에서 프로모션·진단·문의 순서의 3:1:1 카드 배치를 사용하며, 1099px 이하에서는 같은 순서로 세로 배치합니다. 프로모션은 Physical AI와 AX 진단의 두 슬라이드를 표시합니다. 기존 카드 배치·바로가기는 `designType="typeA"`로 보존합니다. 카드 스타일은 `styles/pages/b2b/main/_card-section.scss`에 있습니다.
 
-PC hero의 왼쪽 하단 구체는 `main-hero_overlap`으로 분리합니다. 나머지 도형은 `main-hero_artwork` 안에서 잘라내고, 구체만 hero 아래 흰색 영역으로 100px 이어지도록 배치합니다. 다음 카드 섹션은 180px 간격을 두어 구체와 콘텐츠가 충돌하지 않게 합니다.
+PC 부유체·영상 시안의 왼쪽 하단 구체는 `main-hero_overlap`으로 분리합니다. 나머지 배경은 `main-hero_artwork` 안에서 잘라내고, 구체만 hero 아래 영역으로 100px 이어지도록 배치합니다. 다음 카드 섹션은 180px 이상의 간격을 두어 구체와 콘텐츠가 충돌하지 않게 합니다.
 
 우측 퀵메뉴는 기본적으로 +와 맨 위로 버튼만 표시합니다. +를 누르면 서비스 링크 3개가 위로 펼쳐지고, +는 닫기 모양으로 회전합니다. 링크는 접힌 동안 inert 처리하며, Escape로 닫고 +로 포커스를 돌려줍니다. 맨 위로 이동·링크 선택 시 메뉴를 닫습니다. Floating은 bottom-right 배치와 푸터 경계 회피를 사용하며, 태블릿·모바일 숨김 규칙을 유지하며 PC에서는 첫 hero와 맨 위에서도 계속 표시합니다.
 
@@ -110,7 +109,7 @@ PC hero의 왼쪽 하단 구체는 `main-hero_overlap`으로 분리합니다. �
 
 추가 콘텐츠 3개와 썸네일은 멀티캠퍼스 공식 멀캠ON 목록을 확인했으며, 이미지 출처는 `public/images/@dummy/README.md`에 기록했습니다.
 
-네 번째 고객사례도 `MainCaseSectionTypeA`에 원본을 보존합니다. typeB는 화면 전체 너비의 어두운 배경에 같은 너비의 카드를 가운데 정렬하고 한 개씩 자동 순환합니다. 활성 카드만 `translateY(-18px)`로 위로 올라옵니다. 좌우 버튼은 없고, 키보드로 카드 전체에 초점이 가면 자동 재생이 멈춥니다. 카드 초점은 `aria-label`로 내용을 읽고 내부 마크업은 `aria-hidden`으로 중복 초점을 막습니다. 작은 화면의 더보기 버튼은 카드 아래에 표시합니다.
+네 번째 고객사례도 `MainCaseSectionTypeA`에 원본을 보존합니다. typeB는 화면 전체 너비의 어두운 배경에 같은 너비의 카드를 가운데 정렬하고 한 개씩 자동 순환합니다. 활성 카드는 위로 올라옵니다. 키보드 초점이 카드에 들어오면 자동재생이 멈춥니다. Tab·Shift+Tab과 좌우 방향키로 이전·다음 카드에 초점을 옮길 수 있습니다. 카드 초점은 `aria-label`로 내용을 읽고 내부 마크업은 `aria-hidden`으로 중복 초점을 막습니다. 작은 화면의 더보기 버튼은 카드 아래에 표시합니다.
 
 고객사례 문구는 `widgets/b2b/main/mainCustomerStories.ts`의 시안 기반 UI 확인용 샘플 4종을 순환 확인을 위해 반복한 구성입니다. 실제 고객사 발언으로 확정된 자료가 아닙니다. 배경·간격·활성 효과는 `styles/pages/b2b/main/_case-section.scss`에서 관리합니다. 더보기는 내부 고객사례 목록 라우트가 없어 현재 공식 BPO 서비스의 고객사례가 있는 `https://www.multicampus.com/b2b/kr/service/bpo.html`로 연결했습니다.
 

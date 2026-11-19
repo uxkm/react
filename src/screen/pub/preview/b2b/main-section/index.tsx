@@ -4,6 +4,7 @@ import { Suspense } from 'react' // Suspense
 import { useSearchParams } from 'next/navigation' // 검색 파라미터 훅
 import { Page } from '@/comp' // comp
 import MainHero from '@/screen/b2b/main/sections/MainHero' // Main Hero 컴포넌트
+import MainHeroTypeA from '@/screen/b2b/main/sections/MainHeroTypeA'
 import MainCardSection from '@/screen/b2b/main/sections/MainCardSection' // Main Card Section 컴포넌트
 import MainInsightSection from '@/screen/b2b/main/sections/MainInsightSection' // Main Insight Section 컴포넌트
 import MainCaseSection from '@/screen/b2b/main/sections/MainCaseSection' // Main Case Section 컴포넌트
@@ -26,18 +27,24 @@ function MainSectionPreview () {
   const params = useSearchParams()
   const requested = params.get('section') ?? 'cards'
   const key = Object.hasOwn(sections, requested) ? requested as keyof typeof sections : 'cards'
+  const type = params.get('type')
+  const designType = type === 'typeA' ? 'typeA' : 'typeB'
+  const heroType = type === 'typeVideo' || type === 'typeB' ? type : undefined
   const { title, Component } = sections[key]
+  const pageTitle = key === 'hero' && heroType === 'typeVideo' ? '메인 타이틀 (영상)' : title
 
   return (
     <>
-      <Page page={`main-section-${key}`} title={title} className="p-content" />
+      <Page page={`main-section-${key}`} title={pageTitle} className="p-content" />
       {key !== 'hero' && <h1 className="visually-hidden">{title}</h1>}
-      <div className="main main-section-preview">
+      <div className={`main main-section-preview${designType === 'typeA' ? ' main_typeA' : ''}`}>
         {key === 'newsletter' ? (
           <div className="main-section-preview_card">
             <Component />
           </div>
-        ) : key === 'hero' ? <MainHero type={params.get('type') === 'typeVideo' ? 'typeVideo' : 'typeB'} /> : <Component />}
+        ) : key === 'hero' ? (
+          designType === 'typeA' ? <MainHeroTypeA /> : <MainHero type={heroType} />
+        ) : <Component designType={designType} />}
       </div>
     </>
   )

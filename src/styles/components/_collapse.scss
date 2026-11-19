@@ -149,7 +149,7 @@
     }
 
     &[aria-expanded="true"] {
-      color: color-token(primary);
+      color: var(--color-accent-text-hover);
     }
 
     &.btn {
