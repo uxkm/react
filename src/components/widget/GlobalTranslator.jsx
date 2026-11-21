@@ -19,9 +19,12 @@ export function GlobalTranslator ({ rootRef }) {
     let controller = null
     let observer = null
     let root = null
+    let running = false
+    let pending = false
 
     const run = async () => {
       if (cancelled) return
+      running = true
       controller?.abort()
       const ac = new AbortController()
       controller = ac
@@ -42,11 +45,19 @@ export function GlobalTranslator ({ rootRef }) {
         if (!cancelled && controller === ac) {
           root.dataset.translating = 'false'
           setLocaleProgress(null)
+          running = false
+          if (pending) {
+            pending = false
+            schedule()
+          }
         }
       }
     }
     const schedule = () => {
-      controller?.abort()
+      if (running) {
+        pending = true
+        return
+      }
       window.clearTimeout(timer)
       timer = window.setTimeout(() => { void run() }, 160)
     }
