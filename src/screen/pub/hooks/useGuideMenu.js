@@ -25,7 +25,6 @@ const EMPTY = {
   intro: { id: guideHomeId, label: '소개' },
   a11y: { id: 'a11y', label: '접근성' },
   guideMenu: [],
-  guideWidgetItems: [],
   guidePreviewMenu: [],
   guideDemoMenu: []
 }

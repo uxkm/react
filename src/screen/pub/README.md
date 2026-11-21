@@ -182,7 +182,7 @@ PUB 전용 소스는 이 폴더에 모으되, Next.js 라우트·공개 JSON·�
 | `public/data/pub/index.json` | 목록 제목·B2B 표시 설정 |
 | `public/data/pub/b2b/index.json` | 목록 분류 순서와 읽을 JSON 파일 |
 | `public/data/pub/b2b/*.json` | 화면 계층과 작업 정보 |
-| `public/data/pub/guide-menu.json` | 가이드 메뉴의 componentGroups·widgetItems·데모 분류와 표시명 |
+| `public/data/pub/guide-menu.json` | 가이드 UI 항목(uiItems)과 데모 분류 및 표시명 |
 | `public/data/pub/docs/a11y/` | 수동 체크리스트와 검토 문서 |
 | `src/styles/pub.scss`, `src/styles/pages/pub/_index.scss` | 목록 스타일 진입점과 본문 스타일 |
 | `src/styles/demo.scss`, `src/styles/pages/pub/demo/` | 가이드·데모 배치와 예제 스타일 |
@@ -214,7 +214,7 @@ guide/ 또는 demo/ 화면 파일
         → GuideMenu에 분류·표시명·현재 경로 표시
 ```
 
-화면 파일이 URL 등록의 원본이고 `guide-menu.json`은 메뉴 분류·순서·표시명의 원본입니다. 생성물을 직접 수정하지 않습니다. 위젯 가이드 항목은 `widgetItems`로 관리하며 URL은 `/pub/guide/...`를 유지합니다.
+화면 파일이 URL 등록의 원본이고 `guide-menu.json`은 메뉴 분류·순서·표시명의 원본입니다. 생성물을 직접 수정하지 않습니다. 컴포넌트와 위젯 가이드는 `uiItems` 순서대로 UI 메뉴에 표시하며 기존 `/pub/guide/...` URL을 사용합니다.
 
 ## 추가·수정할 때의 규칙
 
@@ -223,7 +223,7 @@ guide/ 또는 demo/ 화면 파일
 3. 가이드·데모 화면에는 `GuideLayout` 또는 `DemoLayout`을 사용합니다. 예제 블록은 `DemoBlock`, API 설명은 `GuideApiDocs`로 조합합니다.
 4. 하위 화면은 재귀 등록됩니다. 예: `guide/forms/Input.tsx` → `/pub/guide/forms/input`. 하위 `index.tsx`는 폴더 주소를 사용합니다. `routeId`로 경로, `guideLabel`로 메뉴 이름을 지정할 수 있습니다.
 5. `skeleton`, `widgets`, `modules`, `shared`, `data`, 밑줄로 시작하는 보조 폴더·파일은 가이드·데모 라우트에서 제외됩니다. 화면 내부 보조 구현을 별도 파일로 뺄 때 이 규칙을 따릅니다.
-6. 화면 추가·삭제 후 `npm run generate:registry`로 등록·경계를 검증합니다. 개발 서버에서는 감시기가 자동 갱신합니다. 메뉴의 원하는 분류는 `guide-menu.json`에서 지정합니다.
+6. 화면 추가·삭제 후 `npm run generate:registry`로 등록·경계를 검증합니다. 개발 서버에서는 감시기가 자동 갱신합니다. 메뉴의 표시 순서와 데모 분류는 `guide-menu.json`에서 지정합니다.
 
 ```jsx
 import { GuideLayout } from '@/screen/pub/layout'

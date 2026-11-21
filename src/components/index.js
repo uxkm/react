@@ -28,8 +28,6 @@ export { LayoutProvider, useLayoutSlots, useLayoutSetSlot } from './layout/Layou
 export { LAYOUT_SLOT_HIDDEN } from './shared/layout-slot.ts'
 
 export { Button } from './ui/Button.tsx'
-export { Typography } from './ui/Typography.tsx'
-export { Link } from './ui/Link.tsx'
 export { Icon, iconNames, iconSizes, resolveIconSrc, toIconCssSize } from './ui/Icon.tsx'
 
 export { Badge, BadgeWrap } from './ui/Badge.tsx'
@@ -90,7 +88,6 @@ export { Upload } from './ui/Upload.tsx'
 export { DatePicker } from './ui/DatePicker.tsx'
 
 export { Accordion, AccordionItem, AccordionPanel } from './ui/Accordion.tsx'
-export { Collapse, CollapseItem, CollapsePanel } from './ui/Collapse.tsx'
 export { Carousel, CarouselSlide } from './ui/Carousel.tsx'
 export { Affix } from './ui/Affix.tsx'
 export { BackTop } from './ui/BackTop.tsx'

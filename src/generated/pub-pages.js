@@ -55,10 +55,6 @@ export const pubPages = {
       "label": "checkbox"
     },
     {
-      "id": "collapse",
-      "label": "collapse"
-    },
-    {
       "id": "container",
       "label": "container"
     },
@@ -113,10 +109,6 @@ export const pubPages = {
     {
       "id": "keyword",
       "label": "keyword"
-    },
-    {
-      "id": "link",
-      "label": "link"
     },
     {
       "id": "list",
@@ -221,10 +213,6 @@ export const pubPages = {
     {
       "id": "tree",
       "label": "tree"
-    },
-    {
-      "id": "typography",
-      "label": "typography"
     },
     {
       "id": "upload",

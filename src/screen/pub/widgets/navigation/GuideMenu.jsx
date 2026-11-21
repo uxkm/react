@@ -2,7 +2,7 @@
 
 /**
  * 퍼블리싱 가이드 좌측 메뉴.
- * GuideLayout에서 호출한다. 소개 / 접근성 / 컴포넌트 / 위젯 / 데모 네비.
+ * GuideLayout에서 호출한다. 소개 / 접근성 / UI / 프로젝트 미리보기 / 데모 네비.
  * 접힘 시 카테고리 아이콘 레일 + 우측 Tooltip.
  */
 import { useMemo, useState } from 'react' // 접힘 상태·메뉴 로드
@@ -17,17 +17,6 @@ import {
   guideHomePath, // guide Home Path
   useGuideMenu // Guide Menu 훅
 } from '@/screen/pub/hooks/useGuideMenu' // 홈·접근성 경로·메뉴 JSON 훅
-
-/** 컴포넌트 그룹 id → 접힘 레일 아이콘 */
-const GROUP_ICONS = {
-  basic: 'layers',
-  layout: 'layout',
-  data: 'table',
-  form: 'edit',
-  feedback: 'message-circle',
-  navigation: 'compass',
-  misc: 'more-horizontal'
-}
 
 /** pathname 이 `/pub/guide/{item.id}` 인 컴포넌트 그룹 id (예: /pub/guide/Button) */
 function findComponentGroupId (pathname, guideMenu) {
@@ -75,9 +64,8 @@ export function GuideMenu ({ className }) {
   const guideIntroItem = menu?.intro || { id: 'intro', label: '소개' }
   const guideA11yItem = menu?.a11y || { id: 'a11y', label: '접근성' }
   const guideMenu = useMemo(() => menu?.guideMenu || [], [menu])
-  const guideWidgetItems = useMemo(() => menu?.guideWidgetItems || [], [menu])
   const guidePreviewMenu = useMemo(() => menu?.guidePreviewMenu || [], [menu])
-  const widgetTotal = guideWidgetItems.length + guidePreviewMenu.reduce((sum, group) => sum + group.items.length, 0)
+  const previewTotal = guidePreviewMenu.reduce((sum, group) => sum + group.items.length, 0)
   const guideDemoMenu = useMemo(() => menu?.guideDemoMenu || [], [menu])
   /** 아코디언으로 접히는 모든 그룹 id (컴포넌트 + 데모) */
   const allGroupIds = useMemo(
@@ -90,7 +78,6 @@ export function GuideMenu ({ className }) {
   const a11yHref = guideA11yPath
   const a11yActive = pathname === guideA11yPath
   const activeGroupId = findComponentGroupId(pathname, guideMenu)
-  const widgetActive = guideWidgetItems.some((item) => pathname === '/pub/guide/' + item.id)
 
   const [previousRoute, setPreviousRoute] = useState({ pathname, menu })
   if (previousRoute.pathname !== pathname || previousRoute.menu !== menu) {
@@ -119,8 +106,6 @@ export function GuideMenu ({ className }) {
     setNavOpen(true)
     setOpenGroups((prev) => ({ ...prev, [groupId]: true }))
   }
-
-  const componentTotal = guideMenu.reduce((sum, group) => sum + group.items.length, 0)
 
   return (
     <aside
@@ -163,75 +148,57 @@ export function GuideMenu ({ className }) {
                   </Link>}
                 </div>
 
-                <div className="comp-guide_section" data-guide-section="components">
-                  <p className="comp-guide_section-label">
-                    <span>컴포넌트</span>
-                    <span className="comp-guide_count" role="img" aria-label={`하위 ${componentTotal}개`}>
-                      {componentTotal}
-                    </span>
-                  </p>
-                  {guideMenu.map((group) => {
-                    const expanded = !!openGroups[group.id]
-                    const panelId = 'comp-guide-group-' + group.id
-                    const count = group.items.length
-                    return (
-                      <div
-                        key={group.id}
-                        className={classNames('comp-guide_group', { 'is-open': expanded })}
+                {guideMenu.map((group) => {
+                  const expanded = !!openGroups[group.id]
+                  const panelId = 'comp-guide-group-' + group.id
+                  const count = group.items.length
+                  return (
+                    <div
+                      key={group.id}
+                      className={classNames('comp-guide_section', { 'is-open': expanded })}
+                      data-guide-section="ui"
+                    >
+                      <button
+                        type="button"
+                        className="comp-guide_section-toggle"
+                        aria-expanded={expanded ? 'true' : 'false'}
+                        aria-controls={panelId}
+                        onClick={() => toggleGroup(group.id)}
                       >
-                        <button
-                          type="button"
-                          className="comp-guide_group-toggle"
-                          aria-expanded={expanded ? 'true' : 'false'}
-                          aria-controls={panelId}
-                          onClick={() => toggleGroup(group.id)}
-                        >
-                          <span className="comp-guide_toggle-label">
-                            <span>{group.label}</span>
-                            <span className="comp-guide_count" role="img" aria-label={`하위 ${count}개`}>
-                              {count}
-                            </span>
+                        <span className="comp-guide_toggle-label">
+                          <span>{group.label}</span>
+                          <span className="comp-guide_count" role="img" aria-label={`하위 ${count}개`}>
+                            {count}
                           </span>
-                          <span className="comp-guide_chevron" aria-hidden="true" />
-                        </button>
-                        <ul id={panelId} hidden={!expanded}>
-                          {group.items.map((item) => {
-                            const href = '/pub/guide/' + item.id
-                            const active = pathname === href
-                            return (
-                              <li key={item.id}>
-                                <Link
-                                  className={classNames('comp-guide_link', { 'is-active': active })}
-                                  to={href}
-                                  aria-current={active ? 'page' : undefined}
-                                >
-                                  {item.label}
-                                </Link>
-                              </li>
-                            )
-                          })}
-                        </ul>
-                      </div>
-                    )
-                  })}
-                </div>
+                        </span>
+                        <span className="comp-guide_chevron" aria-hidden="true" />
+                      </button>
+                      <ul id={panelId} className="comp-guide_section-list" hidden={!expanded}>
+                        {group.items.map((item) => {
+                          const href = '/pub/guide/' + item.id
+                          const active = pathname === href
+                          return (
+                            <li key={item.id}>
+                              <Link
+                                className={classNames('comp-guide_link', { 'is-active': active })}
+                                to={href}
+                                aria-current={active ? 'page' : undefined}
+                              >
+                                {item.label}
+                              </Link>
+                            </li>
+                          )
+                        })}
+                      </ul>
+                    </div>
+                  )
+                })}
 
-                {widgetTotal > 0 && <div className="comp-guide_section" data-guide-section="widgets">
+                {previewTotal > 0 && <div className="comp-guide_section" data-guide-section="preview">
                   <p className="comp-guide_section-label">
-                    <span>위젯</span>
-                    <span className="comp-guide_count" role="img" aria-label={`하위 ${widgetTotal}개`}>{widgetTotal}</span>
+                    <span>프로젝트 미리보기</span>
+                    <span className="comp-guide_count" role="img" aria-label={`하위 ${previewTotal}개`}>{previewTotal}</span>
                   </p>
-                  <ul className="comp-guide_section-list">
-                    {guideWidgetItems.map((item) => {
-                      const href = '/pub/guide/' + item.id
-                      const active = pathname === href
-                      return <li key={item.id}>
-                        <Link className={classNames('comp-guide_link', { 'is-active': active })} to={href} aria-current={active ? 'page' : undefined}>
-                          {item.label}
-                        </Link>
-                      </li>
-                    })}
-                  </ul>
                   {guidePreviewMenu.map((group) => {
                     const expanded = !!openGroups[group.id]
                     const panelId = 'comp-guide-group-' + group.id
@@ -352,7 +319,6 @@ export function GuideMenu ({ className }) {
               </Tooltip>
 
               {guideMenu.map((group) => {
-                const iconName = GROUP_ICONS[group.id] || 'more-horizontal'
                 const active = activeGroupId === group.id
                 return (
                   <Tooltip
@@ -367,13 +333,13 @@ export function GuideMenu ({ className }) {
                       aria-label={group.label}
                       onClick={() => openGroupFromRail(group.id)}
                     >
-                      <Icon name={iconName} size="sm" />
+                      <Icon name="layers" size="sm" />
                     </button>
                   </Tooltip>
                 )
               })}
-              {widgetTotal > 0 && <Tooltip className="tooltip_inverse" placement="right" content="위젯">
-                <button type="button" className={classNames('comp-guide_rail-btn', { 'is-active': widgetActive })} aria-label="위젯" onClick={() => setNavOpen(true)}>
+              {previewTotal > 0 && <Tooltip className="tooltip_inverse" placement="right" content="프로젝트 미리보기">
+                <button type="button" className="comp-guide_rail-btn" aria-label="프로젝트 미리보기" onClick={() => setNavOpen(true)}>
                   <Icon name="layout" size="sm" />
                 </button>
               </Tooltip>}

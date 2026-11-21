@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react' // 상태 훅
-import { Avatar, Button, Card, CardBody, CardDeck, CardFooter, CardHeader, Icon, Link, Stat, Tag, TagGroup } from '@/comp' // comp
+import { Avatar, Button, Card, CardBody, CardDeck, CardFooter, CardHeader, Icon, Stat, Tag, TagGroup } from '@/comp' // comp
 import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
 import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
 import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
@@ -280,12 +280,14 @@ const SECTIONS = [
   <div className="card_inner">
     <CardHeader title="가이드 문서" />
     <CardBody>…</CardBody>
-    <CardFooter>…</CardFooter>
+    <CardFooter>
+      <Button tag="a" href="#card" variant="text" color="primary" size="sm" label="문서 보기" />
+    </CardFooter>
   </div>
 </Card>`, {
   name: 'CardExample7',
   reactImports: [],
-  compImports: ['Card', 'CardBody', 'CardFooter', 'CardHeader']
+  compImports: ['Button', 'Card', 'CardBody', 'CardFooter', 'CardHeader']
 }),
     preview: (
       <Card
@@ -302,7 +304,7 @@ const SECTIONS = [
           <CardHeader title="가이드 문서" />
           <CardBody>HTML 컴포넌트 사용법과 접근성 가이드를 확인하세요.</CardBody>
           <CardFooter>
-            <Link href="#card" color="primary" size="sm">문서 보기</Link>
+            <Button tag="a" href="#card" variant="text" color="primary" size="sm" label="문서 보기" />
           </CardFooter>
         </div>
       </Card>

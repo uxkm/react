@@ -13,7 +13,6 @@
 .wbs {
   --control-h: 24px;
   --toggle-size: var(--size-16);
-  --mono: var(--font-mono);
   // 컬럼 min 합(이름 240 + PageUrl/경로 확장 기준 ≈1730). 실제 너비는 grid min-content 가 우선
   --wbs-table-min: 1730px;
   --wbs-sticky-offset: 0px;
@@ -1175,7 +1174,7 @@
   .col-pageurl,
   .col-path {
     code {
-      font-family: var(--mono);
+      font-family: var(--font-sans);
       font-size: var(--font-size-sm);
       color: #3d5568;
     }
@@ -1250,7 +1249,7 @@
     }
 
     code {
-      font-family: var(--mono);
+      font-family: var(--font-sans);
     }
 
     .path-link_label {
@@ -1569,7 +1568,7 @@
     margin: var(--space-4) 0 0;
     font-size: var(--font-size-sm);
     color: var(--color-text-muted);
-    font-family: var(--mono, ui-monospace, monospace);
+    font-family: var(--font-sans);
   }
 
   &_close {

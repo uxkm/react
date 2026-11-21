@@ -76,7 +76,6 @@ export const componentNames = [
   "card",
   "carousel",
   "checkbox",
-  "collapse",
   "container",
   "date-picker",
   "divider",
@@ -91,7 +90,6 @@ export const componentNames = [
   "icon",
   "input",
   "keyword",
-  "link",
   "list",
   "menu",
   "modal",
@@ -118,7 +116,6 @@ export const componentNames = [
   "tooltip",
   "top-banner",
   "tree",
-  "typography",
   "upload"
 ]
 export const demoNames = [
@@ -228,7 +225,6 @@ export const routeTitles = {
   "/pub/guide/card": "Card - 퍼블리싱가이드",
   "/pub/guide/carousel": "Carousel - 퍼블리싱가이드",
   "/pub/guide/checkbox": "Checkbox - 퍼블리싱가이드",
-  "/pub/guide/collapse": "Collapse - 퍼블리싱가이드",
   "/pub/guide/container": "Container - 퍼블리싱가이드",
   "/pub/guide/date-picker": "DatePicker - 퍼블리싱가이드",
   "/pub/guide/divider": "Divider - 퍼블리싱가이드",
@@ -243,7 +239,6 @@ export const routeTitles = {
   "/pub/guide/icon": "Icon - 퍼블리싱가이드",
   "/pub/guide/input": "Input - 퍼블리싱가이드",
   "/pub/guide/keyword": "Keyword - 퍼블리싱가이드",
-  "/pub/guide/link": "Link - 퍼블리싱가이드",
   "/pub/guide/list": "List - 퍼블리싱가이드",
   "/pub/guide/menu": "Menu - 퍼블리싱가이드",
   "/pub/guide/modal": "Modal - 퍼블리싱가이드",
@@ -270,7 +265,6 @@ export const routeTitles = {
   "/pub/guide/tooltip": "Tooltip - 퍼블리싱가이드",
   "/pub/guide/top-banner": "TopBanner - 퍼블리싱가이드",
   "/pub/guide/tree": "Tree - 퍼블리싱가이드",
-  "/pub/guide/typography": "Typography - 퍼블리싱가이드",
   "/pub/guide/upload": "Upload - 퍼블리싱가이드",
   "/pub/demo/ajv": "Ajv - 퍼블리싱가이드",
   "/pub/demo/aos": "AOS - 퍼블리싱가이드",

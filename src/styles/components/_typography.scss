@@ -137,7 +137,7 @@
 
   &_code {
     display: inline;
-    font-family: $font-family-mono;
+    font-family: $font-family;
     font-size: 0.875em;
     padding: var(--typo-code-padding-y) var(--typo-code-padding-x);
     background: var(--color-surface-raised);
@@ -246,7 +246,7 @@
 
   &_kbd {
     display: inline-block;
-    font-family: $font-family-mono;
+    font-family: $font-family;
     font-size: 0.8125em;
     padding: var(--typo-kbd-padding-y) var(--typo-kbd-padding-x);
     border: 1px solid var(--color-border);
@@ -263,7 +263,7 @@
     overflow-x: auto;
     white-space: pre;
     tab-size: 2;
-    font-family: $font-family-mono;
+    font-family: $font-family;
     font-size: size-token(sm);
     line-height: 1.6;
     color: var(--color-text);

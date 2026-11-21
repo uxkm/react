@@ -62,7 +62,7 @@
     dd {
       margin: 0;
       font-size: var(--font-size-md);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-family: var(--font-sans);
       word-break: break-all;
     }
   }

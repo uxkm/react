@@ -65,18 +65,12 @@ export function projectPreviewGroups (pages = []) {
 /** The separately rendered a11y entry must follow source deletion too. */
 export function resolveGuideMenu (data, pages, defaults) {
   const a11y = data.a11y || defaults.a11y
-  const available = new Set(pages.guide.map((page) => page.id))
-  const widgetIds = new Set()
-  const guideWidgetItems = (data.widgetItems || []).filter((item) => {
-    if (!available.has(item.id) || widgetIds.has(item.id)) return false
-    widgetIds.add(item.id)
-    return true
-  })
+  const groups = mergeGuideGroups([{ items: data.uiItems }], pages.guide, { exclude: [a11y.id] })
+  const uiItems = groups.flatMap(({ items }) => items)
   return {
     intro: data.intro || defaults.intro,
     a11y: pages.guide.some((page) => page.id === a11y.id) ? a11y : null,
-    guideMenu: mergeGuideGroups(data.componentGroups, pages.guide, { exclude: [a11y.id, ...widgetIds] }),
-    guideWidgetItems,
+    guideMenu: uiItems.length ? [{ id: 'ui', label: 'Components UI', items: uiItems }] : [],
     guidePreviewMenu: projectPreviewGroups(pages.preview),
     guideDemoMenu: mergeGuideGroups(data.demoGroups, pages.demo)
   }

@@ -73,7 +73,7 @@ import { Button, Container, Input } from '@/comp'
 
 Button API는 `variant` · `color` · `size` · `round` · `block` · `loading` 계약을 따릅니다.
 
-새 창 링크는 숨김 텍스트 대신 `title="새 창 열림"`으로 안내합니다. 공통 UI `Link`와 라우터 `Link`는 `target="_blank"`일 때 이 제목을 자동으로 제공합니다. 네이티브 `<a>`와 `window.open` 버튼에는 직접 지정합니다. 아이콘 링크의 `aria-label`은 채널·기능 이름만 표시하고, `target`·`rel`은 기존 보안 규칙을 유지합니다.
+새 창 링크는 숨김 텍스트 대신 `title="새 창 열림"`으로 안내합니다. 공통 UI `Button tag="a"`와 라우터 `Link`는 `target="_blank"`일 때 이 제목을 자동으로 제공합니다. 네이티브 `<a>`와 `window.open` 버튼에는 직접 지정합니다. 아이콘 링크의 `aria-label`은 채널·기능 이름만 표시하고, `target`·`rel`은 기존 보안 규칙을 유지합니다.
 
 ## 헤더 배경과 스크롤 상태
 

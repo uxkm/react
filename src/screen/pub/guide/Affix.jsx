@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useState } from 'react' // React
-import { Affix, Button, Link, Space } from '@/comp' // comp
+import { Affix, Button, Space } from '@/comp' // comp
 import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
 import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
 import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
@@ -129,9 +129,9 @@ function AnchorAffixDemo () {
         skin="anchor"
         offsetTop={0}
       >
-        <Link href="#affix-sec-1">소개</Link>
-        <Link href="#affix-sec-2">기능</Link>
-        <Link href="#affix-sec-3">API</Link>
+        <Button tag="a" href="#affix-sec-1" variant="text" size="sm" label="소개" />
+        <Button tag="a" href="#affix-sec-2" variant="text" size="sm" label="기능" />
+        <Button tag="a" href="#affix-sec-3" variant="text" size="sm" label="API" />
       </Affix>
       <div className="affix_demo-content">
         <p id="affix-sec-1"><strong>소개</strong> — 앵커 바가 스크롤 시 상단에 남습니다.</p>
@@ -349,7 +349,7 @@ return (
       </>
     ),
     code: ensurePageModule(`import { useRef } from 'react'
-import { Affix, Link } from '@/comp'
+import { Affix, Button } from '@/comp'
 
 const DEMO_PARAS = ${DEMO_PARAS_CODE}
 
@@ -363,9 +363,9 @@ function AnchorAffixDemo () {
         skin="anchor"
         offsetTop={0}
       >
-        <Link href="#affix-sec-1">소개</Link>
-        <Link href="#affix-sec-2">기능</Link>
-        <Link href="#affix-sec-3">API</Link>
+        <Button tag="a" href="#affix-sec-1" variant="text" size="sm" label="소개" />
+        <Button tag="a" href="#affix-sec-2" variant="text" size="sm" label="기능" />
+        <Button tag="a" href="#affix-sec-3" variant="text" size="sm" label="API" />
       </Affix>
       <div className="affix_demo-content">
         <p id="affix-sec-1"><strong>소개</strong> — 앵커 바가 스크롤 시 상단에 남습니다.</p>
