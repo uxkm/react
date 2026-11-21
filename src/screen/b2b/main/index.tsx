@@ -1,7 +1,11 @@
 'use client';
 
-import { Page, PageBanner, PageLoading, useSiteTitle, usePageData } from '@/comp'; // 페이지 공통
+// 공통 모듈 — 페이지 설정, 로딩 및 공용 UI
+import { Page, PageBanner, PageLoading, useSiteTitle, usePageData } from '@/comp';
 import { useScrollToHash } from '@/hooks/react/useScrollToHash'; // URL 해시 스크롤
+import InquirySnackbar from '@/widgets/b2b/common/InquirySnackbar';
+
+// 페이지 전용 모듈 — 본문 및 수동 스켈레톤
 import {
   MainHero,
   MainCardSection,
@@ -10,11 +14,10 @@ import {
   MainCalloutSectionTypeA,
 } from './sections'; // 메인 섹션
 import { useMainAos } from '@/widgets/b2b/main/useMainAos';
-import InquirySnackbar from '@/widgets/b2b/common/InquirySnackbar';
 import { useMainPageType } from '@/widgets/b2b/main/useMainDesignType';
 import { mainTypeANoticeProps } from '@/widgets/b2b/main/MainTopBanner';
 import MainHeroTypeA from './sections/MainHeroTypeA';
-import IndexSkeleton from './skeleton/indexSkeleton'; // Index Skeleton 컴포넌트
+import IndexSkeleton from './skeleton/indexSkeleton';
 
 /** 메인 화면은 sections의 섹션을 호출하고, 각 섹션은 widgets의 개별 콘텐츠를 배치합니다. */
 export default function B2bMainPage() {

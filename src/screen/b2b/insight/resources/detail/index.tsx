@@ -1,9 +1,13 @@
 'use client';
 
-import { Page, PageLoading } from '@/comp'; // comp
-import ComingSoon from '@/widgets/b2b/common/ComingSoon'; // Coming Soon 컴포넌트
-import { resolveSkeletonMode } from '@/config/skeleton'; // resolve Skeleton Mode
-import DetailSkeleton from './skeleton/indexSkeleton'; // Detail Skeleton 컴포넌트
+// 공통 모듈 — 페이지 설정, 로딩 및 공용 UI
+import { Page, PageLoading } from '@/comp';
+import { resolveSkeletonMode } from '@/config/skeleton';
+
+// 페이지 전용 모듈 — 본문 및 수동 스켈레톤
+import DetailSkeleton from './skeleton/indexSkeleton';
+
+import ComingSoon from '@/widgets/b2b/common/ComingSoon'; // 준비 중인 페이지에서 사용
 
 export const pageTitle = '자료실 상세';
 
