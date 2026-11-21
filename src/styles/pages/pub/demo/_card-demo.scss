@@ -5,15 +5,35 @@
   width: 100%;
   max-width: var(--size-640);
 
-  &_image { height: var(--size-440); }
-  &_quick-link { height: var(--size-160); max-width: var(--size-400); }
-  &_content { max-width: var(--size-400); }
-  &_course { max-width: var(--size-400); }
-  &_testimonial { max-width: var(--size-520); }
-  &_overlay, &_news { max-width: var(--size-400); }
-  &_feature { max-width: var(--size-800); }
-  &_webzine { max-width: var(--size-800); }
-  &:is(.demo-card-type_image, .demo-card-type_quick-link) > .card { height: 100%; }
+  &_image {
+    height: var(--size-440);
+  }
+  &_quick-link {
+    height: var(--size-160);
+    max-width: var(--size-400);
+  }
+  &_content {
+    max-width: var(--size-400);
+  }
+  &_course {
+    max-width: var(--size-400);
+  }
+  &_testimonial {
+    max-width: var(--size-520);
+  }
+  &_overlay,
+  &_news {
+    max-width: var(--size-400);
+  }
+  &_feature {
+    max-width: var(--size-800);
+  }
+  &_webzine {
+    max-width: var(--size-800);
+  }
+  &:is(.demo-card-type_image, .demo-card-type_quick-link) > .card {
+    height: 100%;
+  }
 }
 
 .demo-card-composition {
@@ -21,8 +41,12 @@
   min-width: 0;
   max-width: var(--size-720);
 
-  &_recommendations { max-width: var(--size-400); }
-  &_services .card_quick-link { min-height: var(--size-160); }
+  &_recommendations {
+    max-width: var(--size-400);
+  }
+  &_services .card_quick-link {
+    min-height: var(--size-160);
+  }
 }
 
 .demo-corporate-feed {
@@ -31,22 +55,46 @@
   gap: var(--space-20);
   align-items: start;
 
-  @media (max-width: ($breakpoint-md - 1px)) { grid-template-columns: minmax(0, 1fr); }
+  @media (max-width: ($breakpoint-md - 1px)) {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
-.demo-card-composition_corporate-resources .card_quick-link { min-height: var(--size-160); }
+.demo-card-composition_corporate-resources .card_quick-link {
+  min-height: var(--size-160);
+}
 
 @media (max-width: ($breakpoint-md - 1px)) {
   .demo-card-type {
-    .card_promotion { padding: var(--space-28) var(--space-20); }
-    .card_promotion h2 { font-size: var(--font-size-5xl); }
-    .card_image { padding: var(--space-28) var(--space-20); }
-    .card_image p { font-size: var(--font-size-17); }
-    .card_image h2 { font-size: var(--font-size-30); }
-    .card_callout { padding: var(--space-28) var(--space-20); }
-    .card_callout-title { font-size: var(--font-size-28); }
-    .card_callout-description { font-size: var(--font-size-2xl); }
-    .stat_testimonial { padding: var(--space-28) var(--space-20); }
-    .stat_testimonial .stat_value { font-size: var(--font-size-28); }
+    .card_promotion {
+      padding: var(--space-28) var(--space-20);
+    }
+    .card_promotion h2 {
+      font-size: var(--font-size-5xl);
+    }
+    .card_image {
+      padding: var(--space-28) var(--space-20);
+    }
+    .card_image p {
+      font-size: var(--font-size-17);
+    }
+    .card_image h2 {
+      font-size: var(--font-size-30);
+    }
+    .card_callout {
+      padding: var(--space-28) var(--space-20);
+    }
+    .card_callout-title {
+      font-size: var(--font-size-28);
+    }
+    .card_callout-description {
+      font-size: var(--font-size-2xl);
+    }
+    .stat_testimonial {
+      padding: var(--space-28) var(--space-20);
+    }
+    .stat_testimonial .stat_value {
+      font-size: var(--font-size-28);
+    }
   }
 }

@@ -1,10 +1,10 @@
-import checklist from '../../../../public/data/pub/docs/a11y/kwcag-2.2-checklist.md'
+import checklist from '../../../../public/data/pub/docs/a11y/kwcag-2.2-checklist.md';
 
 // 접근성 본문의 하위 절로 표시하도록 원본 제목을 생략하고 절 제목을 한 단계 내립니다.
 const checklistBody = checklist
   .replace(/^# [^\n]+\r?\n/, '')
   .replace(/^(#{2,}) /gm, '$1# ')
-  .trim()
+  .trim();
 
 /**
  * 가이드 접근성(/pub/guide/a11y) 본문.
@@ -12,7 +12,7 @@ const checklistBody = checklist
  */
 
 export const a11ySummary =
-  'KWCAG 2.2(한국형 웹 콘텐츠 접근성 지침) 검사기준과 검사 체크리스트입니다.'
+  'KWCAG 2.2(한국형 웹 콘텐츠 접근성 지침) 검사기준과 검사 체크리스트입니다.';
 
 export const a11yBody = `
 ## 기준 개요
@@ -137,6 +137,6 @@ ${checklistBody}
 5. **재검** — 미준수 항목 수정 후 동일 기준으로 재확인
 
 표준 원문·해설은 [한국형 웹 콘텐츠 접근성 지침(KWCAG) 2.2](https://a11ykr.github.io/kwcag22/) 및 국립전파연구원 KS X OT0003을 참고하세요.
-`.trim()
+`.trim();
 
-export default a11yBody
+export default a11yBody;

@@ -1,5 +1,5 @@
-import { create } from 'zustand' // create
-import { DEFAULT_LOCALE } from './i18n' // 기본 언어 코드
+import { create } from 'zustand'; // create
+import { DEFAULT_LOCALE } from './i18n'; // 기본 언어 코드
 
 /** 언어 선택·번역 진행률·오류·재시도 상태 (Zustand) */
 export const useLocaleStore = create((set) => ({
@@ -16,10 +16,11 @@ export const useLocaleStore = create((set) => ({
   translationError: '',
   setTranslationError: (translationError) => set({ translationError }),
   translationAttempt: 0,
-  retryTranslation: () => set((state) => ({
-    translationAttempt: state.translationAttempt + 1,
-    translationError: ''
-  }))
-}))
+  retryTranslation: () =>
+    set((state) => ({
+      translationAttempt: state.translationAttempt + 1,
+      translationError: '',
+    })),
+}));
 
-export default useLocaleStore
+export default useLocaleStore;

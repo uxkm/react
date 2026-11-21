@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 /**
  * Lottie 애니메이션.
@@ -11,13 +11,13 @@ import {
   useState, // 상태 훅
   useSyncExternalStore, // 외부 스토어 구독 훅
   type CSSProperties, // CSSProperties 타입
-  type HTMLAttributes // HTMLAttributes 타입
-} from 'react' // React
-import lottie, { type AnimationItem, type RendererType } from 'lottie-web' // Lottie 애니메이션
-import { Button } from './Button' // Button 컴포넌트
-import { Icon } from './Icon' // Icon 컴포넌트
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
-import { imgLottie } from '@/utils/media/images' // img Lottie
+  type HTMLAttributes, // HTMLAttributes 타입
+} from 'react'; // React
+import lottie, { type AnimationItem, type RendererType } from 'lottie-web'; // Lottie 애니메이션
+import { Button } from './Button'; // Button 컴포넌트
+import { Icon } from './Icon'; // Icon 컴포넌트
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
+import { imgLottie } from '@/utils/media/images'; // img Lottie
 
 /**
  * Lottie 경로 해석 (Icon resolveIconSrc 와 동일 규칙).
@@ -25,49 +25,49 @@ import { imgLottie } from '@/utils/media/images' // img Lottie
  * - `b2b/finish` 처럼 폴더 포함이면 `/images/lottie/…`
  * - `demo_fireworks` · `demo_fireworks.json` 은 `/images/lottie/…`
  */
-export function resolveLottieSrc (nameOrSrc: string): string {
-  const value = String(nameOrSrc || '').trim()
-  if (!value) return ''
+export function resolveLottieSrc(nameOrSrc: string): string {
+  const value = String(nameOrSrc || '').trim();
+  if (!value) return '';
   if (/^(https?:)?\/\//i.test(value) || value.startsWith('/') || value.startsWith('data:')) {
-    return value
+    return value;
   }
   if (value.includes('/')) {
-    const path = value.replace(/^\/+/, '')
-    const withExt = path.endsWith('.json') ? path : `${path}.json`
-    return `/images/lottie/${withExt}`
+    const path = value.replace(/^\/+/, '');
+    const withExt = path.endsWith('.json') ? path : `${path}.json`;
+    return `/images/lottie/${withExt}`;
   }
-  return imgLottie(value)
+  return imgLottie(value);
 }
 
-function subscribeReducedMotion (onChange: () => void) {
-  const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
-  mq.addEventListener('change', onChange)
-  return () => mq.removeEventListener('change', onChange)
+function subscribeReducedMotion(onChange: () => void) {
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  mq.addEventListener('change', onChange);
+  return () => mq.removeEventListener('change', onChange);
 }
 
-function getReducedMotionSnapshot () {
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+function getReducedMotionSnapshot() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
-function getReducedMotionServerSnapshot () {
-  return false
+function getReducedMotionServerSnapshot() {
+  return false;
 }
 
 /** respectReducedMotion 이 켜져 있을 때만 prefers-reduced-motion 구독 */
-function usePrefersReducedMotion (enabled: boolean) {
+function usePrefersReducedMotion(enabled: boolean) {
   const reduced = useSyncExternalStore(
     subscribeReducedMotion,
     getReducedMotionSnapshot,
-    getReducedMotionServerSnapshot
-  )
-  return enabled && reduced
+    getReducedMotionServerSnapshot,
+  );
+  return enabled && reduced;
 }
 
 type FetchState = {
-  key: string
-  status: 'success' | 'error'
-  data?: unknown
-}
+  key: string;
+  status: 'success' | 'error';
+  data?: unknown;
+};
 
 /** Lottie 가 받는 값 — 루트는 span */
 export interface LottieProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'children' | 'color'> {
@@ -75,43 +75,43 @@ export interface LottieProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'chil
    * Lottie 파일 이름.
    * `demo_fireworks` · `demo_fireworks.json` → /images/lottie/demo_fireworks.json
    */
-  name?: string
+  name?: string;
   /** Lottie JSON 객체. name · src 보다 우선 */
-  animationData?: unknown
+  animationData?: unknown;
   /**
    * JSON URL 직접 지정.
    * name 이 있으면 name 을 쓰고, 절대 URL이 필요할 때만 src 를 쓴다.
    */
-  src?: string
-  loop?: boolean | number
+  src?: string;
+  loop?: boolean | number;
   /** 최초 자동 재생. 기본 true. controls 와 함께 쓰면 playing 상태의 초기값으로도 쓰인다 */
-  autoplay?: boolean
+  autoplay?: boolean;
   /**
    * 재생·정지 아이콘 버튼 표시.
    * 움직이는 애니메이션에 접근성 제어가 필요할 때 켠다. 기본 false
    */
-  controls?: boolean
+  controls?: boolean;
   /** 제어 재생 여부 */
-  playing?: boolean
+  playing?: boolean;
   /** 비제어 초기 재생. 기본은 autoplay */
-  defaultPlaying?: boolean
+  defaultPlaying?: boolean;
   /** 재생/정지 상태가 바뀔 때 호출 */
-  onPlayingChange?: (playing: boolean) => void
+  onPlayingChange?: (playing: boolean) => void;
   /** prefers-reduced-motion 이면 처음부터 정지. 기본 true */
-  respectReducedMotion?: boolean
-  ariaLabel?: string
-  width?: number | string
-  height?: number | string
-  renderer?: RendererType
+  respectReducedMotion?: boolean;
+  ariaLabel?: string;
+  width?: number | string;
+  height?: number | string;
+  renderer?: RendererType;
   /** 로딩 문구. fetch 중 표시 */
-  loadingLabel?: string
+  loadingLabel?: string;
 }
 
 /**
  * Lottie JSON 애니메이션.
  * 모든 래퍼는 span. lottie-web 도 span 컨테이너에 붙여 표준 마크업을 유지한다.
  */
-export function Lottie ({
+export function Lottie({
   name = '',
   animationData: animationDataProp,
   src = '',
@@ -131,106 +131,102 @@ export function Lottie ({
   style,
   ...rest
 }: LottieProps) {
-  const [fetchState, setFetchState] = useState<FetchState | null>(null)
-  const playingControlled = playingProp !== undefined
+  const [fetchState, setFetchState] = useState<FetchState | null>(null);
+  const playingControlled = playingProp !== undefined;
   /** null 이면 아직 사용자가 토글하지 않음 → reduced motion / autoplay 기본값 사용 */
-  const [userPlaying, setUserPlaying] = useState<boolean | null>(null)
-  const reducedMotion = usePrefersReducedMotion(respectReducedMotion)
-  const defaultPlay = defaultPlaying ?? !!autoplay
+  const [userPlaying, setUserPlaying] = useState<boolean | null>(null);
+  const reducedMotion = usePrefersReducedMotion(respectReducedMotion);
+  const defaultPlay = defaultPlaying ?? !!autoplay;
   const playing = playingControlled
     ? !!playingProp
-    : (userPlaying ?? (reducedMotion ? false : defaultPlay))
+    : (userPlaying ?? (reducedMotion ? false : defaultPlay));
 
-  const playerRef = useRef<HTMLSpanElement | null>(null)
-  const animRef = useRef<AnimationItem | null>(null)
+  const playerRef = useRef<HTMLSpanElement | null>(null);
+  const animRef = useRef<AnimationItem | null>(null);
 
-  const resolvedSrc = animationDataProp
-    ? ''
-    : resolveLottieSrc(name || src)
+  const resolvedSrc = animationDataProp ? '' : resolveLottieSrc(name || src);
 
-  const fetchMatches = fetchState?.key === resolvedSrc
-  const fetchedData = fetchMatches && fetchState.status === 'success'
-    ? fetchState.data
-    : null
-  const fetchError = !!(fetchMatches && fetchState.status === 'error')
-  const animationData = animationDataProp ?? fetchedData
-  const loading = !!resolvedSrc && !animationDataProp && !fetchMatches
+  const fetchMatches = fetchState?.key === resolvedSrc;
+  const fetchedData = fetchMatches && fetchState.status === 'success' ? fetchState.data : null;
+  const fetchError = !!(fetchMatches && fetchState.status === 'error');
+  const animationData = animationDataProp ?? fetchedData;
+  const loading = !!resolvedSrc && !animationDataProp && !fetchMatches;
 
   useEffect(() => {
-    if (animationDataProp || !resolvedSrc) return
+    if (animationDataProp || !resolvedSrc) return;
 
-    let cancelled = false
+    let cancelled = false;
     fetch(resolvedSrc)
       .then((res) => {
-        if (!res.ok) throw new Error(`Failed to load ${resolvedSrc}`)
-        return res.json()
+        if (!res.ok) throw new Error(`Failed to load ${resolvedSrc}`);
+        return res.json();
       })
       .then((data) => {
-        if (cancelled) return
-        setFetchState({ key: resolvedSrc, status: 'success', data })
+        if (cancelled) return;
+        setFetchState({ key: resolvedSrc, status: 'success', data });
       })
       .catch((err) => {
-        console.error(err)
-        if (!cancelled) setFetchState({ key: resolvedSrc, status: 'error' })
-      })
+        console.error(err);
+        if (!cancelled) setFetchState({ key: resolvedSrc, status: 'error' });
+      });
 
     return () => {
-      cancelled = true
-    }
-  }, [resolvedSrc, animationDataProp])
+      cancelled = true;
+    };
+  }, [resolvedSrc, animationDataProp]);
 
   useEffect(() => {
-    const container = playerRef.current
-    if (!container || !animationData) return
+    const container = playerRef.current;
+    if (!container || !animationData) return;
 
-    container.replaceChildren()
+    container.replaceChildren();
     const anim = lottie.loadAnimation({
       container,
       renderer,
       loop,
       autoplay: false,
-      animationData: animationData as object
-    })
-    animRef.current = anim
+      animationData: animationData as object,
+    });
+    animRef.current = anim;
 
-    if (playing) anim.play()
-    else anim.goToAndStop(0, true)
+    if (playing) anim.play();
+    else anim.goToAndStop(0, true);
 
     return () => {
-      anim.destroy()
-      if (animRef.current === anim) animRef.current = null
-    }
+      anim.destroy();
+      if (animRef.current === anim) animRef.current = null;
+    };
     // playing 은 아래 effect 에서 동기화
     // eslint-disable-next-line react-hooks/exhaustive-deps -- remount only when data/renderer/loop change
-  }, [animationData, renderer, loop])
+  }, [animationData, renderer, loop]);
 
   useEffect(() => {
-    const anim = animRef.current
-    if (!anim) return
+    const anim = animRef.current;
+    if (!anim) return;
     if (!playing) {
-      anim.pause()
-      return
+      anim.pause();
+      return;
     }
     // loop=false 로 끝난 뒤 재생하면 처음부터 다시 재생
-    const atEnd = anim.currentFrame >= anim.totalFrames - 1
-    if (atEnd) anim.goToAndPlay(0, true)
-    else anim.play()
-  }, [playing])
+    const atEnd = anim.currentFrame >= anim.totalFrames - 1;
+    if (atEnd) anim.goToAndPlay(0, true);
+    else anim.play();
+  }, [playing]);
 
-  function setPlaying (next: boolean) {
-    if (!playingControlled) setUserPlaying(next)
-    onPlayingChange?.(next)
+  function setPlaying(next: boolean) {
+    if (!playingControlled) setUserPlaying(next);
+    onPlayingChange?.(next);
   }
 
-  function togglePlaying () {
-    setPlaying(!playing)
+  function togglePlaying() {
+    setPlaying(!playing);
   }
 
-  const rootStyle: CSSProperties | undefined = style
+  const rootStyle: CSSProperties | undefined = style;
   const stageStyle: CSSProperties = {
     ...(width !== undefined ? { width } : null),
-    ...(height !== undefined ? { height } : null)
-  }
+    ...(height !== undefined ? { height } : null),
+  };
 
   return (
     <span
@@ -240,7 +236,7 @@ export function Lottie ({
         controls && 'lottie_controls-on',
         loading && 'is-loading',
         fetchError && 'is-error',
-        className
+        className,
       )}
       style={rootStyle}
       data-playing={playing ? 'true' : 'false'}
@@ -280,7 +276,7 @@ export function Lottie ({
         </span>
       ) : null}
     </span>
-  )
+  );
 }
 
-export default Lottie
+export default Lottie;

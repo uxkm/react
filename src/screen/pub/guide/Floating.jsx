@@ -1,30 +1,31 @@
-'use client'
+'use client';
 
-import { useRef, useState } from 'react' // React
-import { BackTop, Button, Floating, Icon, Space } from '@/comp' // comp
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
-import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
-import { ensurePageModule, wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // 라이브러리/유틸 · page Example Code
-import { floatingApiSections } from '@/screen/pub/data/guide/floatingApiSections' // floating Api Sections
+import { useRef, useState } from 'react'; // React
+import { BackTop, Button, Floating, Icon, Space } from '@/comp'; // comp
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'; // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'; // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout'; // Guide Layout 컴포넌트
+import { ensurePageModule, wrapPageExample } from '@/screen/pub/lib/pageExampleCode'; // 라이브러리/유틸 · page Example Code
+import { floatingApiSections } from '@/screen/pub/data/guide/floatingApiSections'; // floating Api Sections
 
 // 문서 기준 플로팅의 푸터 경계 동작을 확인할 수 있도록 이 가이드에서는 푸터를 표시한다.
-export const meta = { footer: true }
+export const meta = { footer: true };
 
 const DEMO_PARAS = Array.from({ length: 12 }, (_, index) => (
   <p key={index}>
-    스크롤 데모 문단 {index + 1}. Floating 안 BackTop이 target 스크롤 기준으로 나타나는지 확인합니다.
+    스크롤 데모 문단 {index + 1}. Floating 안 BackTop이 target 스크롤 기준으로 나타나는지
+    확인합니다.
   </p>
-))
+));
 
 const DEMO_PARAS_CODE = `Array.from({ length: 12 }, (_, index) => (
   <p key={index}>
     스크롤 데모 문단 {index + 1}. Floating 안 BackTop이 target 스크롤 기준으로 나타나는지 확인합니다.
   </p>
-))`
+))`;
 
 /** 플로팅 보조 액션 버튼(원형 아이콘). iconOnly 는 children 으로 아이콘을 넣는다 */
-function FloatAction ({ label = '문의', icon = 'mail', ...rest }) {
+function FloatAction({ label = '문의', icon = 'mail', ...rest }) {
   return (
     <Button
       size="md"
@@ -37,27 +38,36 @@ function FloatAction ({ label = '문의', icon = 'mail', ...rest }) {
     >
       <Icon name={icon} />
     </Button>
-  )
+  );
 }
 
 /** 내부 스크롤 + Floating(BackTop 포함) — 데모 래퍼 absolute */
-function ScrollFloatingDemo ({
+function ScrollFloatingDemo({
   order,
   direction = 'column',
   showChat = true,
   showHelp = false,
-  visibilityHeight = 120
+  visibilityHeight = 120,
 }) {
-  const scrollerRef = useRef(null)
-  const [visible, setVisible] = useState(false)
+  const scrollerRef = useRef(null);
+  const [visible, setVisible] = useState(false);
 
   return (
     <div className="floating_demo-wrap">
-      <div className="floating_demo-scroll" tabIndex={0} ref={scrollerRef}>
+      <div
+        className="floating_demo-scroll"
+        tabIndex={0}
+        ref={scrollerRef}
+      >
         <div className="floating_demo-content">
           <p>
             우측 Floating 스택(컨테이너). BackTop 표시: <code>{String(visible)}</code>
-            {order ? <> · order=<code>{JSON.stringify(order)}</code></> : null}
+            {order ? (
+              <>
+                {' '}
+                · order=<code>{JSON.stringify(order)}</code>
+              </>
+            ) : null}
           </p>
           {DEMO_PARAS}
         </div>
@@ -72,12 +82,18 @@ function ScrollFloatingDemo ({
       >
         {showHelp && (
           <Floating.Item name="help">
-            <FloatAction label="도움말" icon="info" />
+            <FloatAction
+              label="도움말"
+              icon="info"
+            />
           </Floating.Item>
         )}
         {showChat && (
           <Floating.Item name="chat">
-            <FloatAction label="문의" icon="mail" />
+            <FloatAction
+              label="문의"
+              icon="mail"
+            />
           </Floating.Item>
         )}
         <Floating.Item name="backTop">
@@ -90,25 +106,31 @@ function ScrollFloatingDemo ({
         </Floating.Item>
       </Floating>
     </div>
-  )
+  );
 }
 
 /** 문서(window · DOM 뷰포트) 기준 Floating — 페이지 스크롤·뷰포트 fixed */
-function WindowFloatingDemo () {
-  const [visible, setVisible] = useState(false)
-  const [boundary, setBoundary] = useState('viewport')
+function WindowFloatingDemo() {
+  const [visible, setVisible] = useState(false);
+  const [boundary, setBoundary] = useState('viewport');
 
   return (
-    <div className="floating_demo-window" data-floating-window-demo="">
+    <div
+      className="floating_demo-window"
+      data-floating-window-demo=""
+    >
       <p>
         이 가이드 <strong>문서(페이지)</strong>를 스크롤하면 <strong>뷰포트 우하단</strong>에
-        Floating 스택이 <code>position: fixed</code>로 붙습니다.
-        BackTop <code>target</code>도 생략(<code>window</code> · <code>data-target=&quot;window&quot;</code>)입니다.
-        내부 스크롤 박스가 아닙니다. BackTop 표시: <code>{String(visible)}</code>
+        Floating 스택이 <code>position: fixed</code>로 붙습니다. BackTop <code>target</code>도 생략(
+        <code>window</code> · <code>data-target=&quot;window&quot;</code>)입니다. 내부 스크롤 박스가
+        아닙니다. BackTop 표시: <code>{String(visible)}</code>
       </p>
       <label>
         플로팅 경계
-        <select value={boundary} onChange={(event) => setBoundary(event.target.value)}>
+        <select
+          value={boundary}
+          onChange={(event) => setBoundary(event.target.value)}
+        >
           <option value="viewport">뷰포트에 고정</option>
           <option value="footer">푸터 위에서 멈춤</option>
         </select>
@@ -122,7 +144,10 @@ function WindowFloatingDemo () {
         gap={10}
       >
         <Floating.Item name="chat">
-          <FloatAction label="문의(문서)" icon="mail" />
+          <FloatAction
+            label="문의(문서)"
+            icon="mail"
+          />
         </Floating.Item>
         <Floating.Item name="backTop">
           <BackTop
@@ -133,7 +158,7 @@ function WindowFloatingDemo () {
         </Floating.Item>
       </Floating>
     </div>
-  )
+  );
 }
 
 const FLOAT_ACTION_CODE = `function FloatAction ({ label = '문의', icon = 'mail', ...rest }) {
@@ -150,13 +175,13 @@ const FLOAT_ACTION_CODE = `function FloatAction ({ label = '문의', icon = 'mai
       <Icon name={icon} />
     </Button>
   )
-}`
+}`;
 
 /** 로컬 meta로 전체·항목별 표시를 확인하는 미리보기 */
-function FloatingMetaDemo () {
-  const [showFloating, setShowFloating] = useState(true)
-  const [showChat, setShowChat] = useState(true)
-  const [showExtra, setShowExtra] = useState(false)
+function FloatingMetaDemo() {
+  const [showFloating, setShowFloating] = useState(true);
+  const [showChat, setShowChat] = useState(true);
+  const [showExtra, setShowExtra] = useState(false);
   return (
     <div data-floating-meta-demo="">
       <Space>
@@ -166,38 +191,55 @@ function FloatingMetaDemo () {
       </Space>
       <div className="floating_demo-wrap floating_demo-preview">
         <Floating
-          meta={{ floating: showFloating, floatingItems: { chat: showChat, 'page-help': showExtra } }}
+          meta={{
+            floating: showFloating,
+            floatingItems: { chat: showChat, 'page-help': showExtra },
+          }}
           style={{ position: 'absolute' }}
         >
-          <Floating.Item name="chat"><Button>상담</Button></Floating.Item>
-          <Floating.Item name="page-help"><Button>페이지 도움말</Button></Floating.Item>
-          <Floating.Item name="backTop"><Button>맨 위로</Button></Floating.Item>
+          <Floating.Item name="chat">
+            <Button>상담</Button>
+          </Floating.Item>
+          <Floating.Item name="page-help">
+            <Button>페이지 도움말</Button>
+          </Floating.Item>
+          <Floating.Item name="backTop">
+            <Button>맨 위로</Button>
+          </Floating.Item>
         </Floating>
       </div>
     </div>
-  )
+  );
 }
 
-function FloatingSlotsDemo () {
-  const [showCustom, setShowCustom] = useState(true)
+function FloatingSlotsDemo() {
+  const [showCustom, setShowCustom] = useState(true);
   return (
     <div data-floating-slots-demo="">
       <Button onClick={() => setShowCustom((value) => !value)}>커스텀 영역 표시 전환</Button>
-      <div className="floating_demo-wrap floating_demo-preview" style={{ minHeight: 200 }}>
+      <div
+        className="floating_demo-wrap floating_demo-preview"
+        style={{ minHeight: 200 }}
+      >
         <Floating
           style={{ position: 'absolute' }}
           meta={{ floatingItems: { 'page-tools': showCustom } }}
-          slots={{ 'page-tools': (
-            <div>
-              <strong>페이지 전용 UI</strong>
-              <input aria-label="플로팅 메모" placeholder="직접 입력할 수 있습니다" />
-              <Button size="sm">저장</Button>
-            </div>
-          ) }}
+          slots={{
+            'page-tools': (
+              <div>
+                <strong>페이지 전용 UI</strong>
+                <input
+                  aria-label="플로팅 메모"
+                  placeholder="직접 입력할 수 있습니다"
+                />
+                <Button size="sm">저장</Button>
+              </div>
+            ),
+          }}
         />
       </div>
     </div>
-  )
+  );
 }
 
 const SECTIONS = [
@@ -235,15 +277,15 @@ export default function ExamplePage () {
 // boundary="footer": 푸터 위에서 멈춤
 // boundary="#stop-area": 지정한 영역 위에서 멈춤
 // getPosition={({ defaultStyle }) => ({ ...defaultStyle, right: 48 })}: 직접 좌표 보정`,
-    preview: <FloatingSlotsDemo />
+    preview: <FloatingSlotsDemo />,
   },
   {
     title: '페이지 meta · 전체와 항목별 표시',
     description: (
       <>
         페이지의 <code>meta.floating</code>은 전체, <code>meta.floatingItems</code>는
-        <code>Floating.Item name</code>별 표시를 제어합니다. 생략하면 표시하며,
-        전체가 false면 내부 항목이 true여도 숨깁니다. 아래 미리보기는 Floating의 로컬 meta로 동작을 보여 줍니다.
+        <code>Floating.Item name</code>별 표시를 제어합니다. 생략하면 표시하며, 전체가 false면 내부
+        항목이 true여도 숨깁니다. 아래 미리보기는 Floating의 로컬 meta로 동작을 보여 줍니다.
       </>
     ),
     code: `'use client'
@@ -273,18 +315,19 @@ export default function ExamplePage () {
     </>
   )
 }`,
-    preview: <FloatingMetaDemo />
+    preview: <FloatingMetaDemo />,
   },
   {
     title: '기본 사용',
     description: (
       <>
         <code>Floating</code>은 우측(기본 <code>bottom-right</code>)에 고정되는 액션 스택입니다.
-        <code>Floating.Item</code>에 버튼·<code>BackTop</code> 등을 넣습니다.
-        BackTop이 안에 있으면 고정 기준은 Floating이며, Top 버튼은 스택 <strong>하단</strong>에 둡니다.
+        <code>Floating.Item</code>에 버튼·<code>BackTop</code> 등을 넣습니다. BackTop이 안에 있으면
+        고정 기준은 Floating이며, Top 버튼은 스택 <strong>하단</strong>에 둡니다.
       </>
     ),
-    code: wrapPageExample(`${FLOAT_ACTION_CODE}
+    code: wrapPageExample(
+      `${FLOAT_ACTION_CODE}
 
 <div className="floating_demo-wrap floating_demo-preview">
   <Floating
@@ -301,39 +344,67 @@ export default function ExamplePage () {
       <BackTop label="맨 위로" />
     </Floating.Item>
   </Floating>
-</div>`, {
-      name: 'FloatingExample',
-      reactImports: [],
-      compImports: ['BackTop', 'Button', 'Floating', 'Icon']
-    }),
+</div>`,
+      {
+        name: 'FloatingExample',
+        reactImports: [],
+        compImports: ['BackTop', 'Button', 'Floating', 'Icon'],
+      },
+    ),
     preview: (
       <div className="floating_demo-wrap floating_demo-preview">
-        <Floating placement="bottom-right" offsetBottom={16} offsetRight={16} gap={10} style={{ position: 'absolute' }}>
+        <Floating
+          placement="bottom-right"
+          offsetBottom={16}
+          offsetRight={16}
+          gap={10}
+          style={{ position: 'absolute' }}
+        >
           <Floating.Item name="chat">
             <FloatAction />
           </Floating.Item>
           <Floating.Item name="backTop">
-            <div className="back_top is-visible is-in-floating" data-back-top="" data-in-floating="" style={{ opacity: 1, visibility: 'visible', pointerEvents: 'auto', transform: 'none', position: 'static' }}>
-              <button type="button" className="back_top_btn back_top_primary" aria-label="맨 위로">
-                <Icon name="chevron-down" className="back_top_icon" aria-hidden />
+            <div
+              className="back_top is-visible is-in-floating"
+              data-back-top=""
+              data-in-floating=""
+              style={{
+                opacity: 1,
+                visibility: 'visible',
+                pointerEvents: 'auto',
+                transform: 'none',
+                position: 'static',
+              }}
+            >
+              <button
+                type="button"
+                className="back_top_btn back_top_primary"
+                aria-label="맨 위로"
+              >
+                <Icon
+                  name="chevron-down"
+                  className="back_top_icon"
+                  aria-hidden
+                />
                 <span className="back_top_label">맨 위로</span>
               </button>
             </div>
           </Floating.Item>
         </Floating>
       </div>
-    )
+    ),
   },
   {
     title: '스크롤 · 내부 컨테이너',
     description: (
       <>
-        데모 스크롤 박스 + 래퍼 안 <code>absolute</code> Floating입니다.
-        BackTop <code>target</code>은 내부 스크롤(<code>data-target=&quot;container&quot;</code>).
+        데모 스크롤 박스 + 래퍼 안 <code>absolute</code> Floating입니다. BackTop <code>target</code>
+        은 내부 스크롤(<code>data-target=&quot;container&quot;</code>).
         <code>data-in-floating</code>으로 자체 fixed는 해제되고, 스택 위치 기준은 Floating입니다.
       </>
     ),
-    code: ensurePageModule(`import { useRef, useState } from 'react'
+    code: ensurePageModule(
+      `import { useRef, useState } from 'react'
 import { BackTop, Button, Floating, Icon } from '@/comp'
 
 const DEMO_PARAS = ${DEMO_PARAS_CODE}
@@ -374,19 +445,22 @@ function FloatingScrollExample () {
       </Floating>
     </div>
   )
-}`, 'FloatingScrollExample'),
-    preview: <ScrollFloatingDemo />
+}`,
+      'FloatingScrollExample',
+    ),
+    preview: <ScrollFloatingDemo />,
   },
   {
     title: '스크롤 · 문서(window)',
     description: (
       <>
-        Floating 기본은 <code>position: fixed</code>로 <strong>문서 DOM 뷰포트</strong> 우하단에 붙습니다.
-        BackTop도 <code>target</code> 생략(<code>window</code>)이라 페이지 스크롤에 반응합니다.
-        이 가이드를 스크롤해 확인하세요. 내부 컨테이너 데모와 대비됩니다.
+        Floating 기본은 <code>position: fixed</code>로 <strong>문서 DOM 뷰포트</strong> 우하단에
+        붙습니다. BackTop도 <code>target</code> 생략(<code>window</code>)이라 페이지 스크롤에
+        반응합니다. 이 가이드를 스크롤해 확인하세요. 내부 컨테이너 데모와 대비됩니다.
       </>
     ),
-    code: ensurePageModule(`import { useState } from 'react'
+    code: ensurePageModule(
+      `import { useState } from 'react'
 import { BackTop, Button, Floating, Icon } from '@/comp'
 
 ${FLOAT_ACTION_CODE}
@@ -420,8 +494,10 @@ function FloatingWindowExample () {
       </Floating>
     </div>
   )
-}`, 'FloatingWindowExample'),
-    preview: <WindowFloatingDemo />
+}`,
+      'FloatingWindowExample',
+    ),
+    preview: <WindowFloatingDemo />,
   },
   {
     title: '순서(order)',
@@ -429,8 +505,8 @@ function FloatingWindowExample () {
       <>
         아이템은 있을 수도·없을 수도 있고, 순서도 바뀔 수 있습니다.
         <code>order=&#123;[&apos;backTop&apos;, &apos;chat&apos;]&#125;</code>처럼
-        <code>Floating.Item name</code> 배열로 위→아래 순서를 지정합니다.
-        아이템별 <code>order</code> 숫자(CSS order)도 지원합니다.
+        <code>Floating.Item name</code> 배열로 위→아래 순서를 지정합니다. 아이템별{' '}
+        <code>order</code> 숫자(CSS order)도 지원합니다.
       </>
     ),
     code: ensurePageModule(`import { useRef, useState } from 'react'
@@ -498,7 +574,11 @@ export default function FloatingOrderExample () {
   )
 }`),
     preview: (
-      <Space vertical block size={24}>
+      <Space
+        vertical
+        block
+        size={24}
+      >
         <ScrollFloatingDemo
           showHelp
           order={['chat', 'help', 'backTop']}
@@ -508,18 +588,19 @@ export default function FloatingOrderExample () {
           order={['backTop', 'help', 'chat']}
         />
       </Space>
-    )
+    ),
   },
   {
     title: '방향(direction)',
     description: (
       <>
-        <code>direction</code>으로 스택 방향을 바꿉니다.
-        기본 <code>column</code>은 위→아래(마지막이 하단).
+        <code>direction</code>으로 스택 방향을 바꿉니다. 기본 <code>column</code>은 위→아래(마지막이
+        하단).
         <code>column-reverse</code>면 시각적 상하가 뒤집힙니다.
       </>
     ),
-    code: ensurePageModule(`import { useRef, useState } from 'react'
+    code: ensurePageModule(
+      `import { useRef, useState } from 'react'
 import { BackTop, Button, Floating, Icon } from '@/comp'
 
 const DEMO_PARAS = ${DEMO_PARAS_CODE}
@@ -563,20 +644,22 @@ function FloatingDirectionExample () {
       </Floating>
     </div>
   )
-}`, 'FloatingDirectionExample'),
+}`,
+      'FloatingDirectionExample',
+    ),
     preview: (
       <ScrollFloatingDemo
         direction="column-reverse"
         order={['chat', 'backTop']}
       />
-    )
+    ),
   },
   {
     title: 'HTML 마크업',
     description: (
       <>
-        스타일 계약은 <code>floating</code> · <code>floating_item</code>입니다.
-        BackTop이 안에 있으면 <code>back_top is-in-floating</code>이 붙습니다.
+        스타일 계약은 <code>floating</code> · <code>floating_item</code>입니다. BackTop이 안에
+        있으면 <code>back_top is-in-floating</code>이 붙습니다.
       </>
     ),
     code: `<div class="floating_demo-wrap floating_demo-preview">
@@ -625,28 +708,54 @@ function FloatingDirectionExample () {
           data-direction="column"
           style={{ position: 'absolute', bottom: 16, right: 16, gap: 10 }}
         >
-          <div className="floating_item" data-floating-item="" data-name="chat">
+          <div
+            className="floating_item"
+            data-floating-item=""
+            data-name="chat"
+          >
             <FloatAction />
           </div>
-          <div className="floating_item" data-floating-item="" data-name="backTop">
-            <div className="back_top is-visible is-in-floating" data-back-top="" data-in-floating="" style={{ opacity: 1, visibility: 'visible', pointerEvents: 'auto', transform: 'none' }}>
-              <button type="button" className="back_top_btn back_top_primary" aria-label="맨 위로">
-                <Icon name="chevron-down" className="back_top_icon" aria-hidden />
+          <div
+            className="floating_item"
+            data-floating-item=""
+            data-name="backTop"
+          >
+            <div
+              className="back_top is-visible is-in-floating"
+              data-back-top=""
+              data-in-floating=""
+              style={{
+                opacity: 1,
+                visibility: 'visible',
+                pointerEvents: 'auto',
+                transform: 'none',
+              }}
+            >
+              <button
+                type="button"
+                className="back_top_btn back_top_primary"
+                aria-label="맨 위로"
+              >
+                <Icon
+                  name="chevron-down"
+                  className="back_top_icon"
+                  aria-hidden
+                />
                 <span className="back_top_label">맨 위로</span>
               </button>
             </div>
           </div>
         </div>
       </div>
-    )
-  }
-]
+    ),
+  },
+];
 
 /**
  * Floating 가이드 화면.
  * 우측 플로팅 스택 · BackTop 연동 · order · direction 예시와 API 문서를 모은다.
  */
-export default function FloatingGuide () {
+export default function FloatingGuide() {
   return (
     <GuideLayout
       category="기타"
@@ -667,5 +776,5 @@ export default function FloatingGuide () {
 
       <GuideApiDocs sections={floatingApiSections} />
     </GuideLayout>
-  )
+  );
 }

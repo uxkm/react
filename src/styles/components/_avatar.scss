@@ -18,7 +18,6 @@
   --avatar-badge-size-sm: var(--size-6);
   --avatar-badge-size: var(--size-8);
   --avatar-badge-size-lg: var(--size-10);
-
 }
 
 // Avatar — OOCSS: 구조(.avatar) + 크기(.avatar_*) + 형태(.avatar_square) + 공통 색상(.color_*)
@@ -151,5 +150,14 @@
 }
 
 // 고객사례 프로필의 크기·색·이미지 맞춤은 Avatar에서 관리합니다.
-.avatar.avatar_testimonial { --avatar-size: var(--size-80); width: var(--size-80); height: var(--size-80); background: #f5dfe3; color: #946d73; }
-.avatar_testimonial > :not(.avatar_badge, .icon) { width: 100%; height: 100%; }
+.avatar.avatar_testimonial {
+  --avatar-size: var(--size-80);
+  width: var(--size-80);
+  height: var(--size-80);
+  background: #f5dfe3;
+  color: #946d73;
+}
+.avatar_testimonial > :not(.avatar_badge, .icon) {
+  width: 100%;
+  height: 100%;
+}

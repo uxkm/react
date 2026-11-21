@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { Tab, Tabs } from '@/comp'
+import { useState } from 'react';
+import { Tab, Tabs } from '@/comp';
 
 const categories = [
   {
@@ -11,14 +11,14 @@ const categories = [
       {
         value: 'all',
         label: '전체 과정',
-        content: '직무·리더십·AI 교육과정을 확인하세요.'
+        content: '직무·리더십·AI 교육과정을 확인하세요.',
       },
       {
         value: 'recommended',
         label: '추천 과정',
-        content: '업무 목표에 맞는 추천 교육과정입니다.'
-      }
-    ]
+        content: '업무 목표에 맞는 추천 교육과정입니다.',
+      },
+    ],
   },
   {
     value: 'resources',
@@ -27,28 +27,28 @@ const categories = [
       {
         value: 'all',
         label: '전체 자료',
-        content: '가이드와 리포트를 한곳에서 확인하세요.'
+        content: '가이드와 리포트를 한곳에서 확인하세요.',
       },
       {
         value: 'guides',
         label: '가이드',
-        content: '실무에서 활용할 수 있는 학습 가이드입니다.'
+        content: '실무에서 활용할 수 있는 학습 가이드입니다.',
       },
       {
         value: 'reports',
         label: '리포트',
-        content: '새로운 교육 트렌드를 담은 리포트입니다.'
-      }
-    ]
-  }
-]
+        content: '새로운 교육 트렌드를 담은 리포트입니다.',
+      },
+    ],
+  },
+];
 
 export default function NestedTabsDemo() {
-  const [category, setCategory] = useState('courses')
+  const [category, setCategory] = useState('courses');
   const [selectedTabs, setSelectedTabs] = useState({
     courses: 'all',
-    resources: 'all'
-  })
+    resources: 'all',
+  });
 
   return (
     <Tabs
@@ -75,7 +75,7 @@ export default function NestedTabsDemo() {
             onChange={(value) =>
               setSelectedTabs((previous) => ({
                 ...previous,
-                [group.value]: value
+                [group.value]: value,
               }))
             }
           >
@@ -92,7 +92,7 @@ export default function NestedTabsDemo() {
         </Tab>
       ))}
     </Tabs>
-  )
+  );
 }
 
 export const nestedTabsCode = `'use client'
@@ -191,4 +191,4 @@ export default function NestedTabsDemo() {
     </Tabs>
   )
 }
-`
+`;

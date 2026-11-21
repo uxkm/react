@@ -2,32 +2,32 @@
  * 구분선.
  * 가로·세로, dashed, 가운데/좌우 라벨을 지원한다.
  */
-import { createElement, type HTMLAttributes, type ReactNode } from 'react' // React
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
-import { hasNodes } from '@/utils/react' // has Nodes
+import { createElement, type HTMLAttributes, type ReactNode } from 'react'; // React
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
+import { hasNodes } from '@/utils/react'; // has Nodes
 
 /** 구분선. 가로가 기본, vertical 이면 세로 */
 export interface DividerProps extends Omit<HTMLAttributes<HTMLElement>, 'children'> {
-  tag?: 'auto' | 'hr' | 'div' | 'span'
-  as?: string
-  vertical?: boolean
-  dashed?: boolean
-  plain?: boolean
-  orient?: '' | 'left' | 'right'
+  tag?: 'auto' | 'hr' | 'div' | 'span';
+  as?: string;
+  vertical?: boolean;
+  dashed?: boolean;
+  plain?: boolean;
+  orient?: '' | 'left' | 'right';
   /** orientation 별칭 */
-  orientation?: string
-  label?: string
-  marginY?: string
-  thickness?: string
-  height?: string
-  children?: ReactNode
+  orientation?: string;
+  label?: string;
+  marginY?: string;
+  thickness?: string;
+  height?: string;
+  children?: ReactNode;
 }
 
 /**
  * 구분선.
  * vertical 이면 세로, children 이 있으면 선 가운데 문구.
  */
-export function Divider ({
+export function Divider({
   tag = 'auto',
   as = '',
   vertical = false,
@@ -43,15 +43,15 @@ export function Divider ({
   children,
   ...rest
 }: DividerProps) {
-  const hasLabel = !!label || hasNodes(children)
+  const hasLabel = !!label || hasNodes(children);
 
-  let rootTag: string
-  if (as) rootTag = as
-  else if (tag !== 'auto') rootTag = tag
-  else if (hasLabel) rootTag = 'div'
-  else rootTag = vertical ? 'span' : 'hr'
+  let rootTag: string;
+  if (as) rootTag = as;
+  else if (tag !== 'auto') rootTag = tag;
+  else if (hasLabel) rootTag = 'div';
+  else rootTag = vertical ? 'span' : 'hr';
 
-  const resolvedOrient = orient || orientation || ''
+  const resolvedOrient = orient || orientation || '';
 
   const dividerClass = classNames(
     'divider',
@@ -63,19 +63,19 @@ export function Divider ({
     thickness && 'divider_thickness-' + thickness,
     height && 'divider_height-' + height,
     hasLabel && rootTag !== 'hr' && 'divider_with-label',
-    className
-  )
+    className,
+  );
 
   const props = {
     ...rest,
     className: dividerClass,
-    role: rootTag === 'hr' ? 'separator' : (vertical ? undefined : 'separator'),
+    role: rootTag === 'hr' ? 'separator' : vertical ? undefined : 'separator',
     'aria-orientation': vertical ? 'vertical' : 'horizontal',
-    'aria-hidden': vertical && !hasLabel ? 'true' : undefined
-  }
+    'aria-hidden': vertical && !hasLabel ? 'true' : undefined,
+  };
 
-  if (rootTag === 'hr') return createElement(rootTag, props)
-  return createElement(rootTag, props, hasNodes(children) ? children : label)
+  if (rootTag === 'hr') return createElement(rootTag, props);
+  return createElement(rootTag, props, hasNodes(children) ? children : label);
 }
 
-export default Divider
+export default Divider;

@@ -1,65 +1,65 @@
-'use client'
+'use client';
 
 /**
  * 단계 표시.
  * current 기준으로 진행 단계(title·desc)를 나열한다.
  */
 
-import { useState, type HTMLAttributes, type ReactNode } from 'react' // React
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
-import { hasNodes } from '@/utils/react' // has Nodes
-import { Icon } from './Icon' // Icon 컴포넌트
+import { useState, type HTMLAttributes, type ReactNode } from 'react'; // React
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
+import { hasNodes } from '@/utils/react'; // has Nodes
+import { Icon } from './Icon'; // Icon 컴포넌트
 
 /** 단계 상태 */
-export type StepStatus = 'wait' | 'process' | 'finish' | 'error'
+export type StepStatus = 'wait' | 'process' | 'finish' | 'error';
 
 /** 단계 한 칸 */
 export interface StepItem {
-  key?: string
-  title: ReactNode
-  desc?: ReactNode
-  icon?: ReactNode
+  key?: string;
+  title: ReactNode;
+  desc?: ReactNode;
+  icon?: ReactNode;
   /** 개별 상태. 없으면 current 기준으로 계산 */
-  status?: StepStatus
-  disabled?: boolean
+  status?: StepStatus;
+  disabled?: boolean;
 }
 
 /** 단계 표시가 받는 값. current 는 0부터 */
 export interface StepsProps extends Omit<HTMLAttributes<HTMLOListElement>, 'onChange'> {
-  items: StepItem[]
-  current?: number
+  items: StepItem[];
+  current?: number;
   /** 비제어 초기 단계 */
-  defaultCurrent?: number
-  direction?: 'horizontal' | 'vertical'
-  size?: 'sm' | 'md' | 'lg'
+  defaultCurrent?: number;
+  direction?: 'horizontal' | 'vertical';
+  size?: 'sm' | 'md' | 'lg';
   /** 숫자 대신 작은 점 */
-  dot?: boolean
-  align?: 'start' | 'center'
+  dot?: boolean;
+  align?: 'start' | 'center';
   /** 끝난/대기 단계 클릭으로 current 변경 */
-  navigable?: boolean
-  label?: string
-  onChange?: (index: number) => void
+  navigable?: boolean;
+  label?: string;
+  onChange?: (index: number) => void;
 }
 
-function resolveStatus (index: number, current: number, override?: StepStatus): StepStatus {
-  if (override) return override
-  if (index < current) return 'finish'
-  if (index === current) return 'process'
-  return 'wait'
+function resolveStatus(index: number, current: number, override?: StepStatus): StepStatus {
+  if (override) return override;
+  if (index < current) return 'finish';
+  if (index === current) return 'process';
+  return 'wait';
 }
 
-function statusClass (status: StepStatus) {
-  if (status === 'finish') return 'is-finished'
-  if (status === 'process') return 'is-active'
-  if (status === 'error') return 'is-error'
-  return 'is-wait'
+function statusClass(status: StepStatus) {
+  if (status === 'finish') return 'is-finished';
+  if (status === 'process') return 'is-active';
+  if (status === 'error') return 'is-error';
+  return 'is-wait';
 }
 
 /**
  * 진행 단계.
  * current 보다 앞은 끝난 단계, current 는 지금 단계.
  */
-export function Steps ({
+export function Steps({
   items,
   current: currentProp,
   defaultCurrent = 0,
@@ -73,15 +73,15 @@ export function Steps ({
   onChange,
   ...rest
 }: StepsProps) {
-  const controlled = currentProp !== undefined
-  const [innerCurrent, setInnerCurrent] = useState(defaultCurrent)
-  const current = controlled ? currentProp : innerCurrent
-  const hasIconItem = items.some((item) => hasNodes(item.icon))
+  const controlled = currentProp !== undefined;
+  const [innerCurrent, setInnerCurrent] = useState(defaultCurrent);
+  const current = controlled ? currentProp : innerCurrent;
+  const hasIconItem = items.some((item) => hasNodes(item.icon));
 
   const go = (index: number) => {
-    if (!controlled) setInnerCurrent(index)
-    onChange?.(index)
-  }
+    if (!controlled) setInnerCurrent(index);
+    onChange?.(index);
+  };
 
   return (
     <ol
@@ -95,45 +95,58 @@ export function Steps ({
         align === 'center' && 'steps_align-center',
         navigable && 'steps_navigable',
         hasIconItem && 'steps_icon-style',
-        className
+        className,
       )}
       aria-label={label}
     >
       {items.map((item, index) => {
-        const status = resolveStatus(index, current, item.status)
-        const state = statusClass(status)
-        const isCurrent = status === 'process'
-        const canNavigate =
-          navigable &&
-          !item.disabled &&
-          status !== 'wait'
+        const status = resolveStatus(index, current, item.status);
+        const state = statusClass(status);
+        const isCurrent = status === 'process';
+        const canNavigate = navigable && !item.disabled && status !== 'wait';
 
         const indicatorInner = (() => {
-          if (dot) return null
+          if (dot) return null;
           if (hasNodes(item.icon)) {
-            return <span className="steps_icon">{item.icon}</span>
+            return <span className="steps_icon">{item.icon}</span>;
           }
           if (status === 'finish') {
             return (
-              <Icon name="check" size="100%" className="steps_icon" aria-hidden />
-            )
+              <Icon
+                name="check"
+                size="100%"
+                className="steps_icon"
+                aria-hidden
+              />
+            );
           }
           if (status === 'error') {
             return (
-              <Icon name="close" size="100%" className="steps_icon" aria-hidden />
-            )
+              <Icon
+                name="close"
+                size="100%"
+                className="steps_icon"
+                aria-hidden
+              />
+            );
           }
-          return <span className="steps_index">{index + 1}</span>
-        })()
+          return <span className="steps_index">{index + 1}</span>;
+        })();
 
         const body = (
           <>
             <div className="steps_head">
-              <span className="steps_indicator" aria-hidden="true">
+              <span
+                className="steps_indicator"
+                aria-hidden="true"
+              >
                 {indicatorInner}
               </span>
               {index < items.length - 1 && (
-                <span className="steps_tail" aria-hidden="true" />
+                <span
+                  className="steps_tail"
+                  aria-hidden="true"
+                />
               )}
             </div>
             <div className="steps_content">
@@ -141,7 +154,7 @@ export function Steps ({
               {hasNodes(item.desc) && <p className="steps_desc">{item.desc}</p>}
             </div>
           </>
-        )
+        );
 
         return (
           <li
@@ -149,25 +162,25 @@ export function Steps ({
             key={item.key || index}
             aria-current={isCurrent ? 'step' : undefined}
           >
-            {navigable
-              ? (
-                <button
-                  type="button"
-                  className={classNames('steps_trigger', item.disabled && 'is-disabled')}
-                  disabled={!canNavigate}
-                  onClick={() => {
-                    if (canNavigate) go(index)
-                  }}
-                >
-                  {body}
-                </button>
-                )
-              : body}
+            {navigable ? (
+              <button
+                type="button"
+                className={classNames('steps_trigger', item.disabled && 'is-disabled')}
+                disabled={!canNavigate}
+                onClick={() => {
+                  if (canNavigate) go(index);
+                }}
+              >
+                {body}
+              </button>
+            ) : (
+              body
+            )}
           </li>
-        )
+        );
       })}
     </ol>
-  )
+  );
 }
 
-export default Steps
+export default Steps;

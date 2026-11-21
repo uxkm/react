@@ -122,14 +122,14 @@ $bp-pc: (
   sm: 1024px,
   md: 1440px,
   lg: 1920px,
-  xl: 2580px
+  xl: 2580px,
 );
 
 $bp-mobile: (
   sm: 360px,
   md: 768px,
   lg: 1024px,
-  xl: 1280px
+  xl: 1280px,
 );
 
 $breakpoints: $bp-mobile;

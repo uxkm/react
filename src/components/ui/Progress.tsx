@@ -2,30 +2,30 @@
  * 진행 막대.
  * 0~100% 표시, 줄무늬·애니메이션·indeterminate 지원.
  */
-import type { HTMLAttributes } from 'react' // HTMLAttributes 타입
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
+import type { HTMLAttributes } from 'react'; // HTMLAttributes 타입
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
 
 /** 진행 막대가 받는 값. value 는 0~100 */
 export interface ProgressProps extends Omit<HTMLAttributes<HTMLDivElement>, 'color'> {
-  percent?: number
-  status?: '' | 'success' | 'exception'
-  size?: 'sm' | 'md' | 'lg'
-  color?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'muted' | ''
-  showInfo?: boolean
-  striped?: boolean
-  animated?: boolean
-  indeterminate?: boolean
-  inside?: boolean
-  block?: boolean
-  label?: string
-  ariaLabel?: string
+  percent?: number;
+  status?: '' | 'success' | 'exception';
+  size?: 'sm' | 'md' | 'lg';
+  color?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'muted' | '';
+  showInfo?: boolean;
+  striped?: boolean;
+  animated?: boolean;
+  indeterminate?: boolean;
+  inside?: boolean;
+  block?: boolean;
+  label?: string;
+  ariaLabel?: string;
 }
 
 /**
  * 진행률 막대.
  * percent 0~100, color 색, showInfo 퍼센트 숫자 표시.
  */
-export function Progress ({
+export function Progress({
   percent = 0,
   status = '',
   size = 'md',
@@ -41,15 +41,15 @@ export function Progress ({
   className,
   ...rest
 }: ProgressProps) {
-  let clamped = Number(percent)
-  if (isNaN(clamped) || clamped < 0) clamped = 0
-  else if (clamped > 100) clamped = 100
+  let clamped = Number(percent);
+  if (isNaN(clamped) || clamped < 0) clamped = 0;
+  else if (clamped > 100) clamped = 100;
 
-  let infoText: string
-  if (label) infoText = label
-  else if (status === 'success') infoText = '완료'
-  else if (status === 'exception') infoText = '실패'
-  else infoText = clamped + '%'
+  let infoText: string;
+  if (label) infoText = label;
+  else if (status === 'success') infoText = '완료';
+  else if (status === 'exception') infoText = '실패';
+  else infoText = clamped + '%';
 
   return (
     <div
@@ -65,7 +65,7 @@ export function Progress ({
         indeterminate && 'is-indeterminate',
         status === 'success' && 'is-success',
         status === 'exception' && 'is-exception',
-        className
+        className,
       )}
       role="progressbar"
       aria-valuenow={indeterminate ? undefined : clamped}
@@ -83,7 +83,7 @@ export function Progress ({
       </div>
       {!inside && showInfo && <span className="progress_info">{infoText}</span>}
     </div>
-  )
+  );
 }
 
-export default Progress
+export default Progress;

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 /**
  * 별점 입력.
@@ -9,60 +9,73 @@ import {
   useMemo, // 메모 훅
   useState, // 상태 훅
   type HTMLAttributes, // HTMLAttributes 타입
-  type ReactNode // ReactNode 타입
-} from 'react' // React
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
+  type ReactNode, // ReactNode 타입
+} from 'react'; // React
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
 
-const VALID_SIZES = new Set(['sm', 'md', 'lg'])
+const VALID_SIZES = new Set(['sm', 'md', 'lg']);
 const STAR_PATH =
-  'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'
+  'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z';
 
-function StarGraphic ({ half = false }: { half?: boolean }) {
+function StarGraphic({ half = false }: { half?: boolean }) {
   return (
-    <span className="rate_star-graphic" aria-hidden="true">
-      <svg className="rate_star-icon" viewBox="0 0 24 24" fill="currentColor">
+    <span
+      className="rate_star-graphic"
+      aria-hidden="true"
+    >
+      <svg
+        className="rate_star-icon"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+      >
         <path d={STAR_PATH} />
       </svg>
-      <svg className="rate_star-icon rate_star-icon-filled" viewBox="0 0 24 24" fill="currentColor">
+      <svg
+        className="rate_star-icon rate_star-icon-filled"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+      >
         <path d={STAR_PATH} />
       </svg>
-      {half
-        ? (
-          <span className="rate_star-icon-half">
-            <svg className="rate_star-icon" viewBox="0 0 24 24" fill="currentColor">
-              <path d={STAR_PATH} />
-            </svg>
-          </span>
-          )
-        : null}
+      {half ? (
+        <span className="rate_star-icon-half">
+          <svg
+            className="rate_star-icon"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path d={STAR_PATH} />
+          </svg>
+        </span>
+      ) : null}
     </span>
-  )
+  );
 }
 
 /** 별점이 받는 값 */
 export interface RateProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange' | 'defaultValue'> {
   /** 선택값. null 이면 미선택(제어). undefined 는 비제어 */
-  value?: number | null
-  defaultValue?: number | null
-  count?: number
-  allowHalf?: boolean
-  clearable?: boolean
-  readOnly?: boolean
-  readonly?: boolean
-  disabled?: boolean
-  size?: 'sm' | 'md' | 'lg'
-  legend?: ReactNode
-  name?: string
-  ripple?: boolean
+  value?: number | null;
+  defaultValue?: number | null;
+  count?: number;
+  allowHalf?: boolean;
+  clearable?: boolean;
+  readOnly?: boolean;
+  readonly?: boolean;
+  disabled?: boolean;
+  size?: 'sm' | 'md' | 'lg';
+  legend?: ReactNode;
+  name?: string;
+  ripple?: boolean;
   /** 값 변경. clear 시 null */
-  onChange?: (value: number | null) => void
+  onChange?: (value: number | null) => void;
 }
 
 /**
  * 별점으로 평가·표시한다.
  * 편집 모드는 fieldset + radio, 읽기 전용은 채움 상태만 표시한다.
  */
-export function Rate ({
+export function Rate({
   value,
   defaultValue,
   count = 5,
@@ -79,18 +92,18 @@ export function Rate ({
   onChange,
   ...props
 }: RateProps) {
-  const generatedName = useId()
-  const groupName = name || generatedName
-  const resolvedCount = Number(count) > 0 ? Number(count) : 5
-  const resolvedSize = VALID_SIZES.has(size) ? size : 'md'
-  const isReadonly = readOnly || readonly
-  const controlled = value !== undefined
-  const [innerValue, setInnerValue] = useState<number | null>(defaultValue ?? null)
-  const currentValue = controlled ? value : innerValue
+  const generatedName = useId();
+  const groupName = name || generatedName;
+  const resolvedCount = Number(count) > 0 ? Number(count) : 5;
+  const resolvedSize = VALID_SIZES.has(size) ? size : 'md';
+  const isReadonly = readOnly || readonly;
+  const controlled = value !== undefined;
+  const [innerValue, setInnerValue] = useState<number | null>(defaultValue ?? null);
+  const currentValue = controlled ? value : innerValue;
   const stars = useMemo(
     () => Array.from({ length: resolvedCount }, (_, index) => index + 1),
-    [resolvedCount]
-  )
+    [resolvedCount],
+  );
 
   const classes = classNames(
     'rate',
@@ -99,15 +112,15 @@ export function Rate ({
     allowHalf && 'rate_allow-half',
     clearable && 'rate_clearable',
     isReadonly && 'is-readonly',
-    className
-  )
+    className,
+  );
 
   const update = (next: number | null) => {
-    if (!controlled) setInnerValue(next)
-    onChange?.(next)
-  }
+    if (!controlled) setInnerValue(next);
+    onChange?.(next);
+  };
 
-  const rippleAttr = ripple ? ({ 'data-ripple': 'true' as const }) : {}
+  const rippleAttr = ripple ? { 'data-ripple': 'true' as const } : {};
 
   if (isReadonly) {
     return (
@@ -124,17 +137,20 @@ export function Rate ({
                 ? 'is-filled'
                 : allowHalf && (currentValue ?? 0) >= star - 0.5
                   ? 'is-half'
-                  : ''
+                  : '';
             return (
-              <span key={star} className={classNames('rate_star-readonly', state)}>
+              <span
+                key={star}
+                className={classNames('rate_star-readonly', state)}
+              >
                 <StarGraphic half={state === 'is-half'} />
               </span>
-            )
+            );
           })}
         </div>
         {currentValue != null ? <span className="rate_value">{currentValue}</span> : null}
       </div>
-    )
+    );
   }
 
   return (
@@ -148,21 +164,23 @@ export function Rate ({
       <div className="rate_control">
         <div className="rate_stars">
           {stars.map((star) => (
-            <label key={star} className="rate_star" {...rippleAttr}>
-              {allowHalf
-                ? (
-                  <input
-                    type="radio"
-                    className="rate_input rate_input-half"
-                    name={groupName}
-                    value={star - 0.5}
-                    aria-label={`${star - 0.5}점`}
-                    checked={currentValue === star - 0.5}
-                    disabled={disabled}
-                    onChange={() => update(star - 0.5)}
-                  />
-                  )
-                : null}
+            <label
+              key={star}
+              className="rate_star"
+              {...rippleAttr}
+            >
+              {allowHalf ? (
+                <input
+                  type="radio"
+                  className="rate_input rate_input-half"
+                  name={groupName}
+                  value={star - 0.5}
+                  aria-label={`${star - 0.5}점`}
+                  checked={currentValue === star - 0.5}
+                  disabled={disabled}
+                  onChange={() => update(star - 0.5)}
+                />
+              ) : null}
               <input
                 type="radio"
                 className="rate_input"
@@ -173,69 +191,65 @@ export function Rate ({
                 disabled={disabled}
                 onChange={() => update(star)}
               />
-              {allowHalf
-                ? (
-                  <>
-                    <button
-                      type="button"
-                      className="rate_star-half rate_star-half-left"
-                      tabIndex={-1}
-                      aria-hidden="true"
-                      disabled={disabled}
-                      onClick={(event) => {
-                        event.preventDefault()
-                        event.stopPropagation()
-                        update(star - 0.5)
-                      }}
-                    />
-                    <button
-                      type="button"
-                      className="rate_star-half rate_star-half-right"
-                      tabIndex={-1}
-                      aria-hidden="true"
-                      disabled={disabled}
-                      onClick={(event) => {
-                        event.preventDefault()
-                        event.stopPropagation()
-                        update(star)
-                      }}
-                    />
-                  </>
-                  )
-                : null}
+              {allowHalf ? (
+                <>
+                  <button
+                    type="button"
+                    className="rate_star-half rate_star-half-left"
+                    tabIndex={-1}
+                    aria-hidden="true"
+                    disabled={disabled}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      update(star - 0.5);
+                    }}
+                  />
+                  <button
+                    type="button"
+                    className="rate_star-half rate_star-half-right"
+                    tabIndex={-1}
+                    aria-hidden="true"
+                    disabled={disabled}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      update(star);
+                    }}
+                  />
+                </>
+              ) : null}
               <StarGraphic half={allowHalf} />
               <span className="rate_star-label">{star}점</span>
             </label>
           ))}
         </div>
-        {clearable
-          ? (
-            <button
-              type="button"
-              className="rate_clear"
-              {...rippleAttr}
-              aria-label="별점 초기화"
-              disabled={disabled}
-              title="초기화"
-              onClick={() => update(null)}
+        {clearable ? (
+          <button
+            type="button"
+            className="rate_clear"
+            {...rippleAttr}
+            aria-label="별점 초기화"
+            disabled={disabled}
+            title="초기화"
+            onClick={() => update(null)}
+          >
+            <svg
+              className="rate_clear-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              aria-hidden="true"
             >
-              <svg
-                className="rate_clear-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                aria-hidden="true"
-              >
-                <path d="M18 6L6 18M6 6l12 12" />
-              </svg>
-            </button>
-            )
-          : null}
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+        ) : null}
         {currentValue != null ? <output className="rate_value">{currentValue}점</output> : null}
       </div>
     </fieldset>
-  )
+  );
 }
 
-export default Rate
+export default Rate;

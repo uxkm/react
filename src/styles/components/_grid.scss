@@ -50,14 +50,17 @@
     }
   }
 
-  @each $name, $columns in (
-    "1-1": 1fr 1fr,
-    "2-1": 2fr 1fr,
-    "1-2": 1fr 2fr,
-    "3-1": 3fr 1fr,
-    "1-1-1": repeat(3, 1fr),
-    "1-2-1": 1fr 2fr 1fr
-  ) {
+  @each $name,
+    $columns
+      in (
+        '1-1': 1fr 1fr,
+        '2-1': 2fr 1fr,
+        '1-2': 1fr 2fr,
+        '3-1': 3fr 1fr,
+        '1-1-1': repeat(3, 1fr),
+        '1-2-1': 1fr 2fr 1fr
+      )
+  {
     &_ratio-#{$name} {
       grid-template-columns: $columns;
     }

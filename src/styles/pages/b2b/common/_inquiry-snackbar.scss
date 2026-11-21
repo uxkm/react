@@ -6,5 +6,13 @@
 }
 
 @media (max-width: 1099px) {
-  .page-snackbar.inquiry-snackbar-region { inset-inline: var(--space-12); --snackbar-region-inset-block-end: calc(var(--space-16) + env(safe-area-inset-bottom, 0px)); }
+  .page-snackbar.inquiry-snackbar-region {
+    inset-inline: var(--space-12);
+    --snackbar-region-inset-block-end: calc(var(--space-16) + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+.app-layout[data-hero-active='true'] .inquiry-snackbar {
+  visibility: hidden;
+  pointer-events: none;
 }

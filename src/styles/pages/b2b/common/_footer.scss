@@ -1,3 +1,5 @@
+@use 'foundations/variables' as *;
+
 :root {
   // 고유 규격 (공통 규격은 foundations/tokens 참조)
   --b2b-footer-size-104px: 104px;
@@ -112,7 +114,9 @@
       color: #222;
       font: inherit;
 
-      .btn_label { color: #222; }
+      .btn_label {
+        color: #222;
+      }
     }
 
     .dropdown_menu {
@@ -235,5 +239,32 @@
   p.footer_copyright {
     margin-top: var(--space-8);
     color: #222;
+  }
+}
+
+@media (max-width: ($breakpoint-pc - 1px)) {
+  .footer,
+  .footer_support-inner,
+  .footer_inner {
+    min-width: 0;
+  }
+  .footer_support-inner,
+  .footer_inner {
+    padding-inline: var(--space-16);
+  }
+  .footer_tools {
+    flex-wrap: wrap;
+    margin-left: 0;
+    gap: var(--space-16);
+  }
+  .footer_customer {
+    gap: var(--space-8);
+  }
+  .footer ul.footer_certifications {
+    padding-inline: 0;
+    gap: var(--space-24);
+  }
+  .footer_company {
+    overflow-wrap: anywhere;
   }
 }

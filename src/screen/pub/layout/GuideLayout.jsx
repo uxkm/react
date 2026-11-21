@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 /**
  * 퍼블리싱 가이드 공통 레이아웃 (Shell + 본문 통합).
@@ -8,18 +8,16 @@
  *
  * 헤더 숨김: export const meta = { header: false } (PageLayoutVisibility)
  */
-import { Link } from '@/lib/router' // 앱 라우터 Link
-import { Container } from '@/comp/ui/Container' // 본문 폭·패딩 컨테이너
-import { Header } from '@/comp/layout/Header' // 상단 헤더 슬롯
-import { LayoutSlot } from '@/comp/layout/LayoutSlot' // Layout Slot 컴포넌트
-import { hasNodes } from '@/utils/react' // children 유무 판별
-import { classNames } from '@/utils/style/classNames' // className 결합
-import { GUIDE_SECTION, useGuideTitle } from '@/screen/pub/hooks/useGuideTitle' // 탭 섹션·가이드 타이틀
-import { GuideMenu } from '@/screen/pub/widgets/navigation/GuideMenu' // 좌측 가이드 네비
+import { Link } from '@/lib/router'; // 앱 라우터 Link
+import { Container } from '@/comp/ui/Container'; // 본문 폭·패딩 컨테이너
+import { Header } from '@/comp/layout/Header'; // 상단 헤더 슬롯
+import { LayoutSlot } from '@/comp/layout/LayoutSlot'; // Layout Slot 컴포넌트
+import { hasNodes } from '@/utils/react'; // children 유무 판별
+import { classNames } from '@/utils/style/classNames'; // className 결합
+import { GUIDE_SECTION, useGuideTitle } from '@/screen/pub/hooks/useGuideTitle'; // 탭 섹션·가이드 타이틀
+import { GuideMenu } from '@/screen/pub/widgets/navigation/GuideMenu'; // 좌측 가이드 네비
 
-const DEFAULT_GUIDE_BRAND = (
-  <span className="app-header_brand">퍼블리싱 가이드</span>
-)
+const DEFAULT_GUIDE_BRAND = <span className="app-header_brand">퍼블리싱 가이드</span>;
 
 /**
  * 가이드·데모 화면 공통 레이아웃
@@ -32,7 +30,7 @@ const DEFAULT_GUIDE_BRAND = (
  * @example 좌측 메뉴 숨김
  * <GuideLayout showMenu={false} title="…" />
  */
-export function GuideLayout ({
+export function GuideLayout({
   category = '',
   title,
   description = '',
@@ -59,31 +57,40 @@ export function GuideLayout ({
   backLabel = '← 목록으로',
   /** 좌측 GuideMenu 표시. 기본 true */
   showMenu = true,
-  className
+  className,
 }) {
-  useGuideTitle(documentTitle || title, { section: documentSection })
+  useGuideTitle(documentTitle || title, { section: documentSection });
 
-  const defaultBack = showBack
-    ? <Link className="app-header_back-link" to={backTo}>{backLabel}</Link>
-    : null
-  const backNode = headerBack !== undefined ? headerBack : defaultBack
-  const brandNode = headerBrand !== undefined ? headerBrand : DEFAULT_GUIDE_BRAND
+  const defaultBack = showBack ? (
+    <Link
+      className="app-header_back-link"
+      to={backTo}
+    >
+      {backLabel}
+    </Link>
+  ) : null;
+  const backNode = headerBack !== undefined ? headerBack : defaultBack;
+  const brandNode = headerBrand !== undefined ? headerBrand : DEFAULT_GUIDE_BRAND;
 
-  const headerControl = hasNodes(header)
-    ? (
-      <Header {...headerAppearance} layout={headerLayout} hideNavOnScroll={hideNavOnScroll}>{header}</Header>
-      )
-    : (
-      <Header
-        {...headerAppearance}
-        layout={headerLayout}
-        hideNavOnScroll={hideNavOnScroll}
-        back={backNode}
-        brand={brandNode}
-        nav={headerNav}
-        actions={headerActions}
-      />
-      )
+  const headerControl = hasNodes(header) ? (
+    <Header
+      {...headerAppearance}
+      layout={headerLayout}
+      hideNavOnScroll={hideNavOnScroll}
+    >
+      {header}
+    </Header>
+  ) : (
+    <Header
+      {...headerAppearance}
+      layout={headerLayout}
+      hideNavOnScroll={hideNavOnScroll}
+      back={backNode}
+      brand={brandNode}
+      nav={headerNav}
+      actions={headerActions}
+    />
+  );
 
   const page = (
     <div className="demo-page">
@@ -97,22 +104,25 @@ export function GuideLayout ({
         <section className="demo-page_body">{children}</section>
       </Container>
     </div>
-  )
+  );
 
   return (
     <>
-      <LayoutSlot name="banner" hidden />
+      <LayoutSlot
+        name="banner"
+        hidden
+      />
       {headerControl}
-      {showMenu
-        ? (
-          <div className={classNames('comp-guide', className)}>
-            <GuideMenu />
-            <div className="comp-guide_main">{page}</div>
-          </div>
-          )
-        : page}
+      {showMenu ? (
+        <div className={classNames('comp-guide', className)}>
+          <GuideMenu />
+          <div className="comp-guide_main">{page}</div>
+        </div>
+      ) : (
+        page
+      )}
     </>
-  )
+  );
 }
 
-export default GuideLayout
+export default GuideLayout;

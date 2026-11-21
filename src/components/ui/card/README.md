@@ -8,19 +8,19 @@
 
 `Card`의 `type`과 `card`로 타입별 카드를 호출합니다. TypeScript가 각 타입에 필요한 데이터를 검사합니다. 타입별 컴포넌트를 직접 import해 사용해도 됩니다.
 
-| type | 모듈 | 구성 |
-| --- | --- | --- |
-| `course` | `CourseCard` | 썸네일·제목·분류, 세로·가로 배치, 배지·정보·푸터 슬롯, 독립 액션 |
-| `promotion` | `PromotionCard` | 큰 제목, 설명, 이미지, 하단 CTA |
-| `image` | `ImageCard` | 안내 문구, 제목, 이미지, 카드 전체 링크, CTA |
-| `content` | `ContentCard` | 썸네일 배경, 카테고리, 날짜, 제목, 선택 설명·키워드, 카드 전체 링크 |
-| `overlay` | `OverlayCard` | 이미지 위 분류·날짜·제목·키워드, 세로·가로 형식 |
-| `news` | `NewsCard` | 이미지 없는 분류·날짜·제목·설명·키워드 |
-| `webzine` | `WebzineCard` | 좌측·우측 썸네일과 분류·날짜·제목·설명·키워드 |
-| `feature` | `FeatureCard` | 이미지·본문 분할 소개, 선택 톤·이미지 위치, CTA·actions |
-| `quick-link` | `QuickLinkCard` | 제목, 아이콘, 카드 전체 링크 |
-| `testimonial` | `TestimonialCard` | 업종, 인용문, 작성자, 프로필, 선택 테두리 |
-| `callout` | `CalloutCard` | 가운데 정렬 제목, 설명, 버튼·링크 영역 |
+| type          | 모듈              | 구성                                                                |
+| ------------- | ----------------- | ------------------------------------------------------------------- |
+| `course`      | `CourseCard`      | 썸네일·제목·분류, 세로·가로 배치, 배지·정보·푸터 슬롯, 독립 액션    |
+| `promotion`   | `PromotionCard`   | 큰 제목, 설명, 이미지, 하단 CTA                                     |
+| `image`       | `ImageCard`       | 안내 문구, 제목, 이미지, 카드 전체 링크, CTA                        |
+| `content`     | `ContentCard`     | 썸네일 배경, 카테고리, 날짜, 제목, 선택 설명·키워드, 카드 전체 링크 |
+| `overlay`     | `OverlayCard`     | 이미지 위 분류·날짜·제목·키워드, 세로·가로 형식                     |
+| `news`        | `NewsCard`        | 이미지 없는 분류·날짜·제목·설명·키워드                              |
+| `webzine`     | `WebzineCard`     | 좌측·우측 썸네일과 분류·날짜·제목·설명·키워드                       |
+| `feature`     | `FeatureCard`     | 이미지·본문 분할 소개, 선택 톤·이미지 위치, CTA·actions             |
+| `quick-link`  | `QuickLinkCard`   | 제목, 아이콘, 카드 전체 링크                                        |
+| `testimonial` | `TestimonialCard` | 업종, 인용문, 작성자, 프로필, 선택 테두리                           |
+| `callout`     | `CalloutCard`     | 가운데 정렬 제목, 설명, 버튼·링크 영역                              |
 
 ```tsx
 import { Card } from '@/comp'
@@ -71,7 +71,17 @@ import { Icon } from '@/comp/ui/Icon'
 <Card
   type="image"
   card={cardData}
-  slots={{ image: <div style={{ width: '100%', height: '100%', background: 'url(/images/pages/main/my-image.png) center / contain no-repeat' }} /> }}
+  slots={{
+    image: (
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          background: 'url(/images/pages/main/my-image.png) center / contain no-repeat',
+        }}
+      />
+    ),
+  }}
   imageProps={{ width: 380, height: 300, fit: 'contain' }}
 />
 ```
@@ -125,7 +135,7 @@ import { Icon } from '@/comp/ui/Icon'
     category: 'HR 트렌드',
     title: '콘텐츠 제목',
     description: '콘텐츠 설명',
-    href: '/b2b/insight/on/list'
+    href: '/b2b/insight/on/list',
   }}
   image={{ src: '/images/@dummy/hr-trend.png', fit: '120% auto' }}
   imageProps={{ fit: 'cover', position: 'center' }}
@@ -147,7 +157,7 @@ import { Icon } from '@/comp/ui/Icon'
   card={{
     category: '금융',
     quote: '임원이 먼저 배우니\n전사 AI 전환에\n속도가 붙었습니다',
-    author: 'A금융 인재개발팀 김OO 팀장'
+    author: 'A금융 인재개발팀 김OO 팀장',
   }}
   shadow={false}
 />
@@ -177,7 +187,15 @@ import { Icon } from '@/comp/ui/Icon'
 <Card
   type="callout"
   card={{ title: '무엇이든 물어보세요', description: '조직에 꼭 맞는 솔루션을 제안해 드립니다.' }}
-  actions={<Button tag="a" href="/b2b/contact/education" round>기업교육문의</Button>}
+  actions={
+    <Button
+      tag="a"
+      href="/b2b/contact/education"
+      round
+    >
+      기업교육문의
+    </Button>
+  }
 />
 ```
 
@@ -190,18 +208,44 @@ import { Icon } from '@/comp/ui/Icon'
 [멀티캠퍼스 모바일](https://m.multicampus.com/)의 공개 화면 템플릿에서 `wrap_st_thumb`·`st_label`·`st_title`·`st_schedule`·`st_tag`·후기 영역과 Swiper 구성을 확인했습니다. 화면의 실제 시각 배치는 브라우저 연결 제한으로 확인하지 못했습니다. 해당 정보 구조를 참고해 `course`를 추가했고 기존 콘텐츠·바로가기·안내 유형도 재사용합니다. 가이드 문구·가격·평점·진도는 예시 데이터입니다.
 
 ```tsx
-import { Button, Card, Progress, Tag, TagGroup } from '@/comp'
+import { Button, Card, Progress, Tag, TagGroup } from '@/comp';
 
-<Card type="course" layout="horizontal"
+<Card
+  type="course"
+  layout="horizontal"
   card={{ id: 'learning', title: '업무에 활용하는 AI', href: '/learning', category: 'AI' }}
   image={{ src: '/images/@dummy/hr-trend.png', fit: '120% auto' }}
   slots={{
-    badges: <TagGroup tight><Tag size="sm">온라인</Tag><Tag size="sm" color="success">수강 중</Tag></TagGroup>,
-    meta: <Progress percent={60} showInfo ariaLabel="AI 과정 학습 진도" />,
-    footer: <span>10차시 중 6차시 완료</span>
+    badges: (
+      <TagGroup tight>
+        <Tag size="sm">온라인</Tag>
+        <Tag
+          size="sm"
+          color="success"
+        >
+          수강 중
+        </Tag>
+      </TagGroup>
+    ),
+    meta: (
+      <Progress
+        percent={60}
+        showInfo
+        ariaLabel="AI 과정 학습 진도"
+      />
+    ),
+    footer: <span>10차시 중 6차시 완료</span>,
   }}
-  actions={<Button tag="a" href="/learning/resume" size="sm">이어서 학습</Button>}
-/>
+  actions={
+    <Button
+      tag="a"
+      href="/learning/resume"
+      size="sm"
+    >
+      이어서 학습
+    </Button>
+  }
+/>;
 ```
 
 기본 `layout="vertical"`은 추천 과정, `horizontal`은 목록·나의 학습에 사용합니다. Card는 배치만 담당하고 배지는 Tag·TagGroup, 진도는 Progress, 찜·신청·학습은 Button·Icon으로 구성합니다. `slots.badges`·`slots.meta`·`slots.footer`와 `actions`는 상세 링크의 형제이므로 독립적인 조작 요소를 전달할 수 있습니다. `slots.image`는 상세 링크 안에 있어 버튼·링크를 넣지 않습니다. 이미지 숨김·교체는 기존 `image`·`imageProps`·`slots.image` 계약을 따릅니다. 빈 슬롯은 렌더하지 않습니다.
@@ -220,15 +264,15 @@ import { Button, Card, Progress, Tag, TagGroup } from '@/comp'
 
 별도 타입을 늘리지 않고 `course`에 아래 슬롯을 추가했습니다.
 
-| 목록 정보 | 조합 |
-| --- | --- |
-| 학습유형·난이도·교재 | `slots.labels` + 읽기 전용 TagGroup·Tag, 제목 앞 표시 |
-| 복수 교육일정·상시 학습기간 | `slots.schedule` + 목록·time |
-| 평점·후기 수 | `slots.reviews` + Icon·텍스트, 0도 그대로 표시 |
-| 관련 키워드 | `slots.keywords` + TagGroup·Tag |
-| 교육비 | 기존 `slots.footer` + 금액 텍스트 |
-| 맛보기·찜·신청·마감 | 기존 `actions` + Button·Icon·Modal |
-| 목록·갤러리 전환 | 기존 `layout="horizontal"`·`vertical` + CardDeck |
+| 목록 정보                   | 조합                                                  |
+| --------------------------- | ----------------------------------------------------- |
+| 학습유형·난이도·교재        | `slots.labels` + 읽기 전용 TagGroup·Tag, 제목 앞 표시 |
+| 복수 교육일정·상시 학습기간 | `slots.schedule` + 목록·time                          |
+| 평점·후기 수                | `slots.reviews` + Icon·텍스트, 0도 그대로 표시        |
+| 관련 키워드                 | `slots.keywords` + TagGroup·Tag                       |
+| 교육비                      | 기존 `slots.footer` + 금액 텍스트                     |
+| 맛보기·찜·신청·마감         | 기존 `actions` + Button·Icon·Modal                    |
+| 목록·갤러리 전환            | 기존 `layout="horizontal"`·`vertical` + CardDeck      |
 
 `labels`는 상세 링크 안에 있어 링크·버튼·체크형 Tag를 넣지 않습니다. 조작 가능한 배지는 기존 `slots.badges`에 전달합니다. 일정·후기·키워드는 링크 밖에 배치하며, 미지정 시 빈 영역을 만들지 않습니다. 각 슬롯은 ReactNode이므로 화면에서 데이터 형식과 표현을 정합니다. `src/screen/pub/data/guide/courseCatalogExample.jsx`에 동작 예제가 있습니다.
 
@@ -246,18 +290,18 @@ import { Button, Card, Progress, Tag, TagGroup } from '@/comp'
 
 분석 기준은 [네이버 기업 사이트 메인](https://www.navercorp.com/main)의 공개 HTML·CSS입니다. [We the Navigators 제목 이미지](https://www.navercorp.com/img/pc/main-news-title.png)는 섹션 제목이며 카드 자체가 아닙니다. 소스의 이미지·일반 텍스트·이미지 없는 상태를 구분했습니다. 원본 브라우저 화면은 직접 확인하지 못했습니다. 가이드는 구조를 참고한 샘플 문구·날짜·수치를 사용합니다.
 
-| 원본 영역·패턴 | 확인한 정보와 동작 | 공통 유형·조합 |
-| --- | --- | --- |
-| We the Navigators 스토리 | 배경 위 분류·날짜·제목·키워드, 하단 어두운 오버레이 | `overlay`, 기본 portrait |
-| 이미지 없는 보도자료 | 이미지 마크업 없이 분류·날짜·제목, 회색 배경 | `news`, 썸네일·대체 아이콘 없음 |
-| 이미지가 있는 보도자료 | 상단 썸네일과 하단 분류·날짜·제목 | 기존 `content`에 선택 date·keywords·target 추가 |
-| 이벤트 피드 배너 | 이미지·날짜·제목, 선택 분류, 외부 이동 | `overlay` landscape + target |
-| 상단 헤드라인 | 넓은 비주얼 위 분류·날짜·제목, 슬라이드 탐색 | `overlay` landscape + Carousel·CarouselSlide |
-| 중간 캠페인 배너 | 우측 이미지, 좌측 제목·설명·CTA | `feature` + imagePosition=end, 필요 시 Carousel |
-| 서비스·기술·지속가능성 | 이미지와 본문이 분할된 펼침 패널, 상세 이동 | `feature` + Accordion, 버튼과 링크 분리 |
-| 파트너·개발자 지원 | 제목과 우하단 이동 아이콘, 새 창 링크 타일, 탭 전환 | 기존 `quick-link` surface + Icon·Button presentation·Tabs·CardDeck |
-| 주가·짧은 공지 | 수치·증감과 간단한 소식 | 기본 Card·Stat, news와 Carousel 조합 |
-| 헤더의 내비게이션 미리보기 | 썸네일·분류·제목과 요약 링크 | 기존 content 또는 CardHeader·Body·Footer 조합 |
+| 원본 영역·패턴             | 확인한 정보와 동작                                  | 공통 유형·조합                                                     |
+| -------------------------- | --------------------------------------------------- | ------------------------------------------------------------------ |
+| We the Navigators 스토리   | 배경 위 분류·날짜·제목·키워드, 하단 어두운 오버레이 | `overlay`, 기본 portrait                                           |
+| 이미지 없는 보도자료       | 이미지 마크업 없이 분류·날짜·제목, 회색 배경        | `news`, 썸네일·대체 아이콘 없음                                    |
+| 이미지가 있는 보도자료     | 상단 썸네일과 하단 분류·날짜·제목                   | 기존 `content`에 선택 date·keywords·target 추가                    |
+| 이벤트 피드 배너           | 이미지·날짜·제목, 선택 분류, 외부 이동              | `overlay` landscape + target                                       |
+| 상단 헤드라인              | 넓은 비주얼 위 분류·날짜·제목, 슬라이드 탐색        | `overlay` landscape + Carousel·CarouselSlide                       |
+| 중간 캠페인 배너           | 우측 이미지, 좌측 제목·설명·CTA                     | `feature` + imagePosition=end, 필요 시 Carousel                    |
+| 서비스·기술·지속가능성     | 이미지와 본문이 분할된 펼침 패널, 상세 이동         | `feature` + Accordion, 버튼과 링크 분리                            |
+| 파트너·개발자 지원         | 제목과 우하단 이동 아이콘, 새 창 링크 타일, 탭 전환 | 기존 `quick-link` surface + Icon·Button presentation·Tabs·CardDeck |
+| 주가·짧은 공지             | 수치·증감과 간단한 소식                             | 기본 Card·Stat, news와 Carousel 조합                               |
+| 헤더의 내비게이션 미리보기 | 썸네일·분류·제목과 요약 링크                        | 기존 content 또는 CardHeader·Body·Footer 조합                      |
 
 스토리·뉴스 피드의 원본은 큰 화면에서 Masonry, 작은 화면에서 Swiper 배치를 사용합니다. 카드 자체와 배치·동작을 분리해 가이드에는 혼합 그리드와 별도의 캐러셀 예제를 제공합니다. 순서·여러 카드의 배치와 상태는 호출 화면이 담당합니다.
 
@@ -285,7 +329,7 @@ import { Button, Card, Progress, Tag, TagGroup } from '@/comp'
     description: '새롭게 달라진 서비스를 소개합니다.',
     keywords: ['서비스', '업데이트'],
     href: '/news/detail',
-    image: '/images/@dummy/naver-tech.png'
+    image: '/images/@dummy/naver-tech.png',
   }}
 />
 // 우측 썸네일은 같은 데이터에 imagePosition="end"를 지정합니다.

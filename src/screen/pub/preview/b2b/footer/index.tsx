@@ -1,23 +1,26 @@
-'use client'
+'use client';
 
-import { Page } from '@/comp' // comp
-import { useMainDesignType } from '@/widgets/b2b/main/useMainDesignType'
-import Footer from '@/widgets/b2b/common/Footer' // Footer 컴포넌트
+import { Page } from '@/comp'; // comp
+import { useMainDesignType } from '@/widgets/b2b/main/useMainDesignType';
+import Footer from '@/widgets/b2b/common/Footer'; // Footer 컴포넌트
 
-export const pageTitle = "Footer"
-export const meta = { banner: false, header: false, footer: false, floating: false }
+export const pageTitle = 'Footer';
+export const meta = { banner: false, header: false, footer: false, floating: false };
 
 /** 공통 레이아웃 없이 푸터 위젯만 표시합니다. */
-export default function B2bCommonFooterPage () {
-  const designType = useMainDesignType()
+export default function B2bCommonFooterPage() {
+  const designType = useMainDesignType();
   return (
     <>
-      <Page page="common-footer" title={pageTitle} className="project-content widget-preview" />
+      <Page
+        page="common-footer"
+        title={pageTitle}
+        className="project-content widget-preview"
+      />
       <h1 className="visually-hidden">{pageTitle}</h1>
       <div className="footer-preview">
         <Footer designType={designType} />
-
       </div>
     </>
-  )
+  );
 }

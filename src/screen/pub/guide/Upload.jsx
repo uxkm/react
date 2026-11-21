@@ -1,53 +1,59 @@
-'use client'
+'use client';
 
-import { useState } from 'react' // 상태 훅
-import { Button, Upload } from '@/comp' // comp
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
-import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
-import { uploadApiSections } from '@/screen/pub/data/guide/uploadApiSections' // upload Api Sections
+import { useState } from 'react'; // 상태 훅
+import { Button, Upload } from '@/comp'; // comp
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'; // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'; // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout'; // Guide Layout 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'; // wrap Page Example
+import { uploadApiSections } from '@/screen/pub/data/guide/uploadApiSections'; // upload Api Sections
 
-const SAMPLE = '/images/icon/ico_avatar.svg'
+const SAMPLE = '/images/icon/ico_avatar.svg';
 const sampleFile = {
   name: '제품소개서.pdf',
   size: 1843200,
   type: 'application/pdf',
-  status: 'done'
-}
+  status: 'done',
+};
 const sampleImage = (name) => ({
   name,
   size: 245760,
   type: 'image/svg+xml',
   status: 'done',
-  url: SAMPLE
-})
+  url: SAMPLE,
+});
 
-function AttachmentForm () {
-  const [files, setFiles] = useState([])
-  const [lastAction, setLastAction] = useState('—')
+function AttachmentForm() {
+  const [files, setFiles] = useState([]);
+  const [lastAction, setLastAction] = useState('—');
   return (
     <form
       className="form form_vertical form_fit form_compact"
       onSubmit={(event) => event.preventDefault()}
     >
       <div className="form_field">
-        <p className="form_field-label" id="attachments-label">
+        <p
+          className="form_field-label"
+          id="attachments-label"
+        >
           첨부 파일
           <span className="form_field-required">
             <span aria-hidden="true">*</span>
             <span className="form_field-required-text">필수 항목</span>
           </span>
         </p>
-        <div role="group" aria-labelledby="attachments-label">
+        <div
+          role="group"
+          aria-labelledby="attachments-label"
+        >
           <Upload
             files={files}
             onChange={setFiles}
             onSelect={(selected) => {
-              setLastAction(`추가 ${selected.length}개`)
+              setLastAction(`추가 ${selected.length}개`);
             }}
             onRemove={(item) => {
-              setLastAction(`삭제 ${item.name}`)
+              setLastAction(`삭제 ${item.name}`);
             }}
             multiple
             accept=".pdf,.doc,.docx"
@@ -59,19 +65,23 @@ function AttachmentForm () {
         <p className="upload_hint">
           최근 액션: <code>{lastAction}</code>
         </p>
-        {!files.length
-          ? (
-            <p className="form_field-error" role="alert">
-              파일을 한 개 이상 첨부해 주세요.
-            </p>
-            )
-          : null}
+        {!files.length ? (
+          <p
+            className="form_field-error"
+            role="alert"
+          >
+            파일을 한 개 이상 첨부해 주세요.
+          </p>
+        ) : null}
       </div>
       <div className="form_actions">
-        <Button type="submit" label="제출" />
+        <Button
+          type="submit"
+          label="제출"
+        />
       </div>
     </form>
-  )
+  );
 }
 
 const SECTIONS = [
@@ -79,32 +89,36 @@ const SECTIONS = [
     title: '버튼 업로드',
     description: (
       <>
-        기본은 <code>upload_trigger</code> + 숨김 file input입니다. <code>trigger</code>로 버튼을 교체할 수 있습니다.
+        기본은 <code>upload_trigger</code> + 숨김 file input입니다. <code>trigger</code>로 버튼을
+        교체할 수 있습니다.
       </>
     ),
-    code: wrapPageExample(`<Upload buttonLabel="파일 선택" />
+    code: wrapPageExample(
+      `<Upload buttonLabel="파일 선택" />
 <Upload
   hint="PNG, JPG · 최대 5MB"
   trigger={<span className="btn btn_outline color_primary"><span className="btn_label">업로드</span></span>}
 />
-<Upload disabled buttonLabel="비활성" />`, {
-  name: 'UploadUploadExample',
-  reactImports: [],
-  compImports: ['Upload']
-}),
+<Upload disabled buttonLabel="비활성" />`,
+      {
+        name: 'UploadUploadExample',
+        reactImports: [],
+        compImports: ['Upload'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
         <Upload buttonLabel="파일 선택" />
         <Upload
           hint="PNG, JPG · 최대 5MB"
-          trigger={(
+          trigger={
             <span className="btn btn_outline color_primary">
               <span className="btn_label">업로드</span>
             </span>
-          )}
+          }
         />
         <Upload
-          trigger={(
+          trigger={
             <>
               <span className="btn btn_filled color_primary btn_sm">
                 <span className="btn_label">Small</span>
@@ -113,20 +127,25 @@ const SECTIONS = [
                 <span className="btn_label">Large</span>
               </span>
             </>
-          )}
+          }
         />
-        <Upload disabled buttonLabel="비활성" />
+        <Upload
+          disabled
+          buttonLabel="비활성"
+        />
       </div>
-    )
+    ),
   },
   {
     title: '드래그 앤 드롭',
     description: (
       <>
-        <code>variant=&quot;drag&quot;</code>로 드롭존을 사용합니다. accept · maxSize · maxFiles로 검증합니다.
+        <code>variant=&quot;drag&quot;</code>로 드롭존을 사용합니다. accept · maxSize · maxFiles로
+        검증합니다.
       </>
     ),
-    code: wrapPageExample(`<Upload
+    code: wrapPageExample(
+      `<Upload
   variant="drag"
   fit
   multiple
@@ -135,11 +154,13 @@ const SECTIONS = [
   maxFiles={3}
   description="PNG, JPG, PDF · 파일당 최대 5MB"
   hint="최대 3개까지 첨부할 수 있습니다."
-/>`, {
-  name: 'UploadExample2',
-  reactImports: [],
-  compImports: ['Upload']
-}),
+/>`,
+      {
+        name: 'UploadExample2',
+        reactImports: [],
+        compImports: ['Upload'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
         <Upload
@@ -160,16 +181,18 @@ const SECTIONS = [
           description="is-dragover 상태"
         />
       </div>
-    )
+    ),
   },
   {
     title: '파일 목록',
     description: (
       <>
-        <code>variant=&quot;list&quot;</code>와 <code>defaultFiles</code>로 진행·완료·오류 상태를 표시합니다.
+        <code>variant=&quot;list&quot;</code>와 <code>defaultFiles</code>로 진행·완료·오류 상태를
+        표시합니다.
       </>
     ),
-    code: wrapPageExample(`<Upload
+    code: wrapPageExample(
+      `<Upload
   variant="list"
   fit
   multiple
@@ -178,11 +201,13 @@ const SECTIONS = [
     { name: '제품소개서.pdf', size: 1843200, status: 'done' },
     { name: '대용량_영상.mp4', size: 12582912, status: 'error', error: '…' }
   ]}
-/>`, {
-  name: 'UploadExample3',
-  reactImports: [],
-  compImports: ['Upload']
-}),
+/>`,
+      {
+        name: 'UploadExample3',
+        reactImports: [],
+        compImports: ['Upload'],
+      },
+    ),
     preview: (
       <Upload
         variant="list"
@@ -193,18 +218,18 @@ const SECTIONS = [
             name: '프로젝트_제안서_v2.pdf',
             size: 2516582,
             status: 'uploading',
-            progress: 60
+            progress: 60,
           },
           sampleFile,
           {
             name: '대용량_영상.mp4',
             size: 12582912,
             status: 'error',
-            error: '파일 크기가 10MB를 초과합니다.'
-          }
+            error: '파일 크기가 10MB를 초과합니다.',
+          },
         ]}
       />
-    )
+    ),
   },
   {
     title: '사진 카드',
@@ -213,18 +238,21 @@ const SECTIONS = [
         <code>variant=&quot;picture-card&quot;</code>로 이미지 카드형 첨부를 구성합니다.
       </>
     ),
-    code: wrapPageExample(`<Upload
+    code: wrapPageExample(
+      `<Upload
   variant="picture-card"
   multiple
   accept="image/*"
   maxFiles={5}
   buttonLabel="업로드"
   defaultFiles={[…]}
-/>`, {
-  name: 'UploadExample4',
-  reactImports: [],
-  compImports: ['Upload']
-}),
+/>`,
+      {
+        name: 'UploadExample4',
+        reactImports: [],
+        compImports: ['Upload'],
+      },
+    ),
     preview: (
       <Upload
         variant="picture-card"
@@ -235,7 +263,7 @@ const SECTIONS = [
         hint="최대 5장 · JPG, PNG"
         defaultFiles={[sampleImage('프로필-1.svg'), sampleImage('프로필-2.svg')]}
       />
-    )
+    ),
   },
   {
     title: '아바타 업로드',
@@ -244,16 +272,19 @@ const SECTIONS = [
         <code>variant=&quot;avatar&quot;</code>로 프로필 사진 교체 UI를 만듭니다.
       </>
     ),
-    code: wrapPageExample(`<Upload
+    code: wrapPageExample(
+      `<Upload
   variant="avatar"
   accept="image/*"
   avatarSrc="/images/icon/ico_avatar.svg"
   avatarAlt="프로필 사진"
-/>`, {
-  name: 'UploadUploadExample2',
-  reactImports: [],
-  compImports: ['Upload']
-}),
+/>`,
+      {
+        name: 'UploadUploadExample2',
+        reactImports: [],
+        compImports: ['Upload'],
+      },
+    ),
     preview: (
       <Upload
         variant="avatar"
@@ -261,7 +292,7 @@ const SECTIONS = [
         avatarSrc={SAMPLE}
         avatarAlt="프로필 사진"
       />
-    )
+    ),
   },
   {
     title: '크기',
@@ -270,15 +301,18 @@ const SECTIONS = [
         <code>size</code>는 sm · md · lg입니다.
       </>
     ),
-    code: wrapPageExample(`<Upload variant="drag" size="sm" title="SM 업로드" description="파일을 선택하세요." />
-…`, {
-  name: 'UploadSizeExample',
-  reactImports: [],
-  compImports: ['Upload']
-}),
+    code: wrapPageExample(
+      `<Upload variant="drag" size="sm" title="SM 업로드" description="파일을 선택하세요." />
+…`,
+      {
+        name: 'UploadSizeExample',
+        reactImports: [],
+        compImports: ['Upload'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
-        {(['sm', 'md', 'lg']).map((size) => (
+        {['sm', 'md', 'lg'].map((size) => (
           <Upload
             key={size}
             variant="drag"
@@ -288,7 +322,7 @@ const SECTIONS = [
           />
         ))}
       </div>
-    )
+    ),
   },
   {
     title: '너비',
@@ -297,31 +331,48 @@ const SECTIONS = [
         기본은 전체 너비입니다. <code>fit</code>으로 제한 너비를 사용합니다.
       </>
     ),
-    code: wrapPageExample(`<Upload variant="drag" title="전체 너비" />
-<Upload variant="drag" fit title="제한 너비" />`, {
-  name: 'UploadExample7',
-  reactImports: [],
-  compImports: ['Upload']
-}),
+    code: wrapPageExample(
+      `<Upload variant="drag" title="전체 너비" />
+<Upload variant="drag" fit title="제한 너비" />`,
+      {
+        name: 'UploadExample7',
+        reactImports: [],
+        compImports: ['Upload'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
-        <Upload variant="drag" title="전체 너비" />
-        <Upload variant="drag" fit title="제한 너비" />
+        <Upload
+          variant="drag"
+          title="전체 너비"
+        />
+        <Upload
+          variant="drag"
+          fit
+          title="제한 너비"
+        />
       </div>
-    )
+    ),
   },
   {
     title: '상태',
     description: <>비활성·오류 상태를 지원합니다.</>,
-    code: wrapPageExample(`<Upload disabled hint="파일을 변경할 수 없습니다." defaultFiles={[…]} />
-<Upload variant="drag" error title="업로드 오류" description="…" />`, {
-  name: 'UploadStateExample',
-  reactImports: [],
-  compImports: ['Upload']
-}),
+    code: wrapPageExample(
+      `<Upload disabled hint="파일을 변경할 수 없습니다." defaultFiles={[…]} />
+<Upload variant="drag" error title="업로드 오류" description="…" />`,
+      {
+        name: 'UploadStateExample',
+        reactImports: [],
+        compImports: ['Upload'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
-        <Upload disabled hint="파일을 변경할 수 없습니다." defaultFiles={[sampleFile]} />
+        <Upload
+          disabled
+          hint="파일을 변경할 수 없습니다."
+          defaultFiles={[sampleFile]}
+        />
         <Upload
           variant="drag"
           error
@@ -329,17 +380,20 @@ const SECTIONS = [
           description="허용되는 파일을 다시 선택해 주세요."
         />
       </div>
-    )
+    ),
   },
   {
     title: '조합 예시',
     description: (
       <>
-        <code>files</code> · <code>onChange</code>는 같은 <code>UploadFileItem[]</code>로 왕복 제어합니다.
-        <code>onSelect</code>는 새로 고른 <code>File[]</code>, <code>onRemove</code>는 삭제 항목을 페이지에 알립니다.
+        <code>files</code> · <code>onChange</code>는 같은 <code>UploadFileItem[]</code>로 왕복
+        제어합니다.
+        <code>onSelect</code>는 새로 고른 <code>File[]</code>, <code>onRemove</code>는 삭제 항목을
+        페이지에 알립니다.
       </>
     ),
-    code: wrapPageExample(`const [files, setFiles] = useState([])
+    code: wrapPageExample(
+      `const [files, setFiles] = useState([])
 
 <Upload
   files={files}
@@ -354,20 +408,22 @@ const SECTIONS = [
   accept=".pdf,.doc,.docx"
   maxSize={10 * 1024 * 1024}
   maxFiles={3}
-/>`, {
-      name: 'UploadExample',
-      reactImports: ['useState'],
-      compImports: ['Upload']
-    }),
-    preview: <AttachmentForm />
-  }
-]
+/>`,
+      {
+        name: 'UploadExample',
+        reactImports: ['useState'],
+        compImports: ['Upload'],
+      },
+    ),
+    preview: <AttachmentForm />,
+  },
+];
 
 /**
  * Upload 가이드 화면.
  * docs와 동일한 버튼·드롭존·목록·카드 예시와 API 문서를 모은다.
  */
-export default function UploadGuide () {
+export default function UploadGuide() {
   return (
     <GuideLayout
       category="폼"
@@ -388,5 +444,5 @@ export default function UploadGuide () {
 
       <GuideApiDocs sections={uploadApiSections} />
     </GuideLayout>
-  )
+  );
 }

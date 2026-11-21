@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 /**
  * 페이지네이션.
@@ -11,61 +11,61 @@ import {
   type FormEvent, // FormEvent 타입
   type HTMLAttributes, // HTMLAttributes 타입
   type KeyboardEvent, // KeyboardEvent 타입
-  type ReactNode // ReactNode 타입
-} from 'react' // React
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
-import { hasNodes } from '@/utils/react' // has Nodes
+  type ReactNode, // ReactNode 타입
+} from 'react'; // React
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
+import { hasNodes } from '@/utils/react'; // has Nodes
 
 /** 페이지 이동이 받는 값 */
 export interface PaginationProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
-  page?: number
+  page?: number;
   /** 비제어 초기 페이지 */
-  defaultPage?: number
-  pageCount?: number
-  siblingCount?: number
-  size?: 'sm' | 'md' | 'lg'
-  align?: 'start' | 'center' | 'end'
-  round?: boolean
-  minimal?: boolean
+  defaultPage?: number;
+  pageCount?: number;
+  siblingCount?: number;
+  size?: 'sm' | 'md' | 'lg';
+  align?: 'start' | 'center' | 'end';
+  round?: boolean;
+  minimal?: boolean;
   /** 번호 목록 대신 현재/전체 텍스트 */
-  simple?: boolean
+  simple?: boolean;
   /** 총 건수 등 왼쪽 안내 */
-  total?: ReactNode
-  showJumper?: boolean
-  hideOnSinglePage?: boolean
-  prevLabel?: ReactNode
-  nextLabel?: ReactNode
-  ariaLabel?: string
-  onChange?: (page: number) => void
+  total?: ReactNode;
+  showJumper?: boolean;
+  hideOnSinglePage?: boolean;
+  prevLabel?: ReactNode;
+  nextLabel?: ReactNode;
+  ariaLabel?: string;
+  onChange?: (page: number) => void;
 }
 
 /** 현재 페이지 주변에 보여줄 번호 */
-function pageWindow (page: number, pageCount: number, siblingCount: number) {
-  const start = Math.max(1, page - siblingCount)
-  const end = Math.min(pageCount, page + siblingCount)
-  const pages: Array<number | 'ellipsis'> = []
+function pageWindow(page: number, pageCount: number, siblingCount: number) {
+  const start = Math.max(1, page - siblingCount);
+  const end = Math.min(pageCount, page + siblingCount);
+  const pages: Array<number | 'ellipsis'> = [];
   if (start > 1) {
-    pages.push(1)
-    if (start > 2) pages.push('ellipsis')
+    pages.push(1);
+    if (start > 2) pages.push('ellipsis');
   }
-  for (let index = start; index <= end; index += 1) pages.push(index)
+  for (let index = start; index <= end; index += 1) pages.push(index);
   if (end < pageCount) {
-    if (end < pageCount - 1) pages.push('ellipsis')
-    pages.push(pageCount)
+    if (end < pageCount - 1) pages.push('ellipsis');
+    pages.push(pageCount);
   }
-  return pages
+  return pages;
 }
 
-function clampPage (value: number, pageCount: number) {
-  if (!Number.isFinite(value)) return 1
-  return Math.min(pageCount, Math.max(1, Math.trunc(value)))
+function clampPage(value: number, pageCount: number) {
+  if (!Number.isFinite(value)) return 1;
+  return Math.min(pageCount, Math.max(1, Math.trunc(value)));
 }
 
 /**
  * 목록 페이지 이동.
  * page 현재 쪽, pageCount 전체 쪽. onChange 로 바뀐 쪽을 올린다.
  */
-export function Pagination ({
+export function Pagination({
   page: pageProp,
   defaultPage = 1,
   pageCount = 1,
@@ -85,36 +85,36 @@ export function Pagination ({
   onChange,
   ...rest
 }: PaginationProps) {
-  const controlled = pageProp !== undefined
-  const [innerPage, setInnerPage] = useState(defaultPage)
-  const safeCount = Math.max(1, Math.trunc(pageCount) || 1)
-  const current = clampPage(controlled ? pageProp : innerPage, safeCount)
-  const pages = pageWindow(current, safeCount, siblingCount)
-  const [jumper, setJumper] = useState(String(current))
+  const controlled = pageProp !== undefined;
+  const [innerPage, setInnerPage] = useState(defaultPage);
+  const safeCount = Math.max(1, Math.trunc(pageCount) || 1);
+  const current = clampPage(controlled ? pageProp : innerPage, safeCount);
+  const pages = pageWindow(current, safeCount, siblingCount);
+  const [jumper, setJumper] = useState(String(current));
 
-  const [previousPage, setPreviousPage] = useState(current)
+  const [previousPage, setPreviousPage] = useState(current);
   if (previousPage !== current) {
-    setPreviousPage(current)
-    setJumper(String(current))
+    setPreviousPage(current);
+    setJumper(String(current));
   }
 
-  if (hideOnSinglePage && safeCount <= 1) return null
+  if (hideOnSinglePage && safeCount <= 1) return null;
 
   const go = (next: number) => {
-    const clamped = clampPage(next, safeCount)
-    if (clamped === current) return
-    if (!controlled) setInnerPage(clamped)
-    onChange?.(clamped)
-  }
+    const clamped = clampPage(next, safeCount);
+    if (clamped === current) return;
+    if (!controlled) setInnerPage(clamped);
+    onChange?.(clamped);
+  };
 
   const submitJumper = () => {
-    const parsed = Number(jumper)
+    const parsed = Number(jumper);
     if (!Number.isFinite(parsed)) {
-      setJumper(String(current))
-      return
+      setJumper(String(current));
+      return;
     }
-    go(parsed)
-  }
+    go(parsed);
+  };
 
   const rootClass = classNames(
     'pagination',
@@ -125,11 +125,11 @@ export function Pagination ({
     round && 'pagination_round',
     minimal && 'pagination_minimal',
     simple && 'pagination_simple',
-    className
-  )
+    className,
+  );
 
-  const prevDisabled = current <= 1
-  const nextDisabled = current >= safeCount
+  const prevDisabled = current <= 1;
+  const nextDisabled = current >= safeCount;
 
   const list = (
     <ul className="pagination_list">
@@ -145,33 +145,36 @@ export function Pagination ({
         </button>
       </li>
 
-      {simple
-        ? (
-          <li className="pagination_item">
-            <span className="pagination_simple-text">
-              <span className="pagination_simple-current">{current}</span>
-              {' / '}
-              {safeCount}
-            </span>
+      {simple ? (
+        <li className="pagination_item">
+          <span className="pagination_simple-text">
+            <span className="pagination_simple-current">{current}</span>
+            {' / '}
+            {safeCount}
+          </span>
+        </li>
+      ) : (
+        pages.map((item, index) => (
+          <li
+            className="pagination_item"
+            key={`${item}-${index}`}
+          >
+            {item === 'ellipsis' ? (
+              <span className="pagination_ellipsis">…</span>
+            ) : (
+              <button
+                type="button"
+                className={classNames('pagination_link', item === current && 'is-active')}
+                aria-current={item === current ? 'page' : undefined}
+                aria-label={`${item} 페이지`}
+                onClick={() => go(item)}
+              >
+                {item}
+              </button>
+            )}
           </li>
-          )
-        : pages.map((item, index) => (
-          <li className="pagination_item" key={`${item}-${index}`}>
-            {item === 'ellipsis'
-              ? <span className="pagination_ellipsis">…</span>
-              : (
-                <button
-                  type="button"
-                  className={classNames('pagination_link', item === current && 'is-active')}
-                  aria-current={item === current ? 'page' : undefined}
-                  aria-label={`${item} 페이지`}
-                  onClick={() => go(item)}
-                >
-                  {item}
-                </button>
-                )}
-          </li>
-          ))}
+        ))
+      )}
 
       <li className="pagination_item">
         <button
@@ -185,63 +188,61 @@ export function Pagination ({
         </button>
       </li>
     </ul>
-  )
+  );
 
-  const jumperNode = showJumper
-    ? (
-      <form
-        className="pagination_jumper"
-        onSubmit={(event: FormEvent) => {
-          event.preventDefault()
-          submitJumper()
+  const jumperNode = showJumper ? (
+    <form
+      className="pagination_jumper"
+      onSubmit={(event: FormEvent) => {
+        event.preventDefault();
+        submitJumper();
+      }}
+    >
+      <span>이동</span>
+      <input
+        className="pagination_jumper-input"
+        type="number"
+        min={1}
+        max={safeCount}
+        value={jumper}
+        aria-label="페이지 번호 입력"
+        onChange={(event: ChangeEvent<HTMLInputElement>) => setJumper(event.target.value)}
+        onBlur={submitJumper}
+        onKeyDown={(event: KeyboardEvent<HTMLInputElement>) => {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            submitJumper();
+          }
         }}
-      >
-        <span>이동</span>
-        <input
-          className="pagination_jumper-input"
-          type="number"
-          min={1}
-          max={safeCount}
-          value={jumper}
-          aria-label="페이지 번호 입력"
-          onChange={(event: ChangeEvent<HTMLInputElement>) => setJumper(event.target.value)}
-          onBlur={submitJumper}
-          onKeyDown={(event: KeyboardEvent<HTMLInputElement>) => {
-            if (event.key === 'Enter') {
-              event.preventDefault()
-              submitJumper()
-            }
-          }}
-        />
-        <span>쪽</span>
-      </form>
-      )
-    : null
+      />
+      <span>쪽</span>
+    </form>
+  ) : null;
 
-  const hasExtras = hasNodes(total) || showJumper
+  const hasExtras = hasNodes(total) || showJumper;
 
   return (
-    <nav {...rest} className={rootClass} aria-label={ariaLabel}>
-      {hasExtras
-        ? (
-          <div className="pagination_wrap">
-            {hasNodes(total)
-              ? <span className="pagination_total">{total}</span>
-              : <span />}
-            <div className="pagination_wrap-end">
-              {list}
-              {jumperNode}
-            </div>
-          </div>
-          )
-        : (
-          <>
+    <nav
+      {...rest}
+      className={rootClass}
+      aria-label={ariaLabel}
+    >
+      {hasExtras ? (
+        <div className="pagination_wrap">
+          {hasNodes(total) ? <span className="pagination_total">{total}</span> : <span />}
+          <div className="pagination_wrap-end">
             {list}
             {jumperNode}
-          </>
-          )}
+          </div>
+        </div>
+      ) : (
+        <>
+          {list}
+          {jumperNode}
+        </>
+      )}
     </nav>
-  )
+  );
 }
 
-export default Pagination
+export default Pagination;

@@ -2,35 +2,35 @@
  * 수동 페이지 스켈레톤.
  * page/list/form/card 프리셋으로 로딩 뼈대를 그린다.
  */
-import type { HTMLAttributes, ReactNode } from 'react' // React
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
-import { hasNodes } from '@/utils/react' // has Nodes
-import { Skeleton } from './Skeleton' // Skeleton 컴포넌트
+import type { HTMLAttributes, ReactNode } from 'react'; // React
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
+import { hasNodes } from '@/utils/react'; // has Nodes
+import { Skeleton } from './Skeleton'; // Skeleton 컴포넌트
 
 /** 수동 스켈레톤 모양. page 일반, list 목록, form 입력, card 카드 */
-export type PageSkeletonType = 'page' | 'list' | 'form' | 'card'
+export type PageSkeletonType = 'page' | 'list' | 'form' | 'card';
 
 /** 수동 스켈레톤이 받는 값. 줄 수, 카드 수 */
 export interface PageSkeletonProps extends HTMLAttributes<HTMLDivElement> {
-  type?: PageSkeletonType
-  showMeta?: boolean
-  showLinks?: boolean
-  linkCount?: number
-  rows?: number
-  fields?: number
-  cards?: number
+  type?: PageSkeletonType;
+  showMeta?: boolean;
+  showLinks?: boolean;
+  linkCount?: number;
+  rows?: number;
+  fields?: number;
+  cards?: number;
   /** 기본 프리셋 대신 직접 구성 */
-  children?: ReactNode
+  children?: ReactNode;
 }
 
 /** 1부터 count 까지 번호. 스켈레톤 행을 반복할 때 쓴다 */
-const range = (count: number) => Array.from({ length: Math.max(0, count) }, (_, i) => i + 1)
+const range = (count: number) => Array.from({ length: Math.max(0, count) }, (_, i) => i + 1);
 
 /**
  * 공통 스켈레톤 프리셋: page / list / form / card
  * 페이지마다 다르면 PageLoading 의 skeleton prop 에 노드를 전달
  */
-export function PageSkeleton ({
+export function PageSkeleton({
   type = 'page',
   showMeta = true,
   showLinks = false,
@@ -42,7 +42,7 @@ export function PageSkeleton ({
   className,
   ...rest
 }: PageSkeletonProps) {
-  let preset: ReactNode = null
+  let preset: ReactNode = null;
 
   if (type === 'page') {
     preset = (
@@ -65,12 +65,16 @@ export function PageSkeleton ({
         {showLinks && (
           <div className="page-skeleton_links">
             {range(linkCount).map((n) => (
-              <Skeleton key={'link-' + n} variant="chip" width={72 + (n % 3) * 16} />
+              <Skeleton
+                key={'link-' + n}
+                variant="chip"
+                width={72 + (n % 3) * 16}
+              />
             ))}
           </div>
         )}
       </>
-    )
+    );
   } else if (type === 'list') {
     preset = (
       <>
@@ -78,30 +82,51 @@ export function PageSkeleton ({
           <Skeleton variant="title" />
         </div>
         {range(rows).map((n) => (
-          <div key={'row-' + n} className="page-skeleton_row">
+          <div
+            key={'row-' + n}
+            className="page-skeleton_row"
+          >
             <Skeleton variant="avatar" />
             <div className="page-skeleton_row-body">
-              <Skeleton variant="text" width="55%" />
-              <Skeleton variant="text-sm" width="40%" />
+              <Skeleton
+                variant="text"
+                width="55%"
+              />
+              <Skeleton
+                variant="text-sm"
+                width="40%"
+              />
             </div>
           </div>
         ))}
       </>
-    )
+    );
   } else if (type === 'form') {
     preset = (
       <>
         <div className="page-skeleton_title">
-          <Skeleton variant="title" width="200px" />
+          <Skeleton
+            variant="title"
+            width="200px"
+          />
         </div>
         <div className="page-skeleton_form">
           {range(fields).map((n) => (
-            <Skeleton key={'field-' + n} variant="meta" height="44px" />
+            <Skeleton
+              key={'field-' + n}
+              variant="meta"
+              height="44px"
+            />
           ))}
-          <Skeleton variant="button" width="100%" height="44px" block />
+          <Skeleton
+            variant="button"
+            width="100%"
+            height="44px"
+            block
+          />
         </div>
       </>
-    )
+    );
   } else if (type === 'card') {
     preset = (
       <>
@@ -120,7 +145,7 @@ export function PageSkeleton ({
           ))}
         </div>
       </>
-    )
+    );
   }
 
   return (
@@ -131,7 +156,7 @@ export function PageSkeleton ({
     >
       {hasNodes(children) ? children : preset}
     </div>
-  )
+  );
 }
 
-export default PageSkeleton
+export default PageSkeleton;

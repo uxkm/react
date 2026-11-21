@@ -1,50 +1,50 @@
-'use client'
+'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react' // React
-import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
-import '@/styles/pub.scss' // pub 스타일
+import { useCallback, useEffect, useRef, useState } from 'react'; // React
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'; // Demo Layout 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'; // Demo Block 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'; // wrap Page Example
+import '@/styles/pub.scss'; // pub 스타일
 
 /** 번호를 두 자리로. 1 → 01 */
-function pad (n) {
-  const s = String(n)
-  return s.length < 2 ? '0' + s : s
+function pad(n) {
+  const s = String(n);
+  return s.length < 2 ? '0' + s : s;
 }
 
 /**
  * 필터 가로 스크롤 데모.
  * 하위 칩이 많을 때 가로 스크롤이 생기는지 확인한다.
  */
-export default function FilterScrollDemoPage () {
-  const [chipCount, setChipCount] = useState(40)
+export default function FilterScrollDemoPage() {
+  const [chipCount, setChipCount] = useState(40);
   const [metrics, setMetrics] = useState({
     scrollWidth: 0,
     clientWidth: 0,
-    canScrollX: false
-  })
-  const subsRef = useRef(null)
+    canScrollX: false,
+  });
+  const subsRef = useRef(null);
 
   const measure = useCallback(() => {
-    const el = subsRef.current
-    if (!el) return
-    const scrollWidth = el.scrollWidth
-    const clientWidth = el.clientWidth
+    const el = subsRef.current;
+    if (!el) return;
+    const scrollWidth = el.scrollWidth;
+    const clientWidth = el.clientWidth;
     setMetrics({
       scrollWidth,
       clientWidth,
-      canScrollX: scrollWidth > clientWidth + 1
-    })
-  }, [])
+      canScrollX: scrollWidth > clientWidth + 1,
+    });
+  }, []);
 
   useEffect(() => {
-    measure()
-  }, [chipCount, measure])
+    measure();
+  }, [chipCount, measure]);
 
   useEffect(() => {
-    window.addEventListener('resize', measure)
-    return () => window.removeEventListener('resize', measure)
-  }, [measure])
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, [measure]);
 
   return (
     <DemoLayout
@@ -55,7 +55,8 @@ export default function FilterScrollDemoPage () {
       <div className="wbs filter-scroll-demo">
         <DemoBlock
           title="필터 하위목록 가로 스크롤"
-          code={wrapPageExample(`const [chipCount, setChipCount] = useState(40)
+          code={wrapPageExample(
+            `const [chipCount, setChipCount] = useState(40)
 const subsRef = useRef(null)
 
 const measure = useCallback(() => {
@@ -95,12 +96,14 @@ useEffect(() => {
     <button type="button" className="wbs-btn" onClick={() => setChipCount(40)}>칩 40개</button>
     <button type="button" className="wbs-btn" onClick={measure}>다시 측정</button>
   </div>
-</div>`, {
-            name: 'FilterScrollExample',
-            reactImports: ['useCallback', 'useEffect', 'useRef', 'useState'],
-            compImports: [],
-            extraImports: ["import '@/styles/pub.scss'"]
-          })}
+</div>`,
+            {
+              name: 'FilterScrollExample',
+              reactImports: ['useCallback', 'useEffect', 'useRef', 'useState'],
+              compImports: [],
+              extraImports: ["import '@/styles/pub.scss'"],
+            },
+          )}
         >
           <div className="wbs-filter-bar">
             <button
@@ -109,14 +112,23 @@ useEffect(() => {
               aria-label="필터, 로그인"
             >
               <span className="wbs-filter-btn_label">로그인</span>
-              <span className="wbs-filter-btn_icon" aria-hidden="true">▾</span>
+              <span
+                className="wbs-filter-btn_icon"
+                aria-hidden="true"
+              >
+                ▾
+              </span>
             </button>
             <div className="wbs-filter-selected">
-              <span className="wbs-filter-selected_sep" aria-hidden="true" />
+              <span
+                className="wbs-filter-selected_sep"
+                aria-hidden="true"
+              />
               <ul
                 ref={subsRef}
                 className="wbs-filter-subs"
-                aria-label="선택한 화면명 하위 목록" tabIndex={0}
+                aria-label="선택한 화면명 하위 목록"
+                tabIndex={0}
               >
                 {Array.from({ length: chipCount }, (_, i) => i + 1).map((n) => (
                   <li key={'chip-' + n}>
@@ -149,13 +161,37 @@ useEffect(() => {
           </dl>
 
           <div className="filter-scroll-demo_actions">
-            <button type="button" className="wbs-btn" onClick={() => setChipCount(5)}>칩 5개</button>
-            <button type="button" className="wbs-btn" onClick={() => setChipCount(20)}>칩 20개</button>
-            <button type="button" className="wbs-btn" onClick={() => setChipCount(40)}>칩 40개</button>
-            <button type="button" className="wbs-btn" onClick={measure}>다시 측정</button>
+            <button
+              type="button"
+              className="wbs-btn"
+              onClick={() => setChipCount(5)}
+            >
+              칩 5개
+            </button>
+            <button
+              type="button"
+              className="wbs-btn"
+              onClick={() => setChipCount(20)}
+            >
+              칩 20개
+            </button>
+            <button
+              type="button"
+              className="wbs-btn"
+              onClick={() => setChipCount(40)}
+            >
+              칩 40개
+            </button>
+            <button
+              type="button"
+              className="wbs-btn"
+              onClick={measure}
+            >
+              다시 측정
+            </button>
           </div>
         </DemoBlock>
       </div>
     </DemoLayout>
-  )
+  );
 }

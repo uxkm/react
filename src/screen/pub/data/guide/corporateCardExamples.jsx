@@ -8,9 +8,9 @@ import {
   CarouselSlide,
   Icon,
   Stat,
-  Tabs
-} from '@/comp'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
+  Tabs,
+} from '@/comp';
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode';
 
 const story = {
   id: 'story',
@@ -20,16 +20,16 @@ const story = {
   description: '기술과 일상에서 발견한 변화를 소개합니다.',
   href: '#card-types',
   keywords: ['사람', '새로운 경험'],
-  image: '/images/@dummy/naver-story.jpg'
-}
+  image: '/images/@dummy/naver-story.jpg',
+};
 const news = {
   id: 'news',
   category: '보도자료',
   date: '2026-11-15',
   title: '함께 성장하는 새로운 파트너 프로그램을 소개합니다',
   href: '#card-types',
-  keywords: ['파트너', '성장']
-}
+  keywords: ['파트너', '성장'],
+};
 const feature = {
   id: 'service',
   category: '서비스',
@@ -37,8 +37,8 @@ const feature = {
   description: '새로운 서비스와 기술이 만들어 가는 변화를 만나보세요.',
   href: '#card-types',
   action: '자세히 보기',
-  image: '/images/@dummy/naver-service.png'
-}
+  image: '/images/@dummy/naver-service.png',
+};
 const technologies = [
   feature,
   {
@@ -46,18 +46,18 @@ const technologies = [
     id: 'technology',
     category: '기술',
     title: '새로운 도전을\n현실로 만드는 기술',
-    image: '/images/@dummy/naver-tech.png'
+    image: '/images/@dummy/naver-tech.png',
   },
   {
     ...feature,
     id: 'sustainability',
     category: '지속가능성',
-    title: '더 나은 내일을 위한\n연결과 실천'
-  }
-]
+    title: '더 나은 내일을 위한\n연결과 실천',
+  },
+];
 
 const code = (jsx, compImports, name) =>
-  wrapPageExample(jsx, { compImports, reactImports: [], name })
+  wrapPageExample(jsx, { compImports, reactImports: [], name });
 
 export const corporateCardTypeExamples = [
   {
@@ -74,8 +74,8 @@ export const corporateCardTypeExamples = [
     code: code(
       `<Card type="overlay" format="portrait" card={${JSON.stringify(story, null, 2)}} />`,
       ['Card'],
-      'OverlayCardExample'
-    )
+      'OverlayCardExample',
+    ),
   },
   {
     type: 'news',
@@ -91,8 +91,8 @@ export const corporateCardTypeExamples = [
     code: code(
       `<Card type="news" card={${JSON.stringify(news, null, 2)}} />`,
       ['Card'],
-      'NewsCardExample'
-    )
+      'NewsCardExample',
+    ),
   },
   {
     type: 'feature',
@@ -109,10 +109,10 @@ export const corporateCardTypeExamples = [
     code: code(
       `<Card type="feature" tone="brand" imagePosition="start" card={${JSON.stringify(feature, null, 2)}} />`,
       ['Card'],
-      'FeatureCardExample'
-    )
-  }
-]
+      'FeatureCardExample',
+    ),
+  },
+];
 
 const mixedCode = `<div className="demo-corporate-feed">
   <Card type="overlay" card={${JSON.stringify(story, null, 2)}} />
@@ -122,34 +122,34 @@ const mixedCode = `<div className="demo-corporate-feed">
   </div>
   <Card type="content" card={{ id: 'thumbnail-news', category: '보도자료', date: '2026-11-13', title: '이미지와 함께 전하는 새로운 소식', href: '#card-types', keywords: ['서비스', '업데이트'], image: '/images/@dummy/naver-service.png' }} />
   <Card type="overlay" format="landscape" card={{ id: 'event', date: '2026-11-12', title: '새로운 경험이 시작되는 곳', href: 'https://www.navercorp.com/main', target: '_blank', image: '/images/@dummy/naver-tech.png' }} />
-</div>`
+</div>`;
 
 const carouselCode = `const stories = ${JSON.stringify([story, { ...story, id: 'story-next', title: '기술로 연결되는 내일의 일상', image: '/images/@dummy/naver-tech.png' }], null, 2)}
 
 <Carousel ariaLabel="헤드라인 카드 예제" navigation pagination="fraction">
   {stories.map(card => <CarouselSlide key={card.id}><Card type="overlay" format="landscape" card={card} /></CarouselSlide>)}
 </Carousel>
-<Card type="feature" imagePosition="end" card={${JSON.stringify({ ...feature, id: 'campaign', category: '캠페인', title: '새로운 소식을 만나보세요' }, null, 2)}} />`
+<Card type="feature" imagePosition="end" card={${JSON.stringify({ ...feature, id: 'campaign', category: '캠페인', title: '새로운 소식을 만나보세요' }, null, 2)}} />`;
 
 const accordionCode = `const features = ${JSON.stringify(technologies, null, 2)}
 
 <Accordion defaultValue="service" items={features.map(card => ({
   value: card.id, label: card.category,
   content: <Card type="feature" tone={card.id === 'technology' ? 'dark' : 'brand'} card={card} />
-}))} />`
+}))} />`;
 
 const resources = [
   {
     id: 'partner',
     label: '파트너 지원',
-    links: ['비즈니스 지원', '파트너 교육', '성장 프로그램']
+    links: ['비즈니스 지원', '파트너 교육', '성장 프로그램'],
   },
   {
     id: 'developer',
     label: '개발자 지원',
-    links: ['개발자 센터', 'API 문서', '오픈소스']
-  }
-]
+    links: ['개발자 센터', 'API 문서', '오픈소스'],
+  },
+];
 
 const tabsCode = `const groups = ${JSON.stringify(resources, null, 2)}
 
@@ -160,7 +160,7 @@ const tabsCode = `const groups = ${JSON.stringify(resources, null, 2)}
       icon: <Button presentation iconOnly size="sm" ariaLabel="새 창 열림"><Icon name="external" size={20} /></Button>
     }} />)}
   </CardDeck>
-}))} />`
+}))} />`;
 
 export const corporateCardCompositionExamples = [
   {
@@ -186,7 +186,7 @@ export const corporateCardCompositionExamples = [
               category: '리포트',
               date: '2026-11-14',
               title: '우리의 변화를 기록한 새로운 소식',
-              href: '#card-types'
+              href: '#card-types',
             }}
           />
         </div>
@@ -199,7 +199,7 @@ export const corporateCardCompositionExamples = [
             title: '이미지와 함께 전하는 새로운 소식',
             href: '#card-types',
             keywords: ['서비스', '업데이트'],
-            image: '/images/@dummy/naver-service.png'
+            image: '/images/@dummy/naver-service.png',
           }}
         />
         <Card
@@ -211,12 +211,12 @@ export const corporateCardCompositionExamples = [
             title: '새로운 경험이 시작되는 곳',
             href: 'https://www.navercorp.com/main',
             target: '_blank',
-            image: '/images/@dummy/naver-tech.png'
+            image: '/images/@dummy/naver-tech.png',
           }}
         />
       </div>
     ),
-    code: code(mixedCode, ['Card'], 'CorporateFeedExample')
+    code: code(mixedCode, ['Card'], 'CorporateFeedExample'),
   },
   {
     id: 'corporate-headline',
@@ -236,8 +236,8 @@ export const corporateCardCompositionExamples = [
               ...story,
               id: 'story-next',
               title: '기술로 연결되는 내일의 일상',
-              image: '/images/@dummy/naver-tech.png'
-            }
+              image: '/images/@dummy/naver-tech.png',
+            },
           ].map((card) => (
             <CarouselSlide key={card.id}>
               <Card
@@ -255,16 +255,12 @@ export const corporateCardCompositionExamples = [
             ...feature,
             id: 'campaign',
             category: '캠페인',
-            title: '새로운 소식을 만나보세요'
+            title: '새로운 소식을 만나보세요',
           }}
         />
       </div>
     ),
-    code: code(
-      carouselCode,
-      ['Card', 'Carousel', 'CarouselSlide'],
-      'CorporateHeadlineExample'
-    )
+    code: code(carouselCode, ['Card', 'Carousel', 'CarouselSlide'], 'CorporateHeadlineExample'),
   },
   {
     id: 'corporate-features',
@@ -283,11 +279,11 @@ export const corporateCardCompositionExamples = [
               tone={card.id === 'technology' ? 'dark' : 'brand'}
               card={card}
             />
-          )
+          ),
         }))}
       />
     ),
-    code: code(accordionCode, ['Accordion', 'Card'], 'CorporateFeaturesExample')
+    code: code(accordionCode, ['Accordion', 'Card'], 'CorporateFeaturesExample'),
   },
   {
     id: 'corporate-resources',
@@ -323,20 +319,20 @@ export const corporateCardCompositionExamples = [
                           size={20}
                         />
                       </Button>
-                    )
+                    ),
                   }}
                 />
               ))}
             </CardDeck>
-          )
+          ),
         }))}
       />
     ),
     code: code(
       tabsCode,
       ['Tabs', 'Card', 'CardDeck', 'Icon', 'Button'],
-      'CorporateResourcesExample'
-    )
+      'CorporateResourcesExample',
+    ),
   },
   {
     id: 'corporate-summary',
@@ -365,7 +361,7 @@ export const corporateCardCompositionExamples = [
             category: '소식',
             date: '2026-11-15',
             title: '새로운 업데이트를 확인하세요',
-            href: '#card-types'
+            href: '#card-types',
           }}
         />
       </CardDeck>
@@ -376,7 +372,7 @@ export const corporateCardCompositionExamples = [
   <Card type="news" card={{ id: 'brief', category: '소식', date: '2026-11-15', title: '새로운 업데이트를 확인하세요', href: '#card-types' }} />
 </CardDeck>`,
       ['Card', 'CardDeck', 'CardBody', 'Stat'],
-      'CorporateSummaryExample'
-    )
-  }
-]
+      'CorporateSummaryExample',
+    ),
+  },
+];

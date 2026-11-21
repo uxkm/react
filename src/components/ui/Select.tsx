@@ -5,41 +5,42 @@
 import type {
   ChangeEvent, // ChangeEvent 타입
   ReactNode, // ReactNode 타입
-  SelectHTMLAttributes // SelectHTMLAttributes 타입
-} from 'react' // React
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
-import { hasNodes } from '@/utils/react' // has Nodes
+  SelectHTMLAttributes, // SelectHTMLAttributes 타입
+} from 'react'; // React
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
+import { hasNodes } from '@/utils/react'; // has Nodes
 
-const VALID_SIZES = new Set(['sm', 'md', 'lg'])
+const VALID_SIZES = new Set(['sm', 'md', 'lg']);
 
 /** 선택 값 */
-export type SelectValue = string | number
+export type SelectValue = string | number;
 
 /** options prop용 항목 (children 대신 쓸 때) */
 export type SelectOption =
-  | SelectValue
-  | { value: SelectValue; label?: ReactNode; disabled?: boolean }
+  SelectValue | { value: SelectValue; label?: ReactNode; disabled?: boolean };
 
 /** 셀렉트가 받는 값 */
-export interface SelectProps
-  extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'size' | 'prefix'> {
-  size?: 'sm' | 'md' | 'lg'
+export interface SelectProps extends Omit<
+  SelectHTMLAttributes<HTMLSelectElement>,
+  'size' | 'prefix'
+> {
+  size?: 'sm' | 'md' | 'lg';
   /** 네이티브 select size(표시 행 수) */
-  nativeSize?: number
-  fit?: boolean
-  error?: boolean
-  placeholder?: string
+  nativeSize?: number;
+  fit?: boolean;
+  error?: boolean;
+  placeholder?: string;
   /** children이 없을 때 option 목록 */
-  options?: SelectOption[]
-  children?: ReactNode
-  onChange?: (event: ChangeEvent<HTMLSelectElement>) => void
+  options?: SelectOption[];
+  children?: ReactNode;
+  onChange?: (event: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 /**
  * 목록에서 값을 고르는 네이티브 select.
  * option · optgroup은 children(또는 options)으로 구성한다.
  */
-export function Select ({
+export function Select({
   size = 'md',
   nativeSize,
   disabled = false,
@@ -55,42 +56,45 @@ export function Select ({
   onChange,
   ...props
 }: SelectProps) {
-  const resolvedSize = VALID_SIZES.has(size) ? size : 'md'
+  const resolvedSize = VALID_SIZES.has(size) ? size : 'md';
   const classes = classNames(
     'input',
     resolvedSize === 'sm' && 'input_sm',
     resolvedSize === 'lg' && 'input_lg',
     fit && 'input_fit',
     error && 'is-error',
-    className
-  )
+    className,
+  );
 
-  const hasPlaceholder = placeholder != null
+  const hasPlaceholder = placeholder != null;
   const valueProps =
     value !== undefined
       ? { value }
-      : { defaultValue: defaultValue ?? (!multiple && hasPlaceholder ? '' : undefined) }
+      : { defaultValue: defaultValue ?? (!multiple && hasPlaceholder ? '' : undefined) };
 
   const optionNodes = hasNodes(children)
     ? children
     : options.map((item) => {
-      if (item && typeof item === 'object') {
+        if (item && typeof item === 'object') {
+          return (
+            <option
+              key={String(item.value)}
+              value={item.value}
+              disabled={item.disabled}
+            >
+              {item.label != null ? item.label : item.value}
+            </option>
+          );
+        }
         return (
           <option
-            key={String(item.value)}
-            value={item.value}
-            disabled={item.disabled}
+            key={String(item)}
+            value={item as SelectValue}
           >
-            {item.label != null ? item.label : item.value}
+            {String(item)}
           </option>
-        )
-      }
-      return (
-        <option key={String(item)} value={item as SelectValue}>
-          {String(item)}
-        </option>
-      )
-    })
+        );
+      });
 
   return (
     <select
@@ -104,13 +108,16 @@ export function Select ({
       onChange={onChange}
     >
       {hasPlaceholder && (
-        <option value="" disabled>
+        <option
+          value=""
+          disabled
+        >
           {placeholder}
         </option>
       )}
       {optionNodes}
     </select>
-  )
+  );
 }
 
-export default Select
+export default Select;

@@ -1,26 +1,36 @@
-import Card from '@/comp/ui/Card' // Card 컴포넌트
-import { Icon } from '@/comp/ui/Icon' // Icon 컴포넌트
+import Card from '@/comp/ui/Card'; // Card 컴포넌트
+import { Icon } from '@/comp/ui/Icon'; // Icon 컴포넌트
 import type {
   CardAppearanceProps, // CardAppearanceProps 타입
-  QuickLinkCardData // QuickLinkCardData 타입
-} from '@/comp/ui/Card' // 카드 · card Types
+  QuickLinkCardData, // QuickLinkCardData 타입
+} from '@/comp/ui/Card'; // 카드 · card Types
 
 /** 바로가기 내용은 사용하는 위젯 안에서 관리합니다. */
-export default function MainQuickLinks ({ shadow = false }: Readonly<CardAppearanceProps>) {
+export default function MainQuickLinks({ shadow = false }: Readonly<CardAppearanceProps>) {
   const cards: readonly QuickLinkCardData[] = [
     {
       id: 'proposal',
       href: '/b2b/insight/resources/list',
       title: '기업교육 제안서\n다운로드',
-      icon: <Icon name="download" size={25} />,
-      tone: 'cream'
+      icon: (
+        <Icon
+          name="download"
+          size={25}
+        />
+      ),
+      tone: 'cream',
     },
     {
       id: 'estimate',
       href: '/b2b/contents/mandatory/estimate',
       title: '법정필수교육 간편 견적받기',
-      icon: <Icon name="book" size={25} />,
-      tone: 'gray'
+      icon: (
+        <Icon
+          name="book"
+          size={25}
+        />
+      ),
+      tone: 'gray',
     },
     {
       id: 'trend',
@@ -31,15 +41,23 @@ export default function MainQuickLinks ({ shadow = false }: Readonly<CardAppeara
           <path d="M4 20V10h3v10M11 20V4h3v16M18 20v-8h3v8" />
         </Icon>
       ),
-      tone: 'sage'
-    }
-  ]
+      tone: 'sage',
+    },
+  ];
 
   return (
-    <div className="main-quick-links" aria-label="교육 서비스 바로가기">
+    <div
+      className="main-quick-links"
+      aria-label="교육 서비스 바로가기"
+    >
       {cards.map((card) => (
-        <Card key={card.id} type="quick-link" card={card} shadow={shadow} />
+        <Card
+          key={card.id}
+          type="quick-link"
+          card={card}
+          shadow={shadow}
+        />
       ))}
     </div>
-  )
+  );
 }

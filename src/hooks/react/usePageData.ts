@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from 'react' // 훅
-import { useLatestRef } from './useLatestRef' // 커밋된 콜백 참조
-import { usePageLoading } from './usePageLoading' // 페이지 로딩 훅
+import { useEffect, useState } from 'react'; // 훅
+import { useLatestRef } from './useLatestRef'; // 커밋된 콜백 참조
+import { usePageLoading } from './usePageLoading'; // 페이지 로딩 훅
 
 export type UsePageDataOptions = {
   /**
@@ -10,10 +10,10 @@ export type UsePageDataOptions = {
    * 예) () => import('./data').then((m) => m.default)
    * 생략 시: 페이지가 이미 import 한 모듈 기준으로 마운트 완료만 반영
    */
-  load?: () => Promise<unknown>
+  load?: () => Promise<unknown>;
   /** false 이면 로딩 없이 바로 본문 */
-  enabled?: boolean
-}
+  enabled?: boolean;
+};
 
 /**
  * 페이지 로컬 모듈 준비 상태 (API 없음).
@@ -27,45 +27,45 @@ export type UsePageDataOptions = {
  *   load: () => import('./data').then((m) => m.default)
  * })
  */
-export function usePageData (options: UsePageDataOptions = {}) {
-  const enabled = options.enabled !== false
-  const { loading, run, setLoading } = usePageLoading(enabled)
-  const [data, setData] = useState<unknown>(null)
-  const [error, setError] = useState<unknown>(null)
-  const loadRef = useLatestRef(options.load)
+export function usePageData(options: UsePageDataOptions = {}) {
+  const enabled = options.enabled !== false;
+  const { loading, run, setLoading } = usePageLoading(enabled);
+  const [data, setData] = useState<unknown>(null);
+  const [error, setError] = useState<unknown>(null);
+  const loadRef = useLatestRef(options.load);
 
   useEffect(() => {
     if (!enabled) {
-      setLoading(false)
-      return undefined
+      setLoading(false);
+      return undefined;
     }
 
-    let cancelled = false
+    let cancelled = false;
 
     run(async () => {
       // 추가 로컬 로드가 있으면 실행, 없으면 페이지 import 모듈 준비(마운트)만 반영
-      if (loadRef.current) return loadRef.current()
-      return null
+      if (loadRef.current) return loadRef.current();
+      return null;
     })
       .then((json) => {
-        if (cancelled) return null
-        setData(json)
-        setError(null)
-        return json
+        if (cancelled) return null;
+        setData(json);
+        setError(null);
+        return json;
       })
       .catch((err) => {
-        if (cancelled) return null
-        setError(err)
-        console.error(err)
-        return null
-      })
+        if (cancelled) return null;
+        setError(err);
+        console.error(err);
+        return null;
+      });
 
     return () => {
-      cancelled = true
-    }
-  }, [enabled, run, setLoading, loadRef])
+      cancelled = true;
+    };
+  }, [enabled, run, setLoading, loadRef]);
 
-  return { loading, data, error }
+  return { loading, data, error };
 }
 
-export default usePageData
+export default usePageData;

@@ -2,36 +2,36 @@
  * Flex 레이아웃.
  * direction·gap·정렬로 가로·세로 배치 상자를 만든다.
  */
-import { createElement, type HTMLAttributes, type ReactNode } from 'react' // React
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
+import { createElement, type HTMLAttributes, type ReactNode } from 'react'; // React
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
 
 /** 간격 이름 → flex_gap-* 클래스 */
 const GAP_TOKEN: Record<string, string> = {
   sm: 'flex_gap-sm',
   lg: 'flex_gap-lg',
-  none: 'flex_gap-none'
-}
+  none: 'flex_gap-none',
+};
 
 /** 가로·세로 정렬 상자 */
 export interface FlexProps extends HTMLAttributes<HTMLElement> {
-  as?: string
-  direction?: 'row' | 'col' | 'column' | string
-  wrap?: boolean
-  gap?: 'sm' | 'lg' | 'none' | string | number
-  cols?: number | string
-  ratio?: string
-  equal?: boolean
-  autoFit?: boolean
-  align?: string
-  justify?: string
-  children?: ReactNode
+  as?: string;
+  direction?: 'row' | 'col' | 'column' | string;
+  wrap?: boolean;
+  gap?: 'sm' | 'lg' | 'none' | string | number;
+  cols?: number | string;
+  ratio?: string;
+  equal?: boolean;
+  autoFit?: boolean;
+  align?: string;
+  justify?: string;
+  children?: ReactNode;
 }
 
 /**
  * 가로·세로 배치.
  * direction 방향, align 교차축, justify 주축, gap 간격.
  */
-export function Flex ({
+export function Flex({
   as = 'div',
   direction = 'row',
   wrap = false,
@@ -47,7 +47,7 @@ export function Flex ({
   children,
   ...rest
 }: FlexProps) {
-  const isCol = direction === 'col' || direction === 'column'
+  const isCol = direction === 'col' || direction === 'column';
 
   const flexClass = classNames(
     'flex',
@@ -60,12 +60,12 @@ export function Flex ({
     autoFit && 'flex_auto-fit',
     align && 'flex_align-' + align,
     justify && 'flex_justify-' + (justify === 'space-between' ? 'between' : justify),
-    className
-  )
+    className,
+  );
 
-  const inlineStyle = typeof gap === 'number' ? { gap: gap + 'px', ...style } : style
+  const inlineStyle = typeof gap === 'number' ? { gap: gap + 'px', ...style } : style;
 
-  return createElement(as, { ...rest, className: flexClass, style: inlineStyle }, children)
+  return createElement(as, { ...rest, className: flexClass, style: inlineStyle }, children);
 }
 
-export default Flex
+export default Flex;

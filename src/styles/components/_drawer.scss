@@ -43,7 +43,6 @@
   --drawer-adaptive-center-width: var(--drawer-width-lg);
   --drawer-adaptive-center-max-height: 90vh;
   --drawer-adaptive-center-radius: var(--radius-lg);
-
 }
 
 // Drawer — OOCSS: 구조(.drawer) + 스킨(.drawer_placement-right · .drawer_sm) + 파트(.drawer_panel · .drawer_header · .drawer_body · .drawer_footer)
@@ -97,7 +96,9 @@
   color: inherit;
   overflow: hidden;
 
-  &::backdrop { background: transparent; }
+  &::backdrop {
+    background: transparent;
+  }
 
   position: fixed;
   inset: 0;
@@ -148,7 +149,7 @@
       transition-delay: 0.08s;
     }
 
-    .drawer[data-drawer-backdrop="false"] & {
+    .drawer[data-drawer-backdrop='false'] & {
       display: none;
     }
   }
@@ -543,7 +544,7 @@
         pointer-events: none;
       }
 
-      &[data-drawer-backdrop="false"] > .drawer_backdrop {
+      &[data-drawer-backdrop='false'] > .drawer_backdrop {
         display: none;
       }
     }

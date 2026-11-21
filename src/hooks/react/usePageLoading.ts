@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react' // 훅
+import { useCallback, useEffect, useRef, useState } from 'react'; // 훅
 
 /**
  * 페이지 로딩 상태.
@@ -17,29 +17,29 @@ import { useCallback, useEffect, useRef, useState } from 'react' // 훅
  *   })
  * }, [run])
  */
-export function usePageLoading (initialLoading = false) {
-  const [loading, setLoading] = useState(initialLoading)
-  const seqRef = useRef(0)
-  const mountedRef = useRef(true)
+export function usePageLoading(initialLoading = false) {
+  const [loading, setLoading] = useState(initialLoading);
+  const seqRef = useRef(0);
+  const mountedRef = useRef(true);
 
   useEffect(() => {
-    mountedRef.current = true
+    mountedRef.current = true;
     return () => {
-      mountedRef.current = false
-    }
-  }, [])
+      mountedRef.current = false;
+    };
+  }, []);
 
-  const run = useCallback(async <T,>(task: () => Promise<T>) => {
-    const seq = ++seqRef.current
-    setLoading(true)
+  const run = useCallback(async <T>(task: () => Promise<T>) => {
+    const seq = ++seqRef.current;
+    setLoading(true);
     try {
-      return await task()
+      return await task();
     } finally {
-      if (mountedRef.current && seqRef.current === seq) setLoading(false)
+      if (mountedRef.current && seqRef.current === seq) setLoading(false);
     }
-  }, [])
+  }, []);
 
-  return { loading, setLoading, run }
+  return { loading, setLoading, run };
 }
 
-export default usePageLoading
+export default usePageLoading;

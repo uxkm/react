@@ -15,7 +15,6 @@
   --breadcrumb-icon-size: 1rem;
   --breadcrumb-icon-padding: 0.15rem;
   --breadcrumb-ellipsis-size: 1.5rem;
-
 }
 
 // Breadcrumb — OOCSS: 구조(.breadcrumb) + 변형(.breadcrumb_*) + 상태(.is-current)
@@ -45,14 +44,14 @@
   font-size: var(--breadcrumb-font-size);
   line-height: var(--breadcrumb-line-height);
 
-  @include breadcrumb-separator("›");
+  @include breadcrumb-separator('›');
 
   &.breadcrumb_sep-slash {
-    @include breadcrumb-separator("/");
+    @include breadcrumb-separator('/');
   }
 
   &.breadcrumb_sep-dot {
-    @include breadcrumb-separator("·");
+    @include breadcrumb-separator('·');
   }
 
   &.breadcrumb_sm {
@@ -116,7 +115,7 @@
     @include focus-ring(var(--color-accent));
 
     &.is-disabled,
-    &[aria-disabled="true"] {
+    &[aria-disabled='true'] {
       @include disabled-state;
     }
   }

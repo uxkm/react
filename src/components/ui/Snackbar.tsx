@@ -1,56 +1,56 @@
-'use client'
+'use client';
 
 /**
  * 스낵바(짧은 토스트형 알림).
  * 하단에 잠깐 뜨는 메시지. 색·아이콘·닫기 지원.
  */
 
-import { useState, type HTMLAttributes, type ReactNode } from 'react' // React
-import { useAutoClose } from '@/hooks/interaction/useAutoClose' // Auto Close 훅
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
-import { hasNodes } from '@/utils/react' // has Nodes
-import { Icon, type IconName } from './Icon' // Icon · IconName 타입
+import { useState, type HTMLAttributes, type ReactNode } from 'react'; // React
+import { useAutoClose } from '@/hooks/interaction/useAutoClose'; // Auto Close 훅
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
+import { hasNodes } from '@/utils/react'; // has Nodes
+import { Icon, type IconName } from './Icon'; // Icon · IconName 타입
 
 /** 스낵바 색 */
-export type SnackbarColor = 'info' | 'success' | 'warning' | 'error' | 'danger'
+export type SnackbarColor = 'info' | 'success' | 'warning' | 'error' | 'danger';
 
 /** 색 이름 → Icon name */
 const ICON_NAME: Record<string, IconName> = {
   info: 'info',
   success: 'check-circle',
   warning: 'warning',
-  error: 'x-circle'
-}
+  error: 'x-circle',
+};
 
 /** 짧은 알림이 받는 값 */
 export interface SnackbarProps extends HTMLAttributes<HTMLDivElement> {
-  variant?: 'default' | 'promotion'
+  variant?: 'default' | 'promotion';
   /** 문구 옆에 표시할 링크·버튼. */
-  action?: ReactNode
-  color?: SnackbarColor
-  message?: ReactNode
-  round?: boolean
-  showIcon?: boolean
-  icon?: ReactNode
-  closable?: boolean
+  action?: ReactNode;
+  color?: SnackbarColor;
+  message?: ReactNode;
+  round?: boolean;
+  showIcon?: boolean;
+  icon?: ReactNode;
+  closable?: boolean;
   /** 넘기면 표시 상태를 페이지가 제어한다 */
-  open?: boolean
+  open?: boolean;
   /** 비제어 초기 표시. 기본 true */
-  defaultOpen?: boolean
+  defaultOpen?: boolean;
   /** 마운트 시 열림. open 이 없을 때 defaultOpen 보다 우선한다 */
-  openOnLoad?: boolean
+  openOnLoad?: boolean;
   /** 열린 후 자동 닫힘 시간(ms). 생략하거나 0 이하이면 사용하지 않는다 */
-  autoCloseDelay?: number
+  autoCloseDelay?: number;
   /** 표시 상태가 바뀔 때 호출 */
-  onOpenChange?: (open: boolean) => void
-  onClose?: () => void
+  onOpenChange?: (open: boolean) => void;
+  onClose?: () => void;
 }
 
 /**
  * 잠깐 보여 주는 알림 막대.
  * color 종류, message 문구. open · onOpenChange 로 페이지에서 표시를 제어한다.
  */
-export function Snackbar ({
+export function Snackbar({
   variant = 'default',
   action,
   color = 'info',
@@ -70,33 +70,48 @@ export function Snackbar ({
   role,
   ...rest
 }: SnackbarProps) {
-  const controlled = open !== undefined
-  const [innerOpen, setInnerOpen] = useState(openOnLoad ?? defaultOpen)
-  const visible = controlled ? open : innerOpen
+  const controlled = open !== undefined;
+  const [innerOpen, setInnerOpen] = useState(openOnLoad ?? defaultOpen);
+  const visible = controlled ? open : innerOpen;
 
   const setVisible = (next: boolean) => {
-    if (!controlled) setInnerOpen(next)
-    onOpenChange?.(next)
-    if (!next) onClose?.()
-  }
+    if (!controlled) setInnerOpen(next);
+    onOpenChange?.(next);
+    if (!next) onClose?.();
+  };
 
-  useAutoClose(visible, autoCloseDelay, () => setVisible(false))
+  useAutoClose(visible, autoCloseDelay, () => setVisible(false));
 
-  if (!visible) return null
-  const resolved = color === 'danger' ? 'error' : color
-  const defaultIconName = ICON_NAME[resolved] || 'info'
+  if (!visible) return null;
+  const resolved = color === 'danger' ? 'error' : color;
+  const defaultIconName = ICON_NAME[resolved] || 'info';
 
   return (
     <div
       {...rest}
-      className={classNames('snackbar', variant === 'promotion' ? 'snackbar_promotion' : 'color_' + resolved, round && 'snackbar_round', className)}
-      role={role ?? (variant === 'promotion' ? 'region' : resolved === 'error' ? 'alert' : 'status')}
+      className={classNames(
+        'snackbar',
+        variant === 'promotion' ? 'snackbar_promotion' : 'color_' + resolved,
+        round && 'snackbar_round',
+        className,
+      )}
+      role={
+        role ?? (variant === 'promotion' ? 'region' : resolved === 'error' ? 'alert' : 'status')
+      }
     >
       {showIcon && (
-        <span className="snackbar_icon" aria-hidden="true">
-          {hasNodes(icon)
-            ? icon
-            : <Icon name={defaultIconName} size="100%" />}
+        <span
+          className="snackbar_icon"
+          aria-hidden="true"
+        >
+          {hasNodes(icon) ? (
+            icon
+          ) : (
+            <Icon
+              name={defaultIconName}
+              size="100%"
+            />
+          )}
         </span>
       )}
       <span className="snackbar_message">
@@ -110,11 +125,14 @@ export function Snackbar ({
           aria-label="닫기"
           onClick={() => setVisible(false)}
         >
-          <Icon name="close" size="0.75em" />
+          <Icon
+            name="close"
+            size="0.75em"
+          />
         </button>
       )}
     </div>
-  )
+  );
 }
 
-export default Snackbar
+export default Snackbar;

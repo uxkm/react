@@ -10,7 +10,6 @@
   --tag-gap: var(--space-xs);
   --tag-close-size: 0.875rem;
 
-
   // ----- Tag — size sm · lg
   --tag-padding-y-sm: 0.05rem;
   --tag-padding-x-sm: 0.35rem;
@@ -25,7 +24,6 @@
   --tag-icon-size-sm: 0.8125em;
   --tag-icon-size-lg: 1em;
   --tag-add-border-style: dashed;
-
 }
 
 // Tag — OOCSS: 구조(.tag) + 크기(.tag_*) + 변형(.tag_outline · .tag_solid · .tag_round · .tag_checkable · .tag_add) + 공통 색상(.color_*)
@@ -331,7 +329,23 @@ pre code :where(.tag),
 }
 
 .tag.tag_category {
-  min-height: var(--size-32); padding: var(--space-3) var(--space-16); border-color: #efbda8; border-radius: var(--radius-pill);
-  background: transparent; color: var(--color-tag-category-text); font-size: var(--font-size-lg); font-weight: 400; line-height: var(--line-height-24);
+  min-height: var(--size-32);
+  padding: var(--space-3) var(--space-16);
+  border-color: #efbda8;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-tag-category-text);
+  font-size: var(--font-size-lg);
+  font-weight: 400;
+  line-height: var(--line-height-24);
 }
-.tag.tag_brand { padding: 0 var(--space-12); border: 0; border-radius: var(--radius-40); background: #b74428; color: #fff; font-size: inherit; font-weight: 400; line-height: inherit; }
+.tag.tag_brand {
+  padding: 0 var(--space-12);
+  border: 0;
+  border-radius: var(--radius-40);
+  background: #b74428;
+  color: #fff;
+  font-size: inherit;
+  font-weight: 400;
+  line-height: inherit;
+}

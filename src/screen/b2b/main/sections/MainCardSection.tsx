@@ -1,10 +1,14 @@
-import MainPromotionBanner from '@/widgets/b2b/main/MainPromotionBanner' // Main Promotion Banner 컴포넌트
-import MainConsultationCard from '@/widgets/b2b/main/MainConsultationCard' // Main Consultation Card 컴포넌트
-import MainDiagnosisCard from '@/widgets/b2b/main/MainDiagnosisCard' // Main Diagnosis Card 컴포넌트
-import MainQuickLinks from '@/widgets/b2b/main/MainQuickLinks' // Main Quick Links 컴포넌트
+import MainPromotionBanner from '@/widgets/b2b/main/MainPromotionBanner'; // Main Promotion Banner 컴포넌트
+import MainConsultationCard from '@/widgets/b2b/main/MainConsultationCard'; // Main Consultation Card 컴포넌트
+import MainDiagnosisCard from '@/widgets/b2b/main/MainDiagnosisCard'; // Main Diagnosis Card 컴포넌트
+import MainQuickLinks from '@/widgets/b2b/main/MainQuickLinks'; // Main Quick Links 컴포넌트
 
 /** 섹션은 영역 배치만 담당하고 각 레이아웃 안에서 해당 위젯을 호출합니다. */
-export default function MainCardSection ({ designType = 'typeB' }: { designType?: 'typeA' | 'typeB' }) {
+export default function MainCardSection({
+  designType = 'typeB',
+}: {
+  designType?: 'typeA' | 'typeB';
+}) {
   return (
     <section
       id="card-grid"
@@ -30,10 +34,12 @@ export default function MainCardSection ({ designType = 'typeB' }: { designType?
         <MainDiagnosisCard designType={designType} />
       </div>
 
-      {designType === 'typeA' && <div className="main-cards_quick-links">
-        {/* 주요 서비스 바로가기 영역 */}
-        <MainQuickLinks />
-      </div>}
+      {designType === 'typeA' && (
+        <div className="main-cards_quick-links">
+          {/* 주요 서비스 바로가기 영역 */}
+          <MainQuickLinks />
+        </div>
+      )}
     </section>
-  )
+  );
 }

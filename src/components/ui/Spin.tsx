@@ -2,29 +2,29 @@
  * 로딩 스피너.
  * spinning 중 회전 표시. tip · 크기 · 색 · 인라인 · 래퍼 오버레이 지원.
  */
-import type { HTMLAttributes, ReactNode } from 'react' // React
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
-import { hasNodes } from '@/utils/react' // has Nodes
+import type { HTMLAttributes, ReactNode } from 'react'; // React
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
+import { hasNodes } from '@/utils/react'; // has Nodes
 
 /** 로딩 표시가 받는 값 */
 export interface SpinProps extends HTMLAttributes<HTMLDivElement> {
-  spinning?: boolean
-  size?: 'sm' | 'md' | 'lg'
-  color?: 'primary' | 'success' | 'warning' | 'danger' | ''
-  tip?: ReactNode
-  inline?: boolean
+  spinning?: boolean;
+  size?: 'sm' | 'md' | 'lg';
+  color?: 'primary' | 'success' | 'warning' | 'danger' | '';
+  tip?: ReactNode;
+  inline?: boolean;
   /** 단독: spin_block / 자식 래퍼: spin_wrap-block */
-  block?: boolean
+  block?: boolean;
   /** 자식 래퍼 로딩 시 본문 블러(spin_wrap-blur) */
-  blur?: boolean
-  ariaLabel?: string
+  blur?: boolean;
+  ariaLabel?: string;
 }
 
 /**
  * 불러오는 중 표시.
  * 자식이 있으면 spin_wrap + overlay, 없으면 인디케이터만 렌더링한다.
  */
-export function Spin ({
+export function Spin({
   spinning = true,
   size = 'md',
   color = 'primary',
@@ -37,9 +37,9 @@ export function Spin ({
   children,
   ...rest
 }: SpinProps) {
-  const hasChild = hasNodes(children)
-  const showTip = spinning && hasNodes(tip)
-  const label = ariaLabel || (typeof tip === 'string' ? tip : '') || '로딩 중'
+  const hasChild = hasNodes(children);
+  const showTip = spinning && hasNodes(tip);
+  const label = ariaLabel || (typeof tip === 'string' ? tip : '') || '로딩 중';
 
   const indicator = (
     <div
@@ -52,19 +52,24 @@ export function Spin ({
         size === 'lg' && 'spin_lg',
         inline && !hasChild && 'spin_inline',
         block && !hasChild && 'spin_block',
-        !hasChild && className
+        !hasChild && className,
       )}
       role="status"
       aria-live="polite"
       aria-busy={spinning || undefined}
       aria-label={label}
     >
-      {spinning && <span className="spin_indicator" aria-hidden="true" />}
+      {spinning && (
+        <span
+          className="spin_indicator"
+          aria-hidden="true"
+        />
+      )}
       {showTip && <span className="spin_tip">{tip}</span>}
     </div>
-  )
+  );
 
-  if (!hasChild) return indicator
+  if (!hasChild) return indicator;
 
   return (
     <div
@@ -74,13 +79,13 @@ export function Spin ({
         block && 'spin_wrap-block',
         blur && 'spin_wrap-blur',
         spinning && 'is-loading',
-        className
+        className,
       )}
     >
       <div className="spin_wrap-body">{children}</div>
       {spinning && indicator}
     </div>
-  )
+  );
 }
 
-export default Spin
+export default Spin;

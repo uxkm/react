@@ -1,7 +1,7 @@
-import { defineConfig, devices } from '@playwright/test'
+import { defineConfig, devices } from '@playwright/test';
 
-const port = Number(process.env.BROWSER_TEST_PORT || 18100)
-const baseURL = process.env.BROWSER_TEST_BASE_URL || `http://127.0.0.1:${port}`
+const port = Number(process.env.BROWSER_TEST_PORT || 18100);
+const baseURL = process.env.BROWSER_TEST_BASE_URL || `http://127.0.0.1:${port}`;
 
 export default defineConfig({
   testDir: './tests/browser',
@@ -13,33 +13,32 @@ export default defineConfig({
   timeout: 60_000,
   expect: { timeout: 10_000 },
   outputDir: 'test-results/browser',
-  reporter: [
-    ['list'],
-    ['html', { outputFolder: 'reports/browser/html', open: 'never' }]
-  ],
+  reporter: [['list'], ['html', { outputFolder: 'reports/browser/html', open: 'never' }]],
   use: {
     baseURL,
     locale: 'ko-KR',
     trace: 'retain-on-failure',
-    screenshot: 'only-on-failure'
+    screenshot: 'only-on-failure',
   },
   projects: [
     { name: 'desktop-chromium', use: { ...devices['Desktop Chrome'] } },
     {
       name: 'mobile-chromium',
-      use: { ...devices['Pixel 7'] }
-    }
+      use: { ...devices['Pixel 7'] },
+    },
   ],
   // 기본 명령은 먼저 정적 빌드를 생성한다. 외부 검증 서버도 지정할 수 있다.
-  webServer: process.env.BROWSER_TEST_BASE_URL ? undefined : {
-    command: 'node scripts/serve/serve-static.mjs',
-    url: baseURL,
-    reuseExistingServer: false,
-    timeout: 30_000,
-    env: {
-      BIND_HOST: '127.0.0.1',
-      PORT: String(port),
-      HTTPS_PORT: String(port + 1)
-    }
-  }
-})
+  webServer: process.env.BROWSER_TEST_BASE_URL
+    ? undefined
+    : {
+        command: 'node scripts/serve/serve-static.mjs',
+        url: baseURL,
+        reuseExistingServer: false,
+        timeout: 30_000,
+        env: {
+          BIND_HOST: '127.0.0.1',
+          PORT: String(port),
+          HTTPS_PORT: String(port + 1),
+        },
+      },
+});

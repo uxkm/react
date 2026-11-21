@@ -1,17 +1,17 @@
-'use client'
+'use client';
 
-import { useState } from 'react' // 상태 훅
-import { Switch } from '@/comp' // Switch 컴포넌트
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
-import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
-import { switchApiSections } from '@/screen/pub/data/guide/switchApiSections' // switch Api Sections
+import { useState } from 'react'; // 상태 훅
+import { Switch } from '@/comp'; // Switch 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'; // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'; // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout'; // Guide Layout 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'; // wrap Page Example
+import { switchApiSections } from '@/screen/pub/data/guide/switchApiSections'; // switch Api Sections
 
 /** checked · onChange 로 부모가 켜짐 상태를 관리하는 예시 */
-function ControlledDemo () {
-  const [checked, setChecked] = useState(false)
-  const [autoSave, setAutoSave] = useState(true)
+function ControlledDemo() {
+  const [checked, setChecked] = useState(false);
+  const [autoSave, setAutoSave] = useState(true);
 
   return (
     <div className="demo-stack">
@@ -26,7 +26,7 @@ function ControlledDemo () {
         label="자동 저장"
       />
     </div>
-  )
+  );
 }
 
 const SECTIONS = [
@@ -38,41 +38,58 @@ const SECTIONS = [
         <code>switch_label-end</code>는 레이블 → 스위치 순서이며, 설정 화면에서 자주 사용합니다.
       </>
     ),
-    code: wrapPageExample(`<Switch defaultChecked label="기본 — switch" />
-<Switch labelEnd defaultChecked label="레이블 뒤 — switch_label-end" />`, {
-  name: 'SwitchExample1',
-  reactImports: [],
-  compImports: ['Switch']
-}),
+    code: wrapPageExample(
+      `<Switch defaultChecked label="기본 — switch" />
+<Switch labelEnd defaultChecked label="레이블 뒤 — switch_label-end" />`,
+      {
+        name: 'SwitchExample1',
+        reactImports: [],
+        compImports: ['Switch'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
-        <Switch defaultChecked label="기본 — switch" />
-        <Switch labelEnd defaultChecked label="레이블 뒤 — switch_label-end" />
+        <Switch
+          defaultChecked
+          label="기본 — switch"
+        />
+        <Switch
+          labelEnd
+          defaultChecked
+          label="레이블 뒤 — switch_label-end"
+        />
       </div>
-    )
+    ),
   },
   {
     title: '레이블 뒤',
     description: (
       <>
-        <code>labelEnd</code>는 레이블 → 스위치 순입니다.
-        전체 너비는 <code>switch_block</code> · <code>switch_group_block</code>을 씁니다.
+        <code>labelEnd</code>는 레이블 → 스위치 순입니다. 전체 너비는 <code>switch_block</code> ·{' '}
+        <code>switch_group_block</code>을 씁니다.
       </>
     ),
-    code: wrapPageExample(`<Switch labelEnd defaultChecked label="푸시 알림 받기" />
+    code: wrapPageExample(
+      `<Switch labelEnd defaultChecked label="푸시 알림 받기" />
 <Switch labelEnd>
   <span className="switch_content">
     <span className="switch_label">마케팅 정보 수신</span>
     <span className="switch_hint">이벤트·할인 소식을 이메일로 받습니다.</span>
   </span>
-</Switch>`, {
-  name: 'SwitchExample2',
-  reactImports: [],
-  compImports: ['Switch']
-}),
+</Switch>`,
+      {
+        name: 'SwitchExample2',
+        reactImports: [],
+        compImports: ['Switch'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
-        <Switch labelEnd defaultChecked label="푸시 알림 받기" />
+        <Switch
+          labelEnd
+          defaultChecked
+          label="푸시 알림 받기"
+        />
         <Switch labelEnd>
           <span className="switch_content">
             <span className="switch_label">마케팅 정보 수신</span>
@@ -84,24 +101,47 @@ const SECTIONS = [
           style={{ maxWidth: 360, width: '100%' }}
         >
           <legend className="switch_group-legend">알림 설정 — switch_group_block</legend>
-          <Switch labelEnd defaultChecked label="이메일 알림" />
-          <Switch labelEnd defaultChecked label="푸시 알림" />
-          <Switch labelEnd label="SMS 알림" />
+          <Switch
+            labelEnd
+            defaultChecked
+            label="이메일 알림"
+          />
+          <Switch
+            labelEnd
+            defaultChecked
+            label="푸시 알림"
+          />
+          <Switch
+            labelEnd
+            label="SMS 알림"
+          />
         </fieldset>
-        <Switch labelEnd size="sm" defaultChecked label="Small — switch_sm" />
-        <Switch labelEnd size="lg" defaultChecked label="Large — switch_lg" />
+        <Switch
+          labelEnd
+          size="sm"
+          defaultChecked
+          label="Small — switch_sm"
+        />
+        <Switch
+          labelEnd
+          size="lg"
+          defaultChecked
+          label="Large — switch_lg"
+        />
       </div>
-    )
+    ),
   },
   {
     title: '기본',
     description: (
       <>
-        부모가 상태를 관리하는 예제는 <code>checked</code>와 <code>onChange</code>를 함께 전달합니다. 초기 상태만 지정할 때는 <code>defaultChecked</code>를 사용합니다.
-        부모 <code>useState</code>로 켜짐 상태를 관리합니다.
+        부모가 상태를 관리하는 예제는 <code>checked</code>와 <code>onChange</code>를 함께
+        전달합니다. 초기 상태만 지정할 때는 <code>defaultChecked</code>를 사용합니다. 부모{' '}
+        <code>useState</code>로 켜짐 상태를 관리합니다.
       </>
     ),
-    code: wrapPageExample(`const [checked, setChecked] = useState(false)
+    code: wrapPageExample(
+      `const [checked, setChecked] = useState(false)
 const [autoSave, setAutoSave] = useState(true)
 
 <Switch
@@ -113,34 +153,46 @@ const [autoSave, setAutoSave] = useState(true)
   checked={autoSave}
   onChange={(e) => setAutoSave(e.target.checked)}
   label="자동 저장"
-/>`, {
-      name: 'SwitchExample',
-      reactImports: ['useState'],
-      compImports: ['Switch']
-    }),
-    preview: <ControlledDemo />
+/>`,
+      {
+        name: 'SwitchExample',
+        reactImports: ['useState'],
+        compImports: ['Switch'],
+      },
+    ),
+    preview: <ControlledDemo />,
   },
   {
     title: '단독 사용',
     description: (
       <>
-        레이블 없이 스위치만 사용할 수 있습니다. <code>ariaLabel</code>로 접근 가능한 이름을 지정합니다.
+        레이블 없이 스위치만 사용할 수 있습니다. <code>ariaLabel</code>로 접근 가능한 이름을
+        지정합니다.
       </>
     ),
-    code: wrapPageExample(`<Switch ariaLabel="기능 켜기" />
+    code: wrapPageExample(
+      `<Switch ariaLabel="기능 켜기" />
 <Switch defaultChecked ariaLabel="기능 끄기" />
-<Switch disabled ariaLabel="비활성" />`, {
-  name: 'SwitchExample3',
-  reactImports: [],
-  compImports: ['Switch']
-}),
+<Switch disabled ariaLabel="비활성" />`,
+      {
+        name: 'SwitchExample3',
+        reactImports: [],
+        compImports: ['Switch'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
         <Switch ariaLabel="기능 켜기" />
-        <Switch defaultChecked ariaLabel="기능 끄기" />
-        <Switch disabled ariaLabel="비활성" />
+        <Switch
+          defaultChecked
+          ariaLabel="기능 끄기"
+        />
+        <Switch
+          disabled
+          ariaLabel="비활성"
+        />
       </div>
-    )
+    ),
   },
   {
     title: '크기',
@@ -149,90 +201,170 @@ const [autoSave, setAutoSave] = useState(true)
         <code>size</code>는 sm · md · lg입니다.
       </>
     ),
-    code: wrapPageExample(`<Switch labelEnd size="sm" defaultChecked label="Small — switch_sm" />
+    code: wrapPageExample(
+      `<Switch labelEnd size="sm" defaultChecked label="Small — switch_sm" />
 <Switch labelEnd defaultChecked label="Medium — 기본" />
-<Switch labelEnd size="lg" defaultChecked label="Large — switch_lg" />`, {
-  name: 'SwitchSizeExample',
-  reactImports: [],
-  compImports: ['Switch']
-}),
+<Switch labelEnd size="lg" defaultChecked label="Large — switch_lg" />`,
+      {
+        name: 'SwitchSizeExample',
+        reactImports: [],
+        compImports: ['Switch'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
-        <Switch labelEnd size="sm" defaultChecked label="Small — switch_sm" />
-        <Switch labelEnd defaultChecked label="Medium — 기본" />
-        <Switch labelEnd size="lg" defaultChecked label="Large — switch_lg" />
+        <Switch
+          labelEnd
+          size="sm"
+          defaultChecked
+          label="Small — switch_sm"
+        />
+        <Switch
+          labelEnd
+          defaultChecked
+          label="Medium — 기본"
+        />
+        <Switch
+          labelEnd
+          size="lg"
+          defaultChecked
+          label="Large — switch_lg"
+        />
       </div>
-    )
+    ),
   },
   {
     title: '너비',
     description: (
       <>
-        기본은 인라인(콘텐츠) 너비입니다. <code>switch_block</code> · <code>switch_group_block</code>으로 전체 너비를 사용합니다.
+        기본은 인라인(콘텐츠) 너비입니다. <code>switch_block</code> ·{' '}
+        <code>switch_group_block</code>으로 전체 너비를 사용합니다.
       </>
     ),
-    code: wrapPageExample(`<Switch labelEnd defaultChecked label="기본 — 인라인 너비" />
+    code: wrapPageExample(
+      `<Switch labelEnd defaultChecked label="기본 — 인라인 너비" />
 <Switch labelEnd className="switch_block" defaultChecked label="switch_block — 전체 너비" />
-<fieldset className="switch_group switch_group_block">…</fieldset>`, {
-  name: 'SwitchExample5',
-  reactImports: [],
-  compImports: ['Switch']
-}),
+<fieldset className="switch_group switch_group_block">…</fieldset>`,
+      {
+        name: 'SwitchExample5',
+        reactImports: [],
+        compImports: ['Switch'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
-        <Switch labelEnd defaultChecked label="기본 — 인라인 너비" />
-        <Switch labelEnd className="switch_block" defaultChecked label="switch_block — 전체 너비" />
+        <Switch
+          labelEnd
+          defaultChecked
+          label="기본 — 인라인 너비"
+        />
+        <Switch
+          labelEnd
+          className="switch_block"
+          defaultChecked
+          label="switch_block — 전체 너비"
+        />
         <fieldset
           className="switch_group switch_group_block"
           style={{ maxWidth: 360, width: '100%' }}
         >
           <legend className="switch_group-legend">switch_group_block</legend>
-          <Switch labelEnd defaultChecked label="Wi-Fi" />
-          <Switch labelEnd label="블루투스" />
+          <Switch
+            labelEnd
+            defaultChecked
+            label="Wi-Fi"
+          />
+          <Switch
+            labelEnd
+            label="블루투스"
+          />
         </fieldset>
       </div>
-    )
+    ),
   },
   {
     title: '색상',
     description: (
       <>
-        <code>color_primary</code> · <code>color_success</code> · <code>color_danger</code> · <code>color_warning</code>으로 켜짐 색을 지정합니다.
+        <code>color_primary</code> · <code>color_success</code> · <code>color_danger</code> ·{' '}
+        <code>color_warning</code>으로 켜짐 색을 지정합니다.
       </>
     ),
-    code: wrapPageExample(`<Switch className="color_primary" labelEnd defaultChecked label="Primary" />
-…`, {
-  name: 'SwitchColorExample',
-  reactImports: [],
-  compImports: ['Switch']
-}),
+    code: wrapPageExample(
+      `<Switch className="color_primary" labelEnd defaultChecked label="Primary" />
+…`,
+      {
+        name: 'SwitchColorExample',
+        reactImports: [],
+        compImports: ['Switch'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
-        <Switch className="color_primary" labelEnd defaultChecked label="Primary" />
-        <Switch className="color_success" labelEnd defaultChecked label="Success" />
-        <Switch className="color_danger" labelEnd defaultChecked label="Danger" />
-        <Switch className="color_warning" labelEnd defaultChecked label="Warning" />
+        <Switch
+          className="color_primary"
+          labelEnd
+          defaultChecked
+          label="Primary"
+        />
+        <Switch
+          className="color_success"
+          labelEnd
+          defaultChecked
+          label="Success"
+        />
+        <Switch
+          className="color_danger"
+          labelEnd
+          defaultChecked
+          label="Danger"
+        />
+        <Switch
+          className="color_warning"
+          labelEnd
+          defaultChecked
+          label="Warning"
+        />
       </div>
-    )
+    ),
   },
   {
     title: '상태',
     description: <>켜짐·꺼짐·비활성 상태를 지원합니다.</>,
-    code: wrapPageExample(`<Switch labelEnd label="꺼짐" />
+    code: wrapPageExample(
+      `<Switch labelEnd label="꺼짐" />
 <Switch labelEnd defaultChecked label="켜짐" />
-<Switch labelEnd disabled label="비활성" />`, {
-  name: 'SwitchStateExample',
-  reactImports: [],
-  compImports: ['Switch']
-}),
+<Switch labelEnd disabled label="비활성" />`,
+      {
+        name: 'SwitchStateExample',
+        reactImports: [],
+        compImports: ['Switch'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
-        <Switch labelEnd label="꺼짐" />
-        <Switch labelEnd defaultChecked label="켜짐" />
-        <Switch labelEnd disabled label="비활성" />
-        <Switch labelEnd defaultChecked disabled label="켜짐 (비활성)" />
+        <Switch
+          labelEnd
+          label="꺼짐"
+        />
+        <Switch
+          labelEnd
+          defaultChecked
+          label="켜짐"
+        />
+        <Switch
+          labelEnd
+          disabled
+          label="비활성"
+        />
+        <Switch
+          labelEnd
+          defaultChecked
+          disabled
+          label="켜짐 (비활성)"
+        />
       </div>
-    )
+    ),
   },
   {
     title: '그룹',
@@ -241,7 +373,8 @@ const [autoSave, setAutoSave] = useState(true)
         <code>switch_group</code>으로 묶습니다. <code>switch_group_compact</code>로 간격을 줄입니다.
       </>
     ),
-    code: wrapPageExample(`<fieldset className="switch_group switch_group_block">
+    code: wrapPageExample(
+      `<fieldset className="switch_group switch_group_block">
   <legend className="switch_group-legend">개인정보 설정</legend>
   <Switch labelEnd defaultChecked>
     <span className="switch_content">
@@ -250,11 +383,13 @@ const [autoSave, setAutoSave] = useState(true)
     </span>
   </Switch>
   …
-</fieldset>`, {
-  name: 'SwitchGroupExample',
-  reactImports: [],
-  compImports: ['Switch']
-}),
+</fieldset>`,
+      {
+        name: 'SwitchGroupExample',
+        reactImports: [],
+        compImports: ['Switch'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
         <fieldset
@@ -262,7 +397,10 @@ const [autoSave, setAutoSave] = useState(true)
           style={{ maxWidth: 400, width: '100%' }}
         >
           <legend className="switch_group-legend">개인정보 설정</legend>
-          <Switch labelEnd defaultChecked>
+          <Switch
+            labelEnd
+            defaultChecked
+          >
             <span className="switch_content">
               <span className="switch_label">프로필 공개</span>
               <span className="switch_hint">다른 사용자가 내 프로필을 볼 수 있습니다.</span>
@@ -274,18 +412,28 @@ const [autoSave, setAutoSave] = useState(true)
               <span className="switch_hint">최근 활동이 타임라인에 노출됩니다.</span>
             </span>
           </Switch>
-          <Switch labelEnd defaultChecked label="검색 허용" />
+          <Switch
+            labelEnd
+            defaultChecked
+            label="검색 허용"
+          />
         </fieldset>
         <fieldset
           className="switch_group switch_group_block switch_group_compact"
           style={{ maxWidth: 400, width: '100%' }}
         >
           <legend className="switch_group-legend">접근성 — switch_group_compact</legend>
-          <Switch labelEnd label="고대비 모드" />
-          <Switch labelEnd label="애니메이션 줄이기" />
+          <Switch
+            labelEnd
+            label="고대비 모드"
+          />
+          <Switch
+            labelEnd
+            label="애니메이션 줄이기"
+          />
         </fieldset>
       </div>
-    )
+    ),
   },
   {
     title: '폼 레이아웃',
@@ -294,7 +442,8 @@ const [autoSave, setAutoSave] = useState(true)
         <code>form_vertical</code> · <code>form_horizontal</code>과 함께 사용합니다.
       </>
     ),
-    code: wrapPageExample(`<form className="form form_vertical form_fit">
+    code: wrapPageExample(
+      `<form className="form form_vertical form_fit">
   <div className="form_field">
     <span className="form_field-label" id="…">알림</span>
     <fieldset className="switch_group switch_group_block" aria-labelledby="…">
@@ -302,30 +451,51 @@ const [autoSave, setAutoSave] = useState(true)
       <Switch labelEnd label="푸시 알림" />
     </fieldset>
   </div>
-</form>`, {
-  name: 'SwitchFormExample',
-  reactImports: [],
-  compImports: ['Switch']
-}),
+</form>`,
+      {
+        name: 'SwitchFormExample',
+        reactImports: [],
+        compImports: ['Switch'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
-        <form className="form form_vertical form_fit" onSubmit={(event) => event.preventDefault()}>
+        <form
+          className="form form_vertical form_fit"
+          onSubmit={(event) => event.preventDefault()}
+        >
           <div className="form_field">
-            <span className="form_field-label" id="switch-form-vertical-label">
+            <span
+              className="form_field-label"
+              id="switch-form-vertical-label"
+            >
               알림
             </span>
             <fieldset
               className="switch_group switch_group_block"
               aria-labelledby="switch-form-vertical-label"
             >
-              <Switch labelEnd defaultChecked label="이메일 알림" />
-              <Switch labelEnd label="푸시 알림" />
+              <Switch
+                labelEnd
+                defaultChecked
+                label="이메일 알림"
+              />
+              <Switch
+                labelEnd
+                label="푸시 알림"
+              />
             </fieldset>
           </div>
         </form>
-        <form className="form form_horizontal form_fit" onSubmit={(event) => event.preventDefault()}>
+        <form
+          className="form form_horizontal form_fit"
+          onSubmit={(event) => event.preventDefault()}
+        >
           <div className="form_field">
-            <span className="form_field-label" id="switch-form-horizontal-label">
+            <span
+              className="form_field-label"
+              id="switch-form-horizontal-label"
+            >
               자동 저장
             </span>
             <Switch
@@ -337,15 +507,15 @@ const [autoSave, setAutoSave] = useState(true)
           </div>
         </form>
       </div>
-    )
-  }
-]
+    ),
+  },
+];
 
 /**
  * Switch 가이드 화면.
  * docs와 동일한 유형·크기·그룹·폼 예시와 API 문서를 모은다.
  */
-export default function SwitchGuide () {
+export default function SwitchGuide() {
   return (
     <GuideLayout
       category="폼"
@@ -366,5 +536,5 @@ export default function SwitchGuide () {
 
       <GuideApiDocs sections={switchApiSections} />
     </GuideLayout>
-  )
+  );
 }

@@ -1,10 +1,10 @@
-'use client'
+'use client';
 
 /**
  * 퍼블리싱 작업 전 안내 화면.
  * 폴더/화면 메타·하위 링크를 한글 원문으로 보여 준다.
  */
-import { Link } from '@/lib/router' // 클라이언트 링크
+import { Link } from '@/lib/router'; // 클라이언트 링크
 
 /**
  * B2B 화면·위젯 프리뷰의 작업 전 안내 UI — 한글 원문으로 렌더.
@@ -20,7 +20,7 @@ import { Link } from '@/lib/router' // 클라이언트 링크
  * - pageUrl     : 메타 dl 용 URL (번역 제외)
  * - links       : 하위 화면 링크 목록 `{ to, label, screenId? }[]`
  */
-export function PublishingPlaceholder ({
+export function PublishingPlaceholder({
   device,
   folderId,
   folderName,
@@ -28,18 +28,18 @@ export function PublishingPlaceholder ({
   screenType,
   screenId,
   pageUrl,
-  links
+  links,
 }) {
-  const folderLabel = folderName || folderId || ''
-  const nameLabel = screenName || folderLabel
+  const folderLabel = folderName || folderId || '';
+  const nameLabel = screenName || folderLabel;
   /** 폴더명 앞 번호(예: "01. ") 제거한 짧은 이름 — 안내 문구용 */
-  const shortName = String(folderLabel || '').replace(/^\d+\.\s*/, '') || nameLabel
+  const shortName = String(folderLabel || '').replace(/^\d+\.\s*/, '') || nameLabel;
 
   return (
     <div className="page">
       {device ? <p>{device} 메뉴</p> : null}
       <h1>{nameLabel}</h1>
-      {(screenType || screenId || pageUrl) ? (
+      {screenType || screenId || pageUrl ? (
         <dl>
           {screenType ? (
             <div>
@@ -70,15 +70,13 @@ export function PublishingPlaceholder ({
         <ul>
           {links.map((item) => (
             <li key={item.to || item.screenId || item.label}>
-              {item.to
-                ? <Link to={item.to}>{item.label}</Link>
-                : (item.label || '')}
+              {item.to ? <Link to={item.to}>{item.label}</Link> : item.label || ''}
             </li>
           ))}
         </ul>
       ) : null}
     </div>
-  )
+  );
 }
 
-export default PublishingPlaceholder
+export default PublishingPlaceholder;

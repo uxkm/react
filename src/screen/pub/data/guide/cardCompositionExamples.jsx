@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
+import { useState } from 'react';
 import {
   Button,
   Card,
@@ -10,14 +10,14 @@ import {
   Icon,
   Progress,
   Tag,
-  TagGroup
-} from '@/comp'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
-import CourseCatalogDemo, { courseCatalogCode } from './courseCatalogExample'
-import { corporateCardCompositionExamples } from './corporateCardExamples'
+  TagGroup,
+} from '@/comp';
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode';
+import CourseCatalogDemo, { courseCatalogCode } from './courseCatalogExample';
+import { corporateCardCompositionExamples } from './corporateCardExamples';
 
 function ThumbnailFallbackDemo() {
-  const [recovered, setRecovered] = useState(false)
+  const [recovered, setRecovered] = useState(false);
   return (
     <div className="demo-stack">
       <CardDeck columns={2}>
@@ -26,7 +26,7 @@ function ThumbnailFallbackDemo() {
           card={{
             id: 'no-thumbnail',
             title: '이미지가 없는 교육과정',
-            href: '#card-types'
+            href: '#card-types',
           }}
         />
         <Card
@@ -36,7 +36,7 @@ function ThumbnailFallbackDemo() {
             category: '인사이트',
             title: '이미지 로드 실패와 복구',
             description: '불러오기 실패 시에도 썸네일 크기를 유지합니다.',
-            href: '#card-types'
+            href: '#card-types',
           }}
           image={
             recovered
@@ -53,11 +53,11 @@ function ThumbnailFallbackDemo() {
         {recovered ? '실패 이미지로 교체' : '정상 이미지로 교체'}
       </Button>
     </div>
-  )
+  );
 }
 
 function LearningCardDemo() {
-  const [saved, setSaved] = useState(false)
+  const [saved, setSaved] = useState(false);
   return (
     <Card
       type="course"
@@ -67,7 +67,7 @@ function LearningCardDemo() {
         category: '나의 학습',
         title: '데이터로 설득하는 보고서 작성',
         description: '학습기간 2026.11.01 ~ 2026.11.30',
-        href: '#card-composition'
+        href: '#card-composition',
       }}
       image={{ src: '/images/@dummy/hr-trend.png', fit: '120% auto' }}
       slots={{
@@ -94,7 +94,7 @@ function LearningCardDemo() {
             ariaLabel="보고서 작성 과정 학습 진도"
           />
         ),
-        footer: <span>10차시 중 6차시 완료</span>
+        footer: <span>10차시 중 6차시 완료</span>,
       }}
       actions={
         <>
@@ -123,7 +123,7 @@ function LearningCardDemo() {
         </>
       }
     />
-  )
+  );
 }
 
 const learningCode = `const [saved, setSaved] = useState(false)
@@ -145,7 +145,7 @@ const learningCode = `const [saved, setSaved] = useState(false)
     </Button>
     <Button tag="a" href="#card-types" size="sm">이어서 학습</Button>
   </>}
-/>`
+/>`;
 
 const recommendations = [
   {
@@ -154,7 +154,7 @@ const recommendations = [
     title: 'AI로 달라지는 일하는 방법',
     description: '업무에 적용할 아이디어를 확인하세요.',
     href: '#card-composition',
-    image: { src: '/images/@dummy/hr-trend.png', fit: '120% auto' }
+    image: { src: '/images/@dummy/hr-trend.png', fit: '120% auto' },
   },
   {
     id: 'leadership',
@@ -162,7 +162,7 @@ const recommendations = [
     title: '함께 성장하는 팀의 대화',
     description: '팀을 위한 커뮤니케이션을 배웁니다.',
     href: '#card-composition',
-    image: { src: '/images/@dummy/hr-trend.png', fit: '120% auto' }
+    image: { src: '/images/@dummy/hr-trend.png', fit: '120% auto' },
   },
   {
     id: 'data',
@@ -170,9 +170,9 @@ const recommendations = [
     title: '숫자로 읽는 비즈니스',
     description: '데이터를 이해하는 관점을 넓혀 보세요.',
     href: '#card-composition',
-    image: { src: '/images/@dummy/hr-trend.png', fit: '120% auto' }
-  }
-]
+    image: { src: '/images/@dummy/hr-trend.png', fit: '120% auto' },
+  },
+];
 
 export const cardCompositionExamples = [
   {
@@ -193,9 +193,9 @@ export const cardCompositionExamples = [
       {
         name: 'ThumbnailFallbackExample',
         reactImports: ['useState'],
-        compImports: ['Card', 'CardDeck', 'Button']
-      }
-    )
+        compImports: ['Card', 'CardDeck', 'Button'],
+      },
+    ),
   },
   {
     id: 'catalog',
@@ -203,7 +203,7 @@ export const cardCompositionExamples = [
     description:
       '과정 목록의 정보 구조를 기존 course 유형에 적용했습니다. 제목 앞 속성 배지·여러 일정·평점과 후기·키워드·가격·맛보기·찜·신청 상태를 조합합니다. 목록형과 갤러리형을 전환할 수 있으며 내용은 예시 데이터입니다.',
     preview: <CourseCatalogDemo />,
-    code: courseCatalogCode
+    code: courseCatalogCode,
   },
   {
     id: 'learning',
@@ -214,8 +214,8 @@ export const cardCompositionExamples = [
     code: wrapPageExample(learningCode, {
       name: 'LearningCardExample',
       reactImports: ['useState'],
-      compImports: ['Card', 'Tag', 'TagGroup', 'Progress', 'Button', 'Icon']
-    })
+      compImports: ['Card', 'Tag', 'TagGroup', 'Progress', 'Button', 'Icon'],
+    }),
   },
   {
     id: 'recommendations',
@@ -249,9 +249,9 @@ export const cardCompositionExamples = [
       {
         name: 'RecommendedCardsExample',
         reactImports: [],
-        compImports: ['Card', 'Carousel', 'CarouselSlide']
-      }
-    )
+        compImports: ['Card', 'Carousel', 'CarouselSlide'],
+      },
+    ),
   },
   {
     id: 'services',
@@ -272,14 +272,14 @@ export const cardCompositionExamples = [
                 name="search"
                 size={32}
               />
-            )
+            ),
           }}
         />
         <Card
           type="callout"
           card={{
             title: '학습 상담',
-            description: '목표에 맞는 학습을 찾아보세요.'
+            description: '목표에 맞는 학습을 찾아보세요.',
           }}
           actions={
             <Button
@@ -301,9 +301,9 @@ export const cardCompositionExamples = [
       {
         name: 'ServiceCardsExample',
         reactImports: [],
-        compImports: ['Card', 'CardDeck', 'Icon', 'Button']
-      }
-    )
+        compImports: ['Card', 'CardDeck', 'Icon', 'Button'],
+      },
+    ),
   },
-  ...corporateCardCompositionExamples
-]
+  ...corporateCardCompositionExamples,
+];

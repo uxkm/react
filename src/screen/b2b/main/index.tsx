@@ -1,29 +1,29 @@
-'use client'
+'use client';
 
-import { Page, PageBanner, PageLoading, useSiteTitle, usePageData } from '@/comp' // 페이지 공통
-import { useScrollToHash } from '@/hooks/react/useScrollToHash' // URL 해시 스크롤
+import { Page, PageBanner, PageLoading, useSiteTitle, usePageData } from '@/comp'; // 페이지 공통
+import { useScrollToHash } from '@/hooks/react/useScrollToHash'; // URL 해시 스크롤
 import {
   MainHero,
   MainCardSection,
   MainInsightSection,
   MainCaseSection,
-  MainCalloutSectionTypeA
-} from './sections' // 메인 섹션
-import { useMainAos } from '@/widgets/b2b/main/useMainAos'
-import InquirySnackbar from '@/widgets/b2b/common/InquirySnackbar'
-import { useMainPageType } from '@/widgets/b2b/main/useMainDesignType'
-import { mainTypeANoticeProps } from '@/widgets/b2b/main/MainTopBanner'
-import MainHeroTypeA from './sections/MainHeroTypeA'
-import IndexSkeleton from './skeleton/indexSkeleton' // Index Skeleton 컴포넌트
+  MainCalloutSectionTypeA,
+} from './sections'; // 메인 섹션
+import { useMainAos } from '@/widgets/b2b/main/useMainAos';
+import InquirySnackbar from '@/widgets/b2b/common/InquirySnackbar';
+import { useMainPageType } from '@/widgets/b2b/main/useMainDesignType';
+import { mainTypeANoticeProps } from '@/widgets/b2b/main/MainTopBanner';
+import MainHeroTypeA from './sections/MainHeroTypeA';
+import IndexSkeleton from './skeleton/indexSkeleton'; // Index Skeleton 컴포넌트
 
 /** 메인 화면은 sections의 섹션을 호출하고, 각 섹션은 widgets의 개별 콘텐츠를 배치합니다. */
-export default function B2bMainPage () {
-  const pageType = useMainPageType()
-  const designType = pageType === 'typeA' ? 'typeA' : 'typeB'
+export default function B2bMainPage() {
+  const pageType = useMainPageType();
+  const designType = pageType === 'typeA' ? 'typeA' : 'typeB';
   // 메인은 페이지명 없이 사이트명만 표시한다.
-  useSiteTitle()
+  useSiteTitle();
   // 헤더 고객사례(/b2b#cases) 등 해시로 진입 시 해당 섹션으로 스크롤
-  useScrollToHash()
+  useScrollToHash();
 
   /*
    * 로딩(스켈레톤) — API 없음, 이 페이지 폴더에서 호출한 모듈 기준
@@ -51,8 +51,8 @@ export default function B2bMainPage () {
    *    <PageLoading loading={loading} skeletonMode="manual" skeleton={<IndexSkeleton />} />
    */
   // const { loading } = usePageData() // 기본: 스켈레톤 먼저 → 모듈 준비 후 본문
-  const { loading } = usePageData({ enabled: false }) // 스켈레톤 선표시 없이 바로 본문
-  useMainAos(loading)
+  const { loading } = usePageData({ enabled: false }); // 스켈레톤 선표시 없이 바로 본문
+  useMainAos(loading);
   // const loading = true // 디자인 확인용: 스켈레톤만 계속 표시
 
   return (
@@ -61,13 +61,16 @@ export default function B2bMainPage () {
         AppLayout 의 <main> 에 메타를 반영 (화면에는 안 그림)
         - page="main" → <main data-page="main">
         - className="p-content" → <main class="app-layout_main p-content">
-          (B2B 본문 폭: min 1440 / max 1600, styles/pages/b2b/index.scss)
+          (B2B 본문 폭: min 1440 / max 1600, styles/pages/b2b/common/_layout.scss)
         메인은 title 없이 사이트명만. (주석에 title="…" 리터럴을 쓰면
         registry 가 타이틀로 긁어가니, 예시는 title={pageTitle} 형태로만 적을 것)
         예) <Page page="main" className="p-content" />
             <Page page="contents-it" title={pageTitle} className="p-content" />
       */}
-      <Page page="main" className={`p-content main-page_${designType}`} />
+      <Page
+        page="main"
+        className={`p-content main-page_${designType}`}
+      />
       {designType === 'typeA' && <PageBanner {...mainTypeANoticeProps} />}
       <PageLoading
         loading={loading}
@@ -92,5 +95,5 @@ export default function B2bMainPage () {
       </PageLoading>
       <InquirySnackbar />
     </>
-  )
+  );
 }

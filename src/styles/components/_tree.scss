@@ -45,13 +45,16 @@
   &_item {
     min-width: 0;
 
-    &[data-expanded="false"] > .tree {
+    &[data-expanded='false'] > .tree {
       display: none;
     }
   }
 
   &_row {
-    &:focus-visible { outline: var(--focus-outline-width) solid var(--color-accent); outline-offset: var(--focus-outline-offset); }
+    &:focus-visible {
+      outline: var(--focus-outline-width) solid var(--color-accent);
+      outline-offset: var(--focus-outline-offset);
+    }
     display: flex;
     align-items: center;
     gap: $space-xs;
@@ -114,7 +117,7 @@
     @include focus-ring;
 
     &::before {
-      content: "";
+      content: '';
       display: block;
       width: 0;
       height: 0;
@@ -124,14 +127,14 @@
       transition: transform $transition-fast;
     }
 
-    &[aria-expanded="true"]::before {
+    &[aria-expanded='true']::before {
       transform: rotate(90deg);
     }
   }
 
   &_toggle-plus {
     &::before {
-      content: "+";
+      content: '+';
       display: flex;
       align-items: center;
       justify-content: center;
@@ -149,8 +152,8 @@
         border-color $transition-fast;
     }
 
-    &[aria-expanded="true"]::before {
-      content: "−";
+    &[aria-expanded='true']::before {
+      content: '−';
       transform: none;
     }
 
@@ -200,7 +203,7 @@
     margin: 0;
     cursor: pointer;
 
-    input[type="checkbox"] {
+    input[type='checkbox'] {
       margin: 0;
       width: var(--tree-size-0-875rem);
       height: var(--tree-size-0-875rem);
@@ -231,7 +234,7 @@
       position: relative;
 
       &::before {
-        content: "";
+        content: '';
         position: absolute;
         top: 0;
         bottom: 0;
@@ -245,7 +248,7 @@
       }
 
       > .tree_row::before {
-        content: "";
+        content: '';
         position: absolute;
         top: calc(var(--tree-row-height) / 2);
         left: calc(var(--tree-toggle-size) / 2 - var(--tree-indent));
@@ -260,5 +263,17 @@
   }
 }
 
-.tree_check { display: inline-flex; align-items: center; justify-content: center; min-width: var(--size-24); min-height: var(--size-24); }
-.tree .tree_check input { min-width: var(--size-24); min-height: var(--size-24); width: var(--size-24); height: var(--size-24); margin: 0; }
+.tree_check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--size-24);
+  min-height: var(--size-24);
+}
+.tree .tree_check input {
+  min-width: var(--size-24);
+  min-height: var(--size-24);
+  width: var(--size-24);
+  height: var(--size-24);
+  margin: 0;
+}

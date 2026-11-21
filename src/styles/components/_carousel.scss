@@ -53,7 +53,6 @@
   --carousel-dot-size-active-lg: 1.5rem;
   --carousel-toggle-size-lg: 2.5rem;
   --carousel-toggle-icon-size-lg: 1.125rem;
-
 }
 
 // Carousel — React(viewport/track) · Swiper(선택)
@@ -614,7 +613,7 @@
       display: none;
     }
 
-    &[aria-pressed="false"] {
+    &[aria-pressed='false'] {
       .carousel_toggle-icon-pause {
         display: none;
       }

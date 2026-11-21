@@ -12,7 +12,6 @@
   --list-marker-gap: var(--space-xs);
   --list-inline-label-width: 8rem;
   --list-inline-gap: var(--space-md);
-
 }
 
 // List — OOCSS: 구조(.list) + 스킨(.list_bordered · .list_bullet · .list_ordered) + 파트(.list_item · .list_link)
@@ -259,7 +258,7 @@
   }
 
   // 계층 번호 — counters()로 뎁스별 1.1 · 1-1 형식 생성
-  @mixin list-ordered-hierarchical($separator, $suffix: ". ") {
+  @mixin list-ordered-hierarchical($separator, $suffix: '. ') {
     list-style: none;
     counter-reset: outline;
 
@@ -268,7 +267,7 @@
       @include list-marker-item;
 
       &::marker {
-        content: counters(outline, "#{$separator}") "#{$suffix}";
+        content: counters(outline, '#{$separator}') '#{$suffix}';
       }
     }
 
@@ -310,12 +309,12 @@
 
   // 1 → 1.1 → 1.1.1
   &_ordered-outline {
-    @include list-ordered-hierarchical(".");
+    @include list-ordered-hierarchical('.');
   }
 
   // 1 → 1-1 → 1-1-1
   &_ordered-dash {
-    @include list-ordered-hierarchical("-", " ");
+    @include list-ordered-hierarchical('-', ' ');
   }
 
   // 뎁스마다 번호 형식 자동 전환 (1 → a → i → 1 …)

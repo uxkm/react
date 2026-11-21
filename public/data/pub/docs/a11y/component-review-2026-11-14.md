@@ -17,72 +17,72 @@
 
 ## UI 파일별 결과
 
-| 파일 | 검토 결과·호출 계약 |
-| --- | --- |
-| `Accordion` | Enter·Space, 펼침 상태·패널 연결 확인. 내부 캐러셀 조작 영역 보완. |
-| `Affix` | DOM 순서 유지와 장식용 자리 요소 숨김 확인. |
-| `Alert` | 알림 역할·닫기 이름 확인. 설명 대비 보완. |
-| `AutoSkeleton` | 실제 콘텐츠와 로딩 골격 분리·aria-busy 확인. |
-| `Avatar` | 이미지 alt·대체 아이콘·장식 숨김 계약 확인. 사진의 설명은 호출부에서 제공. |
-| `BackTop` | 키보드 실행 후 본문/스크롤 영역에 초점 이동, 동작 줄이기 설정 반영. |
-| `Badge` | 이름이 있는 배지에는 img/status, BadgeWrap에는 group 역할을 연결. 의미 있는 점에는 ariaLabel 필요. |
-| `Breadcrumb` | 현재 경로·탐색 이름 확인. 경로 펼침 버튼 제거 후 새 링크로 초점 이동. |
-| `Button` | 네이티브 Enter·Space, disabled·loading·이름 전달 확인. outline의 다크 대비 보완. |
-| `Calendar` | 기본 역할을 application에서 group으로 수정해 스크린리더의 일반 탐색 모드를 유지. 날짜 버튼 확인. 휠 listbox에 방향키·Home·End와 roving tabindex 추가. |
-| `Card` | 링크·버튼 루트와 disabled 확인. 클릭형 카드 내부에 다른 조작 요소를 중첩하지 않는 호출 계약 필요. |
-| `Carousel` | 화면 밖 슬라이드 inert·aria-hidden, 초점 진입 시 정지, 방향키 범위 제한, 동작 줄이기 설정, pagination 24px 조작 영역 보완. |
-| `Chart` | figure·figcaption 및 네이티브 속성 전달 확인. 실제 차트 데이터·대체 표/설명은 렌더러 호출부 책임. |
-| `ChartD3` | Chart 어댑터. 데이터 렌더링과 대체 표/설명은 호출부 책임. |
-| `ChartEcharts` | Chart 어댑터. 라이브러리별 ARIA·키보드 설정은 인스턴스 생성부 책임. |
-| `ChartHighcharts` | Chart 어댑터. 라이브러리 접근성 모듈과 데이터 설명은 인스턴스 생성부 책임. |
-| `ChartUs` | Chart 어댑터. 실제 데이터의 텍스트 대안은 호출부 책임. |
-| `Checkbox` | 네이티브 checked·indeterminate·disabled 확인. ariaLabel을 실제 input에도 전달. |
-| `Collapse` | 네이티브 토글·패널 연결 확인. 제목 대비·내부 캐러셀 조작 영역 보완. |
-| `Container` | 배치용 래퍼. 키보드·ARIA 역할을 불필요하게 추가하지 않음. |
-| `DatePicker` | 입력에서 Enter·Space·아래 방향키 열기, 날짜 방향키·Home·End·PageUp/Down, Escape 초점 복귀, 숨김 패널·날짜 범위·지우기 초점 보완. |
-| `Divider` | 구분선·방향과 장식 숨김 확인. |
-| `Drawer` | 이전 검토 반영. native dialog, 이름·설명, Tab 순환, Escape, 중첩, 초점 복귀와 키보드 핸들 확인. |
-| `Dropdown` | menu 소유 구조 수정. 방향키·Home·End·문자 탐색·Escape·Tab·선택 후 초점 복귀 추가. |
-| `Empty` | 상태 메시지·장식 이미지 숨김 확인. |
-| `Flex` | 배치 전용. DOM 순서와 호출부 속성 유지. |
-| `Floating` | 배치 전용. 삽입된 조작 요소를 유지. 데모 스크롤 영역의 초점 진입 보완. |
-| `FormLayout` | form·label htmlFor·오류 alert 확인. 반복 렌더링되는 예제의 ID를 useId로 분리하고 중복 라벨 제거. required와 도움말/오류 aria-describedby는 실제 입력 호출부에서도 연결해야 함. |
-| `Grid` | 배치 전용. 시각적 배치와 읽기 순서가 달라지는 호출부는 별도 확인 필요. |
-| `Icon` | circle·square 클릭형도 네이티브 button으로 렌더해 키보드·disabled 의미 일치. |
-| `Input` | 네이티브 입력·invalid·지우기 초점 복귀 확인. 지우기 조작 영역 24px로 확대. |
-| `Keywords` | 접기 상태·controls 확인. 사용자 토글 문구를 접근성 이름에 유지하고 가로 스크롤 영역 초점 진입 추가. |
-| `Link` | 네이티브 링크 및 disabled 처리 확인. 의미 있는 링크 이름은 호출부 책임. |
-| `List` | ul·ol·dl 및 정의 목록 구조 확인. |
-| `Lottie` | 이미지 이름, 내부 그래픽 장식 숨김, 재생 정지 버튼 및 reduced motion 확인. |
-| `Menu` | 접힌 하위 메뉴가 실제로 숨겨지도록 수정. 구분선의 list 구조 수정. |
-| `Modal` | 이전 검토 반영. native dialog, 이름·설명, Tab 순환, Escape, 중첩, 초점 복귀와 본문 스크롤 확인. |
-| `Navbar` | 토글 expanded·controls 확인. Escape 닫기와 토글 초점 복귀 추가. |
-| `PageLoading` | 로딩 status·aria-busy·자동/수동 스켈레톤 분리 확인. |
-| `PageSkeleton` | 장식 골격 숨김 확인. 상태 메시지는 PageLoading에서 제공. |
-| `Pagination` | nav 이름·현재 페이지·이전/다음 비활성·페이지 점프 Enter 확인. |
-| `Popover` | 비모달 패널 이름·trigger controls 연결, 내부 초점·Escape·초점 복귀 추가. |
-| `Progress` | progressbar 이름·범위·불확정 값 처리 확인. |
-| `Radio` | 동일 name의 네이티브 라디오 탐색 확인. ariaLabel을 실제 input에도 전달. |
-| `Rate` | 네이티브 라디오 확인. 0.5점과 정수점의 이름 구분, disabled 초기화 버튼 보완. |
-| `RouteLoading` | 로딩 status·aria-busy 및 이름 확인. |
-| `Select` | 네이티브 select 키보드와 오류·라벨 속성 전달 확인. |
-| `Skeleton` | 장식 요소의 aria-hidden 확인. |
-| `Slider` | 네이티브 range·label·valuetext·증감 버튼·비활성 확인. 값 제어 시 onChange에서 갱신 필요. |
-| `Snackbar` | error의 alert 및 일반 status, 닫기 버튼 이름 확인. |
-| `Space` | 배치 전용. DOM 순서 유지. |
-| `Spin` | status·이름·busy 및 장식 indicator 확인. |
-| `Stat` | 텍스트 지표와 Avatar 조합 확인. 고객사례 분류 라벨 대비 보완. |
-| `Steps` | 현재 단계 aria-current·네이티브 이동 버튼·비활성 확인. |
-| `Switch` | 네이티브 checkbox 기반 switch 역할·상태·이름 확인. |
-| `Table` | 네이티브 표·열 scope·스크롤 region 초점 진입 확인. 복합 헤더와 caption은 호출부 책임. |
-| `Tabs` | 방향키·Home·End·Delete, 패널 이름·controls 연결과 초점 진입 보완. 닫기 조작의 중첩 인터랙티브 요소 제거. |
-| `Tag` | 선택 버튼·제거 버튼을 형제로 분리한 구조와 pressed·disabled 확인. |
-| `Textarea` | 지우기 초점·오류·문자 수 status 확인. 지우기 조작 영역 24px로 확대. |
-| `Timeline` | 순서·날짜 텍스트와 장식 dot 확인. |
-| `Tooltip` | 실제 버튼/링크에 describedby 연결. 텍스트 트리거 초점 진입과 Escape 닫기 추가. |
-| `Tree` | 행 기반 treeitem 및 aria-owns 그룹 소유, 단일 Tab 진입, 방향키·Home·End·선택·토글, 이름·메타·조작 영역 보완. |
-| `Typography` | 의미 태그·설명 텍스트 확인. mark의 다크 테마 글자색과 pre 스크롤의 키보드 진입 보완. |
-| `Upload` | 네이티브 파일 입력·label·삭제 버튼 이름·progressbar 확인. 실제 업로드 결과/오류 정보는 호출부에서 제공. |
+| 파일              | 검토 결과·호출 계약                                                                                                                                                            |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Accordion`       | Enter·Space, 펼침 상태·패널 연결 확인. 내부 캐러셀 조작 영역 보완.                                                                                                             |
+| `Affix`           | DOM 순서 유지와 장식용 자리 요소 숨김 확인.                                                                                                                                    |
+| `Alert`           | 알림 역할·닫기 이름 확인. 설명 대비 보완.                                                                                                                                      |
+| `AutoSkeleton`    | 실제 콘텐츠와 로딩 골격 분리·aria-busy 확인.                                                                                                                                   |
+| `Avatar`          | 이미지 alt·대체 아이콘·장식 숨김 계약 확인. 사진의 설명은 호출부에서 제공.                                                                                                     |
+| `BackTop`         | 키보드 실행 후 본문/스크롤 영역에 초점 이동, 동작 줄이기 설정 반영.                                                                                                            |
+| `Badge`           | 이름이 있는 배지에는 img/status, BadgeWrap에는 group 역할을 연결. 의미 있는 점에는 ariaLabel 필요.                                                                             |
+| `Breadcrumb`      | 현재 경로·탐색 이름 확인. 경로 펼침 버튼 제거 후 새 링크로 초점 이동.                                                                                                          |
+| `Button`          | 네이티브 Enter·Space, disabled·loading·이름 전달 확인. outline의 다크 대비 보완.                                                                                               |
+| `Calendar`        | 기본 역할을 application에서 group으로 수정해 스크린리더의 일반 탐색 모드를 유지. 날짜 버튼 확인. 휠 listbox에 방향키·Home·End와 roving tabindex 추가.                          |
+| `Card`            | 링크·버튼 루트와 disabled 확인. 클릭형 카드 내부에 다른 조작 요소를 중첩하지 않는 호출 계약 필요.                                                                              |
+| `Carousel`        | 화면 밖 슬라이드 inert·aria-hidden, 초점 진입 시 정지, 방향키 범위 제한, 동작 줄이기 설정, pagination 24px 조작 영역 보완.                                                     |
+| `Chart`           | figure·figcaption 및 네이티브 속성 전달 확인. 실제 차트 데이터·대체 표/설명은 렌더러 호출부 책임.                                                                              |
+| `ChartD3`         | Chart 어댑터. 데이터 렌더링과 대체 표/설명은 호출부 책임.                                                                                                                      |
+| `ChartEcharts`    | Chart 어댑터. 라이브러리별 ARIA·키보드 설정은 인스턴스 생성부 책임.                                                                                                            |
+| `ChartHighcharts` | Chart 어댑터. 라이브러리 접근성 모듈과 데이터 설명은 인스턴스 생성부 책임.                                                                                                     |
+| `ChartUs`         | Chart 어댑터. 실제 데이터의 텍스트 대안은 호출부 책임.                                                                                                                         |
+| `Checkbox`        | 네이티브 checked·indeterminate·disabled 확인. ariaLabel을 실제 input에도 전달.                                                                                                 |
+| `Collapse`        | 네이티브 토글·패널 연결 확인. 제목 대비·내부 캐러셀 조작 영역 보완.                                                                                                            |
+| `Container`       | 배치용 래퍼. 키보드·ARIA 역할을 불필요하게 추가하지 않음.                                                                                                                      |
+| `DatePicker`      | 입력에서 Enter·Space·아래 방향키 열기, 날짜 방향키·Home·End·PageUp/Down, Escape 초점 복귀, 숨김 패널·날짜 범위·지우기 초점 보완.                                               |
+| `Divider`         | 구분선·방향과 장식 숨김 확인.                                                                                                                                                  |
+| `Drawer`          | 이전 검토 반영. native dialog, 이름·설명, Tab 순환, Escape, 중첩, 초점 복귀와 키보드 핸들 확인.                                                                                |
+| `Dropdown`        | menu 소유 구조 수정. 방향키·Home·End·문자 탐색·Escape·Tab·선택 후 초점 복귀 추가.                                                                                              |
+| `Empty`           | 상태 메시지·장식 이미지 숨김 확인.                                                                                                                                             |
+| `Flex`            | 배치 전용. DOM 순서와 호출부 속성 유지.                                                                                                                                        |
+| `Floating`        | 배치 전용. 삽입된 조작 요소를 유지. 데모 스크롤 영역의 초점 진입 보완.                                                                                                         |
+| `FormLayout`      | form·label htmlFor·오류 alert 확인. 반복 렌더링되는 예제의 ID를 useId로 분리하고 중복 라벨 제거. required와 도움말/오류 aria-describedby는 실제 입력 호출부에서도 연결해야 함. |
+| `Grid`            | 배치 전용. 시각적 배치와 읽기 순서가 달라지는 호출부는 별도 확인 필요.                                                                                                         |
+| `Icon`            | circle·square 클릭형도 네이티브 button으로 렌더해 키보드·disabled 의미 일치.                                                                                                   |
+| `Input`           | 네이티브 입력·invalid·지우기 초점 복귀 확인. 지우기 조작 영역 24px로 확대.                                                                                                     |
+| `Keywords`        | 접기 상태·controls 확인. 사용자 토글 문구를 접근성 이름에 유지하고 가로 스크롤 영역 초점 진입 추가.                                                                            |
+| `Link`            | 네이티브 링크 및 disabled 처리 확인. 의미 있는 링크 이름은 호출부 책임.                                                                                                        |
+| `List`            | ul·ol·dl 및 정의 목록 구조 확인.                                                                                                                                               |
+| `Lottie`          | 이미지 이름, 내부 그래픽 장식 숨김, 재생 정지 버튼 및 reduced motion 확인.                                                                                                     |
+| `Menu`            | 접힌 하위 메뉴가 실제로 숨겨지도록 수정. 구분선의 list 구조 수정.                                                                                                              |
+| `Modal`           | 이전 검토 반영. native dialog, 이름·설명, Tab 순환, Escape, 중첩, 초점 복귀와 본문 스크롤 확인.                                                                                |
+| `Navbar`          | 토글 expanded·controls 확인. Escape 닫기와 토글 초점 복귀 추가.                                                                                                                |
+| `PageLoading`     | 로딩 status·aria-busy·자동/수동 스켈레톤 분리 확인.                                                                                                                            |
+| `PageSkeleton`    | 장식 골격 숨김 확인. 상태 메시지는 PageLoading에서 제공.                                                                                                                       |
+| `Pagination`      | nav 이름·현재 페이지·이전/다음 비활성·페이지 점프 Enter 확인.                                                                                                                  |
+| `Popover`         | 비모달 패널 이름·trigger controls 연결, 내부 초점·Escape·초점 복귀 추가.                                                                                                       |
+| `Progress`        | progressbar 이름·범위·불확정 값 처리 확인.                                                                                                                                     |
+| `Radio`           | 동일 name의 네이티브 라디오 탐색 확인. ariaLabel을 실제 input에도 전달.                                                                                                        |
+| `Rate`            | 네이티브 라디오 확인. 0.5점과 정수점의 이름 구분, disabled 초기화 버튼 보완.                                                                                                   |
+| `RouteLoading`    | 로딩 status·aria-busy 및 이름 확인.                                                                                                                                            |
+| `Select`          | 네이티브 select 키보드와 오류·라벨 속성 전달 확인.                                                                                                                             |
+| `Skeleton`        | 장식 요소의 aria-hidden 확인.                                                                                                                                                  |
+| `Slider`          | 네이티브 range·label·valuetext·증감 버튼·비활성 확인. 값 제어 시 onChange에서 갱신 필요.                                                                                       |
+| `Snackbar`        | error의 alert 및 일반 status, 닫기 버튼 이름 확인.                                                                                                                             |
+| `Space`           | 배치 전용. DOM 순서 유지.                                                                                                                                                      |
+| `Spin`            | status·이름·busy 및 장식 indicator 확인.                                                                                                                                       |
+| `Stat`            | 텍스트 지표와 Avatar 조합 확인. 고객사례 분류 라벨 대비 보완.                                                                                                                  |
+| `Steps`           | 현재 단계 aria-current·네이티브 이동 버튼·비활성 확인.                                                                                                                         |
+| `Switch`          | 네이티브 checkbox 기반 switch 역할·상태·이름 확인.                                                                                                                             |
+| `Table`           | 네이티브 표·열 scope·스크롤 region 초점 진입 확인. 복합 헤더와 caption은 호출부 책임.                                                                                          |
+| `Tabs`            | 방향키·Home·End·Delete, 패널 이름·controls 연결과 초점 진입 보완. 닫기 조작의 중첩 인터랙티브 요소 제거.                                                                       |
+| `Tag`             | 선택 버튼·제거 버튼을 형제로 분리한 구조와 pressed·disabled 확인.                                                                                                              |
+| `Textarea`        | 지우기 초점·오류·문자 수 status 확인. 지우기 조작 영역 24px로 확대.                                                                                                            |
+| `Timeline`        | 순서·날짜 텍스트와 장식 dot 확인.                                                                                                                                              |
+| `Tooltip`         | 실제 버튼/링크에 describedby 연결. 텍스트 트리거 초점 진입과 Escape 닫기 추가.                                                                                                 |
+| `Tree`            | 행 기반 treeitem 및 aria-owns 그룹 소유, 단일 Tab 진입, 방향키·Home·End·선택·토글, 이름·메타·조작 영역 보완.                                                                   |
+| `Typography`      | 의미 태그·설명 텍스트 확인. mark의 다크 테마 글자색과 pre 스크롤의 키보드 진입 보완.                                                                                           |
+| `Upload`          | 네이티브 파일 입력·label·삭제 버튼 이름·progressbar 확인. 실제 업로드 결과/오류 정보는 호출부에서 제공.                                                                        |
 
 ## 검증 결과
 

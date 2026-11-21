@@ -1,161 +1,181 @@
-'use client'
+'use client';
 
 /**
  * README 등 프로젝트 마크다운을 가이드 소개·문서용으로 렌더.
  * 제목·문단·목록·표·인라인 서식을 처리하고 코드 예제는 공통 포맷터로 표시한다.
  */
-import { Fragment } from 'react' // Fragment
-import { Link } from '@/lib/router' // 클라이언트 링크
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
-import { FormattedCodeBlock } from './FormattedCodeBlock'
+import { Fragment } from 'react'; // Fragment
+import { Link } from '@/lib/router'; // 클라이언트 링크
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
+import { FormattedCodeBlock } from './FormattedCodeBlock';
 
 /** `**bold**` · `` `code` `` · `[label](href)` */
-function renderInline (text, keyPrefix = 'i') {
-  if (text == null || text === '') return null
-  const source = String(text)
-  const nodes = []
-  const re = /(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g
-  let last = 0
-  let match
-  let index = 0
+function renderInline(text, keyPrefix = 'i') {
+  if (text == null || text === '') return null;
+  const source = String(text);
+  const nodes = [];
+  const re = /(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g;
+  let last = 0;
+  let match;
+  let index = 0;
 
   while ((match = re.exec(source))) {
     if (match.index > last) {
-      nodes.push(source.slice(last, match.index))
+      nodes.push(source.slice(last, match.index));
     }
-    const token = match[0]
-    const key = `${keyPrefix}-${index++}`
+    const token = match[0];
+    const key = `${keyPrefix}-${index++}`;
     if (token.startsWith('**')) {
-      nodes.push(<strong key={key}>{token.slice(2, -2)}</strong>)
+      nodes.push(<strong key={key}>{token.slice(2, -2)}</strong>);
     } else if (token.startsWith('`')) {
-      nodes.push(<code key={key}>{token.slice(1, -1)}</code>)
+      nodes.push(<code key={key}>{token.slice(1, -1)}</code>);
     } else {
-      const link = /^\[[^\]]+\]\(([^)]+)\)$/.exec(token)
-      const label = token.slice(1, token.indexOf(']'))
-      const href = link?.[1] || '#'
+      const link = /^\[[^\]]+\]\(([^)]+)\)$/.exec(token);
+      const label = token.slice(1, token.indexOf(']'));
+      const href = link?.[1] || '#';
       if (/^(https?:|mailto:)/i.test(href)) {
         nodes.push(
-          <a key={key} href={href} target="_blank" title="새 창 열림" rel="noreferrer">
+          <a
+            key={key}
+            href={href}
+            target="_blank"
+            title="새 창 열림"
+            rel="noreferrer"
+          >
             {label}
-          </a>
-        )
+          </a>,
+        );
       } else if (href.startsWith('/data/pub/docs/')) {
         // Static documents use ordinary navigation, without a Next page/RSC request.
-        nodes.push(<a key={key} className="guide-md_link" href={href}>{label}</a>)
+        nodes.push(
+          <a
+            key={key}
+            className="guide-md_link"
+            href={href}
+          >
+            {label}
+          </a>,
+        );
       } else if (href.startsWith('/') || href.startsWith('#')) {
         nodes.push(
-          <Link key={key} className="guide-md_link" to={href}>
+          <Link
+            key={key}
+            className="guide-md_link"
+            to={href}
+          >
             {label}
-          </Link>
-        )
+          </Link>,
+        );
       } else {
         // 저장소 상대 경로(README 내 문서 링크)는 코드로 표시
-        nodes.push(<code key={key}>{label}</code>)
+        nodes.push(<code key={key}>{label}</code>);
       }
     }
-    last = match.index + token.length
+    last = match.index + token.length;
   }
 
-  if (last < source.length) nodes.push(source.slice(last))
-  return nodes.length === 1 ? nodes[0] : nodes
+  if (last < source.length) nodes.push(source.slice(last));
+  return nodes.length === 1 ? nodes[0] : nodes;
 }
 
-function isTableSeparator (line) {
-  return /^\|?\s*:?-+:?\s*(\|\s*:?-+:?\s*)+\|?\s*$/.test(line.trim())
+function isTableSeparator(line) {
+  return /^\|?\s*:?-+:?\s*(\|\s*:?-+:?\s*)+\|?\s*$/.test(line.trim());
 }
 
 /**
  * 표 행 분리.
  * README 의 `\|` 이스케이프·인라인 코드 안 `|` 는 열 구분자로 쓰지 않는다.
  */
-function splitTableRow (line) {
-  const trimmed = line.trim().replace(/^\|/, '').replace(/\|$/, '')
-  const held = []
+function splitTableRow(line) {
+  const trimmed = line.trim().replace(/^\|/, '').replace(/\|$/, '');
+  const held = [];
   const hold = (value) => {
-    const token = `\uE000${held.length}\uE001`
-    held.push(value)
-    return token
-  }
+    const token = `\uE000${held.length}\uE001`;
+    held.push(value);
+    return token;
+  };
   // 1) 인라인 코드 먼저 보호 (코드 안 \| → | 로 복원)
-  let protectedLine = trimmed.replace(/`[^`]*`/g, (m) => hold(m.replace(/\\\|/g, '|')))
+  let protectedLine = trimmed.replace(/`[^`]*`/g, (m) => hold(m.replace(/\\\|/g, '|')));
   // 2) 코드 밖 남은 \| 는 리터럴 |
-  protectedLine = protectedLine.replace(/\\\|/g, () => hold('|'))
+  protectedLine = protectedLine.replace(/\\\|/g, () => hold('|'));
 
   return protectedLine.split('|').map((cell) => {
-    let text = cell.trim()
-    text = text.replace(/\uE000(\d+)\uE001/g, (_, i) => held[Number(i)])
-    return text
-  })
+    let text = cell.trim();
+    text = text.replace(/\uE000(\d+)\uE001/g, (_, i) => held[Number(i)]);
+    return text;
+  });
 }
 
-function parseBlocks (markdown) {
-  const lines = String(markdown || '').replace(/\r\n/g, '\n').split('\n')
-  const blocks = []
-  let i = 0
+function parseBlocks(markdown) {
+  const lines = String(markdown || '')
+    .replace(/\r\n/g, '\n')
+    .split('\n');
+  const blocks = [];
+  let i = 0;
 
   while (i < lines.length) {
-    const line = lines[i]
-    const trimmed = line.trim()
+    const line = lines[i];
+    const trimmed = line.trim();
 
     if (!trimmed) {
-      i += 1
-      continue
+      i += 1;
+      continue;
     }
 
     if (trimmed.startsWith('```')) {
-      const lang = trimmed.slice(3).trim()
-      const code = []
-      i += 1
+      const lang = trimmed.slice(3).trim();
+      const code = [];
+      i += 1;
       while (i < lines.length && !lines[i].trim().startsWith('```')) {
-        code.push(lines[i])
-        i += 1
+        code.push(lines[i]);
+        i += 1;
       }
-      if (i < lines.length) i += 1
-      blocks.push({ type: 'code', lang, value: code.join('\n') })
-      continue
+      if (i < lines.length) i += 1;
+      blocks.push({ type: 'code', lang, value: code.join('\n') });
+      continue;
     }
 
-    const heading = /^(#{1,3})\s+(.+)$/.exec(trimmed)
+    const heading = /^(#{1,3})\s+(.+)$/.exec(trimmed);
     if (heading) {
-      blocks.push({ type: 'heading', level: heading[1].length, text: heading[2].trim() })
-      i += 1
-      continue
+      blocks.push({ type: 'heading', level: heading[1].length, text: heading[2].trim() });
+      i += 1;
+      continue;
     }
 
     if (trimmed.includes('|') && i + 1 < lines.length && isTableSeparator(lines[i + 1])) {
-      const header = splitTableRow(trimmed)
-      i += 2
-      const rows = []
+      const header = splitTableRow(trimmed);
+      i += 2;
+      const rows = [];
       while (i < lines.length && lines[i].trim().includes('|') && !isTableSeparator(lines[i])) {
-        rows.push(splitTableRow(lines[i]))
-        i += 1
+        rows.push(splitTableRow(lines[i]));
+        i += 1;
       }
-      blocks.push({ type: 'table', header, rows })
-      continue
+      blocks.push({ type: 'table', header, rows });
+      continue;
     }
 
     if (/^[-*]\s+/.test(trimmed)) {
-      const items = []
+      const items = [];
       while (i < lines.length && /^[-*]\s+/.test(lines[i].trim())) {
-        items.push(lines[i].trim().replace(/^[-*]\s+/, ''))
-        i += 1
+        items.push(lines[i].trim().replace(/^[-*]\s+/, ''));
+        i += 1;
       }
-      blocks.push({ type: 'ul', items })
-      continue
+      blocks.push({ type: 'ul', items });
+      continue;
     }
 
     if (/^\d+\.\s+/.test(trimmed)) {
-      const items = []
+      const items = [];
       while (i < lines.length && /^\d+\.\s+/.test(lines[i].trim())) {
-        items.push(lines[i].trim().replace(/^\d+\.\s+/, ''))
-        i += 1
+        items.push(lines[i].trim().replace(/^\d+\.\s+/, ''));
+        i += 1;
       }
-      blocks.push({ type: 'ol', items })
-      continue
+      blocks.push({ type: 'ol', items });
+      continue;
     }
 
-    const para = [trimmed]
-    i += 1
+    const para = [trimmed];
+    i += 1;
     while (
       i < lines.length &&
       lines[i].trim() &&
@@ -165,75 +185,97 @@ function parseBlocks (markdown) {
       !/^\d+\.\s+/.test(lines[i].trim()) &&
       !(lines[i].includes('|') && i + 1 < lines.length && isTableSeparator(lines[i + 1]))
     ) {
-      para.push(lines[i].trim())
-      i += 1
+      para.push(lines[i].trim());
+      i += 1;
     }
-    blocks.push({ type: 'p', text: para.join(' ') })
+    blocks.push({ type: 'p', text: para.join(' ') });
   }
 
-  return blocks
+  return blocks;
 }
 
-function slugify (text) {
+function slugify(text) {
   return String(text || '')
     .toLowerCase()
     .replace(/[^\w\uac00-\ud7a3\s-]/g, '')
     .trim()
-    .replace(/\s+/g, '-')
+    .replace(/\s+/g, '-');
 }
 
 /**
  * @param {{ source: string, className?: string }} props
  */
-export function MarkdownDoc ({ source, className }) {
-  const blocks = parseBlocks(source)
+export function MarkdownDoc({ source, className }) {
+  const blocks = parseBlocks(source);
 
   return (
     <div className={classNames('guide-md', className)}>
       {blocks.map((block, index) => {
-        const key = `${block.type}-${index}`
+        const key = `${block.type}-${index}`;
         if (block.type === 'heading') {
-          const Tag = `h${block.level}`
-          const id = slugify(block.text)
+          const Tag = `h${block.level}`;
+          const id = slugify(block.text);
           return (
-            <Tag key={key} id={id} className={`guide-md_h${block.level}`}>
+            <Tag
+              key={key}
+              id={id}
+              className={`guide-md_h${block.level}`}
+            >
               {renderInline(block.text, key)}
             </Tag>
-          )
+          );
         }
         if (block.type === 'p') {
           return (
-            <p key={key} className="guide-md_p">
+            <p
+              key={key}
+              className="guide-md_p"
+            >
               {renderInline(block.text, key)}
             </p>
-          )
+          );
         }
         if (block.type === 'ul' || block.type === 'ol') {
-          const ListTag = block.type === 'ol' ? 'ol' : 'ul'
+          const ListTag = block.type === 'ol' ? 'ol' : 'ul';
           return (
             <ListTag
               key={key}
-              className={classNames('guide-md_list', block.type === 'ol' && 'guide-md_list_ordered')}
+              className={classNames(
+                'guide-md_list',
+                block.type === 'ol' && 'guide-md_list_ordered',
+              )}
             >
               {block.items.map((item, itemIndex) => (
                 <li key={`${key}-${itemIndex}`}>{renderInline(item, `${key}-${itemIndex}`)}</li>
               ))}
             </ListTag>
-          )
+          );
         }
         if (block.type === 'code') {
           return (
-            <FormattedCodeBlock key={key} code={block.value} language={block.lang} />
-          )
+            <FormattedCodeBlock
+              key={key}
+              code={block.value}
+              language={block.lang}
+            />
+          );
         }
         if (block.type === 'table') {
           return (
-            <div key={key} className="guide-md_table-wrap" role="region" aria-label={`문서 표 ${index + 1}`} tabIndex={0}>
+            <div
+              key={key}
+              className="guide-md_table-wrap"
+              role="region"
+              aria-label={`문서 표 ${index + 1}`}
+              tabIndex={0}
+            >
               <table className="guide-md_table">
                 <thead>
                   <tr>
                     {block.header.map((cell, cellIndex) => (
-                      <th key={`${key}-h-${cellIndex}`}>{renderInline(cell, `${key}-h-${cellIndex}`)}</th>
+                      <th key={`${key}-h-${cellIndex}`}>
+                        {renderInline(cell, `${key}-h-${cellIndex}`)}
+                      </th>
                     ))}
                   </tr>
                 </thead>
@@ -250,12 +292,12 @@ export function MarkdownDoc ({ source, className }) {
                 </tbody>
               </table>
             </div>
-          )
+          );
         }
-        return <Fragment key={key} />
+        return <Fragment key={key} />;
       })}
     </div>
-  )
+  );
 }
 
-export default MarkdownDoc
+export default MarkdownDoc;

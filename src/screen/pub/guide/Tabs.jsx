@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import { useState } from 'react' // 상태 훅
+import { useState } from 'react'; // 상태 훅
 import {
   Button, // Button 컴포넌트
   Card, // Card 컴포넌트
@@ -17,64 +17,103 @@ import {
   Space, // Space 컴포넌트
   Tab, // Tab 컴포넌트
   TabPanel, // Tab Panel 컴포넌트
-  Tabs // Tabs 컴포넌트
-} from '@/comp' // comp
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
-import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
-import { pageExampleCode, pageExampleReturn } from '@/screen/pub/lib/pageExampleCode' // 라이브러리/유틸 · page Example Code
-import { tabsApiSections } from '@/screen/pub/data/guide/tabsApiSections' // tabs Api Sections
-import NestedTabsDemo, { nestedTabsCode } from '@/screen/pub/data/guide/nestedTabsExample'
-import { KeywordTabsDemo, NestedKeywordTabsDemo, keywordTabsCode, nestedKeywordTabsCode } from '@/screen/pub/data/guide/keywordTabsExamples'
+  Tabs, // Tabs 컴포넌트
+} from '@/comp'; // comp
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'; // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'; // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout'; // Guide Layout 컴포넌트
+import { pageExampleCode, pageExampleReturn } from '@/screen/pub/lib/pageExampleCode'; // 라이브러리/유틸 · page Example Code
+import { tabsApiSections } from '@/screen/pub/data/guide/tabsApiSections'; // tabs Api Sections
+import NestedTabsDemo, { nestedTabsCode } from '@/screen/pub/data/guide/nestedTabsExample';
+import {
+  KeywordTabsDemo,
+  NestedKeywordTabsDemo,
+  keywordTabsCode,
+  nestedKeywordTabsCode,
+} from '@/screen/pub/data/guide/keywordTabsExamples';
 
 const BASIC_TABS = [
   { value: 'overview', label: '개요' },
   { value: 'settings', label: '설정' },
-  { value: 'activity', label: '활동' }
-]
+  { value: 'activity', label: '활동' },
+];
 
 const ICON_TABS = [
-  { value: 'home', label: '홈', icon: <Icon name="home" size="100%" /> },
-  { value: 'search', label: '검색', icon: <Icon name="search" size="100%" /> },
-  { value: 'inbox', label: '수신함', icon: <Icon name="inbox" size="100%" /> }
-]
+  {
+    value: 'home',
+    label: '홈',
+    icon: (
+      <Icon
+        name="home"
+        size="100%"
+      />
+    ),
+  },
+  {
+    value: 'search',
+    label: '검색',
+    icon: (
+      <Icon
+        name="search"
+        size="100%"
+      />
+    ),
+  },
+  {
+    value: 'inbox',
+    label: '수신함',
+    icon: (
+      <Icon
+        name="inbox"
+        size="100%"
+      />
+    ),
+  },
+];
 
 const DISABLED_TABS = [
   { value: 'a', label: '활성' },
   { value: 'b', label: '비활성', disabled: true },
-  { value: 'c', label: '대기' }
-]
+  { value: 'c', label: '대기' },
+];
 
 const MANY_TABS = Array.from({ length: 16 }, (_, index) => ({
   value: `t-${index + 1}`,
-  label: `메뉴 항목 ${index + 1}`
-}))
+  label: `메뉴 항목 ${index + 1}`,
+}));
 
 const CUSTOM_MENU = [
   { value: 'overview', label: '개요', icon: 'home' },
   { value: 'settings', label: '설정', icon: 'settings' },
-  { value: 'activity', label: '활동(비활성)', disabled: true }
-]
+  { value: 'activity', label: '활동(비활성)', disabled: true },
+];
 
 /** 데이터 map + value별 panels 슬롯 */
-function ControlledTabs ({
+function ControlledTabs({
   tabs = BASIC_TABS,
   initial = tabs[0]?.value,
   panelPrefix = '콘텐츠',
   ...props
 }) {
-  const [value, setValue] = useState(initial)
+  const [value, setValue] = useState(initial);
   const panels = Object.fromEntries(
     tabs.map((tab) => [
       tab.value,
-      <p className="tabs_panel-placeholder" key={String(tab.value)}>
+      <p
+        className="tabs_panel-placeholder"
+        key={String(tab.value)}
+      >
         {panelPrefix}: {tab.label}
-      </p>
-    ])
-  )
+      </p>,
+    ]),
+  );
 
   return (
-    <Tabs {...props} value={value} onChange={setValue}>
+    <Tabs
+      {...props}
+      value={value}
+      onChange={setValue}
+    >
       {tabs.map((tab) => (
         <Tab
           key={String(tab.value)}
@@ -88,11 +127,11 @@ function ControlledTabs ({
         </Tab>
       ))}
     </Tabs>
-  )
+  );
 }
 
 /** 코드보기용 — tabs map + value별 패널 슬롯(panels) */
-function compoundCode (options = {}) {
+function compoundCode(options = {}) {
   const {
     props = '',
     tabs = BASIC_TABS,
@@ -100,41 +139,50 @@ function compoundCode (options = {}) {
     initial = tabs[0]?.value,
     wrapStart = '',
     wrapEnd = '',
-    name = 'TabsExample'
-  } = options
-  const propLine = props ? ` ${props}` : ''
-  const hasIcon = tabs.some((tab) => tab.icon)
-  const hasDisabled = tabs.some((tab) => tab.disabled)
-  const hasClosable = tabs.some((tab) => tab.closable)
+    name = 'TabsExample',
+  } = options;
+  const propLine = props ? ` ${props}` : '';
+  const hasIcon = tabs.some((tab) => tab.icon);
+  const hasDisabled = tabs.some((tab) => tab.disabled);
+  const hasClosable = tabs.some((tab) => tab.closable);
 
-  const tabsDecl = tabs.length > 6
-    ? `const tabs = Array.from({ length: ${tabs.length} }, (_, index) => ({\n` +
-      `  value: \`t-\${index + 1}\`,\n` +
-      `  label: \`메뉴 항목 \${index + 1}\`\n` +
-      '}))'
-    : `const tabs = [\n${tabs.map((tab) => {
-      const fields = [
-        `value: '${tab.value}'`,
-        tab.label != null ? `label: '${tab.label}'` : null,
-        tab.disabled ? 'disabled: true' : null,
-        tab.closable ? 'closable: true' : null,
-        tab.icon ? 'icon: <Icon name="…" size="100%" />' : null
-      ].filter(Boolean).join(', ')
-      return `  { ${fields} }`
-    }).join(',\n')}\n]`
+  const tabsDecl =
+    tabs.length > 6
+      ? `const tabs = Array.from({ length: ${tabs.length} }, (_, index) => ({\n` +
+        `  value: \`t-\${index + 1}\`,\n` +
+        `  label: \`메뉴 항목 \${index + 1}\`\n` +
+        '}))'
+      : `const tabs = [\n${tabs
+          .map((tab) => {
+            const fields = [
+              `value: '${tab.value}'`,
+              tab.label != null ? `label: '${tab.label}'` : null,
+              tab.disabled ? 'disabled: true' : null,
+              tab.closable ? 'closable: true' : null,
+              tab.icon ? 'icon: <Icon name="…" size="100%" />' : null,
+            ]
+              .filter(Boolean)
+              .join(', ');
+            return `  { ${fields} }`;
+          })
+          .join(',\n')}\n]`;
 
-  const panelsDecl = tabs.length > 6
-    ? `const panels = Object.fromEntries(\n` +
-      `  tabs.map((tab) => [\n` +
-      `    tab.value,\n` +
-      `    <p className="tabs_panel-placeholder" key={tab.value}>${panelPrefix}: {tab.label}</p>\n` +
-      `  ])\n` +
-      ')'
-    : `const panels = {\n${tabs.map((tab) => (
-      `  '${tab.value}': (\n` +
-      `    <p className="tabs_panel-placeholder">${panelPrefix}: ${tab.label}</p>\n` +
-      '  )'
-    )).join(',\n')}\n}`
+  const panelsDecl =
+    tabs.length > 6
+      ? `const panels = Object.fromEntries(\n` +
+        `  tabs.map((tab) => [\n` +
+        `    tab.value,\n` +
+        `    <p className="tabs_panel-placeholder" key={tab.value}>${panelPrefix}: {tab.label}</p>\n` +
+        `  ])\n` +
+        ')'
+      : `const panels = {\n${tabs
+          .map(
+            (tab) =>
+              `  '${tab.value}': (\n` +
+              `    <p className="tabs_panel-placeholder">${panelPrefix}: ${tab.label}</p>\n` +
+              '  )',
+          )
+          .join(',\n')}\n}`;
 
   const tabAttrs = [
     'key={tab.value}',
@@ -142,8 +190,10 @@ function compoundCode (options = {}) {
     'label={tab.label}',
     hasIcon ? 'icon={tab.icon}' : null,
     hasDisabled ? 'disabled={tab.disabled}' : null,
-    hasClosable ? 'closable={tab.closable}' : null
-  ].filter(Boolean).join('\n      ')
+    hasClosable ? 'closable={tab.closable}' : null,
+  ]
+    .filter(Boolean)
+    .join('\n      ');
 
   const tabsJsx = `<Tabs value={value} onChange={setValue}${propLine}>
   {tabs.map((tab) => (
@@ -153,11 +203,11 @@ function compoundCode (options = {}) {
       {panels[tab.value]}
     </Tab>
   ))}
-</Tabs>`
+</Tabs>`;
 
   const jsx = wrapStart
     ? `${wrapStart.replace(/\n$/, '')}\n  ${tabsJsx.split('\n').join('\n  ')}\n${wrapEnd.replace(/^\n/, '')}`
-    : tabsJsx
+    : tabsJsx;
 
   return pageExampleCode({
     name,
@@ -169,100 +219,136 @@ function compoundCode (options = {}) {
 
 ${panelsDecl}
 
-const [value, setValue] = useState('${initial}')`
-    )
-  })
+const [value, setValue] = useState('${initial}')`,
+    ),
+  });
 }
 
 /** 메뉴 map + label · children(panels 맵) 패널 슬롯 */
-function CompoundTabsDemo () {
-  const [value, setValue] = useState('overview')
+function CompoundTabsDemo() {
+  const [value, setValue] = useState('overview');
   const panels = {
     overview: <p className="tabs_panel-placeholder">콘텐츠: 개요</p>,
     settings: <p className="tabs_panel-placeholder">콘텐츠: 설정</p>,
-    activity: <p className="tabs_panel-placeholder">콘텐츠: 활동(비활성)</p>
-  }
+    activity: <p className="tabs_panel-placeholder">콘텐츠: 활동(비활성)</p>,
+  };
 
   return (
-    <Tabs value={value} onChange={setValue} indicatorSlide>
+    <Tabs
+      value={value}
+      onChange={setValue}
+      indicatorSlide
+    >
       {CUSTOM_MENU.map((tab) => (
         <Tab
           key={tab.value}
           value={tab.value}
           label={tab.label}
-          icon={tab.icon
-            ? (
-              <Icon name={tab.icon} size="100%" />
-              )
-            : undefined}
+          icon={
+            tab.icon ? (
+              <Icon
+                name={tab.icon}
+                size="100%"
+              />
+            ) : undefined
+          }
           disabled={tab.disabled}
         >
           {panels[tab.value]}
         </Tab>
       ))}
     </Tabs>
-  )
+  );
 }
 
-function OverviewSlot () {
-  return <p className="tabs_panel-placeholder">개요 페이지 슬롯</p>
+function OverviewSlot() {
+  return <p className="tabs_panel-placeholder">개요 페이지 슬롯</p>;
 }
 
-function SettingsSlot () {
+function SettingsSlot() {
   return (
-    <Space vertical block size={8}>
+    <Space
+      vertical
+      block
+      size={8}
+    >
       <p className="tabs_panel-placeholder">설정 페이지 슬롯</p>
-      <Button size="sm" variant="outline" label="저장" />
+      <Button
+        size="sm"
+        variant="outline"
+        label="저장"
+      />
     </Space>
-  )
+  );
 }
 
-function ActivitySlot () {
-  return <p className="tabs_panel-placeholder">활동 페이지 슬롯</p>
+function ActivitySlot() {
+  return <p className="tabs_panel-placeholder">활동 페이지 슬롯</p>;
 }
 
 const PANEL_SLOTS = {
   overview: OverviewSlot,
   settings: SettingsSlot,
-  activity: ActivitySlot
-}
+  activity: ActivitySlot,
+};
 
 /** 메뉴 map + panel prop 으로 탭별 컴포넌트 슬롯 */
-function SlotPanelTabsDemo () {
-  const [value, setValue] = useState('overview')
+function SlotPanelTabsDemo() {
+  const [value, setValue] = useState('overview');
 
   return (
-    <Tabs value={value} onChange={setValue} indicatorSlide>
+    <Tabs
+      value={value}
+      onChange={setValue}
+      indicatorSlide
+    >
       {CUSTOM_MENU.map((tab) => {
-        const Panel = PANEL_SLOTS[tab.value]
+        const Panel = PANEL_SLOTS[tab.value];
         return (
           <Tab
             key={tab.value}
             value={tab.value}
             label={tab.label}
-            icon={tab.icon
-              ? (
-                <Icon name={tab.icon} size="100%" />
-                )
-              : undefined}
+            icon={
+              tab.icon ? (
+                <Icon
+                  name={tab.icon}
+                  size="100%"
+                />
+              ) : undefined
+            }
             disabled={tab.disabled}
             panel={Panel ? <Panel /> : null}
           />
-        )
+        );
       })}
     </Tabs>
-  )
+  );
 }
 
 /** Tab + TabPanel 조합 */
-function TabPanelCompoundDemo () {
-  const [value, setValue] = useState('overview')
+function TabPanelCompoundDemo() {
+  const [value, setValue] = useState('overview');
 
   return (
-    <Tabs value={value} onChange={setValue} indicatorSlide>
-      <Tab value="overview" label="개요" />
-      <Tab value="settings" label="설정" />
-      <Tab value="activity" label="활동" disabled />
+    <Tabs
+      value={value}
+      onChange={setValue}
+      indicatorSlide
+    >
+      <Tab
+        value="overview"
+        label="개요"
+      />
+      <Tab
+        value="settings"
+        label="설정"
+      />
+      <Tab
+        value="activity"
+        label="활동"
+        disabled
+      />
       <TabPanel value="overview">
         <p className="tabs_panel-placeholder">개요 패널</p>
       </TabPanel>
@@ -273,13 +359,16 @@ function TabPanelCompoundDemo () {
         <p className="tabs_panel-placeholder">활동 패널</p>
       </TabPanel>
     </Tabs>
-  )
+  );
 }
 
 /** 패널별 위젯/모듈: 슬라이드 · 폼 · 카드 */
-function PanelSlideModule () {
+function PanelSlideModule() {
   return (
-    <Carousel ariaLabel="탭 패널 슬라이드" autoplay>
+    <Carousel
+      ariaLabel="탭 패널 슬라이드"
+      autoplay
+    >
       <CarouselSlide>
         <article className="card card_accent color_primary card_elevated">
           <div className="card_body">
@@ -308,68 +397,100 @@ function PanelSlideModule () {
         </article>
       </CarouselSlide>
     </Carousel>
-  )
+  );
 }
 
-function PanelFormModule ({ idPrefix = 'tabs-panel' } = {}) {
+function PanelFormModule({ idPrefix = 'tabs-panel' } = {}) {
   return (
     <FormLayout>
-      <FormField label="이름" htmlFor={`${idPrefix}-name`} required>
-        <Input id={`${idPrefix}-name`} placeholder="홍길동" />
+      <FormField
+        label="이름"
+        htmlFor={`${idPrefix}-name`}
+        required
+      >
+        <Input
+          id={`${idPrefix}-name`}
+          placeholder="홍길동"
+        />
       </FormField>
-      <FormField label="이메일" htmlFor={`${idPrefix}-email`}>
-        <Input id={`${idPrefix}-email`} type="email" placeholder="name@example.com" />
+      <FormField
+        label="이메일"
+        htmlFor={`${idPrefix}-email`}
+      >
+        <Input
+          id={`${idPrefix}-email`}
+          type="email"
+          placeholder="name@example.com"
+        />
       </FormField>
       <FormActions>
-        <Button variant="outline" color="default" label="취소" />
+        <Button
+          variant="outline"
+          color="default"
+          label="취소"
+        />
         <Button label="저장" />
       </FormActions>
     </FormLayout>
-  )
+  );
 }
 
-function PanelCardModule () {
+function PanelCardModule() {
   return (
     <Card style={{ maxWidth: 360, width: '100%' }}>
-      <CardHeader title="프로젝트 카드" subtitle="모듈 패널 예시" />
+      <CardHeader
+        title="프로젝트 카드"
+        subtitle="모듈 패널 예시"
+      />
       <CardBody>
         탭 패널에서 Card 위젯을 호출한 예시입니다. 관련 설명과 액션을 담을 수 있습니다.
       </CardBody>
       <CardFooter>
-        <Button size="sm" variant="outline" label="자세히" />
-        <Button size="sm" label="열기" />
+        <Button
+          size="sm"
+          variant="outline"
+          label="자세히"
+        />
+        <Button
+          size="sm"
+          label="열기"
+        />
       </CardFooter>
     </Card>
-  )
+  );
 }
 
 /** 페이지에 이미 있는 위젯 — Tabs에서 그대로 호출 */
-const HeroCarousel = PanelSlideModule
-function ContactForm () {
-  return <PanelFormModule idPrefix="tabs-page-form" />
+const HeroCarousel = PanelSlideModule;
+function ContactForm() {
+  return <PanelFormModule idPrefix="tabs-page-form" />;
 }
-const ProjectCard = PanelCardModule
+const ProjectCard = PanelCardModule;
 
 const MODULE_PANEL_MAP = {
   slide: PanelSlideModule,
   form: PanelFormModule,
-  card: PanelCardModule
-}
+  card: PanelCardModule,
+};
 
 const MODULE_TABS = [
   { value: 'slide', label: '슬라이드' },
   { value: 'form', label: '폼' },
-  { value: 'card', label: '카드' }
-]
+  { value: 'card', label: '카드' },
+];
 
 /** 탭마다 다른 위젯/모듈 패널 */
-function ModulePanelsDemo () {
-  const [value, setValue] = useState('slide')
+function ModulePanelsDemo() {
+  const [value, setValue] = useState('slide');
 
   return (
-    <Tabs value={value} onChange={setValue} indicatorSlide>
+    <Tabs
+      value={value}
+      onChange={setValue}
+      indicatorSlide
+    >
       {MODULE_TABS.map((tab) => {
-        const Panel = MODULE_PANEL_MAP[tab.value]
+        const Panel = MODULE_PANEL_MAP[tab.value];
         return (
           <Tab
             key={tab.value}
@@ -377,49 +498,69 @@ function ModulePanelsDemo () {
             label={tab.label}
             panel={Panel ? <Panel /> : null}
           />
-        )
+        );
       })}
     </Tabs>
-  )
+  );
 }
 
 /** 페이지 위젯을 panel에 직접 호출 */
-function PageWidgetPanelsDemo () {
-  const [value, setValue] = useState('slide')
+function PageWidgetPanelsDemo() {
+  const [value, setValue] = useState('slide');
 
   return (
-    <Tabs value={value} onChange={setValue} indicatorSlide>
-      <Tab value="slide" label="슬라이드" panel={<HeroCarousel />} />
-      <Tab value="form" label="폼" panel={<ContactForm />} />
-      <Tab value="card" label="카드" panel={<ProjectCard />} />
+    <Tabs
+      value={value}
+      onChange={setValue}
+      indicatorSlide
+    >
+      <Tab
+        value="slide"
+        label="슬라이드"
+        panel={<HeroCarousel />}
+      />
+      <Tab
+        value="form"
+        label="폼"
+        panel={<ContactForm />}
+      />
+      <Tab
+        value="card"
+        label="카드"
+        panel={<ProjectCard />}
+      />
     </Tabs>
-  )
+  );
 }
 
 /** 닫기 가능한 탭 — 메뉴 map · 패널 내용 교체 */
-function ClosableTabsDemo () {
+function ClosableTabsDemo() {
   const [items, setItems] = useState([
     { value: 'doc-1', label: '문서 1', closable: true },
     { value: 'doc-2', label: '문서 2', closable: true },
-    { value: 'doc-3', label: '문서 3', closable: true }
-  ])
-  const [value, setValue] = useState('doc-1')
+    { value: 'doc-3', label: '문서 3', closable: true },
+  ]);
+  const [value, setValue] = useState('doc-1');
 
   const onClose = (closed) => {
     setItems((prev) => {
-      const next = prev.filter((item) => item.value !== closed)
+      const next = prev.filter((item) => item.value !== closed);
       if (closed === value && next.length) {
-        setValue(next[0].value)
+        setValue(next[0].value);
       } else if (!next.length) {
-        setValue('')
+        setValue('');
       }
-      return next
-    })
-  }
+      return next;
+    });
+  };
 
   if (!items.length) {
     return (
-      <Space vertical block size={12}>
+      <Space
+        vertical
+        block
+        size={12}
+      >
         <p className="tabs_panel-placeholder">열린 탭이 없습니다.</p>
         <Button
           size="sm"
@@ -428,13 +569,13 @@ function ClosableTabsDemo () {
           onClick={() => {
             setItems([
               { value: 'doc-1', label: '문서 1', closable: true },
-              { value: 'doc-2', label: '문서 2', closable: true }
-            ])
-            setValue('doc-1')
+              { value: 'doc-2', label: '문서 2', closable: true },
+            ]);
+            setValue('doc-1');
           }}
         />
       </Space>
-    )
+    );
   }
 
   return (
@@ -442,7 +583,13 @@ function ClosableTabsDemo () {
       value={value}
       onChange={setValue}
       onClose={onClose}
-      extra={<Button size="sm" variant="ghost" label="추가" />}
+      extra={
+        <Button
+          size="sm"
+          variant="ghost"
+          label="추가"
+        />
+      }
     >
       {items.map((tab) => (
         <Tab
@@ -455,7 +602,7 @@ function ClosableTabsDemo () {
         </Tab>
       ))}
     </Tabs>
-  )
+  );
 }
 
 const SECTIONS = [
@@ -464,52 +611,81 @@ const SECTIONS = [
     description: (
       <>
         메뉴는 데이터 <code>map</code>으로 <code>Tab</code>을 돌립니다.
-        <code>label</code>과 함께 <code>children</code>에 넣으면 탭별 패널 슬롯으로 표시됩니다.
-        기본 스킨은 <code>line</code>(<code>tabs_line</code>)이며, 선택 탭에 <code>is-active</code>와
+        <code>label</code>과 함께 <code>children</code>에 넣으면 탭별 패널 슬롯으로 표시됩니다. 기본
+        스킨은 <code>line</code>(<code>tabs_line</code>)이며, 선택 탭에 <code>is-active</code>와
         <code>aria-selected</code>가 붙습니다.
       </>
     ),
     code: compoundCode({ panelPrefix: '콘텐츠' }),
-    preview: <ControlledTabs />
+    preview: <ControlledTabs />,
   },
   {
     title: '키워드 탭 · 단일',
-    description: 'variant="keyword"는 가운데 정렬한 키워드 모양의 탭입니다. 선택한 키워드를 채움으로 표시하고, 좁은 화면에서는 여러 줄로 가운데 정렬합니다. 방향키·Home·End로 선택하고 연결된 패널을 표시합니다.',
+    description:
+      'variant="keyword"는 가운데 정렬한 키워드 모양의 탭입니다. 선택한 키워드를 채움으로 표시하고, 좁은 화면에서는 여러 줄로 가운데 정렬합니다. 방향키·Home·End로 선택하고 연결된 패널을 표시합니다.',
     code: keywordTabsCode,
-    preview: <div data-tabs-keyword-demo="single"><KeywordTabsDemo /></div>
+    preview: (
+      <div data-tabs-keyword-demo="single">
+        <KeywordTabsDemo />
+      </div>
+    ),
   },
   {
     title: '키워드 탭 · 이중',
-    description: '상위·하위 모두 키워드 탭을 사용하며 각 메뉴를 가운데 정렬합니다. 대분류마다 하위 선택을 따로 유지하고, label과 탭·패널 연결도 그룹별로 구분합니다.',
+    description:
+      '상위·하위 모두 키워드 탭을 사용하며 각 메뉴를 가운데 정렬합니다. 대분류마다 하위 선택을 따로 유지하고, label과 탭·패널 연결도 그룹별로 구분합니다.',
     code: nestedKeywordTabsCode,
-    preview: <div data-tabs-keyword-demo="nested"><NestedKeywordTabsDemo /></div>
+    preview: (
+      <div data-tabs-keyword-demo="nested">
+        <NestedKeywordTabsDemo />
+      </div>
+    ),
   },
   {
     title: '이중 탭 · 탭 안의 탭',
-    description: '상위 Tab의 패널 안에 Tabs를 중첩합니다. 상위는 card, 하위는 pill 스킨을 사용하며 그룹마다 선택 상태와 label을 지정합니다. 상위 탭을 바꿨다가 돌아와도 각 하위 탭의 선택을 유지합니다. 방향키·Home·End는 현재 탭 목록 안에서 동작하고 Tab으로 하위 탭에 진입합니다.',
+    description:
+      '상위 Tab의 패널 안에 Tabs를 중첩합니다. 상위는 card, 하위는 pill 스킨을 사용하며 그룹마다 선택 상태와 label을 지정합니다. 상위 탭을 바꿨다가 돌아와도 각 하위 탭의 선택을 유지합니다. 방향키·Home·End는 현재 탭 목록 안에서 동작하고 Tab으로 하위 탭에 진입합니다.',
     code: nestedTabsCode,
-    preview: <div data-tabs-nested-demo><NestedTabsDemo /></div>
+    preview: (
+      <div data-tabs-nested-demo>
+        <NestedTabsDemo />
+      </div>
+    ),
   },
   {
     title: '변형(variant)',
     description: (
       <>
-        <code>variant</code>는 <code>line</code>(기본) · <code>card</code> · <code>pill</code> · <code>keyword</code>입니다.
-        각각 <code>tabs_line</code> · <code>tabs_card</code> · <code>tabs_pill</code> · <code>tabs_keyword</code>가 붙습니다.
+        <code>variant</code>는 <code>line</code>(기본) · <code>card</code> · <code>pill</code> ·{' '}
+        <code>keyword</code>입니다. 각각 <code>tabs_line</code> · <code>tabs_card</code> ·{' '}
+        <code>tabs_pill</code> · <code>tabs_keyword</code>가 붙습니다.
       </>
     ),
     code: [
       compoundCode({ props: 'variant="line"', panelPrefix: 'line' }),
       compoundCode({ props: 'variant="card"', panelPrefix: 'card' }),
-      compoundCode({ props: 'variant="pill"', panelPrefix: 'pill' })
+      compoundCode({ props: 'variant="pill"', panelPrefix: 'pill' }),
     ].join('\n\n'),
     preview: (
-      <Space vertical block size={24}>
-        <ControlledTabs variant="line" panelPrefix="line" />
-        <ControlledTabs variant="card" panelPrefix="card" />
-        <ControlledTabs variant="pill" panelPrefix="pill" />
+      <Space
+        vertical
+        block
+        size={24}
+      >
+        <ControlledTabs
+          variant="line"
+          panelPrefix="line"
+        />
+        <ControlledTabs
+          variant="card"
+          panelPrefix="card"
+        />
+        <ControlledTabs
+          variant="pill"
+          panelPrefix="pill"
+        />
       </Space>
-    )
+    ),
   },
   {
     title: '인디케이터 슬라이드',
@@ -526,19 +702,31 @@ const SECTIONS = [
       compoundCode({ props: 'indicatorSlide variant="pill"', panelPrefix: 'pill slide' }),
       compoundCode({
         props: 'indicatorSlide layout="equal" variant="line"',
-        panelPrefix: 'equal slide'
+        panelPrefix: 'equal slide',
       }),
       compoundCode({
         props: 'indicatorSlide vertical variant="line"',
         panelPrefix: 'vertical slide',
         wrapStart: '<div className="tabs_demo-narrow">\n',
-        wrapEnd: '\n</div>'
-      })
+        wrapEnd: '\n</div>',
+      }),
     ].join('\n\n'),
     preview: (
-      <Space vertical block size={24}>
-        <ControlledTabs indicatorSlide variant="line" panelPrefix="line slide" />
-        <ControlledTabs indicatorSlide variant="pill" panelPrefix="pill slide" />
+      <Space
+        vertical
+        block
+        size={24}
+      >
+        <ControlledTabs
+          indicatorSlide
+          variant="line"
+          panelPrefix="line slide"
+        />
+        <ControlledTabs
+          indicatorSlide
+          variant="pill"
+          panelPrefix="pill slide"
+        />
         <ControlledTabs
           indicatorSlide
           layout="equal"
@@ -554,15 +742,17 @@ const SECTIONS = [
           />
         </div>
       </Space>
-    )
+    ),
   },
   {
     title: '스크롤 네비 · 딤 · 선택',
     description: (
       <>
-        <code>layout=&quot;scroll&quot;</code>이면 좌·우 <code>Icon button</code>(<code>tabs_nav</code>)이 붙습니다.
-        예시는 컨테이너 너비 100% 기준이며, 좁아지면 스크롤·네비가 반응형으로 동작합니다.
-        <code>navFade</code>로 가장자리 딤을 켜고, <code>navSelect</code>이면 이전/다음 클릭 시 인접 탭을 선택합니다.
+        <code>layout=&quot;scroll&quot;</code>이면 좌·우 <code>Icon button</code>(
+        <code>tabs_nav</code>)이 붙습니다. 예시는 컨테이너 너비 100% 기준이며, 좁아지면
+        스크롤·네비가 반응형으로 동작합니다.
+        <code>navFade</code>로 가장자리 딤을 켜고, <code>navSelect</code>이면 이전/다음 클릭 시 인접
+        탭을 선택합니다.
       </>
     ),
     code: [
@@ -572,7 +762,7 @@ const SECTIONS = [
         initial: 't-1',
         panelPrefix: 'scroll',
         wrapStart: '<div className="tabs_demo-fluid">\n',
-        wrapEnd: '\n</div>'
+        wrapEnd: '\n</div>',
       }),
       compoundCode({
         props: 'indicatorSlide layout="scroll" navFade',
@@ -580,7 +770,7 @@ const SECTIONS = [
         initial: 't-1',
         panelPrefix: 'navFade',
         wrapStart: '<div className="tabs_demo-fluid">\n',
-        wrapEnd: '\n</div>'
+        wrapEnd: '\n</div>',
       }),
       compoundCode({
         props: 'indicatorSlide layout="scroll" navSelect',
@@ -588,7 +778,7 @@ const SECTIONS = [
         initial: 't-1',
         panelPrefix: 'navSelect',
         wrapStart: '<div className="tabs_demo-fluid">\n',
-        wrapEnd: '\n</div>'
+        wrapEnd: '\n</div>',
       }),
       compoundCode({
         props: 'indicatorSlide layout="scroll" navFade navSelect',
@@ -596,11 +786,15 @@ const SECTIONS = [
         initial: 't-1',
         panelPrefix: 'navFade + navSelect',
         wrapStart: '<div className="tabs_demo-fluid">\n',
-        wrapEnd: '\n</div>'
-      })
+        wrapEnd: '\n</div>',
+      }),
     ].join('\n\n'),
     preview: (
-      <Space vertical block size={24}>
+      <Space
+        vertical
+        block
+        size={24}
+      >
         <div className="tabs_demo-fluid">
           <ControlledTabs
             indicatorSlide
@@ -642,14 +836,16 @@ const SECTIONS = [
           />
         </div>
       </Space>
-    )
+    ),
   },
   {
     title: '네비 버튼 스타일',
     description: (
       <>
-        <code>navVariant</code>는 <code>outline</code>(기본) · <code>ghost</code> · <code>soft</code>입니다.
-        <code>navColor</code>로 Icon 색(<code>primary</code> · <code>muted</code> 등)을 바꿀 수 있고,
+        <code>navVariant</code>는 <code>outline</code>(기본) · <code>ghost</code> ·{' '}
+        <code>soft</code>입니다.
+        <code>navColor</code>로 Icon 색(<code>primary</code> · <code>muted</code> 등)을 바꿀 수
+        있고,
         <code>navClassName</code>으로 클래스를 더할 수 있습니다.
       </>
     ),
@@ -660,7 +856,7 @@ const SECTIONS = [
         initial: 't-1',
         panelPrefix: 'outline',
         wrapStart: '<div className="tabs_demo-fluid">\n',
-        wrapEnd: '\n</div>'
+        wrapEnd: '\n</div>',
       }),
       compoundCode({
         props: 'layout="scroll" navVariant="ghost" navColor="muted"',
@@ -668,7 +864,7 @@ const SECTIONS = [
         initial: 't-1',
         panelPrefix: 'ghost · muted',
         wrapStart: '<div className="tabs_demo-fluid">\n',
-        wrapEnd: '\n</div>'
+        wrapEnd: '\n</div>',
       }),
       compoundCode({
         props: 'layout="scroll" navVariant="soft" navColor="primary"',
@@ -676,11 +872,15 @@ const SECTIONS = [
         initial: 't-1',
         panelPrefix: 'soft · primary',
         wrapStart: '<div className="tabs_demo-fluid">\n',
-        wrapEnd: '\n</div>'
-      })
+        wrapEnd: '\n</div>',
+      }),
     ].join('\n\n'),
     preview: (
-      <Space vertical block size={24}>
+      <Space
+        vertical
+        block
+        size={24}
+      >
         <div className="tabs_demo-fluid">
           <ControlledTabs
             layout="scroll"
@@ -711,14 +911,15 @@ const SECTIONS = [
           />
         </div>
       </Space>
-    )
+    ),
   },
   {
     title: '패널 슬롯 · children',
     description: (
       <>
         <code>Tab</code>에 <code>label</code>을 주고 <code>children</code>에 패널을 넣습니다.
-        <code>panels[tab.value]</code>처럼 value별 슬롯 맵을 두면 탭마다 다른 내용을 제어할 수 있습니다.
+        <code>panels[tab.value]</code>처럼 value별 슬롯 맵을 두면 탭마다 다른 내용을 제어할 수
+        있습니다.
       </>
     ),
     code: pageExampleCode({
@@ -757,10 +958,10 @@ const panels = {
   )
 }
 
-const [value, setValue] = useState('overview')`
-      )
+const [value, setValue] = useState('overview')`,
+      ),
     }),
-    preview: <CompoundTabsDemo />
+    preview: <CompoundTabsDemo />,
   },
   {
     title: '패널 슬롯 · panel prop',
@@ -819,10 +1020,10 @@ const PanelMap = {
   activity: ActivityPage
 }
 
-const [value, setValue] = useState('overview')`
-      )
+const [value, setValue] = useState('overview')`,
+      ),
     }),
-    preview: <SlotPanelTabsDemo />
+    preview: <SlotPanelTabsDemo />,
   },
   {
     title: '패널 슬롯 · TabPanel',
@@ -851,17 +1052,17 @@ const [value, setValue] = useState('overview')`
     <p className="tabs_panel-placeholder">활동 패널</p>
   </TabPanel>
 </Tabs>`,
-        `const [value, setValue] = useState('overview')`
-      )
+        `const [value, setValue] = useState('overview')`,
+      ),
     }),
-    preview: <TabPanelCompoundDemo />
+    preview: <TabPanelCompoundDemo />,
   },
   {
     title: '패널 슬롯 · 위젯/모듈',
     description: (
       <>
-        탭마다 다른 위젯·모듈을 호출합니다. 첫 탭은 <code>Carousel</code>(슬라이드),
-        둘째는 <code>FormLayout</code> 폼 요소, 셋째는 <code>Card</code>입니다.
+        탭마다 다른 위젯·모듈을 호출합니다. 첫 탭은 <code>Carousel</code>(슬라이드), 둘째는{' '}
+        <code>FormLayout</code> 폼 요소, 셋째는 <code>Card</code>입니다.
         <code>panel</code> prop에 모듈 컴포넌트를 넘깁니다.
       </>
     ),
@@ -881,7 +1082,7 @@ const [value, setValue] = useState('overview')`
         'FormLayout',
         'Input',
         'Tab',
-        'Tabs'
+        'Tabs',
       ],
       body: pageExampleReturn(
         `<Tabs value={value} onChange={setValue} indicatorSlide>
@@ -975,18 +1176,18 @@ const PanelMap = {
   card: PanelCardModule
 }
 
-const [value, setValue] = useState('slide')`
-      )
+const [value, setValue] = useState('slide')`,
+      ),
     }),
-    preview: <ModulePanelsDemo />
+    preview: <ModulePanelsDemo />,
   },
   {
     title: '패널 슬롯 · 페이지 위젯 호출',
     description: (
       <>
-        페이지에 이미 위젯이 있다면 모듈을 새로 감싸지 않고{' '}
-        <code>&lt;HeroCarousel /&gt;</code> · <code>&lt;ContactForm /&gt;</code> ·{' '}
-        <code>&lt;ProjectCard /&gt;</code>처럼 <code>panel</code>에 그대로 넘깁니다.
+        페이지에 이미 위젯이 있다면 모듈을 새로 감싸지 않고 <code>&lt;HeroCarousel /&gt;</code> ·{' '}
+        <code>&lt;ContactForm /&gt;</code> · <code>&lt;ProjectCard /&gt;</code>처럼{' '}
+        <code>panel</code>에 그대로 넘깁니다.
       </>
     ),
     code: pageExampleCode({
@@ -994,8 +1195,8 @@ const [value, setValue] = useState('slide')`
       reactImports: ['useState'],
       compImports: ['Tab', 'Tabs'],
       extraImports: [
-        "// 페이지에 이미 있는 위젯",
-        "import { HeroCarousel, ContactForm, ProjectCard } from './widgets'"
+        '// 페이지에 이미 있는 위젯',
+        "import { HeroCarousel, ContactForm, ProjectCard } from './widgets'",
       ],
       body: pageExampleReturn(
         `<Tabs value={value} onChange={setValue} indicatorSlide>
@@ -1003,38 +1204,53 @@ const [value, setValue] = useState('slide')`
   <Tab value="form" label="폼" panel={<ContactForm />} />
   <Tab value="card" label="카드" panel={<ProjectCard />} />
 </Tabs>`,
-        `const [value, setValue] = useState('slide')`
-      )
+        `const [value, setValue] = useState('slide')`,
+      ),
     }),
-    preview: <PageWidgetPanelsDemo />
+    preview: <PageWidgetPanelsDemo />,
   },
   {
     title: '크기',
     description: (
       <>
         <code>size</code>는 <code>sm</code> · <code>md</code>(기본) · <code>lg</code>입니다.
-        <code>sm</code> · <code>lg</code>일 때 <code>tabs_sm</code> · <code>tabs_lg</code>가 붙습니다.
+        <code>sm</code> · <code>lg</code>일 때 <code>tabs_sm</code> · <code>tabs_lg</code>가
+        붙습니다.
       </>
     ),
     code: [
       compoundCode({ props: 'size="sm"', panelPrefix: 'sm' }),
       compoundCode({ props: 'size="md"', panelPrefix: 'md' }),
-      compoundCode({ props: 'size="lg"', panelPrefix: 'lg' })
+      compoundCode({ props: 'size="lg"', panelPrefix: 'lg' }),
     ].join('\n\n'),
     preview: (
-      <Space vertical block size={24}>
-        <ControlledTabs size="sm" panelPrefix="sm" />
-        <ControlledTabs size="md" panelPrefix="md" />
-        <ControlledTabs size="lg" panelPrefix="lg" />
+      <Space
+        vertical
+        block
+        size={24}
+      >
+        <ControlledTabs
+          size="sm"
+          panelPrefix="sm"
+        />
+        <ControlledTabs
+          size="md"
+          panelPrefix="md"
+        />
+        <ControlledTabs
+          size="lg"
+          panelPrefix="lg"
+        />
       </Space>
-    )
+    ),
   },
   {
     title: '세로 · 균등 · 스크롤',
     description: (
       <>
         <code>vertical</code>은 세로 탭, <code>layout=&quot;equal&quot;</code>은 가로 균등 분할,
-        <code>layout=&quot;scroll&quot;</code>은 좌·우 이전/다음 네비, <code>scrollable</code>은 스크롤바만 붙입니다.
+        <code>layout=&quot;scroll&quot;</code>은 좌·우 이전/다음 네비, <code>scrollable</code>은
+        스크롤바만 붙입니다.
       </>
     ),
     code: [
@@ -1042,7 +1258,7 @@ const [value, setValue] = useState('slide')`
         props: 'vertical',
         panelPrefix: 'vertical',
         wrapStart: '<div className="tabs_demo-narrow">\n',
-        wrapEnd: '\n</div>'
+        wrapEnd: '\n</div>',
       }),
       compoundCode({ props: 'layout="equal"', panelPrefix: 'equal' }),
       compoundCode({
@@ -1051,7 +1267,7 @@ const [value, setValue] = useState('slide')`
         initial: 't-1',
         panelPrefix: 'scroll nav',
         wrapStart: '<div className="tabs_demo-fluid">\n',
-        wrapEnd: '\n</div>'
+        wrapEnd: '\n</div>',
       }),
       compoundCode({
         props: 'scrollable',
@@ -1059,15 +1275,25 @@ const [value, setValue] = useState('slide')`
         initial: 't-1',
         panelPrefix: 'scrollable',
         wrapStart: '<div className="tabs_demo-fluid">\n',
-        wrapEnd: '\n</div>'
-      })
+        wrapEnd: '\n</div>',
+      }),
     ].join('\n\n'),
     preview: (
-      <Space vertical block size={24}>
+      <Space
+        vertical
+        block
+        size={24}
+      >
         <div className="tabs_demo-narrow">
-          <ControlledTabs vertical panelPrefix="vertical" />
+          <ControlledTabs
+            vertical
+            panelPrefix="vertical"
+          />
         </div>
-        <ControlledTabs layout="equal" panelPrefix="equal" />
+        <ControlledTabs
+          layout="equal"
+          panelPrefix="equal"
+        />
         <div className="tabs_demo-fluid">
           <ControlledTabs
             layout="scroll"
@@ -1085,7 +1311,7 @@ const [value, setValue] = useState('slide')`
           />
         </div>
       </Space>
-    )
+    ),
   },
   {
     title: '아이콘 · 비활성',
@@ -1100,30 +1326,43 @@ const [value, setValue] = useState('slide')`
         tabs: [
           { value: 'home', label: '홈', icon: true },
           { value: 'search', label: '검색', icon: true },
-          { value: 'inbox', label: '수신함', icon: true }
+          { value: 'inbox', label: '수신함', icon: true },
         ],
         initial: 'home',
-        panelPrefix: '아이콘'
+        panelPrefix: '아이콘',
       }),
       compoundCode({
         tabs: DISABLED_TABS,
         initial: 'a',
-        panelPrefix: '비활성 예시'
-      })
+        panelPrefix: '비활성 예시',
+      }),
     ].join('\n\n'),
     preview: (
-      <Space vertical block size={24}>
-        <ControlledTabs tabs={ICON_TABS} initial="home" panelPrefix="아이콘" />
-        <ControlledTabs tabs={DISABLED_TABS} initial="a" panelPrefix="비활성 예시" />
+      <Space
+        vertical
+        block
+        size={24}
+      >
+        <ControlledTabs
+          tabs={ICON_TABS}
+          initial="home"
+          panelPrefix="아이콘"
+        />
+        <ControlledTabs
+          tabs={DISABLED_TABS}
+          initial="a"
+          panelPrefix="비활성 예시"
+        />
       </Space>
-    )
+    ),
   },
   {
     title: '닫기 · extra',
     description: (
       <>
         <code>Tab</code>의 <code>closable</code>이면 ×(<code>tabs_close</code>)가 붙고
-        <code>onClose</code>가 호출됩니다. <code>extra</code>는 바 오른쪽(<code>tabs_extra</code>)에 둡니다.
+        <code>onClose</code>가 호출됩니다. <code>extra</code>는 바 오른쪽(<code>tabs_extra</code>)에
+        둡니다.
       </>
     ),
     code: pageExampleCode({
@@ -1155,18 +1394,19 @@ const [value, setValue] = useState('slide')`
   { value: 'doc-2', label: '문서 2', closable: true },
   { value: 'doc-3', label: '문서 3', closable: true }
 ])
-const [value, setValue] = useState('doc-1')`
-      )
+const [value, setValue] = useState('doc-1')`,
+      ),
     }),
-    preview: <ClosableTabsDemo />
+    preview: <ClosableTabsDemo />,
   },
   {
     title: 'HTML 마크업',
     description: (
       <>
-        스타일 계약은 <code>tabs</code> · <code>tabs_bar</code> · <code>tabs_list</code> · <code>tabs_tab</code> ·
-        <code>tabs_panel</code>입니다. 기본 스킨은 <code>tabs_line</code>입니다.
-        화면 프리뷰는 실제 Tabs 컴포넌트로 동작합니다. 아래 HTML은 구조 참고용이며, 단독 사용 시 선택·키보드 이벤트를 JavaScript로 구현해야 합니다.
+        스타일 계약은 <code>tabs</code> · <code>tabs_bar</code> · <code>tabs_list</code> ·{' '}
+        <code>tabs_tab</code> ·<code>tabs_panel</code>입니다. 기본 스킨은 <code>tabs_line</code>
+        입니다. 화면 프리뷰는 실제 Tabs 컴포넌트로 동작합니다. 아래 HTML은 구조 참고용이며, 단독
+        사용 시 선택·키보드 이벤트를 JavaScript로 구현해야 합니다.
       </>
     ),
     code: `<!-- 정적 구조 예시: 단독 HTML에는 선택 상태와 키보드 이동을 처리하는 JavaScript가 필요합니다. -->
@@ -1192,48 +1432,52 @@ const [value, setValue] = useState('doc-1')`
     </div>
   </div>
 </div>`,
-    preview: <ControlledTabs label="HTML 구조 예시 탭" panelPrefix="HTML" />
+    preview: (
+      <ControlledTabs
+        label="HTML 구조 예시 탭"
+        panelPrefix="HTML"
+      />
+    ),
   },
   {
     title: '접근성',
     description: (
       <>
-        <code>tablist</code>에 <code>aria-label</code>(기본 &quot;섹션&quot;)을 둡니다.
-        활성 탭은 <code>aria-selected=&quot;true&quot;</code>, 비활성 탭은 <code>tabIndex=-1</code>입니다.
-        세로일 때는 <code>aria-orientation=&quot;vertical&quot;</code>입니다.
-        Tab은 선택한 탭으로 진입한 뒤 패널·다음 조작 요소로 나갑니다.
-        탭 사이는 가로 방향키(세로형은 위·아래)로 이동하면서 바로 선택합니다.
-        Enter·Space로도 초점이 있는 탭을 선택할 수 있습니다.
+        <code>tablist</code>에 <code>aria-label</code>(기본 &quot;섹션&quot;)을 둡니다. 활성 탭은{' '}
+        <code>aria-selected=&quot;true&quot;</code>, 비활성 탭은 <code>tabIndex=-1</code>입니다.
+        세로일 때는 <code>aria-orientation=&quot;vertical&quot;</code>입니다. Tab은 선택한 탭으로
+        진입한 뒤 패널·다음 조작 요소로 나갑니다. 탭 사이는 가로 방향키(세로형은 위·아래)로
+        이동하면서 바로 선택합니다. Enter·Space로도 초점이 있는 탭을 선택할 수 있습니다.
       </>
     ),
     code: compoundCode({
       props: 'label="설정 탭"',
       tabs: [
         { value: 'a', label: '일반' },
-        { value: 'b', label: '알림' }
+        { value: 'b', label: '알림' },
       ],
       initial: 'a',
-      panelPrefix: '설정'
+      panelPrefix: '설정',
     }),
     preview: (
       <ControlledTabs
         label="설정 탭"
         tabs={[
           { value: 'a', label: '일반' },
-          { value: 'b', label: '알림' }
+          { value: 'b', label: '알림' },
         ]}
         initial="a"
         panelPrefix="설정"
       />
-    )
-  }
-]
+    ),
+  },
+];
 
 /**
  * Tabs 가이드 화면.
  * 메뉴는 데이터 map · 패널은 Tab children / panel / TabPanel 슬롯으로 구성한다.
  */
-export default function TabsGuide () {
+export default function TabsGuide() {
   return (
     <GuideLayout
       category="네비게이션"
@@ -1254,5 +1498,5 @@ export default function TabsGuide () {
 
       <GuideApiDocs sections={tabsApiSections} />
     </GuideLayout>
-  )
+  );
 }

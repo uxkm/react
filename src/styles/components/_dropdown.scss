@@ -18,7 +18,6 @@
   --dropdown-offset-lg: var(--space-md);
   --dropdown-item-line-height: 1.4;
   --z-dropdown: 100;
-
 }
 
 // Dropdown — OOCSS: 구조(.dropdown) + 스킨(.dropdown_placement-* · .dropdown_offset-* · .dropdown_block) + 파트(.dropdown_trigger · .dropdown_menu)
@@ -44,7 +43,7 @@
   vertical-align: middle;
 
   &.is-open {
-    > [data-demo-slot="trigger"] > .dropdown_trigger[aria-expanded],
+    > [data-demo-slot='trigger'] > .dropdown_trigger[aria-expanded],
     > .dropdown_trigger[aria-expanded] {
       z-index: calc(var(--z-dropdown, 100) + 1);
     }
@@ -95,8 +94,8 @@
         max-height: calc(
           var(--dropdown-max-visible-items) *
             (
-              var(--menu-item-padding-y) * 2 +
-                var(--menu-font-size) * var(--dropdown-item-line-height)
+              var(--menu-item-padding-y) * 2 + var(--menu-font-size) *
+                var(--dropdown-item-line-height)
             ) +
             (var(--dropdown-max-visible-items) - 1) * var(--menu-gap)
         );
@@ -215,8 +214,8 @@
     display: flex;
     width: 100%;
 
-    > [data-demo-slot="trigger"],
-    > [data-demo-slot="trigger"] > .dropdown_trigger,
+    > [data-demo-slot='trigger'],
+    > [data-demo-slot='trigger'] > .dropdown_trigger,
     > .dropdown_trigger {
       width: 100%;
     }
@@ -227,7 +226,7 @@
   }
 
   &_fit {
-    > [data-demo-slot="trigger"] > .dropdown_trigger.btn_select,
+    > [data-demo-slot='trigger'] > .dropdown_trigger.btn_select,
     > .dropdown_trigger.btn_select {
       min-width: var(--dropdown-min-width);
     }

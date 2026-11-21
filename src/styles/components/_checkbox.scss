@@ -20,7 +20,6 @@
   --checkbox-group-gap: var(--space-sm);
   --checkbox-button-padding-y: 0.35rem;
   --checkbox-button-padding-x: 0.75rem;
-
 }
 
 // Checkbox — OOCSS: 구조(.checkbox) / 크기(.checkbox_sm) / 변형(.checkbox_button · .checkbox_label-end · .checkbox_card) + 공통 색상(.color_*)
@@ -203,7 +202,7 @@
     }
   }
 
-  @include disabled-semantic-checked-box(".checkbox_input", ".checkbox_box");
+  @include disabled-semantic-checked-box('.checkbox_input', '.checkbox_box');
 
   &.is-error .checkbox_box {
     border-color: var(--color-danger);
@@ -288,7 +287,7 @@
       box-shadow $transition-fast;
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       top: 50%;
       left: 50%;

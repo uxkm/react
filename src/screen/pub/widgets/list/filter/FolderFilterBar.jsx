@@ -2,10 +2,10 @@
  * FolderFilterBar
  * - 화면명 필터 트리거 버튼과, 선택된 폴더의 하위 리프 바로가기 목록
  */
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
-import { toAppHref } from '../table/PathLinkCell' // to App Href
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
+import { toAppHref } from '../table/PathLinkCell'; // to App Href
 
-export default function FolderFilterBar ({
+export default function FolderFilterBar({
   active,
   open,
   label,
@@ -14,7 +14,7 @@ export default function FolderFilterBar ({
   subsAria,
   items,
   itemLabelOf,
-  onOpen
+  onOpen,
 }) {
   return (
     <div className="wbs-filter-bar">
@@ -27,34 +27,43 @@ export default function FolderFilterBar ({
         onClick={onOpen}
       >
         <span className="wbs-filter-btn_label">{label || filterLabel}</span>
-        <span className="wbs-filter-btn_icon" aria-hidden="true">▾</span>
+        <span
+          className="wbs-filter-btn_icon"
+          aria-hidden="true"
+        >
+          ▾
+        </span>
       </button>
       {items.length > 0 && (
         <div className="wbs-filter-selected">
-          <span className="wbs-filter-selected_sep" aria-hidden="true" />
-          <ul className="wbs-filter-subs" aria-label={subsAria}>
+          <span
+            className="wbs-filter-selected_sep"
+            aria-hidden="true"
+          />
+          <ul
+            className="wbs-filter-subs"
+            aria-label={subsAria}
+          >
             {items.map((item, idx) => (
               <li key={(item.id || item.name || idx) + '-sub'}>
-                {item.pageUrl
-                  ? (
-                    <a
-                      className="wbs-filter-sub"
-                      href={toAppHref(item.pageUrl)}
-                      target="_blank"
-                      title="새 창 열림"
-                      rel="noopener noreferrer"
-                    >{itemLabelOf(item)}</a>
-                  )
-                  : (
-                    <span className="wbs-filter-sub is-static">
-                      {itemLabelOf(item)}
-                    </span>
-                  )}
+                {item.pageUrl ? (
+                  <a
+                    className="wbs-filter-sub"
+                    href={toAppHref(item.pageUrl)}
+                    target="_blank"
+                    title="새 창 열림"
+                    rel="noopener noreferrer"
+                  >
+                    {itemLabelOf(item)}
+                  </a>
+                ) : (
+                  <span className="wbs-filter-sub is-static">{itemLabelOf(item)}</span>
+                )}
               </li>
             ))}
           </ul>
         </div>
       )}
     </div>
-  )
+  );
 }

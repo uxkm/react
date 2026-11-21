@@ -32,7 +32,6 @@
   --card-product-media-width: 8.5rem;
   --card-webzine-media-ratio: 3 / 2;
   --card-hover-translate: -2px;
-
 }
 
 // Card — OOCSS: 구조(.card) + 스킨(.card_*) + 파트(.card_header · .card_body · .card_footer) + 공통 색상(.color_*)
@@ -99,7 +98,9 @@
   &.card_hover {
     &:hover {
       border-color: var(--color-accent);
-      &.card_shadow { box-shadow: var(--card-shadow-md); }
+      &.card_shadow {
+        box-shadow: var(--card-shadow-md);
+      }
       transform: translateY(var(--card-hover-translate));
     }
   }
@@ -458,11 +459,7 @@
     align-items: center;
     justify-content: center;
     color: var(--color-text-muted);
-    background: linear-gradient(
-      135deg,
-      var(--color-surface-raised) 0%,
-      var(--color-bg) 100%
-    );
+    background: linear-gradient(135deg, var(--color-surface-raised) 0%, var(--color-bg) 100%);
 
     .icon,
     svg {
@@ -556,7 +553,9 @@ button.card,
 
   &:hover:not(.is-disabled) {
     border-color: var(--color-accent);
-    &.card_shadow { box-shadow: var(--card-shadow); }
+    &.card_shadow {
+      box-shadow: var(--card-shadow);
+    }
   }
 }
 

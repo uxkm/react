@@ -9,45 +9,45 @@ Next.js 16 App Router와 React 19 기반 퍼블리싱 작업 환경입니다. B2
 - **퍼블리싱 목록**: 화면별 경로·작업 상태·비고를 JSON으로 관리합니다.
 - **검사 도구**: ESLint, TypeScript와 Playwright 기반 일반 회귀 검사를 사용합니다.
 
-| 경로 | 용도 |
-| --- | --- |
-| [소개](/pub/guide) | 프로젝트 환경과 작업 방법 |
-| [접근성](/pub/guide/a11y) | KWCAG 2.2 검사 항목과 검수 흐름 |
-| [컴포넌트 예제](/pub/guide/button) | 공통 UI 가이드의 시작 화면 |
-| [라이브러리 데모](/pub/demo/libs) | 외부 라이브러리 사용 예제 |
-| [퍼블리싱 목록](/pub) | 화면 목록·진행 상태 |
-| `/b2b` | 프로젝트 메인과 하위 화면 |
+| 경로                               | 용도                            |
+| ---------------------------------- | ------------------------------- |
+| [소개](/pub/guide)                 | 프로젝트 환경과 작업 방법       |
+| [접근성](/pub/guide/a11y)          | KWCAG 2.2 검사 항목과 검수 흐름 |
+| [컴포넌트 예제](/pub/guide/button) | 공통 UI 가이드의 시작 화면      |
+| [라이브러리 데모](/pub/demo/libs)  | 외부 라이브러리 사용 예제       |
+| [퍼블리싱 목록](/pub)              | 화면 목록·진행 상태             |
+| `/b2b`                             | 프로젝트 메인과 하위 화면       |
 
 ## 문서 안내
 
 처음 작업한다면 시작하기 → 폴더별 역할 → 작업별 수정 위치 순서로 확인합니다. 루트 README는 전체 구조와 운영 방법을, 영역별 README는 내부 파일과 구현 규칙을 설명합니다.
 
-| 문서 | 내용 |
-| --- | --- |
-| [폴더별 역할](#폴더별-역할과-주요-파일) | 소스·스타일·자산·스크립트의 책임과 주요 파일 |
-| [작업별 수정 위치](#작업별-수정-위치) | 화면·메뉴·카드·목록·가이드 변경 시 수정할 원본 |
-| [PUB 상세 구조](src/screen/pub/README.md) | 퍼블리싱 도구의 폴더와 파일별 역할, JSON·메뉴·화면 연결 |
-| [B2B 화면 구조](src/screen/b2b/README.md) | 업무 메뉴별 화면 폴더와 프로젝트 마크업 규칙 |
-| [공통 컴포넌트](src/components/README.md) | UI·레이아웃·슬롯 구성과 사용법 |
-| [공통 Card 유형](src/components/ui/card/README.md) | 카드 유형·이미지·슬롯·위젯 조합 |
-| [라이브러리 연동](src/lib/README.md) | 라우팅·언어·외부 라이브러리 래퍼 |
+| 문서                                               | 내용                                                    |
+| -------------------------------------------------- | ------------------------------------------------------- |
+| [폴더별 역할](#폴더별-역할과-주요-파일)            | 소스·스타일·자산·스크립트의 책임과 주요 파일            |
+| [작업별 수정 위치](#작업별-수정-위치)              | 화면·메뉴·카드·목록·가이드 변경 시 수정할 원본          |
+| [PUB 상세 구조](src/screen/pub/README.md)          | 퍼블리싱 도구의 폴더와 파일별 역할, JSON·메뉴·화면 연결 |
+| [B2B 화면 구조](src/screen/b2b/README.md)          | 업무 메뉴별 화면 폴더와 프로젝트 마크업 규칙            |
+| [공통 컴포넌트](src/components/README.md)          | UI·레이아웃·슬롯 구성과 사용법                          |
+| [공통 Card 유형](src/components/ui/card/README.md) | 카드 유형·이미지·슬롯·위젯 조합                         |
+| [라이브러리 연동](src/lib/README.md)               | 라우팅·언어·외부 라이브러리 래퍼                        |
 
 ## 개발 환경
 
 아래 패키지 버전은 현재 `package-lock.json` 기준입니다. Node.js는 `.nvmrc`와 `.node-version`에 맞춥니다.
 
-| 항목 | 현재 구성 |
-| --- | --- |
-| Node.js | `24.11.1` 고정 · 패키지 최소 조건 `20.9.0` |
-| npm | `10` 이상 |
-| Next.js | `16.4.5` · App Router |
-| React / React DOM | `19.3.1` |
-| TypeScript | `5.9.3` · JSX와 TSX 병행 |
-| 번들러 | 개발·프로덕션 빌드 모두 **Turbopack** |
-| 스타일 | Sass Embedded + PostCSS·Autoprefixer |
-| 코드 검사 | ESLint 9 · Flat Config · 경고 허용 안 함 |
-| 브라우저 검사 | Playwright `1.65.0` · 일반 회귀 검사 |
-| 배포 | `output: 'export'`로 생성한 `out/` 정적 파일 |
+| 항목              | 현재 구성                                    |
+| ----------------- | -------------------------------------------- |
+| Node.js           | `24.11.1` 고정 · 패키지 최소 조건 `20.9.0`   |
+| npm               | `10` 이상                                    |
+| Next.js           | `16.4.5` · App Router                        |
+| React / React DOM | `19.3.1`                                     |
+| TypeScript        | `5.9.3` · JSX와 TSX 병행                     |
+| 번들러            | 개발·프로덕션 빌드 모두 **Turbopack**        |
+| 스타일            | Sass Embedded + PostCSS·Autoprefixer         |
+| 코드 검사         | ESLint 9 · Flat Config · 경고 허용 안 함     |
+| 브라우저 검사     | Playwright `1.65.0` · 일반 회귀 검사         |
+| 배포              | `output: 'export'`로 생성한 `out/` 정적 파일 |
 
 지원 대상은 Chrome·Edge·Firefox 111 이상, Safari·iOS Safari 16.4 이상, Android Chrome 111 이상입니다. `browserslist`는 브라우저 버전을 기준으로 설정합니다.
 
@@ -72,24 +72,24 @@ PowerShell에서 `npm.ps1` 실행 정책 오류가 나면 같은 명령을 `npm.
 
 환경변수 지정 문법은 셸마다 다릅니다. 다음은 포트 변경 예시입니다 (`HTTPS_PORT`, `BIND_HOST`, `BROWSER_TEST_BASE_URL`도 같은 방식).
 
-| 셸 | 명령 |
-| --- | --- |
-| macOS / Linux | `PORT=8091 npm run dev` |
-| Windows PowerShell | `$env:PORT='8091'; npm run dev` |
+| 셸                    | 명령                             |
+| --------------------- | -------------------------------- |
+| macOS / Linux         | `PORT=8091 npm run dev`          |
+| Windows PowerShell    | `$env:PORT='8091'; npm run dev`  |
 | Windows 명령 프롬프트 | `set "PORT=8091" && npm run dev` |
 
 `.gitattributes`는 텍스트를 LF로 유지하며, TypeScript는 import 경로의 대소문자 일치를 검사합니다. 개발 서버는 Windows에서도 사용할 수 있는 IPC로 정상 종료를 요청하고 종료를 기다린 뒤 재시작합니다. 8초 동안 종료하지 않으면 강제 종료합니다.
 
-| 작업 | 명령 | 동작 |
-| --- | --- | --- |
-| 일반 개발 | `npm run dev` | 레지스트리 생성 후 SCSS를 직접 읽는 Turbopack 서버 실행 |
-| 스타일만 빌드 | `npm run build:styles` | SCSS를 일반 CSS와 압축 CSS로 변환 (프로덕션용) |
-| 화면 레지스트리 갱신 | `npm run generate:registry` | 화면 로더·주소 목록·제목 생성 |
-| 프로덕션 빌드 | `npm run build` | 레지스트리·스타일 생성 후 Turbopack으로 정적 사이트 빌드 |
-| 빌드 미리보기 | `npm run start` | `out/`을 HTTP와 선택적 HTTPS로 제공 |
-| HTTP 미리보기 | `npm run start:http` | `serve`로 `out/`을 HTTP 8090에서 제공 |
-| 전체 코드 검사 | `npm run lint` | React·Next.js 규칙 검사 · 경고도 실패 처리 |
-| 타입 검사 | `npm run typecheck` | TypeScript 검사 · 산출물 출력 없음 |
+| 작업                 | 명령                        | 동작                                                     |
+| -------------------- | --------------------------- | -------------------------------------------------------- |
+| 일반 개발            | `npm run dev`               | 레지스트리 생성 후 SCSS를 직접 읽는 Turbopack 서버 실행  |
+| 스타일만 빌드        | `npm run build:styles`      | SCSS를 일반 CSS와 압축 CSS로 변환 (프로덕션용)           |
+| 화면 레지스트리 갱신 | `npm run generate:registry` | 화면 로더·주소 목록·제목 생성                            |
+| 프로덕션 빌드        | `npm run build`             | 레지스트리·스타일 생성 후 Turbopack으로 정적 사이트 빌드 |
+| 빌드 미리보기        | `npm run start`             | `out/`을 HTTP와 선택적 HTTPS로 제공                      |
+| HTTP 미리보기        | `npm run start:http`        | `serve`로 `out/`을 HTTP 8090에서 제공                    |
+| 전체 코드 검사       | `npm run lint`              | React·Next.js 규칙 검사 · 경고도 실패 처리               |
+| 타입 검사            | `npm run typecheck`         | TypeScript 검사 · 산출물 출력 없음                       |
 
 `npm run dev`는 실행 시 Registry를 생성하고 파일 감시를 계속 실행합니다. 화면·폴더를 추가·삭제·이름 변경하면 라우트와 메뉴를 자동 갱신합니다. 이미지·JSON 등 정적 파일 변경도 브라우저에 자동 반영합니다. 라우트 구조·설정·SCSS 진입점이 바뀌면 감시기가 개발 서버를 자동 재시작합니다. 개발 중에는 SCSS를 직접 읽으며 `src/styles/css/`는 생성하지 않습니다.
 
@@ -145,16 +145,16 @@ URL은 `src/app/`에서 정의하고, 실제 화면은 `src/screen/`에 둡니�
 └── node_modules/                  # 설치한 의존성 (Git 제외)
 ```
 
-| 계층 | 작업 위치와 역할 |
-| --- | --- |
-| 라우트 | `src/app/**/page.jsx`에서 URL 매개변수·정적 경로·제목을 처리합니다. |
-| 화면 | `src/screen/b2b/`에서 JSX 화면과 스켈레톤을 작성합니다. |
-| 가이드·데모 | `src/screen/pub/guide/`, `src/screen/pub/demo/`에서 예제를 관리합니다. |
-| 공통 컴포넌트 | `src/components/`에서 TSX 기반 UI를 작성하고 `@/comp`로 가져옵니다. |
-| 레이아웃 기반 | `src/components/layout/`에서 Header·Footer·Page와 레이아웃 슬롯을 관리합니다. |
-| 기능 모듈 | 필요할 때만 `src/components/modules/common/` 또는 `src/components/modules/b2b/`에 입력·상태·검증을 묶은 기능 영역을 만듭니다. 현재는 사용하지 않아 폴더를 두지 않습니다. |
-| PUB 전용 코드 | `src/screen/pub/` 안에 화면·위젯·모듈·훅·메뉴 처리 로직을 모읍니다. 공통 UI·레이아웃·페이지에서 재사용할 기능은 기존 공통 폴더에 둡니다. |
-| 생성물 | `src/generated/registry-*.js`는 스크립트로 생성하며 직접 편집하지 않습니다. |
+| 계층          | 작업 위치와 역할                                                                                                                                                         |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 라우트        | `src/app/**/page.jsx`에서 URL 매개변수·정적 경로·제목을 처리합니다.                                                                                                      |
+| 화면          | `src/screen/b2b/`에서 JSX 화면과 스켈레톤을 작성합니다.                                                                                                                  |
+| 가이드·데모   | `src/screen/pub/guide/`, `src/screen/pub/demo/`에서 예제를 관리합니다.                                                                                                   |
+| 공통 컴포넌트 | `src/components/`에서 TSX 기반 UI를 작성하고 `@/comp`로 가져옵니다.                                                                                                      |
+| 레이아웃 기반 | `src/components/layout/`에서 Header·Footer·Page와 레이아웃 슬롯을 관리합니다.                                                                                            |
+| 기능 모듈     | 필요할 때만 `src/components/modules/common/` 또는 `src/components/modules/b2b/`에 입력·상태·검증을 묶은 기능 영역을 만듭니다. 현재는 사용하지 않아 폴더를 두지 않습니다. |
+| PUB 전용 코드 | `src/screen/pub/` 안에 화면·위젯·모듈·훅·메뉴 처리 로직을 모읍니다. 공통 UI·레이아웃·페이지에서 재사용할 기능은 기존 공통 폴더에 둡니다.                                 |
+| 생성물        | `src/generated/registry-*.js`는 스크립트로 생성하며 직접 편집하지 않습니다.                                                                                              |
 
 일반 화면 소스는 Next.js의 예약 라우팅 경로인 `src/pages/`에 두지 않습니다.
 
@@ -168,58 +168,58 @@ URL은 `src/app/`에서 정의하고, 실제 화면은 `src/screen/`에 둡니�
 
 이 폴더는 주소·문서·레이아웃을 연결합니다. 본문 마크업은 `screen/`, 프로젝트 UI는 `widgets/b2b/`에서 수정합니다.
 
-| 파일·폴더 | 상세 역할 |
-| --- | --- |
-| `layout.jsx` | 모든 경로의 `html`·`body`, 기본 metadata·viewport·폰트·공통 SCSS·AppProviders를 설정합니다. |
-| `page.jsx` | `/`에서 `screen/Home.jsx`를 연결합니다. Home은 프로젝트 존재 여부에 따라 이동할 주소를 정합니다. |
-| `loading.jsx` | 라우트 전환 중 표시할 공통 로딩 경계입니다. |
-| `error.jsx`, `global-error.jsx` | 라우트 오류와 루트 레이아웃 오류를 처리합니다. |
-| `not-found.jsx` | 없는 경로의 404 본문을 연결합니다. |
-| `b2b/page.jsx` | `/b2b`의 메인 화면을 Registry로 연결합니다. 자동 생성 대상입니다. |
-| `b2b/[...slug]/page.jsx` | 여러 단계의 B2B 주소를 받고 정적 경로·제목·화면 모듈을 연결합니다. 자동 생성 대상입니다. |
-| `b2b/layout.jsx` | B2B SCSS와 `ProjectLayout`을 연결합니다. 자동 생성 대상입니다. |
-| `b2b/template.jsx` | 현재는 children을 그대로 반환합니다. 헤더·푸터의 실제 구성은 `ProjectLayout.tsx`에 있습니다. |
-| `pub/page.jsx` | `/pub` 목록 화면과 `pub.scss`를 연결합니다. |
-| `pub/guide/page.jsx` | `/pub/guide` 소개 화면을 연결합니다. |
-| `pub/guide/[...name]/page.jsx` | 컴포넌트 가이드의 정적 경로·제목·Registry 화면을 연결합니다. |
-| `pub/guide/layout.jsx` | 가이드 스타일을 읽고 공통 푸터를 숨깁니다. |
-| `pub/demo/[...name]/page.jsx`, `pub/demo/layout.jsx` | 라이브러리 데모의 정적 경로·제목·화면과 데모 스타일을 연결합니다. |
+| 파일·폴더                                            | 상세 역할                                                                                        |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `layout.tsx`                                         | 모든 경로의 `html`·`body`, 기본 metadata·viewport·폰트·공통 SCSS·AppProviders를 설정합니다.      |
+| `page.jsx`                                           | `/`에서 `screen/Home.jsx`를 연결합니다. Home은 프로젝트 존재 여부에 따라 이동할 주소를 정합니다. |
+| `loading.jsx`                                        | 라우트 전환 중 표시할 공통 로딩 경계입니다.                                                      |
+| `error.jsx`, `global-error.jsx`                      | 라우트 오류와 루트 레이아웃 오류를 처리합니다.                                                   |
+| `not-found.tsx`                                      | 없는 경로의 404 본문을 연결합니다.                                                               |
+| `b2b/page.tsx`                                       | `/b2b`의 메인 화면을 Registry로 연결합니다. 자동 생성 대상입니다.                                |
+| `b2b/[...slug]/page.jsx`                             | 여러 단계의 B2B 주소를 받고 정적 경로·제목·화면 모듈을 연결합니다. 자동 생성 대상입니다.         |
+| `b2b/layout.jsx`                                     | B2B SCSS와 `ProjectLayout`을 연결합니다. 자동 생성 대상입니다.                                   |
+| `b2b/template.jsx`                                   | 현재는 children을 그대로 반환합니다. 헤더·푸터의 실제 구성은 `ProjectLayout.tsx`에 있습니다.     |
+| `pub/page.tsx`                                       | `/pub` 목록 화면과 `pub.scss`를 연결합니다.                                                      |
+| `pub/guide/page.tsx`                                 | `/pub/guide` 소개 화면을 연결합니다.                                                             |
+| `pub/guide/[...name]/page.jsx`                       | 컴포넌트 가이드의 정적 경로·제목·Registry 화면을 연결합니다.                                     |
+| `pub/guide/layout.jsx`                               | 가이드 스타일을 읽고 공통 푸터를 숨깁니다.                                                       |
+| `pub/demo/[...name]/page.jsx`, `pub/demo/layout.jsx` | 라이브러리 데모의 정적 경로·제목·화면과 데모 스타일을 연결합니다.                                |
 
 ### 2. `src/screen/` — 실제 화면과 페이지 내부 섹션
 
-| 폴더·파일 | 상세 역할 |
-| --- | --- |
-| `b2b/main/index.tsx` | 메인 섹션을 조합하고 페이지 설정을 선언합니다. |
-| `b2b/main/sections/` | `MainHero`는 도입부, `MainCardSection`은 프로모션·상담·진단·바로가기, `MainInsightSection`은 콘텐츠, `MainCaseSection`은 고객사례, `MainCalloutSection`은 문의·구독 영역을 구성합니다. `index.ts`는 섹션 export 입구입니다. |
-| `b2b/contents/` | AX·IT·직무·리더십·법정필수·외국어·중소기업 교육 화면입니다. |
-| `b2b/service/` | 플랫폼·러닝·진단·컨설팅·BPO 화면입니다. |
-| `b2b/insight/` | 멀캠ON·자료실의 목록과 상세 화면입니다. |
-| `b2b/contact/` | 기업교육·플랫폼 도입 문의 화면입니다. |
-| `b2b/company/` | 소개·CEO·연혁·윤리·지속가능경영·투자자정보·홍보 화면입니다. |
-| 각 화면의 `index.tsx` | 페이지 제목·meta·본문·로딩 연결을 작성합니다. `index`는 URL에 포함하지 않습니다. |
-| 각 화면의 `skeleton/indexSkeleton.tsx` | 해당 화면의 수동 로딩 형태입니다. 별도 URL로 등록하지 않습니다. |
-| `pub/` | 퍼블리싱 도구 전체입니다. 내부 폴더와 파일별 설명은 [PUB README](src/screen/pub/README.md)에 있습니다. |
-| `error/ErrorView.jsx` | 오류 본문과 재시도 안내입니다. |
-| `error/NotFound.jsx` | 404 본문과 복귀 안내입니다. |
+| 폴더·파일                              | 상세 역할                                                                                                                                                                                                                   |
+| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `b2b/main/index.tsx`                   | 메인 섹션을 조합하고 페이지 설정을 선언합니다.                                                                                                                                                                              |
+| `b2b/main/sections/`                   | `MainHero`는 도입부, `MainCardSection`은 프로모션·상담·진단·바로가기, `MainInsightSection`은 콘텐츠, `MainCaseSection`은 고객사례, `MainCalloutSection`은 문의·구독 영역을 구성합니다. `index.ts`는 섹션 export 입구입니다. |
+| `b2b/contents/`                        | AX·IT·직무·리더십·법정필수·외국어·중소기업 교육 화면입니다.                                                                                                                                                                 |
+| `b2b/service/`                         | 플랫폼·러닝·진단·컨설팅·BPO 화면입니다.                                                                                                                                                                                     |
+| `b2b/insight/`                         | 멀캠ON·자료실의 목록과 상세 화면입니다.                                                                                                                                                                                     |
+| `b2b/contact/`                         | 기업교육·플랫폼 도입 문의 화면입니다.                                                                                                                                                                                       |
+| `b2b/company/`                         | 소개·CEO·연혁·윤리·지속가능경영·투자자정보·홍보 화면입니다.                                                                                                                                                                 |
+| 각 화면의 `index.tsx`                  | 페이지 제목·meta·본문·로딩 연결을 작성합니다. `index`는 URL에 포함하지 않습니다.                                                                                                                                            |
+| 각 화면의 `skeleton/indexSkeleton.tsx` | 해당 화면의 수동 로딩 형태입니다. 별도 URL로 등록하지 않습니다.                                                                                                                                                             |
+| `pub/`                                 | 퍼블리싱 도구 전체입니다. 내부 폴더와 파일별 설명은 [PUB README](src/screen/pub/README.md)에 있습니다.                                                                                                                      |
+| `error/ErrorView.jsx`                  | 오류 본문과 재시도 안내입니다.                                                                                                                                                                                              |
+| `error/NotFound.jsx`                   | 404 본문과 복귀 안내입니다.                                                                                                                                                                                                 |
 
 ### 3. `src/components/` — 공통 UI와 레이아웃 기반
 
-| 폴더·파일 | 상세 역할 |
-| --- | --- |
-| `index.js` | `@/comp`로 가져오는 공개 export 목록입니다. 공통 UI를 공개할 때 갱신합니다. |
-| `ui/` | Button·Input·Tabs·Modal·Carousel·Table 등 범용 UI입니다. 프로젝트 문구·메뉴 데이터를 넣지 않습니다. |
-| `layout/Page.tsx` | 페이지 본문과 레이아웃 설정을 연결합니다. |
-| `layout/Header.tsx`, `Footer.tsx`, `PageHeader.tsx` | 페이지에서 상단·하단 콘텐츠와 헤더 설정을 등록하는 인터페이스입니다. |
-| `layout/LayoutContext.tsx`, `LayoutSlot.tsx` | 페이지별 슬롯의 등록·해제와 공통 배치 상태를 연결합니다. |
-| `layout/PageLayoutVisibility.tsx` | 화면 meta를 공통 영역의 표시 상태로 전달합니다. |
-| `layout/PageBanner.tsx`, `PageFloating.tsx`, `PageSnackbar.tsx` | 페이지 전용 배너·플로팅·하단 알림을 공통 슬롯에 등록합니다. |
-| `widget/AppLayout.tsx` | 배너·헤더·본문·푸터·플로팅·스낵바의 실제 배치를 조합합니다. |
-| `widget/AppHeader.tsx`, `AppFooter.tsx` | 공통 헤더·푸터 UI입니다. B2B 전용 Header·Footer와 구분합니다. |
-| `widget/TopBanner.tsx`, `NoticeTopBanner.tsx` | 상단 배너 구현과 공지 배너 구성입니다. |
-| `widget/GlobalTranslator.jsx`, `LanguageSwitcher.jsx` | 화면 문구 번역 실행과 언어 선택 UI입니다. |
-| `providers/AppProviders.jsx` | 언어·환경 감지·리플·스크롤바를 초기화합니다. B2B는 자체 AppLayout을 사용하고 나머지 경로는 여기서 공통 AppLayout으로 감쌉니다. |
-| `providers/DevelopmentRefresh.jsx`, `RouteRedirect.jsx` | 개발 중 정적 자산 새로고침과 클라이언트 경로 이동을 처리합니다. |
-| `shared/` | `page-meta.ts`, `layout-slot.ts`, `header-appearance.ts`, `floating-position.ts`가 표시·슬롯·헤더 외형·위치의 타입 계약을 정의합니다. |
+| 폴더·파일                                                       | 상세 역할                                                                                                                             |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `index.js`                                                      | `@/comp`로 가져오는 공개 export 목록입니다. 공통 UI를 공개할 때 갱신합니다.                                                           |
+| `ui/`                                                           | Button·Input·Tabs·Modal·Carousel·Table 등 범용 UI입니다. 프로젝트 문구·메뉴 데이터를 넣지 않습니다.                                   |
+| `layout/Page.tsx`                                               | 페이지 본문과 레이아웃 설정을 연결합니다.                                                                                             |
+| `layout/Header.tsx`, `Footer.tsx`, `PageHeader.tsx`             | 페이지에서 상단·하단 콘텐츠와 헤더 설정을 등록하는 인터페이스입니다.                                                                  |
+| `layout/LayoutContext.tsx`, `LayoutSlot.tsx`                    | 페이지별 슬롯의 등록·해제와 공통 배치 상태를 연결합니다.                                                                              |
+| `layout/PageLayoutVisibility.tsx`                               | 화면 meta를 공통 영역의 표시 상태로 전달합니다.                                                                                       |
+| `layout/PageBanner.tsx`, `PageFloating.tsx`, `PageSnackbar.tsx` | 페이지 전용 배너·플로팅·하단 알림을 공통 슬롯에 등록합니다.                                                                           |
+| `widget/AppLayout.tsx`                                          | 배너·헤더·본문·푸터·플로팅·스낵바의 실제 배치를 조합합니다.                                                                           |
+| `widget/AppHeader.tsx`, `AppFooter.tsx`                         | 공통 헤더·푸터 UI입니다. B2B 전용 Header·Footer와 구분합니다.                                                                         |
+| `widget/TopBanner.tsx`, `NoticeTopBanner.tsx`                   | 상단 배너 구현과 공지 배너 구성입니다.                                                                                                |
+| `widget/GlobalTranslator.jsx`, `LanguageSwitcher.jsx`           | 화면 문구 번역 실행과 언어 선택 UI입니다.                                                                                             |
+| `providers/AppProviders.jsx`                                    | 언어·환경 감지·리플·스크롤바를 초기화합니다. B2B는 자체 AppLayout을 사용하고 나머지 경로는 여기서 공통 AppLayout으로 감쌉니다.        |
+| `providers/DevelopmentRefresh.jsx`, `RouteRedirect.jsx`         | 개발 중 정적 자산 새로고침과 클라이언트 경로 이동을 처리합니다.                                                                       |
+| `shared/`                                                       | `page-meta.ts`, `layout-slot.ts`, `header-appearance.ts`, `floating-position.ts`가 표시·슬롯·헤더 외형·위치의 타입 계약을 정의합니다. |
 
 개별 UI의 옵션·예제는 `/pub/guide/{name}`과 [컴포넌트 README](src/components/README.md)를 확인합니다.
 
@@ -227,134 +227,134 @@ URL은 `src/app/`에서 정의하고, 실제 화면은 `src/screen/`에 둡니�
 
 현재 `widgets/common/`은 빈 작업 폴더입니다. B2B 고유 위젯은 `widgets/b2b/`에 둡니다. 기능 모듈이 필요하면 `components/modules/` 안에 생성하며, 최상위 `src/modules/`나 미사용 모듈 폴더는 만들지 않습니다.
 
-| 폴더·파일 | 상세 역할 |
-| --- | --- |
-| `widgets/b2b/ProjectLayout.tsx` | B2B 헤더·푸터·퀵메뉴를 AppLayout props로 전달해 첫 HTML부터 공통 영역을 포함합니다. |
-| `widgets/b2b/common/Header.tsx`, `Footer.tsx` | B2B 디자인의 실제 헤더·푸터를 구현합니다. |
-| `widgets/b2b/common/FullMenu.tsx`, `menuData.ts` | 전체메뉴 UI와 메뉴 링크·분류 데이터를 관리합니다. |
-| `widgets/b2b/common/footerData.ts` | 푸터의 링크·관련 데이터를 관리합니다. |
-| `widgets/b2b/common/QuickMenu.tsx` | 플로팅 퀵메뉴와 관련 상호작용을 구현합니다. |
-| `widgets/b2b/common/InquirySnackbar.tsx` | 기업교육 문의용 하단 안내입니다. 현재 메인에서 호출합니다. |
-| `widgets/b2b/common/ComingSoon.tsx` | 아직 준비 중인 기능의 안내 UI입니다. |
-| `widgets/b2b/main/` | 프로모션·상담·진단·인사이트·고객사례·문의·구독 카드의 문구·이미지·링크를 관리합니다. |
-| `screen/pub/preview/b2b/` | 위젯 단독 확인 화면입니다. 각 `index.tsx`가 `/pub/preview/b2b/...`으로 등록됩니다. |
-| `components/ui/Card.tsx` | 기본 카드와 6개 데이터 기반 유형을 제공하는 공통 공개 입구입니다. |
-| `components/ui/card/*Card.tsx` | Promotion·Image·Content·QuickLink·Testimonial·Callout 유형의 재사용 마크업입니다. |
-| `components/ui/card/CardBackground.tsx`, `cardTypes.ts` | 카드 배경 미디어와 데이터·옵션 타입을 관리합니다. |
+| 폴더·파일                                               | 상세 역할                                                                            |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `widgets/b2b/ProjectLayout.tsx`                         | B2B 헤더·푸터·퀵메뉴를 AppLayout props로 전달해 첫 HTML부터 공통 영역을 포함합니다.  |
+| `widgets/b2b/common/Header.tsx`, `Footer.tsx`           | B2B 디자인의 실제 헤더·푸터를 구현합니다.                                            |
+| `widgets/b2b/common/FullMenu.tsx`, `menuData.ts`        | 전체메뉴 UI와 메뉴 링크·분류 데이터를 관리합니다.                                    |
+| `widgets/b2b/common/footerData.ts`                      | 푸터의 링크·관련 데이터를 관리합니다.                                                |
+| `widgets/b2b/common/QuickMenu.tsx`                      | 플로팅 퀵메뉴와 관련 상호작용을 구현합니다.                                          |
+| `widgets/b2b/common/InquirySnackbar.tsx`                | 기업교육 문의용 하단 안내입니다. 현재 메인에서 호출합니다.                           |
+| `widgets/b2b/common/ComingSoon.tsx`                     | 아직 준비 중인 기능의 안내 UI입니다.                                                 |
+| `widgets/b2b/main/`                                     | 프로모션·상담·진단·인사이트·고객사례·문의·구독 카드의 문구·이미지·링크를 관리합니다. |
+| `screen/pub/preview/b2b/`                               | 위젯 단독 확인 화면입니다. 각 `index.tsx`가 `/pub/preview/b2b/...`으로 등록됩니다.   |
+| `components/ui/Card.tsx`                                | 기본 카드와 6개 데이터 기반 유형을 제공하는 공통 공개 입구입니다.                    |
+| `components/ui/card/*Card.tsx`                          | Promotion·Image·Content·QuickLink·Testimonial·Callout 유형의 재사용 마크업입니다.    |
+| `components/ui/card/CardBackground.tsx`, `cardTypes.ts` | 카드 배경 미디어와 데이터·옵션 타입을 관리합니다.                                    |
 
 메인 변경 흐름은 `화면 index → sections의 배치 → widgets의 콘텐츠 → components의 공통 Card 유형`입니다. 카드 상세 계약은 [카드 README](src/components/ui/card/README.md)에 있습니다.
 
 ### 5. `src/hooks/`, `src/lib/`, `src/utils/` — 동작과 연동
 
-| 폴더 | 주요 파일과 역할 |
-| --- | --- |
-| `hooks/react/` | `useControllable`은 내부·외부 상태 연결, `useHydrated`는 마운트 여부, `useLatestRef`는 최신 참조, `usePageData`는 로컬 모듈 준비, `usePageLoading`은 비동기 로딩 상태, `useScrollToHash`는 앵커 이동을 처리합니다. |
-| `hooks/interaction/` | `useAutoClose`·`useDailyDismissal`은 자동 닫힘·하루 숨김, `useClickOutside`·`useEscapeKey`는 외부 클릭·Escape, `useModalDialog`는 모달 초점·키보드 동작을 처리합니다. |
-| `hooks/layout/` | `useMediaQuery`는 화면 조건, `useFloatingPosition`은 플로팅 좌표·경계를 처리합니다. |
-| `hooks/i18n/`, `hooks/scroll/` | `useLocale`은 언어 상태 API, `useHomeScrollEffects`는 스크롤 효과 연결입니다. |
-| `lib/page/` | `RegistryPage`는 화면 모듈 로딩, `staticParams`는 정적 주소, `routeMetadata`는 서버 제목, `siteTitle`은 클라이언트 탭 제목을 처리합니다. |
-| `lib/router/` | Next.js Link·navigation을 프로젝트에서 사용하는 인터페이스로 제공합니다. |
-| `lib/i18n/` | 언어 설정·Zustand 상태·DOM 번역 요청과 캐시를 관리합니다. |
-| `lib/layout/`, `lib/vendor/` | 공통 breakpoint와 Swiper·FullCalendar·Lottie 등 외부 라이브러리의 가져오기 입구입니다. |
-| `utils/dom/` | `detectEnvironment`, `overlayScrollbar`, `ripple`, `scrollEffects`가 DOM 기반 전역 효과를 구현합니다. |
-| `utils/media/` | `embedSvg.ts`는 SVG 처리, `images.js`는 이미지 관련 유틸리티입니다. |
-| `utils/react/`, `utils/style/` | React children 판별 등 공통 함수와 `classNames.js`의 조건부 클래스 결합입니다. |
+| 폴더                           | 주요 파일과 역할                                                                                                                                                                                                   |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `hooks/react/`                 | `useControllable`은 내부·외부 상태 연결, `useHydrated`는 마운트 여부, `useLatestRef`는 최신 참조, `usePageData`는 로컬 모듈 준비, `usePageLoading`은 비동기 로딩 상태, `useScrollToHash`는 앵커 이동을 처리합니다. |
+| `hooks/interaction/`           | `useAutoClose`·`useDailyDismissal`은 자동 닫힘·하루 숨김, `useClickOutside`·`useEscapeKey`는 외부 클릭·Escape, `useModalDialog`는 모달 초점·키보드 동작을 처리합니다.                                              |
+| `hooks/layout/`                | `useMediaQuery`는 화면 조건, `useFloatingPosition`은 플로팅 좌표·경계를 처리합니다.                                                                                                                                |
+| `hooks/i18n/`, `hooks/scroll/` | `useLocale`은 언어 상태 API, `useHomeScrollEffects`는 스크롤 효과 연결입니다.                                                                                                                                      |
+| `lib/page/`                    | `RegistryPage`는 화면 모듈 로딩, `staticParams`는 정적 주소, `routeMetadata`는 서버 제목, `siteTitle`은 클라이언트 탭 제목을 처리합니다.                                                                           |
+| `lib/router/`                  | Next.js Link·navigation을 프로젝트에서 사용하는 인터페이스로 제공합니다.                                                                                                                                           |
+| `lib/i18n/`                    | 언어 설정·Zustand 상태·DOM 번역 요청과 캐시를 관리합니다.                                                                                                                                                          |
+| `lib/layout/`, `lib/vendor/`   | 공통 breakpoint와 Swiper·FullCalendar·Lottie 등 외부 라이브러리의 가져오기 입구입니다.                                                                                                                             |
+| `utils/dom/`                   | `detectEnvironment`, `overlayScrollbar`, `ripple`, `scrollEffects`가 DOM 기반 전역 효과를 구현합니다.                                                                                                              |
+| `utils/media/`                 | `embedSvg.ts`는 SVG 처리, `images.js`는 이미지 관련 유틸리티입니다.                                                                                                                                                |
+| `utils/react/`, `utils/style/` | React children 판별 등 공통 함수와 `classNames.js`의 조건부 클래스 결합입니다.                                                                                                                                     |
 
 `hooks`에는 React 생명주기·상태를 사용하는 코드를, `lib`에는 라우터·번역·라이브러리 연동을, `utils`에는 개별 보조 함수를 둡니다. PUB 전용 동작은 `screen/pub/hooks`, `screen/pub/lib`에 둡니다.
 
 ### 6. `src/styles/` — 스타일 원본과 생성 CSS
 
-| 폴더·파일 | 상세 역할 |
-| --- | --- |
-| `index.scss` | 루트 layout이 읽는 공통 스타일 진입점입니다. 토큰·테마·기본 문서·레이아웃·UI·오류 화면 스타일을 묶습니다. |
-| `pub.scss` | 목록 전용 `pages/pub/_index.scss`를 연결합니다. |
-| `demo.scss` | 가이드·데모 전용 `pages/pub/demo/_index.scss`를 연결합니다. |
-| `foundations/_tokens.scss`, `_themes.scss` | 디자인 토큰과 테마별 CSS 변수를 정의합니다. |
-| `foundations/_variables.scss`, `_mixins.scss` | SCSS에서 재사용할 값과 믹스인을 정의합니다. |
-| `foundations/_utilities.scss`, `_ripple.scss` | 유틸리티 클래스와 리플 효과 스타일입니다. |
-| `common/` | base·global·animations·scrollbar·scroll-effects 원본입니다. 실제 적용 여부는 진입점의 `@use` 연결을 확인합니다. |
-| `components/` | `_button.scss`, `_modal.scss`처럼 공통 UI별 파일을 관리하고 `_index.scss`로 묶습니다. |
-| `layouts/` | `_app.scss`, `_page.scss`의 앱·본문 배치를 `_index.scss`로 묶습니다. |
-| `pages/b2b/index.scss` | B2B 공통·메인·카드 스타일과 화면 크기별 재배치를 연결합니다. |
-| `pages/b2b/common/` | 헤더·푸터·퀵메뉴·준비 중 안내·문의 스낵바 스타일입니다. |
-| `pages/b2b/main/_main.scss` | 메인 섹션과 카드 내부 브랜드·소셜 그룹의 배치를 관리합니다. 카드·버튼·아바타·배지의 유형 스킨은 각 공통 컴포넌트 스타일에 둡니다. |
-| `pages/pub/`, `pages/pub/demo/`, `pages/error/` | 목록, 가이드·데모, 오류 화면 전용 스타일입니다. |
-| `css/` | 빌드한 CSS·압축 CSS가 생기는 출력 폴더입니다. 직접 수정하지 않습니다. |
+| 폴더·파일                                       | 상세 역할                                                                                                                         |
+| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `index.scss`                                    | 루트 layout이 읽는 공통 스타일 진입점입니다. 토큰·테마·기본 문서·레이아웃·UI·오류 화면 스타일을 묶습니다.                         |
+| `pub.scss`                                      | 목록 전용 `pages/pub/_index.scss`를 연결합니다.                                                                                   |
+| `demo.scss`                                     | 가이드·데모 전용 `pages/pub/demo/_index.scss`를 연결합니다.                                                                       |
+| `foundations/_tokens.scss`, `_themes.scss`      | 디자인 토큰과 테마별 CSS 변수를 정의합니다.                                                                                       |
+| `foundations/_variables.scss`, `_mixins.scss`   | SCSS에서 재사용할 값과 믹스인을 정의합니다.                                                                                       |
+| `foundations/_utilities.scss`, `_ripple.scss`   | 유틸리티 클래스와 리플 효과 스타일입니다.                                                                                         |
+| `common/`                                       | base·global·animations·scrollbar·scroll-effects 원본입니다. 실제 적용 여부는 진입점의 `@use` 연결을 확인합니다.                   |
+| `components/`                                   | `_button.scss`, `_modal.scss`처럼 공통 UI별 파일을 관리하고 `_index.scss`로 묶습니다.                                             |
+| `layouts/`                                      | `_app.scss`, `_page.scss`의 앱·본문 배치를 `_index.scss`로 묶습니다.                                                              |
+| `pages/b2b/index.scss`                          | B2B 공통·메인·카드 스타일과 화면 크기별 재배치를 연결합니다.                                                                      |
+| `pages/b2b/common/`                             | 헤더·푸터·퀵메뉴·준비 중 안내·문의 스낵바 스타일입니다.                                                                           |
+| `pages/b2b/main/_main.scss`                     | 메인 섹션과 카드 내부 브랜드·소셜 그룹의 배치를 관리합니다. 카드·버튼·아바타·배지의 유형 스킨은 각 공통 컴포넌트 스타일에 둡니다. |
+| `pages/pub/`, `pages/pub/demo/`, `pages/error/` | 목록, 가이드·데모, 오류 화면 전용 스타일입니다.                                                                                   |
+| `css/`                                          | 빌드한 CSS·압축 CSS가 생기는 출력 폴더입니다. 직접 수정하지 않습니다.                                                             |
 
 ### 7. `public/`, `src/assets/` — 데이터와 정적 자산
 
-| 폴더·파일 | 상세 역할 |
-| --- | --- |
-| `public/data/pub/index.json` | 목록 이름과 B2B 표시 설정의 원본입니다. |
-| `public/data/pub/b2b/index.json` | 목록 폴더의 순서·표시명·읽을 JSON 파일을 정의합니다. |
-| `public/data/pub/b2b/{common,main,contents,service,insight,contact,company}.json` | 폴더별 화면 계층·URL·소스 경로·작업 정보·비고의 원본입니다. |
-| `public/data/pub/guide-menu.json` | 가이드·위젯·데모 메뉴의 분류·순서·라벨을 관리합니다. |
-| `public/data/pub/b2b.generated.json` | 프로젝트 메타데이터 생성물입니다. 원본 `index.json`을 수정합니다. |
-| `public/data/pub/lottie.json` | Lottie 데모에서 사용하는 파일 목록입니다. `scripts/generate/lottie-list.mjs`로 생성합니다. |
-| `public/data/pub/docs/a11y/` | 수동 체크리스트·컴포넌트 검토·사이트 검토 문서와 검사 목록입니다. |
-| `public/fonts/pretendard/` | 폰트 CSS와 woff·woff2 파일입니다. 루트 layout이 CSS를 연결합니다. |
-| `public/images/common/`, `pages/main/`, `icon/`, `lottie/`, `@dummy/` | 공통 이미지, 메인 이미지, 아이콘, 애니메이션 JSON, 샘플 이미지를 구분합니다. |
-| `public/assets/b2b/` | 프로젝트 전용 자산을 추가할 작업 위치입니다. 현재 구현의 이미지 경로는 `public/images/`도 사용하므로 기존 참조를 확인합니다. |
-| `src/assets/logo.svg` | 소스에서 import하여 사용하는 번들 에셋입니다. |
+| 폴더·파일                                                                         | 상세 역할                                                                                                                    |
+| --------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `public/data/pub/index.json`                                                      | 목록 이름과 B2B 표시 설정의 원본입니다.                                                                                      |
+| `public/data/pub/b2b/index.json`                                                  | 목록 폴더의 순서·표시명·읽을 JSON 파일을 정의합니다.                                                                         |
+| `public/data/pub/b2b/{common,main,contents,service,insight,contact,company}.json` | 폴더별 화면 계층·URL·소스 경로·작업 정보·비고의 원본입니다.                                                                  |
+| `public/data/pub/guide-menu.json`                                                 | 가이드·위젯·데모 메뉴의 분류·순서·라벨을 관리합니다.                                                                         |
+| `public/data/pub/b2b.generated.json`                                              | 프로젝트 메타데이터 생성물입니다. 원본 `index.json`을 수정합니다.                                                            |
+| `public/data/pub/lottie.json`                                                     | Lottie 데모에서 사용하는 파일 목록입니다. `scripts/generate/lottie-list.mjs`로 생성합니다.                                   |
+| `public/data/pub/docs/a11y/`                                                      | 수동 체크리스트·컴포넌트 검토·사이트 검토 문서와 검사 목록입니다.                                                            |
+| `public/fonts/pretendard/`                                                        | 폰트 CSS와 woff·woff2 파일입니다. 루트 layout이 CSS를 연결합니다.                                                            |
+| `public/images/common/`, `pages/main/`, `icon/`, `lottie/`, `@dummy/`             | 공통 이미지, 메인 이미지, 아이콘, 애니메이션 JSON, 샘플 이미지를 구분합니다.                                                 |
+| `public/assets/b2b/`                                                              | 프로젝트 전용 자산을 추가할 작업 위치입니다. 현재 구현의 이미지 경로는 `public/images/`도 사용하므로 기존 참조를 확인합니다. |
+| `src/assets/logo.svg`                                                             | 소스에서 import하여 사용하는 번들 에셋입니다.                                                                                |
 
 `public/images/a.png`는 `/images/a.png`로 참조합니다. `public` 파일의 URL에 `/public`을 붙이지 않습니다. 생성물과 원본 JSON을 구분하고, 목록 JSON 변경만으로 실제 화면 파일이나 URL이 만들어지지는 않습니다.
 
 ### 8. 설정·생성물·검사 폴더
 
-| 폴더·파일 | 상세 역할 |
-| --- | --- |
-| `src/config/skeleton.ts` | 화면 ID별 auto·manual 스켈레톤 모드를 결정합니다. |
-| `src/generated/` | 화면 import·주소·제목·프로젝트 메타데이터 생성물입니다. [자동 생성 파일과 수정 위치](#자동-생성-파일과-수정-위치)를 따릅니다. |
-| `src/md.d.ts`, `src/styles.d.ts` | Markdown과 스타일 import의 타입 선언입니다. |
-| `scripts/build/` | 스타일 컴파일·Next 빌드·호환 패치·산출물 정리를 실행합니다. |
-| `scripts/generate/` | 프로젝트 셸·레지스트리·Lottie 목록 생성과 프로젝트 경계 검증을 담당합니다. |
-| `scripts/dev/` | `dev.mjs`는 개발 사이클, `watch-files.mjs`는 파일 감시를 담당합니다. |
-| `scripts/serve/` | 개발·정적 HTTP/HTTPS 서버, 공통 listen 처리, 개발 새로고침 채널입니다. |
-| `scripts/lib/` | `stop-child.mjs`는 하위 프로세스 종료, `write-if-changed.mjs`는 내용이 달라질 때만 파일 저장을 처리합니다. |
-| `tests/*.mjs` | 프로젝트 경계·화면 구성·감시·서버 수신·OS 공통 동작을 검사합니다. |
-| `tests/browser/*.spec.mjs` | 공통 UI 키보드·레이아웃·라우트·번역·B2B 화면 등을 브라우저에서 검사합니다. |
-| `reports/`, `test-results/` | 검사 결과 출력 위치입니다. 작업 원본을 두지 않습니다. |
-| `package.json` | npm 실행 명령·의존성·지원 브라우저·Node 최소 버전입니다. |
-| `package-lock.json` | 로컬 설치 버전 고정 파일입니다. 현재 Git 제외 정책을 사용합니다. |
-| `tsconfig.json` | JS/TS 검사 범위와 import 별칭입니다. `@/*`는 `src/*`, `@/comp`는 공통 컴포넌트 입구입니다. |
-| `.nvmrc`, `.node-version`, `.npmrc` | Node 버전과 npm 설치 설정입니다. |
-| `.gitignore`, `.gitattributes` | Git 제외 대상과 텍스트 줄바꿈 정책입니다. |
-| `next-env.d.ts`, `tsconfig.tsbuildinfo`, `.next/`, `out/` | Next 타입 선언·TypeScript 증분 캐시·Next 산출물·정적 배포 결과입니다. 직접 작업하는 소스가 아닙니다. |
+| 폴더·파일                                                 | 상세 역할                                                                                                                     |
+| --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `src/config/skeleton.ts`                                  | 화면 ID별 auto·manual 스켈레톤 모드를 결정합니다.                                                                             |
+| `src/generated/`                                          | 화면 import·주소·제목·프로젝트 메타데이터 생성물입니다. [자동 생성 파일과 수정 위치](#자동-생성-파일과-수정-위치)를 따릅니다. |
+| `src/md.d.ts`, `src/styles.d.ts`                          | Markdown과 스타일 import의 타입 선언입니다.                                                                                   |
+| `scripts/build/`                                          | 스타일 컴파일·Next 빌드·호환 패치·산출물 정리를 실행합니다.                                                                   |
+| `scripts/generate/`                                       | 프로젝트 셸·레지스트리·Lottie 목록 생성과 프로젝트 경계 검증을 담당합니다.                                                    |
+| `scripts/dev/`                                            | `dev.mjs`는 개발 사이클, `watch-files.mjs`는 파일 감시를 담당합니다.                                                          |
+| `scripts/serve/`                                          | 개발·정적 HTTP/HTTPS 서버, 공통 listen 처리, 개발 새로고침 채널입니다.                                                        |
+| `scripts/lib/`                                            | `stop-child.mjs`는 하위 프로세스 종료, `write-if-changed.mjs`는 내용이 달라질 때만 파일 저장을 처리합니다.                    |
+| `tests/*.mjs`                                             | 프로젝트 경계·화면 구성·감시·서버 수신·OS 공통 동작을 검사합니다.                                                             |
+| `tests/browser/*.spec.mjs`                                | 공통 UI 키보드·레이아웃·라우트·번역·B2B 화면 등을 브라우저에서 검사합니다.                                                    |
+| `reports/`, `test-results/`                               | 검사 결과 출력 위치입니다. 작업 원본을 두지 않습니다.                                                                         |
+| `package.json`                                            | npm 실행 명령·의존성·지원 브라우저·Node 최소 버전입니다.                                                                      |
+| `package-lock.json`                                       | 로컬 설치 버전 고정 파일입니다. 현재 Git 제외 정책을 사용합니다.                                                              |
+| `tsconfig.json`                                           | JS/TS 검사 범위와 import 별칭입니다. `@/*`는 `src/*`, `@/comp`는 공통 컴포넌트 입구입니다.                                    |
+| `.nvmrc`, `.node-version`, `.npmrc`                       | Node 버전과 npm 설치 설정입니다.                                                                                              |
+| `.gitignore`, `.gitattributes`                            | Git 제외 대상과 텍스트 줄바꿈 정책입니다.                                                                                     |
+| `next-env.d.ts`, `tsconfig.tsbuildinfo`, `.next/`, `out/` | Next 타입 선언·TypeScript 증분 캐시·Next 산출물·정적 배포 결과입니다. 직접 작업하는 소스가 아닙니다.                          |
 
 `tests/`, 보고서, 빌드 결과 등은 현재 `.gitignore` 정책에 따라 Git에서 제외됩니다. 작업 폴더를 새로 받았을 때 로컬 전용 검사 파일의 포함 여부를 확인합니다. 나머지 도구 설정 파일과 실행 스크립트는 [설정과 실행 스크립트](#설정과-실행-스크립트)에 정리했습니다.
 
 ## 작업별 수정 위치
 
-| 작업 | 수정할 원본과 확인 순서 |
-| --- | --- |
-| B2B 페이지 본문 추가·변경 | `screen/b2b/{메뉴}/{화면}/index.tsx` → 필요 시 같은 폴더의 skeleton → 목록 JSON → Registry 갱신 |
-| 페이지의 로딩 형태 변경 | 화면의 `skeleton/indexSkeleton.tsx` → `config/skeleton.ts`의 manual 등록 → 실제 loading 상태 연결 |
-| 메인 섹션 순서·배치 변경 | `screen/b2b/main/index.tsx`, `sections/` → `styles/pages/b2b/main/_main.scss` |
-| 메인 카드 문구·링크·이미지 변경 | `widgets/b2b/main/`의 해당 위젯. 카드 공통 구조는 `components/ui/card/` |
-| B2B 헤더·전체메뉴 변경 | `widgets/b2b/common/Header.tsx`, `FullMenu.tsx`, `menuData.ts` → `_header.scss` |
-| B2B 푸터 변경 | `widgets/b2b/common/Footer.tsx`, `footerData.ts` → `_footer.scss` |
-| 공통 UI 동작·스타일 변경 | `components/ui/{이름}.tsx` → `styles/components/_{이름}.scss` → 해당 PUB 가이드·API 설명 |
-| 목록의 담당자·일정·상태·비고 변경 | `public/data/pub/b2b/`의 해당 분류 JSON |
-| 목록 표·검색·필터 변경 | `screen/pub/index.jsx`, `widgets/list/` → `styles/pages/pub/_index.scss` |
-| 가이드·데모 추가 | `screen/pub/guide/` 또는 `demo/` 화면 → 필요 시 `data/guide/` → `guide-menu.json` → Registry 갱신 |
-| 소개 문서 변경 | 루트 `README.md`. `screen/pub/data/projectReadme.js`를 통해 `/pub/guide`에도 표시됩니다. |
-| 전체 색상·간격·테마 변경 | `styles/foundations/`의 토큰·변수·테마 |
+| 작업                              | 수정할 원본과 확인 순서                                                                           |
+| --------------------------------- | ------------------------------------------------------------------------------------------------- |
+| B2B 페이지 본문 추가·변경         | `screen/b2b/{메뉴}/{화면}/index.tsx` → 필요 시 같은 폴더의 skeleton → 목록 JSON → Registry 갱신   |
+| 페이지의 로딩 형태 변경           | 화면의 `skeleton/indexSkeleton.tsx` → `config/skeleton.ts`의 manual 등록 → 실제 loading 상태 연결 |
+| 메인 섹션 순서·배치 변경          | `screen/b2b/main/index.tsx`, `sections/` → `styles/pages/b2b/main/_main.scss`                     |
+| 메인 카드 문구·링크·이미지 변경   | `widgets/b2b/main/`의 해당 위젯. 카드 공통 구조는 `components/ui/card/`                           |
+| B2B 헤더·전체메뉴 변경            | `widgets/b2b/common/Header.tsx`, `FullMenu.tsx`, `menuData.ts` → `_header.scss`                   |
+| B2B 푸터 변경                     | `widgets/b2b/common/Footer.tsx`, `footerData.ts` → `_footer.scss`                                 |
+| 공통 UI 동작·스타일 변경          | `components/ui/{이름}.tsx` → `styles/components/_{이름}.scss` → 해당 PUB 가이드·API 설명          |
+| 목록의 담당자·일정·상태·비고 변경 | `public/data/pub/b2b/`의 해당 분류 JSON                                                           |
+| 목록 표·검색·필터 변경            | `screen/pub/index.jsx`, `widgets/list/` → `styles/pages/pub/_index.scss`                          |
+| 가이드·데모 추가                  | `screen/pub/guide/` 또는 `demo/` 화면 → 필요 시 `data/guide/` → `guide-menu.json` → Registry 갱신 |
+| 소개 문서 변경                    | 루트 `README.md`. `screen/pub/data/projectReadme.js`를 통해 `/pub/guide`에도 표시됩니다.          |
+| 전체 색상·간격·테마 변경          | `styles/foundations/`의 토큰·변수·테마                                                            |
 
 화면 추가 후 `npm run generate:registry`로 등록·검증합니다. 코드 변경에는 lint·typecheck를, 정적 배포 확인에는 build를, 상호작용 변경에는 해당 브라우저 검사를 사용합니다. README 등 문서만 바꿀 때는 경로·링크·실제 코드와 설명의 일치를 확인합니다.
 
 ## 주요 URL
 
-| URL 형태 | 설명 |
-| --- | --- |
-| `/` | 프로젝트가 있으면 `/b2b`, 없으면 `/pub`로 이동 |
-| `/b2b` | 프로젝트 메인 |
-| `/b2b/{menuId}` | 프로젝트 메뉴 메인 |
-| `/b2b/{menuId}/{screen}` | 프로젝트 상세 화면 |
-| `/pub/guide` | 현재 소개 페이지 |
-| `/pub/guide/a11y` | 접근성 가이드 |
-| `/pub/guide/{name}` | 컴포넌트 가이드 |
-| `/pub/demo/{name}` | 라이브러리·패턴 데모 |
-| `/pub` | 퍼블리싱 목록 |
+| URL 형태                 | 설명                                           |
+| ------------------------ | ---------------------------------------------- |
+| `/`                      | 프로젝트가 있으면 `/b2b`, 없으면 `/pub`로 이동 |
+| `/b2b`                   | 프로젝트 메인                                  |
+| `/b2b/{menuId}`          | 프로젝트 메뉴 메인                             |
+| `/b2b/{menuId}/{screen}` | 프로젝트 상세 화면                             |
+| `/pub/guide`             | 현재 소개 페이지                               |
+| `/pub/guide/a11y`        | 접근성 가이드                                  |
+| `/pub/guide/{name}`      | 컴포넌트 가이드                                |
+| `/pub/demo/{name}`       | 라이브러리·패턴 데모                           |
+| `/pub`                   | 퍼블리싱 목록                                  |
 
 `device` 표시는 `B2B`이며 모든 화면은 `/b2b` 아래에 있습니다. `/b2b/main`처럼 프로젝트 경로 뒤에 `main`이 오는 주소는 프로젝트 루트로 이동합니다.
 
@@ -362,10 +362,10 @@ URL은 `src/app/`에서 정의하고, 실제 화면은 `src/screen/`에 둡니�
 
 SCSS 원본은 `src/styles/`에 있습니다.
 
-| 모드 | 스타일 처리 |
-| --- | --- |
-| `dev` | Turbopack이 SCSS를 직접 컴파일 (`src/styles/css/` 미생성) |
-| `build` | 스타일을 먼저 생성하고 `.min.css`로 정적 사이트 빌드 |
+| 모드    | 스타일 처리                                               |
+| ------- | --------------------------------------------------------- |
+| `dev`   | Turbopack이 SCSS를 직접 컴파일 (`src/styles/css/` 미생성) |
+| `build` | 스타일을 먼저 생성하고 `.min.css`로 정적 사이트 빌드      |
 
 스타일 엔트리는 `scripts/build/style-entries.mjs`에서 관리합니다. 공통 `index`, `pub`, `demo`와 프로젝트 페이지 엔트리를 자동 탐색하며 빌드 출력 위치는 `src/styles/css/`입니다. 공용 변수·믹스인이 필요한 SCSS에는 `@use`를 명시합니다.
 
@@ -428,8 +428,8 @@ npm run test:browser
 
 ## VS Code 사용
 
-| 파일 | 설정 내용 |
-| --- | --- |
+| 파일                    | 설정 내용                                                     |
+| ----------------------- | ------------------------------------------------------------- |
 | `.vscode/settings.json` | ESLint 저장 시 자동 수정, 프로젝트 TypeScript, 검색·감시 제외 |
 
 JS/TS 파일에서 `TypeScript: Select TypeScript Version` → `Use Workspace Version`을 선택합니다. 개발·빌드·검사는 터미널에서 `package.json`의 npm 명령으로 실행합니다.
@@ -438,23 +438,23 @@ JS/TS 저장 시 ESLint가 수정 가능한 항목을 처리합니다. JSON·JSO
 
 ## 설정과 실행 스크립트
 
-| 파일 | 역할 |
-| --- | --- |
-| `next.config.ts` | `NextConfig` 타입을 사용하는 Next.js·Turbopack·Sass 설정 |
-| `eslint.config.mjs` | React·Next.js 코드 검사 규칙 |
-| `postcss.config.mjs` | CSS 후처리 설정 |
-| `playwright.config.mjs` | 브라우저·테스트 서버·결과 보고서 설정 |
-| `scripts/generate/registry.mjs` | 화면 레지스트리·정적 주소·제목 생성 |
-| `scripts/generate/project.mjs` | B2B 메타·라우트 셸 sync |
-| `scripts/generate/validate-project.mjs` | 프로젝트·PUB 경계 검증 |
-| `scripts/build/build-styles.mjs` | SCSS → CSS 변환 |
-| `scripts/build/build-next.mjs` | 로컬 Next CLI를 CSS 모드로 실행 |
-| `scripts/build/clean.mjs` | OS 공통 산출물·캐시·의존성 정리 |
-| `scripts/build/prepare-next.mjs` | Next 메타데이터 호환 패치 |
-| `scripts/build/style-entries.mjs` | SCSS 엔트리 목록 |
-| `scripts/dev/dev.mjs` | 개발 서버·파일 감시 사이클 |
-| `scripts/serve/serve-next.mjs` | 개발용 HTTP·HTTPS 서버 |
-| `scripts/serve/serve-static.mjs` | `out/` 정적 미리보기 서버 |
+| 파일                                    | 역할                                                     |
+| --------------------------------------- | -------------------------------------------------------- |
+| `next.config.ts`                        | `NextConfig` 타입을 사용하는 Next.js·Turbopack·Sass 설정 |
+| `eslint.config.mjs`                     | React·Next.js 코드 검사 규칙                             |
+| `postcss.config.mjs`                    | CSS 후처리 설정                                          |
+| `playwright.config.mjs`                 | 브라우저·테스트 서버·결과 보고서 설정                    |
+| `scripts/generate/registry.mjs`         | 화면 레지스트리·정적 주소·제목 생성                      |
+| `scripts/generate/project.mjs`          | B2B 메타·라우트 셸 sync                                  |
+| `scripts/generate/validate-project.mjs` | 프로젝트·PUB 경계 검증                                   |
+| `scripts/build/build-styles.mjs`        | SCSS → CSS 변환                                          |
+| `scripts/build/build-next.mjs`          | 로컬 Next CLI를 CSS 모드로 실행                          |
+| `scripts/build/clean.mjs`               | OS 공통 산출물·캐시·의존성 정리                          |
+| `scripts/build/prepare-next.mjs`        | Next 메타데이터 호환 패치                                |
+| `scripts/build/style-entries.mjs`       | SCSS 엔트리 목록                                         |
+| `scripts/dev/dev.mjs`                   | 개발 서버·파일 감시 사이클                               |
+| `scripts/serve/serve-next.mjs`          | 개발용 HTTP·HTTPS 서버                                   |
+| `scripts/serve/serve-static.mjs`        | `out/` 정적 미리보기 서버                                |
 
 `.mjs`는 Node.js가 ES Module로 실행하는 파일입니다. Next.js 설정은 타입 검사를 위해 `.ts`를 사용하고, 도구 설정과 실행 스크립트에는 지원되는 `.mjs` 형식을 사용합니다.
 
@@ -476,11 +476,11 @@ mkcert -key-file certificates/localhost-key.pem -cert-file certificates/localhos
 
 정적 export에 포함될 주소는 빌드 시 확정합니다. 요청 시점 서버 처리나 호스팅의 HTTP 리다이렉트가 필요하면 해당 배포 구성을 별도로 적용합니다.
 
-| 명령 | 정리 대상 |
-| --- | --- |
-| `npm run clean` | `.next`, `out`, 생성 CSS·캐시 |
-| `npm run clean:modules` | `node_modules` |
-| `npm run clean:all` | 빌드 산출물·캐시와 `node_modules` |
+| 명령                    | 정리 대상                         |
+| ----------------------- | --------------------------------- |
+| `npm run clean`         | `.next`, `out`, 생성 CSS·캐시     |
+| `npm run clean:modules` | `node_modules`                    |
+| `npm run clean:all`     | 빌드 산출물·캐시와 `node_modules` |
 
 코드와 컴포넌트 구조는 `src/components/README.md`, 라이브러리 연동 목록은 `src/lib/README.md`에서 확인할 수 있습니다.
 
@@ -501,8 +501,8 @@ B2B 페이지는 `페이지명/index.tsx` 구조로 작성합니다. 예를 들�
 ```ts
 // src/config/skeleton.ts — 디자인이 확정된 화면만 추가
 export const SKELETON_PAGE_MODE: Record<string, SkeletonMode> = {
-  'b2b/contents/ax/overview': 'manual'
-}
+  'b2b/contents/ax/overview': 'manual',
+};
 ```
 
 ```bash
@@ -517,7 +517,7 @@ npm run test:project
 
 `public/data/pub/index.json`의 `b2b`에서 목록 이름·설명·표시 이름을 관리합니다. `id`와 `base`는 각각 `b2b`, `b2b/`로 고정합니다. `b2b.generated.json`과 `src/generated/b2b.js`에는 단일 프로젝트 메타데이터만 저장합니다.
 
-`src/app/b2b/page.jsx`, `layout.jsx`, `[...slug]/page.jsx`는 생성기가 관리합니다. 실제 UI는 `src/screen/b2b`에 작성하며 `main/index.tsx`를 메인으로 사용합니다. `dev`, `build`에서 라우트와 설정을 자동 생성·검사하고 개발 중에는 파일 변경을 감시합니다.
+`src/app/b2b/page.tsx`, `layout.jsx`, `[...slug]/page.jsx`는 생성기가 관리합니다. 실제 UI는 `src/screen/b2b`에 작성하며 `main/index.tsx`를 메인으로 사용합니다. `dev`, `build`에서 라우트와 설정을 자동 생성·검사하고 개발 중에는 파일 변경을 감시합니다.
 
 PUB 구조와 공통 컴포넌트는 프로젝트에 관계없이 동일하게 유지합니다. `/pub`, `/pub/guide`, `/pub/guide/{name}`, `/pub/demo/{name}`을 제공하며, PUB는 프로젝트 화면·위젯·모듈·스타일·Registry를 가져오지 않습니다. `validate:project`가 직접·간접 의존성과 정적 배포 제약을 검사합니다. 프로젝트 스타일은 `src/styles/pages/b2b`, 이미지는 `public/assets/b2b`에서 관리합니다.
 
@@ -529,18 +529,18 @@ PUB 구조와 공통 컴포넌트는 프로젝트에 관계없이 동일하게 �
 
 `src/generated/`는 원본 화면과 설정으로부터 생성합니다. 직접 수정하지 않고 아래 원본을 수정한 뒤 `npm run generate:registry`로 갱신합니다. `dev`, `build`에서도 자동 실행하며, 개발 서버의 파일 감시기는 변경 시 다시 생성합니다.
 
-| 생성 파일 | 생성 함수·스크립트 | 수정할 원본과 역할 |
-| --- | --- | --- |
-| `src/generated/b2b.js` | `scripts/generate/project.mjs` → `syncProject()` | `public/data/pub/index.json`의 `b2b`, `src/screen/b2b/` 존재 여부. 단일 B2B 메타데이터이며 화면 폴더가 없으면 `null`입니다. |
-| `src/generated/registry-b2b.js` | `scripts/generate/registry.mjs` → `buildProject()` | `src/screen/b2b/`. 화면 import와 `meta`를 등록합니다. |
-| `src/generated/registry-preview-b2b.js` | `scripts/generate/registry.mjs` → `buildPubPages('preview/b2b')` | `src/screen/pub/preview/b2b/`. PUB 전용 미리보기 import와 `meta`를 등록합니다. |
-| `src/generated/registry-component.js` | `scripts/generate/registry.mjs` → `buildPubPages('guide')` | `src/screen/pub/guide/`. 공통 컴포넌트 가이드 import와 `meta`를 등록합니다. |
-| `src/generated/registry-demo.js` | `scripts/generate/registry.mjs` → `buildPubPages('demo')` | `src/screen/pub/demo/`. 데모 import와 `meta`를 등록합니다. |
-| `src/generated/registry-ids.js` | `scripts/generate/registry.mjs` | 위 화면들의 B2B 경로 배열 `b2bRoutes`, 가이드·데모 ID와 제목입니다. 화면 파일명, `pageTitle`, `routeId`를 원본에서 수정합니다. |
-| `src/generated/pub-pages.js` | `scripts/generate/registry.mjs` | 가이드·데모 화면 목록과 `guideLabel`. 메뉴 분류·순서는 `public/data/pub/guide-menu.json`에서 관리합니다. |
-| `src/generated/registry.js` | `scripts/generate/registry.mjs` | 가이드·데모 레지스트리만 묶는 공통 진입점입니다. 생성 방식을 바꾸려면 해당 스크립트를 수정합니다. |
+| 생성 파일                               | 생성 함수·스크립트                                               | 수정할 원본과 역할                                                                                                             |
+| --------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `src/generated/b2b.js`                  | `scripts/generate/project.mjs` → `syncProject()`                 | `public/data/pub/index.json`의 `b2b`, `src/screen/b2b/` 존재 여부. 단일 B2B 메타데이터이며 화면 폴더가 없으면 `null`입니다.    |
+| `src/generated/registry-b2b.js`         | `scripts/generate/registry.mjs` → `buildProject()`               | `src/screen/b2b/`. 화면 import와 `meta`를 등록합니다.                                                                          |
+| `src/generated/registry-preview-b2b.js` | `scripts/generate/registry.mjs` → `buildPubPages('preview/b2b')` | `src/screen/pub/preview/b2b/`. PUB 전용 미리보기 import와 `meta`를 등록합니다.                                                 |
+| `src/generated/registry-component.js`   | `scripts/generate/registry.mjs` → `buildPubPages('guide')`       | `src/screen/pub/guide/`. 공통 컴포넌트 가이드 import와 `meta`를 등록합니다.                                                    |
+| `src/generated/registry-demo.js`        | `scripts/generate/registry.mjs` → `buildPubPages('demo')`        | `src/screen/pub/demo/`. 데모 import와 `meta`를 등록합니다.                                                                     |
+| `src/generated/registry-ids.js`         | `scripts/generate/registry.mjs`                                  | 위 화면들의 B2B 경로 배열 `b2bRoutes`, 가이드·데모 ID와 제목입니다. 화면 파일명, `pageTitle`, `routeId`를 원본에서 수정합니다. |
+| `src/generated/pub-pages.js`            | `scripts/generate/registry.mjs`                                  | 가이드·데모 화면 목록과 `guideLabel`. 메뉴 분류·순서는 `public/data/pub/guide-menu.json`에서 관리합니다.                       |
+| `src/generated/registry.js`             | `scripts/generate/registry.mjs`                                  | 가이드·데모 레지스트리만 묶는 공통 진입점입니다. 생성 방식을 바꾸려면 해당 스크립트를 수정합니다.                              |
 
-`public/data/pub/b2b.generated.json`과 `src/app/b2b/{page.jsx,layout.jsx,[...slug]/page.jsx}`도 `syncProject()`가 생성합니다. 실제 화면은 `src/screen/b2b`에서 수정합니다. 루트 `index.jsx` 또는 `index.tsx`가 있으면 메인으로 우선 사용하고, 없으면 `main/index.tsx`를 사용합니다. 두 방식 모두 `/b2b`로 열며 `/b2b/main`은 `/b2b`로 이동합니다.
+`public/data/pub/b2b.generated.json`과 `src/app/b2b/{page.tsx,layout.jsx,[...slug]/page.jsx}`도 `syncProject()`가 생성합니다. 실제 화면은 `src/screen/b2b`에서 수정합니다. 루트 `index.jsx` 또는 `index.tsx`가 있으면 메인으로 우선 사용하고, 없으면 `main/index.tsx`를 사용합니다. 두 방식 모두 `/b2b`로 열며 `/b2b/main`은 `/b2b`로 이동합니다.
 
 설정은 `b2b` 객체 하나만 지원합니다. 이전 `tabs`, `project`, `projects` 설정과 WEB·MOBILE·project 전용 폴더는 검증 오류로 알립니다. 이전 이름의 생성 메타데이터와 사용하지 않는 `registry-*.js`는 재생성 시 정리합니다. 재생성은 내용이 달라진 파일만 갱신합니다.
 
@@ -552,15 +552,15 @@ PUB 구조와 공통 컴포넌트는 프로젝트에 관계없이 동일하게 �
 
 `npm run dev`는 SCSS 직접 로딩 모드로 파일 감시기를 실행합니다.
 
-| 대상 | 변경 반영 |
-| --- | --- |
-| `src/screen/pub/guide`, `src/screen/pub/demo` | 하위 JSX·TSX 화면 생성·삭제·이름 변경 시 Registry·정적 경로·메뉴 갱신 |
-| `src/app`, 프로젝트 화면 폴더 | 라우트·프로젝트 추가·삭제 감지 및 개발 서버 자동 재시작 |
-| `src/components`, `hooks`, `lib`, `widgets` 등 | Next Fast Refresh로 코드 변경 반영 |
-| `src/styles`와 소스 폴더의 SCSS | 신규 진입점 자동 발견. UI 모드는 CSS 재컴파일 및 삭제된 CSS 산출물 정리 |
-| `public` 전체 | 이미지·폰트·동영상·아이콘·CSS·JSON 등의 생성·수정·삭제·이름 변경 후 브라우저 새로고침 |
-| 소스에 포함된 이미지·JSON 등 정적 에셋 | 브라우저 새로고침으로 변경 반영 |
-| Next·PostCSS·TypeScript 설정, `src/config`, 환경 변수, 스크립트 | 개발 서버 자동 재시작 |
+| 대상                                                            | 변경 반영                                                                             |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `src/screen/pub/guide`, `src/screen/pub/demo`                   | 하위 JSX·TSX 화면 생성·삭제·이름 변경 시 Registry·정적 경로·메뉴 갱신                 |
+| `src/app`, 프로젝트 화면 폴더                                   | 라우트·프로젝트 추가·삭제 감지 및 개발 서버 자동 재시작                               |
+| `src/components`, `hooks`, `lib`, `widgets` 등                  | Next Fast Refresh로 코드 변경 반영                                                    |
+| `src/styles`와 소스 폴더의 SCSS                                 | 신규 진입점 자동 발견. UI 모드는 CSS 재컴파일 및 삭제된 CSS 산출물 정리               |
+| `public` 전체                                                   | 이미지·폰트·동영상·아이콘·CSS·JSON 등의 생성·수정·삭제·이름 변경 후 브라우저 새로고침 |
+| 소스에 포함된 이미지·JSON 등 정적 에셋                          | 브라우저 새로고침으로 변경 반영                                                       |
+| Next·PostCSS·TypeScript 설정, `src/config`, 환경 변수, 스크립트 | 개발 서버 자동 재시작                                                                 |
 
 `src/screen/pub/guide/forms/Input.tsx`는 `/pub/guide/forms/input`, `src/screen/pub/demo/charts/ExampleDemoPage.tsx`는 `/pub/demo/charts/example`로 등록됩니다. 하위 폴더의 `index.jsx`·`index.tsx`는 해당 폴더 주소로 등록됩니다. `routeId` export로 경로를 지정하고 `guideLabel` export로 메뉴 이름을 지정할 수 있습니다. 빈 폴더는 페이지로 등록하지 않습니다. 가이드 루트 `index.jsx`는 기존 `/pub/guide`에서 사용하며, `skeleton`, `widgets`, `modules`, `shared`, `data`, 밑줄로 시작하는 보조 폴더·파일은 가이드·데모 라우트에서 제외합니다.
 

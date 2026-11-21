@@ -64,11 +64,16 @@ src/components/
 ## 사용
 
 ```js
-import { Button, Container, Input } from '@/comp'
+import { Button, Container, Input } from '@/comp';
 ```
 
 ```jsx
-<Button variant="filled" color="primary" size="md" label="확인" />
+<Button
+  variant="filled"
+  color="primary"
+  size="md"
+  label="확인"
+/>
 ```
 
 Button API는 `variant` · `color` · `size` · `round` · `block` · `loading` 계약을 따릅니다.
@@ -104,7 +109,9 @@ Button API는 `variant` · `color` · `size` · `round` · `block` · `loading` 
   --app-header-bg: transparent;
   --app-header-bg-scrolled: var(--color-header-bg-scrolled);
 }
-.service-header.is-scrolled { box-shadow: 0 2px 12px rgb(0 0 0 / 8%); }
+.service-header.is-scrolled {
+  box-shadow: 0 2px 12px rgb(0 0 0 / 8%);
+}
 ```
 
 헤더의 문서상 시작 위치가 화면 상단을 지나면 `is-scrolled`와 `data-scrolled="true"`가 붙고, 위로 복귀하면 제거됩니다. 상단 배너가 있으면 헤더가 실제 상단에 도달한 뒤 전환합니다. 기존 스크롤 숨김(`is-scroll-hidden`)은 별개로 유지합니다.
@@ -130,7 +137,7 @@ PUB의 GuideLayout에서는 배너 슬롯을 숨겨 가이드·데모의 상단�
   storageKey="campaign-2026-11"
   items={[
     { id: 'notice', content: <strong>주요 안내</strong>, href: '/notice' },
-    { id: 'event', content: <span>이벤트 안내</span> }
+    { id: 'event', content: <span>이벤트 안내</span> },
   ]}
 />
 ```
@@ -148,18 +155,20 @@ export const meta = {
   header: true,
   footer: true,
   floating: true,
-  floatingItems: { chat: false, backTop: true, 'page-help': true }
-}
+  floatingItems: { chat: false, backTop: true, 'page-help': true },
+};
 ```
 
 공통 항목은 `AppLayout`의 `floating`에 `Floating.Item` 목록으로 전달하고, 배치는 `floatingProps`로 설정합니다. 페이지 전용 버튼·UI는 다음처럼 추가합니다.
 
 ```jsx
-import { Button, Floating, PageFloating } from '@/comp'
+import { Button, Floating, PageFloating } from '@/comp';
 
 <PageFloating>
-  <Floating.Item name="page-help"><Button>페이지 도움말</Button></Floating.Item>
-</PageFloating>
+  <Floating.Item name="page-help">
+    <Button>페이지 도움말</Button>
+  </Floating.Item>
+</PageFloating>;
 ```
 
 페이지 이동·언마운트 시 이전 추가 항목과 표시 설정은 정리됩니다. 전체 `floating:false`는 항목별 `true`보다 우선하며, `true`는 등록된 항목의 표시를 허용할 뿐 새 항목을 만들거나 BackTop의 스크롤 조건을 강제하지 않습니다. 항목 이름은 공통·페이지 항목을 통틀어 고유하게 지정합니다. 모든 항목이 숨겨지면 플로팅 컨테이너도 렌더하지 않습니다.
@@ -173,19 +182,19 @@ import { Button, Floating, PageFloating } from '@/comp'
   floatingProps={{ boundary: 'footer', boundaryGap: 20, offsetBottom: 24 }}
   slots={{
     'page-tools': <MyPageTools />,
-    'page-notice': <MyPageNotice />
+    'page-notice': <MyPageNotice />,
   }}
 />
 ```
 
 `slots`는 버튼·입력·카드 등 임의 UI를 이름별로 등록합니다. 이름은 `meta.floatingItems`와 `order`에도 사용합니다. `Floating`에 직접 전달하거나 기존 `children`과 함께 사용할 수 있습니다.
 
-| 설정 | 동작 |
-| --- | --- |
-| `boundary="viewport"` | 기존처럼 뷰포트에 고정합니다. 기본값입니다. |
-| `boundary="footer"` | 푸터 상단에서 `boundaryGap`만큼 떨어져 멈춥니다. 푸터가 없거나 숨겨지면 뷰포트 고정을 유지합니다. |
-| `boundary="#stop-area"` | 지정한 영역 상단 위에서 멈춥니다. HTMLElement나 `() => ref.current`도 전달할 수 있습니다. |
-| `getPosition={callback}` | 기본 좌표를 바탕으로 사용자 정의 좌표를 반환합니다. |
+| 설정                     | 동작                                                                                              |
+| ------------------------ | ------------------------------------------------------------------------------------------------- |
+| `boundary="viewport"`    | 기존처럼 뷰포트에 고정합니다. 기본값입니다.                                                       |
+| `boundary="footer"`      | 푸터 상단에서 `boundaryGap`만큼 떨어져 멈춥니다. 푸터가 없거나 숨겨지면 뷰포트 고정을 유지합니다. |
+| `boundary="#stop-area"`  | 지정한 영역 상단 위에서 멈춥니다. HTMLElement나 `() => ref.current`도 전달할 수 있습니다.         |
+| `getPosition={callback}` | 기본 좌표를 바탕으로 사용자 정의 좌표를 반환합니다.                                               |
 
 스크롤·창 크기·플로팅 내용·경계 요소·페이지 높이가 바뀌면 위치를 다시 계산합니다. 자동 경계 회피는 `position: fixed` 기준이며, absolute 등 다른 좌표계는 `getPosition`으로 직접 보정합니다.
 
@@ -209,9 +218,13 @@ import { Button, Floating, PageFloating } from '@/comp'
 어느 페이지에서든 `PageSnackbar`를 호출하면 공통 `AppLayout`의 마지막 슬롯에 하단 중앙으로 표시합니다. 페이지 이동 시 정리되며, 한 페이지에는 하나만 호출합니다. 본문 안에 직접 배치하는 `Snackbar`도 계속 사용할 수 있습니다.
 
 ```jsx
-import { PageSnackbar } from '@/comp'
+import { PageSnackbar } from '@/comp';
 
-<PageSnackbar openOnLoad message="저장되었습니다." closable />
+<PageSnackbar
+  openOnLoad
+  message="저장되었습니다."
+  closable
+/>;
 // 동적 호출: open={open} onOpenChange={setOpen}
 ```
 

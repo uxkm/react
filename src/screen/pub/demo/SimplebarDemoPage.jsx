@@ -1,16 +1,17 @@
-'use client'
+'use client';
 
-import { SimpleBar } from '@/lib/vendor/simplebar' // Simple Bar 컴포넌트
-import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { SimpleBar } from '@/lib/vendor/simplebar'; // Simple Bar 컴포넌트
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'; // Demo Layout 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'; // Demo Block 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'; // wrap Page Example
 
-const lines = Array.from({ length: 24 }, (_, i) => (
-  `라인 ${i + 1} — SimpleBar 커스텀 스크롤 영역 예시입니다.`
-))
+const lines = Array.from(
+  { length: 24 },
+  (_, i) => `라인 ${i + 1} — SimpleBar 커스텀 스크롤 영역 예시입니다.`,
+);
 
 /** simplebar-react 데모 */
-export default function SimplebarDemoPage () {
+export default function SimplebarDemoPage() {
   return (
     <DemoLayout
       title="SimpleBar"
@@ -19,7 +20,8 @@ export default function SimplebarDemoPage () {
     >
       <DemoBlock
         title="고정 높이 스크롤"
-        code={wrapPageExample(`const lines = Array.from({ length: 24 }, (_, i) => 'Line ' + (i + 1))
+        code={wrapPageExample(
+          `const lines = Array.from({ length: 24 }, (_, i) => 'Line ' + (i + 1))
 
 <div className="lib-demo-scroll">
   <SimpleBar style={{ maxHeight: 180 }}>
@@ -27,23 +29,30 @@ export default function SimplebarDemoPage () {
       <p key={line} style={{ margin: '0 0 8px' }}>{line}</p>
     ))}
   </SimpleBar>
-</div>`, {
-          name: 'SimplebarExample',
-          reactImports: [],
-          compImports: [],
-          extraImports: ["import { SimpleBar } from '@/lib/vendor/simplebar'"]
-        })}
+</div>`,
+          {
+            name: 'SimplebarExample',
+            reactImports: [],
+            compImports: [],
+            extraImports: ["import { SimpleBar } from '@/lib/vendor/simplebar'"],
+          },
+        )}
       >
         <div className="lib-demo-scroll">
           <SimpleBar style={{ maxHeight: 180 }}>
             <div className="lib-demo-scroll_inner">
               {lines.map((line) => (
-                <p key={line} style={{ margin: '0 0 8px' }}>{line}</p>
+                <p
+                  key={line}
+                  style={{ margin: '0 0 8px' }}
+                >
+                  {line}
+                </p>
               ))}
             </div>
           </SimpleBar>
         </div>
       </DemoBlock>
     </DemoLayout>
-  )
+  );
 }

@@ -20,7 +20,6 @@
   --switch-label-weight: var(--checkbox-label-weight);
   --switch-hint-size: var(--checkbox-hint-size);
   --switch-group-gap: var(--checkbox-group-gap);
-
 }
 
 // Switch — OOCSS: 구조(.switch) / 크기(.switch_sm) / 변형(.switch_label-end) + 공통 색상(.color_*)
@@ -69,7 +68,9 @@
 
 .switch {
   --switch-thumb-size: calc(var(--switch-height) - var(--switch-padding) * 2);
-  --switch-thumb-travel: calc(var(--switch-width) - var(--switch-thumb-size) - var(--switch-padding) * 2);
+  --switch-thumb-travel: calc(
+    var(--switch-width) - var(--switch-thumb-size) - var(--switch-padding) * 2
+  );
 
   display: inline-flex;
   width: auto;

@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import { useEscapeKey } from '@/hooks/interaction/useEscapeKey' // Escape Key 훅
+import { useEscapeKey } from '@/hooks/interaction/useEscapeKey'; // Escape Key 훅
 
 /**
  * 날짜 선택.
@@ -13,89 +13,91 @@ import {
   useRef, // ref 훅
   useState, // 상태 훅
   type InputHTMLAttributes, // InputHTMLAttributes 타입
-  type ReactNode // ReactNode 타입
-} from 'react' // React
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
+  type ReactNode, // ReactNode 타입
+} from 'react'; // React
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
 
-const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토']
-const pad = (value: number) => String(value).padStart(2, '0')
+const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
+const pad = (value: number) => String(value).padStart(2, '0');
 const toValue = (date: Date | null) =>
-  date ? `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}` : ''
+  date ? `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}` : '';
 const parseValue = (value?: string) =>
-  /^\d{4}-\d{2}-\d{2}$/.test(value || '') ? new Date(`${value}T00:00:00`) : null
+  /^\d{4}-\d{2}-\d{2}$/.test(value || '') ? new Date(`${value}T00:00:00`) : null;
 const formatValue = (value: string, locale: string) => {
-  const date = parseValue(value)
+  const date = parseValue(value);
   return date
     ? new Intl.DateTimeFormat(locale, {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit'
-    }).format(date)
-    : ''
-}
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      }).format(date)
+    : '';
+};
 
-function getCells (month: Date) {
-  const first = new Date(month.getFullYear(), month.getMonth(), 1)
-  const start = new Date(month.getFullYear(), month.getMonth(), 1 - first.getDay())
+function getCells(month: Date) {
+  const first = new Date(month.getFullYear(), month.getMonth(), 1);
+  const start = new Date(month.getFullYear(), month.getMonth(), 1 - first.getDay());
   return Array.from({ length: 42 }, (_, index) => {
-    const date = new Date(start)
-    date.setDate(start.getDate() + index)
-    return { date, value: toValue(date), other: date.getMonth() !== month.getMonth() }
-  })
+    const date = new Date(start);
+    date.setDate(start.getDate() + index);
+    return { date, value: toValue(date), other: date.getMonth() !== month.getMonth() };
+  });
 }
 
 /** 날짜 선택이 받는 값 */
-export interface DatePickerProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'value' | 'defaultValue' | 'onChange' | 'type'> {
-  value?: string
-  defaultValue?: string
-  onChange?: (value: string) => void
+export interface DatePickerProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  'size' | 'value' | 'defaultValue' | 'onChange' | 'type'
+> {
+  value?: string;
+  defaultValue?: string;
+  onChange?: (value: string) => void;
   /** 패널 열림(제어) */
-  open?: boolean
+  open?: boolean;
   /** 비제어 초기 열림 */
-  defaultOpen?: boolean
+  defaultOpen?: boolean;
   /** 패널 열림이 바뀔 때 호출 */
-  onOpenChange?: (open: boolean) => void
+  onOpenChange?: (open: boolean) => void;
   /** 표시 중인 월(제어). Date 또는 YYYY-MM-DD */
-  displayMonth?: Date | string
+  displayMonth?: Date | string;
   /** 비제어 초기 표시 월 */
-  defaultDisplayMonth?: Date | string
+  defaultDisplayMonth?: Date | string;
   /** 표시 월이 바뀔 때 호출 */
-  onDisplayMonthChange?: (month: Date) => void
-  placeholder?: string
-  locale?: string
-  size?: 'sm' | 'md' | 'lg'
-  fit?: boolean
-  block?: boolean
-  disabled?: boolean
-  error?: boolean
-  success?: boolean
-  clearable?: boolean
-  min?: string
-  max?: string
-  name?: string
-  required?: boolean
-  panelAlign?: 'start' | 'end'
-  ariaLabel?: string
-  children?: ReactNode
+  onDisplayMonthChange?: (month: Date) => void;
+  placeholder?: string;
+  locale?: string;
+  size?: 'sm' | 'md' | 'lg';
+  fit?: boolean;
+  block?: boolean;
+  disabled?: boolean;
+  error?: boolean;
+  success?: boolean;
+  clearable?: boolean;
+  min?: string;
+  max?: string;
+  name?: string;
+  required?: boolean;
+  panelAlign?: 'start' | 'end';
+  ariaLabel?: string;
+  children?: ReactNode;
 }
 
 /**
  * 날짜 입력.
  * value는 YYYY-MM-DD. clearable · min · max · 검증 상태를 지원한다.
  */
-function toMonthDate (value?: Date | string | null) {
+function toMonthDate(value?: Date | string | null) {
   if (value instanceof Date && !Number.isNaN(value.getTime())) {
-    return new Date(value.getFullYear(), value.getMonth(), 1)
+    return new Date(value.getFullYear(), value.getMonth(), 1);
   }
   if (typeof value === 'string') {
-    const parsed = parseValue(value)
-    if (parsed) return new Date(parsed.getFullYear(), parsed.getMonth(), 1)
+    const parsed = parseValue(value);
+    if (parsed) return new Date(parsed.getFullYear(), parsed.getMonth(), 1);
   }
-  return null
+  return null;
 }
 
-export function DatePicker ({
+export function DatePicker({
   id,
   value,
   defaultValue = '',
@@ -125,93 +127,95 @@ export function DatePicker ({
   onClick,
   ...props
 }: DatePickerProps) {
-  const generatedId = useId().replace(/:/g, '')
-  const inputId = id || `date-picker-${generatedId}`
-  const panelId = `${inputId}-panel`
-  const controlled = value !== undefined
-  const [innerValue, setInnerValue] = useState(defaultValue)
-  const selectedValue = controlled ? value : innerValue
-  const openControlled = openProp !== undefined
-  const [innerOpen, setInnerOpen] = useState(defaultOpen)
-  const open = openControlled ? openProp : innerOpen
-  const monthControlled = displayMonth !== undefined
+  const generatedId = useId().replace(/:/g, '');
+  const inputId = id || `date-picker-${generatedId}`;
+  const panelId = `${inputId}-panel`;
+  const controlled = value !== undefined;
+  const [innerValue, setInnerValue] = useState(defaultValue);
+  const selectedValue = controlled ? value : innerValue;
+  const openControlled = openProp !== undefined;
+  const [innerOpen, setInnerOpen] = useState(defaultOpen);
+  const open = openControlled ? openProp : innerOpen;
+  const monthControlled = displayMonth !== undefined;
   const [innerMonth, setInnerMonth] = useState(
     () =>
       toMonthDate(defaultDisplayMonth) ||
       toMonthDate(displayMonth) ||
       toMonthDate(selectedValue) ||
-      new Date(new Date().getFullYear(), new Date().getMonth(), 1)
-  )
-  const month = monthControlled
-    ? (toMonthDate(displayMonth) || innerMonth)
-    : innerMonth
-  const rootRef = useRef<HTMLDivElement>(null)
-  const [focusedDay, setFocusedDay] = useState<string | null>(null)
-  const cells = useMemo(() => getCells(month), [month])
-  const today = toValue(new Date())
+      new Date(new Date().getFullYear(), new Date().getMonth(), 1),
+  );
+  const month = monthControlled ? toMonthDate(displayMonth) || innerMonth : innerMonth;
+  const rootRef = useRef<HTMLDivElement>(null);
+  const [focusedDay, setFocusedDay] = useState<string | null>(null);
+  const cells = useMemo(() => getCells(month), [month]);
+  const today = toValue(new Date());
 
   const setOpen = (next: boolean) => {
-    if (!openControlled) setInnerOpen(next)
-    onOpenChange?.(next)
-  }
+    if (!openControlled) setInnerOpen(next);
+    onOpenChange?.(next);
+  };
 
   const setMonth = (next: Date | ((current: Date) => Date)) => {
-    const resolved = typeof next === 'function' ? next(month) : next
-    const normalized = new Date(resolved.getFullYear(), resolved.getMonth(), 1)
-    if (!monthControlled) setInnerMonth(normalized)
-    onDisplayMonthChange?.(normalized)
-  }
+    const resolved = typeof next === 'function' ? next(month) : next;
+    const normalized = new Date(resolved.getFullYear(), resolved.getMonth(), 1);
+    if (!monthControlled) setInnerMonth(normalized);
+    onDisplayMonthChange?.(normalized);
+  };
 
-  const [previousValue, setPreviousValue] = useState(selectedValue)
+  const [previousValue, setPreviousValue] = useState(selectedValue);
   if (previousValue !== selectedValue) {
-    setPreviousValue(selectedValue)
-    const date = parseValue(selectedValue)
-    if (!monthControlled && date) setInnerMonth(new Date(date.getFullYear(), date.getMonth(), 1))
+    setPreviousValue(selectedValue);
+    const date = parseValue(selectedValue);
+    if (!monthControlled && date) setInnerMonth(new Date(date.getFullYear(), date.getMonth(), 1));
   }
 
   useEffect(() => {
-    if (!open) return
+    if (!open) return;
     const close = (event: MouseEvent) => {
       if (!rootRef.current?.contains(event.target as Node)) {
-        if (!openControlled) setInnerOpen(false)
-        onOpenChange?.(false)
+        if (!openControlled) setInnerOpen(false);
+        onOpenChange?.(false);
       }
-    }
-    document.addEventListener('click', close, true)
-    return () => document.removeEventListener('click', close, true)
-  }, [open, openControlled, onOpenChange])
+    };
+    document.addEventListener('click', close, true);
+    return () => document.removeEventListener('click', close, true);
+  }, [open, openControlled, onOpenChange]);
 
   useEffect(() => {
-    if (!open) return
+    if (!open) return;
     requestAnimationFrame(() =>
       rootRef.current
         ?.querySelector<HTMLElement>(
-          '.calendar_day.is-selected:not(:disabled), .calendar_day:not(:disabled)'
+          '.calendar_day.is-selected:not(:disabled), .calendar_day:not(:disabled)',
         )
-        ?.focus()
-    )
-  }, [open])
+        ?.focus(),
+    );
+  }, [open]);
 
   const commit = (next: string) => {
-    if (!controlled) setInnerValue(next)
-    onChange?.(next)
-  }
+    if (!controlled) setInnerValue(next);
+    onChange?.(next);
+  };
 
   const select = (next: string) => {
-    commit(next)
-    setOpen(false)
+    commit(next);
+    setOpen(false);
     requestAnimationFrame(() =>
-      rootRef.current?.querySelector<HTMLElement>('.date_picker_input')?.focus()
-    )
-  }
+      rootRef.current?.querySelector<HTMLElement>('.date_picker_input')?.focus(),
+    );
+  };
 
   const moveMonth = (offset: number) =>
-    setMonth((current) => new Date(current.getFullYear(), current.getMonth() + offset, 1))
+    setMonth((current) => new Date(current.getFullYear(), current.getMonth() + offset, 1));
 
-  useEscapeKey(rootRef, () => {
-    setOpen(false)
-    rootRef.current?.querySelector<HTMLElement>('.date_picker_input')?.focus()
-  }, open)
+  useEscapeKey(
+    rootRef,
+    () => {
+      setOpen(false);
+      rootRef.current?.querySelector<HTMLElement>('.date_picker_input')?.focus();
+    },
+    open,
+  );
 
   const classes = classNames(
     'date_picker',
@@ -222,8 +226,8 @@ export function DatePicker ({
     error && 'is-error',
     success && 'is-success',
     open && 'is-open',
-    className
-  )
+    className,
+  );
 
   return (
     <div
@@ -248,43 +252,47 @@ export function DatePicker ({
           aria-controls={panelId}
           aria-invalid={error || undefined}
           onKeyDown={(event) => {
-            props.onKeyDown?.(event)
-            if (event.defaultPrevented || disabled) return
+            props.onKeyDown?.(event);
+            if (event.defaultPrevented || disabled) return;
             if (['Enter', ' ', 'ArrowDown'].includes(event.key)) {
-              event.preventDefault()
-              setOpen(true)
+              event.preventDefault();
+              setOpen(true);
             }
           }}
           onClick={(event) => {
-            if (!disabled) setOpen(true)
-            onClick?.(event)
+            if (!disabled) setOpen(true);
+            onClick?.(event);
           }}
         />
-        {name ? <input type="hidden" name={name} value={selectedValue} /> : null}
-        {clearable && selectedValue && !disabled
-          ? (
-            <button
-              className="date_picker_clear"
-              type="button"
-              aria-label="날짜 지우기"
-              onClick={() => {
-                commit('')
-                rootRef.current?.querySelector<HTMLElement>('.date_picker_input')?.focus()
-              }}
+        {name ? (
+          <input
+            type="hidden"
+            name={name}
+            value={selectedValue}
+          />
+        ) : null}
+        {clearable && selectedValue && !disabled ? (
+          <button
+            className="date_picker_clear"
+            type="button"
+            aria-label="날짜 지우기"
+            onClick={() => {
+              commit('');
+              rootRef.current?.querySelector<HTMLElement>('.date_picker_input')?.focus();
+            }}
+          >
+            <svg
+              className="icon"
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
             >
-              <svg
-                className="icon"
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="m6 6 12 12M18 6 6 18" />
-              </svg>
-            </button>
-            )
-          : null}
+              <path d="m6 6 12 12M18 6 6 18" />
+            </svg>
+          </button>
+        ) : null}
         <button
           className="date_picker_btn"
           type="button"
@@ -302,7 +310,13 @@ export function DatePicker ({
             stroke="currentColor"
             strokeWidth="2"
           >
-            <rect x="3" y="5" width="18" height="16" rx="2" />
+            <rect
+              x="3"
+              y="5"
+              width="18"
+              height="16"
+              rx="2"
+            />
             <path d="M16 3v4M8 3v4M3 10h18" />
           </svg>
         </button>
@@ -326,7 +340,10 @@ export function DatePicker ({
             >
               ‹
             </button>
-            <span className="calendar_title" aria-live="polite">
+            <span
+              className="calendar_title"
+              aria-live="polite"
+            >
               {month.getFullYear()}년 {month.getMonth() + 1}월
             </span>
             <button
@@ -338,41 +355,58 @@ export function DatePicker ({
               ›
             </button>
           </div>
-          <div className="calendar_weekdays" aria-hidden="true">
+          <div
+            className="calendar_weekdays"
+            aria-hidden="true"
+          >
             {WEEKDAYS.map((day) => (
-              <span key={day} className="calendar_weekday">
+              <span
+                key={day}
+                className="calendar_weekday"
+              >
                 {day}
               </span>
             ))}
           </div>
-          <div className="calendar_grid" onKeyDown={(event) => {
-            const button = (event.target as HTMLElement).closest<HTMLButtonElement>('[data-date]')
-            if (!button || event.altKey || event.metaKey) return
-            const date = parseValue(button.dataset.date)
-            if (!date) return
-            const key = event.key
-            if (key === 'ArrowLeft') date.setDate(date.getDate() - 1)
-            else if (key === 'ArrowRight') date.setDate(date.getDate() + 1)
-            else if (key === 'ArrowUp') date.setDate(date.getDate() - 7)
-            else if (key === 'ArrowDown') date.setDate(date.getDate() + 7)
-            else if (key === 'Home') date.setDate(date.getDate() - date.getDay())
-            else if (key === 'End') date.setDate(date.getDate() + 6 - date.getDay())
-            else if (key === 'PageUp' || key === 'PageDown') {
-              const day = date.getDate()
-              date.setDate(1)
-              date.setMonth(date.getMonth() + (key === 'PageUp' ? -1 : 1) * (event.shiftKey ? 12 : 1))
-              date.setDate(Math.min(day, new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()))
-            } else return
-            event.preventDefault()
-            const next = toValue(date)
-            if ((min && next < min) || (max && next > max)) return
-            setFocusedDay(next)
-            setMonth(new Date(date.getFullYear(), date.getMonth(), 1))
-            requestAnimationFrame(() => rootRef.current?.querySelector<HTMLElement>(`[data-date="${next}"]`)?.focus())
-          }}>
+          <div
+            className="calendar_grid"
+            onKeyDown={(event) => {
+              const button = (event.target as HTMLElement).closest<HTMLButtonElement>(
+                '[data-date]',
+              );
+              if (!button || event.altKey || event.metaKey) return;
+              const date = parseValue(button.dataset.date);
+              if (!date) return;
+              const key = event.key;
+              if (key === 'ArrowLeft') date.setDate(date.getDate() - 1);
+              else if (key === 'ArrowRight') date.setDate(date.getDate() + 1);
+              else if (key === 'ArrowUp') date.setDate(date.getDate() - 7);
+              else if (key === 'ArrowDown') date.setDate(date.getDate() + 7);
+              else if (key === 'Home') date.setDate(date.getDate() - date.getDay());
+              else if (key === 'End') date.setDate(date.getDate() + 6 - date.getDay());
+              else if (key === 'PageUp' || key === 'PageDown') {
+                const day = date.getDate();
+                date.setDate(1);
+                date.setMonth(
+                  date.getMonth() + (key === 'PageUp' ? -1 : 1) * (event.shiftKey ? 12 : 1),
+                );
+                date.setDate(
+                  Math.min(day, new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()),
+                );
+              } else return;
+              event.preventDefault();
+              const next = toValue(date);
+              if ((min && next < min) || (max && next > max)) return;
+              setFocusedDay(next);
+              setMonth(new Date(date.getFullYear(), date.getMonth(), 1));
+              requestAnimationFrame(() =>
+                rootRef.current?.querySelector<HTMLElement>(`[data-date="${next}"]`)?.focus(),
+              );
+            }}
+          >
             {cells.map((cell) => {
               const unavailable =
-                Boolean(min && cell.value < min) || Boolean(max && cell.value > max)
+                Boolean(min && cell.value < min) || Boolean(max && cell.value > max);
               return (
                 <button
                   key={cell.value}
@@ -382,7 +416,7 @@ export function DatePicker ({
                     'calendar_day',
                     cell.other && 'is-other-month',
                     cell.value === today && 'is-today',
-                    cell.value === selectedValue && 'is-selected'
+                    cell.value === selectedValue && 'is-selected',
                   )}
                   disabled={unavailable}
                   tabIndex={cell.value === (focusedDay ?? (selectedValue || today)) ? 0 : -1}
@@ -394,7 +428,7 @@ export function DatePicker ({
                 >
                   {cell.date.getDate()}
                 </button>
-              )
+              );
             })}
           </div>
           <div className="calendar_footer">
@@ -406,24 +440,22 @@ export function DatePicker ({
             >
               오늘
             </button>
-            {clearable
-              ? (
-                <div className="calendar_footer-actions">
-                  <button
-                    type="button"
-                    className="btn btn_ghost btn_sm"
-                    onClick={() => commit('')}
-                  >
-                    초기화
-                  </button>
-                </div>
-                )
-              : null}
+            {clearable ? (
+              <div className="calendar_footer-actions">
+                <button
+                  type="button"
+                  className="btn btn_ghost btn_sm"
+                  onClick={() => commit('')}
+                >
+                  초기화
+                </button>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default DatePicker
+export default DatePicker;

@@ -11,7 +11,9 @@
     border-radius: var(--radius-pill);
     background: var(--scrollbar-thumb);
     opacity: 1;
-    transition: background-color var(--transition-fast), opacity var(--scrollbar-fade-ms) ease;
+    transition:
+      background-color var(--transition-fast),
+      opacity var(--scrollbar-fade-ms) ease;
   }
 
   &.simplebar-hover::before,

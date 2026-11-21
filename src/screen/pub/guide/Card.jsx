@@ -1,54 +1,112 @@
-'use client'
+'use client';
 
-import { useState } from 'react' // 상태 훅
-import { Avatar, Button, Card, CardBody, CardDeck, CardFooter, CardHeader, Icon, Stat, Tag, TagGroup } from '@/comp' // comp
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
-import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
-import { cardApiSections } from '@/screen/pub/data/guide/cardApiSections' // card Api Sections
-import { cardTypeExamples } from '@/screen/pub/data/guide/cardTypeExamples'
-import { cardCompositionExamples } from '@/screen/pub/data/guide/cardCompositionExamples'
+import { useState } from 'react'; // 상태 훅
+import {
+  Avatar,
+  Button,
+  Card,
+  CardBody,
+  CardDeck,
+  CardFooter,
+  CardHeader,
+  Icon,
+  Stat,
+  Tag,
+  TagGroup,
+} from '@/comp'; // comp
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'; // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'; // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout'; // Guide Layout 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'; // wrap Page Example
+import { cardApiSections } from '@/screen/pub/data/guide/cardApiSections'; // card Api Sections
+import { cardTypeExamples } from '@/screen/pub/data/guide/cardTypeExamples';
+import { cardCompositionExamples } from '@/screen/pub/data/guide/cardCompositionExamples';
 
 const MediaIcon = (
-  <Icon name="image" style={{ strokeWidth: 1.5 }} />
-)
+  <Icon
+    name="image"
+    style={{ strokeWidth: 1.5 }}
+  />
+);
 
 const DocIcon = (
-  <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+  <svg
+    className="icon"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    aria-hidden="true"
+  >
     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
     <path d="M14 2v6h6" />
   </svg>
-)
+);
 
 const BoltIcon = (
-  <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+  <svg
+    className="icon"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    aria-hidden="true"
+  >
     <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
   </svg>
-)
+);
 
 const ShieldIcon = (
-  <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+  <svg
+    className="icon"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    aria-hidden="true"
+  >
     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
   </svg>
-)
+);
 
 const MoreIcon = (
-  <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-    <circle cx="12" cy="12" r="1" />
-    <circle cx="19" cy="12" r="1" />
-    <circle cx="5" cy="12" r="1" />
+  <svg
+    className="icon"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    aria-hidden="true"
+  >
+    <circle
+      cx="12"
+      cy="12"
+      r="1"
+    />
+    <circle
+      cx="19"
+      cy="12"
+      r="1"
+    />
+    <circle
+      cx="5"
+      cy="12"
+      r="1"
+    />
   </svg>
-)
+);
 
 /** href · onClick 으로 카드를 클릭 가능하게 만드는 예시 */
-function ClickableCardDemo () {
-  const [selected, setSelected] = useState('')
+function ClickableCardDemo() {
+  const [selected, setSelected] = useState('');
 
   return (
     <div className="demo-stack">
       <CardDeck columns={2}>
-        <Card href="#card" hoverable>
+        <Card
+          href="#card"
+          hoverable
+        >
           <CardBody>
             <strong className="card_title">링크 카드</strong>
             <p className="card_subtitle">클릭하면 상세 페이지로 이동합니다.</p>
@@ -65,11 +123,9 @@ function ClickableCardDemo () {
           </CardBody>
         </Card>
       </CardDeck>
-      {selected
-        ? <p className="color_muted size_sm">선택: {selected}</p>
-        : null}
+      {selected ? <p className="color_muted size_sm">선택: {selected}</p> : null}
     </div>
-  )
+  );
 }
 
 const SECTIONS = [
@@ -77,48 +133,70 @@ const SECTIONS = [
     title: '기본',
     description: (
       <>
-        <code>card_header</code> · <code>card_body</code> · <code>card_footer</code> 구조를 가집니다.
+        <code>card_header</code> · <code>card_body</code> · <code>card_footer</code> 구조를
+        가집니다.
       </>
     ),
-    code: wrapPageExample(`<Card style={{ maxWidth: 360 }}>
+    code: wrapPageExample(
+      `<Card style={{ maxWidth: 360 }}>
   <CardHeader title="카드 제목" subtitle="부제목 또는 메타 정보" />
   <CardBody>카드 본문 영역입니다.</CardBody>
   <CardFooter>
     <Button variant="filled" color="primary" size="sm" label="확인" />
     <Button variant="ghost" size="sm" label="취소" />
   </CardFooter>
-</Card>`, {
-  name: 'CardBasicExample',
-  reactImports: [],
-  compImports: ['Button', 'Card', 'CardBody', 'CardFooter', 'CardHeader']
-}),
+</Card>`,
+      {
+        name: 'CardBasicExample',
+        reactImports: [],
+        compImports: ['Button', 'Card', 'CardBody', 'CardFooter', 'CardHeader'],
+      },
+    ),
     preview: (
       <Card style={{ maxWidth: 360, width: '100%' }}>
-        <CardHeader title="카드 제목" subtitle="부제목 또는 메타 정보" />
+        <CardHeader
+          title="카드 제목"
+          subtitle="부제목 또는 메타 정보"
+        />
         <CardBody>카드 본문 영역입니다. 관련 콘텐츠, 설명, 데이터를 담을 수 있습니다.</CardBody>
         <CardFooter>
-          <Button variant="filled" color="primary" size="sm" label="확인" />
-          <Button variant="ghost" size="sm" label="취소" />
+          <Button
+            variant="filled"
+            color="primary"
+            size="sm"
+            label="확인"
+          />
+          <Button
+            variant="ghost"
+            size="sm"
+            label="취소"
+          />
         </CardFooter>
       </Card>
-    )
+    ),
   },
   {
     title: '간단',
     description: 'header나 footer 없이 body만 사용하는 단순 카드입니다.',
-    code: wrapPageExample(`<Card variant="shadow" size="compact">
+    code: wrapPageExample(
+      `<Card variant="shadow" size="compact">
   <CardBody>
     <p className="card_title">알림</p>
     새로운 메시지가 도착했습니다.
   </CardBody>
-</Card>`, {
-  name: 'CardExample2',
-  reactImports: [],
-  compImports: ['Card', 'CardBody']
-}),
+</Card>`,
+      {
+        name: 'CardExample2',
+        reactImports: [],
+        compImports: ['Card', 'CardBody'],
+      },
+    ),
     preview: (
       <CardDeck columns={2}>
-        <Card variant="shadow" size="compact">
+        <Card
+          variant="shadow"
+          size="compact"
+        >
           <CardBody>
             <p className="card_title">알림</p>
             새로운 메시지가 도착했습니다. 확인해 주세요.
@@ -128,38 +206,52 @@ const SECTIONS = [
           <CardBody>컴팩트 카드 — 좁은 패딩으로 밀도 높은 정보를 표시합니다.</CardBody>
         </Card>
       </CardDeck>
-    )
+    ),
   },
   {
     title: '스킨',
     description: '기본은 테두리·그림자가 적용됩니다. variant로 외형을 조절합니다.',
-    code: wrapPageExample(`<Card><CardBody>기본 — 테두리 · 그림자</CardBody></Card>
+    code: wrapPageExample(
+      `<Card><CardBody>기본 — 테두리 · 그림자</CardBody></Card>
 <Card variant="shadow"><CardBody>Shadow</CardBody></Card>
 <Card className="card_elevated"><CardBody>Elevated</CardBody></Card>
-<Card variant="flat"><CardBody>Ghost</CardBody></Card>`, {
-  name: 'CardExample3',
-  reactImports: [],
-  compImports: ['Card', 'CardBody']
-}),
+<Card variant="flat"><CardBody>Ghost</CardBody></Card>`,
+      {
+        name: 'CardExample3',
+        reactImports: [],
+        compImports: ['Card', 'CardBody'],
+      },
+    ),
     preview: (
       <CardDeck columns={2}>
-        <Card><CardBody>기본 — 테두리 · 그림자</CardBody></Card>
-        <Card variant="shadow"><CardBody>Shadow — 그림자</CardBody></Card>
-        <Card className="card_elevated"><CardBody>Elevated — 강한 그림자</CardBody></Card>
-        <Card variant="flat"><CardBody>Ghost — 투명 배경</CardBody></Card>
+        <Card>
+          <CardBody>기본 — 테두리 · 그림자</CardBody>
+        </Card>
+        <Card variant="shadow">
+          <CardBody>Shadow — 그림자</CardBody>
+        </Card>
+        <Card className="card_elevated">
+          <CardBody>Elevated — 강한 그림자</CardBody>
+        </Card>
+        <Card variant="flat">
+          <CardBody>Ghost — 투명 배경</CardBody>
+        </Card>
       </CardDeck>
-    )
+    ),
   },
   {
     title: '크기',
     description: 'size로 패딩과 제목 크기를 조절합니다.',
-    code: wrapPageExample(`<Card size="sm"><CardHeader title="Small" /><CardBody>…</CardBody></Card>
+    code: wrapPageExample(
+      `<Card size="sm"><CardHeader title="Small" /><CardBody>…</CardBody></Card>
 <Card><CardHeader title="Medium" /><CardBody>…</CardBody></Card>
-<Card size="lg"><CardHeader title="Large" /><CardBody>…</CardBody></Card>`, {
-  name: 'CardSizeExample',
-  reactImports: [],
-  compImports: ['Card', 'CardBody', 'CardHeader']
-}),
+<Card size="lg"><CardHeader title="Large" /><CardBody>…</CardBody></Card>`,
+      {
+        name: 'CardSizeExample',
+        reactImports: [],
+        compImports: ['Card', 'CardBody', 'CardHeader'],
+      },
+    ),
     preview: (
       <CardDeck columns={2}>
         <Card size="sm">
@@ -175,7 +267,7 @@ const SECTIONS = [
           <CardBody>큰 카드 — 넓은 패딩과 큰 제목.</CardBody>
         </Card>
       </CardDeck>
-    )
+    ),
   },
   {
     title: '강조 테두리',
@@ -184,13 +276,16 @@ const SECTIONS = [
         <code>card_accent</code>와 <code>color_*</code>로 왼쪽 강조선을 적용합니다.
       </>
     ),
-    code: wrapPageExample(`<Card className="card_accent color_primary">
+    code: wrapPageExample(
+      `<Card className="card_accent color_primary">
   <CardBody><p className="card_title">정보</p>…</CardBody>
-</Card>`, {
-  name: 'CardExample5',
-  reactImports: [],
-  compImports: ['Card', 'CardBody']
-}),
+</Card>`,
+      {
+        name: 'CardExample5',
+        reactImports: [],
+        compImports: ['Card', 'CardBody'],
+      },
+    ),
     preview: (
       <CardDeck columns={2}>
         <Card className="card_accent color_primary">
@@ -218,7 +313,7 @@ const SECTIONS = [
           </CardBody>
         </Card>
       </CardDeck>
-    )
+    ),
   },
   {
     title: '미디어',
@@ -227,25 +322,32 @@ const SECTIONS = [
         <code>card_media</code>로 상단 이미지·썸네일 영역을 추가합니다.
       </>
     ),
-    code: wrapPageExample(`<Card
+    code: wrapPageExample(
+      `<Card
   hoverable
   variant="shadow"
   media={<div className="card_media card_media-placeholder" role="img" aria-label="썸네일" />}
 >
   <CardHeader title="프로젝트 Alpha" subtitle="업데이트 · 2일 전" />
   <CardBody>…</CardBody>
-</Card>`, {
-  name: 'CardExample6',
-  reactImports: [],
-  compImports: ['Card', 'CardBody', 'CardHeader']
-}),
+</Card>`,
+      {
+        name: 'CardExample6',
+        reactImports: [],
+        compImports: ['Card', 'CardBody', 'CardHeader'],
+      },
+    ),
     preview: (
       <Card
         hoverable
         variant="shadow"
         style={{ maxWidth: 320, width: '100%' }}
         media={
-          <div className="card_media card_media-placeholder" role="img" aria-label="프로젝트 썸네일">
+          <div
+            className="card_media card_media-placeholder"
+            role="img"
+            aria-label="프로젝트 썸네일"
+          >
             {MediaIcon}
           </div>
         }
@@ -253,26 +355,37 @@ const SECTIONS = [
         <CardHeader>
           <div className="card_header-row">
             <strong className="card_title">프로젝트 Alpha</strong>
-            <Tag size="sm" color="primary" label="진행 중" />
+            <Tag
+              size="sm"
+              color="primary"
+              label="진행 중"
+            />
           </div>
           <p className="card_subtitle">업데이트 · 2일 전</p>
         </CardHeader>
         <CardBody>디자인 시스템 구축 및 컴포넌트 라이브러리 개발 프로젝트입니다.</CardBody>
         <CardFooter between>
           <span className="color_muted size_sm">3명 참여</span>
-          <Button variant="text" color="primary" size="sm" label="자세히" />
+          <Button
+            variant="text"
+            color="primary"
+            size="sm"
+            label="자세히"
+          />
         </CardFooter>
       </Card>
-    )
+    ),
   },
   {
     title: '가로',
     description: (
       <>
-        <code>card_horizontal</code>로 미디어와 콘텐츠를 나란히 배치합니다. <code>card_inner</code>로 본문을 감쌉니다.
+        <code>card_horizontal</code>로 미디어와 콘텐츠를 나란히 배치합니다. <code>card_inner</code>
+        로 본문을 감쌉니다.
       </>
     ),
-    code: wrapPageExample(`<Card
+    code: wrapPageExample(
+      `<Card
   variant="shadow"
   className="card_horizontal"
   media={<div className="card_media card_media-placeholder" />}
@@ -284,18 +397,24 @@ const SECTIONS = [
       <Button tag="a" href="#card" variant="text" color="primary" size="sm" label="문서 보기" />
     </CardFooter>
   </div>
-</Card>`, {
-  name: 'CardExample7',
-  reactImports: [],
-  compImports: ['Button', 'Card', 'CardBody', 'CardFooter', 'CardHeader']
-}),
+</Card>`,
+      {
+        name: 'CardExample7',
+        reactImports: [],
+        compImports: ['Button', 'Card', 'CardBody', 'CardFooter', 'CardHeader'],
+      },
+    ),
     preview: (
       <Card
         variant="shadow"
         className="card_horizontal"
         style={{ maxWidth: 480, width: '100%' }}
         media={
-          <div className="card_media card_media-placeholder" role="img" aria-label="문서 썸네일">
+          <div
+            className="card_media card_media-placeholder"
+            role="img"
+            aria-label="문서 썸네일"
+          >
             {DocIcon}
           </div>
         }
@@ -304,11 +423,18 @@ const SECTIONS = [
           <CardHeader title="가이드 문서" />
           <CardBody>HTML 컴포넌트 사용법과 접근성 가이드를 확인하세요.</CardBody>
           <CardFooter>
-            <Button tag="a" href="#card" variant="text" color="primary" size="sm" label="문서 보기" />
+            <Button
+              tag="a"
+              href="#card"
+              variant="text"
+              color="primary"
+              size="sm"
+              label="문서 보기"
+            />
           </CardFooter>
         </div>
       </Card>
-    )
+    ),
   },
   {
     title: '아이콘 · 통계',
@@ -317,40 +443,63 @@ const SECTIONS = [
         <code>card_icon</code> · Stat으로 기능 소개·지표 카드를 구성합니다.
       </>
     ),
-    code: wrapPageExample(`<Card hoverable variant="shadow">
+    code: wrapPageExample(
+      `<Card hoverable variant="shadow">
   <CardBody>
     <span className="card_icon color_primary" aria-hidden="true">…</span>
     <strong className="card_title">빠른 성능</strong>
     <p className="card_subtitle">가벼운 번들, 빠른 로딩</p>
   </CardBody>
-</Card>`, {
-  name: 'CardIconExample',
-  reactImports: [],
-  compImports: ['Card', 'CardBody']
-}),
+</Card>`,
+      {
+        name: 'CardIconExample',
+        reactImports: [],
+        compImports: ['Card', 'CardBody'],
+      },
+    ),
     preview: (
       <CardDeck>
-        <Card hoverable variant="shadow">
+        <Card
+          hoverable
+          variant="shadow"
+        >
           <CardBody>
-            <span className="card_icon color_primary" aria-hidden="true">{BoltIcon}</span>
+            <span
+              className="card_icon color_primary"
+              aria-hidden="true"
+            >
+              {BoltIcon}
+            </span>
             <strong className="card_title">빠른 성능</strong>
             <p className="card_subtitle">가벼운 번들, 빠른 로딩</p>
           </CardBody>
         </Card>
-        <Card hoverable variant="shadow">
+        <Card
+          hoverable
+          variant="shadow"
+        >
           <CardBody>
-            <span className="card_icon color_success" aria-hidden="true">{ShieldIcon}</span>
+            <span
+              className="card_icon color_success"
+              aria-hidden="true"
+            >
+              {ShieldIcon}
+            </span>
             <strong className="card_title">접근성</strong>
             <p className="card_subtitle">WCAG 2.2 AA 기준</p>
           </CardBody>
         </Card>
         <Card variant="shadow">
           <CardBody>
-            <Stat title="월간 활성 사용자" value="24.5K" description="+18.2%" />
+            <Stat
+              title="월간 활성 사용자"
+              value="24.5K"
+              description="+18.2%"
+            />
           </CardBody>
         </Card>
       </CardDeck>
-    )
+    ),
   },
   {
     title: '프로필',
@@ -359,7 +508,8 @@ const SECTIONS = [
         <code>card_avatar</code> · <code>card_extra</code>로 사용자 정보 카드를 만듭니다.
       </>
     ),
-    code: wrapPageExample(`<Card variant="shadow">
+    code: wrapPageExample(
+      `<Card variant="shadow">
   <CardHeader extra={<Button variant="ghost" size="sm" iconOnly ariaLabel="더 보기">…</Button>}>
     <div className="card_header-row">
       <Avatar color="primary" label="홍" />
@@ -367,22 +517,36 @@ const SECTIONS = [
     </div>
   </CardHeader>
   …
-</Card>`, {
-  name: 'CardExample9',
-  reactImports: [],
-  compImports: ['Avatar', 'Button', 'Card', 'CardHeader']
-}),
+</Card>`,
+      {
+        name: 'CardExample9',
+        reactImports: [],
+        compImports: ['Avatar', 'Button', 'Card', 'CardHeader'],
+      },
+    ),
     preview: (
-      <Card variant="shadow" style={{ maxWidth: 320, width: '100%' }}>
+      <Card
+        variant="shadow"
+        style={{ maxWidth: 320, width: '100%' }}
+      >
         <CardHeader
           extra={
-            <Button variant="ghost" size="sm" iconOnly ariaLabel="더 보기">
+            <Button
+              variant="ghost"
+              size="sm"
+              iconOnly
+              ariaLabel="더 보기"
+            >
               {MoreIcon}
             </Button>
           }
         >
           <div className="card_header-row">
-            <Avatar color="primary" label="홍" aria-hidden="true" />
+            <Avatar
+              color="primary"
+              label="홍"
+              aria-hidden="true"
+            />
             <div>
               <strong className="card_title">홍길동</strong>
               <p className="card_subtitle">프론트엔드 개발자</p>
@@ -391,27 +555,47 @@ const SECTIONS = [
         </CardHeader>
         <CardBody>
           <TagGroup tight>
-            <Tag size="sm" color="primary" label="React" />
-            <Tag size="sm" color="primary" label="TypeScript" />
-            <Tag size="sm" color="default" label="SCSS" />
+            <Tag
+              size="sm"
+              color="primary"
+              label="React"
+            />
+            <Tag
+              size="sm"
+              color="primary"
+              label="TypeScript"
+            />
+            <Tag
+              size="sm"
+              color="default"
+              label="SCSS"
+            />
           </TagGroup>
         </CardBody>
         <CardFooter between>
           <span className="color_muted size_sm">서울 · 온라인</span>
-          <Button variant="outline" color="primary" size="sm" label="팔로우" />
+          <Button
+            variant="outline"
+            color="primary"
+            size="sm"
+            label="팔로우"
+          />
         </CardFooter>
       </Card>
-    )
+    ),
   },
   {
     title: '클릭 가능',
     description: (
       <>
-        <code>href</code> 또는 <code>onClick</code>으로 전체 카드를 클릭 가능하게 만듭니다. <code>hoverable</code>과 함께 사용합니다.
-        <code>href</code>면 <code>a</code>, <code>onClick</code>만 있으면 <code>button</code>으로 렌더링됩니다.
+        <code>href</code> 또는 <code>onClick</code>으로 전체 카드를 클릭 가능하게 만듭니다.{' '}
+        <code>hoverable</code>과 함께 사용합니다.
+        <code>href</code>면 <code>a</code>, <code>onClick</code>만 있으면 <code>button</code>으로
+        렌더링됩니다.
       </>
     ),
-    code: wrapPageExample(`const [selected, setSelected] = useState('')
+    code: wrapPageExample(
+      `const [selected, setSelected] = useState('')
 
 <Card href="#card" hoverable>
   <CardBody>
@@ -428,12 +612,14 @@ const SECTIONS = [
     <strong className="card_title">클릭 카드</strong>
     <p className="card_subtitle">onClick으로 페이지 상태를 갱신합니다.</p>
   </CardBody>
-</Card>`, {
-      name: 'CardExample',
-      reactImports: ['useState'],
-      compImports: ['Card', 'CardBody']
-    }),
-    preview: <ClickableCardDemo />
+</Card>`,
+      {
+        name: 'CardExample',
+        reactImports: ['useState'],
+        compImports: ['Card', 'CardBody'],
+      },
+    ),
+    preview: <ClickableCardDemo />,
   },
   {
     title: '비활성',
@@ -442,41 +628,51 @@ const SECTIONS = [
         <code>disabled</code>로 비활성 상태를 표시합니다.
       </>
     ),
-    code: wrapPageExample(`<Card disabled style={{ maxWidth: 280 }}>
+    code: wrapPageExample(
+      `<Card disabled style={{ maxWidth: 280 }}>
   <CardBody>
     <strong className="card_title">비활성 카드</strong>
     <p className="card_subtitle">현재 이용할 수 없습니다.</p>
   </CardBody>
-</Card>`, {
-  name: 'CardDisabledExample',
-  reactImports: [],
-  compImports: ['Card', 'CardBody']
-}),
+</Card>`,
+      {
+        name: 'CardDisabledExample',
+        reactImports: [],
+        compImports: ['Card', 'CardBody'],
+      },
+    ),
     preview: (
-      <Card disabled style={{ maxWidth: 280, width: '100%' }}>
+      <Card
+        disabled
+        style={{ maxWidth: 280, width: '100%' }}
+      >
         <CardBody>
           <strong className="card_title">비활성 카드</strong>
           <p className="card_subtitle">현재 이용할 수 없습니다.</p>
         </CardBody>
       </Card>
-    )
+    ),
   },
   {
     title: '카드 그리드',
     description: (
       <>
-        <code>CardDeck</code>으로 여러 카드를 그리드로 배치합니다. <code>columns</code>로 2·3열을 고정할 수 있습니다.
+        <code>CardDeck</code>으로 여러 카드를 그리드로 배치합니다. <code>columns</code>로 2·3열을
+        고정할 수 있습니다.
       </>
     ),
-    code: wrapPageExample(`<CardDeck>
+    code: wrapPageExample(
+      `<CardDeck>
   <Card hoverable><CardHeader title="Feature A" /><CardBody>…</CardBody></Card>
   <Card hoverable><CardHeader title="Feature B" /><CardBody>…</CardBody></Card>
   <Card hoverable><CardHeader title="Feature C" /><CardBody>…</CardBody></Card>
-</CardDeck>`, {
-  name: 'CardExample11',
-  reactImports: [],
-  compImports: ['Card', 'CardBody', 'CardDeck', 'CardHeader']
-}),
+</CardDeck>`,
+      {
+        name: 'CardExample11',
+        reactImports: [],
+        compImports: ['Card', 'CardBody', 'CardDeck', 'CardHeader'],
+      },
+    ),
     preview: (
       <CardDeck>
         <Card hoverable>
@@ -492,35 +688,66 @@ const SECTIONS = [
           <CardBody>Pure SCSS로 커스터마이즈 가능.</CardBody>
         </Card>
       </CardDeck>
-    )
-  }
-]
+    ),
+  },
+];
 
 /**
  * Card 가이드 화면.
  * docs와 동일한 기본·스킨·미디어·프로필·그리드 유형을 제공한다.
  */
-export default function CardGuide () {
+export default function CardGuide() {
   return (
     <GuideLayout
       category="데이터 표시"
       title="Card"
       description="Header·Body·Footer·Deck으로 카드를 조합하고, 교육과정·프로모션·이미지·콘텐츠·바로가기·고객사례·안내·오버레이·뉴스·웹진·분할 소개 유형을 선택합니다."
     >
-      <section id="card-types" aria-labelledby="card-types-title">
+      <section
+        id="card-types"
+        aria-labelledby="card-types-title"
+      >
         <h2 id="card-types-title">카드 유형</h2>
-        <p>공통 <code>Card</code>에 <code>type</code>과 <code>card</code>를 전달합니다. 문구·링크·이미지는 사용하는 화면에서 지정합니다.</p>
+        <p>
+          공통 <code>Card</code>에 <code>type</code>과 <code>card</code>를 전달합니다.
+          문구·링크·이미지는 사용하는 화면에서 지정합니다.
+        </p>
         {cardTypeExamples.map((example) => (
-          <DemoBlock key={example.type} title={example.title} description={example.description} code={example.code} fileName="CardTypeExample.jsx">
-            <div className={`demo-card-type demo-card-type_${example.type}`} data-card-type={example.type}>{example.preview}</div>
+          <DemoBlock
+            key={example.type}
+            title={example.title}
+            description={example.description}
+            code={example.code}
+            fileName="CardTypeExample.jsx"
+          >
+            <div
+              className={`demo-card-type demo-card-type_${example.type}`}
+              data-card-type={example.type}
+            >
+              {example.preview}
+            </div>
           </DemoBlock>
         ))}
       </section>
-      <section id="card-composition" aria-labelledby="card-composition-title">
+      <section
+        id="card-composition"
+        aria-labelledby="card-composition-title"
+      >
         <h2 id="card-composition-title">조합 예제</h2>
-        {cardCompositionExamples.map(example => (
-          <DemoBlock key={example.id} title={example.title} description={example.description} code={example.code} fileName="CardCompositionExample.jsx">
-            <div className={`demo-card-composition demo-card-composition_${example.id}`} data-card-composition={example.id}>{example.preview}</div>
+        {cardCompositionExamples.map((example) => (
+          <DemoBlock
+            key={example.id}
+            title={example.title}
+            description={example.description}
+            code={example.code}
+            fileName="CardCompositionExample.jsx"
+          >
+            <div
+              className={`demo-card-composition demo-card-composition_${example.id}`}
+              data-card-composition={example.id}
+            >
+              {example.preview}
+            </div>
           </DemoBlock>
         ))}
       </section>
@@ -538,5 +765,5 @@ export default function CardGuide () {
 
       <GuideApiDocs sections={cardApiSections} />
     </GuideLayout>
-  )
+  );
 }

@@ -1,17 +1,17 @@
-'use client'
+'use client';
 
-import { useMemo, useState } from 'react' // React
-import { filesize } from 'filesize' // filesize
-import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { useMemo, useState } from 'react'; // React
+import { filesize } from 'filesize'; // filesize
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'; // Demo Layout 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'; // Demo Block 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'; // wrap Page Example
 
-const presets = [0, 512, 1024, 1536, 1048576, 1073741824, 5368709120]
+const presets = [0, 512, 1024, 1536, 1048576, 1073741824, 5368709120];
 
 /** filesize 데모 */
-export default function FilesizeDemoPage () {
-  const [bytes, setBytes] = useState(1536)
-  const formatted = useMemo(() => filesize(bytes, { base: 2, standard: 'jedec' }), [bytes])
+export default function FilesizeDemoPage() {
+  const [bytes, setBytes] = useState(1536);
+  const formatted = useMemo(() => filesize(bytes, { base: 2, standard: 'jedec' }), [bytes]);
 
   return (
     <DemoLayout
@@ -21,7 +21,8 @@ export default function FilesizeDemoPage () {
     >
       <DemoBlock
         title="바이트 입력"
-        code={wrapPageExample(`const [bytes, setBytes] = useState(1536)
+        code={wrapPageExample(
+          `const [bytes, setBytes] = useState(1536)
 const formatted = useMemo(() => filesize(bytes, { base: 2, standard: 'jedec' }), [bytes])
 
 <div className="demo-stack">
@@ -41,14 +42,16 @@ const formatted = useMemo(() => filesize(bytes, { base: 2, standard: 'jedec' }),
       </button>
     ))}
   </div>
-</div>`, {
-          name: 'FilesizeExample',
-          reactImports: ['useMemo', 'useState'],
-          compImports: [],
-          extraImports: [
-            "import { filesize } from 'filesize'\n\nconst presets = [0, 512, 1024, 1536, 1048576, 1073741824]"
-          ]
-        })}
+</div>`,
+          {
+            name: 'FilesizeExample',
+            reactImports: ['useMemo', 'useState'],
+            compImports: [],
+            extraImports: [
+              "import { filesize } from 'filesize'\n\nconst presets = [0, 512, 1024, 1536, 1048576, 1073741824]",
+            ],
+          },
+        )}
       >
         <div className="demo-stack">
           <input
@@ -59,7 +62,12 @@ const formatted = useMemo(() => filesize(bytes, { base: 2, standard: 'jedec' }),
             onChange={(e) => setBytes(Number(e.target.value) || 0)}
             aria-label="바이트"
           />
-          <pre tabIndex={0} className="lib-demo-pre">{bytes} bytes → {formatted}</pre>
+          <pre
+            tabIndex={0}
+            className="lib-demo-pre"
+          >
+            {bytes} bytes → {formatted}
+          </pre>
           <div className="demo-row">
             {presets.map((value) => (
               <button
@@ -75,5 +83,5 @@ const formatted = useMemo(() => filesize(bytes, { base: 2, standard: 'jedec' }),
         </div>
       </DemoBlock>
     </DemoLayout>
-  )
+  );
 }

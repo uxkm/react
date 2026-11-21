@@ -10,33 +10,33 @@
  *   style={{ backgroundImage: `url(${img('pages', 'home/hero.png')})` }}
  */
 
-const BASE = '/images'
+const BASE = '/images';
 
 /** @param {'icon'|'common'|'pages'|'lottie'} folder @param {string} file */
-export function img (folder, file) {
-  const name = String(file || '').replace(/^\/+/, '')
-  return `${BASE}/${folder}/${name}`
+export function img(folder, file) {
+  const name = String(file || '').replace(/^\/+/, '');
+  return `${BASE}/${folder}/${name}`;
 }
 
 /** @param {string} file */
-export function imgIcon (file) {
-  return img('icon', file)
+export function imgIcon(file) {
+  return img('icon', file);
 }
 
 /** @param {string} file — `demo_fireworks` · `demo_fireworks.json` → /images/lottie/… */
-export function imgLottie (file) {
-  const raw = String(file || '').trim()
-  if (!raw) return ''
-  const name = raw.endsWith('.json') ? raw : `${raw}.json`
-  return img('lottie', name)
+export function imgLottie(file) {
+  const raw = String(file || '').trim();
+  if (!raw) return '';
+  const name = raw.endsWith('.json') ? raw : `${raw}.json`;
+  return img('lottie', name);
 }
 
 /** @param {string} file */
-export function imgCommon (file) {
-  return img('common', file)
+export function imgCommon(file) {
+  return img('common', file);
 }
 
 /** @param {string} file */
-export function imgPages (file) {
-  return img('pages', file)
+export function imgPages(file) {
+  return img('pages', file);
 }

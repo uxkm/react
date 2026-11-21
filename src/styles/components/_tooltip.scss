@@ -21,7 +21,6 @@
   --tooltip-close-icon-size: 0.75rem;
   --z-tooltip: 120;
 
-
   // ----- Tooltip — size sm · lg
   --tooltip-max-width-sm: 12rem;
   --tooltip-padding-x-sm: var(--space-xs);
@@ -34,7 +33,6 @@
   --tooltip-padding-y-lg: 0.5rem;
   --tooltip-font-size-lg: var(--text-size-sm);
   --tooltip-arrow-size-lg: var(--size-8);
-
 }
 
 // Tooltip — OOCSS: 구조(.tooltip) + 스킨(.tooltip_placement-* · .tooltip_inverse) + 파트(.tooltip_trigger · .tooltip_bubble · .tooltip_arrow)
@@ -84,7 +82,7 @@
   display: inline-flex;
   vertical-align: middle;
 
-  &[data-tooltip-trigger="click"] {
+  &[data-tooltip-trigger='click'] {
     .tooltip_bubble {
       pointer-events: auto;
     }
@@ -111,9 +109,7 @@
 
   &_bubble {
     position: absolute;
-    top: calc(
-      100% + var(--tooltip-offset-bottom) + var(--tooltip-arrow-clearance)
-    );
+    top: calc(100% + var(--tooltip-offset-bottom) + var(--tooltip-arrow-clearance));
     left: 50%;
     z-index: var(--z-tooltip, 120);
     display: none;
@@ -262,9 +258,7 @@
   &_placement-top {
     .tooltip_bubble {
       top: auto;
-      bottom: calc(
-        100% + var(--tooltip-offset-top) + var(--tooltip-arrow-clearance)
-      );
+      bottom: calc(100% + var(--tooltip-offset-top) + var(--tooltip-arrow-clearance));
     }
   }
 
@@ -286,9 +280,7 @@
   &_placement-top-start {
     .tooltip_bubble {
       top: auto;
-      bottom: calc(
-        100% + var(--tooltip-offset-top) + var(--tooltip-arrow-clearance)
-      );
+      bottom: calc(100% + var(--tooltip-offset-top) + var(--tooltip-arrow-clearance));
       left: 0;
       transform: none;
     }
@@ -297,9 +289,7 @@
   &_placement-top-end {
     .tooltip_bubble {
       top: auto;
-      bottom: calc(
-        100% + var(--tooltip-offset-top) + var(--tooltip-arrow-clearance)
-      );
+      bottom: calc(100% + var(--tooltip-offset-top) + var(--tooltip-arrow-clearance));
       left: auto;
       right: 0;
       transform: none;
@@ -311,9 +301,7 @@
       top: 50%;
       bottom: auto;
       left: auto;
-      right: calc(
-        100% + var(--tooltip-offset-left) + var(--tooltip-arrow-clearance)
-      );
+      right: calc(100% + var(--tooltip-offset-left) + var(--tooltip-arrow-clearance));
       transform: translateY(-50%);
     }
   }
@@ -322,9 +310,7 @@
     .tooltip_bubble {
       top: 50%;
       bottom: auto;
-      left: calc(
-        100% + var(--tooltip-offset-right) + var(--tooltip-arrow-clearance)
-      );
+      left: calc(100% + var(--tooltip-offset-right) + var(--tooltip-arrow-clearance));
       transform: translateY(-50%);
     }
   }
@@ -332,7 +318,13 @@
   // ----- 말풍선 정렬 (교차축 · CSS — target · content)
 
   &_panel-align-start:not(&_arrow-anchor-mixed) {
-    &:not(.tooltip_placement-left, .tooltip_placement-right, .tooltip_placement-top, .tooltip_placement-top-start, .tooltip_placement-top-end) {
+    &:not(
+      .tooltip_placement-left,
+      .tooltip_placement-right,
+      .tooltip_placement-top,
+      .tooltip_placement-top-start,
+      .tooltip_placement-top-end
+    ) {
       .tooltip_bubble {
         left: 0;
         transform: none;
@@ -341,7 +333,13 @@
   }
 
   &_panel-align-end:not(&_arrow-anchor-mixed) {
-    &:not(.tooltip_placement-left, .tooltip_placement-right, .tooltip_placement-top, .tooltip_placement-top-start, .tooltip_placement-top-end) {
+    &:not(
+      .tooltip_placement-left,
+      .tooltip_placement-right,
+      .tooltip_placement-top,
+      .tooltip_placement-top-start,
+      .tooltip_placement-top-end
+    ) {
       .tooltip_bubble {
         left: auto;
         right: 0;
@@ -368,7 +366,13 @@
 
   // ----- 화살표 위치
 
-  &:not(.tooltip_placement-top, .tooltip_placement-top-start, .tooltip_placement-top-end, .tooltip_placement-left, .tooltip_placement-right) {
+  &:not(
+    .tooltip_placement-top,
+    .tooltip_placement-top-start,
+    .tooltip_placement-top-end,
+    .tooltip_placement-left,
+    .tooltip_placement-right
+  ) {
     .tooltip_arrow {
       top: 0;
       left: 50%;
@@ -378,14 +382,26 @@
     }
   }
 
-  &_placement-start:not(.tooltip_placement-top, .tooltip_placement-top-start, .tooltip_placement-top-end, .tooltip_placement-left, .tooltip_placement-right) {
+  &_placement-start:not(
+      .tooltip_placement-top,
+      .tooltip_placement-top-start,
+      .tooltip_placement-top-end,
+      .tooltip_placement-left,
+      .tooltip_placement-right
+    ) {
     .tooltip_arrow {
       left: max(var(--tooltip-padding-x), var(--tooltip-arrow-edge-inset));
       transform: translateY(-50%) rotate(45deg);
     }
   }
 
-  &_placement-end:not(.tooltip_placement-top, .tooltip_placement-top-start, .tooltip_placement-top-end, .tooltip_placement-left, .tooltip_placement-right) {
+  &_placement-end:not(
+      .tooltip_placement-top,
+      .tooltip_placement-top-start,
+      .tooltip_placement-top-end,
+      .tooltip_placement-left,
+      .tooltip_placement-right
+    ) {
     .tooltip_arrow {
       left: auto;
       right: max(var(--tooltip-padding-x), var(--tooltip-arrow-edge-inset));
@@ -393,7 +409,12 @@
     }
   }
 
-  &_placement-top:not(.tooltip_placement-left, .tooltip_placement-right, .tooltip_placement-top-start, .tooltip_placement-top-end) {
+  &_placement-top:not(
+      .tooltip_placement-left,
+      .tooltip_placement-right,
+      .tooltip_placement-top-start,
+      .tooltip_placement-top-end
+    ) {
     .tooltip_arrow {
       top: auto;
       bottom: 0;
@@ -469,7 +490,13 @@
 
   &_arrow-anchor-target,
   &_arrow-anchor-mixed {
-    &:not(.tooltip_placement-top, .tooltip_placement-top-start, .tooltip_placement-top-end, .tooltip_placement-left, .tooltip_placement-right) {
+    &:not(
+      .tooltip_placement-top,
+      .tooltip_placement-top-start,
+      .tooltip_placement-top-end,
+      .tooltip_placement-left,
+      .tooltip_placement-right
+    ) {
       .tooltip_arrow {
         left: clamp(
           var(--tooltip-arrow-edge-inset),
@@ -483,7 +510,12 @@
       }
     }
 
-    &.tooltip_placement-top:not(.tooltip_placement-left, .tooltip_placement-right, .tooltip_placement-top-start, .tooltip_placement-top-end),
+    &.tooltip_placement-top:not(
+        .tooltip_placement-left,
+        .tooltip_placement-right,
+        .tooltip_placement-top-start,
+        .tooltip_placement-top-end
+      ),
     &.tooltip_placement-top-start,
     &.tooltip_placement-top-end {
       .tooltip_arrow {

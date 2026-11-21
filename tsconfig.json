@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -25,21 +21,11 @@
       }
     ],
     "paths": {
-      "@/comp": [
-        "./src/components"
-      ],
-      "@/comp/*": [
-        "./src/components/*"
-      ],
-      "@/*": [
-        "./src/*"
-      ],
-      "@components/*": [
-        "./src/components/*"
-      ],
-      "@screen/*": [
-        "./src/screen/*"
-      ]
+      "@/comp": ["./src/components"],
+      "@/comp/*": ["./src/components/*"],
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@screen/*": ["./src/screen/*"]
     }
   },
   "include": [
@@ -51,11 +37,5 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules",
-    "out",
-    "reports",
-    "test-results",
-    "tests"
-  ]
+  "exclude": ["node_modules", "out", "reports", "test-results", "tests"]
 }

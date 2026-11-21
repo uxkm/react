@@ -2,7 +2,7 @@
  * PubSearchBar
  * - 검색 카테고리·검색어 입력, 지우기, 폴더 모두 펼치기/접기
  */
-export default function PubSearchBar ({
+export default function PubSearchBar({
   categoryLabel,
   categoryId = 'wbs-search-category',
   category,
@@ -19,12 +19,17 @@ export default function PubSearchBar ({
   expanded,
   expandLabel,
   collapseLabel,
-  onExpand
+  onExpand,
 }) {
   return (
     <div className="wbs-panel-head">
       <div className="wbs-search">
-        <label className="wbs-search-label" htmlFor={categoryId}>{categoryLabel}</label>
+        <label
+          className="wbs-search-label"
+          htmlFor={categoryId}
+        >
+          {categoryLabel}
+        </label>
         <select
           id={categoryId}
           className="wbs-select"
@@ -32,10 +37,20 @@ export default function PubSearchBar ({
           onChange={(e) => onCategory(e.target.value)}
         >
           {categories.map((opt) => (
-            <option key={opt.value} value={opt.value}>{opt.label}</option>
+            <option
+              key={opt.value}
+              value={opt.value}
+            >
+              {opt.label}
+            </option>
           ))}
         </select>
-        <label className="wbs-search-label" htmlFor={inputId}>{searchLabel}</label>
+        <label
+          className="wbs-search-label"
+          htmlFor={inputId}
+        >
+          {searchLabel}
+        </label>
         <div className="wbs-search-field">
           <input
             id={inputId}
@@ -46,8 +61,8 @@ export default function PubSearchBar ({
             onChange={(e) => onChange(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
-                e.preventDefault()
-                onSearch()
+                e.preventDefault();
+                onSearch();
               }
             }}
           />
@@ -56,8 +71,13 @@ export default function PubSearchBar ({
               type="button"
               className="wbs-input-clear"
               aria-label={clearLabel}
-              onClick={() => { onClear(); document.getElementById(inputId)?.focus() }}
-            >×</button>
+              onClick={() => {
+                onClear();
+                document.getElementById(inputId)?.focus();
+              }}
+            >
+              ×
+            </button>
           )}
         </div>
       </div>
@@ -68,10 +88,13 @@ export default function PubSearchBar ({
             checked={expanded}
             onChange={(e) => onExpand(e.target.checked)}
           />
-          <span className="wbs-switch_ui" aria-hidden="true" />
+          <span
+            className="wbs-switch_ui"
+            aria-hidden="true"
+          />
           <span className="wbs-switch_label">{expanded ? collapseLabel : expandLabel}</span>
         </label>
       </div>
     </div>
-  )
+  );
 }

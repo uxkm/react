@@ -27,7 +27,6 @@
   --pagination-jumper-gap: var(--space-xs);
   --pagination-jumper-input-width: 3rem;
   --pagination-jumper-input-padding-x: 0.35rem;
-
 }
 
 // Pagination — OOCSS: 구조(.pagination) + 변형(.pagination_*) + 파트(.pagination_link · .pagination_btn · .pagination_ellipsis)
@@ -84,7 +83,7 @@
     border-color $transition-fast;
   @include focus-ring;
 
-  &:hover:not(:disabled):not(.is-disabled):not(.is-active):not([aria-current="page"]) {
+  &:hover:not(:disabled):not(.is-disabled):not(.is-active):not([aria-current='page']) {
     color: color-token(primary);
     background: var(--pagination-bg-hover);
     border-color: var(--color-accent);
@@ -113,11 +112,17 @@
   }
 
   &.pagination_sm {
-    @include pagination-item-size(var(--pagination-item-min-size-sm), var(--pagination-font-size-sm));
+    @include pagination-item-size(
+      var(--pagination-item-min-size-sm),
+      var(--pagination-font-size-sm)
+    );
   }
 
   &.pagination_lg {
-    @include pagination-item-size(var(--pagination-item-min-size-lg), var(--pagination-font-size-lg));
+    @include pagination-item-size(
+      var(--pagination-item-min-size-lg),
+      var(--pagination-font-size-lg)
+    );
   }
 
   &.pagination_round {
@@ -134,14 +139,14 @@
       border-color: transparent;
       background: transparent;
 
-      &:hover:not(:disabled):not(.is-disabled):not(.is-active):not([aria-current="page"]) {
+      &:hover:not(:disabled):not(.is-disabled):not(.is-active):not([aria-current='page']) {
         background: var(--pagination-bg-hover);
       }
     }
 
     .pagination_link {
       &.is-active,
-      &[aria-current="page"] {
+      &[aria-current='page'] {
         border-color: transparent;
       }
     }
@@ -206,7 +211,7 @@
     }
 
     &.is-active,
-    &[aria-current="page"] {
+    &[aria-current='page'] {
       color: var(--pagination-color-active);
       background: var(--pagination-bg-active);
       border-color: var(--color-accent);

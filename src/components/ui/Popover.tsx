@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 /**
  * 팝오버.
@@ -10,47 +10,50 @@ import {
   useRef, // ref 훅
   useState, // 상태 훅
   type HTMLAttributes, // HTMLAttributes 타입
-  type ReactNode // ReactNode 타입
-} from 'react' // React
-import { useAutoClose } from '@/hooks/interaction/useAutoClose' // Auto Close 훅
-import { focusDialogContent } from '@/hooks/interaction/useModalDialog'
-import { useEscapeKey } from '@/hooks/interaction/useEscapeKey' // 내부 Escape 처리
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
-import { hasNodes } from '@/utils/react' // has Nodes
-import { Icon } from './Icon' // Icon 컴포넌트
+  type ReactNode, // ReactNode 타입
+} from 'react'; // React
+import { useAutoClose } from '@/hooks/interaction/useAutoClose'; // Auto Close 훅
+import { focusDialogContent } from '@/hooks/interaction/useModalDialog';
+import { useEscapeKey } from '@/hooks/interaction/useEscapeKey'; // 내부 Escape 처리
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
+import { hasNodes } from '@/utils/react'; // has Nodes
+import { Icon } from './Icon'; // Icon 컴포넌트
 
 /** 팝오버가 받는 값 */
-export interface PopoverProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'content' | 'style'> {
-  title?: ReactNode
-  content?: ReactNode
-  open?: boolean
+export interface PopoverProps extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  'title' | 'content' | 'style'
+> {
+  title?: ReactNode;
+  content?: ReactNode;
+  open?: boolean;
   /** 비제어 초기 열림 */
-  defaultOpen?: boolean
+  defaultOpen?: boolean;
   /** 마운트 시 열림. open 이 없을 때 defaultOpen 보다 우선한다 */
-  openOnLoad?: boolean
+  openOnLoad?: boolean;
   /** 열린 후 자동 닫힘 시간(ms). 생략하거나 0 이하이면 사용하지 않는다 */
-  autoCloseDelay?: number
-  trigger?: ReactNode
+  autoCloseDelay?: number;
+  trigger?: ReactNode;
   /** true 이면 패널에 닫기(Icon close) 버튼을 표시한다. 기본 true */
-  closable?: boolean
+  closable?: boolean;
   /** true 이면 패널·트리거 바깥을 누를 때 닫힌다. 기본 true */
-  closeOnOutsideClick?: boolean
+  closeOnOutsideClick?: boolean;
   /** true 이면 popover_arrow 를 표시한다. 기본 true. false 이면 popover_no-arrow */
-  arrow?: boolean
+  arrow?: boolean;
   /**
    * 화살표 위치(가장자리 기준 %). 넘기면 popover_arrow-anchor-mixed 와
    * --popover-arrow-position 이 적용된다. 예: '25%' · 50
    */
-  arrowPosition?: string | number
-  style?: HTMLAttributes<HTMLDivElement>['style']
-  onOpenChange?: (open: boolean) => void
+  arrowPosition?: string | number;
+  style?: HTMLAttributes<HTMLDivElement>['style'];
+  onOpenChange?: (open: boolean) => void;
 }
 
 /**
  * 버튼을 누르면 옆에 뜨는 설명 패널.
  * trigger 가 버튼, content 가 본문. closable · closeOnOutsideClick · arrow 로 닫기·화살표를 제어한다.
  */
-export function Popover ({
+export function Popover({
   title,
   content,
   open,
@@ -71,49 +74,53 @@ export function Popover ({
   'aria-describedby': ariaDescribedBy,
   ...rest
 }: PopoverProps) {
-  const rootRef = useRef<HTMLDivElement>(null)
-  const panelId = useId()
-  const titleId = useId()
-  const [inner, setInner] = useState(openOnLoad ?? defaultOpen)
-  const shown = open ?? inner
+  const rootRef = useRef<HTMLDivElement>(null);
+  const panelId = useId();
+  const titleId = useId();
+  const [inner, setInner] = useState(openOnLoad ?? defaultOpen);
+  const shown = open ?? inner;
 
   const setShown = (next: boolean) => {
-    if (open === undefined) setInner(next)
-    onOpenChange?.(next)
-  }
+    if (open === undefined) setInner(next);
+    onOpenChange?.(next);
+  };
 
-  const toggle = () => setShown(!shown)
+  const toggle = () => setShown(!shown);
   const close = () => {
     if (rootRef.current?.querySelector('.popover_panel')?.contains(document.activeElement)) {
-      rootRef.current.querySelector<HTMLElement>('.popover_trigger')?.focus()
+      rootRef.current.querySelector<HTMLElement>('.popover_trigger')?.focus();
     }
-    setShown(false)
-  }
-  useEscapeKey(rootRef, close, shown)
+    setShown(false);
+  };
+  useEscapeKey(rootRef, close, shown);
   useEffect(() => {
-    if (!shown || document.activeElement !== rootRef.current?.querySelector('.popover_trigger')) return
-    const panel = rootRef.current?.querySelector<HTMLElement>('.popover_panel')
-    if (panel) focusDialogContent(panel)
-  }, [shown])
+    if (!shown || document.activeElement !== rootRef.current?.querySelector('.popover_trigger'))
+      return;
+    const panel = rootRef.current?.querySelector<HTMLElement>('.popover_panel');
+    if (panel) focusDialogContent(panel);
+  }, [shown]);
 
-  useAutoClose(shown, autoCloseDelay, close)
+  useAutoClose(shown, autoCloseDelay, close);
 
   // 바깥 영역 클릭 시 닫기
   useEffect(() => {
-    if (!shown || !closeOnOutsideClick) return
+    if (!shown || !closeOnOutsideClick) return;
     const onPointerDown = (event: PointerEvent) => {
-      if (rootRef.current?.contains(event.target as Node)) return
-      if (open === undefined) setInner(false)
-      onOpenChange?.(false)
-    }
-    document.addEventListener('pointerdown', onPointerDown, true)
-    return () => document.removeEventListener('pointerdown', onPointerDown, true)
-  }, [shown, closeOnOutsideClick, open, onOpenChange])
+      if (rootRef.current?.contains(event.target as Node)) return;
+      if (open === undefined) setInner(false);
+      onOpenChange?.(false);
+    };
+    document.addEventListener('pointerdown', onPointerDown, true);
+    return () => document.removeEventListener('pointerdown', onPointerDown, true);
+  }, [shown, closeOnOutsideClick, open, onOpenChange]);
 
-  const showHeader = hasNodes(title) || closable
-  const arrowPos = arrowPosition == null || arrowPosition === ''
-    ? null
-    : (typeof arrowPosition === 'number' ? `${arrowPosition}%` : String(arrowPosition))
+  const showHeader = hasNodes(title) || closable;
+  const arrowPos =
+    arrowPosition == null || arrowPosition === ''
+      ? null
+      : typeof arrowPosition === 'number'
+        ? `${arrowPosition}%`
+        : String(arrowPosition);
 
   return (
     <div
@@ -124,11 +131,11 @@ export function Popover ({
         shown && 'is-open',
         !arrow && 'popover_no-arrow',
         arrowPos && 'popover_arrow-anchor-mixed',
-        className
+        className,
       )}
       style={{
         ...style,
-        ...(arrowPos ? { ['--popover-arrow-position' as string]: arrowPos } : null)
+        ...(arrowPos ? { ['--popover-arrow-position' as string]: arrowPos } : null),
       }}
     >
       <button
@@ -142,16 +149,45 @@ export function Popover ({
         <span className="btn_label">{trigger ?? '자세히'}</span>
       </button>
       {shown && (
-        <div id={panelId} className="popover_panel" data-dialog-panel="" role="dialog" tabIndex={-1}
+        <div
+          id={panelId}
+          className="popover_panel"
+          data-dialog-panel=""
+          role="dialog"
+          tabIndex={-1}
           aria-labelledby={ariaLabelledBy || (!ariaLabel && hasNodes(title) ? titleId : undefined)}
           aria-describedby={ariaDescribedBy}
-          aria-label={ariaLabel || (!ariaLabelledBy && !hasNodes(title) ? (typeof trigger === 'string' ? trigger : '추가 정보') : undefined)}>
-          {arrow && <span className="popover_arrow" aria-hidden="true" />}
+          aria-label={
+            ariaLabel ||
+            (!ariaLabelledBy && !hasNodes(title)
+              ? typeof trigger === 'string'
+                ? trigger
+                : '추가 정보'
+              : undefined)
+          }
+        >
+          {arrow && (
+            <span
+              className="popover_arrow"
+              aria-hidden="true"
+            />
+          )}
           {showHeader && (
             <div className="popover_header">
-              {hasNodes(title)
-                ? <span id={titleId} className="popover_title" role="heading" aria-level={2} data-dialog-title="" tabIndex={-1}>{title}</span>
-                : <span className="popover_title" />}
+              {hasNodes(title) ? (
+                <span
+                  id={titleId}
+                  className="popover_title"
+                  role="heading"
+                  aria-level={2}
+                  data-dialog-title=""
+                  tabIndex={-1}
+                >
+                  {title}
+                </span>
+              ) : (
+                <span className="popover_title" />
+              )}
               {closable && (
                 <button
                   type="button"
@@ -159,7 +195,10 @@ export function Popover ({
                   aria-label="닫기"
                   onClick={close}
                 >
-                  <Icon name="close" size="var(--popover-close-icon-size)" />
+                  <Icon
+                    name="close"
+                    size="var(--popover-close-icon-size)"
+                  />
                 </button>
               )}
             </div>
@@ -168,7 +207,7 @@ export function Popover ({
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default Popover
+export default Popover;

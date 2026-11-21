@@ -30,7 +30,6 @@
   --modal-footer-padding-y: var(--space-md);
   --modal-footer-padding-x: var(--space-lg);
   --modal-adaptive-sheet-max-height: 90vh;
-
 }
 
 // Modal — OOCSS: 구조(.modal) + 스킨(.modal_sm · .modal_lg · .modal_fullscreen) + 파트(.modal_dialog · .modal_header · .modal_body · .modal_footer)
@@ -79,7 +78,9 @@
   color: inherit;
   overflow: auto;
 
-  &::backdrop { background: transparent; }
+  &::backdrop {
+    background: transparent;
+  }
 
   position: fixed;
   inset: 0;
@@ -116,7 +117,7 @@
       pointer-events: none;
     }
 
-    .modal[data-modal-backdrop="false"] & {
+    .modal[data-modal-backdrop='false'] & {
       display: none;
     }
   }
@@ -405,7 +406,7 @@
         transform: none;
       }
 
-      &[data-modal-backdrop="false"] > .modal_backdrop {
+      &[data-modal-backdrop='false'] > .modal_backdrop {
         display: none;
       }
 

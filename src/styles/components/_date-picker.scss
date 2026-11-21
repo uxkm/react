@@ -13,7 +13,6 @@
   --date-picker-input-font-size: var(--text-size-base);
   --date-picker-btn-size: 2.25rem;
   --date-picker-icon-size: 1rem;
-
 }
 
 // Date Picker — OOCSS: 구조(.date_picker) + 스킨(.date_picker_*) + 파트(.date_picker_trigger · .date_picker_panel)
@@ -288,7 +287,7 @@
 }
 
 @media (forced-colors: active) {
-  .date_picker_panel .calendar_day[aria-pressed="true"]:not(:disabled) {
+  .date_picker_panel .calendar_day[aria-pressed='true']:not(:disabled) {
     forced-color-adjust: none;
     background-color: Highlight;
     color: HighlightText;

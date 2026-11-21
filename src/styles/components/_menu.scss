@@ -20,7 +20,6 @@
   --menu-divider-margin-y: var(--space-xs);
   --menu-group-padding-y: var(--space-sm);
   --menu-group-font-size: 0.6875rem;
-
 }
 
 // Menu — OOCSS: 구조(.menu) + 스킨(.menu_horizontal · .menu_bordered · .menu_compact) + 파트(.menu_list · .menu_link · .menu_submenu)
@@ -98,7 +97,7 @@
     }
 
     &.is-active,
-    &[aria-current="page"] {
+    &[aria-current='page'] {
       color: color-token(primary);
       background: var(--color-accent-muted);
       font-weight: 600;
@@ -116,7 +115,7 @@
     color: var(--color-text-muted);
 
     .menu_link.is-active &,
-    .menu_link[aria-current="page"] & {
+    .menu_link[aria-current='page'] & {
       color: color-token(primary);
     }
   }

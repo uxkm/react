@@ -1,41 +1,45 @@
-'use client'
+'use client';
 
-import { useEffect, useRef, useState } from 'react' // React
-import { useEscapeKey } from '@/hooks/interaction/useEscapeKey'
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
-import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { useEffect, useRef, useState } from 'react'; // React
+import { useEscapeKey } from '@/hooks/interaction/useEscapeKey';
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
+import { GuideLayout } from '@/screen/pub/layout'; // Guide Layout 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'; // Demo Block 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'; // wrap Page Example
 
 /** 정렬 기준 목록 */
-const sortList = ['최신순', '인기순', '이름순', '오래된순']
+const sortList = ['최신순', '인기순', '이름순', '오래된순'];
 
 /**
  * Sorting Menu (Basic) 데모 화면.
  * 기본형 정렬 메뉴의 동작을 확인한다.
  */
 export default function SortingMenuBasicDemoPage() {
-  const [isSortingOpen, setIsSortingOpen] = useState(false)
-  const [selectedItem, setSelectedItem] = useState('')
-  const sortingWrapRef = useRef(null)
-  useEscapeKey(sortingWrapRef, () => {
-    setIsSortingOpen(false)
-    sortingWrapRef.current?.querySelector('.sort-btn')?.focus()
-  }, isSortingOpen)
+  const [isSortingOpen, setIsSortingOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState('');
+  const sortingWrapRef = useRef(null);
+  useEscapeKey(
+    sortingWrapRef,
+    () => {
+      setIsSortingOpen(false);
+      sortingWrapRef.current?.querySelector('.sort-btn')?.focus();
+    },
+    isSortingOpen,
+  );
 
   // document click 으로 외부 클릭 시 닫기
   useEffect(() => {
     /** 메뉴 밖을 누르면 정렬 메뉴를 닫는다 */
     const onDocumentClick = (e) => {
-      const wrap = sortingWrapRef.current
-      if (!wrap || !isSortingOpen) return
-      if (!wrap.contains(e.target)) setIsSortingOpen(false)
-    }
-    document.addEventListener('click', onDocumentClick)
-    return () => document.removeEventListener('click', onDocumentClick)
-  }, [isSortingOpen])
+      const wrap = sortingWrapRef.current;
+      if (!wrap || !isSortingOpen) return;
+      if (!wrap.contains(e.target)) setIsSortingOpen(false);
+    };
+    document.addEventListener('click', onDocumentClick);
+    return () => document.removeEventListener('click', onDocumentClick);
+  }, [isSortingOpen]);
 
-  const current = selectedItem || sortList[0]
+  const current = selectedItem || sortList[0];
 
   return (
     // Header 사용법 (GuideLayout header* props)
@@ -51,7 +55,8 @@ export default function SortingMenuBasicDemoPage() {
     >
       <DemoBlock
         title="정렬 드롭다운 (document 클릭)"
-        code={wrapPageExample(`const [isSortingOpen, setIsSortingOpen] = useState(false)
+        code={wrapPageExample(
+          `const [isSortingOpen, setIsSortingOpen] = useState(false)
 const [selectedItem, setSelectedItem] = useState('')
 const sortingWrapRef = useRef(null)
 
@@ -117,14 +122,16 @@ const current = selectedItem || sortList[0]
     선택: <strong>{current}</strong>
     {' '}· 메뉴: {isSortingOpen ? '열림' : '닫힘'}
   </p>
-</div>`, {
-          name: 'SortingMenuBasicExample',
-          reactImports: ['useEffect', 'useRef', 'useState'],
-          compImports: [],
-          extraImports: [
-          "import { classNames } from '@/utils/style/classNames'\n\nconst sortList = ['최신순', '인기순', '이름순', '오래된순']"
-          ]
-        })}
+</div>`,
+          {
+            name: 'SortingMenuBasicExample',
+            reactImports: ['useEffect', 'useRef', 'useState'],
+            compImports: [],
+            extraImports: [
+              "import { classNames } from '@/utils/style/classNames'\n\nconst sortList = ['최신순', '인기순', '이름순', '오래된순']",
+            ],
+          },
+        )}
       >
         <div className="sorting-menu-demo">
           <div className="menu-wrap newType">
@@ -140,8 +147,8 @@ const current = selectedItem || sortList[0]
                       className="sort-btn"
                       aria-expanded={String(isSortingOpen)}
                       onClick={(e) => {
-                        e.stopPropagation()
-                        setIsSortingOpen((open) => !open)
+                        e.stopPropagation();
+                        setIsSortingOpen((open) => !open);
                       }}
                     >
                       {current}
@@ -155,10 +162,10 @@ const current = selectedItem || sortList[0]
                             type="button"
                             className={classNames({ active: current === item })}
                             onClick={(e) => {
-                              e.stopPropagation()
-                              setSelectedItem(item)
-                      sortingWrapRef.current?.querySelector('.sort-btn')?.focus()
-                              setIsSortingOpen(false)
+                              e.stopPropagation();
+                              setSelectedItem(item);
+                              sortingWrapRef.current?.querySelector('.sort-btn')?.focus();
+                              setIsSortingOpen(false);
                             }}
                           >
                             {item}
@@ -173,11 +180,10 @@ const current = selectedItem || sortList[0]
           </div>
 
           <p className="demo-status">
-            선택: <strong>{current}</strong>
-            {' '}· 메뉴: {isSortingOpen ? '열림' : '닫힘'}
+            선택: <strong>{current}</strong> · 메뉴: {isSortingOpen ? '열림' : '닫힘'}
           </p>
         </div>
       </DemoBlock>
     </GuideLayout>
-  )
+  );
 }

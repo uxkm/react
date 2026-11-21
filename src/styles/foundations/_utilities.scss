@@ -62,22 +62,25 @@
 
 $spacing-sizes: xs, sm, md, lg, xl;
 
-@each $prefix, $property in (
-  m: margin,
-  mt: margin-top,
-  mr: margin-right,
-  mb: margin-bottom,
-  ml: margin-left,
-  mx: margin-inline,
-  my: margin-block,
-  p: padding,
-  pt: padding-top,
-  pr: padding-right,
-  pb: padding-bottom,
-  pl: padding-left,
-  px: padding-inline,
-  py: padding-block
-) {
+@each $prefix,
+  $property
+    in (
+      m: margin,
+      mt: margin-top,
+      mr: margin-right,
+      mb: margin-bottom,
+      ml: margin-left,
+      mx: margin-inline,
+      my: margin-block,
+      p: padding,
+      pt: padding-top,
+      pr: padding-right,
+      pb: padding-bottom,
+      pl: padding-left,
+      px: padding-inline,
+      py: padding-block
+    )
+{
   .#{$prefix} {
     @each $size in $spacing-sizes {
       &_#{$size} {

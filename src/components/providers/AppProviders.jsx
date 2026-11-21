@@ -1,99 +1,100 @@
-'use client'
+'use client';
 
 /**
  * 앱 루트 Provider.
  * 저장 언어 복원·document lang 적용 후 AppLayout 으로 전 라우트를 감싼다.
  */
-import { useEffect } from 'react' // 마운트 시 부트스트랩 effect
-import { usePathname } from 'next/navigation' // 경로명 훅
-import { AppLayout } from '@/comp' // 전 라우트 공통 앱 레이아웃
+import { useEffect } from 'react'; // 마운트 시 부트스트랩 effect
+import { usePathname } from 'next/navigation'; // 경로명 훅
+import { AppLayout } from '@/comp'; // 전 라우트 공통 앱 레이아웃
 import {
   DEFAULT_LOCALE, // 기본 언어 코드
   applyDocumentLang, // document lang 속성 반영
-  bootstrapLocale // 저장·감지 언어 복원
-} from '@/lib/i18n/i18n' // 라이브러리/유틸 · i18n
-import { useLocaleStore } from '@/lib/i18n/localeStore' // 언어(locale) 전역 상태
-import { initDetectEnvironment } from '@/utils/dom/detectEnvironment' // OS·브라우저·디바이스 class를 <html>에 부여
-import { initOverlayScrollbar } from '@/utils/dom/overlayScrollbar' // classic 스크롤바 OS용 오버레이 스크롤
-import { initRipple } from '@/utils/dom/ripple' // data-ripple 클릭 파장 효과
-import DevelopmentRefresh from './DevelopmentRefresh' // 개발 모드 핫리프레시 보조
+  bootstrapLocale, // 저장·감지 언어 복원
+} from '@/lib/i18n/i18n'; // 라이브러리/유틸 · i18n
+import { useLocaleStore } from '@/lib/i18n/localeStore'; // 언어(locale) 전역 상태
+import { initDetectEnvironment } from '@/utils/dom/detectEnvironment'; // OS·브라우저·디바이스 class를 <html>에 부여
+import { initOverlayScrollbar } from '@/utils/dom/overlayScrollbar'; // classic 스크롤바 OS용 오버레이 스크롤
+import { initRipple } from '@/utils/dom/ripple'; // data-ripple 클릭 파장 효과
+import DevelopmentRefresh from './DevelopmentRefresh'; // 개발 모드 핫리프레시 보조
 
 /** soft nav 시 중복 bootstrap 방지 */
-let localeBootstrapped = false
+let localeBootstrapped = false;
 
 /** 저장 언어 복원 후 전 라우트에 적용 (번역은 AppLayout GlobalTranslator) */
-function LocaleBootstrap ({ children }) {
-  const setLocale = useLocaleStore((s) => s.setLocale)
+function LocaleBootstrap({ children }) {
+  const setLocale = useLocaleStore((s) => s.setLocale);
 
   useEffect(() => {
-    if (localeBootstrapped) return undefined
+    if (localeBootstrapped) return undefined;
 
-    let cancelled = false
+    let cancelled = false;
 
-    ;(async () => {
-      setLocale(DEFAULT_LOCALE)
-      applyDocumentLang(DEFAULT_LOCALE)
+    (async () => {
+      setLocale(DEFAULT_LOCALE);
+      applyDocumentLang(DEFAULT_LOCALE);
 
       try {
-        const locale = await bootstrapLocale()
-        if (cancelled) return
-        setLocale(locale)
+        const locale = await bootstrapLocale();
+        if (cancelled) return;
+        setLocale(locale);
       } catch (err) {
-        console.warn('[locale] bootstrap failed', err)
-        if (cancelled) return
-        setLocale(DEFAULT_LOCALE)
-        applyDocumentLang(DEFAULT_LOCALE)
+        console.warn('[locale] bootstrap failed', err);
+        if (cancelled) return;
+        setLocale(DEFAULT_LOCALE);
+        applyDocumentLang(DEFAULT_LOCALE);
       } finally {
-        if (!cancelled) localeBootstrapped = true
+        if (!cancelled) localeBootstrapped = true;
       }
-    })()
+    })();
 
     return () => {
-      cancelled = true
-    }
-  }, [setLocale])
+      cancelled = true;
+    };
+  }, [setLocale]);
 
-  return children
+  return children;
 }
 
 /** 클릭 파장(data-ripple) 전역 등록 */
-function RippleBootstrap ({ children }) {
+function RippleBootstrap({ children }) {
   useEffect(() => {
-    initRipple()
-  }, [])
-  return children
+    initRipple();
+  }, []);
+  return children;
 }
 
 /** classic 스크롤바 OS에서 맥 스타일 오버레이 스크롤 등록 */
-function ScrollbarBootstrap ({ children }) {
-  useEffect(() => initOverlayScrollbar(), [])
-  return children
+function ScrollbarBootstrap({ children }) {
+  useEffect(() => initOverlayScrollbar(), []);
+  return children;
 }
 
 /** OS·브라우저·디바이스 class를 <html>에 부여 */
-function DetectBootstrap ({ children }) {
+function DetectBootstrap({ children }) {
   useEffect(() => {
-    initDetectEnvironment().catch(error => {
-      console.warn('[environment] 환경 감지를 초기화하지 못했습니다.', error)
-    })
-  }, [])
-  return children
+    initDetectEnvironment().catch((error) => {
+      console.warn('[environment] 환경 감지를 초기화하지 못했습니다.', error);
+    });
+  }, []);
+  return children;
 }
 
 /**
  * B2B 페이지와 PUB 프로젝트 미리보기는 자체 AppLayout을 구성한다.
  * 나머지 경로는 공통 AppLayout의 슬롯·기본 헤더를 사용한다.
  */
-function AppShell ({ children }) {
-  const pathname = usePathname() || ''
-  const isB2b = pathname === '/b2b' || pathname.startsWith('/b2b/')
-  const isProjectPreview = pathname === '/pub/preview/b2b' || pathname.startsWith('/pub/preview/b2b/')
+function AppShell({ children }) {
+  const pathname = usePathname() || '';
+  const isB2b = pathname === '/b2b' || pathname.startsWith('/b2b/');
+  const isProjectPreview =
+    pathname === '/pub/preview/b2b' || pathname.startsWith('/pub/preview/b2b/');
 
-  return isB2b || isProjectPreview ? children : <AppLayout>{children}</AppLayout>
+  return isB2b || isProjectPreview ? children : <AppLayout>{children}</AppLayout>;
 }
 
 /** 앱 레이아웃으로 화면을 감싼다 */
-export default function AppProviders ({ children }) {
+export default function AppProviders({ children }) {
   return (
     <>
       <DevelopmentRefresh />
@@ -107,5 +108,5 @@ export default function AppProviders ({ children }) {
         </LocaleBootstrap>
       </DetectBootstrap>
     </>
-  )
+  );
 }

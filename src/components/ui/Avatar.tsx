@@ -1,54 +1,55 @@
-'use client'
+'use client';
 
 /**
  * 아바타.
  * 이니셜·이미지·아이콘으로 사용자/엔티티를 표시한다. 상태 점·그룹을 지원한다.
  */
-import { useState, type HTMLAttributes, type ReactNode, type CSSProperties } from 'react' // React
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
-import { hasNodes } from '@/utils/react' // has Nodes
-import { Icon } from './Icon'
+import { useState, type HTMLAttributes, type ReactNode, type CSSProperties } from 'react'; // React
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
+import { hasNodes } from '@/utils/react'; // has Nodes
+import { Icon } from './Icon';
 
 /** 아바타 크기 */
-export type AvatarSize = 'sm' | 'md' | 'lg' | 'xl'
+export type AvatarSize = 'sm' | 'md' | 'lg' | 'xl';
 /** 아바타 색 */
-export type AvatarColor = 'primary' | 'default' | 'success' | 'warning' | 'danger' | 'info' | 'muted'
+export type AvatarColor =
+  'primary' | 'default' | 'success' | 'warning' | 'danger' | 'info' | 'muted';
 
-const VALID_SIZES = new Set(['sm', 'md', 'lg', 'xl'])
+const VALID_SIZES = new Set(['sm', 'md', 'lg', 'xl']);
 
 /** 아바타가 받는 값 */
 export interface AvatarProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'color'> {
-  variant?: 'default' | 'testimonial'
-  imageFit?: CSSProperties['objectFit']
-  imagePosition?: CSSProperties['objectPosition']
-  priority?: boolean
-  size?: AvatarSize
-  color?: AvatarColor | ''
-  square?: boolean
-  src?: string
-  alt?: string
-  icon?: ReactNode
+  variant?: 'default' | 'testimonial';
+  imageFit?: CSSProperties['objectFit'];
+  imagePosition?: CSSProperties['objectPosition'];
+  priority?: boolean;
+  size?: AvatarSize;
+  color?: AvatarColor | '';
+  square?: boolean;
+  src?: string;
+  alt?: string;
+  icon?: ReactNode;
   /** 이니셜 텍스트 */
-  initials?: ReactNode
+  initials?: ReactNode;
   /** initials 별칭 */
-  label?: ReactNode
-  badgeColor?: string
-  badgeLabel?: string
-  ariaHidden?: boolean
-  children?: ReactNode
+  label?: ReactNode;
+  badgeColor?: string;
+  badgeLabel?: string;
+  ariaHidden?: boolean;
+  children?: ReactNode;
 }
 
 /** 아바타 그룹 */
 export interface AvatarGroupProps extends HTMLAttributes<HTMLDivElement> {
-  ariaLabel?: string
-  children?: ReactNode
+  ariaLabel?: string;
+  children?: ReactNode;
 }
 
 /**
  * 사람·항목을 나타내는 둥근 표식.
  * src 이미지 → 실패/없으면 icon · children · initials 순.
  */
-export function Avatar ({
+export function Avatar({
   variant = 'default',
   imageFit = 'cover',
   imagePosition = 'center',
@@ -68,19 +69,26 @@ export function Avatar ({
   className,
   ...rest
 }: AvatarProps) {
-  const [imageError, setImageError] = useState(false)
-  const resolvedSize = VALID_SIZES.has(size) ? size : 'md'
-  const showImage = Boolean(src) && !imageError
+  const [imageError, setImageError] = useState(false);
+  const resolvedSize = VALID_SIZES.has(size) ? size : 'md';
+  const showImage = Boolean(src) && !imageError;
   const fallback = hasNodes(icon)
     ? icon
     : hasNodes(children)
       ? children
-      : (initials ?? label ?? (variant === 'testimonial' ? <Icon name="user" size={44} /> : null))
+      : (initials ??
+        label ??
+        (variant === 'testimonial' ? (
+          <Icon
+            name="user"
+            size={44}
+          />
+        ) : null));
 
-  const [previousSrc, setPreviousSrc] = useState(src)
+  const [previousSrc, setPreviousSrc] = useState(src);
   if (previousSrc !== src) {
-    setPreviousSrc(src)
-    setImageError(false)
+    setPreviousSrc(src);
+    setImageError(false);
   }
 
   return (
@@ -92,49 +100,42 @@ export function Avatar ({
         color && 'color_' + color,
         resolvedSize !== 'md' && 'avatar_' + resolvedSize,
         square && 'avatar_square',
-        className
+        className,
       )}
       aria-hidden={ariaHidden || undefined}
     >
-      {showImage
-        ? (
-          <img
-            ref={(node) => {
-              // 정적 HTML의 이미지가 hydration 전에 실패한 경우도 fallback으로 복구합니다.
-              if (node?.complete && node.currentSrc && node.naturalWidth === 0) setImageError(true)
-            }}
-            className="avatar_image"
-            src={src}
-            alt={alt}
-            style={{ objectFit: imageFit, objectPosition: imagePosition }}
-            loading={priority ? 'eager' : undefined}
-            fetchPriority={priority ? 'high' : undefined}
-            onError={() => setImageError(true)}
-          />
-          )
-        : fallback}
-      {badgeColor
-        ? (
-          <span
-            className={classNames('avatar_badge', 'color_' + badgeColor)}
-            role="img"
-            aria-label={badgeLabel || undefined}
-          />
-          )
-        : null}
+      {showImage ? (
+        <img
+          ref={(node) => {
+            // 정적 HTML의 이미지가 hydration 전에 실패한 경우도 fallback으로 복구합니다.
+            if (node?.complete && node.currentSrc && node.naturalWidth === 0) setImageError(true);
+          }}
+          className="avatar_image"
+          src={src}
+          alt={alt}
+          style={{ objectFit: imageFit, objectPosition: imagePosition }}
+          loading={priority ? 'eager' : undefined}
+          fetchPriority={priority ? 'high' : undefined}
+          onError={() => setImageError(true)}
+        />
+      ) : (
+        fallback
+      )}
+      {badgeColor ? (
+        <span
+          className={classNames('avatar_badge', 'color_' + badgeColor)}
+          role="img"
+          aria-label={badgeLabel || undefined}
+        />
+      ) : null}
     </span>
-  )
+  );
 }
 
 /**
  * 아바타를 겹쳐 보여주는 묶음. role=group.
  */
-export function AvatarGroup ({
-  ariaLabel = '',
-  className,
-  children,
-  ...rest
-}: AvatarGroupProps) {
+export function AvatarGroup({ ariaLabel = '', className, children, ...rest }: AvatarGroupProps) {
   return (
     <div
       {...rest}
@@ -144,7 +145,7 @@ export function AvatarGroup ({
     >
       {children}
     </div>
-  )
+  );
 }
 
-export default Avatar
+export default Avatar;

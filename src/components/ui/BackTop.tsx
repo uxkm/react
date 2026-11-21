@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 /**
  * 맨 위로(BackTop).
@@ -14,85 +14,87 @@ import {
   useRef, // ref 훅
   useState, // 상태 훅
   type ButtonHTMLAttributes, // ButtonHTMLAttributes 타입
-  type ReactNode // ReactNode 타입
-} from 'react' // React
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
-import { hasNodes } from '@/utils/react' // has Nodes
-import { Icon } from './Icon' // Icon 컴포넌트
-import { useFloatingContext } from './Floating' // Floating Context 훅
+  type ReactNode, // ReactNode 타입
+} from 'react'; // React
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
+import { hasNodes } from '@/utils/react'; // has Nodes
+import { Icon } from './Icon'; // Icon 컴포넌트
+import { useFloatingContext } from './Floating'; // Floating Context 훅
 
 /** 스크롤 컨테이너. 생략 시 window(문서 뷰포트) */
-export type BackTopTarget = Window | HTMLElement | null | undefined
+export type BackTopTarget = Window | HTMLElement | null | undefined;
 
 /** BackTop props */
 export interface BackTopProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   /** 표시 임계 스크롤(px). target 스크롤량이 이 값 이상이면 보임 */
-  visibilityHeight?: number
+  visibilityHeight?: number;
   /**
    * 스크롤·맨 위 이동 기준 컨테이너.
    * - 생략 / window → 문서 뷰포트(window)
    * - HTMLElement → 해당 요소의 내부 스크롤
    * 함수면 호출 결과를 쓴다.
    */
-  target?: BackTopTarget | (() => BackTopTarget)
+  target?: BackTopTarget | (() => BackTopTarget);
   /** primary(기본) · ghost */
-  variant?: 'primary' | 'ghost'
+  variant?: 'primary' | 'ghost';
   /** sm · md(기본) · lg */
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'sm' | 'md' | 'lg';
   /** 버튼 라벨. children 이 있으면 쓰지 않는다 */
-  label?: ReactNode
+  label?: ReactNode;
   /** 아이콘. 기본은 chevron-up(chevron-down 회전). false 면 숨김 */
-  icon?: ReactNode | false
+  icon?: ReactNode | false;
   /** 버튼 안 콘텐츠. 있으면 label · icon 대신 쓴다 */
-  children?: ReactNode
+  children?: ReactNode;
   /**
    * 표시 여부(제어). 넘기면 스크롤 계산 대신 페이지가 표시를 관리한다.
    * 생략 시 visibilityHeight 기준 자동 표시.
    */
-  visible?: boolean
+  visible?: boolean;
   /** 표시 상태가 바뀔 때(스크롤 기반 측정값) */
-  onVisibleChange?: (visible: boolean) => void
+  onVisibleChange?: (visible: boolean) => void;
 }
 
-function resolveTarget (target: BackTopProps['target']): Window | HTMLElement | null {
-  if (typeof window === 'undefined') return null
-  const value = typeof target === 'function' ? target() : target
-  return value == null ? window : value
+function resolveTarget(target: BackTopProps['target']): Window | HTMLElement | null {
+  if (typeof window === 'undefined') return null;
+  const value = typeof target === 'function' ? target() : target;
+  return value == null ? window : value;
 }
 
-function isWindow (node: Window | HTMLElement): node is Window {
-  return typeof window !== 'undefined' && node === window
+function isWindow(node: Window | HTMLElement): node is Window {
+  return typeof window !== 'undefined' && node === window;
 }
 
-function getScrollTop (scrollParent: Window | HTMLElement) {
+function getScrollTop(scrollParent: Window | HTMLElement) {
   if (isWindow(scrollParent)) {
-    return window.scrollY || document.documentElement.scrollTop || 0
+    return window.scrollY || document.documentElement.scrollTop || 0;
   }
-  return scrollParent.scrollTop
+  return scrollParent.scrollTop;
 }
 
-function scrollToTop (scrollParent: Window | HTMLElement) {
-  const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'
+function scrollToTop(scrollParent: Window | HTMLElement) {
+  const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ? 'instant'
+    : 'smooth';
   if (isWindow(scrollParent)) {
-    window.scrollTo({ top: 0, behavior })
-    return
+    window.scrollTo({ top: 0, behavior });
+    return;
   }
   // Element.scrollTo({ behavior: 'smooth' }) 가 no-op 인 환경이 있어 auto 후 보정
   if (typeof scrollParent.scrollTo === 'function') {
-    scrollParent.scrollTo({ top: 0, behavior })
+    scrollParent.scrollTo({ top: 0, behavior });
     requestAnimationFrame(() => {
-      if (scrollParent.scrollTop > 0) scrollParent.scrollTo(0, 0)
-    })
-    return
+      if (scrollParent.scrollTop > 0) scrollParent.scrollTo(0, 0);
+    });
+    return;
   }
-  scrollParent.scrollTop = 0
+  scrollParent.scrollTop = 0;
 }
 
 /**
  * 스크롤을 내리면 나타나는 맨 위 버튼.
  * 표시·이동 기준은 항상 target(window=문서, HTMLElement=내부 스크롤)이다.
  */
-export function BackTop ({
+export function BackTop({
   visibilityHeight = 200,
   target,
   variant = 'primary',
@@ -106,75 +108,84 @@ export function BackTop ({
   onClick,
   ...rest
 }: BackTopProps) {
-  const uid = useId().replace(/:/g, '')
-  const floating = useFloatingContext()
-  const controlled = visibleProp !== undefined
-  const [innerVisible, setInnerVisible] = useState(false)
-  const visible = controlled ? visibleProp : innerVisible
-  const [targetMode, setTargetMode] = useState<'window' | 'container'>('window')
-  const visibleRef = useRef(false)
+  const uid = useId().replace(/:/g, '');
+  const floating = useFloatingContext();
+  const controlled = visibleProp !== undefined;
+  const [innerVisible, setInnerVisible] = useState(false);
+  const visible = controlled ? visibleProp : innerVisible;
+  const [targetMode, setTargetMode] = useState<'window' | 'container'>('window');
+  const visibleRef = useRef(false);
 
   const update = useCallback(() => {
-    const scrollParent = resolveTarget(target)
-    if (!scrollParent) return
+    const scrollParent = resolveTarget(target);
+    if (!scrollParent) return;
 
-    const mode = isWindow(scrollParent) ? 'window' : 'container'
-    setTargetMode((prev) => (prev === mode ? prev : mode))
+    const mode = isWindow(scrollParent) ? 'window' : 'container';
+    setTargetMode((prev) => (prev === mode ? prev : mode));
 
-    const nextVisible = getScrollTop(scrollParent) >= visibilityHeight
+    const nextVisible = getScrollTop(scrollParent) >= visibilityHeight;
     if (visibleRef.current !== nextVisible) {
-      visibleRef.current = nextVisible
-      if (!controlled) setInnerVisible(nextVisible)
-      onVisibleChange?.(nextVisible)
+      visibleRef.current = nextVisible;
+      if (!controlled) setInnerVisible(nextVisible);
+      onVisibleChange?.(nextVisible);
     }
-  }, [target, visibilityHeight, onVisibleChange, controlled])
+  }, [target, visibilityHeight, onVisibleChange, controlled]);
 
   useLayoutEffect(() => {
-    const frame = requestAnimationFrame(update)
-    return () => cancelAnimationFrame(frame)
-  }, [update])
+    const frame = requestAnimationFrame(update);
+    return () => cancelAnimationFrame(frame);
+  }, [update]);
 
   useEffect(() => {
-    const scrollParent = resolveTarget(target)
-    if (!scrollParent) return
+    const scrollParent = resolveTarget(target);
+    if (!scrollParent) return;
 
-    const onScrollOrResize = () => update()
+    const onScrollOrResize = () => update();
 
-    scrollParent.addEventListener('scroll', onScrollOrResize, { passive: true })
+    scrollParent.addEventListener('scroll', onScrollOrResize, { passive: true });
     // 컨테이너가 뷰포트에서 바뀔 때도 갱신(문서 스크롤)
     if (!isWindow(scrollParent)) {
-      window.addEventListener('scroll', onScrollOrResize, { passive: true })
+      window.addEventListener('scroll', onScrollOrResize, { passive: true });
     }
-    window.addEventListener('resize', onScrollOrResize)
+    window.addEventListener('resize', onScrollOrResize);
 
     return () => {
-      scrollParent.removeEventListener('scroll', onScrollOrResize)
+      scrollParent.removeEventListener('scroll', onScrollOrResize);
       if (!isWindow(scrollParent)) {
-        window.removeEventListener('scroll', onScrollOrResize)
+        window.removeEventListener('scroll', onScrollOrResize);
       }
-      window.removeEventListener('resize', onScrollOrResize)
-    }
-  }, [target, update])
+      window.removeEventListener('resize', onScrollOrResize);
+    };
+  }, [target, update]);
 
-  const content = hasNodes(children)
-    ? children
-    : (
-      <>
-        {icon !== false && (
-          hasNodes(icon)
-            ? icon
-            : <Icon name="chevron-down" className="back_top_icon" aria-hidden />
-        )}
-        {hasNodes(label) && <span className="back_top_label">{label}</span>}
-      </>
-      )
+  const content = hasNodes(children) ? (
+    children
+  ) : (
+    <>
+      {icon !== false &&
+        (hasNodes(icon) ? (
+          icon
+        ) : (
+          <Icon
+            name="chevron-down"
+            className="back_top_icon"
+            aria-hidden
+          />
+        ))}
+      {hasNodes(label) && <span className="back_top_label">{label}</span>}
+    </>
+  );
 
-  const { id: buttonId, 'aria-label': ariaLabel, ...buttonRest } = rest
+  const { id: buttonId, 'aria-label': ariaLabel, ...buttonRest } = rest;
 
   return (
     <div
       id={`back-top-${uid}`}
-      className={classNames('back_top', visible && 'is-visible', floating.inside && 'is-in-floating')}
+      className={classNames(
+        'back_top',
+        visible && 'is-visible',
+        floating.inside && 'is-in-floating',
+      )}
       data-back-top=""
       data-target={targetMode}
       data-visibility-height={visibilityHeight}
@@ -190,30 +201,36 @@ export function BackTop ({
           variant === 'ghost' && 'back_top_ghost',
           size === 'sm' && 'back_top_sm',
           size === 'lg' && 'back_top_lg',
-          className
+          className,
         )}
         aria-label={ariaLabel ?? (typeof label === 'string' ? label : '맨 위로')}
         onClick={(event) => {
-          const scrollParent = resolveTarget(target)
-          if (scrollParent) scrollToTop(scrollParent)
+          const scrollParent = resolveTarget(target);
+          if (scrollParent) scrollToTop(scrollParent);
           if (scrollParent && event.detail === 0) {
-            const destination = isWindow(scrollParent) ? document.querySelector<HTMLElement>('main') : scrollParent
+            const destination = isWindow(scrollParent)
+              ? document.querySelector<HTMLElement>('main')
+              : scrollParent;
             if (destination) {
-              const previous = destination.getAttribute('tabindex')
+              const previous = destination.getAttribute('tabindex');
               if (previous === null) {
-                destination.tabIndex = -1
-                destination.addEventListener('blur', () => destination.removeAttribute('tabindex'), { once: true })
+                destination.tabIndex = -1;
+                destination.addEventListener(
+                  'blur',
+                  () => destination.removeAttribute('tabindex'),
+                  { once: true },
+                );
               }
-              destination.focus({ preventScroll: true })
+              destination.focus({ preventScroll: true });
             }
           }
-          onClick?.(event)
+          onClick?.(event);
         }}
       >
         {content}
       </button>
     </div>
-  )
+  );
 }
 
-export default BackTop
+export default BackTop;

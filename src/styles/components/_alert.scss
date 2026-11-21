@@ -16,7 +16,6 @@
   --alert-actions-gap: var(--space-sm);
   --alert-actions-margin-top: var(--space-sm);
 
-
   // ----- Alert — size sm · lg
   --alert-padding-y-sm: var(--space-sm);
   --alert-padding-x-sm: var(--space-md);
@@ -29,7 +28,6 @@
   --alert-font-size-lg: var(--text-size-base);
   --alert-icon-size-lg: 1.5rem;
   --alert-close-size-lg: 1.5rem;
-
 }
 
 // Alert — OOCSS: 구조(.alert) + 크기(.alert_*) + 변형(.alert_banner) + 공통 색상(.color_*)

@@ -1,5 +1,5 @@
 @use 'common/global' as *;
-@use "input";
+@use 'input';
 
 :root {
   // 고유 규격 (공통 규격은 foundations/tokens 참조)
@@ -15,7 +15,6 @@
   --textarea-min-height: 5rem;
   --textarea-count-inset-x: 0.75rem;
   --textarea-count-inset-y: 0.5rem;
-
 }
 
 // Textarea — OOCSS: 구조(.textarea) / 크기(.textarea_sm) / 리사이즈(.textarea_resize_*) 분리
@@ -126,15 +125,21 @@
   }
 
   &.textarea_clearable.is-filled .textarea {
-    padding-right: calc(var(--input-clear-offset) + var(--input-clear-size) + var(--input-clear-offset));
+    padding-right: calc(
+      var(--input-clear-offset) + var(--input-clear-size) + var(--input-clear-offset)
+    );
   }
 
   &.textarea_clearable.is-filled:has(.textarea_sm) .textarea {
-    padding-right: calc(var(--textarea-space-0-6rem) + var(--input-clear-size) + var(--input-clear-offset));
+    padding-right: calc(
+      var(--textarea-space-0-6rem) + var(--input-clear-size) + var(--input-clear-offset)
+    );
   }
 
   &.textarea_clearable.is-filled:has(.textarea_lg) .textarea {
-    padding-right: calc(var(--textarea-space-0-9rem) + var(--input-clear-size) + var(--input-clear-offset));
+    padding-right: calc(
+      var(--textarea-space-0-9rem) + var(--input-clear-size) + var(--input-clear-offset)
+    );
   }
 }
 
@@ -156,15 +161,21 @@
   }
 
   &.is-filled .textarea {
-    padding-right: calc(var(--input-clear-offset) + var(--input-clear-size) + var(--input-clear-offset));
+    padding-right: calc(
+      var(--input-clear-offset) + var(--input-clear-size) + var(--input-clear-offset)
+    );
   }
 
   &.is-filled:has(> .textarea_sm) .textarea {
-    padding-right: calc(var(--textarea-space-0-6rem) + var(--input-clear-size) + var(--input-clear-offset));
+    padding-right: calc(
+      var(--textarea-space-0-6rem) + var(--input-clear-size) + var(--input-clear-offset)
+    );
   }
 
   &.is-filled:has(> .textarea_lg) .textarea {
-    padding-right: calc(var(--textarea-space-0-9rem) + var(--input-clear-size) + var(--input-clear-offset));
+    padding-right: calc(
+      var(--textarea-space-0-9rem) + var(--input-clear-size) + var(--input-clear-offset)
+    );
   }
 }
 

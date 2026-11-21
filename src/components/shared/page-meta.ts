@@ -10,31 +10,31 @@
  */
 export interface FloatingVisibilityMeta {
   /** 플로팅 전체. false만 숨기고 생략하면 표시한다. */
-  floating?: boolean
+  floating?: boolean;
   /** Floating.Item의 name별 표시 여부. 생략한 이름은 표시한다. */
-  floatingItems?: Record<string, boolean>
+  floatingItems?: Record<string, boolean>;
 }
 
 export interface PageMeta extends FloatingVisibilityMeta {
   /** 헤더 위 배너. false면 숨기고 생략하면 등록된 배너를 표시한다. */
-  banner?: boolean
+  banner?: boolean;
   /**
    * 상단 공통 헤더(AppHeader).
    * true 표시, false 숨김. 생략하면 표시.
    * 본문에 화면 전용 header 가 있으면 false.
    */
-  header?: boolean
+  header?: boolean;
   /**
    * 하단 공통 푸터(AppFooter).
    * true 표시, false 숨김. 생략하면 표시.
    */
-  footer?: boolean
+  footer?: boolean;
 }
 
 /**
  * 헤더·푸터 등 레이아웃 영역을 표시할지 판단한다. (공통 규칙)
  * false 만 숨긴다. 값이 없으면 표시한다.
  */
-export function isLayoutSectionVisible (value: boolean | undefined): boolean {
-  return value !== false
+export function isLayoutSectionVisible(value: boolean | undefined): boolean {
+  return value !== false;
 }

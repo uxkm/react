@@ -1,35 +1,35 @@
-'use client'
+'use client';
 
-import { Link } from '@/lib/router' // 클라이언트 링크
-import { useGuideMenu } from '@/screen/pub/hooks/useGuideMenu' // Guide Menu 훅
-import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
+import { Link } from '@/lib/router'; // 클라이언트 링크
+import { useGuideMenu } from '@/screen/pub/hooks/useGuideMenu'; // Guide Menu 훅
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'; // Demo Layout 컴포넌트
 
 /** URL /pub/demo/libs (파일명 기본 slug 인 libs-index 대신) */
-export const routeId = 'libs'
+export const routeId = 'libs';
 /** 사이드 메뉴 라벨 (없으면 id 기반) */
-export const guideLabel = 'Libs 목록'
+export const guideLabel = 'Libs 목록';
 
 /** guide-menu.json demoGroups 를 카드 목록으로 (libs 자신 제외) */
-function demoItemsFromMenu (demoGroups) {
-  const items = []
+function demoItemsFromMenu(demoGroups) {
+  const items = [];
   for (const group of demoGroups || []) {
     for (const item of group.items || []) {
-      if (!item?.id || item.id === 'libs') continue
+      if (!item?.id || item.id === 'libs') continue;
       items.push({
         id: item.id,
         title: item.label || item.id,
         package: item.package || group.label || '',
-        description: item.description || ''
-      })
+        description: item.description || '',
+      });
     }
   }
-  return items
+  return items;
 }
 
 /** 라이브러리 데모 목록 — 메뉴는 public/data/pub/guide-menu.json */
-export default function LibsIndexDemoPage () {
-  const menu = useGuideMenu()
-  const items = demoItemsFromMenu(menu?.guideDemoMenu)
+export default function LibsIndexDemoPage() {
+  const menu = useGuideMenu();
+  const items = demoItemsFromMenu(menu?.guideDemoMenu);
 
   return (
     <DemoLayout
@@ -44,16 +44,12 @@ export default function LibsIndexDemoPage () {
             className="lib-demo-card"
             to={`/pub/demo/${item.id}`}
           >
-            {item.package
-              ? <p className="lib-demo-card_pkg">{item.package}</p>
-              : null}
+            {item.package ? <p className="lib-demo-card_pkg">{item.package}</p> : null}
             <h2 className="lib-demo-card_title">{item.title}</h2>
-            {item.description
-              ? <p className="lib-demo-card_desc">{item.description}</p>
-              : null}
+            {item.description ? <p className="lib-demo-card_desc">{item.description}</p> : null}
           </Link>
         ))}
       </div>
     </DemoLayout>
-  )
+  );
 }

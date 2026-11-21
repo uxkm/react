@@ -5,32 +5,34 @@
 import type {
   ChangeEvent, // ChangeEvent 타입
   InputHTMLAttributes, // InputHTMLAttributes 타입
-  ReactNode // ReactNode 타입
-} from 'react' // React
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
+  ReactNode, // ReactNode 타입
+} from 'react'; // React
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
 
 /** 라디오가 받는 값 */
-export interface RadioProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange' | 'size' | 'color'> {
-  label?: ReactNode
-  name?: string
-  value?: string | number
-  checked?: boolean
-  defaultChecked?: boolean
-  disabled?: boolean
-  labelEnd?: boolean
-  button?: boolean
-  ripple?: boolean
-  ariaLabel?: string
-  children?: ReactNode
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void
+export interface RadioProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  'type' | 'onChange' | 'size' | 'color'
+> {
+  label?: ReactNode;
+  name?: string;
+  value?: string | number;
+  checked?: boolean;
+  defaultChecked?: boolean;
+  disabled?: boolean;
+  labelEnd?: boolean;
+  button?: boolean;
+  ripple?: boolean;
+  ariaLabel?: string;
+  children?: ReactNode;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 /**
  * 단일 선택이 가능한 라디오 버튼.
  * 같은 name으로 그룹을 이룬다.
  */
-export function Radio ({
+export function Radio({
   label,
   name,
   value,
@@ -47,19 +49,17 @@ export function Radio ({
   id,
   ...props
 }: RadioProps) {
-  const content = children ?? label
-  const standalone = content == null || content === ''
+  const content = children ?? label;
+  const standalone = content == null || content === '';
   const classes = classNames(
     'radio',
     labelEnd && 'radio_label-end',
     button && 'radio_button',
-    className
-  )
+    className,
+  );
 
   // checked 유무로 제어/비제어 판정. onChange 만으로는 제어 모드가 되지 않는다.
-  const checkedProps = checked !== undefined
-    ? { checked, onChange }
-    : { defaultChecked, onChange }
+  const checkedProps = checked !== undefined ? { checked, onChange } : { defaultChecked, onChange };
 
   const input = (
     <input
@@ -73,8 +73,8 @@ export function Radio ({
       disabled={disabled}
       {...checkedProps}
     />
-  )
-  const rippleAttrs = ripple ? { 'data-ripple': 'true' as const } : {}
+  );
+  const rippleAttrs = ripple ? { 'data-ripple': 'true' as const } : {};
 
   if (standalone) {
     return (
@@ -83,30 +83,42 @@ export function Radio ({
         {...rippleAttrs}
       >
         {input}
-        <span className="radio_box" aria-hidden="true" />
+        <span
+          className="radio_box"
+          aria-hidden="true"
+        />
       </label>
-    )
+    );
   }
 
   if (button) {
     return (
-      <label className={classes} {...rippleAttrs}>
+      <label
+        className={classes}
+        {...rippleAttrs}
+      >
         {input}
         <span className="radio_label">{content}</span>
       </label>
-    )
+    );
   }
 
   return (
-    <label className={classes} {...rippleAttrs}>
+    <label
+      className={classes}
+      {...rippleAttrs}
+    >
       {labelEnd && <span className="radio_label">{content}</span>}
       <span className="radio_control">
         {input}
-        <span className="radio_box" aria-hidden="true" />
+        <span
+          className="radio_box"
+          aria-hidden="true"
+        />
       </span>
       {!labelEnd && <span className="radio_label">{content}</span>}
     </label>
-  )
+  );
 }
 
-export default Radio
+export default Radio;

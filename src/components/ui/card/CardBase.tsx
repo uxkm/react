@@ -8,22 +8,16 @@ import {
   type ElementType, // ElementType 타입
   type HTMLAttributes, // HTMLAttributes 타입
   type MouseEvent, // MouseEvent 타입
-  type ReactNode // ReactNode 타입
-} from 'react' // React
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
-import { hasNodes } from '@/utils/react' // has Nodes
+  type ReactNode, // ReactNode 타입
+} from 'react'; // React
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
+import { hasNodes } from '@/utils/react'; // has Nodes
 
 /** 카드 모양 */
 export type CardVariant =
-  | 'bordered'
-  | 'default'
-  | 'shadow'
-  | 'flat'
-  | 'borderless'
-  | 'elevated'
-  | 'ghost'
+  'bordered' | 'default' | 'shadow' | 'flat' | 'borderless' | 'elevated' | 'ghost';
 
-const VALID_SIZES = new Set(['sm', 'md', 'lg', 'compact'])
+const VALID_SIZES = new Set(['sm', 'md', 'lg', 'compact']);
 const VALID_VARIANTS = new Set([
   'bordered',
   'default',
@@ -31,76 +25,78 @@ const VALID_VARIANTS = new Set([
   'flat',
   'borderless',
   'elevated',
-  'ghost'
-])
+  'ghost',
+]);
 
 /** 카드가 받는 값 */
-export interface BaseCardProps
-  extends Omit<HTMLAttributes<HTMLElement>, 'title' | 'onClick' | 'color'> {
-  variant?: CardVariant
+export interface BaseCardProps extends Omit<
+  HTMLAttributes<HTMLElement>,
+  'title' | 'onClick' | 'color'
+> {
+  variant?: CardVariant;
   /** 그림자 표시 여부. 기본 false이며 기존 shadow/elevated variant에서는 기본 true입니다. */
-  shadow?: boolean
-  size?: 'sm' | 'md' | 'lg' | 'compact'
-  title?: ReactNode
-  subtitle?: ReactNode
+  shadow?: boolean;
+  size?: 'sm' | 'md' | 'lg' | 'compact';
+  title?: ReactNode;
+  subtitle?: ReactNode;
   /** HTML 태그 또는 Link 등 사용자 컴포넌트. href는 링크 컴포넌트에도 전달합니다. */
-  as?: ElementType
+  as?: ElementType;
   /** @deprecated use `as` */
-  tag?: string
-  href?: string
-  target?: '_self' | '_blank'
-  rel?: string
-  type?: 'button' | 'submit' | 'reset'
-  hoverable?: boolean
-  horizontal?: boolean
-  compact?: boolean
-  accent?: boolean
-  color?: string
-  disabled?: boolean
-  ripple?: boolean
-  media?: ReactNode
-  header?: ReactNode
-  extra?: ReactNode
+  tag?: string;
+  href?: string;
+  target?: '_self' | '_blank';
+  rel?: string;
+  type?: 'button' | 'submit' | 'reset';
+  hoverable?: boolean;
+  horizontal?: boolean;
+  compact?: boolean;
+  accent?: boolean;
+  color?: string;
+  disabled?: boolean;
+  ripple?: boolean;
+  media?: ReactNode;
+  header?: ReactNode;
+  extra?: ReactNode;
   /** 편의용. CardFooter 대신 쓸 수 있다 */
-  footer?: ReactNode
-  children?: ReactNode
-  onClick?: (event: MouseEvent<HTMLElement>) => void
+  footer?: ReactNode;
+  children?: ReactNode;
+  onClick?: (event: MouseEvent<HTMLElement>) => void;
 }
 
 export interface CardHeaderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
-  title?: ReactNode
-  subtitle?: ReactNode
-  extra?: ReactNode
-  children?: ReactNode
+  title?: ReactNode;
+  subtitle?: ReactNode;
+  extra?: ReactNode;
+  children?: ReactNode;
 }
 
 export interface CardBodyProps extends HTMLAttributes<HTMLDivElement> {
-  children?: ReactNode
+  children?: ReactNode;
 }
 
 export interface CardFooterProps extends HTMLAttributes<HTMLDivElement> {
-  between?: boolean
-  children?: ReactNode
+  between?: boolean;
+  children?: ReactNode;
 }
 
 export interface CardDeckProps extends HTMLAttributes<HTMLDivElement> {
-  columns?: 2 | 3 | number
-  children?: ReactNode
+  columns?: 2 | 3 | number;
+  children?: ReactNode;
 }
 
-function variantClass (variant: string) {
-  if (variant === 'flat' || variant === 'ghost') return 'card_ghost'
-  if (variant === 'borderless') return 'card_borderless'
-  if (variant === 'default' || variant === 'bordered') return ''
-  if (variant === 'shadow') return ''
-  return 'card_' + variant
+function variantClass(variant: string) {
+  if (variant === 'flat' || variant === 'ghost') return 'card_ghost';
+  if (variant === 'borderless') return 'card_borderless';
+  if (variant === 'default' || variant === 'bordered') return '';
+  if (variant === 'shadow') return '';
+  return 'card_' + variant;
 }
 
 /**
  * 내용을 묶는 카드.
  * href면 a, onClick이면 button, 아니면 article(또는 as/tag).
  */
-export function CardBase ({
+export function CardBase({
   variant = 'bordered',
   shadow,
   size = 'md',
@@ -129,16 +125,16 @@ export function CardBase ({
   tabIndex,
   ...rest
 }: Readonly<BaseCardProps>) {
-  const resolvedSize = VALID_SIZES.has(size) ? size : 'md'
-  const resolvedVariant = VALID_VARIANTS.has(variant) ? variant : 'bordered'
-  const showShadow = shadow ?? (resolvedVariant === 'shadow' || resolvedVariant === 'elevated')
-  const interactive = Boolean(href || onClick)
-  const rootTag = as || tag || (href ? 'a' : onClick ? 'button' : 'article')
+  const resolvedSize = VALID_SIZES.has(size) ? size : 'md';
+  const resolvedVariant = VALID_VARIANTS.has(variant) ? variant : 'bordered';
+  const showShadow = shadow ?? (resolvedVariant === 'shadow' || resolvedVariant === 'elevated');
+  const interactive = Boolean(href || onClick);
+  const rootTag = as || tag || (href ? 'a' : onClick ? 'button' : 'article');
   const hasBuiltInHeader =
     (title != null && title !== '') ||
     (subtitle != null && subtitle !== '') ||
     hasNodes(header) ||
-    hasNodes(extra)
+    hasNodes(extra);
 
   const cardClass = classNames(
     'card',
@@ -152,18 +148,18 @@ export function CardBase ({
     color && 'color_' + color,
     interactive && 'card_clickable',
     disabled && 'is-disabled',
-    className
-  )
+    className,
+  );
 
   /** 비활성이면 막고, 아니면 onClick */
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     if (disabled) {
-      event.preventDefault()
-      event.stopPropagation()
-      return
+      event.preventDefault();
+      event.stopPropagation();
+      return;
     }
-    onClick?.(event)
-  }
+    onClick?.(event);
+  };
 
   return createElement(
     rootTag,
@@ -171,7 +167,10 @@ export function CardBase ({
       ...rest,
       className: cardClass,
       type: rootTag === 'button' ? type : undefined,
-      href: (rootTag === 'a' || typeof rootTag !== 'string') && !disabled ? (href || undefined) : undefined,
+      href:
+        (rootTag === 'a' || typeof rootTag !== 'string') && !disabled
+          ? href || undefined
+          : undefined,
       target: href ? target : undefined,
       rel: href ? (rel ?? (target === '_blank' ? 'noopener noreferrer' : undefined)) : undefined,
       title: target === '_blank' && href ? '새 창 열림' : undefined,
@@ -179,7 +178,7 @@ export function CardBase ({
       'aria-disabled': interactive && disabled ? true : undefined,
       tabIndex: interactive && disabled ? -1 : tabIndex,
       'data-ripple': ripple ? 'true' : undefined,
-      onClick: interactive ? handleClick : undefined
+      onClick: interactive ? handleClick : undefined,
     },
     media,
     hasBuiltInHeader && (
@@ -196,12 +195,12 @@ export function CardBase ({
       </div>
     ),
     children,
-    hasNodes(footer) && <div className="card_footer">{footer}</div>
-  )
+    hasNodes(footer) && <div className="card_footer">{footer}</div>,
+  );
 }
 
 /** 카드 헤더. title·subtitle 또는 children + extra */
-export function CardHeader ({
+export function CardHeader({
   title,
   subtitle,
   extra,
@@ -210,7 +209,10 @@ export function CardHeader ({
   ...rest
 }: CardHeaderProps) {
   return (
-    <div {...rest} className={classNames('card_header', className)}>
+    <div
+      {...rest}
+      className={classNames('card_header', className)}
+    >
       <div className="card_header-main">
         {children ?? (
           <>
@@ -221,25 +223,23 @@ export function CardHeader ({
       </div>
       {hasNodes(extra) && <div className="card_extra">{extra}</div>}
     </div>
-  )
+  );
 }
 
 /** 카드 본문 */
-export function CardBody ({ children, className, ...rest }: CardBodyProps) {
+export function CardBody({ children, className, ...rest }: CardBodyProps) {
   return (
-    <div {...rest} className={classNames('card_body', className)}>
+    <div
+      {...rest}
+      className={classNames('card_body', className)}
+    >
       {children}
     </div>
-  )
+  );
 }
 
 /** 카드 푸터. between이면 양끝 정렬 */
-export function CardFooter ({
-  between = false,
-  children,
-  className,
-  ...rest
-}: CardFooterProps) {
+export function CardFooter({ between = false, children, className, ...rest }: CardFooterProps) {
   return (
     <div
       {...rest}
@@ -247,17 +247,12 @@ export function CardFooter ({
     >
       {children}
     </div>
-  )
+  );
 }
 
 /** 카드 그리드. columns 2|3 고정, 없으면 자동 */
-export function CardDeck ({
-  columns,
-  children,
-  className,
-  ...rest
-}: CardDeckProps) {
-  const resolved = [2, 3].includes(Number(columns)) ? Number(columns) : null
+export function CardDeck({ columns, children, className, ...rest }: CardDeckProps) {
+  const resolved = [2, 3].includes(Number(columns)) ? Number(columns) : null;
   return (
     <div
       {...rest}
@@ -265,7 +260,7 @@ export function CardDeck ({
     >
       {children}
     </div>
-  )
+  );
 }
 
-export default CardBase
+export default CardBase;

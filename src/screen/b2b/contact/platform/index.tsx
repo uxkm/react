@@ -1,20 +1,24 @@
-'use client'
+'use client';
 
-import { Page, PageLoading } from '@/comp' // comp
-import ComingSoon from '@/widgets/b2b/common/ComingSoon' // Coming Soon 컴포넌트
-import { resolveSkeletonMode } from '@/config/skeleton' // resolve Skeleton Mode
-import IndexSkeleton from './skeleton/indexSkeleton' // Index Skeleton 컴포넌트
+import { Page, PageLoading } from '@/comp'; // comp
+import ComingSoon from '@/widgets/b2b/common/ComingSoon'; // Coming Soon 컴포넌트
+import { resolveSkeletonMode } from '@/config/skeleton'; // resolve Skeleton Mode
+import IndexSkeleton from './skeleton/indexSkeleton'; // Index Skeleton 컴포넌트
 
-export const pageTitle = "플랫폼도입문의"
+export const pageTitle = '플랫폼도입문의';
 
 /** 미작업 화면 — ComingSoon. 시안 반영 시 본문을 교체한다. */
-export default function B2bContactPlatformPage () {
-  const skeletonId = 'b2b/contact/platform'
-  const skeletonMode = resolveSkeletonMode(skeletonId)
+export default function B2bContactPlatformPage() {
+  const skeletonId = 'b2b/contact/platform';
+  const skeletonMode = resolveSkeletonMode(skeletonId);
 
   return (
     <>
-      <Page page="contact-platform" title={pageTitle}  className="p-content" />
+      <Page
+        page="contact-platform"
+        title={pageTitle}
+        className="p-content"
+      />
       <PageLoading
         loading={false}
         skeletonId={skeletonId}
@@ -24,8 +28,7 @@ export default function B2bContactPlatformPage () {
       >
         <h1 className="visually-hidden">{pageTitle}</h1>
         <ComingSoon />
-
       </PageLoading>
     </>
-  )
+  );
 }

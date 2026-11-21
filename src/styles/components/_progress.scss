@@ -24,7 +24,6 @@
   --progress-circle-value-size: var(--text-size-lg);
   --progress-circle-value-size-sm: var(--text-size-sm);
   --progress-circle-value-size-lg: var(--text-size-xl);
-
 }
 
 // Progress — OOCSS: 구조(.progress) + 크기(.progress_sm) + 변형(.progress_striped · .progress_circle · .is-indeterminate) + 공통 색상(.color_*)
@@ -330,7 +329,9 @@
       stroke-width: var(--progress-circle-stroke);
       stroke-linecap: round;
       stroke-dasharray: var(--progress-circle-circumference);
-      stroke-dashoffset: calc(var(--progress-circle-circumference) * (1 - var(--progress-percent) / 100));
+      stroke-dashoffset: calc(
+        var(--progress-circle-circumference) * (1 - var(--progress-percent) / 100)
+      );
       transition: stroke-dashoffset $transition-base;
     }
 

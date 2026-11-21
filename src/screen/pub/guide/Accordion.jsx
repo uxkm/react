@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import { useState } from 'react' // 상태 훅
+import { useState } from 'react'; // 상태 훅
 import {
   Accordion, // Accordion 컴포넌트
   AccordionItem, // Accordion Item 컴포넌트
@@ -17,48 +17,52 @@ import {
   FormLayout, // Form Layout 컴포넌트
   Icon, // Icon 컴포넌트
   Input, // Input 컴포넌트
-  Space // Space 컴포넌트
-} from '@/comp' // comp
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
-import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
+  Space, // Space 컴포넌트
+} from '@/comp'; // comp
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'; // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'; // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout'; // Guide Layout 컴포넌트
 import {
   pageExampleCode, // page Example Code
   pageExampleReturn, // page Example Return
-  wrapPageExample // wrap Page Example
-} from '@/screen/pub/lib/pageExampleCode' // 라이브러리/유틸 · page Example Code
-import { accordionApiSections } from '@/screen/pub/data/guide/accordionApiSections' // accordion Api Sections
+  wrapPageExample, // wrap Page Example
+} from '@/screen/pub/lib/pageExampleCode'; // 라이브러리/유틸 · page Example Code
+import { accordionApiSections } from '@/screen/pub/data/guide/accordionApiSections'; // accordion Api Sections
 
 const BASIC_ITEMS = [
   { value: 'shipping', label: '배송 안내' },
   { value: 'return', label: '교환 · 반품' },
-  { value: 'payment', label: '결제' }
-]
+  { value: 'payment', label: '결제' },
+];
 
 const DISABLED_ITEMS = [
   { value: 'a', label: '열림 가능' },
   { value: 'b', label: '비활성', disabled: true },
-  { value: 'c', label: '다른 칸' }
-]
+  { value: 'c', label: '다른 칸' },
+];
 
 const CUSTOM_MENU = [
   { value: 'overview', label: '개요', icon: 'home' },
   { value: 'settings', label: '설정', icon: 'settings' },
-  { value: 'activity', label: '활동(비활성)', disabled: true }
-]
+  { value: 'activity', label: '활동(비활성)', disabled: true },
+];
 
 /** 데이터 map + 단일 패널(내용만 교체) */
-function ControlledAccordion ({
+function ControlledAccordion({
   items = BASIC_ITEMS,
   initial = items[0]?.value,
   panelPrefix = '콘텐츠',
   ...props
 }) {
-  const [value, setValue] = useState(initial)
-  const active = items.find((item) => item.value === value)
+  const [value, setValue] = useState(initial);
+  const active = items.find((item) => item.value === value);
 
   return (
-    <Accordion {...props} value={value} onChange={setValue}>
+    <Accordion
+      {...props}
+      value={value}
+      onChange={setValue}
+    >
       {items.map((item) => (
         <AccordionItem
           key={String(item.value)}
@@ -69,36 +73,42 @@ function ControlledAccordion ({
           disabled={item.disabled}
         />
       ))}
-      <p>{panelPrefix}: {active?.label}</p>
+      <p>
+        {panelPrefix}: {active?.label}
+      </p>
     </Accordion>
-  )
+  );
 }
 
 /** 코드보기용 — items map + 단일 패널 슬롯 */
-function compoundCode (options = {}) {
+function compoundCode(options = {}) {
   const {
     props = '',
     items = BASIC_ITEMS,
     panelPrefix = '콘텐츠',
     initial = items[0]?.value,
     wrapStart = '',
-    wrapEnd = ''
-  } = options
-  const propLine = props ? ` ${props}` : ''
-  const hasIcon = items.some((item) => item.icon)
-  const hasExtra = items.some((item) => item.extra)
-  const hasDisabled = items.some((item) => item.disabled)
+    wrapEnd = '',
+  } = options;
+  const propLine = props ? ` ${props}` : '';
+  const hasIcon = items.some((item) => item.icon);
+  const hasExtra = items.some((item) => item.extra);
+  const hasDisabled = items.some((item) => item.disabled);
 
-  const itemsDecl = `const items = [\n${items.map((item) => {
-    const fields = [
-      `value: '${item.value}'`,
-      item.label != null ? `label: '${item.label}'` : null,
-      item.disabled ? 'disabled: true' : null,
-      item.icon ? 'icon: <Icon name="…" />' : null,
-      item.extra ? `extra: '${item.extra}'` : null
-    ].filter(Boolean).join(', ')
-    return `  { ${fields} }`
-  }).join(',\n')}\n]`
+  const itemsDecl = `const items = [\n${items
+    .map((item) => {
+      const fields = [
+        `value: '${item.value}'`,
+        item.label != null ? `label: '${item.label}'` : null,
+        item.disabled ? 'disabled: true' : null,
+        item.icon ? 'icon: <Icon name="…" />' : null,
+        item.extra ? `extra: '${item.extra}'` : null,
+      ]
+        .filter(Boolean)
+        .join(', ');
+      return `  { ${fields} }`;
+    })
+    .join(',\n')}\n]`;
 
   const itemAttrs = [
     'key={item.value}',
@@ -106,8 +116,10 @@ function compoundCode (options = {}) {
     'label={item.label}',
     hasIcon ? 'icon={item.icon}' : null,
     hasExtra ? 'extra={item.extra}' : null,
-    hasDisabled ? 'disabled={item.disabled}' : null
-  ].filter(Boolean).join('\n      ')
+    hasDisabled ? 'disabled={item.disabled}' : null,
+  ]
+    .filter(Boolean)
+    .join('\n      ');
 
   const fragment = `${wrapStart}${itemsDecl}
 const [value, setValue] = useState('${initial}')
@@ -120,34 +132,45 @@ const active = items.find((item) => item.value === value)
     />
   ))}
   <p>${panelPrefix}: {active?.label}</p>
-</Accordion>${wrapEnd}`
+</Accordion>${wrapEnd}`;
 
-  const compImports = ['Accordion', 'AccordionItem']
-  if (hasIcon) compImports.push('Icon')
+  const compImports = ['Accordion', 'AccordionItem'];
+  if (hasIcon) compImports.push('Icon');
 
   return wrapPageExample(fragment, {
     name: options.name || 'AccordionExample',
     reactImports: ['useState'],
-    compImports
-  })
+    compImports,
+  });
 }
 
 /** 메뉴 데이터 map + 아이콘 커스텀 · 단일 패널 슬롯(children) */
-function CompoundAccordionDemo () {
-  const [value, setValue] = useState('overview')
+function CompoundAccordionDemo() {
+  const [value, setValue] = useState('overview');
   const panels = {
     overview: <p className="accordion_panel-placeholder">콘텐츠: 개요</p>,
     settings: <p className="accordion_panel-placeholder">콘텐츠: 설정</p>,
-    activity: <p className="accordion_panel-placeholder">콘텐츠: 활동(비활성)</p>
-  }
+    activity: <p className="accordion_panel-placeholder">콘텐츠: 활동(비활성)</p>,
+  };
 
   return (
-    <Accordion value={value} onChange={setValue} skin="bordered">
+    <Accordion
+      value={value}
+      onChange={setValue}
+      skin="bordered"
+    >
       {CUSTOM_MENU.map((item) => (
-        <AccordionItem key={item.value} value={item.value} disabled={item.disabled}>
+        <AccordionItem
+          key={item.value}
+          value={item.value}
+          disabled={item.disabled}
+        >
           {item.icon && (
             <span className="accordion_leading">
-              <Icon name={item.icon} size="100%" />
+              <Icon
+                name={item.icon}
+                size="100%"
+              />
             </span>
           )}
           <span className="accordion_label">{item.label}</span>
@@ -155,44 +178,63 @@ function CompoundAccordionDemo () {
       ))}
       {panels[value]}
     </Accordion>
-  )
+  );
 }
 
-function OverviewSlot () {
-  return <p className="accordion_panel-placeholder">개요 페이지 슬롯</p>
+function OverviewSlot() {
+  return <p className="accordion_panel-placeholder">개요 페이지 슬롯</p>;
 }
 
-function SettingsSlot () {
+function SettingsSlot() {
   return (
-    <Space vertical block size={8}>
+    <Space
+      vertical
+      block
+      size={8}
+    >
       <p className="accordion_panel-placeholder">설정 페이지 슬롯</p>
-      <Button size="sm" variant="outline" label="저장" />
+      <Button
+        size="sm"
+        variant="outline"
+        label="저장"
+      />
     </Space>
-  )
+  );
 }
 
-function ActivitySlot () {
-  return <p className="accordion_panel-placeholder">활동 페이지 슬롯</p>
+function ActivitySlot() {
+  return <p className="accordion_panel-placeholder">활동 페이지 슬롯</p>;
 }
 
 const PANEL_SLOTS = {
   overview: OverviewSlot,
   settings: SettingsSlot,
-  activity: ActivitySlot
-}
+  activity: ActivitySlot,
+};
 
 /** 메뉴 map + value → 컴포넌트(슬롯) 패널 */
-function SlotPanelAccordionDemo () {
-  const [value, setValue] = useState('overview')
-  const Panel = PANEL_SLOTS[value]
+function SlotPanelAccordionDemo() {
+  const [value, setValue] = useState('overview');
+  const Panel = PANEL_SLOTS[value];
 
   return (
-    <Accordion value={value} onChange={setValue} skin="card">
+    <Accordion
+      value={value}
+      onChange={setValue}
+      skin="card"
+    >
       {CUSTOM_MENU.map((item) => (
-        <AccordionItem key={item.value} value={item.value} disabled={item.disabled}>
+        <AccordionItem
+          key={item.value}
+          value={item.value}
+          disabled={item.disabled}
+        >
           {item.icon && (
             <span className="accordion_leading">
-              <Icon name={item.icon} size="100%" />
+              <Icon
+                name={item.icon}
+                size="100%"
+              />
             </span>
           )}
           <span className="accordion_label">{item.label}</span>
@@ -200,18 +242,32 @@ function SlotPanelAccordionDemo () {
       ))}
       {Panel ? <Panel key={value} /> : null}
     </Accordion>
-  )
+  );
 }
 
 /** AccordionItem + AccordionPanel 조합 */
-function AccordionPanelCompoundDemo () {
-  const [value, setValue] = useState('overview')
+function AccordionPanelCompoundDemo() {
+  const [value, setValue] = useState('overview');
 
   return (
-    <Accordion value={value} onChange={setValue} skin="bordered">
-      <AccordionItem value="overview" label="개요" />
-      <AccordionItem value="settings" label="설정" />
-      <AccordionItem value="activity" label="활동" disabled />
+    <Accordion
+      value={value}
+      onChange={setValue}
+      skin="bordered"
+    >
+      <AccordionItem
+        value="overview"
+        label="개요"
+      />
+      <AccordionItem
+        value="settings"
+        label="설정"
+      />
+      <AccordionItem
+        value="activity"
+        label="활동"
+        disabled
+      />
       <AccordionPanel value="overview">
         <p className="accordion_panel-placeholder">개요 패널</p>
       </AccordionPanel>
@@ -222,31 +278,40 @@ function AccordionPanelCompoundDemo () {
         <p className="accordion_panel-placeholder">활동 패널</p>
       </AccordionPanel>
     </Accordion>
-  )
+  );
 }
 
 /** items[].content 로 칸별 패널 */
-function ContentPropAccordionDemo () {
-  const [value, setValue] = useState('overview')
+function ContentPropAccordionDemo() {
+  const [value, setValue] = useState('overview');
   const items = CUSTOM_MENU.map((item) => ({
     ...item,
-    icon: item.icon
-      ? <Icon name={item.icon} size="100%" />
-      : undefined,
-    content: (
-      <p className="accordion_panel-placeholder">content: {item.label}</p>
-    )
-  }))
+    icon: item.icon ? (
+      <Icon
+        name={item.icon}
+        size="100%"
+      />
+    ) : undefined,
+    content: <p className="accordion_panel-placeholder">content: {item.label}</p>,
+  }));
 
   return (
-    <Accordion value={value} onChange={setValue} skin="card" items={items} />
-  )
+    <Accordion
+      value={value}
+      onChange={setValue}
+      skin="card"
+      items={items}
+    />
+  );
 }
 
 /** 패널별 위젯/모듈: 슬라이드 · 폼 · 카드 */
-function PanelSlideModule () {
+function PanelSlideModule() {
   return (
-    <Carousel ariaLabel="아코디언 패널 슬라이드" autoplay>
+    <Carousel
+      ariaLabel="아코디언 패널 슬라이드"
+      autoplay
+    >
       <CarouselSlide>
         <article className="card card_accent color_primary card_elevated">
           <div className="card_body">
@@ -275,89 +340,141 @@ function PanelSlideModule () {
         </article>
       </CarouselSlide>
     </Carousel>
-  )
+  );
 }
 
-function PanelFormModule ({ idPrefix = 'accordion-panel' } = {}) {
+function PanelFormModule({ idPrefix = 'accordion-panel' } = {}) {
   return (
     <FormLayout>
-      <FormField label="이름" htmlFor={`${idPrefix}-name`} required>
-        <Input id={`${idPrefix}-name`} placeholder="홍길동" />
+      <FormField
+        label="이름"
+        htmlFor={`${idPrefix}-name`}
+        required
+      >
+        <Input
+          id={`${idPrefix}-name`}
+          placeholder="홍길동"
+        />
       </FormField>
-      <FormField label="이메일" htmlFor={`${idPrefix}-email`}>
-        <Input id={`${idPrefix}-email`} type="email" placeholder="name@example.com" />
+      <FormField
+        label="이메일"
+        htmlFor={`${idPrefix}-email`}
+      >
+        <Input
+          id={`${idPrefix}-email`}
+          type="email"
+          placeholder="name@example.com"
+        />
       </FormField>
       <FormActions>
-        <Button variant="outline" color="default" label="취소" />
+        <Button
+          variant="outline"
+          color="default"
+          label="취소"
+        />
         <Button label="저장" />
       </FormActions>
     </FormLayout>
-  )
+  );
 }
 
-function PanelCardModule () {
+function PanelCardModule() {
   return (
     <Card style={{ maxWidth: 360, width: '100%' }}>
-      <CardHeader title="프로젝트 카드" subtitle="모듈 패널 예시" />
+      <CardHeader
+        title="프로젝트 카드"
+        subtitle="모듈 패널 예시"
+      />
       <CardBody>
         아코디언 패널에서 Card 위젯을 호출한 예시입니다. 관련 설명과 액션을 담을 수 있습니다.
       </CardBody>
       <CardFooter>
-        <Button size="sm" variant="outline" label="자세히" />
-        <Button size="sm" label="열기" />
+        <Button
+          size="sm"
+          variant="outline"
+          label="자세히"
+        />
+        <Button
+          size="sm"
+          label="열기"
+        />
       </CardFooter>
     </Card>
-  )
+  );
 }
 
-const HeroCarousel = PanelSlideModule
-function ContactForm () {
-  return <PanelFormModule idPrefix="accordion-page-form" />
+const HeroCarousel = PanelSlideModule;
+function ContactForm() {
+  return <PanelFormModule idPrefix="accordion-page-form" />;
 }
-const ProjectCard = PanelCardModule
+const ProjectCard = PanelCardModule;
 
 const MODULE_PANEL_MAP = {
   slide: PanelSlideModule,
   form: PanelFormModule,
-  card: PanelCardModule
-}
+  card: PanelCardModule,
+};
 
 const MODULE_MENU = [
   { value: 'slide', label: '슬라이드' },
   { value: 'form', label: '폼' },
-  { value: 'card', label: '카드' }
-]
+  { value: 'card', label: '카드' },
+];
 
 /** 칸마다 다른 위젯/모듈 패널 */
-function ModulePanelsDemo () {
-  const [value, setValue] = useState('slide')
+function ModulePanelsDemo() {
+  const [value, setValue] = useState('slide');
 
   return (
-    <Accordion value={value} onChange={setValue} skin="card">
+    <Accordion
+      value={value}
+      onChange={setValue}
+      skin="card"
+    >
       {MODULE_MENU.map((item) => (
-        <AccordionItem key={item.value} value={item.value} label={item.label} />
+        <AccordionItem
+          key={item.value}
+          value={item.value}
+          label={item.label}
+        />
       ))}
       {MODULE_MENU.map((item) => {
-        const Panel = MODULE_PANEL_MAP[item.value]
+        const Panel = MODULE_PANEL_MAP[item.value];
         return (
-          <AccordionPanel key={item.value} value={item.value}>
+          <AccordionPanel
+            key={item.value}
+            value={item.value}
+          >
             {Panel ? <Panel /> : null}
           </AccordionPanel>
-        )
+        );
       })}
     </Accordion>
-  )
+  );
 }
 
 /** 페이지 위젯을 AccordionPanel에 직접 호출 */
-function PageWidgetPanelsDemo () {
-  const [value, setValue] = useState('slide')
+function PageWidgetPanelsDemo() {
+  const [value, setValue] = useState('slide');
 
   return (
-    <Accordion value={value} onChange={setValue} skin="bordered">
-      <AccordionItem value="slide" label="슬라이드" />
-      <AccordionItem value="form" label="폼" />
-      <AccordionItem value="card" label="카드" />
+    <Accordion
+      value={value}
+      onChange={setValue}
+      skin="bordered"
+    >
+      <AccordionItem
+        value="slide"
+        label="슬라이드"
+      />
+      <AccordionItem
+        value="form"
+        label="폼"
+      />
+      <AccordionItem
+        value="card"
+        label="카드"
+      />
       <AccordionPanel value="slide">
         <HeroCarousel />
       </AccordionPanel>
@@ -368,7 +485,7 @@ function PageWidgetPanelsDemo () {
         <ProjectCard />
       </AccordionPanel>
     </Accordion>
-  )
+  );
 }
 
 const SECTIONS = [
@@ -376,65 +493,92 @@ const SECTIONS = [
     title: '기본 사용',
     description: (
       <>
-        메뉴는 데이터 <code>map</code>으로 <code>AccordionItem</code>을 돌리고,
-        패널은 열린 <code>value</code>에 맞춰 내용만 교체합니다.
-        기본 스킨은 <code>bordered</code>(<code>accordion_bordered</code>)입니다.
+        메뉴는 데이터 <code>map</code>으로 <code>AccordionItem</code>을 돌리고, 패널은 열린{' '}
+        <code>value</code>에 맞춰 내용만 교체합니다. 기본 스킨은 <code>bordered</code>(
+        <code>accordion_bordered</code>)입니다.
       </>
     ),
     code: compoundCode({ panelPrefix: '콘텐츠' }),
-    preview: (
-      <ControlledAccordion />
-    )
+    preview: <ControlledAccordion />,
   },
   {
     title: '스킨(skin)',
     description: (
       <>
-        <code>skin</code>은 <code>bordered</code>(기본) · <code>flush</code> · <code>card</code>입니다.
-        각각 <code>accordion_bordered</code> · <code>accordion_flush</code> · <code>accordion_card</code>가 붙습니다.
+        <code>skin</code>은 <code>bordered</code>(기본) · <code>flush</code> · <code>card</code>
+        입니다. 각각 <code>accordion_bordered</code> · <code>accordion_flush</code> ·{' '}
+        <code>accordion_card</code>가 붙습니다.
       </>
     ),
     code: [
       compoundCode({ props: 'skin="bordered"', panelPrefix: 'bordered' }),
       compoundCode({ props: 'skin="flush"', panelPrefix: 'flush' }),
-      compoundCode({ props: 'skin="card"', panelPrefix: 'card' })
+      compoundCode({ props: 'skin="card"', panelPrefix: 'card' }),
     ].join('\n\n'),
     preview: (
-      <Space vertical block size={24}>
-        <ControlledAccordion skin="bordered" panelPrefix="bordered" />
-        <ControlledAccordion skin="flush" panelPrefix="flush" />
-        <ControlledAccordion skin="card" panelPrefix="card" />
+      <Space
+        vertical
+        block
+        size={24}
+      >
+        <ControlledAccordion
+          skin="bordered"
+          panelPrefix="bordered"
+        />
+        <ControlledAccordion
+          skin="flush"
+          panelPrefix="flush"
+        />
+        <ControlledAccordion
+          skin="card"
+          panelPrefix="card"
+        />
       </Space>
-    )
+    ),
   },
   {
     title: '크기',
     description: (
       <>
         <code>size</code>는 <code>sm</code> · <code>md</code>(기본) · <code>lg</code>입니다.
-        <code>sm</code> · <code>lg</code>일 때 <code>accordion_sm</code> · <code>accordion_lg</code>가 붙습니다.
+        <code>sm</code> · <code>lg</code>일 때 <code>accordion_sm</code> · <code>accordion_lg</code>
+        가 붙습니다.
       </>
     ),
     code: [
       compoundCode({ props: 'size="sm"', panelPrefix: 'sm' }),
       compoundCode({ props: 'size="md"', panelPrefix: 'md' }),
-      compoundCode({ props: 'size="lg"', panelPrefix: 'lg' })
+      compoundCode({ props: 'size="lg"', panelPrefix: 'lg' }),
     ].join('\n\n'),
     preview: (
-      <Space vertical block size={24}>
-        <ControlledAccordion size="sm" panelPrefix="sm" />
-        <ControlledAccordion size="md" panelPrefix="md" />
-        <ControlledAccordion size="lg" panelPrefix="lg" />
+      <Space
+        vertical
+        block
+        size={24}
+      >
+        <ControlledAccordion
+          size="sm"
+          panelPrefix="sm"
+        />
+        <ControlledAccordion
+          size="md"
+          panelPrefix="md"
+        />
+        <ControlledAccordion
+          size="lg"
+          panelPrefix="lg"
+        />
       </Space>
-    )
+    ),
   },
   {
     title: '슬라이드(effect)',
     description: (
       <>
-        <code>effect=&quot;slide&quot;</code>이면 펼침·접힘 시 패널 높이가 슬라이드됩니다.
-        루트에 <code>data-effect=&quot;slide&quot;</code>가 붙고,
-        <code>--accordion-slide-duration</code> · <code>--accordion-slide-easing</code>으로 타이밍을 바꿀 수 있습니다.
+        <code>effect=&quot;slide&quot;</code>이면 펼침·접힘 시 패널 높이가 슬라이드됩니다. 루트에{' '}
+        <code>data-effect=&quot;slide&quot;</code>가 붙고,
+        <code>--accordion-slide-duration</code> · <code>--accordion-slide-easing</code>으로 타이밍을
+        바꿀 수 있습니다.
         <code>prefers-reduced-motion</code>이면 즉시 전환합니다.
       </>
     ),
@@ -442,19 +586,26 @@ const SECTIONS = [
       compoundCode({ props: 'effect="slide"', panelPrefix: 'slide' }),
       compoundCode({
         props: 'effect="slide" skin="card"',
-        panelPrefix: 'slide · card'
-      })
+        panelPrefix: 'slide · card',
+      }),
     ].join('\n\n'),
     preview: (
-      <Space vertical block size={24}>
-        <ControlledAccordion effect="slide" panelPrefix="slide" />
+      <Space
+        vertical
+        block
+        size={24}
+      >
+        <ControlledAccordion
+          effect="slide"
+          panelPrefix="slide"
+        />
         <ControlledAccordion
           effect="slide"
           skin="card"
           panelPrefix="slide · card"
         />
       </Space>
-    )
+    ),
   },
   {
     title: '패널 슬롯 · children',
@@ -500,17 +651,17 @@ const panels = {
   )
 }
 
-const [value, setValue] = useState('overview')`
-      )
+const [value, setValue] = useState('overview')`,
+      ),
     }),
-    preview: <CompoundAccordionDemo />
+    preview: <CompoundAccordionDemo />,
   },
   {
     title: '패널 슬롯 · 컴포넌트 맵',
     description: (
       <>
-        value → 페이지·슬롯 컴포넌트 맵을 두고 <code>panels[value]</code>로 교체합니다.
-        Tabs의 <code>panel</code> prop과 같이 칸별 화면을 연결합니다.
+        value → 페이지·슬롯 컴포넌트 맵을 두고 <code>panels[value]</code>로 교체합니다. Tabs의{' '}
+        <code>panel</code> prop과 같이 칸별 화면을 연결합니다.
       </>
     ),
     code: pageExampleCode({
@@ -561,17 +712,17 @@ const PanelMap = {
 }
 
 const [value, setValue] = useState('overview')
-const Panel = PanelMap[value]`
-      )
+const Panel = PanelMap[value]`,
+      ),
     }),
-    preview: <SlotPanelAccordionDemo />
+    preview: <SlotPanelAccordionDemo />,
   },
   {
     title: '패널 슬롯 · AccordionPanel',
     description: (
       <>
-        <code>AccordionItem</code>과 <code>AccordionPanel</code>을 형제로 두고 <code>value</code>로 연결합니다.
-        메뉴와 패널 마크업을 분리할 때 사용합니다.
+        <code>AccordionItem</code>과 <code>AccordionPanel</code>을 형제로 두고 <code>value</code>로
+        연결합니다. 메뉴와 패널 마크업을 분리할 때 사용합니다.
       </>
     ),
     code: pageExampleCode({
@@ -593,17 +744,17 @@ const Panel = PanelMap[value]`
     <p className="accordion_panel-placeholder">활동 패널</p>
   </AccordionPanel>
 </Accordion>`,
-        `const [value, setValue] = useState('overview')`
-      )
+        `const [value, setValue] = useState('overview')`,
+      ),
     }),
-    preview: <AccordionPanelCompoundDemo />
+    preview: <AccordionPanelCompoundDemo />,
   },
   {
     title: '패널 슬롯 · items content',
     description: (
       <>
-        <code>items</code> 배열의 <code>content</code>에 칸별 패널을 넣습니다.
-        데이터만으로 메뉴·패널을 함께 구성할 때 사용합니다.
+        <code>items</code> 배열의 <code>content</code>에 칸별 패널을 넣습니다. 데이터만으로
+        메뉴·패널을 함께 구성할 때 사용합니다.
       </>
     ),
     code: pageExampleCode({
@@ -633,17 +784,17 @@ const Panel = PanelMap[value]`
   }
 ]
 
-const [value, setValue] = useState('overview')`
-      )
+const [value, setValue] = useState('overview')`,
+      ),
     }),
-    preview: <ContentPropAccordionDemo />
+    preview: <ContentPropAccordionDemo />,
   },
   {
     title: '패널 슬롯 · 위젯/모듈',
     description: (
       <>
-        칸마다 다른 위젯·모듈을 호출합니다. 첫 칸은 <code>Carousel</code>(슬라이드),
-        둘째는 <code>FormLayout</code> 폼, 셋째는 <code>Card</code>입니다.
+        칸마다 다른 위젯·모듈을 호출합니다. 첫 칸은 <code>Carousel</code>(슬라이드), 둘째는{' '}
+        <code>FormLayout</code> 폼, 셋째는 <code>Card</code>입니다.
         <code>AccordionPanel</code>에 모듈 컴포넌트를 넣습니다.
       </>
     ),
@@ -664,7 +815,7 @@ const [value, setValue] = useState('overview')`
         'FormActions',
         'FormField',
         'FormLayout',
-        'Input'
+        'Input',
       ],
       body: pageExampleReturn(
         `<Accordion value={value} onChange={setValue} skin="card">
@@ -739,18 +890,18 @@ const PanelMap = {
   card: PanelCardModule
 }
 
-const [value, setValue] = useState('slide')`
-      )
+const [value, setValue] = useState('slide')`,
+      ),
     }),
-    preview: <ModulePanelsDemo />
+    preview: <ModulePanelsDemo />,
   },
   {
     title: '패널 슬롯 · 페이지 위젯 호출',
     description: (
       <>
-        페이지에 이미 위젯이 있다면 모듈을 새로 감싸지 않고{' '}
-        <code>&lt;HeroCarousel /&gt;</code> · <code>&lt;ContactForm /&gt;</code> ·{' '}
-        <code>&lt;ProjectCard /&gt;</code>처럼 <code>AccordionPanel</code>에 그대로 넣습니다.
+        페이지에 이미 위젯이 있다면 모듈을 새로 감싸지 않고 <code>&lt;HeroCarousel /&gt;</code> ·{' '}
+        <code>&lt;ContactForm /&gt;</code> · <code>&lt;ProjectCard /&gt;</code>처럼{' '}
+        <code>AccordionPanel</code>에 그대로 넣습니다.
       </>
     ),
     code: pageExampleCode({
@@ -759,7 +910,7 @@ const [value, setValue] = useState('slide')`
       compImports: ['Accordion', 'AccordionItem', 'AccordionPanel'],
       extraImports: [
         '// 페이지에 이미 있는 위젯',
-        "import { HeroCarousel, ContactForm, ProjectCard } from './widgets'"
+        "import { HeroCarousel, ContactForm, ProjectCard } from './widgets'",
       ],
       body: pageExampleReturn(
         `<Accordion value={value} onChange={setValue} skin="bordered">
@@ -776,10 +927,10 @@ const [value, setValue] = useState('slide')`
     <ProjectCard />
   </AccordionPanel>
 </Accordion>`,
-        `const [value, setValue] = useState('slide')`
-      )
+        `const [value, setValue] = useState('slide')`,
+      ),
     }),
-    preview: <PageWidgetPanelsDemo />
+    preview: <PageWidgetPanelsDemo />,
   },
   {
     title: '비활성 · extra',
@@ -793,19 +944,23 @@ const [value, setValue] = useState('slide')`
       compoundCode({
         items: DISABLED_ITEMS,
         initial: 'a',
-        panelPrefix: '비활성 예시'
+        panelPrefix: '비활성 예시',
       }),
       compoundCode({
         items: [
           { value: 'faq', label: '자주 묻는 질문', extra: '3' },
-          { value: 'notice', label: '공지', extra: 'N' }
+          { value: 'notice', label: '공지', extra: 'N' },
         ],
         initial: 'faq',
-        panelPrefix: 'extra'
-      })
+        panelPrefix: 'extra',
+      }),
     ].join('\n\n'),
     preview: (
-      <Space vertical block size={24}>
+      <Space
+        vertical
+        block
+        size={24}
+      >
         <ControlledAccordion
           items={DISABLED_ITEMS}
           initial="a"
@@ -814,21 +969,21 @@ const [value, setValue] = useState('slide')`
         <ControlledAccordion
           items={[
             { value: 'faq', label: '자주 묻는 질문', extra: '3' },
-            { value: 'notice', label: '공지', extra: 'N' }
+            { value: 'notice', label: '공지', extra: 'N' },
           ]}
           initial="faq"
           panelPrefix="extra"
         />
       </Space>
-    )
+    ),
   },
   {
     title: 'HTML 마크업',
     description: (
       <>
-        스타일 계약은 <code>accordion</code> · <code>accordion_item</code> · <code>accordion_trigger</code> ·
-        <code>accordion_panel</code> · <code>accordion_content</code>입니다.
-        기본 스킨은 <code>accordion_bordered</code>입니다.
+        스타일 계약은 <code>accordion</code> · <code>accordion_item</code> ·{' '}
+        <code>accordion_trigger</code> ·<code>accordion_panel</code> ·{' '}
+        <code>accordion_content</code>입니다. 기본 스킨은 <code>accordion_bordered</code>입니다.
       </>
     ),
     code: `<div class="accordion accordion_bordered">
@@ -853,24 +1008,43 @@ const [value, setValue] = useState('slide')`
     preview: (
       <div className="accordion accordion_bordered">
         <div className="accordion_item is-open">
-          <div className="accordion_heading" role="heading" aria-level={3}>
-            <button type="button" className="accordion_trigger" aria-expanded="true">
+          <div
+            className="accordion_heading"
+            role="heading"
+            aria-level={3}
+          >
+            <button
+              type="button"
+              className="accordion_trigger"
+              aria-expanded="true"
+            >
               <span className="accordion_label">배송 안내</span>
             </button>
           </div>
-          <div className="accordion_panel" role="region">
+          <div
+            className="accordion_panel"
+            role="region"
+          >
             <div className="accordion_content">영업일 기준 2~3일 내 출고됩니다.</div>
           </div>
         </div>
         <div className="accordion_item">
-          <div className="accordion_heading" role="heading" aria-level={3}>
-            <button type="button" className="accordion_trigger" aria-expanded="false">
+          <div
+            className="accordion_heading"
+            role="heading"
+            aria-level={3}
+          >
+            <button
+              type="button"
+              className="accordion_trigger"
+              aria-expanded="false"
+            >
               <span className="accordion_label">교환 · 반품</span>
             </button>
           </div>
         </div>
       </div>
-    )
+    ),
   },
   {
     title: '접근성',
@@ -884,30 +1058,30 @@ const [value, setValue] = useState('slide')`
       props: 'collapsible',
       items: [
         { value: 'a', label: '일반' },
-        { value: 'b', label: '알림' }
+        { value: 'b', label: '알림' },
       ],
       initial: 'a',
-      panelPrefix: '설정'
+      panelPrefix: '설정',
     }),
     preview: (
       <ControlledAccordion
         collapsible
         items={[
           { value: 'a', label: '일반' },
-          { value: 'b', label: '알림' }
+          { value: 'b', label: '알림' },
         ]}
         initial="a"
         panelPrefix="설정"
       />
-    )
-  }
-]
+    ),
+  },
+];
 
 /**
  * Accordion 가이드 화면.
  * Tabs 와 같이 메뉴는 데이터 map · 패널은 children / AccordionPanel / content / 위젯 슬롯으로 예시를 모은다.
  */
-export default function AccordionGuide () {
+export default function AccordionGuide() {
   return (
     <GuideLayout
       category="기타"
@@ -928,5 +1102,5 @@ export default function AccordionGuide () {
 
       <GuideApiDocs sections={accordionApiSections} />
     </GuideLayout>
-  )
+  );
 }

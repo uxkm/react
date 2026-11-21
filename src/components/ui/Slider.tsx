@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 /**
  * 슬라이더(범위 입력).
@@ -9,16 +9,16 @@ import {
   useState, // 상태 훅
   type CSSProperties, // CSSProperties 타입
   type InputHTMLAttributes, // InputHTMLAttributes 타입
-  type ReactNode // ReactNode 타입
-} from 'react' // React
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
+  type ReactNode, // ReactNode 타입
+} from 'react'; // React
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
 
-const VALID_SIZES = new Set(['sm', 'md', 'lg'])
+const VALID_SIZES = new Set(['sm', 'md', 'lg']);
 
 const clamp = (value: number, min: number, max: number) =>
-  Math.min(max, Math.max(min, Number(value)))
+  Math.min(max, Math.max(min, Number(value)));
 
-function StepIcon ({ increase = false }: { increase?: boolean }) {
+function StepIcon({ increase = false }: { increase?: boolean }) {
   return (
     <svg
       className="slider_step-icon"
@@ -31,38 +31,40 @@ function StepIcon ({ increase = false }: { increase?: boolean }) {
       <path d="M5 12h14" />
       {increase ? <path d="M12 5v14" /> : null}
     </svg>
-  )
+  );
 }
 
 /** 슬라이더가 받는 값 */
-export interface SliderProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'onChange' | 'value' | 'defaultValue' | 'type' | 'color'> {
-  min?: number
-  max?: number
-  value?: number
-  defaultValue?: number
-  step?: number
-  disabled?: boolean
-  vertical?: boolean
-  label?: ReactNode
-  showValue?: boolean
-  stepper?: boolean
-  stepperAlways?: boolean
-  valueSuffix?: string
-  hint?: ReactNode
-  decreaseLabel?: string
-  increaseLabel?: string
-  size?: 'sm' | 'md' | 'lg'
-  ripple?: boolean
-  children?: ReactNode
-  onChange?: (value: number) => void
+export interface SliderProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  'size' | 'onChange' | 'value' | 'defaultValue' | 'type' | 'color'
+> {
+  min?: number;
+  max?: number;
+  value?: number;
+  defaultValue?: number;
+  step?: number;
+  disabled?: boolean;
+  vertical?: boolean;
+  label?: ReactNode;
+  showValue?: boolean;
+  stepper?: boolean;
+  stepperAlways?: boolean;
+  valueSuffix?: string;
+  hint?: ReactNode;
+  decreaseLabel?: string;
+  increaseLabel?: string;
+  size?: 'sm' | 'md' | 'lg';
+  ripple?: boolean;
+  children?: ReactNode;
+  onChange?: (value: number) => void;
 }
 
 /**
  * 범위 값을 조절하는 슬라이더.
  * min · max · step과 레이블·증감 버튼을 조합한다.
  */
-export function Slider ({
+export function Slider({
   min = 0,
   max = 100,
   value,
@@ -87,24 +89,16 @@ export function Slider ({
   style,
   ...props
 }: SliderProps) {
-  const generatedId = useId()
-  const inputId = id || generatedId
-  const numericMin = Number(min)
-  const numericMax = Number(max)
-  const controlled = value !== undefined
-  const [innerValue, setInnerValue] = useState(() =>
-    clamp(defaultValue, numericMin, numericMax)
-  )
-  const currentValue = clamp(
-    controlled ? Number(value) : innerValue,
-    numericMin,
-    numericMax
-  )
-  const resolvedSize = VALID_SIZES.has(size) ? size : 'md'
+  const generatedId = useId();
+  const inputId = id || generatedId;
+  const numericMin = Number(min);
+  const numericMax = Number(max);
+  const controlled = value !== undefined;
+  const [innerValue, setInnerValue] = useState(() => clamp(defaultValue, numericMin, numericMax));
+  const currentValue = clamp(controlled ? Number(value) : innerValue, numericMin, numericMax);
+  const resolvedSize = VALID_SIZES.has(size) ? size : 'md';
   const progress =
-    numericMax === numericMin
-      ? 0
-      : ((currentValue - numericMin) / (numericMax - numericMin)) * 100
+    numericMax === numericMin ? 0 : ((currentValue - numericMin) / (numericMax - numericMin)) * 100;
 
   const classes = classNames(
     'slider',
@@ -113,31 +107,31 @@ export function Slider ({
     vertical && 'slider_vertical',
     stepper && 'slider_stepper',
     stepperAlways && 'slider_stepper_always',
-    className
-  )
+    className,
+  );
 
   const valueMap = String(props['data-slider-valuetext-map'] ?? '')
     .split(',')
     .reduce<Record<string, string>>((map, item) => {
-      const separator = item.indexOf(':')
-      if (separator > -1) map[item.slice(0, separator)] = item.slice(separator + 1)
-      return map
-    }, {})
+      const separator = item.indexOf(':');
+      if (separator > -1) map[item.slice(0, separator)] = item.slice(separator + 1);
+      return map;
+    }, {});
 
   const valueText =
     valueMap[String(currentValue)] ??
     (props['data-slider-valuetext-suffix']
       ? `${currentValue} ${props['data-slider-valuetext-suffix']}`
-      : props['aria-valuetext'])
+      : props['aria-valuetext']);
 
   const update = (next: number | string) => {
-    const normalized = clamp(Number(next), numericMin, numericMax)
-    if (!controlled) setInnerValue(normalized)
-    onChange?.(normalized)
-  }
+    const normalized = clamp(Number(next), numericMin, numericMax);
+    if (!controlled) setInnerValue(normalized);
+    onChange?.(normalized);
+  };
 
-  const rippleAttr = ripple ? ({ 'data-ripple': 'true' as const }) : {}
-  const stepRippleAttr = ripple ? ({ 'data-ripple': 'true' as const }) : {}
+  const rippleAttr = ripple ? { 'data-ripple': 'true' as const } : {};
+  const stepRippleAttr = ripple ? { 'data-ripple': 'true' as const } : {};
 
   const input = (
     <input
@@ -153,7 +147,7 @@ export function Slider ({
       aria-valuetext={valueText || undefined}
       onChange={(event) => update(event.target.value)}
     />
-  )
+  );
 
   return (
     <div
@@ -163,54 +157,56 @@ export function Slider ({
     >
       {(label || showValue) && (
         <div className="slider_header">
-          {label
-            ? (
-              <label className="slider_label" htmlFor={inputId}>
-                {label}
-              </label>
-              )
-            : null}
-          {showValue
-            ? (
-              <output className="slider_value" htmlFor={inputId}>
-                {currentValue}
-                {valueSuffix || props['data-slider-suffix'] || ''}
-              </output>
-              )
-            : null}
+          {label ? (
+            <label
+              className="slider_label"
+              htmlFor={inputId}
+            >
+              {label}
+            </label>
+          ) : null}
+          {showValue ? (
+            <output
+              className="slider_value"
+              htmlFor={inputId}
+            >
+              {currentValue}
+              {valueSuffix || props['data-slider-suffix'] || ''}
+            </output>
+          ) : null}
         </div>
       )}
-      {stepper
-        ? (
-          <div className="slider_control">
-            <button
-              type="button"
-              className="slider_step slider_step-decrease"
-              {...stepRippleAttr}
-              aria-label={decreaseLabel}
-              disabled={disabled || currentValue <= numericMin}
-              onClick={() => update(currentValue - Number(step || 1))}
-            >
-              <StepIcon />
-            </button>
-            {input}
-            <button
-              type="button"
-              className="slider_step slider_step-increase"
-              {...stepRippleAttr}
-              aria-label={increaseLabel}
-              disabled={disabled || currentValue >= numericMax}
-              onClick={() => update(currentValue + Number(step || 1))}
-            >
-              <StepIcon increase />
-            </button>
-          </div>
-          )
-        : input}
+      {stepper ? (
+        <div className="slider_control">
+          <button
+            type="button"
+            className="slider_step slider_step-decrease"
+            {...stepRippleAttr}
+            aria-label={decreaseLabel}
+            disabled={disabled || currentValue <= numericMin}
+            onClick={() => update(currentValue - Number(step || 1))}
+          >
+            <StepIcon />
+          </button>
+          {input}
+          <button
+            type="button"
+            className="slider_step slider_step-increase"
+            {...stepRippleAttr}
+            aria-label={increaseLabel}
+            disabled={disabled || currentValue >= numericMax}
+            onClick={() => update(currentValue + Number(step || 1))}
+          >
+            <StepIcon increase />
+          </button>
+        </div>
+      ) : (
+        input
+      )}
       {hint ? <p className="slider_hint">{hint}</p> : null}
       {children}
     </div>
-  )
+  );
 }
 
-export default Slider
+export default Slider;

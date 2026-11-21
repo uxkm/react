@@ -513,7 +513,9 @@
 
 @mixin overlay-arrow-edge-tokens($name, $panel-radius: var(--radius-lg)) {
   --#{$name}-panel-radius: #{$panel-radius};
-  --#{$name}-arrow-edge-inset: calc(var(--#{$name}-panel-radius) + var(--#{$name}-arrow-size) * 0.35);
+  --#{$name}-arrow-edge-inset: calc(
+    var(--#{$name}-panel-radius) + var(--#{$name}-arrow-size) * 0.35
+  );
 }
 
 // ----- App — typography · layout · surface

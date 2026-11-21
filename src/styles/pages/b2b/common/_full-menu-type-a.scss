@@ -1,0 +1,70 @@
+@use 'foundations/variables' as *;
+
+@media (max-width: ($breakpoint-pc - 1px)) {
+  .full-menu-content_education,
+  .full-menu-content_company {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .full-menu-content_education > h2,
+  .full-menu-content_company > h2 {
+    grid-column: 1 / -1;
+  }
+  .full-menu-content_secondary {
+    grid-template-columns: 1fr;
+  }
+  .full-menu-content_services {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+// 원본 typeA는 기존 모바일 기준(767px 이하)을 유지합니다.
+@mixin full-menu-mobile {
+  .full-menu_typeA .full-menu_surface {
+    padding: 0 var(--space-12) var(--space-20);
+  }
+  .full-menu-content-preview {
+    padding: var(--space-12);
+  }
+  .full-menu-content_education,
+  .full-menu-content_company,
+  .full-menu-content_services,
+  .full-menu-content_insights,
+  .full-menu-content_contact {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .full-menu-content_services > h2,
+  .full-menu-content_insights > h2,
+  .full-menu-content_contact > h2 {
+    grid-column: 1 / -1;
+  }
+  .full-menu-content_education,
+  .full-menu-content_company,
+  .full-menu-content_secondary {
+    padding: var(--space-24) var(--space-16);
+    gap: var(--space-24) var(--space-16);
+  }
+  .full-menu-content_company {
+    min-height: 0;
+  }
+  .full-menu-content h3 {
+    font-size: var(--font-size-2xl);
+  }
+  .full-menu-content li {
+    font-size: var(--font-size-xl);
+  }
+  .full-menu-content_accordion .accordion_trigger {
+    padding: var(--space-20) var(--space-16);
+    font-size: var(--font-size-3xl);
+  }
+  .full-menu-content_accordion .accordion_trigger > span {
+    gap: var(--space-8);
+  }
+}
+@media (max-width: 767px) {
+  @include full-menu-mobile;
+}
+@media (min-width: 768px) and (max-width: 1099px) {
+  .app-layout:has(.header_typeB, .main-cards_typeB) {
+    @include full-menu-mobile;
+  }
+}

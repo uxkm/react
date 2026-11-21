@@ -23,7 +23,6 @@
   --rate-clear-size-sm: 1.25rem;
   --rate-clear-size-lg: 1.75rem;
   --rate-clear-font-size: 1.125rem;
-
 }
 
 // Rate — OOCSS: 구조(.rate) / 크기(.rate_sm) / 변형(.rate_clearable · .rate_allow-half · .is-readonly) + 공통 색상(.color_*)
@@ -50,28 +49,48 @@
 //   </fieldset>
 
 @mixin rate-filled-stars($count) {
-  .rate_stars:has(.rate_star:nth-child(#{$count}) .rate_input:checked:not(.rate_input-half)) .rate_star:nth-child(-n + #{$count}) .rate_star-icon-filled {
+  .rate_stars:has(.rate_star:nth-child(#{$count}) .rate_input:checked:not(.rate_input-half))
+    .rate_star:nth-child(-n + #{$count})
+    .rate_star-icon-filled {
     opacity: 1;
   }
 
   @if $count > 0 {
-    .rate_stars:has(.rate_star:nth-child(#{$count}) .rate_input-half:checked) .rate_star:nth-child(-n + #{$count - 1}) .rate_star-icon-filled {
+    .rate_stars:has(.rate_star:nth-child(#{$count}) .rate_input-half:checked)
+      .rate_star:nth-child(-n + #{$count - 1})
+      .rate_star-icon-filled {
       opacity: 1;
     }
 
-    .rate_stars:has(.rate_star:nth-child(#{$count}) .rate_input-half:checked) .rate_star:nth-child(#{$count}) .rate_star-icon-half {
+    .rate_stars:has(.rate_star:nth-child(#{$count}) .rate_input-half:checked)
+      .rate_star:nth-child(#{$count})
+      .rate_star-icon-half {
       opacity: 1;
     }
   }
 }
 
 @mixin rate-hover-stars($count) {
-  .rate_stars:not(:has(.rate_input:disabled)):not(.is-readonly):has(.rate_star:nth-child(#{$count}):hover) .rate_star:nth-child(-n + #{$count}) .rate_star-icon-filled {
+  .rate_stars:not(:has(.rate_input:disabled)):not(.is-readonly):has(
+      .rate_star:nth-child(#{$count}):hover
+    )
+    .rate_star:nth-child(-n + #{$count})
+    .rate_star-icon-filled {
     opacity: 1;
   }
 
-  .rate_allow-half .rate_stars:not(:has(.rate_input:disabled)):not(.is-readonly):has(.rate_star:nth-child(#{$count}) .rate_star-half-left:hover) .rate_star:nth-child(-n + #{$count - 1}) .rate_star-icon-filled,
-  .rate_allow-half .rate_stars:not(:has(.rate_input:disabled)):not(.is-readonly):has(.rate_star:nth-child(#{$count}) .rate_star-half-left:hover) .rate_star:nth-child(#{$count}) .rate_star-icon-half {
+  .rate_allow-half
+    .rate_stars:not(:has(.rate_input:disabled)):not(.is-readonly):has(
+      .rate_star:nth-child(#{$count}) .rate_star-half-left:hover
+    )
+    .rate_star:nth-child(-n + #{$count - 1})
+    .rate_star-icon-filled,
+  .rate_allow-half
+    .rate_stars:not(:has(.rate_input:disabled)):not(.is-readonly):has(
+      .rate_star:nth-child(#{$count}) .rate_star-half-left:hover
+    )
+    .rate_star:nth-child(#{$count})
+    .rate_star-icon-half {
     opacity: 1;
   }
 }
@@ -379,7 +398,8 @@
     stroke: GrayText;
   }
 
-  .rate:has(.rate_input:disabled) :is(.rate_star-icon-filled, .rate_star-icon-half .rate_star-icon) {
+  .rate:has(.rate_input:disabled)
+    :is(.rate_star-icon-filled, .rate_star-icon-half .rate_star-icon) {
     fill: GrayText;
   }
 }

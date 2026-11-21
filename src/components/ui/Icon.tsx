@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 /**
  * 아이콘.
@@ -11,14 +11,14 @@ import {
   type HTMLAttributes, // HTMLAttributes 타입
   type MouseEvent, // MouseEvent 타입
   type ReactNode, // ReactNode 타입
-  type SVGAttributes // SVGAttributes 타입
-} from 'react' // React
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
-import { imgIcon } from '@/utils/media/images' // img Icon
+  type SVGAttributes, // SVGAttributes 타입
+} from 'react'; // React
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
+import { imgIcon } from '@/utils/media/images'; // img Icon
 import {
   loadEmbeddedSvg, // load Embedded Svg
-  type EmbeddedSvgData // EmbeddedSvgData 타입
-} from '@/utils/media/embedSvg' // 유틸 · embed Svg
+  type EmbeddedSvgData, // EmbeddedSvgData 타입
+} from '@/utils/media/embedSvg'; // 유틸 · embed Svg
 
 /**
  * images 경로 해석.
@@ -26,53 +26,63 @@ import {
  * - `common/logo.svg` 처럼 폴더 포함이면 `/images/…`
  * - `ico_close.svg` · `ico_close` 는 `/images/icon/…`
  */
-export function resolveIconSrc (src: string): string {
-  const value = String(src || '').trim()
-  if (!value) return ''
+export function resolveIconSrc(src: string): string {
+  const value = String(src || '').trim();
+  if (!value) return '';
   if (/^(https?:)?\/\//i.test(value) || value.startsWith('/') || value.startsWith('data:')) {
-    return value
+    return value;
   }
   if (value.includes('/')) {
-    return `/images/${value.replace(/^\/+/, '')}`
+    return `/images/${value.replace(/^\/+/, '')}`;
   }
-  return imgIcon(value.endsWith('.svg') ? value : `${value}.svg`)
+  return imgIcon(value.endsWith('.svg') ? value : `${value}.svg`);
 }
 
 /** name 이 파일 경로(.svg)인지 */
-function isIconFileName (value: string): boolean {
-  return /\.svg$/i.test(value) || value.includes('/')
+function isIconFileName(value: string): boolean {
+  return /\.svg$/i.test(value) || value.includes('/');
 }
 
 /** 아이콘 크기 이름. md 는 기본이라 클래스 없음 */
-export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl'
+export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
 /** 등록된 크기 토큰 목록 */
-export const iconSizes: IconSize[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl']
+export const iconSizes: IconSize[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'];
 /** 아이콘 색 */
-export type IconColor = 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'muted'
+export type IconColor = 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'muted';
 
 /**
  * 커스텀 크기를 CSS 길이로 변환.
  * 토큰(xs~3xl)이면 null. 숫자·'28'·'28px'·'1.75rem'·'var(--x)' 지원.
  */
-export function toIconCssSize (size: IconSize | number | string | undefined | null): string | null {
+export function toIconCssSize(size: IconSize | number | string | undefined | null): string | null {
   if (typeof size === 'number') {
-    return Number.isFinite(size) && size > 0 ? `${size}px` : null
+    return Number.isFinite(size) && size > 0 ? `${size}px` : null;
   }
-  if (typeof size !== 'string') return null
-  const raw = size.trim()
-  if (!raw || iconSizes.includes(raw as IconSize)) return null
-  if (/^var\(--[\w-]+\)$/.test(raw)) return raw
-  if (/^\d+(\.\d+)?$/.test(raw)) return `${raw}px`
-  if (/^\d+(\.\d+)?(px|rem|em|%|vh|vw|ch|ex|vmin|vmax)$/i.test(raw)) return raw
-  return null
+  if (typeof size !== 'string') return null;
+  const raw = size.trim();
+  if (!raw || iconSizes.includes(raw as IconSize)) return null;
+  if (/^var\(--[\w-]+\)$/.test(raw)) return raw;
+  if (/^\d+(\.\d+)?$/.test(raw)) return `${raw}px`;
+  if (/^\d+(\.\d+)?(px|rem|em|%|vh|vw|ch|ex|vmin|vmax)$/i.test(raw)) return raw;
+  return null;
 }
 
 /** 등록된 stroke SVG 아이콘 이름 → 도형. viewBox 0 0 24 24, stroke-width 2 */
 const paths = {
   image: (
     <>
-      <rect x="3" y="3" width="18" height="18" rx="2" />
-      <circle cx="8.5" cy="8.5" r="1.5" />
+      <rect
+        x="3"
+        y="3"
+        width="18"
+        height="18"
+        rx="2"
+      />
+      <circle
+        cx="8.5"
+        cy="8.5"
+        r="1.5"
+      />
       <path d="M21 15l-5-5L5 21" />
     </>
   ),
@@ -86,8 +96,12 @@ const paths = {
       <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14" />
     </>
   ),
-  receipt: <path d="M8 16V3l1.5 1L11 3l1.5 1L14 3l1.5 1L17 3l1.5 1L20 3v15a3 3 0 0 1-6 0v-2H3v2a3 3 0 0 0 3 3h11" />,
-  'clipboard-check': <path d="M13 3H7a4 4 0 0 0-4 4v10a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4v-6M8 11l4 4L21 5" />,
+  receipt: (
+    <path d="M8 16V3l1.5 1L11 3l1.5 1L14 3l1.5 1L17 3l1.5 1L20 3v15a3 3 0 0 1-6 0v-2H3v2a3 3 0 0 0 3 3h11" />
+  ),
+  'clipboard-check': (
+    <path d="M13 3H7a4 4 0 0 0-4 4v10a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4v-6M8 11l4 4L21 5" />
+  ),
   'cloud-download': (
     <>
       <path d="M6 19a4 4 0 0 1-1-7.9A6 6 0 0 1 16.7 9a5 5 0 0 1 1.3 10H6Z" />
@@ -110,12 +124,28 @@ const paths = {
   'chevron-left': <path d="m15 6-6 6 6 6" />,
   'chevron-right': <path d="m9 6 6 6-6 6" />,
   'chevron-down': <path d="m6 9 6 6 6-6" />,
-  'caret-down': <path d="m6 9 6 6 6-6Z" fill="currentColor" stroke="none" />,
-  'caret-up': <path d="m6 15 6-6 6 6Z" fill="currentColor" stroke="none" />,
+  'caret-down': (
+    <path
+      d="m6 9 6 6 6-6Z"
+      fill="currentColor"
+      stroke="none"
+    />
+  ),
+  'caret-up': (
+    <path
+      d="m6 15 6-6 6 6Z"
+      fill="currentColor"
+      stroke="none"
+    />
+  ),
   'chevron-up': <path d="m18 15-6-6-6 6" />,
   search: (
     <>
-      <circle cx="11" cy="11" r="7" />
+      <circle
+        cx="11"
+        cy="11"
+        r="7"
+      />
       <path d="m20 20-4-4" />
     </>
   ),
@@ -137,7 +167,11 @@ const paths = {
   close: <path d="m6 6 12 12M18 6 6 18" />,
   settings: (
     <>
-      <circle cx="12" cy="12" r="3" />
+      <circle
+        cx="12"
+        cy="12"
+        r="3"
+      />
       <path d="M19 12a7 7 0 0 0-.1-1l2-1.5-2-3.4-2.4 1a8 8 0 0 0-1.7-1L14.5 3h-5l-.4 3.1a8 8 0 0 0-1.7 1l-2.4-1-2 3.4L5.1 11a7 7 0 0 0 0 2L3 14.5l2 3.4 2.4-1a8 8 0 0 0 1.7 1l.4 3.1h5l.4-3.1a8 8 0 0 0 1.7-1l2.4 1 2-3.4-2.1-1.5a7 7 0 0 0 .1-1Z" />
     </>
   ),
@@ -149,34 +183,99 @@ const paths = {
   ),
   user: (
     <>
-      <circle cx="12" cy="8" r="4" />
+      <circle
+        cx="12"
+        cy="8"
+        r="4"
+      />
       <path d="M4 21a8 8 0 0 1 16 0" />
     </>
   ),
   naver: (
     <>
-      <rect x="2" y="2" width="20" height="20" rx="3" fill="currentColor" stroke="none" />
-      <path d="M6.5 6.5h3.6l3.8 5.6V6.5h3.6v11h-3.6l-3.8-5.6v5.6H6.5Z" fill="#fff" stroke="none" />
+      <rect
+        x="2"
+        y="2"
+        width="20"
+        height="20"
+        rx="3"
+        fill="currentColor"
+        stroke="none"
+      />
+      <path
+        d="M6.5 6.5h3.6l3.8 5.6V6.5h3.6v11h-3.6l-3.8-5.6v5.6H6.5Z"
+        fill="#fff"
+        stroke="none"
+      />
     </>
   ),
   youtube: (
     <>
-      <rect x="1" y="4" width="22" height="16" rx="5" fill="currentColor" stroke="none" />
-      <path d="m10 8 6 4-6 4Z" fill="#fff" stroke="none" />
+      <rect
+        x="1"
+        y="4"
+        width="22"
+        height="16"
+        rx="5"
+        fill="currentColor"
+        stroke="none"
+      />
+      <path
+        d="m10 8 6 4-6 4Z"
+        fill="#fff"
+        stroke="none"
+      />
     </>
   ),
   linkedin: (
     <>
-      <circle cx="12" cy="12" r="11" fill="currentColor" stroke="none" />
-      <circle cx="7.5" cy="7" r="1.5" fill="#fff" stroke="none" />
-      <path d="M6 10h3v8H6Zm5 0h2.8v1.1c.5-.9 1.3-1.3 2.3-1.3 2 0 2.9 1.3 2.9 3.5V18h-3v-4.2c0-1.1-.3-1.7-1-1.7-.8 0-1 .6-1 1.7V18h-3Z" fill="#fff" stroke="none" />
+      <circle
+        cx="12"
+        cy="12"
+        r="11"
+        fill="currentColor"
+        stroke="none"
+      />
+      <circle
+        cx="7.5"
+        cy="7"
+        r="1.5"
+        fill="#fff"
+        stroke="none"
+      />
+      <path
+        d="M6 10h3v8H6Zm5 0h2.8v1.1c.5-.9 1.3-1.3 2.3-1.3 2 0 2.9 1.3 2.9 3.5V18h-3v-4.2c0-1.1-.3-1.7-1-1.7-.8 0-1 .6-1 1.7V18h-3Z"
+        fill="#fff"
+        stroke="none"
+      />
     </>
   ),
   instagram: (
     <>
-      <rect x="2" y="2" width="20" height="20" rx="5" fill="currentColor" stroke="none" />
-      <circle cx="12" cy="12" r="4.5" fill="none" stroke="#fff" strokeWidth="2" />
-      <circle cx="17.2" cy="6.8" r="1.3" fill="#fff" stroke="none" />
+      <rect
+        x="2"
+        y="2"
+        width="20"
+        height="20"
+        rx="5"
+        fill="currentColor"
+        stroke="none"
+      />
+      <circle
+        cx="12"
+        cy="12"
+        r="4.5"
+        fill="none"
+        stroke="#fff"
+        strokeWidth="2"
+      />
+      <circle
+        cx="17.2"
+        cy="6.8"
+        r="1.3"
+        fill="#fff"
+        stroke="none"
+      />
     </>
   ),
   x: (
@@ -193,36 +292,94 @@ const paths = {
         fill="currentColor"
         stroke="none"
       />
-      <ellipse cx="8.5" cy="11" rx="1.15" ry="1.45" fill="#fff" stroke="none" />
-      <ellipse cx="12" cy="11" rx="1.15" ry="1.45" fill="#fff" stroke="none" />
-      <ellipse cx="15.5" cy="11" rx="1.15" ry="1.45" fill="#fff" stroke="none" />
+      <ellipse
+        cx="8.5"
+        cy="11"
+        rx="1.15"
+        ry="1.45"
+        fill="#fff"
+        stroke="none"
+      />
+      <ellipse
+        cx="12"
+        cy="11"
+        rx="1.15"
+        ry="1.45"
+        fill="#fff"
+        stroke="none"
+      />
+      <ellipse
+        cx="15.5"
+        cy="11"
+        rx="1.15"
+        ry="1.45"
+        fill="#fff"
+        stroke="none"
+      />
     </>
   ),
   grid: (
     <>
-      <rect x="4" y="4" width="6" height="6" />
-      <rect x="14" y="4" width="6" height="6" />
-      <rect x="4" y="14" width="6" height="6" />
-      <rect x="14" y="14" width="6" height="6" />
+      <rect
+        x="4"
+        y="4"
+        width="6"
+        height="6"
+      />
+      <rect
+        x="14"
+        y="4"
+        width="6"
+        height="6"
+      />
+      <rect
+        x="4"
+        y="14"
+        width="6"
+        height="6"
+      />
+      <rect
+        x="14"
+        y="14"
+        width="6"
+        height="6"
+      />
     </>
   ),
   /** 리스트·웹진 보기 전환용 */
   list: (
     <>
       <path d="M8 6h13M8 12h13M8 18h13" />
-      <path d="M3 6h.01M3 12h.01M3 18h.01" strokeWidth="3" strokeLinecap="round" />
+      <path
+        d="M3 6h.01M3 12h.01M3 18h.01"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
     </>
   ),
   cart: (
     <>
       <path d="M3 4h2l2 11h10l3-8H6" />
-      <circle cx="9" cy="20" r="1" />
-      <circle cx="17" cy="20" r="1" />
+      <circle
+        cx="9"
+        cy="20"
+        r="1"
+      />
+      <circle
+        cx="17"
+        cy="20"
+        r="1"
+      />
     </>
   ),
   star: <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z" />,
   /** 새 창/외부 링크 — Navercorp btn-outlink-nav2 형태 */
-  external: <path d="M7 17L16 8M7 7H17V17" strokeLinecap="square" />,
+  external: (
+    <path
+      d="M7 17L16 8M7 7H17V17"
+      strokeLinecap="square"
+    />
+  ),
   refresh: (
     <>
       <path d="M20 7v5h-5" />
@@ -244,13 +401,21 @@ const paths = {
   ),
   info: (
     <>
-      <circle cx="12" cy="12" r="9" />
+      <circle
+        cx="12"
+        cy="12"
+        r="9"
+      />
       <path d="M12 11v6m0-10h.01" />
     </>
   ),
   'check-circle': (
     <>
-      <circle cx="12" cy="12" r="9" />
+      <circle
+        cx="12"
+        cy="12"
+        r="9"
+      />
       <path d="m8 12 3 3 5-6" />
     </>
   ),
@@ -262,7 +427,11 @@ const paths = {
   ),
   'x-circle': (
     <>
-      <circle cx="12" cy="12" r="9" />
+      <circle
+        cx="12"
+        cy="12"
+        r="9"
+      />
       <path d="m9 9 6 6m0-6-6 6" />
     </>
   ),
@@ -285,23 +454,42 @@ const paths = {
     <path d="M20.8 5a5.5 5.5 0 0 0-7.8 0L12 6l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.2A5.5 5.5 0 0 0 20.8 5Z" />
   ),
   'heart-filled': (
-    <path fill="currentColor" d="M20.8 5a5.5 5.5 0 0 0-7.8 0L12 6l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.2A5.5 5.5 0 0 0 20.8 5Z" />
+    <path
+      fill="currentColor"
+      d="M20.8 5a5.5 5.5 0 0 0-7.8 0L12 6l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.2A5.5 5.5 0 0 0 20.8 5Z"
+    />
   ),
   mail: (
     <>
-      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <rect
+        x="3"
+        y="5"
+        width="18"
+        height="14"
+        rx="2"
+      />
       <path d="m3 7 9 6 9-6" />
     </>
   ),
   calendar: (
     <>
-      <rect x="3" y="5" width="18" height="16" rx="2" />
+      <rect
+        x="3"
+        y="5"
+        width="18"
+        height="16"
+        rx="2"
+      />
       <path d="M16 3v4M8 3v4M3 10h18" />
     </>
   ),
   clock: (
     <>
-      <circle cx="12" cy="12" r="9" />
+      <circle
+        cx="12"
+        cy="12"
+        r="9"
+      />
       <path d="M12 7v5l3 2" />
     </>
   ),
@@ -322,13 +510,25 @@ const paths = {
   ),
   layout: (
     <>
-      <rect x="3" y="3" width="18" height="18" rx="2" />
+      <rect
+        x="3"
+        y="3"
+        width="18"
+        height="18"
+        rx="2"
+      />
       <path d="M9 3v18M3 9h6" />
     </>
   ),
   table: (
     <>
-      <rect x="3" y="4" width="18" height="16" rx="2" />
+      <rect
+        x="3"
+        y="4"
+        width="18"
+        height="16"
+        rx="2"
+      />
       <path d="M3 10h18M3 15h18M9 4v16M15 4v16" />
     </>
   ),
@@ -339,47 +539,81 @@ const paths = {
   ),
   compass: (
     <>
-      <circle cx="12" cy="12" r="9" />
+      <circle
+        cx="12"
+        cy="12"
+        r="9"
+      />
       <path d="m16.2 7.8-2.5 6.4-6.4 2.5 2.5-6.4 6.4-2.5Z" />
     </>
   ),
   'more-horizontal': (
     <>
-      <path d="M5 12h.01M12 12h.01M19 12h.01" strokeWidth="3" strokeLinecap="round" />
+      <path
+        d="M5 12h.01M12 12h.01M19 12h.01"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
     </>
   ),
   'more-vertical': (
     <>
-      <path d="M12 5h.01M12 12h.01M12 19h.01" strokeWidth="3" strokeLinecap="round" />
+      <path
+        d="M12 5h.01M12 12h.01M12 19h.01"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
     </>
   ),
-  play: <path d="M8 5v14l11-7z" fill="currentColor" stroke="none" />,
+  play: (
+    <path
+      d="M8 5v14l11-7z"
+      fill="currentColor"
+      stroke="none"
+    />
+  ),
   pause: (
     <>
-      <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor" stroke="none" />
-      <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor" stroke="none" />
+      <rect
+        x="6"
+        y="5"
+        width="4"
+        height="14"
+        rx="1"
+        fill="currentColor"
+        stroke="none"
+      />
+      <rect
+        x="14"
+        y="5"
+        width="4"
+        height="14"
+        rx="1"
+        fill="currentColor"
+        stroke="none"
+      />
     </>
-  )
-} as const
+  ),
+} as const;
 
 /** 제공 아이콘 이름 */
-export type IconName = keyof typeof paths
+export type IconName = keyof typeof paths;
 
 /** 등록된 아이콘 이름 목록 */
-export const iconNames = Object.keys(paths) as IconName[]
+export const iconNames = Object.keys(paths) as IconName[];
 
 type SharedSvgProps = {
-  className?: string
-  title?: string
-  resolvedLabel?: string
-  hasWrapper: boolean
-  sizeStyle?: CSSProperties
-  style?: CSSProperties
-  rest: Record<string, unknown>
-}
+  className?: string;
+  title?: string;
+  resolvedLabel?: string;
+  hasWrapper: boolean;
+  sizeStyle?: CSSProperties;
+  style?: CSSProperties;
+  rest: Record<string, unknown>;
+};
 
 /** 파일 SVG 를 fetch 해 인라인 코드로 그리는 내부 뷰 */
-function EmbeddedSvg ({
+function EmbeddedSvg({
   src,
   className,
   title,
@@ -387,24 +621,24 @@ function EmbeddedSvg ({
   hasWrapper,
   sizeStyle,
   style,
-  rest
+  rest,
 }: SharedSvgProps & { src: string }) {
-  const [data, setData] = useState<EmbeddedSvgData | null>(null)
-  const [previousSrc, setPreviousSrc] = useState(src)
+  const [data, setData] = useState<EmbeddedSvgData | null>(null);
+  const [previousSrc, setPreviousSrc] = useState(src);
   if (previousSrc !== src) {
-    setPreviousSrc(src)
-    setData(null)
+    setPreviousSrc(src);
+    setData(null);
   }
 
   useEffect(() => {
-    let alive = true
+    let alive = true;
     loadEmbeddedSvg(src).then((next) => {
-      if (alive) setData(next)
-    })
+      if (alive) setData(next);
+    });
     return () => {
-      alive = false
-    }
-  }, [src])
+      alive = false;
+    };
+  }, [src]);
 
   const svgProps: SVGAttributes<SVGSVGElement> = {
     className,
@@ -418,15 +652,19 @@ function EmbeddedSvg ({
     'aria-label': !hasWrapper ? resolvedLabel : undefined,
     role: !hasWrapper && resolvedLabel ? 'img' : undefined,
     style: !hasWrapper && (sizeStyle || style) ? { ...sizeStyle, ...style } : undefined,
-    ...(!hasWrapper ? (rest as SVGAttributes<SVGSVGElement>) : {})
-  }
+    ...(!hasWrapper ? (rest as SVGAttributes<SVGSVGElement>) : {}),
+  };
 
   if (!data) {
     return (
-      <svg {...svgProps} data-component="Icon" data-embed={src}>
+      <svg
+        {...svgProps}
+        data-component="Icon"
+        data-embed={src}
+      >
         {title ? <title>{title}</title> : null}
       </svg>
-    )
+    );
   }
 
   return (
@@ -435,64 +673,66 @@ function EmbeddedSvg ({
       data-component="Icon"
       data-embed={src}
       dangerouslySetInnerHTML={{
-        __html: (title ? `<title>${escapeXml(title)}</title>` : '') + data.innerHTML
+        __html: (title ? `<title>${escapeXml(title)}</title>` : '') + data.innerHTML,
       }}
     />
-  )
+  );
 }
 
-function escapeXml (value: string): string {
+function escapeXml(value: string): string {
   return String(value)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
+    .replace(/"/g, '&quot;');
 }
 
 /** 아이콘이 받는 값. name 등록 stroke · src images/.svg · embed 인라인 */
-export interface IconProps
-  extends Omit<HTMLAttributes<HTMLElement>, 'color' | 'title' | 'onClick'> {
-  name?: IconName | string
+export interface IconProps extends Omit<
+  HTMLAttributes<HTMLElement>,
+  'color' | 'title' | 'onClick'
+> {
+  name?: IconName | string;
   /**
    * public/images 의 SVG 파일.
    * `ico_close.svg` → /images/icon/ico_close.svg
    * `common/logo.svg` → /images/common/logo.svg
    * `/images/…` · 절대 URL 은 그대로 사용
    */
-  src?: string
+  src?: string;
   /**
    * true 이면 src 파일을 fetch 해 인라인 SVG 코드로 렌더.
    * false(기본) 이면 img 태그로 표시.
    * 인라인이면 currentColor · color_* 상속이 된다.
    */
-  embed?: boolean
+  embed?: boolean;
   /**
    * 크기.
    * - 토큰: xs · sm · md · lg · xl · 2xl · 3xl
    * - 커스텀: 28 · '28' · '28px' · '1.75rem' · 'var(--icon-banner)'
    */
-  size?: IconSize | number | string
-  color?: IconColor | ''
-  inline?: boolean
-  spin?: boolean
-  button?: boolean
-  circle?: boolean
-  square?: boolean
-  pulse?: boolean
-  ripple?: boolean
+  size?: IconSize | number | string;
+  color?: IconColor | '';
+  inline?: boolean;
+  spin?: boolean;
+  button?: boolean;
+  circle?: boolean;
+  square?: boolean;
+  pulse?: boolean;
+  ripple?: boolean;
   /** button 모드에서 비활성 */
-  disabled?: boolean
-  ariaLabel?: string
-  title?: string
-  children?: ReactNode
-  onClick?: (event: MouseEvent<HTMLElement>) => void
+  disabled?: boolean;
+  ariaLabel?: string;
+  title?: string;
+  children?: ReactNode;
+  onClick?: (event: MouseEvent<HTMLElement>) => void;
 }
 
 /**
  * 공통 아이콘.
  * children → src(+embed) 파일 SVG → name 등록 stroke 순.
  */
-export function Icon ({
+export function Icon({
   name = 'plus',
   src = '',
   embed = false,
@@ -514,20 +754,22 @@ export function Icon ({
   onClick,
   ...rest
 }: IconProps) {
-  const resolvedLabel = ariaLabel || title || undefined
+  const resolvedLabel = ariaLabel || title || undefined;
   // onClick 만 넘긴 경우에도 클릭 가능하도록 button 래퍼로 취급
-  const asButton = Boolean(button || onClick)
-  const hasWrapper = Boolean(asButton || circle || square)
-  const customCssSize = toIconCssSize(size)
-  const namedSize = !customCssSize && typeof size === 'string' && iconSizes.includes(size as IconSize)
-    ? (size as IconSize)
-    : (!customCssSize && typeof size !== 'number' ? 'md' : null)
-  const sizeToken = customCssSize ? null : (namedSize || 'md')
-  const sizeClass = sizeToken && sizeToken !== 'md' ? `icon_${sizeToken}` : ''
-  const frameSizeClass =
-    sizeToken && sizeToken !== 'md' ? `icon_circle-${sizeToken}` : ''
+  const asButton = Boolean(button || onClick);
+  const hasWrapper = Boolean(asButton || circle || square);
+  const customCssSize = toIconCssSize(size);
+  const namedSize =
+    !customCssSize && typeof size === 'string' && iconSizes.includes(size as IconSize)
+      ? (size as IconSize)
+      : !customCssSize && typeof size !== 'number'
+        ? 'md'
+        : null;
+  const sizeToken = customCssSize ? null : namedSize || 'md';
+  const sizeClass = sizeToken && sizeToken !== 'md' ? `icon_${sizeToken}` : '';
+  const frameSizeClass = sizeToken && sizeToken !== 'md' ? `icon_circle-${sizeToken}` : '';
 
-  const iconClass = classNames('icon', sizeClass, spin && 'icon_spin')
+  const iconClass = classNames('icon', sizeClass, spin && 'icon_spin');
   const outerClass = classNames(
     asButton
       ? ['icon_button', frameSizeClass]
@@ -540,30 +782,28 @@ export function Icon ({
     inline && 'icon_inline',
     pulse && circle && 'icon_pulse',
     !hasWrapper && iconClass,
-    className
-  )
+    className,
+  );
 
   // 커스텀 크기 → --icon-custom-size (토큰·래퍼·내부 아이콘이 동일 값 사용)
   const sizeStyle: CSSProperties | undefined = customCssSize
     ? {
         width: customCssSize,
         height: customCssSize,
-        ['--icon-custom-size' as string]: customCssSize
+        ['--icon-custom-size' as string]: customCssSize,
       }
-    : undefined
+    : undefined;
 
-  const hasChildren = children != null && children !== false && children !== ''
+  const hasChildren = children != null && children !== false && children !== '';
   const fileSrc = src
     ? resolveIconSrc(src)
-    : (!hasChildren && isIconFileName(String(name)) ? resolveIconSrc(String(name)) : '')
-  const useFile = Boolean(fileSrc)
-  const useEmbed = useFile && embed
-  const useImage = useFile && !embed
-  const content = hasChildren
-    ? children
-    : useFile
-      ? null
-      : paths[name as IconName] ?? null
+    : !hasChildren && isIconFileName(String(name))
+      ? resolveIconSrc(String(name))
+      : '';
+  const useFile = Boolean(fileSrc);
+  const useEmbed = useFile && embed;
+  const useImage = useFile && !embed;
+  const content = hasChildren ? children : useFile ? null : (paths[name as IconName] ?? null);
 
   const sharedSvg: SharedSvgProps = {
     className: hasWrapper ? iconClass : outerClass,
@@ -572,19 +812,17 @@ export function Icon ({
     hasWrapper,
     sizeStyle,
     style,
-    rest: rest as Record<string, unknown>
-  }
+    rest: rest as Record<string, unknown>,
+  };
 
-  const image = useImage
-    ? (
-      <img
-        src={fileSrc}
-        alt=""
-        aria-hidden="true"
-        draggable={false}
-      />
-      )
-    : null
+  const image = useImage ? (
+    <img
+      src={fileSrc}
+      alt=""
+      aria-hidden="true"
+      draggable={false}
+    />
+  ) : null;
 
   const svgProps: SVGAttributes<SVGSVGElement> = {
     className: sharedSvg.className,
@@ -598,36 +836,49 @@ export function Icon ({
     'aria-label': !hasWrapper ? resolvedLabel : undefined,
     role: !hasWrapper && resolvedLabel ? 'img' : undefined,
     style: !hasWrapper && (sizeStyle || style) ? { ...sizeStyle, ...style } : undefined,
-    ...(!hasWrapper ? (rest as SVGAttributes<SVGSVGElement>) : {})
-  }
+    ...(!hasWrapper ? (rest as SVGAttributes<SVGSVGElement>) : {}),
+  };
 
-  let graphic: ReactNode
+  let graphic: ReactNode;
   if (useEmbed) {
-    graphic = <EmbeddedSvg {...sharedSvg} src={fileSrc} />
+    graphic = (
+      <EmbeddedSvg
+        {...sharedSvg}
+        src={fileSrc}
+      />
+    );
   } else if (useImage) {
-    graphic = hasWrapper
-      ? <i className={iconClass} data-component="Icon">{image}</i>
-      : (
-        <i
-          {...rest}
-          className={outerClass}
-          data-component="Icon"
-          aria-hidden={resolvedLabel ? undefined : true}
-          aria-label={resolvedLabel}
-          role={resolvedLabel ? 'img' : undefined}
-          title={title || undefined}
-          style={sizeStyle || style ? { ...sizeStyle, ...style } : undefined}
-        >
-          {image}
-        </i>
-        )
+    graphic = hasWrapper ? (
+      <i
+        className={iconClass}
+        data-component="Icon"
+      >
+        {image}
+      </i>
+    ) : (
+      <i
+        {...rest}
+        className={outerClass}
+        data-component="Icon"
+        aria-hidden={resolvedLabel ? undefined : true}
+        aria-label={resolvedLabel}
+        role={resolvedLabel ? 'img' : undefined}
+        title={title || undefined}
+        style={sizeStyle || style ? { ...sizeStyle, ...style } : undefined}
+      >
+        {image}
+      </i>
+    );
   } else {
     graphic = (
-      <svg {...svgProps} data-component="Icon">
+      <svg
+        {...svgProps}
+        data-component="Icon"
+      >
         {title ? <title>{title}</title> : null}
         {content}
       </svg>
-    )
+    );
   }
 
   if (asButton) {
@@ -644,7 +895,7 @@ export function Icon ({
       >
         {graphic}
       </button>
-    )
+    );
   }
 
   if (circle || square) {
@@ -662,8 +913,8 @@ export function Icon ({
           onClick
             ? (event) => {
                 if (event.key === 'Enter' || event.key === ' ') {
-                  event.preventDefault()
-                  onClick(event as unknown as MouseEvent<HTMLElement>)
+                  event.preventDefault();
+                  onClick(event as unknown as MouseEvent<HTMLElement>);
                 }
               }
             : undefined
@@ -671,10 +922,10 @@ export function Icon ({
       >
         {graphic}
       </span>
-    )
+    );
   }
 
-  return graphic
+  return graphic;
 }
 
-export default Icon
+export default Icon;

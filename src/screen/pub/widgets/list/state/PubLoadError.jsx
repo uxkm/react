@@ -2,13 +2,20 @@
  * PubLoadError
  * - JSON 등 데이터 불러오기 실패 시 안내 문구와 다시 시도 버튼
  */
-export default function PubLoadError ({ message, retryLabel, onRetry }) {
+export default function PubLoadError({ message, retryLabel, onRetry }) {
   return (
-    <div className="wbs-state wbs-alert" role="alert">
+    <div
+      className="wbs-state wbs-alert"
+      role="alert"
+    >
       <p className="wbs-alert_title">{message}</p>
-      <button type="button" className="wbs-btn" onClick={onRetry}>
+      <button
+        type="button"
+        className="wbs-btn"
+        onClick={onRetry}
+      >
         {retryLabel}
       </button>
     </div>
-  )
+  );
 }

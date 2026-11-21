@@ -4,23 +4,25 @@
  * - 컴포넌트 가이드는 번역 드롭다운 옆(actions)에 배치, 새 창
  * - 숨김은 meta.header (PageLayoutVisibility). 일반 페이지는 PageHeader / Header
  */
-import { Header, AppHeaderLink } from '@/comp' // comp
-import { Link } from '@/lib/router' // 클라이언트 링크
+import { Header, AppHeaderLink } from '@/comp'; // comp
+import { Link } from '@/lib/router'; // 클라이언트 링크
 
-const DEFAULT_BRAND = '퍼블리징 목록'
+const DEFAULT_BRAND = '퍼블리징 목록';
 
 /** 번역 스위치 옆에 두는 컴포넌트 가이드 (새 창) */
-function GuideAction () {
+function GuideAction() {
   return (
     <AppHeaderLink
       to="/pub/guide"
       target="_blank"
       rel="noopener noreferrer"
-    >퍼블리싱 가이드</AppHeaderLink>
-  )
+    >
+      퍼블리싱 가이드
+    </AppHeaderLink>
+  );
 }
 
-export default function PubHeader ({
+export default function PubHeader({
   layout = 'stacked',
   hideNavOnScroll = false,
   headerAppearance,
@@ -28,9 +30,9 @@ export default function PubHeader ({
   brand,
   nav = null,
   actions,
-  back
+  back,
 }) {
-  const title = projectName || DEFAULT_BRAND
+  const title = projectName || DEFAULT_BRAND;
 
   return (
     <Header
@@ -40,15 +42,16 @@ export default function PubHeader ({
       back={back}
       brand={
         brand ?? (
-          <Link className="app-header_brand" to="/pub">{title}</Link>
+          <Link
+            className="app-header_brand"
+            to="/pub"
+          >
+            {title}
+          </Link>
         )
       }
       nav={nav}
-      actions={
-        actions ?? (
-          <GuideAction />
-        )
-      }
+      actions={actions ?? <GuideAction />}
     />
-  )
+  );
 }

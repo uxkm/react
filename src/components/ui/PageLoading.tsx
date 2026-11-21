@@ -1,61 +1,61 @@
-'use client'
+'use client';
 
 /**
  * 페이지 로딩 래퍼.
  * auto 측정 스켈레톤 또는 manual PageSkeleton 으로 로딩 UI 를 표시.
  */
-import type { HTMLAttributes, ReactNode } from 'react' // React
-import { resolveSkeletonMode, type SkeletonMode } from '@/config/skeleton' // 설정 · skeleton
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
-import { hasNodes } from '@/utils/react' // has Nodes
-import { AutoSkeleton } from './AutoSkeleton' // Auto Skeleton 컴포넌트
-import { PageSkeleton, type PageSkeletonType } from './PageSkeleton' // PageSkeleton · PageSkeletonType 타입
+import type { HTMLAttributes, ReactNode } from 'react'; // React
+import { resolveSkeletonMode, type SkeletonMode } from '@/config/skeleton'; // 설정 · skeleton
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
+import { hasNodes } from '@/utils/react'; // has Nodes
+import { AutoSkeleton } from './AutoSkeleton'; // Auto Skeleton 컴포넌트
+import { PageSkeleton, type PageSkeletonType } from './PageSkeleton'; // PageSkeleton · PageSkeletonType 타입
 
-export type { SkeletonMode }
+export type { SkeletonMode };
 
 /** 페이지 로딩이 받는 값. auto 면 측정, manual 이면 skeleton */
 export interface PageLoadingProps extends HTMLAttributes<HTMLDivElement> {
-  loading?: boolean
-  label?: string
+  loading?: boolean;
+  label?: string;
   /**
    * auto(기본): children UI 를 측정해 자동 스켈레톤
    * manual: skeleton 으로 넘긴 수동 디자인 사용
    * 페이지에서 직접 지정하는 것을 권장. 생략 시 config 페이지 맵 → 전역 기본값
    */
-  skeletonMode?: SkeletonMode
+  skeletonMode?: SkeletonMode;
   /**
    * auto 캐시·설정 키. 생략하면 className 을 쓴다.
    * 페이지마다 따로 부여할 필요 없음 — className 으로 구분
    */
-  skeletonId?: string
+  skeletonId?: string;
   /**
    * manual 모드: 수동 스켈레톤
    * auto 모드: 첫 방문 등 캐시 없을 때 폴백 (프리셋 문자열 또는 노드)
    */
-  skeleton?: PageSkeletonType | string | ReactNode
-  showMeta?: boolean
-  showLinks?: boolean
-  linkCount?: number
-  rows?: number
-  fields?: number
-  cards?: number
-  children?: ReactNode
+  skeleton?: PageSkeletonType | string | ReactNode;
+  showMeta?: boolean;
+  showLinks?: boolean;
+  linkCount?: number;
+  rows?: number;
+  fields?: number;
+  cards?: number;
+  children?: ReactNode;
 }
 
 /** skeleton 이 문자열이면 프리셋, 노드면 그 노드를 그대로 쓴다 */
-function resolvePresetOrNode (
+function resolvePresetOrNode(
   skeleton: PageSkeletonType | string | ReactNode | undefined,
   opts: {
-    showMeta: boolean
-    showLinks: boolean
-    linkCount: number
-    rows: number
-    fields: number
-    cards: number
-  }
+    showMeta: boolean;
+    showLinks: boolean;
+    linkCount: number;
+    rows: number;
+    fields: number;
+    cards: number;
+  },
 ): ReactNode {
-  const isPreset = typeof skeleton === 'string' || skeleton == null
-  if (!isPreset && hasNodes(skeleton)) return skeleton
+  const isPreset = typeof skeleton === 'string' || skeleton == null;
+  if (!isPreset && hasNodes(skeleton)) return skeleton;
 
   return (
     <PageSkeleton
@@ -67,7 +67,7 @@ function resolvePresetOrNode (
       fields={opts.fields}
       cards={opts.cards}
     />
-  )
+  );
 }
 
 /**
@@ -93,7 +93,7 @@ function resolvePresetOrNode (
  *   ...
  * </PageLoading>
  */
-export function PageLoading ({
+export function PageLoading({
   loading = false,
   label = '불러오는 중',
   skeletonMode,
@@ -109,10 +109,10 @@ export function PageLoading ({
   className,
   ...rest
 }: PageLoadingProps) {
-  const id = skeletonId || className || 'page'
-  const mode = resolveSkeletonMode(id, skeletonMode)
-  const presetOpts = { showMeta, showLinks, linkCount, rows, fields, cards }
-  const manualOrFallback = resolvePresetOrNode(skeleton, presetOpts)
+  const id = skeletonId || className || 'page';
+  const mode = resolveSkeletonMode(id, skeletonMode);
+  const presetOpts = { showMeta, showLinks, linkCount, rows, fields, cards };
+  const manualOrFallback = resolvePresetOrNode(skeleton, presetOpts);
 
   if (mode === 'manual') {
     if (loading) {
@@ -126,18 +126,21 @@ export function PageLoading ({
         >
           {manualOrFallback}
         </div>
-      )
+      );
     }
 
     if (className || Object.keys(rest).length > 0) {
       return (
-        <div {...rest} className={className}>
+        <div
+          {...rest}
+          className={className}
+        >
           {children}
         </div>
-      )
+      );
     }
 
-    return children
+    return children;
   }
 
   // auto: 항상 같은 래퍼를 유지해 레이아웃 측정·캐시
@@ -149,11 +152,15 @@ export function PageLoading ({
       aria-busy={loading || undefined}
       aria-label={loading ? label : undefined}
     >
-      <AutoSkeleton id={String(id)} loading={loading} fallback={manualOrFallback}>
+      <AutoSkeleton
+        id={String(id)}
+        loading={loading}
+        fallback={manualOrFallback}
+      >
         {children}
       </AutoSkeleton>
     </div>
-  )
+  );
 }
 
-export default PageLoading
+export default PageLoading;

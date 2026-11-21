@@ -17,7 +17,6 @@
   --stat-card-padding: var(--space-lg);
   --stat-icon-wrap-size: 2.5rem;
   --stat-horizontal-gap: var(--space-md);
-
 }
 
 // Stat — OOCSS: 구조(.stat) + 스킨(.stat_card · .stat_horizontal) + 파트(.stat_label · .stat_value · .stat_trend)
@@ -185,16 +184,59 @@
 
   // 고객사례 유형: 라벨·인용문·작성자·원형 프로필.
   &_testimonial {
-    box-sizing: border-box; min-width: 0; height: 100%; min-height: var(--size-560); gap: 0;
-    padding: var(--space-52) var(--space-48) var(--space-44); border: 1px solid transparent; border-radius: var(--radius-24);
-    background: #fff; color: #3485e3; font-family: inherit;
-    &.is-selected { border-color: #4389e5; }
-    .stat_label { color: #256bc0; font-size: var(--font-size-3xl); line-height: var(--line-height-28); }
-    .stat_quote { flex: 1; min-width: 0; margin: var(--space-36) 0 var(--space-56); }
-    .stat_quote-mark { display: block; height: var(--size-96); font-family: Arial, sans-serif; font-size: var(--stat-font-size-160px); font-weight: 700; line-height: 1; }
-    .stat_value { display: block; color: inherit; font-size: var(--font-size-34); font-weight: 700; line-height: 1.5; letter-spacing: -1.2px; white-space: pre-line; }
-    .stat_footer { display: flex; align-items: center; justify-content: space-between; gap: var(--space-20); }
-    .stat_desc { color: #6c7075; font-size: var(--font-size-xl); line-height: var(--line-height-26); letter-spacing: -0.5px; }
+    box-sizing: border-box;
+    min-width: 0;
+    height: 100%;
+    min-height: var(--size-560);
+    gap: 0;
+    padding: var(--space-52) var(--space-48) var(--space-44);
+    border: 1px solid transparent;
+    border-radius: var(--radius-24);
+    background: #fff;
+    color: #3485e3;
+    font-family: inherit;
+    &.is-selected {
+      border-color: #4389e5;
+    }
+    .stat_label {
+      color: #256bc0;
+      font-size: var(--font-size-3xl);
+      line-height: var(--line-height-28);
+    }
+    .stat_quote {
+      flex: 1;
+      min-width: 0;
+      margin: var(--space-36) 0 var(--space-56);
+    }
+    .stat_quote-mark {
+      display: block;
+      height: var(--size-96);
+      font-family: Arial, sans-serif;
+      font-size: var(--stat-font-size-160px);
+      font-weight: 700;
+      line-height: 1;
+    }
+    .stat_value {
+      display: block;
+      color: inherit;
+      font-size: var(--font-size-34);
+      font-weight: 700;
+      line-height: 1.5;
+      letter-spacing: -1.2px;
+      white-space: pre-line;
+    }
+    .stat_footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-20);
+    }
+    .stat_desc {
+      color: #6c7075;
+      font-size: var(--font-size-xl);
+      line-height: var(--line-height-26);
+      letter-spacing: -0.5px;
+    }
   }
 
   &_borderless {

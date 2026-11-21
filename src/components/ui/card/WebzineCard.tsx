@@ -1,9 +1,9 @@
-import { CardBase, CardBody } from './CardBase'
-import { Link } from '@/lib/router'
-import CardBackground from './CardBackground'
-import CardThumbnailFallback from './CardThumbnailFallback'
-import { CardEditorialMeta, CardKeywords } from './CardEditorialInfo'
-import type { WebzineCardData, WebzineCardProps } from './cardTypes'
+import { CardBase, CardBody } from './CardBase';
+import { Link } from '@/lib/router';
+import CardBackground from './CardBackground';
+import CardThumbnailFallback from './CardThumbnailFallback';
+import { CardEditorialMeta, CardKeywords } from './CardEditorialInfo';
+import type { WebzineCardData, WebzineCardProps } from './cardTypes';
 
 /** 좌측·우측 썸네일과 뉴스 정보를 하나의 상세 링크로 제공합니다. */
 export default function WebzineCard({
@@ -13,7 +13,7 @@ export default function WebzineCard({
   image = card.image,
   imageProps,
   slots,
-  priority = false
+  priority = false,
 }: Readonly<{ card: WebzineCardData } & WebzineCardProps>) {
   return (
     <CardBase
@@ -27,11 +27,8 @@ export default function WebzineCard({
         className="card_webzine-media"
         image={image}
         imageProps={{
-          fit:
-            typeof image === 'object' && image !== null
-              ? (image.fit ?? 'cover')
-              : 'cover',
-          ...imageProps
+          fit: typeof image === 'object' && image !== null ? (image.fit ?? 'cover') : 'cover',
+          ...imageProps,
         }}
         priority={priority}
         fallback={<CardThumbnailFallback />}
@@ -44,11 +41,9 @@ export default function WebzineCard({
           date={card.date}
         />
         <strong className="card_editorial-title">{card.title}</strong>
-        {card.description && (
-          <p className="card_editorial-description">{card.description}</p>
-        )}
+        {card.description && <p className="card_editorial-description">{card.description}</p>}
         <CardKeywords keywords={card.keywords} />
       </CardBody>
     </CardBase>
-  )
+  );
 }

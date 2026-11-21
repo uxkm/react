@@ -6,14 +6,14 @@ export {
   KeyboardSensor,
   useSensor,
   useSensors,
-  DragOverlay
-} from '@dnd-kit/core'
+  DragOverlay,
+} from '@dnd-kit/core';
 export {
   SortableContext,
   useSortable,
   sortableKeyboardCoordinates,
   arrayMove,
   verticalListSortingStrategy,
-  horizontalListSortingStrategy
-} from '@dnd-kit/sortable'
-export { CSS } from '@dnd-kit/utilities'
+  horizontalListSortingStrategy,
+} from '@dnd-kit/sortable';
+export { CSS } from '@dnd-kit/utilities';

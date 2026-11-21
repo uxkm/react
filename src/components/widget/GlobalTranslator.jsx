@@ -1,92 +1,94 @@
-'use client'
+'use client';
 
-import { useEffect } from 'react' // effect 훅
-import { useLocaleStore } from '@/lib/i18n/localeStore' // 언어(locale) 전역 상태
-import { DEFAULT_LOCALE, normalizeLocale } from '@/lib/i18n/i18n' // 라이브러리/유틸 · i18n
-import { applyPageTranslation, hasTranslatableMutation } from '@/lib/i18n/pageTranslate' // 라이브러리/유틸 · page Translate
+import { useEffect } from 'react'; // effect 훅
+import { useLocaleStore } from '@/lib/i18n/localeStore'; // 언어(locale) 전역 상태
+import { DEFAULT_LOCALE, normalizeLocale } from '@/lib/i18n/i18n'; // 라이브러리/유틸 · i18n
+import { applyPageTranslation, hasTranslatableMutation } from '@/lib/i18n/pageTranslate'; // 라이브러리/유틸 · page Translate
 
 /** 한글 렌더 후 번역한다. 장애 시 원문과 재시도 상태를 유지한다. */
-export function GlobalTranslator ({ rootRef }) {
-  const locale = useLocaleStore((s) => normalizeLocale(s.locale || DEFAULT_LOCALE))
-  const attempt = useLocaleStore((s) => s.translationAttempt)
-  const setLocaleProgress = useLocaleStore((s) => s.setLocaleProgress)
-  const setTranslationError = useLocaleStore((s) => s.setTranslationError)
+export function GlobalTranslator({ rootRef }) {
+  const locale = useLocaleStore((s) => normalizeLocale(s.locale || DEFAULT_LOCALE));
+  const attempt = useLocaleStore((s) => s.translationAttempt);
+  const setLocaleProgress = useLocaleStore((s) => s.setLocaleProgress);
+  const setTranslationError = useLocaleStore((s) => s.setTranslationError);
 
   useEffect(() => {
-    let cancelled = false
-    let timer = 0
-    let retryTimer = 0
-    let controller = null
-    let observer = null
-    let root = null
-    let running = false
-    let pending = false
+    let cancelled = false;
+    let timer = 0;
+    let retryTimer = 0;
+    let controller = null;
+    let observer = null;
+    let root = null;
+    let running = false;
+    let pending = false;
 
     const run = async () => {
-      if (cancelled) return
-      running = true
-      controller?.abort()
-      const ac = new AbortController()
-      controller = ac
-      root.dataset.translating = 'true'
-      setLocaleProgress(0)
+      if (cancelled) return;
+      running = true;
+      controller?.abort();
+      const ac = new AbortController();
+      controller = ac;
+      root.dataset.translating = 'true';
+      setLocaleProgress(0);
       try {
         const result = await applyPageTranslation(root, locale, {
           signal: ac.signal,
           onProgress: ({ percent }) => {
-            if (!cancelled && !ac.signal.aborted) setLocaleProgress(percent)
-          }
-        })
-        if (cancelled || ac.signal.aborted) return
-        const unavailable = result.status === 'unavailable'
-        setTranslationError(unavailable ? '번역 서비스를 사용할 수 없어 원문을 표시합니다.' : '')
-        document.documentElement.lang = unavailable ? DEFAULT_LOCALE : locale
+            if (!cancelled && !ac.signal.aborted) setLocaleProgress(percent);
+          },
+        });
+        if (cancelled || ac.signal.aborted) return;
+        const unavailable = result.status === 'unavailable';
+        setTranslationError(unavailable ? '번역 서비스를 사용할 수 없어 원문을 표시합니다.' : '');
+        document.documentElement.lang = unavailable ? DEFAULT_LOCALE : locale;
       } finally {
         if (!cancelled && controller === ac) {
-          root.dataset.translating = 'false'
-          setLocaleProgress(null)
-          running = false
+          root.dataset.translating = 'false';
+          setLocaleProgress(null);
+          running = false;
           if (pending) {
-            pending = false
-            schedule()
+            pending = false;
+            schedule();
           }
         }
       }
-    }
+    };
     const schedule = () => {
       if (running) {
-        pending = true
-        return
+        pending = true;
+        return;
       }
-      window.clearTimeout(timer)
-      timer = window.setTimeout(() => { void run() }, 160)
-    }
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        void run();
+      }, 160);
+    };
     const attach = () => {
-      if (cancelled) return
-      root = rootRef?.current
+      if (cancelled) return;
+      root = rootRef?.current;
       if (!root) {
-        retryTimer = window.setTimeout(attach, 50)
-        return
+        retryTimer = window.setTimeout(attach, 50);
+        return;
       }
       observer = new MutationObserver((records) => {
-        if (hasTranslatableMutation(records)) schedule()
-      })
-      observer.observe(root, { childList: true, subtree: true, characterData: true })
-      schedule()
-    }
-    attach()
+        if (hasTranslatableMutation(records)) schedule();
+      });
+      observer.observe(root, { childList: true, subtree: true, characterData: true });
+      schedule();
+    };
+    attach();
     return () => {
-      cancelled = true
-      controller?.abort()
-      observer?.disconnect()
-      window.clearTimeout(timer)
-      window.clearTimeout(retryTimer)
-      if (root) root.dataset.translating = 'false'
-      setLocaleProgress(null)
-    }
-  }, [locale, attempt, rootRef, setLocaleProgress, setTranslationError])
+      cancelled = true;
+      controller?.abort();
+      observer?.disconnect();
+      window.clearTimeout(timer);
+      window.clearTimeout(retryTimer);
+      if (root) root.dataset.translating = 'false';
+      setLocaleProgress(null);
+    };
+  }, [locale, attempt, rootRef, setLocaleProgress, setTranslationError]);
 
-  return null
+  return null;
 }
 
-export default GlobalTranslator
+export default GlobalTranslator;

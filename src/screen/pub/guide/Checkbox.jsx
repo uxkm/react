@@ -1,25 +1,25 @@
-'use client'
+'use client';
 
-import { useState } from 'react' // 상태 훅
-import { Card, CardBody, CardDeck, CardHeader, Checkbox } from '@/comp' // comp
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
-import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
-import { checkboxApiSections } from '@/screen/pub/data/guide/checkboxApiSections' // checkbox Api Sections
+import { useState } from 'react'; // 상태 훅
+import { Card, CardBody, CardDeck, CardHeader, Checkbox } from '@/comp'; // comp
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'; // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'; // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout'; // Guide Layout 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'; // wrap Page Example
+import { checkboxApiSections } from '@/screen/pub/data/guide/checkboxApiSections'; // checkbox Api Sections
 
 /** 카드 전체 클릭 → 내부 checkbox input */
-function onClickableCardClick (event) {
-  if (event.target.closest('.checkbox_control')) return
-  const input = event.currentTarget.querySelector('.checkbox_input')
-  if (input instanceof HTMLInputElement && !input.disabled) input.click()
+function onClickableCardClick(event) {
+  if (event.target.closest('.checkbox_control')) return;
+  const input = event.currentTarget.querySelector('.checkbox_input');
+  if (input instanceof HTMLInputElement && !input.disabled) input.click();
 }
 
 /** checked · onChange 로 부모가 상태를 관리하는 예시 */
-function ControlledDemo () {
-  const [checked, setChecked] = useState(false)
-  const [email, setEmail] = useState(true)
-  const [push, setPush] = useState(false)
+function ControlledDemo() {
+  const [checked, setChecked] = useState(false);
+  const [email, setEmail] = useState(true);
+  const [push, setPush] = useState(false);
 
   return (
     <div className="demo-stack">
@@ -29,15 +29,29 @@ function ControlledDemo () {
         label="동의"
       />
       <div className="form_field">
-        <span className="form_field-label" id="checkbox-notify-label">알림 설정</span>
-        <fieldset className="checkbox_group" aria-labelledby="checkbox-notify-label">
-          <Checkbox checked={email} onChange={(e) => setEmail(e.target.checked)}>
+        <span
+          className="form_field-label"
+          id="checkbox-notify-label"
+        >
+          알림 설정
+        </span>
+        <fieldset
+          className="checkbox_group"
+          aria-labelledby="checkbox-notify-label"
+        >
+          <Checkbox
+            checked={email}
+            onChange={(e) => setEmail(e.target.checked)}
+          >
             <span className="checkbox_content">
               <span className="checkbox_label">이메일 알림</span>
               <span className="checkbox_hint">중요 공지와 계정 관련 메일을 받습니다.</span>
             </span>
           </Checkbox>
-          <Checkbox checked={push} onChange={(e) => setPush(e.target.checked)}>
+          <Checkbox
+            checked={push}
+            onChange={(e) => setPush(e.target.checked)}
+          >
             <span className="checkbox_content">
               <span className="checkbox_label">푸시 알림</span>
               <span className="checkbox_hint">모바일·브라우저 푸시를 허용합니다.</span>
@@ -46,7 +60,7 @@ function ControlledDemo () {
         </fieldset>
       </div>
     </div>
-  )
+  );
 }
 
 const SECTIONS = [
@@ -58,7 +72,8 @@ const SECTIONS = [
         보이는 레이블이 없으면 <code>label.checkbox_control</code>로 암묵 연결합니다.
       </>
     ),
-    code: wrapPageExample(`<Checkbox defaultChecked label="기본 — checkbox" />
+    code: wrapPageExample(
+      `<Checkbox defaultChecked label="기본 — checkbox" />
 <Checkbox labelEnd label="레이블 뒤 — checkbox_label-end" />
 <fieldset className="checkbox_group checkbox_group_horizontal">
   <Checkbox button defaultChecked label="버튼형" />
@@ -66,32 +81,56 @@ const SECTIONS = [
 </fieldset>
 <div className="checkbox_card">
   <Card compact>…</Card>
-</div>`, {
-  name: 'CheckboxExample1',
-  reactImports: [],
-  compImports: ['Card', 'Checkbox']
-}),
+</div>`,
+      {
+        name: 'CheckboxExample1',
+        reactImports: [],
+        compImports: ['Card', 'Checkbox'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
-        <Checkbox defaultChecked label="기본 — checkbox" />
-        <Checkbox labelEnd label="레이블 뒤 — checkbox_label-end" />
+        <Checkbox
+          defaultChecked
+          label="기본 — checkbox"
+        />
+        <Checkbox
+          labelEnd
+          label="레이블 뒤 — checkbox_label-end"
+        />
         <fieldset className="checkbox_group checkbox_group_horizontal">
-          <Checkbox button defaultChecked label="버튼형" />
-          <Checkbox button label="UI" />
-          <Checkbox button label="UX" />
+          <Checkbox
+            button
+            defaultChecked
+            label="버튼형"
+          />
+          <Checkbox
+            button
+            label="UI"
+          />
+          <Checkbox
+            button
+            label="UX"
+          />
         </fieldset>
-        <div className="checkbox_card" style={{ maxWidth: 360 }}>
+        <div
+          className="checkbox_card"
+          style={{ maxWidth: 360 }}
+        >
           <Card compact>
             <CardHeader
-              extra={(
+              extra={
                 <Checkbox
                   id="checkbox-type-card"
                   defaultChecked
                   aria-labelledby="checkbox-type-card-title checkbox-type-card-desc"
                 />
-              )}
+              }
             >
-              <strong className="card_title" id="checkbox-type-card-title">
+              <strong
+                className="card_title"
+                id="checkbox-type-card-title"
+              >
                 카드형 — checkbox_card
               </strong>
             </CardHeader>
@@ -101,30 +140,37 @@ const SECTIONS = [
           </Card>
         </div>
       </div>
-    )
+    ),
   },
   {
     title: '레이블 뒤',
     description: (
       <>
-        <code>checkbox_label-end</code>는 레이블 → 체크박스 순입니다.
-        전체 너비는 <code>checkbox_block</code> · <code>checkbox_group_block</code>을 씁니다.
+        <code>checkbox_label-end</code>는 레이블 → 체크박스 순입니다. 전체 너비는{' '}
+        <code>checkbox_block</code> · <code>checkbox_group_block</code>을 씁니다.
       </>
     ),
-    code: wrapPageExample(`<Checkbox labelEnd defaultChecked label="푸시 알림 받기" />
+    code: wrapPageExample(
+      `<Checkbox labelEnd defaultChecked label="푸시 알림 받기" />
 <Checkbox labelEnd>
   <span className="checkbox_content">
     <span className="checkbox_label">마케팅 정보 수신</span>
     <span className="checkbox_hint">이벤트·할인 소식을 이메일로 받습니다.</span>
   </span>
-</Checkbox>`, {
-  name: 'CheckboxExample2',
-  reactImports: [],
-  compImports: ['Checkbox']
-}),
+</Checkbox>`,
+      {
+        name: 'CheckboxExample2',
+        reactImports: [],
+        compImports: ['Checkbox'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
-        <Checkbox labelEnd defaultChecked label="푸시 알림 받기" />
+        <Checkbox
+          labelEnd
+          defaultChecked
+          label="푸시 알림 받기"
+        />
         <Checkbox labelEnd>
           <span className="checkbox_content">
             <span className="checkbox_label">마케팅 정보 수신</span>
@@ -136,24 +182,48 @@ const SECTIONS = [
           style={{ maxWidth: 360, width: '100%' }}
         >
           <legend className="checkbox_group-legend">알림 설정 — checkbox_group_block</legend>
-          <Checkbox labelEnd defaultChecked label="이메일 알림" />
-          <Checkbox labelEnd defaultChecked label="푸시 알림" />
-          <Checkbox labelEnd label="SMS 알림" />
+          <Checkbox
+            labelEnd
+            defaultChecked
+            label="이메일 알림"
+          />
+          <Checkbox
+            labelEnd
+            defaultChecked
+            label="푸시 알림"
+          />
+          <Checkbox
+            labelEnd
+            label="SMS 알림"
+          />
         </fieldset>
-        <Checkbox className="checkbox_sm" labelEnd defaultChecked label="Small — checkbox_sm" />
-        <Checkbox className="checkbox_lg" labelEnd defaultChecked label="Large — checkbox_lg" />
+        <Checkbox
+          className="checkbox_sm"
+          labelEnd
+          defaultChecked
+          label="Small — checkbox_sm"
+        />
+        <Checkbox
+          className="checkbox_lg"
+          labelEnd
+          defaultChecked
+          label="Large — checkbox_lg"
+        />
       </div>
-    )
+    ),
   },
   {
     title: '기본',
     description: (
       <>
-        부모가 상태를 관리하는 예제는 <code>checked</code>와 <code>onChange</code>를 함께 전달합니다. 초기 상태만 지정할 때는 <code>defaultChecked</code>를 사용합니다.
-        부모 <code>useState</code>로 체크 상태를 관리하고, 레이블·보조 설명(<code>checkbox_hint</code>)을 함께 쓸 수 있습니다.
+        부모가 상태를 관리하는 예제는 <code>checked</code>와 <code>onChange</code>를 함께
+        전달합니다. 초기 상태만 지정할 때는 <code>defaultChecked</code>를 사용합니다. 부모{' '}
+        <code>useState</code>로 체크 상태를 관리하고, 레이블·보조 설명(<code>checkbox_hint</code>)을
+        함께 쓸 수 있습니다.
       </>
     ),
-    code: wrapPageExample(`const [checked, setChecked] = useState(false)
+    code: wrapPageExample(
+      `const [checked, setChecked] = useState(false)
 const [email, setEmail] = useState(true)
 
 <Checkbox
@@ -166,34 +236,46 @@ const [email, setEmail] = useState(true)
     <span className="checkbox_label">이메일 알림</span>
     <span className="checkbox_hint">중요 공지와 계정 관련 메일을 받습니다.</span>
   </span>
-</Checkbox>`, {
-      name: 'CheckboxExample',
-      reactImports: ['useState'],
-      compImports: ['Checkbox']
-    }),
-    preview: <ControlledDemo />
+</Checkbox>`,
+      {
+        name: 'CheckboxExample',
+        reactImports: ['useState'],
+        compImports: ['Checkbox'],
+      },
+    ),
+    preview: <ControlledDemo />,
   },
   {
     title: '단독 사용',
     description: (
       <>
-        레이블 없이 체크박스만 사용할 수 있습니다. <code>ariaLabel</code>로 접근 가능한 이름을 지정합니다.
+        레이블 없이 체크박스만 사용할 수 있습니다. <code>ariaLabel</code>로 접근 가능한 이름을
+        지정합니다.
       </>
     ),
-    code: wrapPageExample(`<Checkbox ariaLabel="항목 선택" />
+    code: wrapPageExample(
+      `<Checkbox ariaLabel="항목 선택" />
 <Checkbox defaultChecked ariaLabel="선택됨" />
-<Checkbox disabled ariaLabel="비활성" />`, {
-  name: 'CheckboxExample3',
-  reactImports: [],
-  compImports: ['Checkbox']
-}),
+<Checkbox disabled ariaLabel="비활성" />`,
+      {
+        name: 'CheckboxExample3',
+        reactImports: [],
+        compImports: ['Checkbox'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
         <Checkbox ariaLabel="항목 선택" />
-        <Checkbox defaultChecked ariaLabel="선택됨" />
-        <Checkbox disabled ariaLabel="비활성" />
+        <Checkbox
+          defaultChecked
+          ariaLabel="선택됨"
+        />
+        <Checkbox
+          disabled
+          ariaLabel="비활성"
+        />
       </div>
-    )
+    ),
   },
   {
     title: '크기',
@@ -202,72 +284,120 @@ const [email, setEmail] = useState(true)
         <code>checkbox_sm</code> · 기본 · <code>checkbox_lg</code>로 박스·텍스트 크기를 조절합니다.
       </>
     ),
-    code: wrapPageExample(`<Checkbox className="checkbox_sm" defaultChecked label="Small — checkbox_sm" />
+    code: wrapPageExample(
+      `<Checkbox className="checkbox_sm" defaultChecked label="Small — checkbox_sm" />
 <Checkbox defaultChecked label="Medium — 기본" />
-<Checkbox className="checkbox_lg" defaultChecked label="Large — checkbox_lg" />`, {
-  name: 'CheckboxSizeExample',
-  reactImports: [],
-  compImports: ['Checkbox']
-}),
+<Checkbox className="checkbox_lg" defaultChecked label="Large — checkbox_lg" />`,
+      {
+        name: 'CheckboxSizeExample',
+        reactImports: [],
+        compImports: ['Checkbox'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
-        <Checkbox className="checkbox_sm" defaultChecked label="Small — checkbox_sm" />
-        <Checkbox defaultChecked label="Medium — 기본" />
-        <Checkbox className="checkbox_lg" defaultChecked label="Large — checkbox_lg" />
+        <Checkbox
+          className="checkbox_sm"
+          defaultChecked
+          label="Small — checkbox_sm"
+        />
+        <Checkbox
+          defaultChecked
+          label="Medium — 기본"
+        />
+        <Checkbox
+          className="checkbox_lg"
+          defaultChecked
+          label="Large — checkbox_lg"
+        />
       </div>
-    )
+    ),
   },
   {
     title: '너비',
     description: (
       <>
-        기본은 인라인(콘텐츠) 너비입니다. <code>checkbox_block</code> · <code>checkbox_group_block</code>으로 전체 너비를 사용합니다.
+        기본은 인라인(콘텐츠) 너비입니다. <code>checkbox_block</code> ·{' '}
+        <code>checkbox_group_block</code>으로 전체 너비를 사용합니다.
       </>
     ),
-    code: wrapPageExample(`<Checkbox defaultChecked label="기본 — 인라인 너비" />
+    code: wrapPageExample(
+      `<Checkbox defaultChecked label="기본 — 인라인 너비" />
 <Checkbox className="checkbox_block" defaultChecked label="checkbox_block — 전체 너비" />
-<fieldset className="checkbox_group checkbox_group_block">…</fieldset>`, {
-  name: 'CheckboxExample5',
-  reactImports: [],
-  compImports: ['Checkbox']
-}),
+<fieldset className="checkbox_group checkbox_group_block">…</fieldset>`,
+      {
+        name: 'CheckboxExample5',
+        reactImports: [],
+        compImports: ['Checkbox'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
-        <Checkbox defaultChecked label="기본 — 인라인 너비" />
-        <Checkbox className="checkbox_block" defaultChecked label="checkbox_block — 전체 너비" />
+        <Checkbox
+          defaultChecked
+          label="기본 — 인라인 너비"
+        />
+        <Checkbox
+          className="checkbox_block"
+          defaultChecked
+          label="checkbox_block — 전체 너비"
+        />
         <fieldset
           className="checkbox_group checkbox_group_block"
           style={{ maxWidth: 360, width: '100%' }}
         >
           <legend className="checkbox_group-legend">checkbox_group_block</legend>
-          <Checkbox defaultChecked label="항목 1" />
+          <Checkbox
+            defaultChecked
+            label="항목 1"
+          />
           <Checkbox label="항목 2" />
         </fieldset>
       </div>
-    )
+    ),
   },
   {
     title: '색상',
     description: (
       <>
-        <code>color_primary</code> · <code>color_success</code> · <code>color_danger</code> · <code>color_warning</code>으로 선택 색을 지정합니다.
+        <code>color_primary</code> · <code>color_success</code> · <code>color_danger</code> ·{' '}
+        <code>color_warning</code>으로 선택 색을 지정합니다.
       </>
     ),
-    code: wrapPageExample(`<Checkbox className="color_primary" defaultChecked label="Primary" />
+    code: wrapPageExample(
+      `<Checkbox className="color_primary" defaultChecked label="Primary" />
 <Checkbox className="color_success" defaultChecked label="Success" />
-…`, {
-  name: 'CheckboxColorExample',
-  reactImports: [],
-  compImports: ['Checkbox']
-}),
+…`,
+      {
+        name: 'CheckboxColorExample',
+        reactImports: [],
+        compImports: ['Checkbox'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
-        <Checkbox className="color_primary" defaultChecked label="Primary" />
-        <Checkbox className="color_success" defaultChecked label="Success" />
-        <Checkbox className="color_danger" defaultChecked label="Danger" />
-        <Checkbox className="color_warning" defaultChecked label="Warning" />
+        <Checkbox
+          className="color_primary"
+          defaultChecked
+          label="Primary"
+        />
+        <Checkbox
+          className="color_success"
+          defaultChecked
+          label="Success"
+        />
+        <Checkbox
+          className="color_danger"
+          defaultChecked
+          label="Danger"
+        />
+        <Checkbox
+          className="color_warning"
+          defaultChecked
+          label="Warning"
+        />
       </div>
-    )
+    ),
   },
   {
     title: '상태',
@@ -276,57 +406,92 @@ const [email, setEmail] = useState(true)
         선택·미선택·불확정(<code>indeterminate</code>)·비활성 상태를 지원합니다.
       </>
     ),
-    code: wrapPageExample(`<Checkbox label="미선택" />
+    code: wrapPageExample(
+      `<Checkbox label="미선택" />
 <Checkbox defaultChecked label="선택됨" />
 <Checkbox defaultChecked indeterminate label="불확정" />
-<Checkbox disabled label="비활성" />`, {
-  name: 'CheckboxStateExample',
-  reactImports: [],
-  compImports: ['Checkbox']
-}),
+<Checkbox disabled label="비활성" />`,
+      {
+        name: 'CheckboxStateExample',
+        reactImports: [],
+        compImports: ['Checkbox'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
         <Checkbox label="미선택" />
-        <Checkbox defaultChecked label="선택됨" />
-        <Checkbox defaultChecked indeterminate label="불확정" />
-        <Checkbox disabled label="비활성" />
-        <Checkbox defaultChecked disabled label="선택됨 (비활성)" />
+        <Checkbox
+          defaultChecked
+          label="선택됨"
+        />
+        <Checkbox
+          defaultChecked
+          indeterminate
+          label="불확정"
+        />
+        <Checkbox
+          disabled
+          label="비활성"
+        />
+        <Checkbox
+          defaultChecked
+          disabled
+          label="선택됨 (비활성)"
+        />
       </div>
-    )
+    ),
   },
   {
     title: '그룹',
     description: (
       <>
-        <code>checkbox_group</code>으로 묶습니다. <code>checkbox_group_horizontal</code> · <code>checkbox_group_compact</code> 변형이 있습니다.
+        <code>checkbox_group</code>으로 묶습니다. <code>checkbox_group_horizontal</code> ·{' '}
+        <code>checkbox_group_compact</code> 변형이 있습니다.
       </>
     ),
-    code: wrapPageExample(`<fieldset className="checkbox_group">
+    code: wrapPageExample(
+      `<fieldset className="checkbox_group">
   <legend className="checkbox_group-legend">관심 분야 (세로)</legend>
   <Checkbox defaultChecked label="디자인" />
   …
 </fieldset>
-<fieldset className="checkbox_group checkbox_group_horizontal">…</fieldset>`, {
-  name: 'CheckboxGroupExample',
-  reactImports: [],
-  compImports: ['Checkbox']
-}),
+<fieldset className="checkbox_group checkbox_group_horizontal">…</fieldset>`,
+      {
+        name: 'CheckboxGroupExample',
+        reactImports: [],
+        compImports: ['Checkbox'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
         <fieldset className="checkbox_group">
           <legend className="checkbox_group-legend">관심 분야 (세로)</legend>
-          <Checkbox defaultChecked label="디자인" />
+          <Checkbox
+            defaultChecked
+            label="디자인"
+          />
           <Checkbox label="개발" />
           <Checkbox label="기획" />
         </fieldset>
         <fieldset className="checkbox_group checkbox_group_horizontal">
           <legend className="checkbox_group-legend">언어 (가로)</legend>
-          <Checkbox button defaultChecked label="한국어" />
-          <Checkbox button defaultChecked label="English" />
-          <Checkbox button label="日本語" />
+          <Checkbox
+            button
+            defaultChecked
+            label="한국어"
+          />
+          <Checkbox
+            button
+            defaultChecked
+            label="English"
+          />
+          <Checkbox
+            button
+            label="日本語"
+          />
         </fieldset>
       </div>
-    )
+    ),
   },
   {
     title: '버튼형',
@@ -335,39 +500,73 @@ const [email, setEmail] = useState(true)
         <code>button</code>은 태그·필터 UI에 적합합니다. 크기·색상 변형과 함께 사용할 수 있습니다.
       </>
     ),
-    code: wrapPageExample(`<fieldset className="checkbox_group checkbox_group_horizontal">
+    code: wrapPageExample(
+      `<fieldset className="checkbox_group checkbox_group_horizontal">
   <Checkbox button defaultChecked label="전체" />
   <Checkbox button label="진행 중" />
   …
-</fieldset>`, {
-  name: 'CheckboxExample9',
-  reactImports: [],
-  compImports: ['Checkbox']
-}),
+</fieldset>`,
+      {
+        name: 'CheckboxExample9',
+        reactImports: [],
+        compImports: ['Checkbox'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
         <fieldset className="checkbox_group checkbox_group_horizontal">
-          <Checkbox button defaultChecked label="전체" />
-          <Checkbox button label="진행 중" />
-          <Checkbox button label="완료" />
-          <Checkbox button disabled label="보류 (비활성)" />
+          <Checkbox
+            button
+            defaultChecked
+            label="전체"
+          />
+          <Checkbox
+            button
+            label="진행 중"
+          />
+          <Checkbox
+            button
+            label="완료"
+          />
+          <Checkbox
+            button
+            disabled
+            label="보류 (비활성)"
+          />
         </fieldset>
         <fieldset className="checkbox_group checkbox_group_horizontal">
-          <Checkbox button className="checkbox_sm color_success" defaultChecked label="Small" />
-          <Checkbox button className="color_success" defaultChecked label="Medium" />
-          <Checkbox button className="checkbox_lg color_success" defaultChecked label="Large" />
+          <Checkbox
+            button
+            className="checkbox_sm color_success"
+            defaultChecked
+            label="Small"
+          />
+          <Checkbox
+            button
+            className="color_success"
+            defaultChecked
+            label="Medium"
+          />
+          <Checkbox
+            button
+            className="checkbox_lg color_success"
+            defaultChecked
+            label="Large"
+          />
         </fieldset>
       </div>
-    )
+    ),
   },
   {
     title: '카드형',
     description: (
       <>
-        <code>div.checkbox_card</code> + card 조합입니다. 카드 전체 클릭은 <code>checkbox_card-clickable</code>을 씁니다.
+        <code>div.checkbox_card</code> + card 조합입니다. 카드 전체 클릭은{' '}
+        <code>checkbox_card-clickable</code>을 씁니다.
       </>
     ),
-    code: wrapPageExample(`<div className="checkbox_card">
+    code: wrapPageExample(
+      `<div className="checkbox_card">
   <Card compact className="card_shadow">
     <CardHeader extra={<Checkbox id="…" defaultChecked aria-labelledby="…" />}>
       <strong className="card_title" id="…">Basic</strong>
@@ -375,20 +574,25 @@ const [email, setEmail] = useState(true)
     </CardHeader>
     <CardBody id="…">개인 프로젝트에 적합합니다.</CardBody>
   </Card>
-</div>`, {
-  name: 'CheckboxExample10',
-  reactImports: [],
-  compImports: ['Card', 'CardBody', 'CardHeader', 'Checkbox']
-}),
+</div>`,
+      {
+        name: 'CheckboxExample10',
+        reactImports: [],
+        compImports: ['Card', 'CardBody', 'CardHeader', 'Checkbox'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
         <fieldset className="checkbox_group">
           <legend className="checkbox_group-legend">요금제 선택 (다중)</legend>
           <CardDeck columns={2}>
             <div className="checkbox_card">
-              <Card compact className="card_shadow">
+              <Card
+                compact
+                className="card_shadow"
+              >
                 <CardHeader
-                  extra={(
+                  extra={
                     <Checkbox
                       id="checkbox-plan-basic"
                       name="plan"
@@ -396,36 +600,52 @@ const [email, setEmail] = useState(true)
                       defaultChecked
                       aria-labelledby="checkbox-plan-basic-title checkbox-plan-basic-desc"
                     />
-                  )}
+                  }
                 >
-                  <strong className="card_title" id="checkbox-plan-basic-title">Basic</strong>
+                  <strong
+                    className="card_title"
+                    id="checkbox-plan-basic-title"
+                  >
+                    Basic
+                  </strong>
                   <p className="card_subtitle">월 9,000원</p>
                 </CardHeader>
                 <CardBody id="checkbox-plan-basic-desc">개인 프로젝트에 적합합니다.</CardBody>
               </Card>
             </div>
             <div className="checkbox_card color_primary">
-              <Card compact className="card_shadow">
+              <Card
+                compact
+                className="card_shadow"
+              >
                 <CardHeader
-                  extra={(
+                  extra={
                     <Checkbox
                       id="checkbox-plan-pro"
                       name="plan"
                       value="pro"
                       aria-labelledby="checkbox-plan-pro-title checkbox-plan-pro-desc"
                     />
-                  )}
+                  }
                 >
-                  <strong className="card_title" id="checkbox-plan-pro-title">Pro</strong>
+                  <strong
+                    className="card_title"
+                    id="checkbox-plan-pro-title"
+                  >
+                    Pro
+                  </strong>
                   <p className="card_subtitle">월 29,000원</p>
                 </CardHeader>
                 <CardBody id="checkbox-plan-pro-desc">팀 협업과 고급 기능을 제공합니다.</CardBody>
               </Card>
             </div>
             <div className="checkbox_card">
-              <Card compact className="card_shadow">
+              <Card
+                compact
+                className="card_shadow"
+              >
                 <CardHeader
-                  extra={(
+                  extra={
                     <Checkbox
                       id="checkbox-plan-enterprise"
                       name="plan"
@@ -433,9 +653,14 @@ const [email, setEmail] = useState(true)
                       disabled
                       aria-labelledby="checkbox-plan-enterprise-title checkbox-plan-enterprise-desc"
                     />
-                  )}
+                  }
                 >
-                  <strong className="card_title" id="checkbox-plan-enterprise-title">Enterprise</strong>
+                  <strong
+                    className="card_title"
+                    id="checkbox-plan-enterprise-title"
+                  >
+                    Enterprise
+                  </strong>
                   <p className="card_subtitle">별도 문의</p>
                 </CardHeader>
                 <CardBody id="checkbox-plan-enterprise-desc">
@@ -451,15 +676,20 @@ const [email, setEmail] = useState(true)
             <div className="checkbox_card color_success">
               <Card compact>
                 <CardHeader
-                  extra={(
+                  extra={
                     <Checkbox
                       id="checkbox-perm-read"
                       defaultChecked
                       aria-labelledby="checkbox-perm-read-title checkbox-perm-read-desc"
                     />
-                  )}
+                  }
                 >
-                  <strong className="card_title" id="checkbox-perm-read-title">읽기</strong>
+                  <strong
+                    className="card_title"
+                    id="checkbox-perm-read-title"
+                  >
+                    읽기
+                  </strong>
                 </CardHeader>
                 <CardBody id="checkbox-perm-read-desc">조회 권한</CardBody>
               </Card>
@@ -467,15 +697,20 @@ const [email, setEmail] = useState(true)
             <div className="checkbox_card color_success">
               <Card compact>
                 <CardHeader
-                  extra={(
+                  extra={
                     <Checkbox
                       id="checkbox-perm-write"
                       defaultChecked
                       aria-labelledby="checkbox-perm-write-title checkbox-perm-write-desc"
                     />
-                  )}
+                  }
                 >
-                  <strong className="card_title" id="checkbox-perm-write-title">쓰기</strong>
+                  <strong
+                    className="card_title"
+                    id="checkbox-perm-write-title"
+                  >
+                    쓰기
+                  </strong>
                 </CardHeader>
                 <CardBody id="checkbox-perm-write-desc">수정 권한</CardBody>
               </Card>
@@ -483,14 +718,19 @@ const [email, setEmail] = useState(true)
             <div className="checkbox_card">
               <Card compact>
                 <CardHeader
-                  extra={(
+                  extra={
                     <Checkbox
                       id="checkbox-perm-delete"
                       aria-labelledby="checkbox-perm-delete-title checkbox-perm-delete-desc"
                     />
-                  )}
+                  }
                 >
-                  <strong className="card_title" id="checkbox-perm-delete-title">삭제</strong>
+                  <strong
+                    className="card_title"
+                    id="checkbox-perm-delete-title"
+                  >
+                    삭제
+                  </strong>
                 </CardHeader>
                 <CardBody id="checkbox-perm-delete-desc">삭제 권한</CardBody>
               </Card>
@@ -508,9 +748,12 @@ const [email, setEmail] = useState(true)
               role="presentation"
               onClick={onClickableCardClick}
             >
-              <Card compact className="card_shadow">
+              <Card
+                compact
+                className="card_shadow"
+              >
                 <CardHeader
-                  extra={(
+                  extra={
                     <Checkbox
                       id="checkbox-plan-full-basic"
                       name="plan-clickable"
@@ -518,9 +761,14 @@ const [email, setEmail] = useState(true)
                       defaultChecked
                       aria-labelledby="checkbox-plan-full-basic-title checkbox-plan-full-basic-desc"
                     />
-                  )}
+                  }
                 >
-                  <strong className="card_title" id="checkbox-plan-full-basic-title">Basic</strong>
+                  <strong
+                    className="card_title"
+                    id="checkbox-plan-full-basic-title"
+                  >
+                    Basic
+                  </strong>
                   <p className="card_subtitle">월 9,000원</p>
                 </CardHeader>
                 <CardBody id="checkbox-plan-full-basic-desc">
@@ -534,18 +782,26 @@ const [email, setEmail] = useState(true)
               role="presentation"
               onClick={onClickableCardClick}
             >
-              <Card compact className="card_shadow">
+              <Card
+                compact
+                className="card_shadow"
+              >
                 <CardHeader
-                  extra={(
+                  extra={
                     <Checkbox
                       id="checkbox-plan-full-pro"
                       name="plan-clickable"
                       value="pro"
                       aria-labelledby="checkbox-plan-full-pro-title checkbox-plan-full-pro-desc"
                     />
-                  )}
+                  }
                 >
-                  <strong className="card_title" id="checkbox-plan-full-pro-title">Pro</strong>
+                  <strong
+                    className="card_title"
+                    id="checkbox-plan-full-pro-title"
+                  >
+                    Pro
+                  </strong>
                   <p className="card_subtitle">월 29,000원</p>
                 </CardHeader>
                 <CardBody id="checkbox-plan-full-pro-desc">
@@ -559,9 +815,12 @@ const [email, setEmail] = useState(true)
               role="presentation"
               onClick={onClickableCardClick}
             >
-              <Card compact className="card_shadow">
+              <Card
+                compact
+                className="card_shadow"
+              >
                 <CardHeader
-                  extra={(
+                  extra={
                     <Checkbox
                       id="checkbox-plan-full-enterprise"
                       name="plan-clickable"
@@ -569,9 +828,14 @@ const [email, setEmail] = useState(true)
                       disabled
                       aria-labelledby="checkbox-plan-full-enterprise-title checkbox-plan-full-enterprise-desc"
                     />
-                  )}
+                  }
                 >
-                  <strong className="card_title" id="checkbox-plan-full-enterprise-title">Enterprise</strong>
+                  <strong
+                    className="card_title"
+                    id="checkbox-plan-full-enterprise-title"
+                  >
+                    Enterprise
+                  </strong>
                   <p className="card_subtitle">별도 문의</p>
                 </CardHeader>
                 <CardBody id="checkbox-plan-full-enterprise-desc">
@@ -582,7 +846,7 @@ const [email, setEmail] = useState(true)
           </CardDeck>
         </fieldset>
       </div>
-    )
+    ),
   },
   {
     title: '폼 레이아웃',
@@ -591,7 +855,8 @@ const [email, setEmail] = useState(true)
         <code>form_vertical</code> · <code>form_horizontal</code>과 함께 사용합니다.
       </>
     ),
-    code: wrapPageExample(`<form className="form form_vertical form_fit">
+    code: wrapPageExample(
+      `<form className="form form_vertical form_fit">
   <div className="form_field">
     <span className="form_field-label" id="…">수신 동의</span>
     <fieldset className="checkbox_group" aria-labelledby="…">
@@ -599,48 +864,75 @@ const [email, setEmail] = useState(true)
       <Checkbox label="뉴스레터 구독" />
     </fieldset>
   </div>
-</form>`, {
-  name: 'CheckboxFormExample',
-  reactImports: [],
-  compImports: ['Checkbox']
-}),
+</form>`,
+      {
+        name: 'CheckboxFormExample',
+        reactImports: [],
+        compImports: ['Checkbox'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
-        <form className="form form_vertical form_fit" onSubmit={(event) => event.preventDefault()}>
+        <form
+          className="form form_vertical form_fit"
+          onSubmit={(event) => event.preventDefault()}
+        >
           <div className="form_field">
-            <span className="form_field-label" id="checkbox-form-vertical-label">
+            <span
+              className="form_field-label"
+              id="checkbox-form-vertical-label"
+            >
               수신 동의
             </span>
-            <fieldset className="checkbox_group" aria-labelledby="checkbox-form-vertical-label">
-              <Checkbox defaultChecked label="마케팅 정보 수신" />
+            <fieldset
+              className="checkbox_group"
+              aria-labelledby="checkbox-form-vertical-label"
+            >
+              <Checkbox
+                defaultChecked
+                label="마케팅 정보 수신"
+              />
               <Checkbox label="뉴스레터 구독" />
             </fieldset>
           </div>
         </form>
-        <form className="form form_horizontal form_fit" onSubmit={(event) => event.preventDefault()}>
+        <form
+          className="form form_horizontal form_fit"
+          onSubmit={(event) => event.preventDefault()}
+        >
           <div className="form_field">
-            <span className="form_field-label" id="checkbox-form-horizontal-label">
+            <span
+              className="form_field-label"
+              id="checkbox-form-horizontal-label"
+            >
               권한
             </span>
             <fieldset
               className="checkbox_group checkbox_group_horizontal"
               aria-labelledby="checkbox-form-horizontal-label"
             >
-              <Checkbox button defaultChecked label="조회" />
-              <Checkbox button label="편집" />
+              <Checkbox
+                button
+                defaultChecked
+                label="조회"
+              />
+              <Checkbox
+                button
+                label="편집"
+              />
             </fieldset>
           </div>
         </form>
       </div>
-    )
-  }
-]
+    ),
+  },
+];
 
 /**
  * Checkbox 가이드 화면.
  * docs와 동일한 유형·상태·그룹·카드형 예시와 API 문서를 모은다.
  */
-export default function CheckboxGuide () {
+export default function CheckboxGuide() {
   return (
     <GuideLayout
       category="폼"
@@ -661,5 +953,5 @@ export default function CheckboxGuide () {
 
       <GuideApiDocs sections={checkboxApiSections} />
     </GuideLayout>
-  )
+  );
 }

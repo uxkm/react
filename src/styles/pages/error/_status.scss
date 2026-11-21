@@ -93,7 +93,12 @@
   }
 }
 
-.page-container.error-status { color: var(--color-text);
-  > p:first-child { color: var(--color-accent-text); }
-  > h1 ~ p { color: var(--color-text-muted); }
+.page-container.error-status {
+  color: var(--color-text);
+  > p:first-child {
+    color: var(--color-accent-text);
+  }
+  > h1 ~ p {
+    color: var(--color-text-muted);
+  }
 }

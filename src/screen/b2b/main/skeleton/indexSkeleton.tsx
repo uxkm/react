@@ -1,27 +1,34 @@
-import { Skeleton } from '@/comp/ui/Skeleton' // Skeleton 컴포넌트
+import { Skeleton } from '@/comp/ui/Skeleton'; // Skeleton 컴포넌트
 
 /** 영역 전체를 채우는 뼈대. 부모 그리드·카드 높이를 그대로 따른다. */
-function FillBone ({ radius = 20 }: { readonly radius?: number }) {
+function FillBone({ radius = 20 }: { readonly radius?: number }) {
   return (
     <Skeleton
       block
       height="100%"
       style={{ display: 'block', borderRadius: radius }}
     />
-  )
+  );
 }
 
 /** 멀캠ON 콘텐츠 카드와 같은 비율·패딩 구조의 뼈대. */
-function InsightCardBone () {
+function InsightCardBone() {
   return (
-    <div className="card card_content" aria-hidden="true">
+    <div
+      className="card card_content"
+      aria-hidden="true"
+    >
       <span
         className="skeleton card_content-media"
         style={{ display: 'block', width: '100%', aspectRatio: '16 / 9', borderRadius: 0 }}
         aria-hidden="true"
       />
       <div className="card_content-body">
-        <Skeleton variant="chip" width={88} height={32} />
+        <Skeleton
+          variant="chip"
+          width={88}
+          height={32}
+        />
         <Skeleton
           block
           height={34}
@@ -42,16 +49,23 @@ function InsightCardBone () {
         />
       </div>
     </div>
-  )
+  );
 }
 
 /** 메인 실제 섹션 클래스·그리드·카드 크기를 그대로 쓰는 수동 스켈레톤. */
-export default function IndexSkeleton () {
+export default function IndexSkeleton() {
   return (
     <>
-      <section className="main-hero" aria-hidden="true">
+      <section
+        className="main-hero"
+        aria-hidden="true"
+      >
         <h1>
-          <Skeleton height={68} width={720} style={{ maxWidth: '100%' }} />
+          <Skeleton
+            height={68}
+            width={720}
+            style={{ maxWidth: '100%' }}
+          />
         </h1>
         <p>
           <Skeleton
@@ -62,7 +76,10 @@ export default function IndexSkeleton () {
         </p>
       </section>
 
-      <section className="main-cards" aria-hidden="true">
+      <section
+        className="main-cards"
+        aria-hidden="true"
+      >
         <div className="main-cards_promotion">
           <FillBone />
         </div>
@@ -81,11 +98,22 @@ export default function IndexSkeleton () {
         </div>
       </section>
 
-      <section className="main-insights" aria-hidden="true">
+      <section
+        className="main-insights"
+        aria-hidden="true"
+      >
         <h2>
           <span className="main-insights_headline">
-            <Skeleton height={48} width={280} style={{ maxWidth: '100%' }} />
-            <Skeleton height={48} width={360} style={{ maxWidth: '100%' }} />
+            <Skeleton
+              height={48}
+              width={280}
+              style={{ maxWidth: '100%' }}
+            />
+            <Skeleton
+              height={48}
+              width={360}
+              style={{ maxWidth: '100%' }}
+            />
           </span>
           <Skeleton
             height={48}
@@ -100,7 +128,10 @@ export default function IndexSkeleton () {
         </div>
       </section>
 
-      <section className="main-cases" aria-hidden="true">
+      <section
+        className="main-cases"
+        aria-hidden="true"
+      >
         <h2>
           <Skeleton
             height={48}
@@ -114,13 +145,25 @@ export default function IndexSkeleton () {
           />
         </h2>
         <div className="main-skeleton_cases-track">
-          <span className="skeleton main-skeleton_case" aria-hidden="true" />
-          <span className="skeleton main-skeleton_case" aria-hidden="true" />
-          <span className="skeleton main-skeleton_case" aria-hidden="true" />
+          <span
+            className="skeleton main-skeleton_case"
+            aria-hidden="true"
+          />
+          <span
+            className="skeleton main-skeleton_case"
+            aria-hidden="true"
+          />
+          <span
+            className="skeleton main-skeleton_case"
+            aria-hidden="true"
+          />
         </div>
       </section>
 
-      <section className="main-callouts" aria-hidden="true">
+      <section
+        className="main-callouts"
+        aria-hidden="true"
+      >
         <div className="card card_callout">
           <Skeleton
             height={48}
@@ -138,8 +181,16 @@ export default function IndexSkeleton () {
             style={{ display: 'block', margin: '8px auto 0' }}
           />
           <div className="card_callout-actions">
-            <Skeleton height={56} width={160} style={{ borderRadius: 60 }} />
-            <Skeleton height={56} width={180} style={{ borderRadius: 60 }} />
+            <Skeleton
+              height={56}
+              width={160}
+              style={{ borderRadius: 60 }}
+            />
+            <Skeleton
+              height={56}
+              width={180}
+              style={{ borderRadius: 60 }}
+            />
           </div>
         </div>
         <div className="card card_callout">
@@ -159,13 +210,29 @@ export default function IndexSkeleton () {
             style={{ display: 'block', margin: '8px auto 0' }}
           />
           <div className="card_callout-actions">
-            <Skeleton height={56} width={140} style={{ borderRadius: 60 }} />
-            <Skeleton height={40} width={40} round />
-            <Skeleton height={40} width={40} round />
-            <Skeleton height={40} width={40} round />
+            <Skeleton
+              height={56}
+              width={140}
+              style={{ borderRadius: 60 }}
+            />
+            <Skeleton
+              height={40}
+              width={40}
+              round
+            />
+            <Skeleton
+              height={40}
+              width={40}
+              round
+            />
+            <Skeleton
+              height={40}
+              width={40}
+              round
+            />
           </div>
         </div>
       </section>
     </>
-  )
+  );
 }

@@ -1,14 +1,23 @@
-'use client'
+'use client';
 
-import { TopBanner, type TopBannerProps } from '@/comp/widget/TopBanner' // TopBanner · TopBannerProps 타입
-import { useLayoutSlotSync } from './LayoutContext' // Layout Slot Sync 훅
+import { TopBanner, type TopBannerProps } from '@/comp/widget/TopBanner'; // TopBanner · TopBannerProps 타입
+import { useLayoutSlotSync } from './LayoutContext'; // Layout Slot Sync 훅
 
 /** 페이지 배너를 공통 레이아웃의 헤더 위에 등록한다. 페이지 이동 시 슬롯을 정리한다. */
-export function PageBanner (props: TopBannerProps) {
-  useLayoutSlotSync((setSlot) => {
-    setSlot('banner', <TopBanner key={props.storageKey || 'app-top-banner'} {...props} />)
-  }, ['banner'])
-  return null
+export function PageBanner(props: TopBannerProps) {
+  useLayoutSlotSync(
+    (setSlot) => {
+      setSlot(
+        'banner',
+        <TopBanner
+          key={props.storageKey || 'app-top-banner'}
+          {...props}
+        />,
+      );
+    },
+    ['banner'],
+  );
+  return null;
 }
 
-export default PageBanner
+export default PageBanner;

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 /**
  * 달력.
@@ -12,45 +12,45 @@ import {
   useState, // 상태 훅
   type ButtonHTMLAttributes, // ButtonHTMLAttributes 타입
   type HTMLAttributes, // HTMLAttributes 타입
-  type ReactNode // ReactNode 타입
-} from 'react' // React
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
+  type ReactNode, // ReactNode 타입
+} from 'react'; // React
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
 
-const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토']
+const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
 /** 날짜 셀 데이터 */
 export interface CalendarDayData {
-  day: number
-  otherMonth?: boolean
-  today?: boolean
-  selected?: boolean
-  disabled?: boolean
-  sunday?: boolean
-  saturday?: boolean
-  rangeStart?: boolean
-  rangeEnd?: boolean
-  inRange?: boolean
-  event?: boolean
+  day: number;
+  otherMonth?: boolean;
+  today?: boolean;
+  selected?: boolean;
+  disabled?: boolean;
+  sunday?: boolean;
+  saturday?: boolean;
+  rangeStart?: boolean;
+  rangeEnd?: boolean;
+  inRange?: boolean;
+  event?: boolean;
 }
 
-function monthDays ({
+function monthDays({
   partial,
   selected = 15,
   today = 12,
   events = [],
   rangeStart,
-  rangeEnd
+  rangeEnd,
 }: {
-  partial?: number
-  selected?: number | null
-  today?: number
-  events?: number[]
-  rangeStart?: number
-  rangeEnd?: number
+  partial?: number;
+  selected?: number | null;
+  today?: number;
+  events?: number[];
+  rangeStart?: number;
+  rangeEnd?: number;
 } = {}): CalendarDayData[] {
-  const cells: CalendarDayData[] = []
-  if (!partial) [26, 27, 28, 29, 30, 31].forEach((day) => cells.push({ day, otherMonth: true }))
-  const count = partial || 30
+  const cells: CalendarDayData[] = [];
+  if (!partial) [26, 27, 28, 29, 30, 31].forEach((day) => cells.push({ day, otherMonth: true }));
+  const count = partial || 30;
   for (let day = 1; day <= count; day += 1) {
     cells.push({
       day,
@@ -59,41 +59,41 @@ function monthDays ({
       rangeStart: day === rangeStart,
       rangeEnd: day === rangeEnd,
       inRange: rangeStart != null && rangeEnd != null && day > rangeStart && day < rangeEnd,
-      event: events.includes(day)
-    })
+      event: events.includes(day),
+    });
   }
-  if (!partial) [1, 2, 3, 4, 5, 6].forEach((day) => cells.push({ day, otherMonth: true }))
-  return cells
+  if (!partial) [1, 2, 3, 4, 5, 6].forEach((day) => cells.push({ day, otherMonth: true }));
+  return cells;
 }
 
 /** Calendar 루트 props */
 export interface CalendarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
-  title?: ReactNode
-  ariaLabel?: string
-  header?: ReactNode
-  weekdays?: ReactNode
-  footer?: ReactNode
-  children?: ReactNode
-  noHeader?: boolean
-  minimal?: boolean
-  compact?: boolean
-  borderless?: boolean
-  shadow?: boolean
-  ghost?: boolean
-  week?: boolean
-  readonly?: boolean
-  disabled?: boolean
-  weekends?: boolean
-  agenda?: boolean
-  wheel?: boolean
-  size?: '' | 'sm' | 'lg'
+  title?: ReactNode;
+  ariaLabel?: string;
+  header?: ReactNode;
+  weekdays?: ReactNode;
+  footer?: ReactNode;
+  children?: ReactNode;
+  noHeader?: boolean;
+  minimal?: boolean;
+  compact?: boolean;
+  borderless?: boolean;
+  shadow?: boolean;
+  ghost?: boolean;
+  week?: boolean;
+  readonly?: boolean;
+  disabled?: boolean;
+  weekends?: boolean;
+  agenda?: boolean;
+  wheel?: boolean;
+  size?: '' | 'sm' | 'lg';
 }
 
 /**
  * 달력 루트.
  * 스킨·레이아웃 플래그와 header · weekdays · children · footer를 조합한다.
  */
-export function Calendar ({
+export function Calendar({
   title,
   ariaLabel,
   header,
@@ -133,9 +133,9 @@ export function Calendar ({
     wheel && 'calendar_wheel',
     size === 'sm' && 'calendar_sm',
     size === 'lg' && 'calendar_lg',
-    className
-  )
-  const resolvedRole = role === 'feed' ? 'region' : role
+    className,
+  );
+  const resolvedRole = role === 'feed' ? 'region' : role;
 
   return (
     <div
@@ -146,35 +146,35 @@ export function Calendar ({
       {...rest}
     >
       {header ??
-        (title && !noHeader && !minimal
-          ? (
-            <CalendarHeader title={title} showNav={false} />
-            )
-          : null)}
+        (title && !noHeader && !minimal ? (
+          <CalendarHeader
+            title={title}
+            showNav={false}
+          />
+        ) : null)}
       {weekdays}
       {children}
       {footer}
     </div>
-  )
+  );
 }
 
-export interface CalendarHeaderProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
-  title?: ReactNode
-  prevLabel?: string
-  nextLabel?: string
-  showNav?: boolean
-  showPrev?: boolean
-  showNext?: boolean
+export interface CalendarHeaderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
+  title?: ReactNode;
+  prevLabel?: string;
+  nextLabel?: string;
+  showNav?: boolean;
+  showPrev?: boolean;
+  showNext?: boolean;
   /** 이전 달 클릭. 페이지에서 월을 제어한다 */
-  onPrev?: () => void
+  onPrev?: () => void;
   /** 다음 달 클릭. 페이지에서 월을 제어한다 */
-  onNext?: () => void
-  children?: ReactNode
+  onNext?: () => void;
+  children?: ReactNode;
 }
 
 /** 월 헤더와 이전·다음 탐색 */
-export function CalendarHeader ({
+export function CalendarHeader({
   title,
   prevLabel = '이전 달',
   nextLabel = '다음 달',
@@ -187,59 +187,58 @@ export function CalendarHeader ({
   className,
   ...rest
 }: CalendarHeaderProps) {
-  const prev = showPrev ?? showNav
-  const next = showNext ?? showNav
+  const prev = showPrev ?? showNav;
+  const next = showNext ?? showNav;
   return (
-    <div className={classNames('calendar_header', className)} {...rest}>
-      {prev
-        ? (
-          <button
-            type="button"
-            className="btn btn_ghost btn_icon-only btn_sm"
-            aria-label={prevLabel}
-            onClick={onPrev}
-          >
-            ‹
-          </button>
-          )
-        : null}
+    <div
+      className={classNames('calendar_header', className)}
+      {...rest}
+    >
+      {prev ? (
+        <button
+          type="button"
+          className="btn btn_ghost btn_icon-only btn_sm"
+          aria-label={prevLabel}
+          onClick={onPrev}
+        >
+          ‹
+        </button>
+      ) : null}
       <span className="calendar_title">{title}</span>
-      {next
-        ? (
-          <button
-            type="button"
-            className="btn btn_ghost btn_icon-only btn_sm"
-            aria-label={nextLabel}
-            onClick={onNext}
-          >
-            ›
-          </button>
-          )
-        : null}
+      {next ? (
+        <button
+          type="button"
+          className="btn btn_ghost btn_icon-only btn_sm"
+          aria-label={nextLabel}
+          onClick={onNext}
+        >
+          ›
+        </button>
+      ) : null}
       {children}
     </div>
-  )
+  );
 }
 
 export interface CalendarNavProps {
-  label?: ReactNode
-  prevLabel?: string
-  nextLabel?: string
-  className?: string
+  label?: ReactNode;
+  prevLabel?: string;
+  nextLabel?: string;
+  className?: string;
   /** 이전 주 클릭 */
-  onPrev?: () => void
+  onPrev?: () => void;
   /** 다음 주 클릭 */
-  onNext?: () => void
+  onNext?: () => void;
 }
 
 /** 주간 탐색 바 */
-export function CalendarNav ({
+export function CalendarNav({
   label,
   prevLabel = '이전 주',
   nextLabel = '다음 주',
   className,
   onPrev,
-  onNext
+  onNext,
 }: CalendarNavProps) {
   return (
     <div className={classNames('calendar_nav', className)}>
@@ -261,47 +260,50 @@ export function CalendarNav ({
         ›
       </button>
     </div>
-  )
+  );
 }
 
 export interface CalendarWeekdaysProps {
-  labels?: string[]
-  className?: string
+  labels?: string[];
+  className?: string;
 }
 
 /** 요일 행 */
-export function CalendarWeekdays ({
-  labels = WEEKDAYS,
-  className
-}: CalendarWeekdaysProps) {
+export function CalendarWeekdays({ labels = WEEKDAYS, className }: CalendarWeekdaysProps) {
   return (
-    <div className={classNames('calendar_weekdays', className)} aria-hidden="true">
+    <div
+      className={classNames('calendar_weekdays', className)}
+      aria-hidden="true"
+    >
       {labels.map((label) => (
-        <span key={label} className="calendar_weekday">
+        <span
+          key={label}
+          className="calendar_weekday"
+        >
           {label}
         </span>
       ))}
     </div>
-  )
+  );
 }
 
 export interface CalendarDayProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  day?: ReactNode
-  otherMonth?: boolean
-  today?: boolean
-  selected?: boolean
-  disabled?: boolean
-  sunday?: boolean
-  saturday?: boolean
-  rangeStart?: boolean
-  rangeEnd?: boolean
-  inRange?: boolean
-  event?: boolean
-  readonly?: boolean
+  day?: ReactNode;
+  otherMonth?: boolean;
+  today?: boolean;
+  selected?: boolean;
+  disabled?: boolean;
+  sunday?: boolean;
+  saturday?: boolean;
+  rangeStart?: boolean;
+  rangeEnd?: boolean;
+  inRange?: boolean;
+  event?: boolean;
+  readonly?: boolean;
 }
 
 /** 날짜 한 칸 */
-export function CalendarDay ({
+export function CalendarDay({
   day,
   otherMonth,
   today,
@@ -329,8 +331,8 @@ export function CalendarDay ({
     rangeEnd && 'is-range-end',
     inRange && 'is-in-range',
     event && 'has-event',
-    className
-  )
+    className,
+  );
   return (
     <button
       type="button"
@@ -343,52 +345,50 @@ export function CalendarDay ({
     >
       {day}
     </button>
-  )
+  );
 }
 
 export interface CalendarGridProps extends HTMLAttributes<HTMLDivElement> {
-  week?: boolean
-  children?: ReactNode
+  week?: boolean;
+  children?: ReactNode;
 }
 
 /** 날짜 그리드 래퍼 */
-export function CalendarGrid ({
-  children,
-  week = false,
-  className,
-  ...rest
-}: CalendarGridProps) {
+export function CalendarGrid({ children, week = false, className, ...rest }: CalendarGridProps) {
   return (
-    <div className={classNames('calendar_grid', week && 'calendar_grid-week', className)} {...rest}>
+    <div
+      className={classNames('calendar_grid', week && 'calendar_grid-week', className)}
+      {...rest}
+    >
       {children}
     </div>
-  )
+  );
 }
 
 export interface CalendarMonthProps {
-  days?: CalendarDayData[]
+  days?: CalendarDayData[];
   /** 선택일. null 이면 미선택. 넘기면 제어 */
-  selected?: number | null
+  selected?: number | null;
   /** 비제어 초기 선택일. days 없을 때 기본 15 */
-  defaultSelected?: number | null
-  today?: number
-  disabled?: number[]
-  events?: number[]
-  rangeStart?: number
-  rangeEnd?: number
-  weekends?: boolean
-  partial?: number
-  week?: boolean
-  readonly?: boolean
+  defaultSelected?: number | null;
+  today?: number;
+  disabled?: number[];
+  events?: number[];
+  rangeStart?: number;
+  rangeEnd?: number;
+  weekends?: boolean;
+  partial?: number;
+  week?: boolean;
+  readonly?: boolean;
   /**
    * 날짜 셀 클릭. 페이지에서 선택일을 제어한다.
    * otherMonth · disabled 셀은 호출되지 않는다.
    */
-  onSelect?: (day: CalendarDayData, index: number) => void
+  onSelect?: (day: CalendarDayData, index: number) => void;
 }
 
 /** 월(또는 주) 날짜 셀 그리드 */
-export function CalendarMonth ({
+export function CalendarMonth({
   days,
   selected: selectedProp,
   defaultSelected,
@@ -401,15 +401,15 @@ export function CalendarMonth ({
   partial,
   week = false,
   readonly = false,
-  onSelect
+  onSelect,
 }: CalendarMonthProps) {
-  const selectedControlled = selectedProp !== undefined
+  const selectedControlled = selectedProp !== undefined;
   const [innerSelected, setInnerSelected] = useState<number | null>(() => {
-    if (defaultSelected !== undefined) return defaultSelected
+    if (defaultSelected !== undefined) return defaultSelected;
     // days 를 직접 주면 셀 플래그를 쓰고, 아니면 데모용 15
-    return days !== undefined ? null : 15
-  })
-  const selected = selectedControlled ? selectedProp : innerSelected
+    return days !== undefined ? null : 15;
+  });
+  const selected = selectedControlled ? selectedProp : innerSelected;
 
   // days !== undefined 이면 빈 배열도 유지. selected 를 넘기거나 비제어 선택이 있으면 덮어쓴다.
   const resolved = useMemo(() => {
@@ -417,33 +417,27 @@ export function CalendarMonth ({
       if (selectedControlled) {
         return cells.map((cell) => ({
           ...cell,
-          selected:
-            cell.day === selectedProp ||
-            cell.day === rangeStart ||
-            cell.day === rangeEnd
-        }))
+          selected: cell.day === selectedProp || cell.day === rangeStart || cell.day === rangeEnd,
+        }));
       }
       if (selected == null && defaultSelected === undefined && days !== undefined) {
-        return cells
+        return cells;
       }
       return cells.map((cell) => ({
         ...cell,
-        selected:
-          cell.day === selected ||
-          cell.day === rangeStart ||
-          cell.day === rangeEnd
-      }))
-    }
+        selected: cell.day === selected || cell.day === rangeStart || cell.day === rangeEnd,
+      }));
+    };
 
-    if (days !== undefined) return applySelected(days)
+    if (days !== undefined) return applySelected(days);
     return monthDays({
       partial,
       selected: selected !== undefined ? selected : 15,
       today,
       events,
       rangeStart,
-      rangeEnd
-    })
+      rangeEnd,
+    });
   }, [
     days,
     partial,
@@ -454,13 +448,13 @@ export function CalendarMonth ({
     today,
     events,
     rangeStart,
-    rangeEnd
-  ])
+    rangeEnd,
+  ]);
 
   return (
     <CalendarGrid week={week}>
       {resolved.map((cell, index) => {
-        const isDisabled = cell.disabled || disabled.includes(cell.day)
+        const isDisabled = cell.disabled || disabled.includes(cell.day);
         return (
           <CalendarDay
             key={`${cell.day}-${index}`}
@@ -473,34 +467,34 @@ export function CalendarMonth ({
               readonly || isDisabled
                 ? undefined
                 : () => {
-                    if (cell.otherMonth && !(cell.selected || cell.inRange)) return
-                    if (!selectedControlled) setInnerSelected(cell.day)
-                    onSelect?.(cell, index)
+                    if (cell.otherMonth && !(cell.selected || cell.inRange)) return;
+                    if (!selectedControlled) setInnerSelected(cell.day);
+                    onSelect?.(cell, index);
                   }
             }
           />
-        )
+        );
       })}
     </CalendarGrid>
-  )
+  );
 }
 
 export interface CalendarFooterProps extends HTMLAttributes<HTMLDivElement> {
-  children?: ReactNode
-  todayLabel?: string
-  clearLabel?: string
-  confirmLabel?: string
-  showDefaults?: boolean
+  children?: ReactNode;
+  todayLabel?: string;
+  clearLabel?: string;
+  confirmLabel?: string;
+  showDefaults?: boolean;
   /** 오늘 클릭 */
-  onToday?: () => void
+  onToday?: () => void;
   /** 초기화 클릭 */
-  onClear?: () => void
+  onClear?: () => void;
   /** 확인 클릭 */
-  onConfirm?: () => void
+  onConfirm?: () => void;
 }
 
 /** 하단 액션 영역 */
-export function CalendarFooter ({
+export function CalendarFooter({
   children,
   className,
   todayLabel = '오늘',
@@ -513,7 +507,10 @@ export function CalendarFooter ({
   ...rest
 }: CalendarFooterProps) {
   return (
-    <div className={classNames('calendar_footer', className)} {...rest}>
+    <div
+      className={classNames('calendar_footer', className)}
+      {...rest}
+    >
       <button
         type="button"
         className="btn btn_text color_primary btn_sm"
@@ -522,8 +519,8 @@ export function CalendarFooter ({
         {todayLabel}
       </button>
       <div className="calendar_footer-actions">
-        {children ?? (showDefaults
-          ? (
+        {children ??
+          (showDefaults ? (
             <>
               <button
                 type="button"
@@ -540,50 +537,48 @@ export function CalendarFooter ({
                 {confirmLabel}
               </button>
             </>
-            )
-          : null)}
+          ) : null)}
       </div>
     </div>
-  )
+  );
 }
 
 export interface CalendarGroupProps extends HTMLAttributes<HTMLDivElement> {
-  children?: ReactNode
+  children?: ReactNode;
 }
 
 /** 다중 패널 그룹 */
-export function CalendarGroup ({
-  children,
-  className,
-  ...rest
-}: CalendarGroupProps) {
+export function CalendarGroup({ children, className, ...rest }: CalendarGroupProps) {
   return (
-    <div className={classNames('calendar_group', className)} {...rest}>
+    <div
+      className={classNames('calendar_group', className)}
+      {...rest}
+    >
       {children}
     </div>
-  )
+  );
 }
 
 export interface CalendarWheelProps {
-  title?: ReactNode
-  shadow?: boolean
-  borderless?: boolean
-  footer?: boolean
-  toolbar?: boolean
-  cancelLabel?: string
-  confirmLabel?: string
-  ariaLabel?: string
-  toolbarContent?: ReactNode
-  footerContent?: ReactNode
-  children?: ReactNode
+  title?: ReactNode;
+  shadow?: boolean;
+  borderless?: boolean;
+  footer?: boolean;
+  toolbar?: boolean;
+  cancelLabel?: string;
+  confirmLabel?: string;
+  ariaLabel?: string;
+  toolbarContent?: ReactNode;
+  footerContent?: ReactNode;
+  children?: ReactNode;
   /** 취소 클릭 */
-  onCancel?: () => void
+  onCancel?: () => void;
   /** 완료/확인 클릭 */
-  onConfirm?: () => void
+  onConfirm?: () => void;
 }
 
 /** iOS 스타일 휠 선택기 */
-export function CalendarWheel ({
+export function CalendarWheel({
   title,
   shadow,
   borderless,
@@ -596,74 +591,78 @@ export function CalendarWheel ({
   footerContent,
   children,
   onCancel,
-  onConfirm
+  onConfirm,
 }: CalendarWheelProps) {
-  const showToolbar = toolbar && (toolbarContent || title || cancelLabel || confirmLabel)
+  const showToolbar = toolbar && (toolbarContent || title || cancelLabel || confirmLabel);
   return (
-    <Calendar wheel shadow={shadow} borderless={borderless} role="group" ariaLabel={ariaLabel}>
-      {showToolbar
-        ? (
-          <div className="calendar_wheel-toolbar">
-            {toolbarContent ?? (
-              <>
-                {cancelLabel
-                  ? (
-                    <button
-                      className="btn btn_text btn_sm"
-                      type="button"
-                      onClick={onCancel}
-                    >
-                      {cancelLabel}
-                    </button>
-                    )
-                  : null}
-                <span className="calendar_wheel-title">{title}</span>
-                {confirmLabel
-                  ? (
-                    <button
-                      className="btn btn_text color_primary btn_sm"
-                      type="button"
-                      onClick={onConfirm}
-                    >
-                      {confirmLabel}
-                    </button>
-                    )
-                  : null}
-              </>
-            )}
-          </div>
-          )
-        : null}
+    <Calendar
+      wheel
+      shadow={shadow}
+      borderless={borderless}
+      role="group"
+      ariaLabel={ariaLabel}
+    >
+      {showToolbar ? (
+        <div className="calendar_wheel-toolbar">
+          {toolbarContent ?? (
+            <>
+              {cancelLabel ? (
+                <button
+                  className="btn btn_text btn_sm"
+                  type="button"
+                  onClick={onCancel}
+                >
+                  {cancelLabel}
+                </button>
+              ) : null}
+              <span className="calendar_wheel-title">{title}</span>
+              {confirmLabel ? (
+                <button
+                  className="btn btn_text color_primary btn_sm"
+                  type="button"
+                  onClick={onConfirm}
+                >
+                  {confirmLabel}
+                </button>
+              ) : null}
+            </>
+          )}
+        </div>
+      ) : null}
       <div className="calendar_wheel-body">
-        <div className="calendar_wheel-highlight" aria-hidden="true" />
+        <div
+          className="calendar_wheel-highlight"
+          aria-hidden="true"
+        />
         <div className="calendar_wheel-columns">{children}</div>
-        <div className="calendar_wheel-fade" aria-hidden="true" />
+        <div
+          className="calendar_wheel-fade"
+          aria-hidden="true"
+        />
       </div>
-      {footer || footerContent
-        ? (
-          <div className="calendar_wheel-footer">{footerContent}</div>
-          )
-        : null}
+      {footer || footerContent ? (
+        <div className="calendar_wheel-footer">{footerContent}</div>
+      ) : null}
     </Calendar>
-  )
+  );
 }
 
 export interface CalendarWheelColumnProps {
-  label?: string
-  items?: Array<string | number>
+  label?: string;
+  items?: Array<string | number>;
   /** 선택값(제어). 넘기면 페이지가 값을 관리한다 */
-  selected?: string | number
+  selected?: string | number;
   /** 비제어 초기 선택 */
-  defaultSelected?: string | number
-  showSteps?: boolean
-  prevLabel?: string
-  nextLabel?: string
+  defaultSelected?: string | number;
+  showSteps?: boolean;
+  prevLabel?: string;
+  nextLabel?: string;
   /** 값이 바뀔 때 호출 */
-  onChange?: (value: string | number) => void
+  onChange?: (value: string | number) => void;
 }
 
 /** 휠 한 열 */
-export function CalendarWheelColumn ({
+export function CalendarWheelColumn({
   label,
   items = [],
   selected,
@@ -671,74 +670,80 @@ export function CalendarWheelColumn ({
   showSteps = true,
   prevLabel = '이전',
   nextLabel = '다음',
-  onChange
+  onChange,
 }: CalendarWheelColumnProps) {
-  const controlled = selected !== undefined
-  const [innerActive, setInnerActive] = useState(defaultSelected ?? selected)
-  const active = controlled ? selected : innerActive
-  const listRef = useRef<HTMLUListElement>(null)
+  const controlled = selected !== undefined;
+  const [innerActive, setInnerActive] = useState(defaultSelected ?? selected);
+  const active = controlled ? selected : innerActive;
+  const listRef = useRef<HTMLUListElement>(null);
   const index = Math.max(
     0,
-    items.findIndex((item) => String(item) === String(active))
-  )
+    items.findIndex((item) => String(item) === String(active)),
+  );
 
   const setActive = (next: string | number) => {
-    if (!controlled) setInnerActive(next)
-    onChange?.(next)
-  }
+    if (!controlled) setInnerActive(next);
+    onChange?.(next);
+  };
 
   const move = (offset: number) => {
-    const next = items[Math.max(0, Math.min(items.length - 1, index + offset))]
-    if (next !== undefined) setActive(next)
-  }
+    const next = items[Math.max(0, Math.min(items.length - 1, index + offset))];
+    if (next !== undefined) setActive(next);
+  };
 
   useEffect(() => {
-    const list = listRef.current
-    const selectedItem = list?.children[index] as HTMLElement | undefined
-    if (!list || !selectedItem) return
+    const list = listRef.current;
+    const selectedItem = list?.children[index] as HTMLElement | undefined;
+    if (!list || !selectedItem) return;
     const frame = requestAnimationFrame(() => {
-      const rowHeight = selectedItem.getBoundingClientRect().height || selectedItem.clientHeight
-      list.scrollTop = index * rowHeight
-    })
-    return () => cancelAnimationFrame(frame)
-  }, [index, items])
+      const rowHeight = selectedItem.getBoundingClientRect().height || selectedItem.clientHeight;
+      list.scrollTop = index * rowHeight;
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [index, items]);
 
   return (
     <div className="calendar_wheel-column">
-      {showSteps
-        ? (
-          <button
-            type="button"
-            className="btn btn_ghost btn_icon-only btn_sm calendar_wheel-step calendar_wheel-step-prev"
-            aria-label={prevLabel}
-            disabled={index <= 0}
-            onClick={() => move(-1)}
-          >
-            ⌃
-          </button>
-          )
-        : null}
-      <ul ref={listRef} className="calendar_wheel-list" role="listbox" aria-label={label}
+      {showSteps ? (
+        <button
+          type="button"
+          className="btn btn_ghost btn_icon-only btn_sm calendar_wheel-step calendar_wheel-step-prev"
+          aria-label={prevLabel}
+          disabled={index <= 0}
+          onClick={() => move(-1)}
+        >
+          ⌃
+        </button>
+      ) : null}
+      <ul
+        ref={listRef}
+        className="calendar_wheel-list"
+        role="listbox"
+        aria-label={label}
         onKeyDown={(event) => {
-          const key = event.key
-          let next = index
-          if (key === 'ArrowDown') next = Math.min(index + 1, items.length - 1)
-          else if (key === 'ArrowUp') next = Math.max(index - 1, 0)
-          else if (key === 'Home') next = 0
-          else if (key === 'End') next = items.length - 1
-          else return
-          event.preventDefault()
-          if (items[next] !== undefined) setActive(items[next])
-          listRef.current?.querySelectorAll<HTMLElement>('[role="option"]')[next]?.focus()
-        }}>
+          const key = event.key;
+          let next = index;
+          if (key === 'ArrowDown') next = Math.min(index + 1, items.length - 1);
+          else if (key === 'ArrowUp') next = Math.max(index - 1, 0);
+          else if (key === 'Home') next = 0;
+          else if (key === 'End') next = items.length - 1;
+          else return;
+          event.preventDefault();
+          if (items[next] !== undefined) setActive(items[next]);
+          listRef.current?.querySelectorAll<HTMLElement>('[role="option"]')[next]?.focus();
+        }}
+      >
         {items.map((item, itemIndex) => (
-          <li key={String(item)} role="presentation">
+          <li
+            key={String(item)}
+            role="presentation"
+          >
             <button
               type="button"
               role="option"
               className={classNames(
                 'calendar_wheel-item',
-                String(item) === String(active) && 'is-selected'
+                String(item) === String(active) && 'is-selected',
               )}
               aria-selected={String(item) === String(active)}
               tabIndex={itemIndex === index ? 0 : -1}
@@ -749,21 +754,19 @@ export function CalendarWheelColumn ({
           </li>
         ))}
       </ul>
-      {showSteps
-        ? (
-          <button
-            type="button"
-            className="btn btn_ghost btn_icon-only btn_sm calendar_wheel-step calendar_wheel-step-next"
-            aria-label={nextLabel}
-            disabled={index >= items.length - 1}
-            onClick={() => move(1)}
-          >
-            ⌄
-          </button>
-          )
-        : null}
+      {showSteps ? (
+        <button
+          type="button"
+          className="btn btn_ghost btn_icon-only btn_sm calendar_wheel-step calendar_wheel-step-next"
+          aria-label={nextLabel}
+          disabled={index >= items.length - 1}
+          onClick={() => move(1)}
+        >
+          ⌄
+        </button>
+      ) : null}
     </div>
-  )
+  );
 }
 
-export default Calendar
+export default Calendar;

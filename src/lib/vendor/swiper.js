@@ -1,4 +1,4 @@
-import { Swiper, SwiperSlide } from 'swiper/react' // Swiper React
+import { Swiper, SwiperSlide } from 'swiper/react'; // Swiper React
 import {
   A11y, // A11y 컴포넌트
   Autoplay, // Autoplay 컴포넌트
@@ -9,17 +9,17 @@ import {
   Keyboard, // Keyboard 컴포넌트
   Navigation, // Navigation 컴포넌트
   Pagination, // Pagination 컴포넌트
-  Thumbs // Thumbs 컴포넌트
-} from 'swiper/modules' // Swiper 모듈
+  Thumbs, // Thumbs 컴포넌트
+} from 'swiper/modules'; // Swiper 모듈
 
-import 'swiper/css' // swiper 패키지
-import 'swiper/css/navigation' // swiper 패키지
-import 'swiper/css/pagination' // swiper 패키지
-import 'swiper/css/effect-fade' // swiper 패키지
-import 'swiper/css/effect-coverflow' // swiper 패키지
-import 'swiper/css/grid' // swiper 패키지
-import 'swiper/css/free-mode' // swiper 패키지
-import 'swiper/css/thumbs' // swiper 패키지
+import 'swiper/css'; // swiper 패키지
+import 'swiper/css/navigation'; // swiper 패키지
+import 'swiper/css/pagination'; // swiper 패키지
+import 'swiper/css/effect-fade'; // swiper 패키지
+import 'swiper/css/effect-coverflow'; // swiper 패키지
+import 'swiper/css/grid'; // swiper 패키지
+import 'swiper/css/free-mode'; // swiper 패키지
+import 'swiper/css/thumbs'; // swiper 패키지
 
 export {
   Swiper,
@@ -33,11 +33,11 @@ export {
   Keyboard,
   Navigation,
   Pagination,
-  Thumbs
-}
+  Thumbs,
+};
 
 /** 슬라이더에서 기본으로 켜 두는 모듈 */
-export const defaultSwiperModules = [Navigation, Pagination, Autoplay, A11y, Keyboard]
+export const defaultSwiperModules = [Navigation, Pagination, Autoplay, A11y, Keyboard];
 
 /** Carousel 컴포넌트용 전체 모듈 */
 export const carouselSwiperModules = [
@@ -50,5 +50,5 @@ export const carouselSwiperModules = [
   EffectCoverflow,
   Grid,
   Thumbs,
-  FreeMode
-]
+  FreeMode,
+];

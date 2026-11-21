@@ -19,7 +19,6 @@
   --steps-dot-size: var(--size-8);
   --steps-pulse-duration: 1.5s;
 
-
   // ----- Steps size
   --steps-indicator-size-sm: 1.75rem;
   --steps-indicator-font-size-sm: var(--text-size-xs);
@@ -30,7 +29,6 @@
   --steps-indicator-font-size-lg: var(--text-size-base);
   --steps-title-size-lg: var(--text-size-base);
   --steps-desc-size-lg: var(--text-size-sm);
-
 }
 
 // Steps — OOCSS: 구조(.steps) + 변형(.steps_*) + 파트(.steps_item · .steps_indicator · .steps_tail · .steps_content)
@@ -52,7 +50,7 @@
 
 @mixin steps-indicator-pulse-ring($inset: -2px) {
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     inset: $inset;
     border-radius: inherit;

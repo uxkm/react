@@ -5,13 +5,13 @@
   --icon-size-4-5rem: 4.5rem;
 
   // ----- Icon — size (xs → 3xl)
-  --icon-size-xs: 0.75rem;   // 12px
-  --icon-size-sm: 1rem;      // 16px
-  --icon-size: 1.25rem;      // 20px · md 기본
-  --icon-size-lg: 1.5rem;    // 24px
-  --icon-size-xl: 2rem;      // 32px
-  --icon-size-2xl: 2.5rem;   // 40px
-  --icon-size-3xl: 3rem;     // 48px
+  --icon-size-xs: 0.75rem; // 12px
+  --icon-size-sm: 1rem; // 16px
+  --icon-size: 1.25rem; // 20px · md 기본
+  --icon-size-lg: 1.5rem; // 24px
+  --icon-size-xl: 2rem; // 32px
+  --icon-size-2xl: 2.5rem; // 40px
+  --icon-size-3xl: 3rem; // 48px
   --icon-spin-duration: 0.8s;
   --icon-circle-size-xs: 1.5rem;
   --icon-circle-size-sm: 1.75rem;
@@ -117,7 +117,7 @@
     position: relative;
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       inset: calc(-1 * var(--space-2));
       border-radius: inherit;

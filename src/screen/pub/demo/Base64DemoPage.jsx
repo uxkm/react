@@ -1,23 +1,23 @@
-'use client'
+'use client';
 
-import { useMemo, useState } from 'react' // React
-import { encode, decode } from 'js-base64' // Base64 인코딩
-import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { useMemo, useState } from 'react'; // React
+import { encode, decode } from 'js-base64'; // Base64 인코딩
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'; // Demo Layout 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'; // Demo Block 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'; // wrap Page Example
 
 /** js-base64 데모 */
-export default function Base64DemoPage () {
-  const [plain, setPlain] = useState('안녕하세요 퍼블리싱 목록')
-  const [encoded, setEncoded] = useState(() => encode('안녕하세요 퍼블리싱 목록'))
+export default function Base64DemoPage() {
+  const [plain, setPlain] = useState('안녕하세요 퍼블리싱 목록');
+  const [encoded, setEncoded] = useState(() => encode('안녕하세요 퍼블리싱 목록'));
 
   const decoded = useMemo(() => {
     try {
-      return decode(encoded)
+      return decode(encoded);
     } catch (err) {
-      return `(디코드 실패) ${err.message}`
+      return `(디코드 실패) ${err.message}`;
     }
-  }, [encoded])
+  }, [encoded]);
 
   return (
     <DemoLayout
@@ -27,7 +27,8 @@ export default function Base64DemoPage () {
     >
       <DemoBlock
         title="인코드"
-        code={wrapPageExample(`const [plain, setPlain] = useState('안녕하세요 퍼블리싱 목록')
+        code={wrapPageExample(
+          `const [plain, setPlain] = useState('안녕하세요 퍼블리싱 목록')
 const encoded = useMemo(() => encode(plain), [plain])
 
 <div className="demo-stack">
@@ -38,29 +39,37 @@ const encoded = useMemo(() => encode(plain), [plain])
     aria-label="원문"
   />
   <pre tabIndex={0} className="lib-demo-pre">{encoded}</pre>
-</div>`, {
-          name: 'Base64EncodeExample',
-          reactImports: ['useMemo', 'useState'],
-          compImports: [],
-          extraImports: ["import { encode } from 'js-base64'"]
-        })}
+</div>`,
+          {
+            name: 'Base64EncodeExample',
+            reactImports: ['useMemo', 'useState'],
+            compImports: [],
+            extraImports: ["import { encode } from 'js-base64'"],
+          },
+        )}
       >
         <div className="demo-stack">
           <textarea
             className="lib-demo-textarea"
             value={plain}
             onChange={(e) => {
-              setPlain(e.target.value)
-              setEncoded(encode(e.target.value))
+              setPlain(e.target.value);
+              setEncoded(encode(e.target.value));
             }}
             aria-label="원문"
           />
-          <pre tabIndex={0} className="lib-demo-pre">{encoded}</pre>
+          <pre
+            tabIndex={0}
+            className="lib-demo-pre"
+          >
+            {encoded}
+          </pre>
         </div>
       </DemoBlock>
       <DemoBlock
         title="디코드"
-        code={wrapPageExample(`const [encoded, setEncoded] = useState('7JWI64WV7ZWY7IS47JqU')
+        code={wrapPageExample(
+          `const [encoded, setEncoded] = useState('7JWI64WV7ZWY7IS47JqU')
 
 const decoded = useMemo(() => {
   try {
@@ -78,12 +87,14 @@ const decoded = useMemo(() => {
     aria-label="Base64"
   />
   <pre tabIndex={0} className="lib-demo-pre">{decoded}</pre>
-</div>`, {
-          name: 'Base64DecodeExample',
-          reactImports: ['useMemo', 'useState'],
-          compImports: [],
-          extraImports: ["import { decode } from 'js-base64'"]
-        })}
+</div>`,
+          {
+            name: 'Base64DecodeExample',
+            reactImports: ['useMemo', 'useState'],
+            compImports: [],
+            extraImports: ["import { decode } from 'js-base64'"],
+          },
+        )}
       >
         <div className="demo-stack">
           <textarea
@@ -92,9 +103,14 @@ const decoded = useMemo(() => {
             onChange={(e) => setEncoded(e.target.value)}
             aria-label="Base64"
           />
-          <pre tabIndex={0} className="lib-demo-pre">{decoded}</pre>
+          <pre
+            tabIndex={0}
+            className="lib-demo-pre"
+          >
+            {decoded}
+          </pre>
         </div>
       </DemoBlock>
     </DemoLayout>
-  )
+  );
 }

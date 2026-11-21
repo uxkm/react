@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
-import { useEffect } from 'react' // effect 훅
+import { useEffect } from 'react'; // effect 훅
 
 /** 브라우저 탭 기본 사이트명 */
-export const SITE_NAME = '멀티캠퍼스 기업교육'
+export const SITE_NAME = '멀티캠퍼스 기업교육';
 
 /**
  * @typedef {object} SiteTitleOptions
@@ -21,15 +21,15 @@ export const SITE_NAME = '멀티캠퍼스 기업교육'
  * @param {SiteTitleOptions} [options]
  * @returns {string}
  */
-export function formatSiteTitle ({ page, section } = {}) {
-  const pageTitle = String(page || '').trim()
-  const sectionTitle = String(section || '').trim()
+export function formatSiteTitle({ page, section } = {}) {
+  const pageTitle = String(page || '').trim();
+  const sectionTitle = String(section || '').trim();
   if (pageTitle && sectionTitle) {
-    return `${pageTitle} - ${sectionTitle} | ${SITE_NAME}`
+    return `${pageTitle} - ${sectionTitle} | ${SITE_NAME}`;
   }
-  if (pageTitle) return `${pageTitle} | ${SITE_NAME}`
-  if (sectionTitle) return `${sectionTitle} | ${SITE_NAME}`
-  return SITE_NAME
+  if (pageTitle) return `${pageTitle} | ${SITE_NAME}`;
+  if (sectionTitle) return `${sectionTitle} | ${SITE_NAME}`;
+  return SITE_NAME;
 }
 
 /**
@@ -38,16 +38,16 @@ export function formatSiteTitle ({ page, section } = {}) {
  *
  * @param {SiteTitleOptions} [options]
  */
-export function useSiteTitle ({ page, section, enabled = true } = {}) {
-  const pageTitle = page || ''
-  const sectionTitle = section || ''
+export function useSiteTitle({ page, section, enabled = true } = {}) {
+  const pageTitle = page || '';
+  const sectionTitle = section || '';
 
   useEffect(() => {
-    if (!enabled) return undefined
-    const prev = document.title
-    document.title = formatSiteTitle({ page: pageTitle, section: sectionTitle })
+    if (!enabled) return undefined;
+    const prev = document.title;
+    document.title = formatSiteTitle({ page: pageTitle, section: sectionTitle });
     return () => {
-      document.title = prev
-    }
-  }, [pageTitle, sectionTitle, enabled])
+      document.title = prev;
+    };
+  }, [pageTitle, sectionTitle, enabled]);
 }

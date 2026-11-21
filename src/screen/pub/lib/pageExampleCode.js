@@ -12,41 +12,43 @@
  * @param {string} options.body 함수 본문(들여쓰기 없이 작성하면 2칸으로 맞춤)
  * @returns {string}
  */
-export function pageExampleCode ({
+export function pageExampleCode({
   name = 'Example',
   reactImports = ['useState'],
   compImports = [],
   extraImports = [],
-  body
+  body,
 }) {
-  const lines = ["'use client'", '']
+  const lines = ["'use client'", ''];
 
   if (reactImports.length) {
-    lines.push(`import { ${reactImports.join(', ')} } from 'react'`)
+    lines.push(`import { ${reactImports.join(', ')} } from 'react'`);
   }
   if (compImports.length) {
-    lines.push(`import { ${compImports.join(', ')} } from '@/comp'`)
+    lines.push(`import { ${compImports.join(', ')} } from '@/comp'`);
   }
   for (const line of extraImports) {
-    if (line) lines.push(line)
+    if (line) lines.push(line);
   }
 
-  lines.push('')
-  lines.push(`export default function ${name} () {`)
-  lines.push(indentBody(body))
-  lines.push('}')
+  lines.push('');
+  lines.push(`export default function ${name} () {`);
+  lines.push(indentBody(body));
+  lines.push('}');
 
-  return lines.join('\n')
+  return lines.join('\n');
 }
 
 /** 본문 각 줄에 2칸 들여쓰기. 빈 줄은 유지 */
-function indentBody (body) {
-  const text = String(body ?? '').replace(/^\n+/, '').replace(/\n+$/, '')
-  if (!text) return '  return null'
+function indentBody(body) {
+  const text = String(body ?? '')
+    .replace(/^\n+/, '')
+    .replace(/\n+$/, '');
+  if (!text) return '  return null';
   return text
     .split('\n')
     .map((line) => (line.trim() === '' ? '' : `  ${line}`))
-    .join('\n')
+    .join('\n');
 }
 
 /**
@@ -55,19 +57,21 @@ function indentBody (body) {
  * @param {string} jsx
  * @param {string} [prefix] return 앞 상태/상수 코드
  */
-export function pageExampleReturn (jsx, prefix = '') {
-  const trimmed = String(jsx ?? '').replace(/^\n+/, '').replace(/\n+$/, '')
-  let returnBlock
+export function pageExampleReturn(jsx, prefix = '') {
+  const trimmed = String(jsx ?? '')
+    .replace(/^\n+/, '')
+    .replace(/\n+$/, '');
+  let returnBlock;
   if (trimmed.startsWith('return')) {
-    returnBlock = trimmed
+    returnBlock = trimmed;
   } else if (trimmed.startsWith('<>') || trimmed.startsWith('<Fragment')) {
-    returnBlock = `return (\n${indentBody(trimmed)}\n)`
+    returnBlock = `return (\n${indentBody(trimmed)}\n)`;
   } else {
     // 형제 루트(Button + Modal 등)도 유효하도록 Fragment 사용
-    returnBlock = `return (\n  <>\n${indentBody(indentBody(trimmed))}\n  </>\n)`
+    returnBlock = `return (\n  <>\n${indentBody(indentBody(trimmed))}\n  </>\n)`;
   }
-  if (!prefix) return returnBlock
-  return `${String(prefix).replace(/\n+$/, '')}\n\n${returnBlock}`
+  if (!prefix) return returnBlock;
+  return `${String(prefix).replace(/\n+$/, '')}\n\n${returnBlock}`;
 }
 
 /**
@@ -81,26 +85,28 @@ export function pageExampleReturn (jsx, prefix = '') {
  * @param {string[]} [options.compImports]
  * @param {string[]} [options.extraImports]
  */
-export function wrapPageExample (fragment, options = {}) {
-  const text = String(fragment ?? '').replace(/^\n+/, '').replace(/\n+$/, '')
-  if (!text) return text
-  if (text.includes("'use client'") || text.includes('"use client"')) return text
+export function wrapPageExample(fragment, options = {}) {
+  const text = String(fragment ?? '')
+    .replace(/^\n+/, '')
+    .replace(/\n+$/, '');
+  if (!text) return text;
+  if (text.includes("'use client'") || text.includes('"use client"')) return text;
 
   const {
     name = 'Example',
     reactImports = ['useState'],
     compImports = [],
-    extraImports = []
-  } = options
+    extraImports = [],
+  } = options;
 
   // 이미 import + function 형태면 use client · export default 만 보강
   if (/^import\s/m.test(text) && /^function\s+\w+/m.test(text)) {
-    return ensurePageModule(text, name)
+    return ensurePageModule(text, name);
   }
 
   // 최상위 JSX 시작 줄만 고른다(헬퍼 function 안의 <Button> 등은 무시)
-  const lines = text.split('\n')
-  const jsxStart = findTopLevelJsxStart(lines)
+  const lines = text.split('\n');
+  const jsxStart = findTopLevelJsxStart(lines);
   if (jsxStart < 0) {
     // JSX 없으면 본문 전체를 함수 안에 둔다
     return pageExampleCode({
@@ -108,35 +114,35 @@ export function wrapPageExample (fragment, options = {}) {
       reactImports,
       compImports,
       extraImports,
-      body: text
-    })
+      body: text,
+    });
   }
 
-  const prefix = lines.slice(0, jsxStart).join('\n').replace(/\n+$/, '')
-  const jsx = lines.slice(jsxStart).join('\n')
+  const prefix = lines.slice(0, jsxStart).join('\n').replace(/\n+$/, '');
+  const jsx = lines.slice(jsxStart).join('\n');
   return pageExampleCode({
     name,
     reactImports,
     compImports,
     extraImports,
-    body: pageExampleReturn(jsx, prefix)
-  })
+    body: pageExampleReturn(jsx, prefix),
+  });
 }
 
 /**
  * 중첩 function/블록 밖의 첫 JSX 줄 인덱스.
  * FloatAction 같은 헬퍼 안의 <Button> 을 본문 JSX 로 오인하지 않는다.
  */
-function findTopLevelJsxStart (lines) {
-  let depth = 0
+function findTopLevelJsxStart(lines) {
+  let depth = 0;
   for (let index = 0; index < lines.length; index += 1) {
-    const line = lines[index]
-    if (depth === 0 && /^\s*</.test(line)) return index
-    const opens = (line.match(/\{/g) || []).length
-    const closes = (line.match(/\}/g) || []).length
-    depth = Math.max(0, depth + opens - closes)
+    const line = lines[index];
+    if (depth === 0 && /^\s*</.test(line)) return index;
+    const opens = (line.match(/\{/g) || []).length;
+    const closes = (line.match(/\}/g) || []).length;
+    depth = Math.max(0, depth + opens - closes);
   }
-  return -1
+  return -1;
 }
 
 /**
@@ -144,17 +150,19 @@ function findTopLevelJsxStart (lines) {
  * @param {string} source
  * @param {string} [exportName] export default 함수 이름(지정 시 기존 함수명 교체)
  */
-export function ensurePageModule (source, exportName) {
-  let text = String(source ?? '').replace(/^\n+/, '').replace(/\n+$/, '')
+export function ensurePageModule(source, exportName) {
+  let text = String(source ?? '')
+    .replace(/^\n+/, '')
+    .replace(/\n+$/, '');
   if (!text.includes("'use client'") && !text.includes('"use client"')) {
-    text = `'use client'\n\n${text}`
+    text = `'use client'\n\n${text}`;
   }
   if (!/export\s+default\s+function/.test(text)) {
     if (exportName) {
-      text = text.replace(/^function\s+\w+/m, `export default function ${exportName}`)
+      text = text.replace(/^function\s+\w+/m, `export default function ${exportName}`);
     } else {
-      text = text.replace(/^function\s+(\w+)/m, 'export default function $1')
+      text = text.replace(/^function\s+(\w+)/m, 'export default function $1');
     }
   }
-  return text
+  return text;
 }

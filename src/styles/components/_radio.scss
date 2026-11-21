@@ -19,7 +19,6 @@
   --radio-group-gap: var(--checkbox-group-gap);
   --radio-button-padding-y: var(--checkbox-button-padding-y);
   --radio-button-padding-x: var(--checkbox-button-padding-x);
-
 }
 
 // Radio — OOCSS: 구조(.radio) / 크기(.radio_sm) / 변형(.radio_button · .radio_label-end · .radio_card) + 공통 색상(.color_*)
@@ -181,7 +180,7 @@
     }
   }
 
-  @include disabled-semantic-checked-box(".radio_input", ".radio_box", false);
+  @include disabled-semantic-checked-box('.radio_input', '.radio_box', false);
 
   &.is-error .radio_box {
     border-color: var(--color-danger);
@@ -251,7 +250,7 @@
       box-shadow $transition-fast;
 
     &::after {
-      content: "";
+      content: '';
       width: calc(var(--radio-size) * 0.45);
       height: calc(var(--radio-size) * 0.45);
       border-radius: 50%;

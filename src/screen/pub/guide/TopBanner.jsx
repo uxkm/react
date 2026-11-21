@@ -1,31 +1,49 @@
-'use client'
+'use client';
 
-import { useState } from 'react' // 상태 훅
-import { TopBanner } from '@/comp' // Top Banner 컴포넌트
-import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
-import { topBannerApiSections } from '@/screen/pub/data/guide/topBannerApiSections' // top Banner Api Sections
+import { useState } from 'react'; // 상태 훅
+import { TopBanner } from '@/comp'; // Top Banner 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout'; // Guide Layout 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'; // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'; // Guide Api Docs 컴포넌트
+import { topBannerApiSections } from '@/screen/pub/data/guide/topBannerApiSections'; // top Banner Api Sections
 
-export const guideLabel = 'TopBanner · 상단 배너'
-export const pageTitle = 'TopBanner'
+export const guideLabel = 'TopBanner · 상단 배너';
+export const pageTitle = 'TopBanner';
 
 const SAMPLE_BANNERS = [
   { id: 'notice', content: <strong>새로운 소식과 주요 안내를 확인하세요.</strong> },
-  { id: 'guide', content: <span>페이지별 배너도 헤더 위 같은 위치에 표시합니다.</span>, href: '/pub/guide' },
-  { id: 'custom', content: <span>텍스트·이미지·링크 등 원하는 콘텐츠를 넣을 수 있습니다.</span> }
-]
+  {
+    id: 'guide',
+    content: <span>페이지별 배너도 헤더 위 같은 위치에 표시합니다.</span>,
+    href: '/pub/guide',
+  },
+  { id: 'custom', content: <span>텍스트·이미지·링크 등 원하는 콘텐츠를 넣을 수 있습니다.</span> },
+];
 
-function BannerPlayground () {
-  const [multiple, setMultiple] = useState(true)
-  const [effect, setEffect] = useState('slide')
+function BannerPlayground() {
+  const [multiple, setMultiple] = useState(true);
+  const [effect, setEffect] = useState('slide');
   return (
     <div data-top-banner-demo="">
       <div className="demo-row">
-        <label><input type="checkbox" checked={multiple} onChange={(event) => setMultiple(event.target.checked)} />여러 배너 사용</label>
-        <label>배너 전환 효과 <select value={effect} onChange={(event) => setEffect(event.target.value)}>
-          <option value="slide">슬라이드</option><option value="fade">페이드</option>
-        </select></label>
+        <label>
+          <input
+            type="checkbox"
+            checked={multiple}
+            onChange={(event) => setMultiple(event.target.checked)}
+          />
+          여러 배너 사용
+        </label>
+        <label>
+          배너 전환 효과{' '}
+          <select
+            value={effect}
+            onChange={(event) => setEffect(event.target.value)}
+          >
+            <option value="slide">슬라이드</option>
+            <option value="fade">페이드</option>
+          </select>
+        </label>
       </div>
       <TopBanner
         items={multiple ? SAMPLE_BANNERS : SAMPLE_BANNERS.slice(0, 1)}
@@ -35,14 +53,20 @@ function BannerPlayground () {
         storageKey="guide-top-banner-preview"
       />
     </div>
-  )
+  );
 }
 
-export default function TopBannerGuide () {
+export default function TopBannerGuide() {
   return (
     <>
-      <GuideLayout category="위젯" title="TopBanner" description="헤더 위 안내 배너. 너비·최소 높이·전환 효과·닫기·하루 숨김을 설정합니다.">
-        <DemoBlock title="공통 레이아웃 · 페이지 배너" description="가이드에서는 레이아웃 상단 배너를 숨깁니다. 실제 페이지는 PageBanner로 헤더 위 슬롯에 등록하며, 아래 미리보기에서 배너 기능을 확인할 수 있습니다."
+      <GuideLayout
+        category="위젯"
+        title="TopBanner"
+        description="헤더 위 안내 배너. 너비·최소 높이·전환 효과·닫기·하루 숨김을 설정합니다."
+      >
+        <DemoBlock
+          title="공통 레이아웃 · 페이지 배너"
+          description="가이드에서는 레이아웃 상단 배너를 숨깁니다. 실제 페이지는 PageBanner로 헤더 위 슬롯에 등록하며, 아래 미리보기에서 배너 기능을 확인할 수 있습니다."
           code={`import { PageBanner } from '@/comp'
 
 export const meta = { banner: true }
@@ -59,30 +83,59 @@ export const meta = { banner: true }
   ]}
 />`}
         >
-          <p>배너는 헤더 위에 위치하고, 닫으면 빈 공간 없이 제거됩니다. <code>meta.banner: false</code>로 페이지별 표시도 제어할 수 있습니다.</p>
+          <p>
+            배너는 헤더 위에 위치하고, 닫으면 빈 공간 없이 제거됩니다.{' '}
+            <code>meta.banner: false</code>로 페이지별 표시도 제어할 수 있습니다.
+          </p>
         </DemoBlock>
-        <DemoBlock title="개수 · 전환 효과" description="한 개로 전환하면 Carousel·이동 버튼·페이지 번호·자동 재생이 모두 제거됩니다. 여러 개면 슬라이드 또는 페이드로 전환합니다."
+        <DemoBlock
+          title="개수 · 전환 효과"
+          description="한 개로 전환하면 Carousel·이동 버튼·페이지 번호·자동 재생이 모두 제거됩니다. 여러 개면 슬라이드 또는 페이드로 전환합니다."
           code={`<TopBanner items={banners} effect="slide" autoplay interval={5000} />
 <TopBanner items={banners} effect="fade" innerMaxWidth={960} height={96} />
 <TopBanner storageKey="single-notice">단일 안내 배너</TopBanner>`}
-        ><BannerPlayground /></DemoBlock>
-        <DemoBlock title="너비 · 가운데 정렬" description="바깥 너비는 기본 100%이며, 안쪽 최대 너비와 콘텐츠 정렬을 별도로 지정합니다. 높이는 콘텐츠가 잘리지 않도록 최소 높이로 적용됩니다."
+        >
+          <BannerPlayground />
+        </DemoBlock>
+        <DemoBlock
+          title="너비 · 가운데 정렬"
+          description="바깥 너비는 기본 100%이며, 안쪽 최대 너비와 콘텐츠 정렬을 별도로 지정합니다. 높이는 콘텐츠가 잘리지 않도록 최소 높이로 적용됩니다."
           code={`<TopBanner width={960} innerMaxWidth={720} height={96} contentAlign="left">
   <strong>지정한 너비 안에서 가운데 정렬된 배너</strong>
 </TopBanner>`}
-        ><TopBanner width={960} innerMaxWidth={720} height={96} contentAlign="left" storageKey="guide-top-banner-width">지정한 너비 안에서 가운데 정렬된 배너</TopBanner></DemoBlock>
-        <DemoBlock title="텍스트 공지 · 수직 롤링" description="검정 배경의 공지형은 오른쪽에 닫기만 제공합니다. 2개 이상이면 위로 롤링하며, 포커스 진입 시 멈추고 영역을 벗어나면 다시 롤링합니다. 공지에서 ↑·↓, Home·End로 전환하고 Space로 정지·재생, Enter로 이동합니다. 동작 줄이기 환경에서는 자동 롤링하지 않습니다."
+        >
+          <TopBanner
+            width={960}
+            innerMaxWidth={720}
+            height={96}
+            contentAlign="left"
+            storageKey="guide-top-banner-width"
+          >
+            지정한 너비 안에서 가운데 정렬된 배너
+          </TopBanner>
+        </DemoBlock>
+        <DemoBlock
+          title="텍스트 공지 · 수직 롤링"
+          description="검정 배경의 공지형은 오른쪽에 닫기만 제공합니다. 2개 이상이면 위로 롤링하며, 포커스 진입 시 멈추고 영역을 벗어나면 다시 롤링합니다. 공지에서 ↑·↓, Home·End로 전환하고 Space로 정지·재생, Enter로 이동합니다. 동작 줄이기 환경에서는 자동 롤링하지 않습니다."
           code={`<PageBanner variant="notice" items={notices} interval={5000} />`}
         >
           <div data-notice-banner-demo="">
-            <TopBanner variant="notice" items={SAMPLE_BANNERS} storageKey="guide-notice-banner" />
+            <TopBanner
+              variant="notice"
+              items={SAMPLE_BANNERS}
+              storageKey="guide-notice-banner"
+            />
           </div>
           <div data-notice-banner-single="">
-            <TopBanner variant="notice" items={SAMPLE_BANNERS.slice(0, 1)} storageKey="guide-notice-single" />
+            <TopBanner
+              variant="notice"
+              items={SAMPLE_BANNERS.slice(0, 1)}
+              storageKey="guide-notice-single"
+            />
           </div>
         </DemoBlock>
         <GuideApiDocs sections={topBannerApiSections} />
       </GuideLayout>
     </>
-  )
+  );
 }

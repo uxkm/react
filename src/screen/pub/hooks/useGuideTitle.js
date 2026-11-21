@@ -1,15 +1,15 @@
-'use client'
+'use client';
 
 /**
  * 가이드·데모 브라우저 탭 제목 모음.
  * 화면은 `@/screen/pub/hooks/useGuideTitle` 로 import.
  */
-import { useSiteTitle } from '@/lib/page/siteTitle' // Site Title 훅
+import { useSiteTitle } from '@/lib/page/siteTitle'; // Site Title 훅
 
 /** 퍼블리싱 가이드·데모 구간의 탭 섹션명 */
-export const GUIDE_SECTION = '퍼블리싱가이드'
+export const GUIDE_SECTION = '퍼블리싱가이드';
 
-export { useSiteTitle }
+export { useSiteTitle };
 
 /**
  * 가이드·데모용 document.title.
@@ -18,7 +18,7 @@ export { useSiteTitle }
  * @param {string} [page]
  * @param {{ section?: string, enabled?: boolean }} [options]
  */
-export function useGuideTitle (page, options = {}) {
-  const { section = GUIDE_SECTION, enabled } = options
-  useSiteTitle({ page, section, enabled })
+export function useGuideTitle(page, options = {}) {
+  const { section = GUIDE_SECTION, enabled } = options;
+  useSiteTitle({ page, section, enabled });
 }

@@ -37,24 +37,17 @@
     }
   }
 
-  @each $name, $value in (
-    start: flex-start,
-    center: center,
-    end: flex-end,
-    baseline: baseline,
-    stretch: stretch
-  ) {
+  @each $name,
+    $value
+      in (start: flex-start, center: center, end: flex-end, baseline: baseline, stretch: stretch)
+  {
     &_align-#{$name} {
       align-items: $value;
     }
   }
 
-  @each $name, $value in (
-    start: flex-start,
-    center: center,
-    end: flex-end,
-    between: space-between
-  ) {
+  @each $name, $value in (start: flex-start, center: center, end: flex-end, between: space-between)
+  {
     &_justify-#{$name} {
       justify-content: $value;
     }

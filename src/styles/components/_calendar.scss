@@ -21,20 +21,20 @@
   --calendar-weekday-size: var(--text-size-xs);
   --calendar-wheel-height: 13.75rem;
   --calendar-wheel-step-height: 2rem;
-  --calendar-wheel-list-height: calc(var(--calendar-wheel-height) - (var(--calendar-wheel-step-height) * 2));
+  --calendar-wheel-list-height: calc(
+    var(--calendar-wheel-height) - (var(--calendar-wheel-step-height) * 2)
+  );
   --calendar-wheel-max-width: 22rem;
   --calendar-wheel-slot-count: 3;
   --calendar-wheel-row-height: 2.75rem;
   --calendar-wheel-font-size: var(--text-size-base);
   --calendar-wheel-font-selected: var(--text-size-lg);
 
-
   // ----- Calendar agenda
   --calendar-agenda-gap: var(--space-md);
   --calendar-agenda-date-width: 3rem;
   --calendar-agenda-event-gap: var(--space-xs);
   --calendar-agenda-daynum-size: 1.5rem;
-
 }
 
 // Calendar — OOCSS: 구조(.calendar) + 스킨(.calendar_*) + 파트(.calendar_header · .calendar_nav · .calendar_grid · .calendar_day)
@@ -310,7 +310,7 @@
     }
 
     &.has-event::after {
-      content: "";
+      content: '';
       position: absolute;
       bottom: var(--space-3);
       width: var(--size-4);

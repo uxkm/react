@@ -1,0 +1,49 @@
+@use 'foundations/variables' as *;
+
+:root {
+  --b2b-color-surface: var(--color-white);
+  --b2b-color-surface-hover: var(--color-neutral-50);
+  --b2b-color-surface-inverse: var(--color-neutral-800);
+  --b2b-color-text: var(--color-neutral-900);
+  --b2b-color-text-muted: var(--color-neutral-500);
+  --b2b-color-case-action-bg: var(--color-neutral-900);
+  --b2b-color-case-avatar-bg: var(--color-green-100);
+  --b2b-color-case-avatar-bg-alt: var(--color-blue-100);
+  --b2b-color-footer-border: var(--color-white-alpha-20);
+  --b2b-color-footer-social-hover: var(--color-white-alpha-16);
+  --b2b-color-gnb-glass: var(--color-navy-alpha-gnb-30);
+  --b2b-color-gnb-glass-border: var(--color-white-alpha-16);
+  --b2b-color-hero-action-hover: var(--color-white-alpha-20);
+
+  // 고유 규격 (공통 규격은 foundations/tokens 참조)
+  --b2b-layout-size-132px: 132px;
+  --b2b-layout-size-552px: 552px;
+}
+
+// PC 디자인 기준: 좁은 창에서는 문서 전체를 가로로 스크롤합니다.
+// Page className="p-content" (위젯 프리뷰는 project-content 병행)
+body:has(.app-layout_main.p-content, .app-layout_main.project-content) {
+  min-width: var(--size-1440);
+}
+
+// 본문 공통 폭. 전체 너비 섹션은 해당 본문 작업 시 별도로 구성합니다.
+.app-layout_main.p-content:not(.widget-preview),
+.app-layout_main.project-content:not(.widget-preview) {
+  --content-max-width: 1600px;
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin-inline: auto;
+
+  // 작업용 화면에 남아 있는 공통 720px 제한을 해제합니다.
+  > .page-container {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+// 확대·좁은 화면에서도 페이지 전체를 좌우로 오가지 않고 읽도록 재배치합니다.
+@media (max-width: ($breakpoint-pc - 1px)) {
+  body:has(.app-layout_main.p-content, .app-layout_main.project-content) {
+    min-width: 0;
+  }
+}

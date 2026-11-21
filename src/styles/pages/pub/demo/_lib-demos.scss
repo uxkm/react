@@ -25,7 +25,9 @@
   background: var(--color-bg);
   text-decoration: none;
   color: inherit;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 
   &:hover {
     border-color: var(--color-accent);
@@ -235,24 +237,74 @@
   }
 }
 
-.chart-data-table { width: 100%; border-collapse: collapse;
-  caption { text-align: left; font-weight: 700; }
-  th, td { padding: var(--space-8); border: 1px solid var(--color-border); text-align: left; }
+.chart-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  caption {
+    text-align: left;
+    font-weight: 700;
+  }
+  th,
+  td {
+    padding: var(--space-8);
+    border: 1px solid var(--color-border);
+    text-align: left;
+  }
 }
-.calendar-event-editor { display: flex; flex-wrap: wrap; gap: var(--space-12); margin-top: var(--space-16);
-  label { display: flex; flex-direction: column; gap: var(--space-4); }
-  input { color: var(--color-text); background: var(--color-surface); border: 1px solid var(--color-border); padding: var(--space-8); }
+.calendar-event-editor {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-12);
+  margin-top: var(--space-16);
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  input {
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: var(--space-8);
+  }
 }
 .lib-demo-calendar {
-  --fc-event-bg-color: #245b9f; --fc-event-border-color: #245b9f;
-  .fc-day-other .fc-daygrid-day-top { opacity: 1; }
-  .fc-daygrid-day-number, .fc-col-header-cell-cushion { color: var(--color-text); }
+  --fc-event-bg-color: #245b9f;
+  --fc-event-border-color: #245b9f;
+  .fc-day-other .fc-daygrid-day-top {
+    opacity: 1;
+  }
+  .fc-daygrid-day-number,
+  .fc-col-header-cell-cushion {
+    color: var(--color-text);
+  }
 }
-.lib-demo-list_item > button { width: 100%; min-height: var(--size-32); border: 0; background: transparent; color: inherit; font: inherit; text-align: left; cursor: grab; }
+.lib-demo-list_item > button {
+  width: 100%;
+  min-height: var(--size-32);
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: grab;
+}
 
-.lib-demo-calendar .fc-col-header { background: var(--color-surface); }
+.lib-demo-calendar .fc-col-header {
+  background: var(--color-surface);
+}
 
-.lib-demo-list_item { display: flex; flex-wrap: wrap; gap: var(--space-8);
-  > button:first-child { flex: 1 0 100%; }
-  > button:not(:first-child) { width: auto; border: 1px solid var(--color-border); padding: var(--space-4) var(--space-12); cursor: pointer; }
+.lib-demo-list_item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  > button:first-child {
+    flex: 1 0 100%;
+  }
+  > button:not(:first-child) {
+    width: auto;
+    border: 1px solid var(--color-border);
+    padding: var(--space-4) var(--space-12);
+    cursor: pointer;
+  }
 }

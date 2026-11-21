@@ -6,166 +6,165 @@
  * data-native-scrollbar / [data-simplebar] 은 제외.
  */
 
-const HOST_ID = 'osb-host'
-const HIDE_MS = 900
-const MIN_THUMB = 24
+const HOST_ID = 'osb-host';
+const HIDE_MS = 900;
+const MIN_THUMB = 24;
 
 /** @type {WeakMap<Element, { vertical: HTMLElement, horizontal: HTMLElement, hideTimer: number }>} */
-const controllers = new WeakMap()
+const controllers = new WeakMap();
 
 /** @type {Set<Element>} */
-const activeElements = new Set()
+const activeElements = new Set();
 
-let host = null
-let started = false
-let dragging = null
-let positionFrame = 0
+let host = null;
+let started = false;
+let dragging = null;
+let positionFrame = 0;
 
-function prefersReducedMotion () {
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+function prefersReducedMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
-function scrollbarSizePx () {
+function scrollbarSizePx() {
   const raw = getComputedStyle(document.documentElement)
     .getPropertyValue('--scrollbar-size')
-    .trim()
-  const n = Number.parseFloat(raw)
-  return Number.isFinite(n) ? n : 9
+    .trim();
+  const n = Number.parseFloat(raw);
+  return Number.isFinite(n) ? n : 9;
 }
 
 /** 스크롤바가 레이아웃 폭을 차지하는지 측정 */
-export function isScrollbarObtrusive () {
-  const outer = document.createElement('div')
+export function isScrollbarObtrusive() {
+  const outer = document.createElement('div');
   // 초기 감지로 classic CSS가 적용된 뒤 다시 측정해도 네이티브 폭을 유지합니다.
-  outer.setAttribute('data-scrollbar-probe', '')
+  outer.setAttribute('data-scrollbar-probe', '');
   outer.style.cssText =
-    'position:absolute;top:-9999px;width:100px;height:100px;overflow:scroll;visibility:hidden'
-  document.documentElement.appendChild(outer)
-  const obtrusive = outer.offsetWidth - outer.clientWidth > 0
-  outer.remove()
-  return obtrusive
+    'position:absolute;top:-9999px;width:100px;height:100px;overflow:scroll;visibility:hidden';
+  document.documentElement.appendChild(outer);
+  const obtrusive = outer.offsetWidth - outer.clientWidth > 0;
+  outer.remove();
+  return obtrusive;
 }
 
 /** html[data-scrollbar] 동기화 — FOUC 방지용 인라인 스크립트와 동일 로직 */
-export function syncScrollbarMode () {
-  const mode = isScrollbarObtrusive() ? 'classic' : 'overlay'
-  document.documentElement.dataset.scrollbar = mode
-  return mode
+export function syncScrollbarMode() {
+  const mode = isScrollbarObtrusive() ? 'classic' : 'overlay';
+  document.documentElement.dataset.scrollbar = mode;
+  return mode;
 }
 
-function ensureHost () {
-  if (host?.isConnected) return host
-  host = document.getElementById(HOST_ID)
+function ensureHost() {
+  if (host?.isConnected) return host;
+  host = document.getElementById(HOST_ID);
   if (!host) {
-    host = document.createElement('div')
-    host.id = HOST_ID
-    host.className = 'osb-host'
-    host.setAttribute('aria-hidden', 'true')
-    document.body.appendChild(host)
+    host = document.createElement('div');
+    host.id = HOST_ID;
+    host.className = 'osb-host';
+    host.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(host);
   }
-  return host
+  return host;
 }
 
-function isViewportScroller (el) {
-  return el === document.documentElement || el === document.body
+function isViewportScroller(el) {
+  return el === document.documentElement || el === document.body;
 }
 
-function canScroll (el, axis) {
-  if (!(el instanceof Element)) return false
-  if (el.closest('[data-simplebar], [data-native-scrollbar]')) return false
+function canScroll(el, axis) {
+  if (!(el instanceof Element)) return false;
+  if (el.closest('[data-simplebar], [data-native-scrollbar]')) return false;
 
-  const style = getComputedStyle(el)
+  const style = getComputedStyle(el);
   // 의도적으로 스크롤바를 숨긴 영역 (--osb-skip: 1)
-  if (style.getPropertyValue('--osb-skip').trim() === '1') return false
-
+  if (style.getPropertyValue('--osb-skip').trim() === '1') return false;
 
   // 문서 뷰포트는 overflow:visible 이어도 스크롤된다
   if (isViewportScroller(el)) {
     if (axis === 'y') {
-      return document.documentElement.scrollHeight - window.innerHeight > 1
+      return document.documentElement.scrollHeight - window.innerHeight > 1;
     }
-    return document.documentElement.scrollWidth - window.innerWidth > 1
+    return document.documentElement.scrollWidth - window.innerWidth > 1;
   }
 
   if (axis === 'y') {
-    const overflowY = style.overflowY
+    const overflowY = style.overflowY;
     if (overflowY !== 'auto' && overflowY !== 'scroll' && overflowY !== 'overlay') {
-      return false
+      return false;
     }
-    return el.scrollHeight - el.clientHeight > 1
+    return el.scrollHeight - el.clientHeight > 1;
   }
 
-  const overflowX = style.overflowX
+  const overflowX = style.overflowX;
   if (overflowX !== 'auto' && overflowX !== 'scroll' && overflowX !== 'overlay') {
-    return false
+    return false;
   }
-  return el.scrollWidth - el.clientWidth > 1
+  return el.scrollWidth - el.clientWidth > 1;
 }
 
-function findScrollable (start, axis) {
-  let node = start instanceof Element ? start : null
+function findScrollable(start, axis) {
+  let node = start instanceof Element ? start : null;
   while (node && node !== document.documentElement) {
-    if (node !== document.body && canScroll(node, axis)) return node
-    node = node.parentElement
+    if (node !== document.body && canScroll(node, axis)) return node;
+    node = node.parentElement;
   }
-  if (canScroll(document.documentElement, axis)) return document.documentElement
-  return null
+  if (canScroll(document.documentElement, axis)) return document.documentElement;
+  return null;
 }
 
-function createRail (axis) {
-  const rail = document.createElement('div')
-  rail.className = `osb osb_${axis === 'y' ? 'vertical' : 'horizontal'}`
-  rail.style.display = 'none'
-  const thumb = document.createElement('div')
-  thumb.className = 'osb_thumb'
-  thumb.dataset.axis = axis
-  rail.appendChild(thumb)
-  ensureHost().appendChild(rail)
-  return rail
+function createRail(axis) {
+  const rail = document.createElement('div');
+  rail.className = `osb osb_${axis === 'y' ? 'vertical' : 'horizontal'}`;
+  rail.style.display = 'none';
+  const thumb = document.createElement('div');
+  thumb.className = 'osb_thumb';
+  thumb.dataset.axis = axis;
+  rail.appendChild(thumb);
+  ensureHost().appendChild(rail);
+  return rail;
 }
 
-function getController (el) {
-  let ctrl = controllers.get(el)
-  if (ctrl) return ctrl
+function getController(el) {
+  let ctrl = controllers.get(el);
+  if (ctrl) return ctrl;
 
   ctrl = {
     vertical: createRail('y'),
     horizontal: createRail('x'),
-    hideTimer: 0
-  }
-  controllers.set(el, ctrl)
-  activeElements.add(el)
+    hideTimer: 0,
+  };
+  controllers.set(el, ctrl);
+  activeElements.add(el);
 
   ctrl.vertical.querySelector('.osb_thumb').addEventListener('pointerdown', (event) => {
-    startDrag(event, el, 'y')
-  })
+    startDrag(event, el, 'y');
+  });
   ctrl.horizontal.querySelector('.osb_thumb').addEventListener('pointerdown', (event) => {
-    startDrag(event, el, 'x')
-  })
+    startDrag(event, el, 'x');
+  });
 
-  return ctrl
+  return ctrl;
 }
 
-function clearHide (ctrl) {
+function clearHide(ctrl) {
   if (ctrl.hideTimer) {
-    window.clearTimeout(ctrl.hideTimer)
-    ctrl.hideTimer = 0
+    window.clearTimeout(ctrl.hideTimer);
+    ctrl.hideTimer = 0;
   }
 }
 
-function scheduleHide (ctrl) {
-  clearHide(ctrl)
-  if (dragging) return
-  const delay = prefersReducedMotion() ? 0 : HIDE_MS
+function scheduleHide(ctrl) {
+  clearHide(ctrl);
+  if (dragging) return;
+  const delay = prefersReducedMotion() ? 0 : HIDE_MS;
   ctrl.hideTimer = window.setTimeout(() => {
-    ctrl.vertical.classList.remove('is-visible')
-    ctrl.horizontal.classList.remove('is-visible')
-    ctrl.hideTimer = 0
-  }, delay)
+    ctrl.vertical.classList.remove('is-visible');
+    ctrl.horizontal.classList.remove('is-visible');
+    ctrl.hideTimer = 0;
+  }, delay);
 }
 
-function metrics (el) {
-  const isRoot = isViewportScroller(el)
+function metrics(el) {
+  const isRoot = isViewportScroller(el);
   const rect = isRoot
     ? {
         top: 0,
@@ -173,9 +172,9 @@ function metrics (el) {
         width: window.innerWidth,
         height: window.innerHeight,
         right: window.innerWidth,
-        bottom: window.innerHeight
+        bottom: window.innerHeight,
       }
-    : el.getBoundingClientRect()
+    : el.getBoundingClientRect();
 
   return {
     rect,
@@ -184,235 +183,237 @@ function metrics (el) {
     scrollHeight: isRoot ? document.documentElement.scrollHeight : el.scrollHeight,
     scrollWidth: isRoot ? document.documentElement.scrollWidth : el.scrollWidth,
     clientHeight: isRoot ? window.innerHeight : el.clientHeight,
-    clientWidth: isRoot ? window.innerWidth : el.clientWidth
-  }
+    clientWidth: isRoot ? window.innerWidth : el.clientWidth,
+  };
 }
 
-function updateRail (el, axis) {
-  const ctrl = getController(el)
-  const rail = axis === 'y' ? ctrl.vertical : ctrl.horizontal
-  const thumb = rail.querySelector('.osb_thumb')
-  const m = metrics(el)
-  const size = scrollbarSizePx()
+function updateRail(el, axis) {
+  const ctrl = getController(el);
+  const rail = axis === 'y' ? ctrl.vertical : ctrl.horizontal;
+  const thumb = rail.querySelector('.osb_thumb');
+  const m = metrics(el);
+  const size = scrollbarSizePx();
 
-  const overflow =
-    axis === 'y' ? m.scrollHeight - m.clientHeight : m.scrollWidth - m.clientWidth
+  const overflow = axis === 'y' ? m.scrollHeight - m.clientHeight : m.scrollWidth - m.clientWidth;
 
   if (overflow <= 1 || !canScroll(el, axis)) {
-    rail.classList.remove('is-visible')
-    rail.style.display = 'none'
-    return rail
+    rail.classList.remove('is-visible');
+    rail.style.display = 'none';
+    return rail;
   }
 
   // fixed 레일이 원래 스크롤 영역을 벗어난 화면 위에 남지 않도록 합니다.
-  if (!isViewportScroller(el) && (
-    m.rect.width <= 0 || m.rect.height <= 0 ||
-    m.rect.bottom <= 0 || m.rect.top >= window.innerHeight ||
-    m.rect.right <= 0 || m.rect.left >= window.innerWidth
-  )) {
-    rail.style.display = 'none'
-    return rail
+  if (
+    !isViewportScroller(el) &&
+    (m.rect.width <= 0 ||
+      m.rect.height <= 0 ||
+      m.rect.bottom <= 0 ||
+      m.rect.top >= window.innerHeight ||
+      m.rect.right <= 0 ||
+      m.rect.left >= window.innerWidth)
+  ) {
+    rail.style.display = 'none';
+    return rail;
   }
 
-  rail.style.display = ''
+  rail.style.display = '';
 
   if (axis === 'y') {
-    rail.style.top = `${m.rect.top}px`
-    rail.style.left = `${m.rect.right - size}px`
-    rail.style.height = `${Math.max(0, m.rect.height)}px`
-    rail.style.width = `${size}px`
+    rail.style.top = `${m.rect.top}px`;
+    rail.style.left = `${m.rect.right - size}px`;
+    rail.style.height = `${Math.max(0, m.rect.height)}px`;
+    rail.style.width = `${size}px`;
 
-    const track = m.clientHeight
-    const thumbSize = Math.max(MIN_THUMB, (m.clientHeight / m.scrollHeight) * track)
-    const maxTop = Math.max(0, track - thumbSize)
-    const top = maxTop === 0 ? 0 : (m.scrollTop / overflow) * maxTop
-    thumb.style.height = `${thumbSize}px`
-    thumb.style.width = ''
-    thumb.style.transform = `translateY(${top}px)`
+    const track = m.clientHeight;
+    const thumbSize = Math.max(MIN_THUMB, (m.clientHeight / m.scrollHeight) * track);
+    const maxTop = Math.max(0, track - thumbSize);
+    const top = maxTop === 0 ? 0 : (m.scrollTop / overflow) * maxTop;
+    thumb.style.height = `${thumbSize}px`;
+    thumb.style.width = '';
+    thumb.style.transform = `translateY(${top}px)`;
   } else {
-    rail.style.left = `${m.rect.left}px`
-    rail.style.top = `${m.rect.bottom - size}px`
-    rail.style.width = `${Math.max(0, m.rect.width)}px`
-    rail.style.height = `${size}px`
+    rail.style.left = `${m.rect.left}px`;
+    rail.style.top = `${m.rect.bottom - size}px`;
+    rail.style.width = `${Math.max(0, m.rect.width)}px`;
+    rail.style.height = `${size}px`;
 
-    const track = m.clientWidth
-    const thumbSize = Math.max(MIN_THUMB, (m.clientWidth / m.scrollWidth) * track)
-    const maxLeft = Math.max(0, track - thumbSize)
-    const left = maxLeft === 0 ? 0 : (m.scrollLeft / overflow) * maxLeft
-    thumb.style.width = `${thumbSize}px`
-    thumb.style.height = ''
-    thumb.style.transform = `translateX(${left}px)`
+    const track = m.clientWidth;
+    const thumbSize = Math.max(MIN_THUMB, (m.clientWidth / m.scrollWidth) * track);
+    const maxLeft = Math.max(0, track - thumbSize);
+    const left = maxLeft === 0 ? 0 : (m.scrollLeft / overflow) * maxLeft;
+    thumb.style.width = `${thumbSize}px`;
+    thumb.style.height = '';
+    thumb.style.transform = `translateX(${left}px)`;
   }
 
-  return rail
+  return rail;
 }
 
-function showFor (el) {
-  if (!(el instanceof Element) || !el.isConnected) return
+function showFor(el) {
+  if (!(el instanceof Element) || !el.isConnected) return;
 
-  const ctrl = getController(el)
-  clearHide(ctrl)
+  const ctrl = getController(el);
+  clearHide(ctrl);
 
-  const y = canScroll(el, 'y')
-  const x = canScroll(el, 'x')
+  const y = canScroll(el, 'y');
+  const x = canScroll(el, 'x');
 
   if (y) {
-    updateRail(el, 'y').classList.add('is-visible')
+    updateRail(el, 'y').classList.add('is-visible');
   } else {
-    ctrl.vertical.style.display = 'none'
-    ctrl.vertical.classList.remove('is-visible')
+    ctrl.vertical.style.display = 'none';
+    ctrl.vertical.classList.remove('is-visible');
   }
 
   if (x) {
-    updateRail(el, 'x').classList.add('is-visible')
+    updateRail(el, 'x').classList.add('is-visible');
   } else {
-    ctrl.horizontal.style.display = 'none'
-    ctrl.horizontal.classList.remove('is-visible')
+    ctrl.horizontal.style.display = 'none';
+    ctrl.horizontal.classList.remove('is-visible');
   }
 
-  scheduleHide(ctrl)
-  schedulePositionUpdate()
+  scheduleHide(ctrl);
+  schedulePositionUpdate();
 }
 
-function startDrag (event, el, axis) {
-  if (event.button !== 0) return
-  event.preventDefault()
-  event.stopPropagation()
+function startDrag(event, el, axis) {
+  if (event.button !== 0) return;
+  event.preventDefault();
+  event.stopPropagation();
 
-  const ctrl = getController(el)
-  const rail = axis === 'y' ? ctrl.vertical : ctrl.horizontal
-  const m = metrics(el)
-  const overflow =
-    axis === 'y' ? m.scrollHeight - m.clientHeight : m.scrollWidth - m.clientWidth
-  const track = axis === 'y' ? m.clientHeight : m.clientWidth
+  const ctrl = getController(el);
+  const rail = axis === 'y' ? ctrl.vertical : ctrl.horizontal;
+  const m = metrics(el);
+  const overflow = axis === 'y' ? m.scrollHeight - m.clientHeight : m.scrollWidth - m.clientWidth;
+  const track = axis === 'y' ? m.clientHeight : m.clientWidth;
   const thumbSize =
     axis === 'y'
       ? Math.max(MIN_THUMB, (m.clientHeight / m.scrollHeight) * track)
-      : Math.max(MIN_THUMB, (m.clientWidth / m.scrollWidth) * track)
-  const maxPos = Math.max(0, track - thumbSize)
-  const startPointer = axis === 'y' ? event.clientY : event.clientX
-  const startScroll = axis === 'y' ? m.scrollTop : m.scrollLeft
+      : Math.max(MIN_THUMB, (m.clientWidth / m.scrollWidth) * track);
+  const maxPos = Math.max(0, track - thumbSize);
+  const startPointer = axis === 'y' ? event.clientY : event.clientX;
+  const startScroll = axis === 'y' ? m.scrollTop : m.scrollLeft;
 
-  dragging = { el, axis }
-  clearHide(ctrl)
-  rail.classList.add('is-visible', 'is-dragging')
-  schedulePositionUpdate()
+  dragging = { el, axis };
+  clearHide(ctrl);
+  rail.classList.add('is-visible', 'is-dragging');
+  schedulePositionUpdate();
 
   const onMove = (moveEvent) => {
-    if (!dragging) return
-    const delta =
-      (axis === 'y' ? moveEvent.clientY : moveEvent.clientX) - startPointer
-    const scrollDelta = maxPos <= 0 ? 0 : (delta / maxPos) * overflow
-    const next = startScroll + scrollDelta
+    if (!dragging) return;
+    const delta = (axis === 'y' ? moveEvent.clientY : moveEvent.clientX) - startPointer;
+    const scrollDelta = maxPos <= 0 ? 0 : (delta / maxPos) * overflow;
+    const next = startScroll + scrollDelta;
     if (isViewportScroller(el)) {
-      if (axis === 'y') window.scrollTo({ top: next })
-      else window.scrollTo({ left: next })
+      if (axis === 'y') window.scrollTo({ top: next });
+      else window.scrollTo({ left: next });
     } else if (axis === 'y') {
-      el.scrollTop = next
+      el.scrollTop = next;
     } else {
-      el.scrollLeft = next
+      el.scrollLeft = next;
     }
-    updateRail(el, axis)
-  }
+    updateRail(el, axis);
+  };
 
   const onUp = () => {
-    dragging = null
-    rail.classList.remove('is-dragging')
-    window.removeEventListener('pointermove', onMove)
-    window.removeEventListener('pointerup', onUp)
-    window.removeEventListener('pointercancel', onUp)
-    scheduleHide(ctrl)
-  }
+    dragging = null;
+    rail.classList.remove('is-dragging');
+    window.removeEventListener('pointermove', onMove);
+    window.removeEventListener('pointerup', onUp);
+    window.removeEventListener('pointercancel', onUp);
+    scheduleHide(ctrl);
+  };
 
-  window.addEventListener('pointermove', onMove)
-  window.addEventListener('pointerup', onUp)
-  window.addEventListener('pointercancel', onUp)
+  window.addEventListener('pointermove', onMove);
+  window.addEventListener('pointerup', onUp);
+  window.addEventListener('pointercancel', onUp);
 }
 
-function onScrollCapture (event) {
-  const el = event.target === document ? document.documentElement : event.target
+function onScrollCapture(event) {
+  const el = event.target === document ? document.documentElement : event.target;
   if (el instanceof Element && (canScroll(el, 'y') || canScroll(el, 'x'))) {
-    showFor(el)
+    showFor(el);
   }
   // 바디·상위 영역의 이동도 표시 중인 내부 레일의 화면 좌표에 영향을 줍니다.
-  schedulePositionUpdate()
+  schedulePositionUpdate();
 }
 
-function onPointerOver (event) {
-  const y = findScrollable(event.target, 'y')
-  const x = findScrollable(event.target, 'x')
-  if (y) showFor(y)
-  if (x && x !== y) showFor(x)
+function onPointerOver(event) {
+  const y = findScrollable(event.target, 'y');
+  const x = findScrollable(event.target, 'x');
+  if (y) showFor(y);
+  if (x && x !== y) showFor(x);
 }
 
-function updateVisiblePositions () {
-  positionFrame = 0
-  let tracking = false
+function updateVisiblePositions() {
+  positionFrame = 0;
+  let tracking = false;
   for (const el of [...activeElements]) {
-    const ctrl = controllers.get(el)
-    if (!ctrl) continue
+    const ctrl = controllers.get(el);
+    if (!ctrl) continue;
     if (!el.isConnected) {
-      clearHide(ctrl)
-      ctrl.vertical.remove()
-      ctrl.horizontal.remove()
-      controllers.delete(el)
-      activeElements.delete(el)
-      continue
+      clearHide(ctrl);
+      ctrl.vertical.remove();
+      ctrl.horizontal.remove();
+      controllers.delete(el);
+      activeElements.delete(el);
+      continue;
     }
     // 위치만 갱신합니다. 다른 영역의 스크롤로 숨김 타이머를 재시작하지 않습니다.
     for (const axis of ['y', 'x']) {
-      const rail = axis === 'y' ? ctrl.vertical : ctrl.horizontal
+      const rail = axis === 'y' ? ctrl.vertical : ctrl.horizontal;
       if (
-        rail.classList.contains('is-visible') || rail.classList.contains('is-dragging') ||
+        rail.classList.contains('is-visible') ||
+        rail.classList.contains('is-dragging') ||
         Number.parseFloat(getComputedStyle(rail).opacity) > 0
       ) {
-        updateRail(el, axis)
-        tracking = true
+        updateRail(el, axis);
+        tracking = true;
       }
     }
   }
   // 접기·펼치기/전환 애니메이션은 scroll·resize 이벤트 없이 좌표를 바꿀 수 있습니다.
   // 레일이 표시되거나 페이드아웃 중인 동안에만 추적하고, 완전히 사라지면 멈춥니다.
-  if (tracking) schedulePositionUpdate()
+  if (tracking) schedulePositionUpdate();
 }
 
-function schedulePositionUpdate () {
-  if (!positionFrame) positionFrame = window.requestAnimationFrame(updateVisiblePositions)
+function schedulePositionUpdate() {
+  if (!positionFrame) positionFrame = window.requestAnimationFrame(updateVisiblePositions);
 }
 
 /** classic 환경에서만 오버레이 스크롤바를 켠다 */
-export function initOverlayScrollbar () {
-  if (started || typeof window === 'undefined') return () => {}
-  started = true
+export function initOverlayScrollbar() {
+  if (started || typeof window === 'undefined') return () => {};
+  started = true;
 
-  const mode = syncScrollbarMode()
+  const mode = syncScrollbarMode();
   if (mode !== 'classic') {
     return () => {
-      started = false
-    }
+      started = false;
+    };
   }
 
-  ensureHost()
+  ensureHost();
 
-  document.addEventListener('scroll', onScrollCapture, { capture: true, passive: true })
-  document.addEventListener('pointerover', onPointerOver, { passive: true })
-  window.addEventListener('resize', schedulePositionUpdate, { passive: true })
+  document.addEventListener('scroll', onScrollCapture, { capture: true, passive: true });
+  document.addEventListener('pointerover', onPointerOver, { passive: true });
+  window.addEventListener('resize', schedulePositionUpdate, { passive: true });
 
   return () => {
-    document.removeEventListener('scroll', onScrollCapture, { capture: true })
-    document.removeEventListener('pointerover', onPointerOver)
-    window.removeEventListener('resize', schedulePositionUpdate)
-    window.cancelAnimationFrame(positionFrame)
-    positionFrame = 0
+    document.removeEventListener('scroll', onScrollCapture, { capture: true });
+    document.removeEventListener('pointerover', onPointerOver);
+    window.removeEventListener('resize', schedulePositionUpdate);
+    window.cancelAnimationFrame(positionFrame);
+    positionFrame = 0;
     for (const el of activeElements) {
-      const ctrl = controllers.get(el)
-      if (ctrl) clearHide(ctrl)
-      controllers.delete(el)
+      const ctrl = controllers.get(el);
+      if (ctrl) clearHide(ctrl);
+      controllers.delete(el);
     }
-    host?.remove()
-    host = null
-    activeElements.clear()
-    started = false
-    dragging = null
-  }
+    host?.remove();
+    host = null;
+    activeElements.clear();
+    started = false;
+    dragging = null;
+  };
 }

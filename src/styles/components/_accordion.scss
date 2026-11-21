@@ -14,7 +14,6 @@
   --accordion-card-gap: 0;
   --accordion-card-trigger-bg: var(--color-surface-raised);
 
-
   // ----- Accordion — size sm · lg
   --accordion-font-size-sm: var(--text-size-xs);
   --accordion-trigger-padding-y-sm: 0.625rem;
@@ -33,7 +32,6 @@
   // ----- Accordion — slide
   --accordion-slide-duration: 0.28s;
   --accordion-slide-easing: ease;
-
 }
 
 // Accordion — OOCSS: 구조(.accordion) + 스킨(.accordion_bordered · .accordion_flush · .accordion_card) + 파트(.accordion_item · .accordion_trigger · .accordion_panel)
@@ -103,7 +101,7 @@
       background: var(--color-surface-raised);
     }
 
-    &[aria-expanded="true"] {
+    &[aria-expanded='true'] {
       color: color-token(primary);
     }
 
@@ -171,7 +169,7 @@
       transform $transition-fast,
       color $transition-fast;
 
-    .accordion_trigger[aria-expanded="true"] & {
+    .accordion_trigger[aria-expanded='true'] & {
       transform: rotate(180deg);
       color: color-token(primary);
     }
@@ -188,7 +186,7 @@
   // ----- effect: slide — JS 가 height 0 ↔ scrollHeight 를 맞추고, CSS 가 transition
   // data-effect="slide"
 
-  &[data-effect="slide"] {
+  &[data-effect='slide'] {
     .accordion_panel {
       overflow: hidden;
       transition: height var(--accordion-slide-duration) var(--accordion-slide-easing);
@@ -240,7 +238,7 @@
       border-top: 1px solid var(--color-border);
     }
 
-    .accordion_trigger[aria-expanded="true"] {
+    .accordion_trigger[aria-expanded='true'] {
       background: var(--color-surface-raised);
     }
   }
@@ -291,7 +289,7 @@
         background: var(--accordion-card-trigger-bg);
       }
 
-      &[aria-expanded="true"] {
+      &[aria-expanded='true'] {
         background: var(--accordion-card-trigger-bg);
 
         &:hover:not(.is-disabled):not(:disabled) {
@@ -325,5 +323,4 @@
     --accordion-content-padding-x: var(--accordion-content-padding-x-lg);
     --accordion-icon-size: var(--accordion-icon-size-lg);
   }
-
 }

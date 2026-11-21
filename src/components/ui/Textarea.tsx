@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 /**
  * 여러 줄 입력.
@@ -10,41 +10,43 @@ import {
   useRef, // ref 훅
   useState, // 상태 훅
   type ChangeEvent, // ChangeEvent 타입
-  type TextareaHTMLAttributes // TextareaHTMLAttributes 타입
-} from 'react' // React
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
-import { useFormReset } from '@/hooks/react/useFormReset'
-import { Icon } from './Icon' // Icon 컴포넌트
+  type TextareaHTMLAttributes, // TextareaHTMLAttributes 타입
+} from 'react'; // React
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
+import { useFormReset } from '@/hooks/react/useFormReset';
+import { Icon } from './Icon'; // Icon 컴포넌트
 
-const VALID_SIZES = new Set(['sm', 'md', 'lg'])
-const VALID_RESIZE = new Set(['none', 'vertical', 'horizontal', 'both'])
+const VALID_SIZES = new Set(['sm', 'md', 'lg']);
+const VALID_RESIZE = new Set(['none', 'vertical', 'horizontal', 'both']);
 
 /** Textarea 크기 */
-export type TextareaSize = 'sm' | 'md' | 'lg'
+export type TextareaSize = 'sm' | 'md' | 'lg';
 
 /** Textarea 리사이즈 방향 */
-export type TextareaResize = 'none' | 'vertical' | 'horizontal' | 'both'
+export type TextareaResize = 'none' | 'vertical' | 'horizontal' | 'both';
 
 /** 여러 줄 입력이 받는 값 */
-export interface TextareaProps
-  extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'value' | 'onChange'> {
-  value?: string | number
-  size?: TextareaSize
-  resize?: TextareaResize
-  error?: boolean
-  fit?: boolean
-  showCount?: boolean
-  clearable?: boolean
-  wrapperClassName?: string
-  onChange?: (event: ChangeEvent<HTMLTextAreaElement>) => void
-  onClear?: () => void
+export interface TextareaProps extends Omit<
+  TextareaHTMLAttributes<HTMLTextAreaElement>,
+  'value' | 'onChange'
+> {
+  value?: string | number;
+  size?: TextareaSize;
+  resize?: TextareaResize;
+  error?: boolean;
+  fit?: boolean;
+  showCount?: boolean;
+  clearable?: boolean;
+  wrapperClassName?: string;
+  onChange?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  onClear?: () => void;
 }
 
 /**
  * 여러 줄 텍스트 입력.
  * showCount · clearable이 있으면 wrap으로 묶는다.
  */
-export function Textarea ({
+export function Textarea({
   size = 'md',
   resize = 'none',
   disabled = false,
@@ -62,23 +64,23 @@ export function Textarea ({
   readOnly,
   ...props
 }: TextareaProps) {
-  const textareaRef = useRef<HTMLTextAreaElement>(null)
-  const generatedId = useId().replace(/:/g, '')
-  const controlled = value !== undefined
-  const [innerValue, setInnerValue] = useState(() => String(defaultValue ?? ''))
-  const currentValue = controlled ? String(value ?? '') : innerValue
-  useFormReset(textareaRef, controlled ? undefined : setInnerValue)
-  const resolvedSize = VALID_SIZES.has(size) ? size : 'md'
-  const resolvedResize = VALID_RESIZE.has(resize) ? resize : 'none'
-  const countId = `${props.id || `textarea-${generatedId}`}-count`
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const generatedId = useId().replace(/:/g, '');
+  const controlled = value !== undefined;
+  const [innerValue, setInnerValue] = useState(() => String(defaultValue ?? ''));
+  const currentValue = controlled ? String(value ?? '') : innerValue;
+  useFormReset(textareaRef, controlled ? undefined : setInnerValue);
+  const resolvedSize = VALID_SIZES.has(size) ? size : 'md';
+  const resolvedResize = VALID_RESIZE.has(resize) ? resize : 'none';
+  const countId = `${props.id || `textarea-${generatedId}`}-count`;
   const describedBy =
-    [props['aria-describedby'], showCount && countId].filter(Boolean).join(' ') || undefined
-  const count = String(currentValue).length
-  const resolvedMaxLength = Number(maxLength)
+    [props['aria-describedby'], showCount && countId].filter(Boolean).join(' ') || undefined;
+  const count = String(currentValue).length;
+  const resolvedMaxLength = Number(maxLength);
   const nativeMaxLength =
-    Number.isInteger(resolvedMaxLength) && resolvedMaxLength >= 0 ? resolvedMaxLength : undefined
-  const hasLimit = nativeMaxLength != null
-  const showClear = clearable && count > 0 && !disabled && !readOnly
+    Number.isInteger(resolvedMaxLength) && resolvedMaxLength >= 0 ? resolvedMaxLength : undefined;
+  const hasLimit = nativeMaxLength != null;
+  const showClear = clearable && count > 0 && !disabled && !readOnly;
 
   const classes = useMemo(
     () =>
@@ -89,29 +91,29 @@ export function Textarea ({
         `textarea_resize_${resolvedResize}`,
         !showCount && !clearable && fit && 'textarea_fit',
         error && 'is-error',
-        className
+        className,
       ),
-    [resolvedSize, resolvedResize, showCount, clearable, fit, error, className]
-  )
+    [resolvedSize, resolvedResize, showCount, clearable, fit, error, className],
+  );
 
-  function handleChange (event: ChangeEvent<HTMLTextAreaElement>) {
-    if (!controlled) setInnerValue(event.target.value)
-    onChange?.(event)
+  function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
+    if (!controlled) setInnerValue(event.target.value);
+    onChange?.(event);
   }
 
-  function handleClear () {
-    if (disabled || readOnly) return
-    const textarea = textareaRef.current
-    if (!textarea) return
+  function handleClear() {
+    if (disabled || readOnly) return;
+    const textarea = textareaRef.current;
+    if (!textarea) return;
     const descriptor = Object.getOwnPropertyDescriptor(
       window.HTMLTextAreaElement.prototype,
-      'value'
-    )
-    descriptor?.set?.call(textarea, '')
-    textarea.dispatchEvent(new Event('input', { bubbles: true }))
-    textarea.dispatchEvent(new Event('change', { bubbles: true }))
-    onClear?.()
-    textarea.focus()
+      'value',
+    );
+    descriptor?.set?.call(textarea, '');
+    textarea.dispatchEvent(new Event('input', { bubbles: true }));
+    textarea.dispatchEvent(new Event('change', { bubbles: true }));
+    onClear?.();
+    textarea.focus();
   }
 
   const control = (
@@ -127,23 +129,21 @@ export function Textarea ({
       aria-describedby={describedBy}
       onChange={handleChange}
     />
-  )
+  );
 
-  const clearButton = clearable
-    ? (
-      <button
-        type="button"
-        className="textarea_clear"
-        aria-label="입력 지우기"
-        hidden={!showClear}
-        onClick={handleClear}
-      >
-        <Icon name="close" />
-      </button>
-      )
-    : null
+  const clearButton = clearable ? (
+    <button
+      type="button"
+      className="textarea_clear"
+      aria-label="입력 지우기"
+      hidden={!showClear}
+      onClick={handleClear}
+    >
+      <Icon name="close" />
+    </button>
+  ) : null;
 
-  if (!showCount && !clearable) return control
+  if (!showCount && !clearable) return control;
 
   return (
     <div
@@ -153,32 +153,36 @@ export function Textarea ({
         clearable && 'textarea_clearable',
         showClear && 'is-filled',
         fit && 'textarea_wrap_fit',
-        wrapperClassName
+        wrapperClassName,
       )}
     >
       {control}
       {clearButton}
-      {showCount
-        ? (
+      {showCount ? (
+        <span
+          id={countId}
+          className={classNames(
+            'textarea_count',
+            nativeMaxLength != null && count >= nativeMaxLength && 'is-limit',
+          )}
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+        >
           <span
-            id={countId}
-            className={classNames('textarea_count', nativeMaxLength != null && count >= nativeMaxLength && 'is-limit')}
-            role="status"
-            aria-live="polite"
-            aria-atomic="true"
+            className="textarea_count_visual"
+            aria-hidden="true"
           >
-            <span className="textarea_count_visual" aria-hidden="true">
-              {count}
-              {hasLimit ? `/${nativeMaxLength}` : ''}
-            </span>
-            <span className="textarea_count_announcer">
-              {count}자 입력{hasLimit ? `, 최대 ${nativeMaxLength}자` : ''}
-            </span>
+            {count}
+            {hasLimit ? `/${nativeMaxLength}` : ''}
           </span>
-          )
-        : null}
+          <span className="textarea_count_announcer">
+            {count}자 입력{hasLimit ? `, 최대 ${nativeMaxLength}자` : ''}
+          </span>
+        </span>
+      ) : null}
     </div>
-  )
+  );
 }
 
-export default Textarea
+export default Textarea;

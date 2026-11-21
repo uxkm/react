@@ -44,7 +44,7 @@
 
     &::before,
     &::after {
-      content: "";
+      content: '';
       flex: 1;
       border-top: var(--divider-thickness) solid var(--divider-color);
     }

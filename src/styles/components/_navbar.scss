@@ -20,7 +20,6 @@
   --navbar-link-font-weight: 500;
   --navbar-search-width: 12rem;
   --navbar-search-width-lg: 16rem;
-
 }
 
 // =============================================================================
@@ -159,7 +158,7 @@
       display: none;
     }
 
-    &[aria-expanded="true"] {
+    &[aria-expanded='true'] {
       .navbar_toggle-icon-open {
         display: none;
       }

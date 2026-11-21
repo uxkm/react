@@ -1,7 +1,7 @@
-import { Button, Card, Icon, Tag, TagGroup } from '@/comp'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
-import { corporateCardTypeExamples } from './corporateCardExamples'
-import { webzineCardExample } from './webzineCardExample'
+import { Button, Card, Icon, Tag, TagGroup } from '@/comp';
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode';
+import { corporateCardTypeExamples } from './corporateCardExamples';
+import { webzineCardExample } from './webzineCardExample';
 
 /** 실제 제공하는 공통 Card 유형. 프로젝트 문구·데이터와 독립된 가이드 예제입니다. */
 export const cardTypeExamples = [
@@ -27,8 +27,8 @@ export const cardTypeExamples = [
       {
         reactImports: [],
         compImports: ['Card', 'Button', 'Tag', 'TagGroup'],
-        name: 'CourseCardExample'
-      }
+        name: 'CourseCardExample',
+      },
     ),
     preview: (
       <Card
@@ -38,7 +38,7 @@ export const cardTypeExamples = [
           category: 'AI · 데이터',
           title: '업무에 바로 쓰는 생성형 AI',
           description: '실습으로 배우는 업무 자동화',
-          href: '#card-types'
+          href: '#card-types',
         }}
         image={{ src: '/images/@dummy/hr-trend.png', fit: '120% auto' }}
         slots={{
@@ -54,7 +54,7 @@ export const cardTypeExamples = [
             </TagGroup>
           ),
           meta: <p>총 8시간 · 입문 · 평점 4.8 / 5</p>,
-          footer: <strong>120,000원</strong>
+          footer: <strong>120,000원</strong>,
         }}
         actions={
           <Button
@@ -66,7 +66,7 @@ export const cardTypeExamples = [
           </Button>
         }
       />
-    )
+    ),
   },
   {
     type: 'promotion',
@@ -83,7 +83,7 @@ export const cardTypeExamples = [
 }} image="/images/pages/main/ax-refresh.png"
   imageProps={{ width: 320, height: 220, fit: 'contain' }}
 />`,
-      { reactImports: [], compImports: ['Card'], name: 'PromotionCardExample' }
+      { reactImports: [], compImports: ['Card'], name: 'PromotionCardExample' },
     ),
     preview: (
       <Card
@@ -93,12 +93,12 @@ export const cardTypeExamples = [
           title: '새로운 배움을\n시작하세요',
           description: '핵심 내용을 소개하고 다음 행동으로 안내합니다.',
           href: '#card-types',
-          action: '자세히 보기'
+          action: '자세히 보기',
         }}
         image="/images/pages/main/ax-refresh.png"
         imageProps={{ width: 320, height: 220, fit: 'contain' }}
       />
-    )
+    ),
   },
   {
     type: 'image',
@@ -116,7 +116,7 @@ export const cardTypeExamples = [
     imageProps={{ width: 240, height: 180, fit: 'contain' }}
   />
 </div>`,
-      { reactImports: [], compImports: ['Card'], name: 'ImageCardExample' }
+      { reactImports: [], compImports: ['Card'], name: 'ImageCardExample' },
     ),
     preview: (
       <Card
@@ -127,12 +127,12 @@ export const cardTypeExamples = [
           title: '나에게 맞는\n학습 찾기',
           description: '목표에 맞는 학습을 확인하세요.',
           href: '#card-types',
-          action: '살펴보기'
+          action: '살펴보기',
         }}
         image="/images/pages/main/consultation-glass.png"
         imageProps={{ width: 240, height: 180, fit: 'contain' }}
       />
-    )
+    ),
   },
   {
     type: 'content',
@@ -146,7 +146,7 @@ export const cardTypeExamples = [
   description: '콘텐츠의 핵심 내용을 간단하게 소개합니다.',
   href: '#card-types'
 }} image={{ src: '/images/@dummy/hr-trend.png', fit: '120% auto' }} />`,
-      { reactImports: [], compImports: ['Card'], name: 'ContentCardExample' }
+      { reactImports: [], compImports: ['Card'], name: 'ContentCardExample' },
     ),
     preview: (
       <Card
@@ -156,11 +156,11 @@ export const cardTypeExamples = [
           category: '인사이트',
           title: '업무에 활용하는 새로운 아이디어',
           description: '콘텐츠의 핵심 내용을 간단하게 소개합니다.',
-          href: '#card-types'
+          href: '#card-types',
         }}
         image={{ src: '/images/@dummy/hr-trend.png', fit: '120% auto' }}
       />
-    )
+    ),
   },
   {
     type: 'quick-link',
@@ -178,8 +178,8 @@ export const cardTypeExamples = [
       {
         reactImports: [],
         compImports: ['Card', 'Icon'],
-        name: 'QuickLinkCardExample'
-      }
+        name: 'QuickLinkCardExample',
+      },
     ),
     preview: (
       <Card
@@ -194,10 +194,10 @@ export const cardTypeExamples = [
               name="download"
               size={32}
             />
-          )
+          ),
         }}
       />
-    )
+    ),
   },
   {
     type: 'testimonial',
@@ -213,8 +213,8 @@ export const cardTypeExamples = [
       {
         reactImports: [],
         compImports: ['Card'],
-        name: 'TestimonialCardExample'
-      }
+        name: 'TestimonialCardExample',
+      },
     ),
     preview: (
       <Card
@@ -223,10 +223,10 @@ export const cardTypeExamples = [
         card={{
           category: '고객사례',
           quote: '배운 내용을 바로 적용하며\n팀의 변화를 만들었습니다.',
-          author: '교육 담당자'
+          author: '교육 담당자',
         }}
       />
-    )
+    ),
   },
   {
     type: 'callout',
@@ -241,15 +241,15 @@ export const cardTypeExamples = [
       {
         reactImports: [],
         compImports: ['Card', 'Button'],
-        name: 'CalloutCardExample'
-      }
+        name: 'CalloutCardExample',
+      },
     ),
     preview: (
       <Card
         type="callout"
         card={{
           title: '더 알아보고 싶으신가요?',
-          description: '안내를 확인하고 다음 단계를 시작하세요.'
+          description: '안내를 확인하고 다음 단계를 시작하세요.',
         }}
         actions={
           <Button
@@ -261,8 +261,8 @@ export const cardTypeExamples = [
           </Button>
         }
       />
-    )
+    ),
   },
   ...corporateCardTypeExamples,
-  webzineCardExample
-]
+  webzineCardExample,
+];

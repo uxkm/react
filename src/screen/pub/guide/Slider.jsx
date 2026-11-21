@@ -1,16 +1,16 @@
-'use client'
+'use client';
 
-import { useState } from 'react' // 상태 훅
-import { Slider } from '@/comp' // Slider 컴포넌트
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
-import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
-import { sliderApiSections } from '@/screen/pub/data/guide/sliderApiSections' // slider Api Sections
+import { useState } from 'react'; // 상태 훅
+import { Slider } from '@/comp'; // Slider 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'; // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'; // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout'; // Guide Layout 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'; // wrap Page Example
+import { sliderApiSections } from '@/screen/pub/data/guide/sliderApiSections'; // slider Api Sections
 
 /** value · onChange 로 부모가 값을 소유하는 제어 예시 */
-function ControlledDemo () {
-  const [value, setValue] = useState(30)
+function ControlledDemo() {
+  const [value, setValue] = useState(30);
 
   return (
     <div className="demo-stack">
@@ -25,7 +25,7 @@ function ControlledDemo () {
         value: <code>{value}</code>
       </p>
     </div>
-  )
+  );
 }
 
 const SECTIONS = [
@@ -33,11 +33,13 @@ const SECTIONS = [
     title: '유형',
     description: (
       <>
-        보이는 레이블이 있으면 <code>label</code> + <code>for</code>를, 없으면 <code>aria-label</code>을 사용합니다.
-        보조 설명은 <code>aria-describedby</code>, 읽기 쉬운 값은 <code>aria-valuetext</code>를 조합합니다.
+        보이는 레이블이 있으면 <code>label</code> + <code>for</code>를, 없으면{' '}
+        <code>aria-label</code>을 사용합니다. 보조 설명은 <code>aria-describedby</code>, 읽기 쉬운
+        값은 <code>aria-valuetext</code>를 조합합니다.
       </>
     ),
-    code: wrapPageExample(`<Slider id="…" className="slider_fit" label="label + for — 기본" value={40} showValue />
+    code: wrapPageExample(
+      `<Slider id="…" className="slider_fit" label="label + for — 기본" value={40} showValue />
 <Slider className="slider_fit" value={55} aria-label="단독 슬라이더 — aria-label" />
 <Slider
   id="…"
@@ -48,11 +50,13 @@ const SECTIONS = [
   max={5}
   data-slider-valuetext-map="1:매우 낮음,2:낮음,3:보통,4:높음,5:매우 높음"
   showValue
-/>`, {
-  name: 'SliderExample1',
-  reactImports: [],
-  compImports: ['Slider']
-}),
+/>`,
+      {
+        name: 'SliderExample1',
+        reactImports: [],
+        compImports: ['Slider'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
         <Slider
@@ -62,7 +66,11 @@ const SECTIONS = [
           value={40}
           showValue
         />
-        <Slider className="slider_fit" value={55} aria-label="단독 슬라이더 — aria-label" />
+        <Slider
+          className="slider_fit"
+          value={55}
+          aria-label="단독 슬라이더 — aria-label"
+        />
         <p className="slider_hint">
           레이블 없이 사용할 때는 <code>aria-label</code>로 접근 가능한 이름을 지정합니다.
         </p>
@@ -78,7 +86,10 @@ const SECTIONS = [
           data-slider-valuetext-suffix="픽셀"
           showValue
         />
-        <p className="slider_hint" id="slider-type-labelledby-hint">
+        <p
+          className="slider_hint"
+          id="slider-type-labelledby-hint"
+        >
           12~24px 사이 글자 크기
         </p>
         <Slider
@@ -91,7 +102,10 @@ const SECTIONS = [
           data-slider-valuetext-suffix="퍼센트"
           showValue
         />
-        <p className="slider_hint" id="slider-type-describedby-hint">
+        <p
+          className="slider_hint"
+          id="slider-type-describedby-hint"
+        >
           0%는 최소, 100%는 최대 대비입니다. 힌트 id를 <code>aria-describedby</code>에 연결합니다.
         </p>
         <Slider
@@ -109,16 +123,18 @@ const SECTIONS = [
           숫자 대신 <code>aria-valuetext</code>로 “보통”처럼 읽기 쉬운 값을 전달합니다.
         </p>
       </div>
-    )
+    ),
   },
   {
     title: '기본',
     description: (
       <>
-        <code>value</code>를 넘기면 제어 모드입니다. 부모가 값을 소유하고 <code>onChange</code>로만 갱신합니다.
+        <code>value</code>를 넘기면 제어 모드입니다. 부모가 값을 소유하고 <code>onChange</code>로만
+        갱신합니다.
       </>
     ),
-    code: wrapPageExample(`const [value, setValue] = useState(30)
+    code: wrapPageExample(
+      `const [value, setValue] = useState(30)
 
 <Slider
   className="slider_fit"
@@ -126,12 +142,14 @@ const SECTIONS = [
   onChange={setValue}
   aria-label="기본 슬라이더"
   showValue
-/>`, {
-      name: 'SliderExample',
-      reactImports: ['useState'],
-      compImports: ['Slider']
-    }),
-    preview: <ControlledDemo />
+/>`,
+      {
+        name: 'SliderExample',
+        reactImports: ['useState'],
+        compImports: ['Slider'],
+      },
+    ),
+    preview: <ControlledDemo />,
   },
   {
     title: '레이블 · 값 표시',
@@ -140,7 +158,8 @@ const SECTIONS = [
         <code>slider_header</code>에 레이블과 <code>output.slider_value</code>를 함께 사용합니다.
       </>
     ),
-    code: wrapPageExample(`<Slider id="slider-volume" className="slider_fit" label="볼륨" value={60} showValue />
+    code: wrapPageExample(
+      `<Slider id="slider-volume" className="slider_fit" label="볼륨" value={60} showValue />
 <Slider
   id="slider-brightness"
   className="slider_fit"
@@ -148,14 +167,22 @@ const SECTIONS = [
   value={40}
   data-slider-suffix="%"
   showValue
-/>`, {
-  name: 'SliderExample2',
-  reactImports: [],
-  compImports: ['Slider']
-}),
+/>`,
+      {
+        name: 'SliderExample2',
+        reactImports: [],
+        compImports: ['Slider'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
-        <Slider id="slider-volume" className="slider_fit" label="볼륨" value={60} showValue />
+        <Slider
+          id="slider-volume"
+          className="slider_fit"
+          label="볼륨"
+          value={60}
+          showValue
+        />
         <Slider
           id="slider-brightness"
           className="slider_fit"
@@ -165,7 +192,7 @@ const SECTIONS = [
           showValue
         />
       </div>
-    )
+    ),
   },
   {
     title: '크기',
@@ -174,13 +201,16 @@ const SECTIONS = [
         <code>size</code>는 sm · md · lg입니다.
       </>
     ),
-    code: wrapPageExample(`<Slider id="…" size="sm" className="slider_fit" label="Small — slider_sm" value={30} showValue />
+    code: wrapPageExample(
+      `<Slider id="…" size="sm" className="slider_fit" label="Small — slider_sm" value={30} showValue />
 <Slider id="…" className="slider_fit" label="Medium — 기본" value={50} showValue />
-<Slider id="…" size="lg" className="slider_fit" label="Large — slider_lg" value={70} showValue />`, {
-  name: 'SliderSizeExample',
-  reactImports: [],
-  compImports: ['Slider']
-}),
+<Slider id="…" size="lg" className="slider_fit" label="Large — slider_lg" value={70} showValue />`,
+      {
+        name: 'SliderSizeExample',
+        reactImports: [],
+        compImports: ['Slider'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
         <Slider
@@ -207,21 +237,25 @@ const SECTIONS = [
           showValue
         />
       </div>
-    )
+    ),
   },
   {
     title: '너비',
     description: (
       <>
-        기본은 부모 100%입니다. <code>slider_fit</code>으로 최대 너비를 제한하고, <code>slider_block</code>으로 전체 너비를 사용합니다.
+        기본은 부모 100%입니다. <code>slider_fit</code>으로 최대 너비를 제한하고,{' '}
+        <code>slider_block</code>으로 전체 너비를 사용합니다.
       </>
     ),
-    code: wrapPageExample(`<Slider className="slider_fit" label="slider_fit — 최대 320px" value={45} showValue />
-<Slider className="slider_block" style={{ maxWidth: 480 }} label="slider_block — 전체 너비" value={65} showValue />`, {
-  name: 'SliderExample4',
-  reactImports: [],
-  compImports: ['Slider']
-}),
+    code: wrapPageExample(
+      `<Slider className="slider_fit" label="slider_fit — 최대 320px" value={45} showValue />
+<Slider className="slider_block" style={{ maxWidth: 480 }} label="slider_block — 전체 너비" value={65} showValue />`,
+      {
+        name: 'SliderExample4',
+        reactImports: [],
+        compImports: ['Slider'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
         <Slider
@@ -240,30 +274,41 @@ const SECTIONS = [
           showValue
         />
       </div>
-    )
+    ),
   },
   {
     title: '간격 · 눈금',
     description: <>step으로 증감 단위를 지정합니다.</>,
-    code: wrapPageExample(`<Slider className="slider_fit" label="step=10" value={50} step={10} showValue />`, {
-  name: 'SliderExample5',
-  reactImports: [],
-  compImports: ['Slider']
-}),
+    code: wrapPageExample(
+      `<Slider className="slider_fit" label="step=10" value={50} step={10} showValue />`,
+      {
+        name: 'SliderExample5',
+        reactImports: [],
+        compImports: ['Slider'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
-        <Slider className="slider_fit" label="step=10" value={50} step={10} showValue />
+        <Slider
+          className="slider_fit"
+          label="step=10"
+          value={50}
+          step={10}
+          showValue
+        />
       </div>
-    )
+    ),
   },
   {
     title: '스텝 버튼',
     description: (
       <>
-        <code>stepper</code>는 모바일에서 증감 버튼을 표시합니다. 항상 보이려면 <code>stepperAlways</code>를 함께 씁니다.
+        <code>stepper</code>는 모바일에서 증감 버튼을 표시합니다. 항상 보이려면{' '}
+        <code>stepperAlways</code>를 함께 씁니다.
       </>
     ),
-    code: wrapPageExample(`<Slider
+    code: wrapPageExample(
+      `<Slider
   className="slider_fit"
   stepper
   label="볼륨 — slider_stepper"
@@ -272,11 +317,13 @@ const SECTIONS = [
   decreaseLabel="볼륨 줄이기"
   increaseLabel="볼륨 늘리기"
 />
-<Slider className="slider_fit" stepper stepperAlways label="밝기 — slider_stepper_always" … />`, {
-  name: 'SliderStepsExample',
-  reactImports: [],
-  compImports: ['Slider']
-}),
+<Slider className="slider_fit" stepper stepperAlways label="밝기 — slider_stepper_always" … />`,
+      {
+        name: 'SliderStepsExample',
+        reactImports: [],
+        compImports: ['Slider'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
         <Slider
@@ -311,21 +358,25 @@ const SECTIONS = [
           disabled
         />
       </div>
-    )
+    ),
   },
   {
     title: '색상',
     description: (
       <>
-        <code>color_primary</code> · <code>color_success</code> · <code>color_danger</code> · <code>color_warning</code>으로 트랙·썸 색을 지정합니다.
+        <code>color_primary</code> · <code>color_success</code> · <code>color_danger</code> ·{' '}
+        <code>color_warning</code>으로 트랙·썸 색을 지정합니다.
       </>
     ),
-    code: wrapPageExample(`<Slider className="color_primary slider_fit" label="Primary" value={60} showValue />
-…`, {
-  name: 'SliderColorExample',
-  reactImports: [],
-  compImports: ['Slider']
-}),
+    code: wrapPageExample(
+      `<Slider className="color_primary slider_fit" label="Primary" value={60} showValue />
+…`,
+      {
+        name: 'SliderColorExample',
+        reactImports: [],
+        compImports: ['Slider'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
         <Slider
@@ -357,54 +408,85 @@ const SECTIONS = [
           showValue
         />
       </div>
-    )
+    ),
   },
   {
     title: '상태',
     description: <>비활성 상태를 지원합니다.</>,
-    code: wrapPageExample(`<Slider className="slider_fit" label="기본" value={50} showValue />
-<Slider className="slider_fit" label="비활성" value={30} disabled showValue />`, {
-  name: 'SliderStateExample',
-  reactImports: [],
-  compImports: ['Slider']
-}),
+    code: wrapPageExample(
+      `<Slider className="slider_fit" label="기본" value={50} showValue />
+<Slider className="slider_fit" label="비활성" value={30} disabled showValue />`,
+      {
+        name: 'SliderStateExample',
+        reactImports: [],
+        compImports: ['Slider'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
-        <Slider className="slider_fit" label="기본" value={50} showValue />
-        <Slider className="slider_fit" label="비활성" value={30} disabled showValue />
+        <Slider
+          className="slider_fit"
+          label="기본"
+          value={50}
+          showValue
+        />
+        <Slider
+          className="slider_fit"
+          label="비활성"
+          value={30}
+          disabled
+          showValue
+        />
       </div>
-    )
+    ),
   },
   {
     title: '폼 레이아웃',
     description: (
       <>
-        <code>form_field</code> · <code>form_vertical</code> · <code>form_horizontal</code>과 함께 사용합니다.
+        <code>form_field</code> · <code>form_vertical</code> · <code>form_horizontal</code>과 함께
+        사용합니다.
       </>
     ),
-    code: wrapPageExample(`<form className="form form_vertical form_fit">
+    code: wrapPageExample(
+      `<form className="form form_vertical form_fit">
   <div className="form_field">
     <label className="form_field-label" htmlFor="slider-form-opacity">불투명도</label>
     <Slider id="slider-form-opacity" value={85} data-slider-suffix="%" />
     <p className="form_field-hint">0~100% 사이 값</p>
   </div>
-</form>`, {
-  name: 'SliderFormExample',
-  reactImports: [],
-  compImports: ['Slider']
-}),
+</form>`,
+      {
+        name: 'SliderFormExample',
+        reactImports: [],
+        compImports: ['Slider'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
-        <form className="form form_vertical form_fit" onSubmit={(event) => event.preventDefault()}>
+        <form
+          className="form form_vertical form_fit"
+          onSubmit={(event) => event.preventDefault()}
+        >
           <div className="form_field">
-            <label className="form_field-label" htmlFor="slider-form-opacity">
+            <label
+              className="form_field-label"
+              htmlFor="slider-form-opacity"
+            >
               불투명도
             </label>
-            <Slider id="slider-form-opacity" value={85} data-slider-suffix="%" />
+            <Slider
+              id="slider-form-opacity"
+              value={85}
+              data-slider-suffix="%"
+            />
             <p className="form_field-hint">0~100% 사이 값</p>
           </div>
           <div className="form_field">
-            <label className="form_field-label" htmlFor="slider-form-zoom">
+            <label
+              className="form_field-label"
+              htmlFor="slider-form-zoom"
+            >
               확대 비율
             </label>
             <Slider
@@ -418,25 +500,36 @@ const SECTIONS = [
             />
           </div>
         </form>
-        <form className="form form_horizontal form_fit" onSubmit={(event) => event.preventDefault()}>
+        <form
+          className="form form_horizontal form_fit"
+          onSubmit={(event) => event.preventDefault()}
+        >
           <div className="form_field">
-            <label className="form_field-label" htmlFor="slider-form-horizontal">
+            <label
+              className="form_field-label"
+              htmlFor="slider-form-horizontal"
+            >
               선 굵기
             </label>
-            <Slider id="slider-form-horizontal" value={3} min={1} max={10} />
+            <Slider
+              id="slider-form-horizontal"
+              value={3}
+              min={1}
+              max={10}
+            />
             <p className="form_field-hint">1~10px</p>
           </div>
         </form>
       </div>
-    )
-  }
-]
+    ),
+  },
+];
 
 /**
  * Slider 가이드 화면.
  * docs와 동일한 유형·크기·스텝·폼 예시와 API 문서를 모은다.
  */
-export default function SliderGuide () {
+export default function SliderGuide() {
   return (
     <GuideLayout
       category="폼"
@@ -457,5 +550,5 @@ export default function SliderGuide () {
 
       <GuideApiDocs sections={sliderApiSections} />
     </GuideLayout>
-  )
+  );
 }

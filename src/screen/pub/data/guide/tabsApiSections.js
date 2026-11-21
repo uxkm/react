@@ -6,310 +6,333 @@ const columns = [
   { key: 'name', label: '이름' },
   { key: 'description', label: '설명' },
   { key: 'default', label: '기본값' },
-  { key: 'type', label: '타입' }
-]
+  { key: 'type', label: '타입' },
+];
 
 const props = [
   {
     name: 'tabs',
     type: 'TabItem[]',
     default: '[]',
-    description: "탭 목록입니다. 문자열·숫자 또는 { value, label?, children?, icon?, content?, disabled?, closable?, closeLabel? }. content 가 있으면 항목별 패널로 렌더합니다. 비어 있으면 Tab · TabPanel 자식을 읽습니다."
+    description:
+      '탭 목록입니다. 문자열·숫자 또는 { value, label?, children?, icon?, content?, disabled?, closable?, closeLabel? }. content 가 있으면 항목별 패널로 렌더합니다. 비어 있으면 Tab · TabPanel 자식을 읽습니다.',
   },
   {
     name: 'renderTab',
     type: '(tab, state) => ReactNode',
     default: '—',
-    description: '탭 버튼 내부를 커스텀합니다. state 는 { active, disabled, select, close? } 입니다.'
+    description:
+      '탭 버튼 내부를 커스텀합니다. state 는 { active, disabled, select, close? } 입니다.',
   },
   {
     name: 'renderPanel',
     type: '(tab, state) => ReactNode',
     default: '—',
-    description: '멀티 패널일 때 패널 본문을 커스텀합니다. state 는 { active } 입니다.'
+    description: '멀티 패널일 때 패널 본문을 커스텀합니다. state 는 { active } 입니다.',
   },
   {
     name: 'children · Tab · TabPanel',
     type: 'ReactNode',
     default: '—',
-    description: '메뉴는 tabs.map → Tab 반복을 권장합니다. Tab 에 label 을 주고 children 을 넣으면 탭별 패널 슬롯입니다(또는 panel prop · TabPanel). 패널에 Tabs를 넣으면 이중 탭으로 구성할 수 있으며 각 그룹의 label·value·onChange를 별도로 지정합니다. label 없이 Tab children 은 메뉴 커스텀입니다. 패널 슬롯이 하나도 없으면 남은 children 이 활성 공통 패널로 쓰입니다. Tabs.Tab · Tabs.Panel 별칭도 같습니다.'
+    description:
+      '메뉴는 tabs.map → Tab 반복을 권장합니다. Tab 에 label 을 주고 children 을 넣으면 탭별 패널 슬롯입니다(또는 panel prop · TabPanel). 패널에 Tabs를 넣으면 이중 탭으로 구성할 수 있으며 각 그룹의 label·value·onChange를 별도로 지정합니다. label 없이 Tab children 은 메뉴 커스텀입니다. 패널 슬롯이 하나도 없으면 남은 children 이 활성 공통 패널로 쓰입니다. Tabs.Tab · Tabs.Panel 별칭도 같습니다.',
   },
   {
     name: 'value · defaultValue',
     type: 'string | number',
     default: '— · 첫 사용 가능 탭',
-    description: '선택된 탭 value 입니다. value 를 넘기면 제어하고, 생략하면 defaultValue(또는 첫 탭)와 내부 상태로 동작합니다.'
+    description:
+      '선택된 탭 value 입니다. value 를 넘기면 제어하고, 생략하면 defaultValue(또는 첫 탭)와 내부 상태로 동작합니다.',
   },
   {
     name: 'onChange',
     type: '(value: string | number) => void',
     default: '—',
-    description: '탭을 고를 때 호출됩니다. 같은 값을 다시 눌러도 호출되지 않습니다. 비제어 모드에서도 내부 활성 탭이 갱신됩니다.'
+    description:
+      '탭을 고를 때 호출됩니다. 같은 값을 다시 눌러도 호출되지 않습니다. 비제어 모드에서도 내부 활성 탭이 갱신됩니다.',
   },
   {
     name: 'onClose',
     type: '(value: string | number) => void',
     default: '—',
-    description: '닫기(×)를 눌렀을 때 호출됩니다. closable 또는 항목 closable 이 있을 때 표시됩니다.'
+    description:
+      '닫기(×)를 눌렀을 때 호출됩니다. closable 또는 항목 closable 이 있을 때 표시됩니다.',
   },
   {
     name: 'variant',
     type: "'line' | 'card' | 'pill' | 'keyword'",
     default: "'line'",
-    description: '스킨입니다. tabs_line · tabs_card · tabs_pill · tabs_keyword가 붙습니다. keyword는 키워드 모양·선택 채움·가운데 정렬이며 기본 배치에서 줄바꿈합니다. Tab 패널 안에 다시 keyword Tabs를 넣으면 가운데 정렬 이중 키워드 탭이 됩니다.'
+    description:
+      '스킨입니다. tabs_line · tabs_card · tabs_pill · tabs_keyword가 붙습니다. keyword는 키워드 모양·선택 채움·가운데 정렬이며 기본 배치에서 줄바꿈합니다. Tab 패널 안에 다시 keyword Tabs를 넣으면 가운데 정렬 이중 키워드 탭이 됩니다.',
   },
   {
     name: 'size',
     type: "'sm' | 'md' | 'lg'",
     default: "'md'",
-    description: '크기입니다. sm · lg 일 때 tabs_sm · tabs_lg 가 붙습니다.'
+    description: '크기입니다. sm · lg 일 때 tabs_sm · tabs_lg 가 붙습니다.',
   },
   {
     name: 'layout',
     type: "'auto' | 'equal' | 'scroll'",
     default: "'auto'",
-    description: '가로 배치입니다. equal → tabs_equal(균등), scroll → tabs_scroll-nav(좌·우 이전/다음 · 가장자리 딤).'
+    description:
+      '가로 배치입니다. equal → tabs_equal(균등), scroll → tabs_scroll-nav(좌·우 이전/다음 · 가장자리 딤).',
   },
   {
     name: 'vertical',
     type: 'boolean',
     default: 'false',
-    description: 'tabs_vertical 을 붙여 세로 탭으로 배치합니다.'
+    description: 'tabs_vertical 을 붙여 세로 탭으로 배치합니다.',
   },
   {
     name: 'scrollable',
     type: 'boolean',
     default: 'false',
-    description: 'layout=\"auto\" 일 때 tabs_scrollable(스크롤바)을 붙입니다. layout=\"scroll\" 의 이전/다음 네비와는 별개입니다.'
+    description:
+      'layout=\"auto\" 일 때 tabs_scrollable(스크롤바)을 붙입니다. layout=\"scroll\" 의 이전/다음 네비와는 별개입니다.',
   },
   {
     name: 'indicatorSlide',
     type: 'boolean',
     default: 'false',
-    description: 'true 이면 tabs_indicator-slide 와 tabs_indicator 가 붙고, 활성 탭을 따라 인디케이터가 이동합니다. line(밑줄·세로면 옆줄) · pill·keyword(배경)에 맞습니다.'
+    description:
+      'true 이면 tabs_indicator-slide 와 tabs_indicator 가 붙고, 활성 탭을 따라 인디케이터가 이동합니다. line(밑줄·세로면 옆줄) · pill·keyword(배경)에 맞습니다.',
   },
   {
     name: 'navFade',
     type: 'boolean',
     default: 'false',
-    description: 'layout=\"scroll\" 일 때 좌·우 가장자리 딤입니다. true 이면 tabs_nav-fade 와 is-fade-start · is-fade-end 가 붙습니다.'
+    description:
+      'layout=\"scroll\" 일 때 좌·우 가장자리 딤입니다. true 이면 tabs_nav-fade 와 is-fade-start · is-fade-end 가 붙습니다.',
   },
   {
     name: 'navSelect',
     type: 'boolean',
     default: 'false',
-    description: 'layout=\"scroll\" 일 때 이전/다음(Icon button) 클릭으로 인접 활성 탭을 선택합니다. false(기본)면 목록만 가로 스크롤하며 버튼 이름도 ‘탭 목록 왼쪽/오른쪽으로 스크롤’로 구분합니다. true이면 ‘이전 탭/다음 탭’으로 읽히며 Enter·Space로 선택합니다.'
+    description:
+      'layout=\"scroll\" 일 때 이전/다음(Icon button) 클릭으로 인접 활성 탭을 선택합니다. false(기본)면 목록만 가로 스크롤하며 버튼 이름도 ‘탭 목록 왼쪽/오른쪽으로 스크롤’로 구분합니다. true이면 ‘이전 탭/다음 탭’으로 읽히며 Enter·Space로 선택합니다.',
   },
   {
     name: 'navVariant',
     type: "'outline' | 'ghost' | 'soft'",
     default: "'outline'",
-    description: '좌·우 네비 Icon button 스킨입니다. tabs_nav-outline · tabs_nav-ghost · tabs_nav-soft 가 붙습니다.'
+    description:
+      '좌·우 네비 Icon button 스킨입니다. tabs_nav-outline · tabs_nav-ghost · tabs_nav-soft 가 붙습니다.',
   },
   {
     name: 'navColor',
     type: "IconColor | ''",
     default: "''",
-    description: '좌·우 네비 Icon color 입니다. primary · muted · danger 등 color_* 가 붙습니다.'
+    description: '좌·우 네비 Icon color 입니다. primary · muted · danger 등 color_* 가 붙습니다.',
   },
   {
     name: 'navClassName',
     type: 'string',
     default: "''",
-    description: '좌·우 네비 버튼에 추가할 클래스입니다.'
+    description: '좌·우 네비 버튼에 추가할 클래스입니다.',
   },
   {
     name: 'closable',
     type: 'boolean',
     default: 'false',
-    description: '모든 탭에 닫기 버튼을 붙입니다. 개별 항목의 closable 로도 지정할 수 있습니다.'
+    description: '모든 탭에 닫기 버튼을 붙입니다. 개별 항목의 closable 로도 지정할 수 있습니다.',
   },
   {
     name: 'extra',
     type: 'ReactNode',
     default: '—',
-    description: 'tabs_bar 오른쪽(tabs_extra)에 두는 부가 콘텐츠입니다. 예: 액션 버튼.'
+    description: 'tabs_bar 오른쪽(tabs_extra)에 두는 부가 콘텐츠입니다. 예: 액션 버튼.',
   },
   {
     name: 'label',
     type: 'string',
     default: "'섹션'",
-    description: 'tablist 의 aria-label 입니다.'
+    description: 'tablist 의 aria-label 입니다.',
   },
   {
     name: 'children',
     type: 'ReactNode',
     default: '—',
-    description: 'Tab · TabPanel 및 공통 패널 슬롯입니다. 항목별 패널이 없으면 나머지 노드가 활성 공통 패널로 렌더됩니다.'
+    description:
+      'Tab · TabPanel 및 공통 패널 슬롯입니다. 항목별 패널이 없으면 나머지 노드가 활성 공통 패널로 렌더됩니다.',
   },
   {
     name: 'className · ...props',
     type: 'div attributes',
     default: '—',
-    description: '루트(tabs) 클래스와 속성입니다. 탭에는 role=\"tab\", 목록에는 role=\"tablist\", 패널에는 role=\"tabpanel\" 이 붙습니다.'
-  }
-]
+    description:
+      '루트(tabs) 클래스와 속성입니다. 탭에는 role=\"tab\", 목록에는 role=\"tablist\", 패널에는 role=\"tabpanel\" 이 붙습니다.',
+  },
+];
 
 const tabProps = [
   {
     name: 'value',
     type: 'string | number',
     default: '—',
-    description: '탭 식별 값입니다. onChange · TabPanel value 와 맞춥니다.'
+    description: '탭 식별 값입니다. onChange · TabPanel value 와 맞춥니다.',
   },
   {
     name: 'label',
     type: 'ReactNode',
     default: '—',
-    description: '탭 버튼 문구입니다. 지정하면 children 은 메뉴가 아니라 이 탭의 패널 슬롯으로 쓰입니다.'
+    description:
+      '탭 버튼 문구입니다. 지정하면 children 은 메뉴가 아니라 이 탭의 패널 슬롯으로 쓰입니다.',
   },
   {
     name: 'panel',
     type: 'ReactNode',
     default: '—',
-    description: '이 탭의 패널 내용입니다. 있으면 children 패널보다 우선합니다. label 유무와 관계없이 패널로 등록됩니다.'
+    description:
+      '이 탭의 패널 내용입니다. 있으면 children 패널보다 우선합니다. label 유무와 관계없이 패널로 등록됩니다.',
   },
   {
     name: 'children',
     type: 'ReactNode',
     default: '—',
-    description: 'label 이 있으면 패널 슬롯, 없으면 탭 버튼 커스텀 내용(아이콘+라벨 마크업 등)입니다.'
+    description:
+      'label 이 있으면 패널 슬롯, 없으면 탭 버튼 커스텀 내용(아이콘+라벨 마크업 등)입니다.',
   },
   {
     name: 'icon · disabled · closable · closeLabel',
     type: 'ReactNode · boolean · boolean · string',
     default: '—',
-    description: '아이콘, 비활성, 닫기 버튼, 닫기 aria-label 입니다.'
-  }
-]
+    description: '아이콘, 비활성, 닫기 버튼, 닫기 aria-label 입니다.',
+  },
+];
 
 const tabPanelProps = [
   {
     name: 'value',
     type: 'string | number',
     default: '—',
-    description: '연결할 탭 value 입니다.'
+    description: '연결할 탭 value 입니다.',
   },
   {
     name: 'children',
     type: 'ReactNode',
     default: '—',
-    description: '해당 탭이 활성일 때 보이는 패널 내용입니다.'
-  }
-]
+    description: '해당 탭이 활성일 때 보이는 패널 내용입니다.',
+  },
+];
 
 const classes = [
   {
     name: 'tabs · tabs_bar · tabs_list-wrap · tabs_list',
     type: 'class',
     default: '—',
-    description: '루트, 탭 바, 목록 래퍼, 탭 목록입니다.'
+    description: '루트, 탭 바, 목록 래퍼, 탭 목록입니다.',
   },
   {
     name: 'tabs_tab · tabs_label · tabs_icon · tabs_close · tabs_extra',
     type: 'class',
     default: '—',
-    description: '탭 버튼, 라벨, 아이콘, 닫기, 바 오른쪽 부가 영역입니다.'
+    description: '탭 버튼, 라벨, 아이콘, 닫기, 바 오른쪽 부가 영역입니다.',
   },
   {
     name: 'tabs_panels · tabs_panel',
     type: 'class',
     default: '—',
-    description: '패널 묶음과 본문 영역입니다.'
+    description: '패널 묶음과 본문 영역입니다.',
   },
   {
     name: 'tabs_line · tabs_card · tabs_pill · tabs_keyword',
     type: 'class',
     default: '—',
-    description: '라인 · 카드 · 필 · 가운데 정렬 키워드 스킨입니다.'
+    description: '라인 · 카드 · 필 · 가운데 정렬 키워드 스킨입니다.',
   },
   {
     name: 'tabs_indicator-slide · tabs_indicator',
     type: 'class',
     default: '—',
-    description: '슬라이딩 인디케이터 모드와 이동 막대입니다. line · pill · keyword 스킨과 함께 씁니다.'
+    description:
+      '슬라이딩 인디케이터 모드와 이동 막대입니다. line · pill · keyword 스킨과 함께 씁니다.',
   },
   {
     name: 'tabs_scroll-nav · tabs_scroll-viewport · tabs_nav',
     type: 'class',
     default: '—',
-    description: '이전/다음 네비입니다. tabs_nav 는 Icon button(icon_button)입니다. 끝·첫 탭에서는 disabled 입니다.'
+    description:
+      '이전/다음 네비입니다. tabs_nav 는 Icon button(icon_button)입니다. 끝·첫 탭에서는 disabled 입니다.',
   },
   {
     name: 'tabs_nav-outline · tabs_nav-ghost · tabs_nav-soft',
     type: 'class',
     default: '—',
-    description: 'navVariant 에 대응하는 네비 버튼 스킨입니다.'
+    description: 'navVariant 에 대응하는 네비 버튼 스킨입니다.',
   },
   {
     name: 'tabs_nav-fade · is-fade-start · is-fade-end',
     type: 'class',
     default: '—',
-    description: 'navFade 옵션일 때 붙는 가장자리 딤 클래스입니다.'
+    description: 'navFade 옵션일 때 붙는 가장자리 딤 클래스입니다.',
   },
   {
     name: 'tabs_sm · tabs_lg · tabs_equal · tabs_scrollable · tabs_vertical',
     type: 'class',
     default: '—',
-    description: '크기 · 균등 분할 · 스크롤바 · 세로 배치 변형입니다.'
+    description: '크기 · 균등 분할 · 스크롤바 · 세로 배치 변형입니다.',
   },
   {
     name: 'is-active · is-disabled',
     type: 'class',
     default: '—',
-    description: '선택 · 비활성 탭 상태입니다. 선택은 aria-selected 와 함께 둡니다.'
-  }
-]
+    description: '선택 · 비활성 탭 상태입니다. 선택은 aria-selected 와 함께 둡니다.',
+  },
+];
 
 const tokens = [
   {
     name: '--tabs-font-size · --tabs-font-weight · --tabs-font-weight-active',
     type: 'size · number',
     default: 'sm · 500 · 600',
-    description: '탭 글자 크기와 기본·활성 굵기입니다.'
+    description: '탭 글자 크기와 기본·활성 굵기입니다.',
   },
   {
     name: '--tabs-gap · --tabs-bar-gap · --tabs-tab-padding-y · --tabs-tab-padding-x',
     type: 'length',
     default: 'xs · md · 0.625rem · 1rem',
-    description: '탭 간격, 바 간격, 탭 안쪽 여백입니다.'
+    description: '탭 간격, 바 간격, 탭 안쪽 여백입니다.',
   },
   {
     name: '--tabs-indicator-height · --tabs-panel-padding-y · --tabs-icon-size',
     type: 'length',
     default: '2px · lg · 1rem',
-    description: '라인 인디케이터 두께, 패널 위 여백, 아이콘 크기입니다.'
+    description: '라인 인디케이터 두께, 패널 위 여백, 아이콘 크기입니다.',
   },
   {
     name: '--tabs-font-size-sm/lg · --tabs-tab-padding-*-sm/lg · --tabs-icon-size-sm/lg',
     type: 'length',
     default: '—',
-    description: 'sm · lg 크기 토큰입니다.'
-  }
-]
+    description: 'sm · lg 크기 토큰입니다.',
+  },
+];
 
 export const tabsApiSections = [
   {
     title: 'API · Props',
-    description: 'React · Next.js Tabs props입니다. tabs · value · onChange 로 구성하고, variant · size · vertical · layout · navFade · navSelect · navVariant · navColor 으로 형태를 바꿉니다.',
-    tables: [{ columns, rows: props }]
+    description:
+      'React · Next.js Tabs props입니다. tabs · value · onChange 로 구성하고, variant · size · vertical · layout · navFade · navSelect · navVariant · navColor 으로 형태를 바꿉니다.',
+    tables: [{ columns, rows: props }],
   },
   {
     title: 'API · Tab',
-    description: 'Tabs 자식 Tab 입니다. label + children(또는 panel)으로 탭별 패널 슬롯을 구성합니다.',
-    tables: [{ columns, rows: tabProps }]
+    description:
+      'Tabs 자식 Tab 입니다. label + children(또는 panel)으로 탭별 패널 슬롯을 구성합니다.',
+    tables: [{ columns, rows: tabProps }],
   },
   {
     title: 'API · TabPanel',
-    description: 'Tabs 자식 TabPanel 입니다. value 가 같은 탭의 패널로 등록됩니다. 방향키·Home·End로 선택하며, 닫기 가능한 탭은 Delete 키로 닫습니다. 닫기 아이콘은 탭 안의 중첩 버튼 대신 같은 동작의 포인터 장식입니다.',
-    tables: [{ columns, rows: tabPanelProps }]
+    description:
+      'Tabs 자식 TabPanel 입니다. value 가 같은 탭의 패널로 등록됩니다. 방향키·Home·End로 선택하며, 닫기 가능한 탭은 Delete 키로 닫습니다. 닫기 아이콘은 탭 안의 중첩 버튼 대신 같은 동작의 포인터 장식입니다.',
+    tables: [{ columns, rows: tabPanelProps }],
   },
   {
     title: '공통 API · 클래스',
-    tables: [{ columns, rows: classes }]
+    tables: [{ columns, rows: classes }],
   },
   {
     title: '공통 API · 디자인 토큰',
-    tables: [{ columns, rows: tokens }]
-  }
-]
+    tables: [{ columns, rows: tokens }],
+  },
+];

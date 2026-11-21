@@ -15,4 +15,3 @@ Create only the wide landscape 3:2 photorealistic CGI artwork for the LEFT LARGE
 ### diagnosis-flower
 
 Extract and recreate only the small ORANGE rounded six-petal asterisk sculpture from the middle pink card in the reference screenshot, as a complete standalone object on an actual alpha transparent background. Soft matte orange clay material with warm peach highlights, gently inflated rounded tubular petals, sophisticated smooth 3D CGI. Three-quarter slightly tilted orientation with six chunky petals radiating from center. No pink card, no ground, no floor, no frame, no text, no other objects. Fully transparent background including gaps between petals. Keep a small transparent margin.
-

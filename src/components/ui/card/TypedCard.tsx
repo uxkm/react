@@ -1,31 +1,37 @@
-import ContentCard from './ContentCard' // Content Card 컴포넌트
-import PromotionCard from './PromotionCard' // Promotion Card 컴포넌트
-import ImageCard from './ImageCard' // Image Card 컴포넌트
-import QuickLinkCard from './QuickLinkCard' // Quick Link Card 컴포넌트
-import TestimonialCard from './TestimonialCard' // Testimonial Card 컴포넌트
-import CalloutCard from './CalloutCard' // Callout Card 컴포넌트
-import CourseCard from './CourseCard'
-import OverlayCard from './OverlayCard'
-import NewsCard from './NewsCard'
-import FeatureCard from './FeatureCard'
-import WebzineCard from './WebzineCard'
-import type { TypedCardProps } from './cardTypes' // Card Props 타입
+import ContentCard from './ContentCard'; // Content Card 컴포넌트
+import PromotionCard from './PromotionCard'; // Promotion Card 컴포넌트
+import ImageCard from './ImageCard'; // Image Card 컴포넌트
+import QuickLinkCard from './QuickLinkCard'; // Quick Link Card 컴포넌트
+import TestimonialCard from './TestimonialCard'; // Testimonial Card 컴포넌트
+import CalloutCard from './CalloutCard'; // Callout Card 컴포넌트
+import CourseCard from './CourseCard';
+import OverlayCard from './OverlayCard';
+import NewsCard from './NewsCard';
+import FeatureCard from './FeatureCard';
+import WebzineCard from './WebzineCard';
+import type { TypedCardProps } from './cardTypes'; // Card Props 타입
 
 /** type에 따라 필요한 카드 데이터가 결정되는 공통 카드 유형 선택. */
-export default function TypedCard (props: Readonly<TypedCardProps>) {
+export default function TypedCard(props: Readonly<TypedCardProps>) {
   switch (props.type) {
     case 'webzine':
-      return <WebzineCard {...props} />
+      return <WebzineCard {...props} />;
     case 'overlay':
-      return <OverlayCard {...props} />
+      return <OverlayCard {...props} />;
     case 'news':
-      return <NewsCard {...props} />
+      return <NewsCard {...props} />;
     case 'feature':
-      return <FeatureCard {...props} />
+      return <FeatureCard {...props} />;
     case 'course':
-      return <CourseCard {...props} />
+      return <CourseCard {...props} />;
     case 'callout':
-      return <CalloutCard card={props.card} actions={props.actions} shadow={props.shadow} />
+      return (
+        <CalloutCard
+          card={props.card}
+          actions={props.actions}
+          shadow={props.shadow}
+        />
+      );
     case 'testimonial':
       return (
         <TestimonialCard
@@ -37,7 +43,7 @@ export default function TypedCard (props: Readonly<TypedCardProps>) {
           slots={props.slots}
           priority={props.priority}
         />
-      )
+      );
     case 'promotion':
       return (
         <PromotionCard
@@ -48,7 +54,7 @@ export default function TypedCard (props: Readonly<TypedCardProps>) {
           slots={props.slots}
           priority={props.priority}
         />
-      )
+      );
     case 'image':
       return (
         <ImageCard
@@ -59,7 +65,7 @@ export default function TypedCard (props: Readonly<TypedCardProps>) {
           slots={props.slots}
           priority={props.priority}
         />
-      )
+      );
     case 'content':
       return (
         <ContentCard
@@ -70,8 +76,13 @@ export default function TypedCard (props: Readonly<TypedCardProps>) {
           slots={props.slots}
           priority={props.priority}
         />
-      )
+      );
     case 'quick-link':
-      return <QuickLinkCard card={props.card} shadow={props.shadow} />
+      return (
+        <QuickLinkCard
+          card={props.card}
+          shadow={props.shadow}
+        />
+      );
   }
 }

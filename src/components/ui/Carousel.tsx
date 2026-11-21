@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import { useLatestRef } from '@/hooks/react/useLatestRef' // Latest Ref 훅
+import { useLatestRef } from '@/hooks/react/useLatestRef'; // Latest Ref 훅
 
 /**
  * Swiper 기반 캐러셀.
@@ -18,165 +18,172 @@ import {
   type CSSProperties, // CSSProperties 타입
   type HTMLAttributes, // HTMLAttributes 타입
   type KeyboardEvent,
-  type ReactNode // ReactNode 타입
-} from 'react' // React
-import Swiper from 'swiper' // Swiper 컴포넌트
-import type { Swiper as SwiperInstance } from 'swiper' // Swiper Instance 타입
-import { carouselSwiperModules } from '@/lib/vendor/swiper' // carousel Swiper Modules
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
-import { hasNodes } from '@/utils/react' // has Nodes
+  type ReactNode, // ReactNode 타입
+} from 'react'; // React
+import Swiper from 'swiper'; // Swiper 컴포넌트
+import type { Swiper as SwiperInstance } from 'swiper'; // Swiper Instance 타입
+import { carouselSwiperModules } from '@/lib/vendor/swiper'; // carousel Swiper Modules
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
+import { hasNodes } from '@/utils/react'; // has Nodes
 
 /** 커버플로우 좌우 노출 */
-export type CoverflowSides = 1 | 1.5 | 2 | 'auto'
+export type CoverflowSides = 1 | 1.5 | 2 | 'auto';
 
 /** 페이지네이션 유형 */
-export type CarouselPagination = boolean | 'fraction' | 'progressbar' | 'custom'
+export type CarouselPagination = boolean | 'fraction' | 'progressbar' | 'custom';
 
 /** Carousel props — Storybook API */
 export interface CarouselProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   /** 캐러셀 영역 접근성 이름 */
-  ariaLabel?: string
-  children?: ReactNode
+  ariaLabel?: string;
+  children?: ReactNode;
   /** sm · md(기본) · lg */
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'sm' | 'md' | 'lg';
   /** 자동 너비 다중 슬라이드 */
-  multi?: boolean
+  multi?: boolean;
   /** 페이지네이션을 슬라이드 영역 밖 */
-  dotsOutside?: boolean
+  dotsOutside?: boolean;
   /** 재생·정지 토글 버튼. 생략하면 autoplay를 따릅니다. */
-  autoplayToggle?: boolean
+  autoplayToggle?: boolean;
   /** 1장일 때도 페이지 수와 비활성 이동·재생 버튼을 표시합니다. 기본 false. */
-  readonly showControlsWhenSingle?: boolean
+  readonly showControlsWhenSingle?: boolean;
   /** fade · coverflow */
-  effect?: 'fade' | 'coverflow'
+  effect?: 'fade' | 'coverflow';
   /** 슬라이드 전환 시간(ms). 기본 300. */
-  readonly speed?: number
+  readonly speed?: number;
   /** 자동 재생 */
-  autoplay?: boolean
+  autoplay?: boolean;
   /** 자동 재생 간격(ms) */
-  delay?: number
+  delay?: number;
   /** 끝↔처음 순환 */
-  loop?: boolean
+  loop?: boolean;
   /** 초기 슬라이드 인덱스 */
-  initialSlide?: number
+  initialSlide?: number;
   /** 현재 슬라이드 인덱스(제어). 넘기면 페이지가 위치를 관리한다 */
-  index?: number
+  index?: number;
   /** 슬라이드가 바뀔 때 호출 */
-  onIndexChange?: (index: number, swiper: SwiperInstance) => void
+  onIndexChange?: (index: number, swiper: SwiperInstance) => void;
   /** 자동재생 재생 중 여부(제어) */
-  playing?: boolean
+  playing?: boolean;
   /** 비제어 초기 재생. 기본은 autoplay */
-  defaultPlaying?: boolean
+  defaultPlaying?: boolean;
   /** 재생/정지 상태가 바뀔 때 호출 */
-  onPlayingChange?: (playing: boolean) => void
+  onPlayingChange?: (playing: boolean) => void;
   /** 한 화면 슬라이드 수 */
-  slidesPerView?: number | 'auto'
+  slidesPerView?: number | 'auto';
   /** 한 번에 이동할 슬라이드 수 */
-  slidesPerGroup?: number
+  slidesPerGroup?: number;
   /** 슬라이드 간격(px) */
-  spaceBetween?: number
+  spaceBetween?: number;
   /** 활성 슬라이드 가운데 정렬. 썸네일 컨트롤에서는 연결된 메인 선택을 따라가며 양 끝은 목록 경계에 맞춥니다. */
-  centered?: boolean
+  centered?: boolean;
   /** 페이지네이션 */
-  pagination?: CarouselPagination
+  pagination?: CarouselPagination;
   /** 이전·다음 버튼 */
-  navigation?: boolean
+  navigation?: boolean;
   /** 2 이상이면 다행 그리드 */
-  gridRows?: number
+  gridRows?: number;
   /** 그리드 채움 방향 */
-  gridFill?: 'row' | 'column'
+  gridFill?: 'row' | 'column';
   /** 커버플로우 스타일 */
-  coverflowStyle?: 'tilt' | 'rise'
+  coverflowStyle?: 'tilt' | 'rise';
   /** 커버플로우 좌우 노출 */
-  coverflowSides?: CoverflowSides
+  coverflowSides?: CoverflowSides;
   /** Swiper coverflowEffect 덮어쓰기 */
-  coverflowEffect?: Record<string, unknown>
+  coverflowEffect?: Record<string, unknown>;
   /** 연결할 썸네일 Swiper */
-  thumbs?: SwiperInstance | null
+  thumbs?: SwiperInstance | null;
   /** 썸네일 컨트롤 캐러셀 */
-  thumbsControl?: boolean
+  thumbsControl?: boolean;
   /** 슬라이드 진행 감시(썸네일·커버플로우) */
-  watchSlidesProgress?: boolean
+  watchSlidesProgress?: boolean;
   /** 자유 스크롤 */
-  freeMode?: boolean
+  freeMode?: boolean;
   /** Swiper 인스턴스 콜백 */
-  onSwiper?: (swiper: SwiperInstance) => void
+  onSwiper?: (swiper: SwiperInstance) => void;
   /** 내비·토글 ripple */
-  ripple?: boolean
+  ripple?: boolean;
 }
 
 /** CarouselSlide props */
 export interface CarouselSlideProps extends HTMLAttributes<HTMLDivElement> {
-  children?: ReactNode
+  children?: ReactNode;
 }
 
 /** 커버플로우 sides 정규화 → 1 | 1.5 | 2 */
-function normalizeCoverflowSides (sides: CoverflowSides): 1 | 1.5 | 2 {
-  const n = Number(sides)
-  if (n === 1) return 1
-  if (n === 2 || n === 2.5) return 2
-  return 1.5
+function normalizeCoverflowSides(sides: CoverflowSides): 1 | 1.5 | 2 {
+  const n = Number(sides);
+  if (n === 1) return 1;
+  if (n === 2 || n === 2.5) return 2;
+  return 1.5;
 }
 
 /** 커버플로우 loop 에 필요한 최소 슬라이드 수 */
-function coverflowLoopMin (sides: 1 | 1.5 | 2) {
-  if (sides === 1) return 6
-  if (sides === 1.5) return 8
-  return 10
+function coverflowLoopMin(sides: 1 | 1.5 | 2) {
+  if (sides === 1) return 6;
+  if (sides === 1.5) return 8;
+  return 10;
 }
 
 /** initialSlide 클램프 · loop 시 modulo */
-function resolveInitialSlide (index: number, count: number, loop: boolean) {
-  const raw = Number.isFinite(Number(index)) ? Math.trunc(Number(index)) : 0
-  if (count < 1) return 0
-  if (loop) return ((raw % count) + count) % count
-  return Math.min(Math.max(raw, 0), count - 1)
+function resolveInitialSlide(index: number, count: number, loop: boolean) {
+  const raw = Number.isFinite(Number(index)) ? Math.trunc(Number(index)) : 0;
+  if (count < 1) return 0;
+  if (loop) return ((raw % count) + count) % count;
+  return Math.min(Math.max(raw, 0), count - 1);
 }
 
 /**
  * 커버플로우 간격·슬라이드 너비 CSS 변수.
  * 반환값은 Swiper spaceBetween 에 넣을 보정 간격.
  */
-function applyCoverflowGap (
+function applyCoverflowGap(
   root: HTMLElement | null,
   swiperEl: HTMLElement | null,
   isCoverflow: boolean,
   spaceBetween: number,
-  sides: 1 | 1.5 | 2
+  sides: 1 | 1.5 | 2,
 ) {
-  if (!root || !swiperEl) return Number(spaceBetween) || 0
+  if (!root || !swiperEl) return Number(spaceBetween) || 0;
   if (!isCoverflow) {
-    root.style.removeProperty('--carousel-coverflow-gap')
-    root.style.removeProperty('--carousel-coverflow-slide-width')
-    return Number(spaceBetween) || 0
+    root.style.removeProperty('--carousel-coverflow-gap');
+    root.style.removeProperty('--carousel-coverflow-slide-width');
+    return Number(spaceBetween) || 0;
   }
-  const gap = Number(spaceBetween) || 0
-  const width = swiperEl.clientWidth || root.clientWidth
-  root.style.setProperty('--carousel-coverflow-gap', `${gap}px`)
-  if (!width) return gap
-  const slideWidth = (width - gap * 2) / 3
-  const peek = (width - slideWidth) / (2 * sides) - slideWidth
-  root.style.setProperty('--carousel-coverflow-slide-width', `${Math.round(slideWidth * 100) / 100}px`)
-  return Math.round(peek * 100) / 100
+  const gap = Number(spaceBetween) || 0;
+  const width = swiperEl.clientWidth || root.clientWidth;
+  root.style.setProperty('--carousel-coverflow-gap', `${gap}px`);
+  if (!width) return gap;
+  const slideWidth = (width - gap * 2) / 3;
+  const peek = (width - slideWidth) / (2 * sides) - slideWidth;
+  root.style.setProperty(
+    '--carousel-coverflow-slide-width',
+    `${Math.round(slideWidth * 100) / 100}px`,
+  );
+  return Math.round(peek * 100) / 100;
 }
 
 /** 한 장(swiper-slide) */
-export function CarouselSlide ({ children, className, ...rest }: CarouselSlideProps) {
+export function CarouselSlide({ children, className, ...rest }: CarouselSlideProps) {
   return (
-    <div {...rest} className={classNames('swiper-slide', className)}>
+    <div
+      {...rest}
+      className={classNames('swiper-slide', className)}
+    >
       {children}
     </div>
-  )
+  );
 }
 
-CarouselSlide.displayName = 'CarouselSlide'
+CarouselSlide.displayName = 'CarouselSlide';
 
-function isCarouselSlideElement (node: ReactNode) {
-  return isValidElement(node) && (
-    node.type === CarouselSlide ||
-    (typeof (node.props as { className?: string })?.className === 'string' &&
-      (node.props as { className: string }).className.split(/\s+/).includes('swiper-slide'))
-  )
+function isCarouselSlideElement(node: ReactNode) {
+  return (
+    isValidElement(node) &&
+    (node.type === CarouselSlide ||
+      (typeof (node.props as { className?: string })?.className === 'string' &&
+        (node.props as { className: string }).className.split(/\s+/).includes('swiper-slide')))
+  );
 }
 
 /**
@@ -185,42 +192,45 @@ function isCarouselSlideElement (node: ReactNode) {
  * 커스텀 컴포넌트(<Slides /> 등)도 그대로 두어 렌더 후 swiper-slide 가 펼쳐지게 한다.
  * 문자열·호스트 요소만 CarouselSlide 로 감싼다.
  */
-function normalizeSlideChildren (children: ReactNode): ReactNode {
+function normalizeSlideChildren(children: ReactNode): ReactNode {
   return Children.map(children, (child, index) => {
-    if (!hasNodes(child)) return null
-    if (isCarouselSlideElement(child)) return child
-    if (isValidElement(child) && typeof child.type !== 'string') return child
+    if (!hasNodes(child)) return null;
+    if (isCarouselSlideElement(child)) return child;
+    if (isValidElement(child) && typeof child.type !== 'string') return child;
     return (
       <CarouselSlide key={isValidElement(child) && child.key != null ? child.key : index}>
         {child}
       </CarouselSlide>
-    )
-  })
+    );
+  });
 }
 
-function countDomSlides (host: HTMLElement | null) {
-  if (!host) return 0
-  return host.querySelectorAll(':scope > .swiper-wrapper > .swiper-slide').length
+function countDomSlides(host: HTMLElement | null) {
+  if (!host) return 0;
+  return host.querySelectorAll(':scope > .swiper-wrapper > .swiper-slide').length;
 }
 
-function getSlideTabStops (slide: HTMLElement) {
-  return Array.from(slide.querySelectorAll<HTMLElement>(
-    'a[href], button, input, select, textarea, summary, [tabindex], [contenteditable], audio[controls], video[controls]'
-  )).filter((element) =>
-    element.closest('.swiper-slide') === slide &&
-    element.tabIndex >= 0 &&
-    !element.matches(':disabled') &&
-    !element.closest('[inert], [aria-hidden="true"]') &&
-    element.getClientRects().length > 0 &&
-    getComputedStyle(element).visibility === 'visible'
-  )
+function getSlideTabStops(slide: HTMLElement) {
+  return Array.from(
+    slide.querySelectorAll<HTMLElement>(
+      'a[href], button, input, select, textarea, summary, [tabindex], [contenteditable], audio[controls], video[controls]',
+    ),
+  ).filter(
+    (element) =>
+      element.closest('.swiper-slide') === slide &&
+      element.tabIndex >= 0 &&
+      !element.matches(':disabled') &&
+      !element.closest('[inert], [aria-hidden="true"]') &&
+      element.getClientRects().length > 0 &&
+      getComputedStyle(element).visibility === 'visible',
+  );
 }
 
 /**
  * Swiper 캐러셀.
  * children 은 CarouselSlide(또는 슬라이드를 렌더하는 자식)로 한 장씩 둔다.
  */
-export function Carousel ({
+export function Carousel({
   ariaLabel = '콘텐츠 슬라이드',
   children,
   className = '',
@@ -260,74 +270,74 @@ export function Carousel ({
   ripple = true,
   ...rest
 }: CarouselProps) {
-  const rootRef = useRef<HTMLDivElement>(null)
-  const swiperRef = useRef<HTMLDivElement>(null)
-  const instanceRef = useRef<SwiperInstance | null>(null)
-  const slideKeyDownRef = useRef<((event: KeyboardEvent<HTMLDivElement>) => void) | null>(null)
-  const indexRef = useLatestRef(index)
-  const onIndexChangeRef = useLatestRef(onIndexChange)
-  const playingControlled = playingProp !== undefined
-  const [innerPlaying, setInnerPlaying] = useState(
-    () => defaultPlaying ?? !!autoplay
-  )
-  const playing = playingControlled ? playingProp : innerPlaying
-  const playingRef = useLatestRef(playing)
-  const onPlayingChangeRef = useLatestRef(onPlayingChange)
+  const rootRef = useRef<HTMLDivElement>(null);
+  const swiperRef = useRef<HTMLDivElement>(null);
+  const instanceRef = useRef<SwiperInstance | null>(null);
+  const slideKeyDownRef = useRef<((event: KeyboardEvent<HTMLDivElement>) => void) | null>(null);
+  const indexRef = useLatestRef(index);
+  const onIndexChangeRef = useLatestRef(onIndexChange);
+  const playingControlled = playingProp !== undefined;
+  const [innerPlaying, setInnerPlaying] = useState(() => defaultPlaying ?? !!autoplay);
+  const playing = playingControlled ? playingProp : innerPlaying;
+  const playingRef = useLatestRef(playing);
+  const onPlayingChangeRef = useLatestRef(onPlayingChange);
   useEffect(() => {
-    const query = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const query = window.matchMedia('(prefers-reduced-motion: reduce)');
     const sync = () => {
-      if (instanceRef.current) instanceRef.current.params.speed = query.matches ? 0 : Math.max(0, speed)
-      if (!query.matches) return
-      setInnerPlaying(false)
-      instanceRef.current?.autoplay?.stop()
-      onPlayingChangeRef.current?.(false)
-    }
-    sync()
-    query.addEventListener('change', sync)
-    return () => query.removeEventListener('change', sync)
-  }, [speed, onPlayingChangeRef])
+      if (instanceRef.current)
+        instanceRef.current.params.speed = query.matches ? 0 : Math.max(0, speed);
+      if (!query.matches) return;
+      setInnerPlaying(false);
+      instanceRef.current?.autoplay?.stop();
+      onPlayingChangeRef.current?.(false);
+    };
+    sync();
+    query.addEventListener('change', sync);
+    return () => query.removeEventListener('change', sync);
+  }, [speed, onPlayingChangeRef]);
   /** DOM 기준 장 수 — <Slides /> 같은 래퍼는 Children 으로는 1로 보이므로 layout 후 센다 */
-  const [slideCount, setSlideCount] = useState(0)
+  const [slideCount, setSlideCount] = useState(0);
 
   const setPlaying = (next: boolean) => {
-    if (!playingControlled) setInnerPlaying(next)
-    onPlayingChange?.(next)
-  }
+    if (!playingControlled) setInnerPlaying(next);
+    onPlayingChange?.(next);
+  };
 
-  const slides = normalizeSlideChildren(children)
+  const slides = normalizeSlideChildren(children);
   /** 1장일 때 자동재생은 끄고, 요청한 경우에만 비활성 제어부를 표시합니다. */
-  const multiSlide = slideCount > 1
+  const multiSlide = slideCount > 1;
 
-  const isCoverflow = effect === 'coverflow'
-  const isGrid = gridRows > 1
-  const sides = normalizeCoverflowSides(coverflowSides)
-  const view: number | 'auto' = isCoverflow || multi || slidesPerView === 'auto' ? 'auto' : slidesPerView
-  const showControls = multiSlide || (slideCount === 1 && showControlsWhenSingle)
-  const showPagination = showControls && pagination !== false
-  const showNavigation = showControls && navigation !== false
-  const showAutoplayControls = showControls && (autoplayToggle ?? autoplay)
+  const isCoverflow = effect === 'coverflow';
+  const isGrid = gridRows > 1;
+  const sides = normalizeCoverflowSides(coverflowSides);
+  const view: number | 'auto' =
+    isCoverflow || multi || slidesPerView === 'auto' ? 'auto' : slidesPerView;
+  const showControls = multiSlide || (slideCount === 1 && showControlsWhenSingle);
+  const showPagination = showControls && pagination !== false;
+  const showNavigation = showControls && navigation !== false;
+  const showAutoplayControls = showControls && (autoplayToggle ?? autoplay);
   /** autoplay 또는 autoplayToggle 이면 Swiper autoplay 모듈을 켠다(토글만 켜도 재생 가능) */
-  const enableAutoplay = multiSlide && (autoplay || autoplayToggle === true)
+  const enableAutoplay = multiSlide && (autoplay || autoplayToggle === true);
 
   const syncCoverflowGap = useCallback(
     () => applyCoverflowGap(rootRef.current, swiperRef.current, isCoverflow, spaceBetween, sides),
-    [isCoverflow, spaceBetween, sides]
-  )
+    [isCoverflow, spaceBetween, sides],
+  );
 
   useLayoutEffect(() => {
-    const next = countDomSlides(swiperRef.current)
-    setSlideCount((prev) => (prev === next ? prev : next))
-  }, [children, slides])
+    const next = countDomSlides(swiperRef.current);
+    setSlideCount((prev) => (prev === next ? prev : next));
+  }, [children, slides]);
 
   useEffect(() => {
-    const host = swiperRef.current
-    if (!host) return
+    const host = swiperRef.current;
+    if (!host) return;
 
-    const domSlideCount = countDomSlides(host)
-    if (domSlideCount === 0) return
+    const domSlideCount = countDomSlides(host);
+    if (domSlideCount === 0) return;
     if (domSlideCount !== slideCount) {
-      setSlideCount(domSlideCount)
-      return
+      setSlideCount(domSlideCount);
+      return;
     }
 
     const canLoop = !(
@@ -339,22 +349,22 @@ export function Carousel ({
         : view === 'auto'
           ? domSlideCount < 4
           : domSlideCount < Math.max(2, Math.ceil(Number(view) || 1) + 1 + (centered ? 1 : 0)))
-    )
+    );
 
     // 초기 위치만 사용. 이후 index 변경은 별도 sync effect 가 담당한다.
     const startIndex = resolveInitialSlide(
       indexRef.current !== undefined ? indexRef.current : initialSlide,
       domSlideCount,
-      canLoop
-    )
-    instanceRef.current?.destroy(true, true)
+      canLoop,
+    );
+    instanceRef.current?.destroy(true, true);
 
     const paginationEl =
       rootRef.current?.querySelector(':scope > .swiper-pagination') ??
-      host.querySelector('.swiper-pagination')
+      host.querySelector('.swiper-pagination');
 
-    const gap = syncCoverflowGap()
-    const hasControls = domSlideCount > 1
+    const gap = syncCoverflowGap();
+    const hasControls = domSlideCount > 1;
 
     const options: Record<string, unknown> = {
       modules: carouselSwiperModules,
@@ -372,21 +382,21 @@ export function Carousel ({
         nextSlideMessage: '다음 슬라이드',
         firstSlideMessage: '첫 슬라이드입니다',
         lastSlideMessage: '마지막 슬라이드입니다',
-        paginationBulletMessage: '{{index}}번 슬라이드로 이동'
+        paginationBulletMessage: '{{index}}번 슬라이드로 이동',
       },
       observer: true,
       // 상위 레이아웃의 상태 속성 변경은 슬라이더 크기 변화가 아닙니다.
       // 부모 감시가 전환 도중 slideToLoop(..., 0)를 호출하지 않도록 끕니다.
       // 실제 크기 변화는 Swiper와 아래 ResizeObserver에서 처리합니다.
       observeParents: false,
-      watchSlidesProgress: true
-    }
+      watchSlidesProgress: true,
+    };
 
     if (showNavigation) {
       options.navigation = {
         prevEl: host.querySelector('.swiper-button-prev'),
-        nextEl: host.querySelector('.swiper-button-next')
-      }
+        nextEl: host.querySelector('.swiper-button-next'),
+      };
     }
 
     if (showPagination) {
@@ -397,31 +407,31 @@ export function Carousel ({
         ...(pagination === 'custom'
           ? {
               renderBullet: (index: number, className: string) =>
-                `<span class="${className}">${index + 1}</span>`
+                `<span class="${className}">${index + 1}</span>`,
             }
-          : {})
-      }
+          : {}),
+      };
     }
 
     if (enableAutoplay) {
-      options.autoplay = { delay, disableOnInteraction: false }
+      options.autoplay = { delay, disableOnInteraction: false };
     }
 
     if (isGrid) {
-      options.grid = { rows: gridRows, fill: gridFill === 'column' ? 'column' : 'row' }
+      options.grid = { rows: gridRows, fill: gridFill === 'column' ? 'column' : 'row' };
     }
 
-    if (freeMode) options.freeMode = true
-    if (thumbsControl) options.slideToClickedSlide = true
+    if (freeMode) options.freeMode = true;
+    if (thumbsControl) options.slideToClickedSlide = true;
     if (thumbsControl && centered && !canLoop) {
-      options.centeredSlidesBounds = true
+      options.centeredSlidesBounds = true;
       // 경계에서 여러 snap 위치가 같아져도 선택 인덱스를 다른 항목으로 보정하지 않습니다.
-      options.normalizeSlideIndex = false
+      options.normalizeSlideIndex = false;
     }
-    if (thumbs && !thumbs.destroyed) options.thumbs = { swiper: thumbs }
+    if (thumbs && !thumbs.destroyed) options.thumbs = { swiper: thumbs };
 
     if (effect === 'fade') {
-      Object.assign(options, { effect: 'fade', fadeEffect: { crossFade: true } })
+      Object.assign(options, { effect: 'fade', fadeEffect: { crossFade: true } });
     }
 
     if (isCoverflow) {
@@ -431,187 +441,224 @@ export function Carousel ({
           ...(coverflowStyle === 'rise'
             ? { rotate: 0, stretch: 0, depth: 28, scale: 0.92, modifier: 1, slideShadows: false }
             : { rotate: 24, stretch: 0, depth: 140, modifier: 1, slideShadows: true }),
-          ...coverflowEffect
-        }
-      })
+          ...coverflowEffect,
+        },
+      });
       if (canLoop) {
-        Object.assign(options, { loopAdditionalSlides: 0, loopAddBlankSlides: false })
+        Object.assign(options, { loopAdditionalSlides: 0, loopAddBlankSlides: false });
       }
     }
 
-    const swiper = new Swiper(host, options)
-    const initializedIndex = swiper.realIndex
-    instanceRef.current = swiper
+    const swiper = new Swiper(host, options);
+    const initializedIndex = swiper.realIndex;
+    instanceRef.current = swiper;
     // Thumbs 기본 동작은 화면 밖 항목만 보이게 합니다. 가운데 정렬 모드는
     // 이미 보이는 항목으로 바뀌어도 메인 선택을 따라 목록을 이동합니다.
     const alignThumbs = (duration: number) => {
-      const control = swiper.thumbs?.swiper
-      if (swiper.destroyed || !control || control.destroyed || !control.params.centeredSlides) return
-      if (control.params.loop) control.slideToLoop(swiper.realIndex, duration, false)
-      else control.slideTo(swiper.realIndex, duration, false)
-    }
-    const followThumbSelection = () => alignThumbs(swiper.thumbs?.swiper?.params.speed ?? 0)
-    const resizeThumbSelection = () => alignThumbs(0)
-    const thumbControl = swiper.thumbs?.swiper
-    swiper.on('slideChange', followThumbSelection)
-    swiper.on('update', resizeThumbSelection)
-    swiper.on('resize', resizeThumbSelection)
-    thumbControl?.on('update', resizeThumbSelection)
-    thumbControl?.on('resize', resizeThumbSelection)
-    const originals = new Map<HTMLElement, { inert: boolean; hidden: string | null; tabIndex: string | null }>()
+      const control = swiper.thumbs?.swiper;
+      if (swiper.destroyed || !control || control.destroyed || !control.params.centeredSlides)
+        return;
+      if (control.params.loop) control.slideToLoop(swiper.realIndex, duration, false);
+      else control.slideTo(swiper.realIndex, duration, false);
+    };
+    const followThumbSelection = () => alignThumbs(swiper.thumbs?.swiper?.params.speed ?? 0);
+    const resizeThumbSelection = () => alignThumbs(0);
+    const thumbControl = swiper.thumbs?.swiper;
+    swiper.on('slideChange', followThumbSelection);
+    swiper.on('update', resizeThumbSelection);
+    swiper.on('resize', resizeThumbSelection);
+    thumbControl?.on('update', resizeThumbSelection);
+    thumbControl?.on('resize', resizeThumbSelection);
+    const originals = new Map<
+      HTMLElement,
+      { inert: boolean; hidden: string | null; tabIndex: string | null }
+    >();
     const syncSlideAccessibility = () => {
-      if (swiper.destroyed) return
-      const viewport = host.getBoundingClientRect()
+      if (swiper.destroyed) return;
+      const viewport = host.getBoundingClientRect();
       for (const slide of swiper.slides) {
         if (!originals.has(slide)) {
           originals.set(slide, {
             inert: slide.inert,
             hidden: slide.getAttribute('aria-hidden'),
-            tabIndex: slide.getAttribute('tabindex')
-          })
+            tabIndex: slide.getAttribute('tabindex'),
+          });
         }
-        const original = originals.get(slide)!
-        const rect = slide.getBoundingClientRect()
-        const visible = effect === 'fade'
-          ? slide === swiper.slides[swiper.activeIndex]
-          : rect.right > viewport.left + 1 && rect.left < viewport.right - 1 &&
-            rect.bottom > viewport.top + 1 && rect.top < viewport.bottom - 1
-        slide.inert = original.inert || !visible
-        if (!visible) slide.setAttribute('aria-hidden', 'true')
-        else if (original.hidden === null) slide.removeAttribute('aria-hidden')
-        else slide.setAttribute('aria-hidden', original.hidden)
+        const original = originals.get(slide)!;
+        const rect = slide.getBoundingClientRect();
+        const visible =
+          effect === 'fade'
+            ? slide === swiper.slides[swiper.activeIndex]
+            : rect.right > viewport.left + 1 &&
+              rect.left < viewport.right - 1 &&
+              rect.bottom > viewport.top + 1 &&
+              rect.top < viewport.bottom - 1;
+        slide.inert = original.inert || !visible;
+        if (!visible) slide.setAttribute('aria-hidden', 'true');
+        else if (original.hidden === null) slide.removeAttribute('aria-hidden');
+        else slide.setAttribute('aria-hidden', original.hidden);
         if (original.tabIndex === null) {
-          if (visible && !slide.inert && original.hidden !== 'true' && getSlideTabStops(slide).length === 0) {
-            slide.tabIndex = 0
+          if (
+            visible &&
+            !slide.inert &&
+            original.hidden !== 'true' &&
+            getSlideTabStops(slide).length === 0
+          ) {
+            slide.tabIndex = 0;
           } else {
-            slide.removeAttribute('tabindex')
+            slide.removeAttribute('tabindex');
           }
         }
       }
-    }
-    let focusFrame = 0
-    let restoreTabStops: ReturnType<typeof setTimeout> | undefined
+    };
+    let focusFrame = 0;
+    let restoreTabStops: ReturnType<typeof setTimeout> | undefined;
     slideKeyDownRef.current = (event) => {
-      const target = event.target
-      const tab = event.key === 'Tab'
-      const arrow = event.key === 'ArrowLeft' || event.key === 'ArrowRight'
-      if ((!tab && !arrow) || event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey ||
-          !(target instanceof HTMLElement) || target.closest('[data-component="Carousel"]') !== event.currentTarget) return
-      const slide = target.closest<HTMLElement>('.swiper-slide')
-      if (!slide || !swiper.slides.includes(slide)) return
-      if (arrow && (event.shiftKey || target.closest('input, textarea, select, [contenteditable], [role="tablist"], [role="slider"], [role="listbox"], [role="tree"], [role="menu"]'))) return
+      const target = event.target;
+      const tab = event.key === 'Tab';
+      const arrow = event.key === 'ArrowLeft' || event.key === 'ArrowRight';
+      if (
+        (!tab && !arrow) ||
+        event.defaultPrevented ||
+        event.altKey ||
+        event.ctrlKey ||
+        event.metaKey ||
+        !(target instanceof HTMLElement) ||
+        target.closest('[data-component="Carousel"]') !== event.currentTarget
+      )
+        return;
+      const slide = target.closest<HTMLElement>('.swiper-slide');
+      if (!slide || !swiper.slides.includes(slide)) return;
+      if (
+        arrow &&
+        (event.shiftKey ||
+          target.closest(
+            'input, textarea, select, [contenteditable], [role="tablist"], [role="slider"], [role="listbox"], [role="tree"], [role="menu"]',
+          ))
+      )
+        return;
 
-      const backward = tab ? event.shiftKey : (event.key === 'ArrowLeft') !== swiper.rtlTranslate
-      const tabStops = tab ? getSlideTabStops(slide) : []
+      const backward = tab ? event.shiftKey : (event.key === 'ArrowLeft') !== swiper.rtlTranslate;
+      const tabStops = tab ? getSlideTabStops(slide) : [];
       // 슬라이드 안의 여러 버튼과 링크는 먼저 브라우저 기본 Tab 순서대로 탐색합니다.
-      if (tab && tabStops.length &&
-          target !== (backward ? tabStops.at(0) : tabStops.at(-1)) &&
-          !(backward && target === slide)) return
+      if (
+        tab &&
+        tabStops.length &&
+        target !== (backward ? tabStops.at(0) : tabStops.at(-1)) &&
+        !(backward && target === slide)
+      )
+        return;
 
       const ordered = swiper.slides.filter((item) => {
-        const original = originals.get(item)
-        return !original?.inert && original?.hidden !== 'true' && !item.classList.contains('swiper-slide-blank')
-      })
-      const indexOf = (item: HTMLElement) => swiper.params.loop
-        ? Number(item.dataset.swiperSlideIndex)
-        : swiper.slides.indexOf(item)
-      ordered.sort((left, right) => indexOf(left) - indexOf(right))
-      const next = ordered.indexOf(slide) + (backward ? -1 : 1)
-      const destination = ordered[next] ?? (!tab && swiper.params.loop ? ordered.at(backward ? -1 : 0) : undefined)
+        const original = originals.get(item);
+        return (
+          !original?.inert &&
+          original?.hidden !== 'true' &&
+          !item.classList.contains('swiper-slide-blank')
+        );
+      });
+      const indexOf = (item: HTMLElement) =>
+        swiper.params.loop ? Number(item.dataset.swiperSlideIndex) : swiper.slides.indexOf(item);
+      ordered.sort((left, right) => indexOf(left) - indexOf(right));
+      const next = ordered.indexOf(slide) + (backward ? -1 : 1);
+      const destination =
+        ordered[next] ?? (!tab && swiper.params.loop ? ordered.at(backward ? -1 : 0) : undefined);
       if (!destination || destination === slide) {
         if (tab && swiper.params.loop) {
           // 루프가 DOM 순서를 바꾸더라도 마지막 Tab은 캐러셀 밖으로 나갑니다.
           for (const item of swiper.slides) {
-            if (item !== slide) item.inert = true
+            if (item !== slide) item.inert = true;
           }
-          clearTimeout(restoreTabStops)
-          restoreTabStops = setTimeout(syncSlideAccessibility, 0)
+          clearTimeout(restoreTabStops);
+          restoreTabStops = setTimeout(syncSlideAccessibility, 0);
         }
-        return
+        return;
       }
 
-      event.preventDefault()
-      event.stopPropagation()
-      cancelAnimationFrame(focusFrame)
+      event.preventDefault();
+      event.stopPropagation();
+      cancelAnimationFrame(focusFrame);
       const focusDestination = () => {
-        if (swiper.destroyed) return
-        const active = host.ownerDocument.activeElement
-        if (active !== target && active !== host.ownerDocument.body) return
-        syncSlideAccessibility()
-        const stops = getSlideTabStops(destination)
-        const focusTarget = (tab && backward ? stops.at(-1) : stops.at(0)) ?? destination
-        focusTarget.focus({ preventScroll: true })
-      }
+        if (swiper.destroyed) return;
+        const active = host.ownerDocument.activeElement;
+        if (active !== target && active !== host.ownerDocument.body) return;
+        syncSlideAccessibility();
+        const stops = getSlideTabStops(destination);
+        const focusTarget = (tab && backward ? stops.at(-1) : stops.at(0)) ?? destination;
+        focusTarget.focus({ preventScroll: true });
+      };
       if (swiper.params.loop) {
-        swiper.slideToLoop(indexOf(destination), 0)
-        focusFrame = requestAnimationFrame(focusDestination)
+        swiper.slideToLoop(indexOf(destination), 0);
+        focusFrame = requestAnimationFrame(focusDestination);
       } else {
-        const column = (destination as HTMLElement & { column?: number }).column
-        swiper.slideTo(isGrid ? (column ?? indexOf(destination)) : indexOf(destination), 0)
-        focusDestination()
+        const column = (destination as HTMLElement & { column?: number }).column;
+        swiper.slideTo(isGrid ? (column ?? indexOf(destination)) : indexOf(destination), 0);
+        focusDestination();
       }
-    }
-    for (const event of ['transitionEnd', 'resize', 'update'] as const) swiper.on(event, syncSlideAccessibility)
+    };
+    for (const event of ['transitionEnd', 'resize', 'update'] as const)
+      swiper.on(event, syncSlideAccessibility);
     // autoplay 모듈은 켰지만 playing 이 false 면 즉시 정지(autoplayToggle 전용 등)
     if (enableAutoplay && !playingRef.current) {
-      swiper.autoplay?.stop()
+      swiper.autoplay?.stop();
     }
-    onSwiper?.(swiper)
+    onSwiper?.(swiper);
 
     const emitIndex = () => {
-      if (swiper.destroyed) return
-      const next = typeof swiper.realIndex === 'number' ? swiper.realIndex : swiper.activeIndex
-      onIndexChangeRef.current?.(next, swiper)
+      if (swiper.destroyed) return;
+      const next = typeof swiper.realIndex === 'number' ? swiper.realIndex : swiper.activeIndex;
+      onIndexChangeRef.current?.(next, swiper);
       // 제어 모드에서 부모가 값을 반영하지 않으면 prop 위치로 되돌린다.
-      if (indexRef.current === undefined) return
+      if (indexRef.current === undefined) return;
       requestAnimationFrame(() => {
-        if (swiper.destroyed) return
+        if (swiper.destroyed) return;
         // 부모의 상태 커밋이 끝난 뒤 확인해야 수락한 이동을 이전 위치로 되돌리지 않는다.
-        const controlled = indexRef.current
-        if (controlled === undefined || controlled === next) return
+        const controlled = indexRef.current;
+        if (controlled === undefined || controlled === next) return;
         if (swiper.params.loop && typeof swiper.slideToLoop === 'function') {
-          swiper.slideToLoop(controlled, 0, false)
+          swiper.slideToLoop(controlled, 0, false);
         } else {
-          swiper.slideTo(controlled, 0, false)
+          swiper.slideTo(controlled, 0, false);
         }
-      })
-    }
-    swiper.on('slideChange', emitIndex)
+      });
+    };
+    swiper.on('slideChange', emitIndex);
 
     const raf = window.requestAnimationFrame(() => {
-      if (swiper.destroyed) return
+      if (swiper.destroyed) return;
       // 초기화 직후 시작한 사용자 이동을 0ms 정렬로 덮어쓰지 않습니다.
       if (swiper.animating || swiper.realIndex !== initializedIndex || swiper.touches.diff !== 0) {
-        syncSlideAccessibility()
-        return
+        syncSlideAccessibility();
+        return;
       }
-      swiper.update()
-      alignThumbs(0)
-      syncSlideAccessibility()
-    })
+      swiper.update();
+      alignThumbs(0);
+      syncSlideAccessibility();
+    });
 
     return () => {
-      window.cancelAnimationFrame(raf)
-      window.cancelAnimationFrame(focusFrame)
-      clearTimeout(restoreTabStops)
-      slideKeyDownRef.current = null
-      for (const event of ['transitionEnd', 'resize', 'update'] as const) swiper.off(event, syncSlideAccessibility)
+      window.cancelAnimationFrame(raf);
+      window.cancelAnimationFrame(focusFrame);
+      clearTimeout(restoreTabStops);
+      slideKeyDownRef.current = null;
+      for (const event of ['transitionEnd', 'resize', 'update'] as const)
+        swiper.off(event, syncSlideAccessibility);
       for (const [slide, original] of originals) {
-        slide.inert = original.inert
-        if (original.hidden === null) slide.removeAttribute('aria-hidden')
-        else slide.setAttribute('aria-hidden', original.hidden)
-        if (original.tabIndex === null) slide.removeAttribute('tabindex')
-        else slide.setAttribute('tabindex', original.tabIndex)
+        slide.inert = original.inert;
+        if (original.hidden === null) slide.removeAttribute('aria-hidden');
+        else slide.setAttribute('aria-hidden', original.hidden);
+        if (original.tabIndex === null) slide.removeAttribute('tabindex');
+        else slide.setAttribute('tabindex', original.tabIndex);
       }
-      swiper.off('slideChange', emitIndex)
-      swiper.off('slideChange', followThumbSelection)
-      swiper.off('update', resizeThumbSelection)
-      swiper.off('resize', resizeThumbSelection)
-      thumbControl?.off('update', resizeThumbSelection)
-      thumbControl?.off('resize', resizeThumbSelection)
-      swiper.destroy(true, true)
-      if (instanceRef.current === swiper) instanceRef.current = null
-    }
+      swiper.off('slideChange', emitIndex);
+      swiper.off('slideChange', followThumbSelection);
+      swiper.off('update', resizeThumbSelection);
+      swiper.off('resize', resizeThumbSelection);
+      thumbControl?.off('update', resizeThumbSelection);
+      thumbControl?.off('resize', resizeThumbSelection);
+      swiper.destroy(true, true);
+      if (instanceRef.current === swiper) instanceRef.current = null;
+    };
   }, [
     centered,
     indexRef,
@@ -642,51 +689,51 @@ export function Carousel ({
     thumbsControl,
     syncCoverflowGap,
     watchSlidesProgress,
-    slideCount
-  ])
+    slideCount,
+  ]);
 
   // 제어 index 가 바뀌면 Swiper 위치를 맞춘다(초기화 재생성 없이).
   useEffect(() => {
-    if (index === undefined) return
-    const swiper = instanceRef.current
-    if (!swiper || swiper.destroyed) return
-    const current = typeof swiper.realIndex === 'number' ? swiper.realIndex : swiper.activeIndex
-    if (current === index) return
+    if (index === undefined) return;
+    const swiper = instanceRef.current;
+    if (!swiper || swiper.destroyed) return;
+    const current = typeof swiper.realIndex === 'number' ? swiper.realIndex : swiper.activeIndex;
+    if (current === index) return;
     if (swiper.params.loop && typeof swiper.slideToLoop === 'function') {
-      swiper.slideToLoop(index)
+      swiper.slideToLoop(index);
     } else {
-      swiper.slideTo(index)
+      swiper.slideTo(index);
     }
-  }, [index])
+  }, [index]);
 
   // 제어 playing 이 바뀌면 autoplay API 를 맞춘다.
   useEffect(() => {
-    if (!enableAutoplay) return
-    const swiper = instanceRef.current
-    const autoplayApi = swiper?.autoplay
-    if (!autoplayApi) return
-    const active = swiper.el.ownerDocument.activeElement
-    const canPlay = playing && !swiper.slides.some((slide) => slide.contains(active))
-    if (canPlay && !autoplayApi.running) autoplayApi.start()
-    if (!canPlay && autoplayApi.running) autoplayApi.stop()
-  }, [playing, enableAutoplay])
+    if (!enableAutoplay) return;
+    const swiper = instanceRef.current;
+    const autoplayApi = swiper?.autoplay;
+    if (!autoplayApi) return;
+    const active = swiper.el.ownerDocument.activeElement;
+    const canPlay = playing && !swiper.slides.some((slide) => slide.contains(active));
+    if (canPlay && !autoplayApi.running) autoplayApi.start();
+    if (!canPlay && autoplayApi.running) autoplayApi.stop();
+  }, [playing, enableAutoplay]);
 
   useEffect(() => {
-    if (!rootRef.current || typeof ResizeObserver === 'undefined') return
+    if (!rootRef.current || typeof ResizeObserver === 'undefined') return;
     const observer = new ResizeObserver(() => {
-      const gap = syncCoverflowGap()
-      const swiper = instanceRef.current
-      if (!swiper || swiper.destroyed) return
-      swiper.params.spaceBetween = gap
-      swiper.update()
-    })
-    observer.observe(rootRef.current)
-    return () => observer.disconnect()
-  }, [syncCoverflowGap])
+      const gap = syncCoverflowGap();
+      const swiper = instanceRef.current;
+      if (!swiper || swiper.destroyed) return;
+      swiper.params.spaceBetween = gap;
+      swiper.update();
+    });
+    observer.observe(rootRef.current);
+    return () => observer.disconnect();
+  }, [syncCoverflowGap]);
 
-  function toggleAutoplay () {
+  function toggleAutoplay() {
     // 요청만 전달하고, 실제 start/stop 은 playing sync effect 가 prop 기준으로 맞춘다.
-    setPlaying(!playing)
+    setPlaying(!playing);
   }
 
   const rootClass = classNames(
@@ -704,8 +751,8 @@ export function Carousel ({
     size !== 'md' && (size === 'sm' || size === 'lg') && `carousel_${size}`,
     showAutoplayControls && !playing && 'is-autoplay-paused',
     !multiSlide && 'is-single',
-    className
-  )
+    className,
+  );
 
   return (
     <div
@@ -717,29 +764,30 @@ export function Carousel ({
       data-count={slideCount}
       data-single={multiSlide ? undefined : ''}
       onKeyDown={(event) => {
-        rest.onKeyDown?.(event)
-        slideKeyDownRef.current?.(event)
+        rest.onKeyDown?.(event);
+        slideKeyDownRef.current?.(event);
       }}
       onFocusCapture={(event) => {
-        rest.onFocusCapture?.(event)
-        const swiper = instanceRef.current
+        rest.onFocusCapture?.(event);
+        const swiper = instanceRef.current;
         if (event.target.closest('[data-component="Carousel"]') !== event.currentTarget) {
-          swiper?.keyboard?.disable()
-          return
+          swiper?.keyboard?.disable();
+          return;
         }
-        if (event.target.closest('.swiper-slide')) swiper?.keyboard?.disable()
-        else if (multiSlide) swiper?.keyboard?.enable()
+        if (event.target.closest('.swiper-slide')) swiper?.keyboard?.disable();
+        else if (multiSlide) swiper?.keyboard?.enable();
         // 클릭으로 토글에 초점이 들어올 때는 클릭 핸들러에서 한 번만 전환합니다.
-        if (event.target.matches('[data-carousel-autoplay-toggle]:not(:focus-visible)')) return
+        if (event.target.matches('[data-carousel-autoplay-toggle]:not(:focus-visible)')) return;
         // 조작 중인 콘텐츠가 자동으로 바뀌지 않도록 초점 진입 시 재생을 멈춥니다.
         if (enableAutoplay && playing) {
-          swiper?.autoplay?.stop()
-          setPlaying(false)
+          swiper?.autoplay?.stop();
+          setPlaying(false);
         }
       }}
       onBlurCapture={(event) => {
-        rest.onBlurCapture?.(event)
-        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) instanceRef.current?.keyboard?.disable()
+        rest.onBlurCapture?.(event);
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null))
+          instanceRef.current?.keyboard?.disable();
       }}
     >
       <div
@@ -791,8 +839,20 @@ export function Carousel ({
             fill="currentColor"
             aria-hidden="true"
           >
-            <rect x="6" y="5" width="4" height="14" rx="1" />
-            <rect x="14" y="5" width="4" height="14" rx="1" />
+            <rect
+              x="6"
+              y="5"
+              width="4"
+              height="14"
+              rx="1"
+            />
+            <rect
+              x="14"
+              y="5"
+              width="4"
+              height="14"
+              rx="1"
+            />
           </svg>
           <svg
             className="carousel_toggle-icon carousel_toggle-icon-play"
@@ -805,10 +865,10 @@ export function Carousel ({
         </button>
       )}
     </div>
-  )
+  );
 }
 
-Carousel.Slide = CarouselSlide
-Carousel.displayName = 'Carousel'
+Carousel.Slide = CarouselSlide;
+Carousel.displayName = 'Carousel';
 
-export default Carousel
+export default Carousel;

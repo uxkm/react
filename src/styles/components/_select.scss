@@ -16,7 +16,6 @@
   --select-caret-size: 1em;
   --select-caret-size-sm: 0.875em;
   --select-caret-size-lg: 1.125em;
-
 }
 
 // Select — OOCSS: 네이티브 select는 .input 공유 · 커스텀 트리거는 .btn_select (Button)
@@ -83,7 +82,7 @@ select.input {
     }
   }
 
-  &[size]:not([size="1"]) {
+  &[size]:not([size='1']) {
     padding-right: var(--select-space-0-75rem);
     background-image: none;
     cursor: default;
@@ -94,7 +93,7 @@ select.input {
   }
 }
 
-[data-theme="dark"] select.input {
+[data-theme='dark'] select.input {
   @include select-native-caret($select-caret-dark);
 
   &:disabled {
@@ -103,7 +102,7 @@ select.input {
 }
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) select.input {
+  :root:not([data-theme='light']) select.input {
     @include select-native-caret($select-caret-dark);
 
     &:disabled {

@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import { useLatestRef } from '@/hooks/react/useLatestRef' // Latest Ref 훅
+import { useLatestRef } from '@/hooks/react/useLatestRef'; // Latest Ref 훅
 
 /**
  * 파일 업로드.
@@ -15,60 +15,59 @@ import {
   type DragEvent, // DragEvent 타입
   type InputHTMLAttributes, // InputHTMLAttributes 타입
   type KeyboardEvent, // KeyboardEvent 타입
-  type ReactNode // ReactNode 타입
-} from 'react' // React
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
+  type ReactNode, // ReactNode 타입
+} from 'react'; // React
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
 
 /** 업로드 목록 항목 */
 export interface UploadFileItem {
-  file?: File
-  name: string
-  size?: number
-  type?: string
-  url?: string
-  status?: 'done' | 'uploading' | 'error' | string
-  progress?: number
-  error?: string
+  file?: File;
+  name: string;
+  size?: number;
+  type?: string;
+  url?: string;
+  status?: 'done' | 'uploading' | 'error' | string;
+  progress?: number;
+  error?: string;
 }
 
 /** 업로드가 받는 값 */
-export interface UploadProps
-  extends Omit<
-    InputHTMLAttributes<HTMLInputElement>,
-    'size' | 'onChange' | 'type' | 'value' | 'defaultValue' | 'title' | 'onError' | 'onSelect'
-  > {
-  inputId?: string
-  variant?: 'button' | 'drag' | 'list' | 'picture-card' | 'avatar' | 'dropzone' | 'cards'
-  size?: 'sm' | 'md' | 'lg'
-  fit?: boolean
-  disabled?: boolean
-  error?: boolean
-  dragover?: boolean
-  multiple?: boolean
-  accept?: string
-  maxSize?: number
-  maxFiles?: number
-  files?: UploadFileItem[]
-  defaultFiles?: UploadFileItem[]
+export interface UploadProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  'size' | 'onChange' | 'type' | 'value' | 'defaultValue' | 'title' | 'onError' | 'onSelect'
+> {
+  inputId?: string;
+  variant?: 'button' | 'drag' | 'list' | 'picture-card' | 'avatar' | 'dropzone' | 'cards';
+  size?: 'sm' | 'md' | 'lg';
+  fit?: boolean;
+  disabled?: boolean;
+  error?: boolean;
+  dragover?: boolean;
+  multiple?: boolean;
+  accept?: string;
+  maxSize?: number;
+  maxFiles?: number;
+  files?: UploadFileItem[];
+  defaultFiles?: UploadFileItem[];
   /**
    * 목록이 바뀔 때 호출. files 와 같은 UploadFileItem[] 을 넘긴다(제어 왕복 가능).
    */
-  onChange?: (files: UploadFileItem[]) => void
+  onChange?: (files: UploadFileItem[]) => void;
   /** 새로 선택한 File[] 만 전달(추가 시점) */
-  onSelect?: (files: File[]) => void
+  onSelect?: (files: File[]) => void;
   /** 항목 삭제 직 호출. 삭제될 항목과 인덱스 */
-  onRemove?: (item: UploadFileItem, index: number) => void
-  onError?: (message: string) => void
-  buttonLabel?: ReactNode
-  title?: ReactNode
-  description?: ReactNode
-  hint?: ReactNode
-  removeLabel?: string
-  trigger?: ReactNode
-  cards?: ReactNode
-  avatarSrc?: string
-  avatarAlt?: string
-  children?: ReactNode
+  onRemove?: (item: UploadFileItem, index: number) => void;
+  onError?: (message: string) => void;
+  buttonLabel?: ReactNode;
+  title?: ReactNode;
+  description?: ReactNode;
+  hint?: ReactNode;
+  removeLabel?: string;
+  trigger?: ReactNode;
+  cards?: ReactNode;
+  avatarSrc?: string;
+  avatarAlt?: string;
+  children?: ReactNode;
 }
 
 const formatSize = (bytes = 0) =>
@@ -76,7 +75,7 @@ const formatSize = (bytes = 0) =>
     ? `${bytes} B`
     : bytes < 1048576
       ? `${(bytes / 1024).toFixed(1)} KB`
-      : `${(bytes / 1048576).toFixed(1)} MB`
+      : `${(bytes / 1048576).toFixed(1)} MB`;
 
 const uploadIcon = (
   <svg
@@ -89,7 +88,7 @@ const uploadIcon = (
   >
     <path d="M5 16v5h14v-5M12 17V3m0 0-4 4m4-4 4 4" />
   </svg>
-)
+);
 
 const fileIcon = (
   <svg
@@ -102,7 +101,7 @@ const fileIcon = (
   >
     <path d="M6 2h8l4 4v16H6zM14 2v5h5" />
   </svg>
-)
+);
 
 const plusIcon = (
   <svg
@@ -115,7 +114,7 @@ const plusIcon = (
   >
     <path d="M12 5v14M5 12h14" />
   </svg>
-)
+);
 
 const userIcon = (
   <svg
@@ -126,32 +125,36 @@ const userIcon = (
     stroke="currentColor"
     strokeWidth="2"
   >
-    <circle cx="12" cy="8" r="4" />
+    <circle
+      cx="12"
+      cy="8"
+      r="4"
+    />
     <path d="M4 21a8 8 0 0 1 16 0" />
   </svg>
-)
+);
 
 const accepts = (file: File, accept?: string) =>
   !accept ||
   accept.split(',').some((rule) => {
-    const value = rule.trim()
+    const value = rule.trim();
     return value.startsWith('.')
       ? file.name.toLowerCase().endsWith(value.toLowerCase())
       : value.endsWith('/*')
         ? file.type.startsWith(value.slice(0, -1))
-        : file.type === value
-  })
+        : file.type === value;
+  });
 
 /** 생성한 object URL을 해제한다 */
 export const revokeUploadObjectUrls = (urls: string[]) => {
-  urls.forEach((url) => URL.revokeObjectURL(url))
-}
+  urls.forEach((url) => URL.revokeObjectURL(url));
+};
 
 /**
  * 파일을 선택·첨부하는 업로드.
  * variant로 버튼·드롭존·목록·카드·아바타 UI를 고른다.
  */
-export function Upload ({
+export function Upload({
   id,
   inputId,
   variant = 'button',
@@ -183,102 +186,102 @@ export function Upload ({
   children,
   ...props
 }: UploadProps) {
-  const generatedId = useId().replace(/:/g, '')
-  const resolvedInputId = inputId || id || `upload-${generatedId}`
-  type ResolvedVariant = 'button' | 'drag' | 'list' | 'picture-card' | 'avatar'
+  const generatedId = useId().replace(/:/g, '');
+  const resolvedInputId = inputId || id || `upload-${generatedId}`;
+  type ResolvedVariant = 'button' | 'drag' | 'list' | 'picture-card' | 'avatar';
   const resolvedVariant: ResolvedVariant =
     variant === 'dropzone'
       ? 'drag'
       : variant === 'cards'
         ? 'picture-card'
-        : (variant as ResolvedVariant)
-  const inputRef = useRef<HTMLInputElement>(null)
-  const createdUrls = useRef<string[]>([])
-  const [innerFiles, setInnerFiles] = useState<UploadFileItem[]>(defaultFiles)
-  const [message, setMessage] = useState('')
-  const [dragActive, setDragActive] = useState(false)
-  const controlled = controlledFiles !== undefined
-  const files = controlled ? controlledFiles : innerFiles
-  const filesRef = useLatestRef(files)
+        : (variant as ResolvedVariant);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const createdUrls = useRef<string[]>([]);
+  const [innerFiles, setInnerFiles] = useState<UploadFileItem[]>(defaultFiles);
+  const [message, setMessage] = useState('');
+  const [dragActive, setDragActive] = useState(false);
+  const controlled = controlledFiles !== undefined;
+  const files = controlled ? controlledFiles : innerFiles;
+  const filesRef = useLatestRef(files);
   /** avatar 미리보기: 제어 files 의 url 을 우선하고, 없으면 avatarSrc */
-  const avatarPreview = files[0]?.url || avatarSrc
+  const avatarPreview = files[0]?.url || avatarSrc;
 
   const pruneStaleUrls = useCallback(() => {
     const active = new Set(
-      filesRef.current.map((item) => item.url).filter((url): url is string => Boolean(url))
-    )
-    const kept: string[] = []
-    const stale: string[] = []
+      filesRef.current.map((item) => item.url).filter((url): url is string => Boolean(url)),
+    );
+    const kept: string[] = [];
+    const stale: string[] = [];
     createdUrls.current.forEach((url) => {
-      if (active.has(url)) kept.push(url)
-      else stale.push(url)
-    })
-    createdUrls.current = kept
-    if (stale.length) revokeUploadObjectUrls(stale)
-  }, [filesRef])
+      if (active.has(url)) kept.push(url);
+      else stale.push(url);
+    });
+    createdUrls.current = kept;
+    if (stale.length) revokeUploadObjectUrls(stale);
+  }, [filesRef]);
 
   // files 에 더 이상 없는 object URL 만 해제(제어 부모가 삭제를 거부해도 미리보기가 깨지지 않음)
   useEffect(() => {
-    pruneStaleUrls()
-  }, [files, pruneStaleUrls])
+    pruneStaleUrls();
+  }, [files, pruneStaleUrls]);
 
-  useEffect(() => () => revokeUploadObjectUrls(createdUrls.current), [])
+  useEffect(() => () => revokeUploadObjectUrls(createdUrls.current), []);
 
   const update = (next: UploadFileItem[]) => {
-    if (!controlled) setInnerFiles(next)
-    onChange?.(next)
+    if (!controlled) setInnerFiles(next);
+    onChange?.(next);
     // 제어 모드에서 부모가 반영하지 않으면 다음 프레임에 미반영 object URL 회수
-    if (controlled) requestAnimationFrame(pruneStaleUrls)
-  }
+    if (controlled) requestAnimationFrame(pruneStaleUrls);
+  };
 
   const addFiles = (list: FileList | File[] | null) => {
-    if (disabled) return
-    const incoming = Array.from(list || [])
+    if (disabled) return;
+    const incoming = Array.from(list || []);
     const invalid = incoming.find(
-      (file) => !accepts(file, accept) || (maxSize != null && file.size > maxSize)
-    )
+      (file) => !accepts(file, accept) || (maxSize != null && file.size > maxSize),
+    );
     if (invalid) {
       const nextMessage = !accepts(invalid, accept)
         ? `${invalid.name}: 허용되지 않는 파일 형식입니다.`
-        : `${invalid.name}: 파일 크기 제한을 초과했습니다.`
-      setMessage(nextMessage)
-      onError?.(nextMessage)
-      return
+        : `${invalid.name}: 파일 크기 제한을 초과했습니다.`;
+      setMessage(nextMessage);
+      onError?.(nextMessage);
+      return;
     }
-    const limit = multiple ? maxFiles || Infinity : 1
-    const available = Math.max(0, limit - (multiple ? files.length : 0))
+    const limit = multiple ? maxFiles || Infinity : 1;
+    const available = Math.max(0, limit - (multiple ? files.length : 0));
     if (!available || incoming.length > available) {
-      const nextMessage = `파일은 최대 ${limit}개까지 선택할 수 있습니다.`
-      setMessage(nextMessage)
-      onError?.(nextMessage)
-      return
+      const nextMessage = `파일은 최대 ${limit}개까지 선택할 수 있습니다.`;
+      setMessage(nextMessage);
+      onError?.(nextMessage);
+      return;
     }
-    const selected = incoming.slice(0, available)
+    const selected = incoming.slice(0, available);
     const added = selected.map((file) => {
-      const preview = file.type.startsWith('image/') ? URL.createObjectURL(file) : ''
-      if (preview) createdUrls.current.push(preview)
+      const preview = file.type.startsWith('image/') ? URL.createObjectURL(file) : '';
+      if (preview) createdUrls.current.push(preview);
       return {
         file,
         name: file.name,
         size: file.size,
         type: file.type,
         url: preview,
-        status: 'done'
-      } satisfies UploadFileItem
-    })
-    setMessage('')
-    onSelect?.(selected)
-    update(multiple ? [...files, ...added] : added)
-    if (inputRef.current) inputRef.current.value = ''
-  }
+        status: 'done',
+      } satisfies UploadFileItem;
+    });
+    setMessage('');
+    onSelect?.(selected);
+    update(multiple ? [...files, ...added] : added);
+    if (inputRef.current) inputRef.current.value = '';
+  };
 
   const remove = (index: number) => {
-    const item = files[index]
-    if (!item) return
-    onRemove?.(item, index)
+    const item = files[index];
+    if (!item) return;
+    onRemove?.(item, index);
     // object URL 해제는 files sync effect 가 담당(부모가 삭제를 거부하면 유지)
-    update(files.filter((_, itemIndex) => itemIndex !== index))
-  }
+    update(files.filter((_, itemIndex) => itemIndex !== index));
+  };
 
   const input = (
     <input
@@ -293,43 +296,43 @@ export function Upload ({
       aria-invalid={error || undefined}
       onChange={(event) => addFiles(event.target.files)}
     />
-  )
+  );
 
   const classes = classNames(
     'upload',
     fit && 'upload_fit',
     size !== 'md' && `upload_${size}`,
     disabled && 'is-disabled',
-    className
-  )
+    className,
+  );
 
-  let triggerNode: ReactNode = null
+  let triggerNode: ReactNode = null;
 
   if (resolvedVariant === 'list') {
-    triggerNode = null
+    triggerNode = null;
   } else if (resolvedVariant === 'drag') {
     triggerNode = (
       <label
         className={classNames(
           'upload_dropzone',
           (dragover || dragActive) && 'is-dragover',
-          (error || message) && 'is-error'
+          (error || message) && 'is-error',
         )}
         htmlFor={resolvedInputId}
         onDragEnter={(event: DragEvent<HTMLLabelElement>) => {
-          event.preventDefault()
-          if (!disabled) setDragActive(true)
+          event.preventDefault();
+          if (!disabled) setDragActive(true);
         }}
         onDragOver={(event: DragEvent<HTMLLabelElement>) => event.preventDefault()}
         onDragLeave={(event: DragEvent<HTMLLabelElement>) => {
           if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
-            setDragActive(false)
+            setDragActive(false);
           }
         }}
         onDrop={(event: DragEvent<HTMLLabelElement>) => {
-          event.preventDefault()
-          setDragActive(false)
-          addFiles(event.dataTransfer.files)
+          event.preventDefault();
+          setDragActive(false);
+          addFiles(event.dataTransfer.files);
         }}
       >
         {input}
@@ -337,22 +340,29 @@ export function Upload ({
           <>
             <span className="upload_dropzone-icon">{uploadIcon}</span>
             <span className="upload_dropzone-title">{title}</span>
-            {description
-              ? <span className="upload_dropzone-desc">{description}</span>
-              : null}
+            {description ? <span className="upload_dropzone-desc">{description}</span> : null}
           </>
         )}
       </label>
-    )
+    );
   } else if (resolvedVariant === 'picture-card') {
     triggerNode = (
       <div className="upload_cards">
         {cards}
         {files.map((item, index) => (
-          <div className="upload_card" key={`${item.name}-${index}`}>
-            {item.url
-              ? <img className="upload_card-image" src={item.url} alt={item.name} />
-              : <span className="upload_item-icon">{fileIcon}</span>}
+          <div
+            className="upload_card"
+            key={`${item.name}-${index}`}
+          >
+            {item.url ? (
+              <img
+                className="upload_card-image"
+                src={item.url}
+                alt={item.name}
+              />
+            ) : (
+              <span className="upload_item-icon">{fileIcon}</span>
+            )}
             <div className="upload_card-actions">
               <button
                 type="button"
@@ -368,7 +378,7 @@ export function Upload ({
         <label
           className="upload_card upload_card-trigger"
           htmlFor={resolvedInputId}
-            >
+        >
           {input}
           {trigger ?? (
             <>
@@ -378,7 +388,7 @@ export function Upload ({
           )}
         </label>
       </div>
-    )
+    );
   } else if (resolvedVariant === 'avatar') {
     triggerNode = (
       <label
@@ -388,16 +398,25 @@ export function Upload ({
         {input}
         {trigger ?? (
           <span className="avatar avatar_xl">
-            {avatarPreview
-              ? <img className="avatar_image" src={avatarPreview} alt={avatarAlt} />
-              : userIcon}
+            {avatarPreview ? (
+              <img
+                className="avatar_image"
+                src={avatarPreview}
+                alt={avatarAlt}
+              />
+            ) : (
+              userIcon
+            )}
           </span>
         )}
-        <span className="upload_avatar-overlay" aria-hidden="true">
+        <span
+          className="upload_avatar-overlay"
+          aria-hidden="true"
+        >
           {uploadIcon}
         </span>
       </label>
-    )
+    );
   } else {
     triggerNode = (
       <label
@@ -411,79 +430,76 @@ export function Upload ({
           </span>
         )}
       </label>
-    )
+    );
   }
 
   const listNode =
-    files.length > 0 && resolvedVariant !== 'picture-card' && resolvedVariant !== 'avatar'
-      ? (
-        <ul className="upload_list">
-          {files.map((item, index) => (
-            <li
-              className={classNames(
-                'upload_item',
-                item.status === 'error' && 'is-error',
-                item.status !== 'uploading' && 'is-done'
-              )}
-              key={`${item.name}-${index}`}
-            >
-              <span className="upload_item-icon">{fileIcon}</span>
-              <span className="upload_item-body">
-                <span className="upload_item-name">{item.name}</span>
-                <span className="upload_item-meta">
-                  {item.status === 'error'
-                    ? item.error || '업로드 실패'
-                    : `${formatSize(item.size)} · 선택 완료`}
-                </span>
-                {item.status === 'uploading'
-                  ? (
-                    <span
-                      className="upload_progress"
-                      role="progressbar"
-                      aria-valuenow={item.progress || 0}
-                      aria-valuemin={0}
-                      aria-valuemax={100}
-                      aria-label={`${item.name} 업로드 진행률`}
-                    >
-                      <span
-                        className="upload_progress-bar"
-                        style={{ width: `${item.progress || 0}%` }}
-                      />
-                    </span>
-                    )
-                  : null}
+    files.length > 0 && resolvedVariant !== 'picture-card' && resolvedVariant !== 'avatar' ? (
+      <ul className="upload_list">
+        {files.map((item, index) => (
+          <li
+            className={classNames(
+              'upload_item',
+              item.status === 'error' && 'is-error',
+              item.status !== 'uploading' && 'is-done',
+            )}
+            key={`${item.name}-${index}`}
+          >
+            <span className="upload_item-icon">{fileIcon}</span>
+            <span className="upload_item-body">
+              <span className="upload_item-name">{item.name}</span>
+              <span className="upload_item-meta">
+                {item.status === 'error'
+                  ? item.error || '업로드 실패'
+                  : `${formatSize(item.size)} · 선택 완료`}
               </span>
-              <button
-                type="button"
-                className="upload_item-action btn btn_ghost btn_icon-only btn_sm"
-                aria-label={`${item.name} ${removeLabel}`}
-                onClick={() => remove(index)}
-              >
-                ×
-              </button>
-            </li>
-          ))}
-        </ul>
-        )
-      : null
+              {item.status === 'uploading' ? (
+                <span
+                  className="upload_progress"
+                  role="progressbar"
+                  aria-valuenow={item.progress || 0}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                  aria-label={`${item.name} 업로드 진행률`}
+                >
+                  <span
+                    className="upload_progress-bar"
+                    style={{ width: `${item.progress || 0}%` }}
+                  />
+                </span>
+              ) : null}
+            </span>
+            <button
+              type="button"
+              className="upload_item-action btn btn_ghost btn_icon-only btn_sm"
+              aria-label={`${item.name} ${removeLabel}`}
+              onClick={() => remove(index)}
+            >
+              ×
+            </button>
+          </li>
+        ))}
+      </ul>
+    ) : null;
 
   return (
     <div className={classes}>
       {triggerNode}
-      {(resolvedVariant === 'button' || resolvedVariant === 'drag') && hint
-        ? <p className="upload_hint">{hint}</p>
-        : null}
-      {message
-        ? (
-          <p className="form_field-error" role="alert">
-            {message}
-          </p>
-          )
-        : null}
+      {(resolvedVariant === 'button' || resolvedVariant === 'drag') && hint ? (
+        <p className="upload_hint">{hint}</p>
+      ) : null}
+      {message ? (
+        <p
+          className="form_field-error"
+          role="alert"
+        >
+          {message}
+        </p>
+      ) : null}
       {children}
       {listNode}
     </div>
-  )
+  );
 }
 
-export default Upload
+export default Upload;

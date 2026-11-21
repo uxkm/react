@@ -1,10 +1,10 @@
-import { type B2bMenuGroup } from './menuData'
+import { type B2bMenuGroup } from './menuData';
 
 export interface FullMenuTypeBSection {
-  readonly id: string
-  readonly title: string
-  readonly description: string
-  readonly groups: readonly B2bMenuGroup[]
+  readonly id: string;
+  readonly title: string;
+  readonly description: string;
+  readonly groups: readonly B2bMenuGroup[];
 }
 
 /** 현재 시안(typeB) 전체메뉴 — 기업교육·서비스·회사소개 3단 구성. */
@@ -22,15 +22,18 @@ export const fullMenuTypeBSections: readonly FullMenuTypeBSection[] = [
           { label: '[공개교육] AI 로드맵', href: 'https://ui.multicampus.com/roadmap/it/ai.html' },
           { label: 'AX 워크숍', href: '/b2b/contents/ax/workshop' },
           { label: 'AI Studio', href: '/b2b/contents/ax/ai-studio' },
-          { label: 'AX 역량수준 진단', href: '/b2b/contents/ax/competency' }
-        ]
+          { label: 'AX 역량수준 진단', href: '/b2b/contents/ax/competency' },
+        ],
       },
       {
         label: 'IT 교육',
         links: [
           { label: 'IT 교육체계', href: '/b2b/contents/it' },
-          { label: '[공개교육] IT 로드맵', href: 'https://ui.multicampus.com/roadmap/it/offline.html' }
-        ]
+          {
+            label: '[공개교육] IT 로드맵',
+            href: 'https://ui.multicampus.com/roadmap/it/offline.html',
+          },
+        ],
       },
       {
         label: '직무교육',
@@ -38,8 +41,8 @@ export const fullMenuTypeBSections: readonly FullMenuTypeBSection[] = [
           { label: '직무 교육체계', href: '/b2b/contents/job' },
           { label: '직무 전문 역량', href: '/b2b/contents/job/professional' },
           { label: '산업 전문 역량', href: '/b2b/contents/job/industry' },
-          { label: '자격대비', href: '/b2b/contents/job/certification' }
-        ]
+          { label: '자격대비', href: '/b2b/contents/job/certification' },
+        ],
       },
       {
         label: '리더십',
@@ -48,8 +51,8 @@ export const fullMenuTypeBSections: readonly FullMenuTypeBSection[] = [
           { label: 'SERICEO', href: 'https://www.sericeo.com/' },
           { label: '리더십 교육', href: '/b2b/contents/leadership' },
           { label: 'MBA 프로그램', href: '/b2b/contents/leadership/mba' },
-          { label: '리더십 진단', href: '/b2b/contents/leadership/assessment' }
-        ]
+          { label: '리더십 진단', href: '/b2b/contents/leadership/assessment' },
+        ],
       },
       {
         label: '법정필수',
@@ -57,8 +60,8 @@ export const fullMenuTypeBSections: readonly FullMenuTypeBSection[] = [
           { label: '법정필수 교육', href: '/b2b/contents/mandatory' },
           { label: '서비스 특징', href: '/b2b/contents/mandatory/features' },
           { label: '대표과정', href: '/b2b/contents/mandatory/courses' },
-          { label: '간편 견적받기', href: '/b2b/contents/mandatory/estimate' }
-        ]
+          { label: '간편 견적받기', href: '/b2b/contents/mandatory/estimate' },
+        ],
       },
       {
         label: '외국어',
@@ -66,16 +69,16 @@ export const fullMenuTypeBSections: readonly FullMenuTypeBSection[] = [
           { label: '외국어생활관', href: '/b2b/contents/language/language-life' },
           { label: '외국어 교육체계', href: '/b2b/contents/language' },
           { label: '사외외국어', href: '/b2b/contents/language/ai-language' },
-          { label: 'OPIc', href: 'https://www.opic.or.kr/' }
-        ]
+          { label: 'OPIc', href: 'https://www.opic.or.kr/' },
+        ],
       },
       {
         label: '중소기업 교육',
         links: [
-          { label: '[90% 환급] 중소기업 인재키움 프리미엄', href: '/b2b/contents/small-business' }
-        ]
-      }
-    ]
+          { label: '[90% 환급] 중소기업 인재키움 프리미엄', href: '/b2b/contents/small-business' },
+        ],
+      },
+    ],
   },
   {
     id: 'services',
@@ -86,31 +89,31 @@ export const fullMenuTypeBSections: readonly FullMenuTypeBSection[] = [
         label: '러닝플랫폼',
         links: [
           { label: '러닝플랫폼', href: '/b2b/service/platform' },
-          { label: '플랫폼 활용 컨설팅', href: '/b2b/service/platform/consulting' }
-        ]
+          { label: '플랫폼 활용 컨설팅', href: '/b2b/service/platform/consulting' },
+        ],
       },
       {
         label: '러닝 서비스',
         links: [
           { label: '이러닝', href: '/b2b/service/learning/elearning' },
           { label: '북러닝', href: '/b2b/service/learning/book' },
-          { label: '마이크로러닝', href: '/b2b/service/learning/micro' }
-        ]
+          { label: '마이크로러닝', href: '/b2b/service/learning/micro' },
+        ],
       },
       {
         label: 'HRD 전문 서비스',
         links: [
           { label: '진단 서비스', href: '/b2b/service/diagnosis' },
           { label: '컨설팅 서비스', href: '/b2b/service/consulting' },
-          { label: 'BPO 서비스', href: '/b2b/service/bpo' }
-        ]
+          { label: 'BPO 서비스', href: '/b2b/service/bpo' },
+        ],
       },
       {
         label: 'HR 인사이트',
         links: [
           { label: '멀캠 ON', href: '/b2b/insight/on/list' },
-          { label: '자료실', href: '/b2b/insight/resources/list' }
-        ]
+          { label: '자료실', href: '/b2b/insight/resources/list' },
+        ],
       },
       {
         label: '상담·신청',
@@ -118,10 +121,10 @@ export const fullMenuTypeBSections: readonly FullMenuTypeBSection[] = [
           { label: '기업교육 맞춤 상담', href: '/b2b/contact/education' },
           { label: '법정필수 간편견적', href: '/b2b/contents/mandatory/estimate' },
           { label: '진단&맞춤탐색', href: '/b2b/service/diagnosis' },
-          { label: '기업교육 제안서 다운로드', href: '/b2b/insight/resources/list' }
-        ]
-      }
-    ]
+          { label: '기업교육 제안서 다운로드', href: '/b2b/insight/resources/list' },
+        ],
+      },
+    ],
   },
   {
     id: 'company',
@@ -133,21 +136,19 @@ export const fullMenuTypeBSections: readonly FullMenuTypeBSection[] = [
         links: [
           { label: 'CEO 인사말', href: '/b2b/company/ceo' },
           { label: '멀티캠퍼스 소개', href: '/b2b/company/intro' },
-          { label: '연혁', href: '/b2b/company/history' }
-        ]
+          { label: '연혁', href: '/b2b/company/history' },
+        ],
       },
       {
         label: '홍보',
         links: [
           { label: '언론보도', href: '/b2b/company/pr/news/list' },
-          { label: '수상실적', href: '/b2b/company/pr/awards' }
-        ]
+          { label: '수상실적', href: '/b2b/company/pr/awards' },
+        ],
       },
       {
         label: '인재채용',
-        links: [
-          { label: '채용안내', href: 'https://careers.multicampus.com/ko/home' }
-        ]
+        links: [{ label: '채용안내', href: 'https://careers.multicampus.com/ko/home' }],
       },
       {
         label: '투자정보',
@@ -156,8 +157,8 @@ export const fullMenuTypeBSections: readonly FullMenuTypeBSection[] = [
           { label: '주주현황', href: '/b2b/company/investors/shareholders' },
           { label: '재무정보', href: '/b2b/company/investors/financial' },
           { label: 'IR 자료실', href: '/b2b/company/investors/ir' },
-          { label: '주가정보', href: '/b2b/company/investors/stock-price' }
-        ]
+          { label: '주가정보', href: '/b2b/company/investors/stock-price' },
+        ],
       },
       {
         label: '지속가능경영',
@@ -170,17 +171,17 @@ export const fullMenuTypeBSections: readonly FullMenuTypeBSection[] = [
           { label: 'ESG Data', href: '/b2b/company/sustainability/esg-data' },
           { label: '윤리규범', href: '/b2b/company/ethics/management' },
           { label: '제보/문의', href: 'https://ethics.multicampus.com/' },
-          { label: '지배구조보고서', href: '/b2b/company/sustainability/esg' }
-        ]
+          { label: '지배구조보고서', href: '/b2b/company/sustainability/esg' },
+        ],
       },
       {
         label: '윤리·준법경영',
         links: [
           { label: '경영원칙', href: '/b2b/company/ethics/management' },
           { label: '부패제보', href: 'https://ethics.multicampus.com/' },
-          { label: '준법경영', href: '/b2b/company/ethics/compliance' }
-        ]
-      }
-    ]
-  }
-]
+          { label: '준법경영', href: '/b2b/company/ethics/compliance' },
+        ],
+      },
+    ],
+  },
+];

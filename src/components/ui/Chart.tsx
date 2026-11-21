@@ -2,17 +2,17 @@
  * 차트 캔버스 자리.
  * engine(amcharts/us/echarts/highcharts/d3) 이름과 높이·제목을 둔다.
  */
-import type { HTMLAttributes, ReactNode } from 'react' // React
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
-import { hasNodes } from '@/utils/react' // has Nodes
+import type { HTMLAttributes, ReactNode } from 'react'; // React
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
+import { hasNodes } from '@/utils/react'; // has Nodes
 
 /** 차트 캔버스가 받는 값. 엔진 이름과 높이, 제목 */
 export interface ChartProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   /** amcharts · us · echarts · highcharts · d3 */
-  engine?: string
-  title?: ReactNode
-  height?: number | string
-  children?: ReactNode
+  engine?: string;
+  title?: ReactNode;
+  height?: number | string;
+  children?: ReactNode;
 }
 
 /**
@@ -20,7 +20,7 @@ export interface ChartProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'
  * 라이브러리 인스턴스는 화면에서 만들고, 이 컴포넌트는 캔버스만 연다.
  * engine 으로 어떤 차트 구현인지 남긴다.
  */
-export function Chart ({
+export function Chart({
   engine = 'amcharts',
   title,
   height = 280,
@@ -30,13 +30,20 @@ export function Chart ({
   ...rest
 }: ChartProps) {
   return (
-    <figure {...rest} className={classNames('chart', className)} data-engine={engine}>
+    <figure
+      {...rest}
+      className={classNames('chart', className)}
+      data-engine={engine}
+    >
       {hasNodes(title) && <figcaption className="chart_title">{title}</figcaption>}
-      <div className="chart_canvas" style={{ height, ...style }}>
+      <div
+        className="chart_canvas"
+        style={{ height, ...style }}
+      >
         {children}
       </div>
     </figure>
-  )
+  );
 }
 
-export default Chart
+export default Chart;

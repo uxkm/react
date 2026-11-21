@@ -5,32 +5,34 @@
 import type {
   ChangeEvent, // ChangeEvent 타입
   InputHTMLAttributes, // InputHTMLAttributes 타입
-  ReactNode // ReactNode 타입
-} from 'react' // React
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
+  ReactNode, // ReactNode 타입
+} from 'react'; // React
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
 
-const VALID_SIZES = new Set(['sm', 'md', 'lg'])
+const VALID_SIZES = new Set(['sm', 'md', 'lg']);
 
 /** 스위치가 받는 값 */
-export interface SwitchProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange' | 'size' | 'color'> {
-  label?: ReactNode
-  checked?: boolean
-  defaultChecked?: boolean
-  disabled?: boolean
-  labelEnd?: boolean
-  size?: 'sm' | 'md' | 'lg'
-  ripple?: boolean
-  ariaLabel?: string
-  children?: ReactNode
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void
+export interface SwitchProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  'type' | 'onChange' | 'size' | 'color'
+> {
+  label?: ReactNode;
+  checked?: boolean;
+  defaultChecked?: boolean;
+  disabled?: boolean;
+  labelEnd?: boolean;
+  size?: 'sm' | 'md' | 'lg';
+  ripple?: boolean;
+  ariaLabel?: string;
+  children?: ReactNode;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 /**
  * 켜짐·꺼짐을 전환하는 스위치.
  * FormSwitch 와 Switch 는 같은 컴포넌트다. SVG switch 태그와 이름이 겹치지 않게 둘 다 둔다.
  */
-export function Switch ({
+export function Switch({
   label,
   checked,
   defaultChecked,
@@ -47,21 +49,19 @@ export function Switch ({
   value,
   ...props
 }: SwitchProps) {
-  const content = children ?? label
-  const hasLabel = content != null && content !== ''
-  const resolvedSize = VALID_SIZES.has(size) ? size : 'md'
+  const content = children ?? label;
+  const hasLabel = content != null && content !== '';
+  const resolvedSize = VALID_SIZES.has(size) ? size : 'md';
   const classes = classNames(
     'switch',
     labelEnd && 'switch_label-end',
     resolvedSize === 'sm' && 'switch_sm',
     resolvedSize === 'lg' && 'switch_lg',
-    className
-  )
+    className,
+  );
 
   // checked 유무로 제어/비제어 판정. onChange 만으로는 제어 모드가 되지 않는다.
-  const checkedProps = checked !== undefined
-    ? { checked, onChange }
-    : { defaultChecked, onChange }
+  const checkedProps = checked !== undefined ? { checked, onChange } : { defaultChecked, onChange };
 
   return (
     <label
@@ -82,16 +82,19 @@ export function Switch ({
           aria-label={props['aria-label'] ?? (!hasLabel ? ariaLabel : undefined)}
           {...checkedProps}
         />
-        <span className="switch_track" aria-hidden="true">
+        <span
+          className="switch_track"
+          aria-hidden="true"
+        >
           <span className="switch_thumb" />
         </span>
       </span>
       {hasLabel && !labelEnd && <span className="switch_label">{content}</span>}
     </label>
-  )
+  );
 }
 
 /** Switch 별칭. SVG switch 태그와 구분할 때 사용한다 */
-export const FormSwitch = Switch
+export const FormSwitch = Switch;
 
-export default Switch
+export default Switch;

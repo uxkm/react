@@ -8,18 +8,28 @@ import {
   type ElementType, // HTMLAttributes 타입
   type KeyboardEvent, // KeyboardEvent 타입
   type MouseEvent, // MouseEvent 타입
-  type ReactNode // ReactNode 타입
-} from 'react' // React
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
-import { hasNodes } from '@/utils/react' // has Nodes
-import { Icon } from './Icon'
+  type ReactNode, // ReactNode 타입
+} from 'react'; // React
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
+import { hasNodes } from '@/utils/react'; // has Nodes
+import { Icon } from './Icon';
 
 /** 버튼 모양. filled 채움, outline 테두리, ghost 옅은 배경, text 글자만, select 선택됨 */
-export type ButtonVariant = 'filled' | 'outline' | 'ghost' | 'text' | 'select' | 'arrow' | 'arrow-pill' | 'gradient' | 'soft-outline' | 'social'
+export type ButtonVariant =
+  | 'filled'
+  | 'outline'
+  | 'ghost'
+  | 'text'
+  | 'select'
+  | 'arrow'
+  | 'arrow-pill'
+  | 'gradient'
+  | 'soft-outline'
+  | 'social';
 /** 버튼 색. primary 가 기본 강조 */
-export type ButtonColor = 'primary' | 'default' | 'success' | 'warning' | 'danger' | 'muted'
+export type ButtonColor = 'primary' | 'default' | 'success' | 'warning' | 'danger' | 'muted';
 /** 버튼 크기. sm 작게, md 기본, lg 크게 */
-export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl'
+export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
 
 /** variant 이름 → btn_* 클래스 */
 const VARIANT_CLASS: Record<string, string> = {
@@ -32,56 +42,58 @@ const VARIANT_CLASS: Record<string, string> = {
   'arrow-pill': 'btn_arrow-pill',
   gradient: 'btn_gradient',
   'soft-outline': 'btn_soft-outline',
-  social: 'btn_social'
-}
+  social: 'btn_social',
+};
 
 /** 버튼이 받는 값. variant·color·size 와 라벨, 아이콘, 비활성 */
-export interface ButtonProps
-  extends Omit<HTMLAttributes<HTMLElement>, 'onClick' | 'onKeyDown' | 'role' | 'color'> {
+export interface ButtonProps extends Omit<
+  HTMLAttributes<HTMLElement>,
+  'onClick' | 'onKeyDown' | 'role' | 'color'
+> {
   /** 시각 표현만 필요한 카드 내부에서는 presentation을 사용합니다. */
-  presentation?: boolean
-  as?: ElementType
-  target?: string
-  rel?: string
-  tone?: 'blue' | 'lavender'
-  channel?: 'naver' | 'youtube' | 'linkedin'
-  variant?: ButtonVariant
-  color?: ButtonColor
-  size?: ButtonSize
-  label?: string
-  ripple?: boolean
-  round?: boolean
-  vertical?: boolean
-  iconOnly?: boolean
-  block?: boolean
-  grow?: boolean | string | number
-  fit?: boolean
-  disabled?: boolean
-  ariaDisabled?: boolean
-  loading?: boolean
-  open?: boolean
-  error?: boolean
-  placeholder?: boolean
-  selectText?: boolean
-  selectCaret?: boolean
-  type?: 'button' | 'submit' | 'reset'
+  presentation?: boolean;
+  as?: ElementType;
+  target?: string;
+  rel?: string;
+  tone?: 'blue' | 'lavender';
+  channel?: 'naver' | 'youtube' | 'linkedin';
+  variant?: ButtonVariant;
+  color?: ButtonColor;
+  size?: ButtonSize;
+  label?: string;
+  ripple?: boolean;
+  round?: boolean;
+  vertical?: boolean;
+  iconOnly?: boolean;
+  block?: boolean;
+  grow?: boolean | string | number;
+  fit?: boolean;
+  disabled?: boolean;
+  ariaDisabled?: boolean;
+  loading?: boolean;
+  open?: boolean;
+  error?: boolean;
+  placeholder?: boolean;
+  selectText?: boolean;
+  selectCaret?: boolean;
+  type?: 'button' | 'submit' | 'reset';
   /** @deprecated use `type` — kept for older demos */
-  nativeType?: 'button' | 'submit' | 'reset' | ''
+  nativeType?: 'button' | 'submit' | 'reset' | '';
   /** 루트 HTML 태그. a 는 href 기본 '#', div·span 은 tabindex·role=button */
-  tag?: 'button' | 'a' | 'div' | 'span'
-  href?: string
-  role?: string
-  ariaLabel?: string
-  haspopup?: boolean | string | null
-  expanded?: boolean | null
-  invalid?: boolean
-  iconBefore?: ReactNode
-  iconAfter?: ReactNode
+  tag?: 'button' | 'a' | 'div' | 'span';
+  href?: string;
+  role?: string;
+  ariaLabel?: string;
+  haspopup?: boolean | string | null;
+  expanded?: boolean | null;
+  invalid?: boolean;
+  iconBefore?: ReactNode;
+  iconAfter?: ReactNode;
   /** arrow·arrow-pill의 원형 영역 아이콘. null 또는 false로 숨깁니다. */
-  arrowIcon?: ReactNode
-  children?: ReactNode
-  onClick?: (event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>) => void
-  onKeyDown?: (event: KeyboardEvent<HTMLElement>) => void
+  arrowIcon?: ReactNode;
+  children?: ReactNode;
+  onClick?: (event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>) => void;
+  onKeyDown?: (event: KeyboardEvent<HTMLElement>) => void;
 }
 
 /**
@@ -89,7 +101,7 @@ export interface ButtonProps
  * variant 모양, color 색, size 크기. label 또는 children 이 문구다.
  * tag 로 button / a / div / span 을 고르고, loading·disabled 이면 클릭을 막는다.
  */
-export function Button ({
+export function Button({
   variant = 'filled',
   presentation = false,
   as,
@@ -127,26 +139,32 @@ export function Button ({
   invalid = false,
   iconBefore,
   iconAfter,
-  arrowIcon = <Icon name="arrow-right" size={20} />,
+  arrowIcon = (
+    <Icon
+      name="arrow-right"
+      size={20}
+    />
+  ),
   children,
   className,
   onClick,
   onKeyDown,
   ...rest
 }: ButtonProps) {
-  const rootTag = presentation ? 'span' : as || (tag === 'a' || tag === 'div' || tag === 'span' ? tag : 'button')
-  const isIconOnly = iconOnly || variant === 'social'
-  const resolvedType = nativeType || type
-  const isDisabled = !!(disabled || ariaDisabled || loading)
-  const showCaret = variant === 'select' ? true : !!selectCaret
+  const rootTag = presentation
+    ? 'span'
+    : as || (tag === 'a' || tag === 'div' || tag === 'span' ? tag : 'button');
+  const isIconOnly = iconOnly || variant === 'social';
+  const resolvedType = nativeType || type;
+  const isDisabled = !!(disabled || ariaDisabled || loading);
+  const showCaret = variant === 'select' ? true : !!selectCaret;
   /** a 태그: href 미지정 시 '#' */
-  const resolvedHref = !presentation && (rootTag === 'a' || typeof rootTag !== 'string') ? (href || '#') : undefined
+  const resolvedHref =
+    !presentation && (rootTag === 'a' || typeof rootTag !== 'string') ? href || '#' : undefined;
 
   const btnClass = classNames(
     'btn',
-    variant === 'select' && selectText
-      ? 'btn_select-text'
-      : VARIANT_CLASS[variant] || 'btn_filled',
+    variant === 'select' && selectText ? 'btn_select-text' : VARIANT_CLASS[variant] || 'btn_filled',
     ['filled', 'outline', 'text', 'select'].includes(variant) && 'color_' + color,
     variant === 'arrow-pill' && 'btn_tone-' + tone,
     variant === 'social' && channel && 'btn_social-' + channel,
@@ -166,95 +184,117 @@ export function Button ({
     loading && 'is-loading',
     open && 'is-open',
     (error || invalid) && 'is-error',
-    className
-  )
+    className,
+  );
 
   /** div·span → role=button + tabindex=0 (a 는 href 기본 '#' 로 포커스 가능) */
-  const needsButtonRole = !presentation && (rootTag === 'div' || rootTag === 'span')
-  const computedRole = role || (needsButtonRole ? 'button' : undefined)
+  const needsButtonRole = !presentation && (rootTag === 'div' || rootTag === 'span');
+  const computedRole = role || (needsButtonRole ? 'button' : undefined);
 
-  let computedTabIndex: number | undefined
+  let computedTabIndex: number | undefined;
   if (presentation) {
-    computedTabIndex = undefined
+    computedTabIndex = undefined;
   } else if (tabIndex !== undefined && tabIndex !== null) {
-    computedTabIndex = tabIndex
+    computedTabIndex = tabIndex;
   } else if (isDisabled && rootTag !== 'button') {
-    computedTabIndex = -1
+    computedTabIndex = -1;
   } else if (needsButtonRole) {
-    computedTabIndex = 0
+    computedTabIndex = 0;
   }
 
-  let haspopupAttr: string | undefined
-  if (haspopup === true || haspopup === '') haspopupAttr = 'true'
-  else if (haspopup === false || haspopup == null) haspopupAttr = undefined
-  else haspopupAttr = String(haspopup)
+  let haspopupAttr: string | undefined;
+  if (haspopup === true || haspopup === '') haspopupAttr = 'true';
+  else if (haspopup === false || haspopup == null) haspopupAttr = undefined;
+  else haspopupAttr = String(haspopup);
 
-  let expandedAttr: 'true' | 'false' | undefined
-  if (expanded === true) expandedAttr = 'true'
-  else if (expanded === false) expandedAttr = 'false'
+  let expandedAttr: 'true' | 'false' | undefined;
+  if (expanded === true) expandedAttr = 'true';
+  else if (expanded === false) expandedAttr = 'false';
   else {
     // select / haspopup / open 사용 시에만 aria-expanded 노출
     const needsExpanded =
       variant === 'select' ||
       open === true ||
-      (haspopup !== null && haspopup !== false && haspopup !== undefined)
-    expandedAttr = needsExpanded ? (open ? 'true' : 'false') : undefined
+      (haspopup !== null && haspopup !== false && haspopup !== undefined);
+    expandedAttr = needsExpanded ? (open ? 'true' : 'false') : undefined;
   }
 
   /** 클릭·Enter·Space. 비활성이면 막고, 아니면 onClick */
   const handleClick = (event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>) => {
     if (isDisabled) {
-      event.preventDefault()
-      event.stopPropagation()
-      return
+      event.preventDefault();
+      event.stopPropagation();
+      return;
     }
-    onClick?.(event)
-  }
+    onClick?.(event);
+  };
 
   /** 버튼 역할일 때 Enter·Space 를 클릭으로 넘긴다 */
   const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
-    onKeyDown?.(event)
-    if (isDisabled) return
-    if (computedRole !== 'button') return
+    onKeyDown?.(event);
+    if (isDisabled) return;
+    if (computedRole !== 'button') return;
     // 네이티브 button 은 브라우저가 Enter/Space 를 click 으로 처리
-    if (rootTag === 'button') return
+    if (rootTag === 'button') return;
     if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault()
-      handleClick(event)
+      event.preventDefault();
+      handleClick(event);
     }
-  }
+  };
 
   const caret = showCaret ? (
     <span
       className={classNames(
         'btn_icon',
         'btn_icon-after',
-        variant === 'select' ? 'btn_select-caret' : 'btn_caret'
+        variant === 'select' ? 'btn_select-caret' : 'btn_caret',
       )}
       aria-hidden="true"
     >
-      <Icon name={variant === 'select' ? 'chevron-down' : 'caret-down'} size="1em" />
+      <Icon
+        name={variant === 'select' ? 'chevron-down' : 'caret-down'}
+        size="1em"
+      />
     </span>
-  ) : null
+  ) : null;
 
-  const arrow = hasNodes(arrowIcon) ? <span className="btn_arrow-circle" aria-hidden="true">{arrowIcon}</span> : null
+  const arrow = hasNodes(arrowIcon) ? (
+    <span
+      className="btn_arrow-circle"
+      aria-hidden="true"
+    >
+      {arrowIcon}
+    </span>
+  ) : null;
   const content: ReactNode = (
     <>
       {variant === 'arrow' ? arrow : null}
-      {loading ? <span aria-hidden="true" className="btn_spinner"><Icon name="loader" /></span> : null}
-      {hasNodes(iconBefore) ? (
-        <span className="btn_icon btn_icon-before">{iconBefore}</span>
+      {loading ? (
+        <span
+          aria-hidden="true"
+          className="btn_spinner"
+        >
+          <Icon name="loader" />
+        </span>
       ) : null}
-      {isIconOnly
-        ? (hasNodes(children) ? children : channel ? <Icon name={channel} size={28} /> : null)
-        : <span className="btn_label">{hasNodes(children) ? children : label}</span>}
-      {hasNodes(iconAfter) ? (
-        <span className="btn_icon btn_icon-after">{iconAfter}</span>
-      ) : null}
+      {hasNodes(iconBefore) ? <span className="btn_icon btn_icon-before">{iconBefore}</span> : null}
+      {isIconOnly ? (
+        hasNodes(children) ? (
+          children
+        ) : channel ? (
+          <Icon
+            name={channel}
+            size={28}
+          />
+        ) : null
+      ) : (
+        <span className="btn_label">{hasNodes(children) ? children : label}</span>
+      )}
+      {hasNodes(iconAfter) ? <span className="btn_icon btn_icon-after">{iconAfter}</span> : null}
       {variant === 'arrow-pill' ? arrow : null}
       {caret}
     </>
-  )
+  );
 
   return createElement(
     rootTag,
@@ -264,7 +304,9 @@ export function Button ({
       type: rootTag === 'button' ? resolvedType : undefined,
       href: resolvedHref,
       target: presentation ? undefined : target,
-      rel: presentation ? undefined : rel || (target === '_blank' ? 'noopener noreferrer' : undefined),
+      rel: presentation
+        ? undefined
+        : rel || (target === '_blank' ? 'noopener noreferrer' : undefined),
       title: target === '_blank' ? '새 창 열림' : rest.title,
       disabled: rootTag === 'button' ? isDisabled : undefined,
       role: presentation ? undefined : computedRole,
@@ -274,13 +316,13 @@ export function Button ({
       'aria-label': ariaLabel || (rest as Record<string, unknown>)['aria-label'] || undefined,
       'aria-haspopup': haspopupAttr,
       'aria-expanded': expandedAttr,
-      'aria-invalid': (error || invalid) ? 'true' : undefined,
+      'aria-invalid': error || invalid ? 'true' : undefined,
       'data-ripple': ripple ? 'true' : undefined,
       onClick: presentation ? undefined : handleClick,
-      onKeyDown: presentation ? undefined : handleKeyDown
+      onKeyDown: presentation ? undefined : handleKeyDown,
     },
-    content
-  )
+    content,
+  );
 }
 
-export default Button
+export default Button;

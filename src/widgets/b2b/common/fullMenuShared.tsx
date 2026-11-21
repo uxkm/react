@@ -1,13 +1,17 @@
-'use client'
+'use client';
 
-import Image from 'next/image'
-import { Link } from '@/lib/router'
-import { Icon } from '@/comp/ui/Icon'
-import { type B2bMenuGroup, type B2bMenuLink } from './menuData'
+import Image from 'next/image';
+import { Link } from '@/lib/router';
+import { Icon } from '@/comp/ui/Icon';
+import { type B2bMenuGroup, type B2bMenuLink } from './menuData';
 
-export function B2bLogo ({ adaptive = false }: { adaptive?: boolean }) {
+export function B2bLogo({ adaptive = false }: { adaptive?: boolean }) {
   return (
-    <Link to="/b2b" className="logo" aria-label="멀티캠퍼스 홈">
+    <Link
+      to="/b2b"
+      className="logo"
+      aria-label="멀티캠퍼스 홈"
+    >
       <Image
         className="logo_dark"
         src="/images/common/logo_black.png"
@@ -19,14 +23,22 @@ export function B2bLogo ({ adaptive = false }: { adaptive?: boolean }) {
         fetchPriority="high"
       />
       {adaptive && (
-        <Image className="logo_light" src="/images/common/logo.png" alt="" aria-hidden="true" width={152} height={26} loading="eager" />
+        <Image
+          className="logo_light"
+          src="/images/common/logo.png"
+          alt=""
+          aria-hidden="true"
+          width={152}
+          height={26}
+          loading="eager"
+        />
       )}
     </Link>
-  )
+  );
 }
 
-export function MenuLink ({ label, href }: Readonly<B2bMenuLink>) {
-  const external = /^https?:\/\//.test(href)
+export function MenuLink({ label, href }: Readonly<B2bMenuLink>) {
+  const external = /^https?:\/\//.test(href);
 
   return (
     <Link
@@ -45,13 +57,22 @@ export function MenuLink ({ label, href }: Readonly<B2bMenuLink>) {
         />
       )}
     </Link>
-  )
+  );
 }
 
-export function MenuGroup ({ group }: Readonly<{ group: B2bMenuGroup }>) {
+export function MenuGroup({ group }: Readonly<{ group: B2bMenuGroup }>) {
   return (
     <div className="full-menu-content_group">
-      <h3>{group.href ? <MenuLink label={group.label} href={group.href} /> : group.label}</h3>
+      <h3>
+        {group.href ? (
+          <MenuLink
+            label={group.label}
+            href={group.href}
+          />
+        ) : (
+          group.label
+        )}
+      </h3>
       {group.links.length > 0 && (
         <ul>
           {group.links.map((item) => (
@@ -62,5 +83,5 @@ export function MenuGroup ({ group }: Readonly<{ group: B2bMenuGroup }>) {
         </ul>
       )}
     </div>
-  )
+  );
 }

@@ -1,20 +1,29 @@
-'use client'
+'use client';
 
-import { useState } from 'react' // 상태 훅
-import { Button, Space, Spin } from '@/comp' // comp
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
-import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
-import { spinApiSections } from '@/screen/pub/data/guide/spinApiSections' // spin Api Sections
+import { useState } from 'react'; // 상태 훅
+import { Button, Space, Spin } from '@/comp'; // comp
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'; // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'; // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout'; // Guide Layout 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'; // wrap Page Example
+import { spinApiSections } from '@/screen/pub/data/guide/spinApiSections'; // spin Api Sections
 
 /** spinning 을 버튼으로 켜고 끄는 래퍼 예시 */
-function WrapDemo () {
-  const [spinning, setSpinning] = useState(true)
+function WrapDemo() {
+  const [spinning, setSpinning] = useState(true);
 
   return (
-    <Space vertical block size={14}>
-      <Spin spinning={spinning} tip="불러오는 중…" block blur>
+    <Space
+      vertical
+      block
+      size={14}
+    >
+      <Spin
+        spinning={spinning}
+        tip="불러오는 중…"
+        block
+        blur
+      >
         <div style={{ padding: 16 }}>
           <p style={{ margin: 0 }}>카드 · 목록 등 콘텐츠 영역입니다.</p>
           <p style={{ margin: '8px 0 0', color: 'var(--color-text-muted)' }}>
@@ -28,7 +37,7 @@ function WrapDemo () {
         onClick={() => setSpinning((value) => !value)}
       />
     </Space>
-  )
+  );
 }
 
 const SECTIONS = [
@@ -36,72 +45,119 @@ const SECTIONS = [
     title: '기본 사용',
     description: (
       <>
-        기본은 회전 인디케이터만 표시합니다. <code>tip</code>을 주면 <code>spin_tip</code>에 문구가 붙고,
+        기본은 회전 인디케이터만 표시합니다. <code>tip</code>을 주면 <code>spin_tip</code>에 문구가
+        붙고,
         <code>spinning={'{false}'}</code>이면 인디케이터를 숨깁니다.
       </>
     ),
-    code: wrapPageExample(`<Spin />
+    code: wrapPageExample(
+      `<Spin />
 <Spin tip="불러오는 중…" />
-<Spin spinning={false} tip="숨김" />`, {
-      name: 'SpinExample',
-      reactImports: [],
-      compImports: ['Spin']
-    }),
+<Spin spinning={false} tip="숨김" />`,
+      {
+        name: 'SpinExample',
+        reactImports: [],
+        compImports: ['Spin'],
+      },
+    ),
     preview: (
-      <Space size={24} align="center">
+      <Space
+        size={24}
+        align="center"
+      >
         <Spin />
         <Spin tip="불러오는 중…" />
-        <Spin spinning={false} tip="숨김" />
+        <Spin
+          spinning={false}
+          tip="숨김"
+        />
       </Space>
-    )
+    ),
   },
   {
     title: '색상',
     description: (
       <>
-        <code>color</code>는 <code>primary</code>(기본) · <code>success</code> · <code>warning</code> · <code>danger</code>를 받아
-        루트에 <code>color_{'{값}'}</code> 클래스가 붙습니다.
+        <code>color</code>는 <code>primary</code>(기본) · <code>success</code> ·{' '}
+        <code>warning</code> · <code>danger</code>를 받아 루트에 <code>color_{'{값}'}</code>{' '}
+        클래스가 붙습니다.
       </>
     ),
-    code: wrapPageExample(`<Spin color="primary" tip="primary" />
+    code: wrapPageExample(
+      `<Spin color="primary" tip="primary" />
 <Spin color="success" tip="success" />
 <Spin color="warning" tip="warning" />
-<Spin color="danger" tip="danger" />`, {
-      name: 'SpinColorExample',
-      reactImports: [],
-      compImports: ['Spin']
-    }),
+<Spin color="danger" tip="danger" />`,
+      {
+        name: 'SpinColorExample',
+        reactImports: [],
+        compImports: ['Spin'],
+      },
+    ),
     preview: (
-      <Space size={24} align="center" wrap>
-        <Spin color="primary" tip="primary" />
-        <Spin color="success" tip="success" />
-        <Spin color="warning" tip="warning" />
-        <Spin color="danger" tip="danger" />
+      <Space
+        size={24}
+        align="center"
+        wrap
+      >
+        <Spin
+          color="primary"
+          tip="primary"
+        />
+        <Spin
+          color="success"
+          tip="success"
+        />
+        <Spin
+          color="warning"
+          tip="warning"
+        />
+        <Spin
+          color="danger"
+          tip="danger"
+        />
       </Space>
-    )
+    ),
   },
   {
     title: '크기',
     description: (
       <>
         <code>size</code>는 <code>sm</code> · <code>md</code>(기본) · <code>lg</code>입니다.
-        <code>sm</code> · <code>lg</code>일 때 루트에 <code>spin_sm</code> · <code>spin_lg</code>가 붙어 원 크기와 tip 글자 크기가 바뀝니다.
+        <code>sm</code> · <code>lg</code>일 때 루트에 <code>spin_sm</code> · <code>spin_lg</code>가
+        붙어 원 크기와 tip 글자 크기가 바뀝니다.
       </>
     ),
-    code: wrapPageExample(`<Spin size="sm" tip="sm" />
+    code: wrapPageExample(
+      `<Spin size="sm" tip="sm" />
 <Spin size="md" tip="md" />
-<Spin size="lg" tip="lg" />`, {
-      name: 'SpinSizeExample',
-      reactImports: [],
-      compImports: ['Spin']
-    }),
+<Spin size="lg" tip="lg" />`,
+      {
+        name: 'SpinSizeExample',
+        reactImports: [],
+        compImports: ['Spin'],
+      },
+    ),
     preview: (
-      <Space size={24} align="center" wrap>
-        <Spin size="sm" tip="sm" />
-        <Spin size="md" tip="md" />
-        <Spin size="lg" tip="lg" />
+      <Space
+        size={24}
+        align="center"
+        wrap
+      >
+        <Spin
+          size="sm"
+          tip="sm"
+        />
+        <Spin
+          size="md"
+          tip="md"
+        />
+        <Spin
+          size="lg"
+          tip="lg"
+        />
       </Space>
-    )
+    ),
   },
   {
     title: '인라인 · 블록',
@@ -111,28 +167,44 @@ const SECTIONS = [
         <code>block</code>은 단독 스피너를 가로 전체 너비로 가운데 둡니다(<code>spin_block</code>).
       </>
     ),
-    code: wrapPageExample(`<Spin inline tip="저장 중…" />
-<Spin block tip="전체 너비" />`, {
-      name: 'SpinLayoutExample',
-      reactImports: [],
-      compImports: ['Spin']
-    }),
+    code: wrapPageExample(
+      `<Spin inline tip="저장 중…" />
+<Spin block tip="전체 너비" />`,
+      {
+        name: 'SpinLayoutExample',
+        reactImports: [],
+        compImports: ['Spin'],
+      },
+    ),
     preview: (
-      <Space vertical block size={14}>
-        <Spin inline tip="저장 중…" />
-        <Spin block tip="전체 너비" />
+      <Space
+        vertical
+        block
+        size={14}
+      >
+        <Spin
+          inline
+          tip="저장 중…"
+        />
+        <Spin
+          block
+          tip="전체 너비"
+        />
       </Space>
-    )
+    ),
   },
   {
     title: '콘텐츠 위 오버레이',
     description: (
       <>
-        자식을 넣으면 <code>spin_wrap</code>으로 감싸고, <code>spinning</code>일 때 <code>spin_overlay</code>가 콘텐츠를 덮습니다.
-        <code>block</code>은 래퍼에 <code>spin_wrap-block</code>(최소 높이)을, <code>blur</code>는 <code>spin_wrap-blur</code>를 붙입니다.
+        자식을 넣으면 <code>spin_wrap</code>으로 감싸고, <code>spinning</code>일 때{' '}
+        <code>spin_overlay</code>가 콘텐츠를 덮습니다.
+        <code>block</code>은 래퍼에 <code>spin_wrap-block</code>(최소 높이)을, <code>blur</code>는{' '}
+        <code>spin_wrap-blur</code>를 붙입니다.
       </>
     ),
-    code: wrapPageExample(`const [spinning, setSpinning] = useState(true)
+    code: wrapPageExample(
+      `const [spinning, setSpinning] = useState(true)
 
 <Spin spinning={spinning} tip="불러오는 중…" block blur>
   <div>콘텐츠</div>
@@ -141,19 +213,22 @@ const SECTIONS = [
   variant="outline"
   label={spinning ? '로딩 끄기' : '로딩 켜기'}
   onClick={() => setSpinning((value) => !value)}
-/>`, {
-      name: 'SpinOverlayExample',
-      reactImports: ['useState'],
-      compImports: ['Button', 'Spin']
-    }),
-    preview: <WrapDemo />
+/>`,
+      {
+        name: 'SpinOverlayExample',
+        reactImports: ['useState'],
+        compImports: ['Button', 'Spin'],
+      },
+    ),
+    preview: <WrapDemo />,
   },
   {
     title: 'HTML 마크업 · 오버레이',
     description: (
       <>
-        스타일 계약은 <code>spin_wrap.is-loading</code> + <code>spin_wrap-body</code> + <code>spin spin_overlay</code>입니다.
-        React <code>Spin</code>에 자식을 넘기면 이 구조로 렌더링됩니다.
+        스타일 계약은 <code>spin_wrap.is-loading</code> + <code>spin_wrap-body</code> +{' '}
+        <code>spin spin_overlay</code>입니다. React <code>Spin</code>에 자식을 넘기면 이 구조로
+        렌더링됩니다.
       </>
     ),
     code: `<div class="spin_wrap spin_wrap-block is-loading">
@@ -165,7 +240,10 @@ const SECTIONS = [
 </div>`,
     preview: (
       <div className="spin_wrap spin_wrap-block is-loading">
-        <div className="spin_wrap-body" style={{ padding: 16 }}>
+        <div
+          className="spin_wrap-body"
+          style={{ padding: 16 }}
+        >
           HTML 마크업 오버레이 예시입니다.
         </div>
         <div
@@ -175,38 +253,44 @@ const SECTIONS = [
           aria-busy="true"
           aria-label="로딩 중"
         >
-          <span className="spin_indicator" aria-hidden="true" />
+          <span
+            className="spin_indicator"
+            aria-hidden="true"
+          />
           <span className="spin_tip">불러오는 중…</span>
         </div>
       </div>
-    )
+    ),
   },
   {
     title: '접근성',
     description: (
       <>
-        인디케이터(또는 overlay)에 <code>role=&quot;status&quot;</code> · <code>aria-live=&quot;polite&quot;</code> · <code>aria-busy</code>가 지정됩니다.
-        <code>aria-label</code>은 <code>ariaLabel</code> → 문자열 <code>tip</code> → &quot;로딩 중&quot; 순입니다.
-        인디케이터 원에는 <code>aria-hidden</code>을 둡니다.
+        인디케이터(또는 overlay)에 <code>role=&quot;status&quot;</code> ·{' '}
+        <code>aria-live=&quot;polite&quot;</code> · <code>aria-busy</code>가 지정됩니다.
+        <code>aria-label</code>은 <code>ariaLabel</code> → 문자열 <code>tip</code> → &quot;로딩
+        중&quot; 순입니다. 인디케이터 원에는 <code>aria-hidden</code>을 둡니다.
       </>
     ),
-    code: wrapPageExample(
-      `<Spin tip="파일 업로드 중" ariaLabel="파일 업로드 진행 중" />`,
-      {
-        name: 'SpinA11yExample',
-        reactImports: [],
-        compImports: ['Spin']
-      }
+    code: wrapPageExample(`<Spin tip="파일 업로드 중" ariaLabel="파일 업로드 진행 중" />`, {
+      name: 'SpinA11yExample',
+      reactImports: [],
+      compImports: ['Spin'],
+    }),
+    preview: (
+      <Spin
+        tip="파일 업로드 중"
+        ariaLabel="파일 업로드 진행 중"
+      />
     ),
-    preview: <Spin tip="파일 업로드 중" ariaLabel="파일 업로드 진행 중" />
-  }
-]
+  },
+];
 
 /**
  * Spin 가이드 화면.
  * 기본 · 색 · 크기 · 인라인 · 오버레이 예시와 API 문서를 모은다.
  */
-export default function SpinGuide () {
+export default function SpinGuide() {
   return (
     <GuideLayout
       category="피드백"
@@ -219,9 +303,7 @@ export default function SpinGuide () {
           title={section.title}
           description={section.description}
           code={section.code}
-          fileName={
-            section.title.includes('HTML') ? 'spin.html' : 'SpinExample.jsx'
-          }
+          fileName={section.title.includes('HTML') ? 'spin.html' : 'SpinExample.jsx'}
         >
           {section.preview}
         </DemoBlock>
@@ -229,5 +311,5 @@ export default function SpinGuide () {
 
       <GuideApiDocs sections={spinApiSections} />
     </GuideLayout>
-  )
+  );
 }

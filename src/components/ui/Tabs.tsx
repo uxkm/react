@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 /**
  * 탭.
@@ -17,155 +17,155 @@ import {
   type HTMLAttributes, // HTMLAttributes 타입
   type KeyboardEvent, // KeyboardEvent 타입
   type ReactElement, // ReactElement 타입
-  type ReactNode // ReactNode 타입
-} from 'react' // React
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
-import { hasNodes } from '@/utils/react' // has Nodes
-import { Icon, type IconColor } from './Icon' // Icon · IconColor 타입
+  type ReactNode, // ReactNode 타입
+} from 'react'; // React
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
+import { hasNodes } from '@/utils/react'; // has Nodes
+import { Icon, type IconColor } from './Icon'; // Icon · IconColor 타입
 
 /** 탭 값. 문자 또는 숫자 */
-export type TabValue = string | number
+export type TabValue = string | number;
 
 /** 탭 한 칸. value, label, 패널 content, 아이콘, 닫기 여부 */
 export type TabItem =
   | TabValue
   | {
-    value: TabValue
-    label?: ReactNode
-    /** 탭 메뉴 안에 넣을 커스텀 노드. 있으면 label 대신 쓴다 */
-    children?: ReactNode
-    icon?: ReactNode
-    disabled?: boolean
-    closable?: boolean
-    closeLabel?: string
-    /** 이 탭의 패널 내용 */
-    content?: ReactNode
-    className?: string
-    panelClassName?: string
-  }
+      value: TabValue;
+      label?: ReactNode;
+      /** 탭 메뉴 안에 넣을 커스텀 노드. 있으면 label 대신 쓴다 */
+      children?: ReactNode;
+      icon?: ReactNode;
+      disabled?: boolean;
+      closable?: boolean;
+      closeLabel?: string;
+      /** 이 탭의 패널 내용 */
+      content?: ReactNode;
+      className?: string;
+      panelClassName?: string;
+    };
 
 /** renderTab 에 전달되는 상태 */
 export interface TabRenderState {
-  active: boolean
-  disabled: boolean
-  select: () => void
-  close?: () => void
+  active: boolean;
+  disabled: boolean;
+  select: () => void;
+  close?: () => void;
 }
 
 /** 정규화된 탭 한 칸 */
 interface NormalizedTab {
-  value: TabValue
-  label: ReactNode
-  custom: ReactNode
-  icon: ReactNode
-  disabled: boolean
-  closable: boolean
-  closeLabel: string
-  content: ReactNode
-  className: string
-  panelClassName: string
+  value: TabValue;
+  label: ReactNode;
+  custom: ReactNode;
+  icon: ReactNode;
+  disabled: boolean;
+  closable: boolean;
+  closeLabel: string;
+  content: ReactNode;
+  className: string;
+  panelClassName: string;
 }
 
 /** 탭이 받는 값. value 와 onChange */
 export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'onInput'> {
-  value?: TabValue
+  value?: TabValue;
   /** 비제어 초기 활성 탭. 생략 시 첫 사용 가능 탭 */
-  defaultValue?: TabValue
-  tabs?: TabItem[]
+  defaultValue?: TabValue;
+  tabs?: TabItem[];
   /** line(기본) · card · pill · keyword(가운데 정렬 키워드) */
-  variant?: 'line' | 'card' | 'pill' | 'keyword'
-  size?: 'sm' | 'md' | 'lg'
+  variant?: 'line' | 'card' | 'pill' | 'keyword';
+  size?: 'sm' | 'md' | 'lg';
   /** auto · equal(균등) · scroll(이전/다음 네비 스크롤) */
-  layout?: 'auto' | 'equal' | 'scroll'
+  layout?: 'auto' | 'equal' | 'scroll';
   /** tabs_vertical */
-  vertical?: boolean
+  vertical?: boolean;
   /** layout=auto 에서 가로 스크롤만. tabs_scrollable */
-  scrollable?: boolean
+  scrollable?: boolean;
   /**
    * 슬라이딩 인디케이터(tabs_indicator-slide).
    * line · pill · keyword 에서 활성 탭을 따라 이동하는 tabs_indicator 를 쓴다.
    */
-  indicatorSlide?: boolean
+  indicatorSlide?: boolean;
   /**
    * layout=scroll 일 때 좌·우 가장자리 딤(is-fade-start · is-fade-end).
    * 기본 false.
    */
-  navFade?: boolean
+  navFade?: boolean;
   /**
    * layout=scroll 일 때 이전/다음 클릭으로 인접 탭을 선택.
    * false(기본)면 목록만 가로 스크롤한다.
    */
-  navSelect?: boolean
+  navSelect?: boolean;
   /** 좌·우 네비 Icon button 스킨. outline(기본) · ghost · soft → tabs_nav-* */
-  navVariant?: 'outline' | 'ghost' | 'soft'
+  navVariant?: 'outline' | 'ghost' | 'soft';
   /** 좌·우 네비 Icon color. primary · muted 등 */
-  navColor?: IconColor | ''
+  navColor?: IconColor | '';
   /** 좌·우 네비에 추가할 클래스 */
-  navClassName?: string
+  navClassName?: string;
   /** 모든 탭에 닫기 버튼 */
-  closable?: boolean
+  closable?: boolean;
   /** tabs_bar 오른쪽 부가 영역 */
-  extra?: ReactNode
+  extra?: ReactNode;
   /** tablist aria-label */
-  label?: string
+  label?: string;
   /** 탭 버튼 내부를 커스텀 렌더 */
-  renderTab?: (tab: NormalizedTab, state: TabRenderState) => ReactNode
+  renderTab?: (tab: NormalizedTab, state: TabRenderState) => ReactNode;
   /** 패널 본문을 커스텀 렌더. 멀티 패널일 때 항목마다 호출 */
-  renderPanel?: (tab: NormalizedTab, state: { active: boolean }) => ReactNode
+  renderPanel?: (tab: NormalizedTab, state: { active: boolean }) => ReactNode;
   /** 활성 탭 변경 — (value) */
-  onChange?: (value: TabValue) => void
+  onChange?: (value: TabValue) => void;
   /** onChange 와 동일 시그니처 (하위 호환) */
-  onInput?: (value: TabValue) => void
-  onClose?: (value: TabValue) => void
+  onInput?: (value: TabValue) => void;
+  onClose?: (value: TabValue) => void;
   /**
    * Tab · TabPanel 자식, 또는 단일 활성 패널 내용.
    * tabs 에 content 가 없고 TabPanel 도 없으면 children 을 활성 패널로 쓴다.
    */
-  children?: ReactNode
+  children?: ReactNode;
 }
 
 /** Tab 컴포넌트 props — 커스텀 탭 메뉴 · 패널 슬롯 */
 export interface TabProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onClick' | 'value'> {
-  value: TabValue
+  value: TabValue;
   /**
    * 탭 버튼 문구.
    * 있으면 children 은 메뉴가 아니라 해당 탭 패널 슬롯으로 쓴다.
    * 없으면 children 은 탭 버튼 커스텀 내용(아이콘+라벨 등)이다.
    */
-  label?: ReactNode
-  icon?: ReactNode
-  disabled?: boolean
-  closable?: boolean
-  closeLabel?: string
+  label?: ReactNode;
+  icon?: ReactNode;
+  disabled?: boolean;
+  closable?: boolean;
+  closeLabel?: string;
   /**
    * 이 탭의 패널 내용(슬롯).
    * label 유무와 관계없이 패널로 쓴다. 있으면 children 패널보다 우선한다.
    */
-  panel?: ReactNode
+  panel?: ReactNode;
   /**
    * label 이 있으면 패널 슬롯, 없으면 탭 버튼 커스텀 내용.
    * panel prop 이 있으면 패널은 panel 을 쓰고 children 은 무시(메뉴 커스텀도 아님).
    */
-  children?: ReactNode
+  children?: ReactNode;
 }
 
 /** TabPanel 컴포넌트 props — 커스텀 탭 패널 */
 export interface TabPanelProps extends HTMLAttributes<HTMLDivElement> {
-  value: TabValue
-  children?: ReactNode
+  value: TabValue;
+  children?: ReactNode;
 }
 
-const TAB_TYPE = 'tabs-tab'
-const PANEL_TYPE = 'tabs-panel'
+const TAB_TYPE = 'tabs-tab';
+const PANEL_TYPE = 'tabs-panel';
 
 /** --tabs-indicator-height 파싱. 없으면 2 */
-function readIndicatorThickness (list: HTMLElement): number {
-  const raw = getComputedStyle(list).getPropertyValue('--tabs-indicator-height').trim()
-  const parsed = Number.parseFloat(raw)
-  return Number.isFinite(parsed) && parsed > 0 ? parsed : 2
+function readIndicatorThickness(list: HTMLElement): number {
+  const raw = getComputedStyle(list).getPropertyValue('--tabs-indicator-height').trim();
+  const parsed = Number.parseFloat(raw);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : 2;
 }
 
-function normalizeItem (item: TabItem): NormalizedTab {
+function normalizeItem(item: TabItem): NormalizedTab {
   if (item && typeof item === 'object') {
     return {
       value: item.value,
@@ -177,8 +177,8 @@ function normalizeItem (item: TabItem): NormalizedTab {
       closeLabel: item.closeLabel || '',
       content: item.content,
       className: item.className || '',
-      panelClassName: item.panelClassName || ''
-    }
+      panelClassName: item.panelClassName || '',
+    };
   }
   return {
     value: item as TabValue,
@@ -190,33 +190,33 @@ function normalizeItem (item: TabItem): NormalizedTab {
     closeLabel: '',
     content: undefined,
     className: '',
-    panelClassName: ''
-  }
+    panelClassName: '',
+  };
 }
 
 /** children 에서 Tab · TabPanel 을 분리한다 */
-function parseCompoundChildren (children: ReactNode): {
-  tabs: NormalizedTab[]
-  panels: { value: TabValue, content: ReactNode, className: string }[]
-  rest: ReactNode[]
+function parseCompoundChildren(children: ReactNode): {
+  tabs: NormalizedTab[];
+  panels: { value: TabValue; content: ReactNode; className: string }[];
+  rest: ReactNode[];
 } {
-  const tabs: NormalizedTab[] = []
-  const panels: { value: TabValue, content: ReactNode, className: string }[] = []
-  const rest: ReactNode[] = []
+  const tabs: NormalizedTab[] = [];
+  const panels: { value: TabValue; content: ReactNode; className: string }[] = [];
+  const rest: ReactNode[] = [];
 
   Children.forEach(children, (child) => {
     if (!isValidElement(child)) {
-      if (child != null && child !== false) rest.push(child)
-      return
+      if (child != null && child !== false) rest.push(child);
+      return;
     }
-    const type = (child.type as { tabsType?: string })?.tabsType
+    const type = (child.type as { tabsType?: string })?.tabsType;
     if (type === TAB_TYPE) {
-      const props = child.props as TabProps
-      const hasLabel = props.label != null
-      const hasPanelProp = hasNodes(props.panel)
+      const props = child.props as TabProps;
+      const hasLabel = props.label != null;
+      const hasPanelProp = hasNodes(props.panel);
       /** label 있으면 children=패널 슬롯, 없으면 children=메뉴 커스텀 */
-      const panelFromChildren = hasLabel && !hasPanelProp ? props.children : undefined
-      const menuCustom = !hasLabel && !hasPanelProp ? props.children : undefined
+      const panelFromChildren = hasLabel && !hasPanelProp ? props.children : undefined;
+      const menuCustom = !hasLabel && !hasPanelProp ? props.children : undefined;
       tabs.push({
         value: props.value,
         label: hasLabel ? props.label : props.value,
@@ -227,23 +227,23 @@ function parseCompoundChildren (children: ReactNode): {
         closeLabel: props.closeLabel || '',
         content: hasPanelProp ? props.panel : panelFromChildren,
         className: props.className || '',
-        panelClassName: ''
-      })
-      return
+        panelClassName: '',
+      });
+      return;
     }
     if (type === PANEL_TYPE) {
-      const props = child.props as TabPanelProps
+      const props = child.props as TabPanelProps;
       panels.push({
         value: props.value,
         content: props.children,
-        className: props.className || ''
-      })
-      return
+        className: props.className || '',
+      });
+      return;
     }
-    rest.push(child)
-  })
+    rest.push(child);
+  });
 
-  return { tabs, panels, rest }
+  return { tabs, panels, rest };
 }
 
 /**
@@ -251,25 +251,25 @@ function parseCompoundChildren (children: ReactNode): {
  * Tabs 자식으로 두면 탭 목록을 구성한다. 단독으로는 DOM 을 렌더하지 않는다.
  * label + children → 패널 슬롯, panel prop → 명시적 패널, label 없이 children → 메뉴 커스텀.
  */
-export function Tab (_props: TabProps): ReactElement | null {
-  return null
+export function Tab(_props: TabProps): ReactElement | null {
+  return null;
 }
-Tab.tabsType = TAB_TYPE
+Tab.tabsType = TAB_TYPE;
 
 /**
  * 커스텀 탭 패널.
  * Tabs 자식으로 두면 value 가 같을 때 표시된다. 단독으로는 DOM 을 렌더하지 않는다.
  */
-export function TabPanel (_props: TabPanelProps): ReactElement | null {
-  return null
+export function TabPanel(_props: TabPanelProps): ReactElement | null {
+  return null;
 }
-TabPanel.tabsType = PANEL_TYPE
+TabPanel.tabsType = PANEL_TYPE;
 
 /**
  * 탭.
  * tabs 배열 · Tab/TabPanel · renderTab/renderPanel 로 메뉴와 패널을 커스텀한다.
  */
-export function Tabs ({
+export function Tabs({
   value: valueProp,
   defaultValue,
   tabs = [],
@@ -296,171 +296,165 @@ export function Tabs ({
   className,
   ...rest
 }: TabsProps) {
-  const uid = useId().replace(/:/g, '')
-  const listRef = useRef<HTMLDivElement>(null)
-  const indicatorRef = useRef<HTMLSpanElement>(null)
-  const indicatorReadyRef = useRef(false)
+  const uid = useId().replace(/:/g, '');
+  const listRef = useRef<HTMLDivElement>(null);
+  const indicatorRef = useRef<HTMLSpanElement>(null);
+  const indicatorReadyRef = useRef(false);
   const [scrollState, setScrollState] = useState({
     overflow: false,
     prev: false,
-    next: false
-  })
-  const valueControlled = valueProp !== undefined
-  const [innerValue, setInnerValue] = useState<TabValue | undefined>(defaultValue)
+    next: false,
+  });
+  const valueControlled = valueProp !== undefined;
+  const [innerValue, setInnerValue] = useState<TabValue | undefined>(defaultValue);
 
-  const compound = parseCompoundChildren(children)
-  const propTabs = (tabs || []).map(normalizeItem)
-  const normalizedTabs = propTabs.length ? propTabs : compound.tabs
+  const compound = parseCompoundChildren(children);
+  const propTabs = (tabs || []).map(normalizeItem);
+  const normalizedTabs = propTabs.length ? propTabs : compound.tabs;
 
   /** 패널 소스: 항목 content · TabPanel · 나머지 children(단일 패널). 원본 타입 보존 */
-  const panelMap = new Map<TabValue, { content: ReactNode, className: string }>()
+  const panelMap = new Map<TabValue, { content: ReactNode; className: string }>();
   for (const tab of normalizedTabs) {
     if (hasNodes(tab.content)) {
       panelMap.set(tab.value, {
         content: tab.content,
-        className: tab.panelClassName
-      })
+        className: tab.panelClassName,
+      });
     }
   }
   for (const panel of compound.panels) {
     panelMap.set(panel.value, {
       content: panel.content,
-      className: panel.className
-    })
+      className: panel.className,
+    });
   }
 
-  const hasMultiPanel = panelMap.size > 0
-  const singlePanelContent = !hasMultiPanel && compound.rest.length
-    ? compound.rest
-    : null
+  const hasMultiPanel = panelMap.size > 0;
+  const singlePanelContent = !hasMultiPanel && compound.rest.length ? compound.rest : null;
 
   /** layout=scroll 이고 가로일 때 이전/다음 네비 */
-  const scrollNav = layout === 'scroll' && !vertical
+  const scrollNav = layout === 'scroll' && !vertical;
   /** scrollable 단독(스크롤바) — scroll-nav 와는 별개 */
-  const isScrollable = (scrollable && layout === 'auto') || (layout === 'scroll' && vertical)
+  const isScrollable = (scrollable && layout === 'auto') || (layout === 'scroll' && vertical);
 
-  const enabledTabs = normalizedTabs.filter((tab) => !tab.disabled)
-  const fallbackValue = enabledTabs[0]?.value ?? normalizedTabs[0]?.value ?? ''
-  const value = valueControlled
-    ? valueProp
-    : (innerValue !== undefined ? innerValue : fallbackValue)
-  const activeEnabledIndex = enabledTabs.findIndex((tab) => tab.value === value)
-  const canSelectPrev = navSelect && activeEnabledIndex > 0
+  const enabledTabs = normalizedTabs.filter((tab) => !tab.disabled);
+  const fallbackValue = enabledTabs[0]?.value ?? normalizedTabs[0]?.value ?? '';
+  const value = valueControlled ? valueProp : innerValue !== undefined ? innerValue : fallbackValue;
+  const activeEnabledIndex = enabledTabs.findIndex((tab) => tab.value === value);
+  const canSelectPrev = navSelect && activeEnabledIndex > 0;
   const canSelectNext =
-    navSelect && activeEnabledIndex >= 0 && activeEnabledIndex < enabledTabs.length - 1
+    navSelect && activeEnabledIndex >= 0 && activeEnabledIndex < enabledTabs.length - 1;
 
   /** 네비 버튼 표시: 선택 모드면 탭 2개 이상, 아니면 오버플로 시 */
-  const showNav = scrollNav && (
-    navSelect ? enabledTabs.length > 1 : scrollState.overflow
-  )
-  const prevDisabled = navSelect ? !canSelectPrev : !scrollState.prev
-  const nextDisabled = navSelect ? !canSelectNext : !scrollState.next
+  const showNav = scrollNav && (navSelect ? enabledTabs.length > 1 : scrollState.overflow);
+  const prevDisabled = navSelect ? !canSelectPrev : !scrollState.prev;
+  const nextDisabled = navSelect ? !canSelectNext : !scrollState.next;
 
   /** 다른 탭을 고르면 onInput·onChange */
   const handleSelect = (next: TabValue) => {
-    if (next === value) return
-    if (!valueControlled) setInnerValue(next)
-    onInput?.(next)
-    onChange?.(next)
-  }
+    if (next === value) return;
+    if (!valueControlled) setInnerValue(next);
+    onInput?.(next);
+    onChange?.(next);
+  };
 
   /** 인디케이터 위치와 스크롤 가장자리 상태를 맞춘다 */
   const updateVisualState = useCallback(() => {
-    const list = listRef.current
-    if (!list) return
+    const list = listRef.current;
+    if (!list) return;
 
     if (indicatorSlide) {
-      const indicator = indicatorRef.current
+      const indicator = indicatorRef.current;
       const active = list.querySelector<HTMLElement>(
-        '.tabs_tab.is-active, .tabs_tab[aria-selected="true"]'
-      )
+        '.tabs_tab.is-active, .tabs_tab[aria-selected="true"]',
+      );
       if (indicator && active) {
-        const listRect = list.getBoundingClientRect()
-        const tabRect = active.getBoundingClientRect()
-        const left = tabRect.left - listRect.left + list.scrollLeft
-        const top = tabRect.top - listRect.top + list.scrollTop
-        const appearing = !indicatorReadyRef.current
-        if (appearing) indicator.style.transition = 'none'
+        const listRect = list.getBoundingClientRect();
+        const tabRect = active.getBoundingClientRect();
+        const left = tabRect.left - listRect.left + list.scrollLeft;
+        const top = tabRect.top - listRect.top + list.scrollTop;
+        const appearing = !indicatorReadyRef.current;
+        if (appearing) indicator.style.transition = 'none';
 
         if (variant === 'pill' || variant === 'keyword') {
-          indicator.style.width = `${tabRect.width}px`
-          indicator.style.height = `${tabRect.height}px`
-          indicator.style.transform = `translate3d(${left}px, ${top}px, 0)`
+          indicator.style.width = `${tabRect.width}px`;
+          indicator.style.height = `${tabRect.height}px`;
+          indicator.style.transform = `translate3d(${left}px, ${top}px, 0)`;
         } else if (vertical) {
-          const thickness = readIndicatorThickness(list)
-          indicator.style.width = `${thickness}px`
-          indicator.style.height = `${tabRect.height}px`
-          indicator.style.transform = `translate3d(${left + tabRect.width - thickness}px, ${top}px, 0)`
+          const thickness = readIndicatorThickness(list);
+          indicator.style.width = `${thickness}px`;
+          indicator.style.height = `${tabRect.height}px`;
+          indicator.style.transform = `translate3d(${left + tabRect.width - thickness}px, ${top}px, 0)`;
         } else {
-          const thickness = readIndicatorThickness(list)
-          indicator.style.width = `${tabRect.width}px`
-          indicator.style.height = `${thickness}px`
-          indicator.style.transform = `translate3d(${left}px, ${top + tabRect.height - thickness}px, 0)`
+          const thickness = readIndicatorThickness(list);
+          indicator.style.width = `${tabRect.width}px`;
+          indicator.style.height = `${thickness}px`;
+          indicator.style.transform = `translate3d(${left}px, ${top + tabRect.height - thickness}px, 0)`;
         }
 
-        indicator.style.opacity = '1'
+        indicator.style.opacity = '1';
         if (appearing) {
-          void indicator.offsetWidth
-          indicator.style.transition = ''
-          indicatorReadyRef.current = true
+          void indicator.offsetWidth;
+          indicator.style.transition = '';
+          indicatorReadyRef.current = true;
         }
       } else if (indicator) {
-        indicator.style.opacity = '0'
+        indicator.style.opacity = '0';
       }
     }
 
-    const max = list.scrollWidth - list.clientWidth
+    const max = list.scrollWidth - list.clientWidth;
     setScrollState({
       overflow: scrollNav && max > 1,
       prev: scrollNav && list.scrollLeft > 1,
-      next: scrollNav && list.scrollLeft < max - 1
-    })
-  }, [indicatorSlide, scrollNav, variant, vertical])
+      next: scrollNav && list.scrollLeft < max - 1,
+    });
+  }, [indicatorSlide, scrollNav, variant, vertical]);
 
   /** 활성 탭이 스크롤 뷰 중앙 근처에 오도록 */
   const scrollTabIntoView = useCallback(
     (tabValue: TabValue) => {
-      const list = listRef.current
-      if (!scrollNav || !list) return
+      const list = listRef.current;
+      if (!scrollNav || !list) return;
       const active = [...list.querySelectorAll<HTMLElement>('.tabs_tab')].find(
-        (tab) => tab.getAttribute('aria-selected') === 'true'
-          || String(tabValue) === tab.dataset.value
-      )
-      if (!active) return
-      const listRect = list.getBoundingClientRect()
-      const tabRect = active.getBoundingClientRect()
-      const tabLeft = tabRect.left - listRect.left + list.scrollLeft
-      const max = list.scrollWidth - list.clientWidth
+        (tab) =>
+          tab.getAttribute('aria-selected') === 'true' || String(tabValue) === tab.dataset.value,
+      );
+      if (!active) return;
+      const listRect = list.getBoundingClientRect();
+      const tabRect = active.getBoundingClientRect();
+      const tabLeft = tabRect.left - listRect.left + list.scrollLeft;
+      const max = list.scrollWidth - list.clientWidth;
       list.scrollTo({
         left: Math.max(0, Math.min(tabLeft - (list.clientWidth - tabRect.width) / 2, max)),
-        behavior: 'smooth'
-      })
+        behavior: 'smooth',
+      });
     },
-    [scrollNav]
-  )
+    [scrollNav],
+  );
 
   useLayoutEffect(() => {
-    if (!indicatorSlide) indicatorReadyRef.current = false
+    if (!indicatorSlide) indicatorReadyRef.current = false;
 
-    const list = listRef.current
-    if (!list) return
+    const list = listRef.current;
+    if (!list) return;
 
     const schedule = () => {
-      requestAnimationFrame(updateVisualState)
-    }
+      requestAnimationFrame(updateVisualState);
+    };
 
-    schedule()
-    list.addEventListener('scroll', updateVisualState, { passive: true })
-    const resizeObserver = new ResizeObserver(schedule)
-    resizeObserver.observe(list)
+    schedule();
+    list.addEventListener('scroll', updateVisualState, { passive: true });
+    const resizeObserver = new ResizeObserver(schedule);
+    resizeObserver.observe(list);
     for (const tab of list.querySelectorAll('.tabs_tab')) {
-      resizeObserver.observe(tab)
+      resizeObserver.observe(tab);
     }
 
     return () => {
-      list.removeEventListener('scroll', updateVisualState)
-      resizeObserver.disconnect()
-    }
+      list.removeEventListener('scroll', updateVisualState);
+      resizeObserver.disconnect();
+    };
   }, [
     updateVisualState,
     indicatorSlide,
@@ -473,33 +467,33 @@ export function Tabs ({
     scrollNav,
     isScrollable,
     navSelect,
-    navFade
-  ])
+    navFade,
+  ]);
 
   useLayoutEffect(() => {
-    if (!scrollNav) return
+    if (!scrollNav) return;
     const frame = requestAnimationFrame(() => {
-      updateVisualState()
-      scrollTabIntoView(value)
-    })
-    return () => cancelAnimationFrame(frame)
-  }, [scrollNav, value, scrollTabIntoView, updateVisualState])
+      updateVisualState();
+      scrollTabIntoView(value);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [scrollNav, value, scrollTabIntoView, updateVisualState]);
 
   /** 이전/다음: navSelect 면 인접 탭 선택, 아니면 목록 스크롤 */
   const handleNav = (direction: -1 | 1) => {
     if (navSelect) {
-      const nextIndex = activeEnabledIndex + direction
-      if (nextIndex < 0 || nextIndex >= enabledTabs.length) return
-      handleSelect(enabledTabs[nextIndex].value)
-      return
+      const nextIndex = activeEnabledIndex + direction;
+      if (nextIndex < 0 || nextIndex >= enabledTabs.length) return;
+      handleSelect(enabledTabs[nextIndex].value);
+      return;
     }
-    const list = listRef.current
-    if (!list) return
+    const list = listRef.current;
+    if (!list) return;
     list.scrollBy({
       left: direction * Math.max(list.clientWidth * 0.75, 120),
-      behavior: 'smooth'
-    })
-  }
+      behavior: 'smooth',
+    });
+  };
 
   const tabsClass = classNames(
     'tabs',
@@ -515,33 +509,37 @@ export function Tabs ({
     isScrollable && 'tabs_scrollable',
     indicatorSlide && 'tabs_indicator-slide',
     navFade && 'tabs_nav-fade',
-    className
-  )
+    className,
+  );
 
   const indicatorStyle: CSSProperties = {
-    opacity: 0
-  }
+    opacity: 0,
+  };
 
   const viewportClass = classNames(
     'tabs_list-wrap',
     scrollNav && 'tabs_scroll-viewport',
     navFade && scrollState.prev && 'is-fade-start',
-    navFade && scrollState.next && 'is-fade-end'
-  )
+    navFade && scrollState.next && 'is-fade-end',
+  );
 
-  const navButtonClass = (side: 'prev' | 'next') => classNames(
-    'tabs_nav',
-    side === 'prev' ? 'tabs_nav_prev' : 'tabs_nav_next',
-    navVariant === 'outline' && 'tabs_nav-outline',
-    navVariant === 'ghost' && 'tabs_nav-ghost',
-    navVariant === 'soft' && 'tabs_nav-soft',
-    navClassName
-  )
+  const navButtonClass = (side: 'prev' | 'next') =>
+    classNames(
+      'tabs_nav',
+      side === 'prev' ? 'tabs_nav_prev' : 'tabs_nav_next',
+      navVariant === 'outline' && 'tabs_nav-outline',
+      navVariant === 'ghost' && 'tabs_nav-ghost',
+      navVariant === 'soft' && 'tabs_nav-soft',
+      navClassName,
+    );
 
-  const showPanels = hasMultiPanel || hasNodes(singlePanelContent)
+  const showPanels = hasMultiPanel || hasNodes(singlePanelContent);
 
   return (
-    <div {...rest} className={tabsClass}>
+    <div
+      {...rest}
+      className={tabsClass}
+    >
       <div className="tabs_bar">
         {showNav && (
           <Icon
@@ -563,28 +561,38 @@ export function Tabs ({
             aria-label={label}
             aria-orientation={vertical ? 'vertical' : 'horizontal'}
             onKeyDown={(event: KeyboardEvent<HTMLDivElement>) => {
-              const target = (event.target as HTMLElement).closest<HTMLElement>('[role="tab"]')
-              if (!target) return
-              const choices = Array.from(event.currentTarget.querySelectorAll<HTMLButtonElement>('[role="tab"]:not(:disabled)'))
-              const index = choices.indexOf(target as HTMLButtonElement)
-              let next = index
-              if (event.key === (vertical ? 'ArrowDown' : 'ArrowRight')) next = (index + 1) % choices.length
-              else if (event.key === (vertical ? 'ArrowUp' : 'ArrowLeft')) next = (index - 1 + choices.length) % choices.length
-              else if (event.key === 'Home') next = 0
-              else if (event.key === 'End') next = choices.length - 1
+              const target = (event.target as HTMLElement).closest<HTMLElement>('[role="tab"]');
+              if (!target) return;
+              const choices = Array.from(
+                event.currentTarget.querySelectorAll<HTMLButtonElement>(
+                  '[role="tab"]:not(:disabled)',
+                ),
+              );
+              const index = choices.indexOf(target as HTMLButtonElement);
+              let next = index;
+              if (event.key === (vertical ? 'ArrowDown' : 'ArrowRight'))
+                next = (index + 1) % choices.length;
+              else if (event.key === (vertical ? 'ArrowUp' : 'ArrowLeft'))
+                next = (index - 1 + choices.length) % choices.length;
+              else if (event.key === 'Home') next = 0;
+              else if (event.key === 'End') next = choices.length - 1;
               else if (event.key === 'Delete' && onClose) {
-                const tab = normalizedTabs.find((item) => String(item.value) === target.dataset.value)
+                const tab = normalizedTabs.find(
+                  (item) => String(item.value) === target.dataset.value,
+                );
                 if (tab && (closable || tab.closable)) {
-                  event.preventDefault()
-                  const neighbor = choices[index + 1] ?? choices[index - 1]
-                  onClose(tab.value)
-                  requestAnimationFrame(() => { if (neighbor?.isConnected) neighbor.focus() })
+                  event.preventDefault();
+                  const neighbor = choices[index + 1] ?? choices[index - 1];
+                  onClose(tab.value);
+                  requestAnimationFrame(() => {
+                    if (neighbor?.isConnected) neighbor.focus();
+                  });
                 }
-                return
-              } else return
-              event.preventDefault()
-              choices[next]?.focus()
-              choices[next]?.click()
+                return;
+              } else return;
+              event.preventDefault();
+              choices[next]?.focus();
+              choices[next]?.click();
             }}
           >
             {indicatorSlide && (
@@ -596,47 +604,64 @@ export function Tabs ({
               />
             )}
             {normalizedTabs.map((tab, index) => {
-              const active = tab.value === value
-              const showClose = closable || tab.closable
-              const tabId = `${uid}-tab-${index}`
-              const panelId = hasMultiPanel ? `${uid}-panel-${index}` : `${uid}-panel-active`
+              const active = tab.value === value;
+              const showClose = closable || tab.closable;
+              const tabId = `${uid}-tab-${index}`;
+              const panelId = hasMultiPanel ? `${uid}-panel-${index}` : `${uid}-panel-active`;
 
               const select = () => {
-                if (tab.disabled) return
-                handleSelect(tab.value)
-              }
+                if (tab.disabled) return;
+                handleSelect(tab.value);
+              };
 
               const close = showClose
                 ? () => {
-                    const current = document.getElementById(tabId)
-                    const buttons = Array.from(current?.closest('[role="tablist"]')?.querySelectorAll<HTMLButtonElement>('[role="tab"]:not(:disabled)') ?? [])
-                    const index = buttons.indexOf(current as HTMLButtonElement)
-                    const neighbor = buttons[index + 1] ?? buttons[index - 1]
-                    const restore = current?.contains(document.activeElement)
-                    onClose?.(tab.value)
-                    if (restore) requestAnimationFrame(() => { if (neighbor?.isConnected) neighbor.focus() })
+                    const current = document.getElementById(tabId);
+                    const buttons = Array.from(
+                      current
+                        ?.closest('[role="tablist"]')
+                        ?.querySelectorAll<HTMLButtonElement>('[role="tab"]:not(:disabled)') ?? [],
+                    );
+                    const index = buttons.indexOf(current as HTMLButtonElement);
+                    const neighbor = buttons[index + 1] ?? buttons[index - 1];
+                    const restore = current?.contains(document.activeElement);
+                    onClose?.(tab.value);
+                    if (restore)
+                      requestAnimationFrame(() => {
+                        if (neighbor?.isConnected) neighbor.focus();
+                      });
                   }
-                : undefined
+                : undefined;
 
-              const inner = renderTab
-                ? renderTab(tab, {
+              const inner = renderTab ? (
+                renderTab(tab, {
                   active,
                   disabled: tab.disabled,
                   select,
-                  close
+                  close,
                 })
-                : (
-                  <>
-                    {hasNodes(tab.icon) && (
-                      <span className="tabs_icon">{tab.icon}</span>
-                    )}
-                    {hasNodes(tab.custom)
-                      ? tab.custom
-                      : <span className="tabs_label">{tab.label}</span>}
-                    {showClose && <span className="tabs_close" aria-hidden="true"
-                      onClick={(event) => { event.stopPropagation(); close?.() }}>×</span>}
-                  </>
-                  )
+              ) : (
+                <>
+                  {hasNodes(tab.icon) && <span className="tabs_icon">{tab.icon}</span>}
+                  {hasNodes(tab.custom) ? (
+                    tab.custom
+                  ) : (
+                    <span className="tabs_label">{tab.label}</span>
+                  )}
+                  {showClose && (
+                    <span
+                      className="tabs_close"
+                      aria-hidden="true"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        close?.();
+                      }}
+                    >
+                      ×
+                    </span>
+                  )}
+                </>
+              );
 
               const tabButton = (
                 <button
@@ -648,22 +673,26 @@ export function Tabs ({
                     'tabs_tab',
                     active && 'is-active',
                     tab.disabled && 'is-disabled',
-                    tab.className
+                    tab.className,
                   )}
                   role="tab"
                   aria-keyshortcuts={showClose ? 'Delete' : undefined}
-                  aria-description={showClose ? `${tab.closeLabel || '탭 닫기'}: Delete 키 사용` : undefined}
+                  aria-description={
+                    showClose ? `${tab.closeLabel || '탭 닫기'}: Delete 키 사용` : undefined
+                  }
                   aria-selected={active}
                   aria-controls={showPanels ? panelId : undefined}
                   aria-disabled={tab.disabled || undefined}
-                  tabIndex={active || (activeEnabledIndex < 0 && tab.value === fallbackValue) ? 0 : -1}
+                  tabIndex={
+                    active || (activeEnabledIndex < 0 && tab.value === fallbackValue) ? 0 : -1
+                  }
                   disabled={tab.disabled}
                   onClick={select}
                 >
                   {inner}
                 </button>
-              )
-              return tabButton
+              );
+              return tabButton;
             })}
           </div>
         </div>
@@ -683,14 +712,12 @@ export function Tabs ({
       </div>
       {showPanels && (
         <div className="tabs_panels">
-          {hasMultiPanel
-            ? normalizedTabs.map((tab, index) => {
-              const active = tab.value === value
-              const mapped = panelMap.get(tab.value)
-              const panelBody = renderPanel
-                ? renderPanel(tab, { active })
-                : mapped?.content
-              if (!hasNodes(panelBody) && !mapped) return null
+          {hasMultiPanel ? (
+            normalizedTabs.map((tab, index) => {
+              const active = tab.value === value;
+              const mapped = panelMap.get(tab.value);
+              const panelBody = renderPanel ? renderPanel(tab, { active }) : mapped?.content;
+              if (!hasNodes(panelBody) && !mapped) return null;
               return (
                 <div
                   key={String(tab.value)}
@@ -698,7 +725,7 @@ export function Tabs ({
                   className={classNames(
                     'tabs_panel',
                     active && 'is-active',
-                    mapped?.className || tab.panelClassName
+                    mapped?.className || tab.panelClassName,
                   )}
                   role="tabpanel"
                   tabIndex={0}
@@ -707,26 +734,26 @@ export function Tabs ({
                 >
                   {panelBody}
                 </div>
-              )
+              );
             })
-            : (
-              <div
-                id={`${uid}-panel-active`}
-                className="tabs_panel is-active"
-                role="tabpanel"
-                tabIndex={0}
-                aria-labelledby={`${uid}-tab-${normalizedTabs.findIndex((tab) => tab.value === value)}`}
-              >
-                {singlePanelContent}
-              </div>
-              )}
+          ) : (
+            <div
+              id={`${uid}-panel-active`}
+              className="tabs_panel is-active"
+              role="tabpanel"
+              tabIndex={0}
+              aria-labelledby={`${uid}-tab-${normalizedTabs.findIndex((tab) => tab.value === value)}`}
+            >
+              {singlePanelContent}
+            </div>
+          )}
         </div>
       )}
     </div>
-  )
+  );
 }
 
-Tabs.Tab = Tab
-Tabs.Panel = TabPanel
+Tabs.Tab = Tab;
+Tabs.Panel = TabPanel;
 
-export default Tabs
+export default Tabs;

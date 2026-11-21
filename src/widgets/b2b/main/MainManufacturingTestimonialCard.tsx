@@ -1,17 +1,17 @@
-import Card from '@/comp/ui/Card' // Card 컴포넌트
-import type { TestimonialCardProps } from '@/comp/ui/Card' // Testimonial Card Props 타입
+import Card from '@/comp/ui/Card'; // Card 컴포넌트
+import type { TestimonialCardProps } from '@/comp/ui/Card'; // Testimonial Card Props 타입
 
 /** 제조 고객사례의 UI 확인용 문구. */
-export default function MainManufacturingTestimonialCard (props: Readonly<TestimonialCardProps>) {
+export default function MainManufacturingTestimonialCard(props: Readonly<TestimonialCardProps>) {
   return (
     <Card
       type="testimonial"
       card={{
         category: '제조',
         quote: '직무별 진단으로\n꼭 필요한 교육만\n설계했습니다',
-        author: 'B제조 인재개발팀 이OO 팀장'
+        author: 'B제조 인재개발팀 이OO 팀장',
       }}
       {...props}
     />
-  )
+  );
 }

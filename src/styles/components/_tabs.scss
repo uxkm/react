@@ -27,7 +27,6 @@
   --tabs-nav-icon-size: 0.875rem;
   --tabs-nav-icon-stroke: 1.5;
 
-
   // ----- Tabs — size sm · lg
   --tabs-font-size-sm: var(--text-size-xs);
   --tabs-tab-padding-y-sm: 0.4rem;
@@ -38,7 +37,6 @@
   --tabs-tab-padding-y-lg: 0.75rem;
   --tabs-tab-padding-x-lg: 1.25rem;
   --tabs-icon-size-lg: 1.125rem;
-
 }
 
 // Tabs — OOCSS: 구조(.tabs) + 스킨(.tabs_line · .tabs_card · .tabs_pill) + 파트(.tabs_bar · .tabs_list · .tabs_tab · .tabs_panel)
@@ -59,7 +57,6 @@
 //   </div>
 
 .tabs {
-
   width: 100%;
   font-size: var(--tabs-font-size);
   color: var(--color-text);
@@ -133,16 +130,16 @@
         background: transparent;
         border-color: transparent;
 
-        &:hover:not(.is-disabled):not(:disabled):not([aria-disabled="true"]) {
+        &:hover:not(.is-disabled):not(:disabled):not([aria-disabled='true']) {
           color: var(--color-text);
           background: transparent;
         }
 
         &.is-active,
-        &[aria-selected="true"] {
+        &[aria-selected='true'] {
           color: color-token(primary);
 
-          &:hover:not(.is-disabled):not(:disabled):not([aria-disabled="true"]) {
+          &:hover:not(.is-disabled):not(:disabled):not([aria-disabled='true']) {
             color: color-token(primary);
           }
         }
@@ -162,7 +159,7 @@
     }
 
     &.is-active,
-    &[aria-selected="true"] {
+    &[aria-selected='true'] {
       color: color-token(primary);
       font-weight: var(--tabs-font-weight-active);
     }
@@ -282,18 +279,18 @@
         background: var(--color-surface-raised);
 
         &.is-active,
-        &[aria-selected="true"] {
+        &[aria-selected='true'] {
           background: transparent;
           box-shadow: none;
         }
 
         &.btn.btn_text {
           &.is-active,
-          &[aria-selected="true"] {
+          &[aria-selected='true'] {
             background: transparent;
             box-shadow: none;
 
-            &:hover:not(.is-disabled):not(:disabled):not([aria-disabled="true"]) {
+            &:hover:not(.is-disabled):not(:disabled):not([aria-disabled='true']) {
               background: transparent;
               box-shadow: none;
             }
@@ -332,26 +329,26 @@
       border-bottom: var(--tabs-indicator-height) solid transparent;
 
       &.is-active,
-      &[aria-selected="true"] {
+      &[aria-selected='true'] {
         border-bottom-color: color-token(primary);
       }
 
       &.is-active:hover:not(.is-disabled):not(:disabled),
-      &[aria-selected="true"]:hover:not(.is-disabled):not(:disabled) {
+      &[aria-selected='true']:hover:not(.is-disabled):not(:disabled) {
         border-bottom-color: color-token(primary);
       }
     }
 
     > .tabs_bar > .tabs_list-wrap > .tabs_list > .tabs_tab.btn.btn_text {
-      &:hover:not(.is-disabled):not(:disabled):not([aria-disabled="true"]) {
+      &:hover:not(.is-disabled):not(:disabled):not([aria-disabled='true']) {
         background: transparent;
       }
 
       &.is-active,
-      &[aria-selected="true"] {
+      &[aria-selected='true'] {
         background: transparent;
 
-        &:hover:not(.is-disabled):not(:disabled):not([aria-disabled="true"]) {
+        &:hover:not(.is-disabled):not(:disabled):not([aria-disabled='true']) {
           background: transparent;
         }
       }
@@ -377,7 +374,7 @@
       background: var(--color-surface-raised);
 
       &.is-active,
-      &[aria-selected="true"] {
+      &[aria-selected='true'] {
         border-color: var(--color-border);
         border-bottom-color: var(--color-surface);
         background: var(--color-surface);
@@ -389,18 +386,18 @@
         border-bottom: none;
         background: var(--color-surface-raised);
 
-        &:hover:not(.is-disabled):not(:disabled):not([aria-disabled="true"]) {
+        &:hover:not(.is-disabled):not(:disabled):not([aria-disabled='true']) {
           background: var(--color-surface-raised);
         }
 
         &.is-active,
-        &[aria-selected="true"] {
+        &[aria-selected='true'] {
           border-color: var(--color-border);
           border-bottom-color: var(--color-surface);
           background: var(--color-surface);
           color: color-token(primary);
 
-          &:hover:not(.is-disabled):not(:disabled):not([aria-disabled="true"]) {
+          &:hover:not(.is-disabled):not(:disabled):not([aria-disabled='true']) {
             border-color: var(--color-border);
             border-bottom-color: var(--color-surface);
             background: var(--color-surface);
@@ -432,23 +429,23 @@
       border-radius: $radius-sm;
 
       &.is-active,
-      &[aria-selected="true"] {
+      &[aria-selected='true'] {
         color: color-token(primary);
         background: var(--color-surface);
         box-shadow: 0 1px 3px rgb(0 0 0 / 8%);
       }
 
       &.btn.btn_text {
-        &:hover:not(.is-disabled):not(:disabled):not([aria-disabled="true"]) {
+        &:hover:not(.is-disabled):not(:disabled):not([aria-disabled='true']) {
           background: transparent;
         }
 
         &.is-active,
-        &[aria-selected="true"] {
+        &[aria-selected='true'] {
           background: var(--color-surface);
           box-shadow: 0 1px 3px rgb(0 0 0 / 8%);
 
-          &:hover:not(.is-disabled):not(:disabled):not([aria-disabled="true"]) {
+          &:hover:not(.is-disabled):not(:disabled):not([aria-disabled='true']) {
             background: var(--color-surface);
             box-shadow: 0 1px 3px rgb(0 0 0 / 8%);
           }
@@ -479,7 +476,7 @@
       color: var(--color-text);
 
       &.is-active,
-      &[aria-selected="true"] {
+      &[aria-selected='true'] {
         border-color: var(--color-accent);
         background: var(--color-accent);
         color: var(--color-on-accent);
@@ -491,7 +488,10 @@
         border-radius: var(--radius-pill);
         background: var(--color-accent);
       }
-      > .tabs_bar > .tabs_list-wrap > .tabs_list > .tabs_tab:is(.is-active, [aria-selected="true"]) {
+      > .tabs_bar
+        > .tabs_list-wrap
+        > .tabs_list
+        > .tabs_tab:is(.is-active, [aria-selected='true']) {
         background: transparent;
       }
     }
@@ -502,8 +502,12 @@
         justify-content: flex-start;
         flex-wrap: nowrap;
       }
-      > .tabs_bar > .tabs_list-wrap > .tabs_list > .tabs_tab:first-of-type { margin-left: auto; }
-      > .tabs_bar > .tabs_list-wrap > .tabs_list > .tabs_tab:last-of-type { margin-right: auto; }
+      > .tabs_bar > .tabs_list-wrap > .tabs_list > .tabs_tab:first-of-type {
+        margin-left: auto;
+      }
+      > .tabs_bar > .tabs_list-wrap > .tabs_list > .tabs_tab:last-of-type {
+        margin-right: auto;
+      }
     }
   }
 
@@ -586,22 +590,13 @@
 
       &::before {
         left: 0;
-        background: linear-gradient(
-          to right,
-          var(--color-surface) 0%,
-          transparent 100%
-        );
+        background: linear-gradient(to right, var(--color-surface) 0%, transparent 100%);
       }
 
       &::after {
         right: 0;
-        background: linear-gradient(
-          to left,
-          var(--color-surface) 0%,
-          transparent 100%
-        );
+        background: linear-gradient(to left, var(--color-surface) 0%, transparent 100%);
       }
-
     }
 
     > .tabs_bar > .tabs_list-wrap > .tabs_list {
@@ -805,26 +800,26 @@
         border-right: var(--tabs-indicator-height) solid transparent;
 
         &.is-active,
-        &[aria-selected="true"] {
+        &[aria-selected='true'] {
           border-right-color: color-token(primary);
         }
 
         &.is-active:hover:not(.is-disabled):not(:disabled),
-        &[aria-selected="true"]:hover:not(.is-disabled):not(:disabled) {
+        &[aria-selected='true']:hover:not(.is-disabled):not(:disabled) {
           border-right-color: color-token(primary);
         }
       }
 
       > .tabs_bar > .tabs_list-wrap > .tabs_list > .tabs_tab.btn.btn_text {
-        &:hover:not(.is-disabled):not(:disabled):not([aria-disabled="true"]) {
+        &:hover:not(.is-disabled):not(:disabled):not([aria-disabled='true']) {
           background: transparent;
         }
 
         &.is-active,
-        &[aria-selected="true"] {
+        &[aria-selected='true'] {
           background: transparent;
 
-          &:hover:not(.is-disabled):not(:disabled):not([aria-disabled="true"]) {
+          &:hover:not(.is-disabled):not(:disabled):not([aria-disabled='true']) {
             background: transparent;
             border-right-color: color-token(primary);
           }
@@ -851,7 +846,7 @@
         background: var(--color-surface-raised);
 
         &.is-active,
-        &[aria-selected="true"] {
+        &[aria-selected='true'] {
           border-color: var(--color-border);
           border-right-color: var(--color-surface);
           background: var(--color-surface);
@@ -863,18 +858,18 @@
           border-right: none;
           background: var(--color-surface-raised);
 
-          &:hover:not(.is-disabled):not(:disabled):not([aria-disabled="true"]) {
+          &:hover:not(.is-disabled):not(:disabled):not([aria-disabled='true']) {
             background: var(--color-surface-raised);
           }
 
           &.is-active,
-          &[aria-selected="true"] {
+          &[aria-selected='true'] {
             border-color: var(--color-border);
             border-right-color: var(--color-surface);
             background: var(--color-surface);
             color: color-token(primary);
 
-            &:hover:not(.is-disabled):not(:disabled):not([aria-disabled="true"]) {
+            &:hover:not(.is-disabled):not(:disabled):not([aria-disabled='true']) {
               border-color: var(--color-border);
               border-right-color: var(--color-surface);
               background: var(--color-surface);
@@ -902,23 +897,23 @@
 
       > .tabs_bar > .tabs_list-wrap > .tabs_list > .tabs_tab {
         &.is-active,
-        &[aria-selected="true"] {
+        &[aria-selected='true'] {
           color: color-token(primary);
           background: var(--color-surface);
           box-shadow: 0 1px 3px rgb(0 0 0 / 8%);
         }
 
         &.btn.btn_text {
-          &:hover:not(.is-disabled):not(:disabled):not([aria-disabled="true"]) {
+          &:hover:not(.is-disabled):not(:disabled):not([aria-disabled='true']) {
             background: transparent;
           }
 
           &.is-active,
-          &[aria-selected="true"] {
+          &[aria-selected='true'] {
             background: var(--color-surface);
             box-shadow: 0 1px 3px rgb(0 0 0 / 8%);
 
-            &:hover:not(.is-disabled):not(:disabled):not([aria-disabled="true"]) {
+            &:hover:not(.is-disabled):not(:disabled):not([aria-disabled='true']) {
               background: var(--color-surface);
               box-shadow: 0 1px 3px rgb(0 0 0 / 8%);
             }

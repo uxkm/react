@@ -24,9 +24,8 @@
   --input-clear-color: var(--color-text-muted);
   --input-clear-hover-color: var(--color-text);
   // 마스킹(●) 글리프 — pass 전용 폰트
-  --input-font-masked: "pass";
+  --input-font-masked: 'pass';
   --input-masked-letter-spacing: 0.08em;
-
 }
 
 // Input — OOCSS: 구조(.input) / 크기(.input_sm) / 파트(.form_field-label) 분리
@@ -118,19 +117,25 @@
     }
 
     &.is-filled .input {
-      padding-right: calc(var(--input-clear-offset) + var(--input-clear-size) + var(--input-clear-offset));
+      padding-right: calc(
+        var(--input-clear-offset) + var(--input-clear-size) + var(--input-clear-offset)
+      );
     }
 
     &.is-filled:has(> .input_sm) .input {
-      padding-right: calc(var(--input-space-0-6rem) + var(--input-clear-size) + var(--input-clear-offset));
+      padding-right: calc(
+        var(--input-space-0-6rem) + var(--input-clear-size) + var(--input-clear-offset)
+      );
     }
 
     &.is-filled:has(> .input_lg) .input {
-      padding-right: calc(var(--input-space-0-9rem) + var(--input-clear-size) + var(--input-clear-offset));
+      padding-right: calc(
+        var(--input-space-0-9rem) + var(--input-clear-size) + var(--input-clear-offset)
+      );
     }
 
-    .input[type="search"]::-webkit-search-cancel-button,
-    .input[type="search"]::-webkit-search-decoration {
+    .input[type='search']::-webkit-search-cancel-button,
+    .input[type='search']::-webkit-search-decoration {
       display: none;
       -webkit-appearance: none;
     }
@@ -334,15 +339,21 @@
       min-width: 0;
 
       &.is-filled > .input {
-        padding-right: calc(var(--input-clear-offset) + var(--input-clear-size) + var(--input-clear-offset));
+        padding-right: calc(
+          var(--input-clear-offset) + var(--input-clear-size) + var(--input-clear-offset)
+        );
       }
 
       &.is-filled:has(> .input_sm) > .input {
-        padding-right: calc(var(--input-space-0-6rem) + var(--input-clear-size) + var(--input-clear-offset));
+        padding-right: calc(
+          var(--input-space-0-6rem) + var(--input-clear-size) + var(--input-clear-offset)
+        );
       }
 
       &.is-filled:has(> .input_lg) > .input {
-        padding-right: calc(var(--input-space-0-9rem) + var(--input-clear-size) + var(--input-clear-offset));
+        padding-right: calc(
+          var(--input-space-0-9rem) + var(--input-clear-size) + var(--input-clear-offset)
+        );
       }
     }
   }
@@ -455,7 +466,7 @@
 
 // 마스킹 입력 — pass 전용 폰트 (CSS 변수 대신 리터럴 지정 — @font-face 매칭 보장)
 .input.input_masked {
-  font-family: pass, "pass" !important;
+  font-family: pass, 'pass' !important;
   font-variant-numeric: tabular-nums;
   letter-spacing: var(--input-masked-letter-spacing);
 }

@@ -4,12 +4,12 @@
  */
 
 /** pageSlots 값: 영역 숨김 표시 */
-export const LAYOUT_SLOT_HIDDEN = Object.freeze({ __layoutHidden: true as const })
+export const LAYOUT_SLOT_HIDDEN = Object.freeze({ __layoutHidden: true as const });
 
 /** 슬롯에 넣는 숨김 표시의 타입 */
-export type LayoutSlotHidden = typeof LAYOUT_SLOT_HIDDEN
+export type LayoutSlotHidden = typeof LAYOUT_SLOT_HIDDEN;
 
 /** 슬롯 값이 숨김 표시인지 */
-export function isLayoutSlotHidden (value: unknown): value is LayoutSlotHidden {
-  return value === LAYOUT_SLOT_HIDDEN
+export function isLayoutSlotHidden(value: unknown): value is LayoutSlotHidden {
+  return value === LAYOUT_SLOT_HIDDEN;
 }

@@ -1,5 +1,5 @@
-import { Card } from '@/comp'
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'
+import { Card } from '@/comp';
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode';
 
 const leftCard = {
   id: 'webzine-left',
@@ -9,8 +9,8 @@ const leftCard = {
   description: '서비스 업데이트와 그 안에 담긴 이야기를 살펴보세요.',
   keywords: ['서비스', '업데이트'],
   href: '#card-types',
-  image: '/images/@dummy/naver-tech.png'
-}
+  image: '/images/@dummy/naver-tech.png',
+};
 
 const rightCard = {
   id: 'webzine-right',
@@ -20,8 +20,8 @@ const rightCard = {
   description: '인터뷰와 사례를 통해 새로운 아이디어를 만나보세요.',
   keywords: ['인터뷰', '인사이트'],
   href: '#card-types',
-  image: '/images/@dummy/naver-service.png'
-}
+  image: '/images/@dummy/naver-service.png',
+};
 
 export const webzineCardExample = {
   type: 'webzine',
@@ -58,6 +58,6 @@ const rightCard = ${JSON.stringify(rightCard, null, 2)}
     card={rightCard}
   />
 </div>`,
-    { name: 'WebzineCardExample', reactImports: [], compImports: ['Card'] }
-  )
-}
+    { name: 'WebzineCardExample', reactImports: [], compImports: ['Card'] },
+  ),
+};

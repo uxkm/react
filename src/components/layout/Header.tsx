@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 /**
  * 화면별 헤더 슬롯 등록 (일반 페이지용).
@@ -8,12 +8,12 @@
  * - /pub 목록: `@/screen/pub/layout` 의 PubHeader
  * - 보이기/숨기기: `export const meta = { header: true | false }` (PageLayoutVisibility)
  */
-import type { ReactNode } from 'react' // React Node 타입
-import { hasNodes } from '@/utils/react' // has Nodes
-import { isAppHeaderLayout, type AppHeaderLayout } from '@/comp/widget/AppHeader' // isAppHeaderLayout · AppHeaderLayout 타입
-import { LAYOUT_SLOT_HIDDEN } from '@/comp/shared/layout-slot' // LAYOUT SLOT HIDDEN 컴포넌트
-import { useLayoutSlotSync } from './LayoutContext' // Layout Slot Sync 훅
-import type { HeaderAppearance } from '@/comp/shared/header-appearance' // Header Appearance 타입
+import type { ReactNode } from 'react'; // React Node 타입
+import { hasNodes } from '@/utils/react'; // has Nodes
+import { isAppHeaderLayout, type AppHeaderLayout } from '@/comp/widget/AppHeader'; // isAppHeaderLayout · AppHeaderLayout 타입
+import { LAYOUT_SLOT_HIDDEN } from '@/comp/shared/layout-slot'; // LAYOUT SLOT HIDDEN 컴포넌트
+import { useLayoutSlotSync } from './LayoutContext'; // Layout Slot Sync 훅
+import type { HeaderAppearance } from '@/comp/shared/header-appearance'; // Header Appearance 타입
 
 /**
  * 슬롯 값 정규화
@@ -21,10 +21,10 @@ import type { HeaderAppearance } from '@/comp/shared/header-appearance' // Heade
  * - null/빈 값: 숨김 마커 → 해당 영역 의도적 비움 (기본 메뉴 미표시)
  * - 노드: 그대로 등록
  */
-function toSlotValue (value: ReactNode) {
-  if (value === undefined) return null
-  if (!hasNodes(value)) return LAYOUT_SLOT_HIDDEN
-  return value
+function toSlotValue(value: ReactNode) {
+  if (value === undefined) return null;
+  if (!hasNodes(value)) return LAYOUT_SLOT_HIDDEN;
+  return value;
 }
 
 /** 헤더 조각 이름 → 슬롯 이름 */
@@ -32,8 +32,8 @@ const PART_NAMES = {
   back: 'header-back',
   brand: 'header-brand',
   nav: 'header-nav',
-  actions: 'header-actions'
-} as const
+  actions: 'header-actions',
+} as const;
 
 /** 헤더가 등록하는 슬롯 전체. 경로가 바뀌면 같이 비운다 */
 const ALL_SLOTS = [
@@ -41,8 +41,8 @@ const ALL_SLOTS = [
   'header-layout',
   'header-hide-nav-on-scroll',
   'header-appearance',
-  ...Object.values(PART_NAMES)
-]
+  ...Object.values(PART_NAMES),
+];
 
 /** 화면이 헤더 슬롯에 넣는 값. 표시 여부는 meta.header */
 export interface HeaderProps extends HeaderAppearance {
@@ -50,22 +50,22 @@ export interface HeaderProps extends HeaderAppearance {
    * inline — 한 줄 헤더
    * stacked — 상단(브랜드) + 하단(네비) 2단
    */
-  layout?: AppHeaderLayout
+  layout?: AppHeaderLayout;
   /**
    * stacked 전용: 스크롤 시 네비까지 함께 위로 올림
    * @example <Header layout="stacked" hideNavOnScroll />
    */
-  hideNavOnScroll?: boolean
+  hideNavOnScroll?: boolean;
   /** 브랜드 왼쪽 뒤로가기 */
-  back?: ReactNode
+  back?: ReactNode;
   /** 공통 헤더의 로고·이름. meta.header 가 true 일 때만 보임 */
-  brand?: ReactNode
+  brand?: ReactNode;
   /** 공통 헤더의 메뉴. 없으면 AppHeader 기본 메뉴 */
-  nav?: ReactNode
+  nav?: ReactNode;
   /** 공통 헤더 오른쪽 동작(링크·버튼) */
-  actions?: ReactNode
+  actions?: ReactNode;
   /** back / brand / nav / actions 없이 children 만 주면 헤더 전체 교체 */
-  children?: ReactNode
+  children?: ReactNode;
 }
 
 /**
@@ -88,7 +88,7 @@ export interface HeaderProps extends HeaderAppearance {
  * @example 헤더 전체 교체
  * <Header><header>...</header></Header>
  */
-export function Header ({
+export function Header({
   layout,
   hideNavOnScroll = false,
   background,
@@ -99,32 +99,35 @@ export function Header ({
   brand,
   nav,
   actions,
-  children
+  children,
 }: HeaderProps) {
   useLayoutSlotSync((setSlot) => {
-    const parts = { back, brand, nav, actions }
-    const keys = Object.keys(PART_NAMES) as Array<keyof typeof PART_NAMES>
+    const parts = { back, brand, nav, actions };
+    const keys = Object.keys(PART_NAMES) as Array<keyof typeof PART_NAMES>;
 
-    setSlot('header-layout', isAppHeaderLayout(layout) ? layout : null)
+    setSlot('header-layout', isAppHeaderLayout(layout) ? layout : null);
     // hasNodes(true)===false 이므로 문자열 센티널 사용
-    setSlot('header-hide-nav-on-scroll', hideNavOnScroll ? 'true' : null)
-    setSlot('header-appearance', JSON.stringify({ background, scrolledBackground, className, style }))
+    setSlot('header-hide-nav-on-scroll', hideNavOnScroll ? 'true' : null);
+    setSlot(
+      'header-appearance',
+      JSON.stringify({ background, scrolledBackground, className, style }),
+    );
 
-    const hasParts = keys.some((key) => hasNodes(parts[key]))
+    const hasParts = keys.some((key) => hasNodes(parts[key]));
 
     if (hasNodes(children) && !hasParts) {
-      keys.forEach((key) => setSlot(PART_NAMES[key], null))
-      setSlot('header', children)
-      return
+      keys.forEach((key) => setSlot(PART_NAMES[key], null));
+      setSlot('header', children);
+      return;
     }
 
-    setSlot('header', null)
+    setSlot('header', null);
     keys.forEach((key) => {
-      setSlot(PART_NAMES[key], toSlotValue(parts[key]))
-    })
-  }, ALL_SLOTS)
+      setSlot(PART_NAMES[key], toSlotValue(parts[key]));
+    });
+  }, ALL_SLOTS);
 
-  return null
+  return null;
 }
 
-export default Header
+export default Header;

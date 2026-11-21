@@ -1,41 +1,43 @@
-'use client'
+'use client';
 
-import { useMemo, useState } from 'react' // React
-import Ajv from 'ajv' // Ajv 컴포넌트
-import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { useMemo, useState } from 'react'; // React
+import Ajv from 'ajv'; // Ajv 컴포넌트
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'; // Demo Layout 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'; // Demo Block 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'; // wrap Page Example
 
 const schema = {
   type: 'object',
   properties: {
     name: { type: 'string', minLength: 1 },
     age: { type: 'integer', minimum: 0, maximum: 150 },
-    email: { type: 'string', pattern: '^.+@.+$' }
+    email: { type: 'string', pattern: '^.+@.+$' },
   },
   required: ['name', 'age'],
-  additionalProperties: false
-}
+  additionalProperties: false,
+};
 
 /** ajv JSON Schema 검증 데모 */
-export default function AjvDemoPage () {
-  const [jsonText, setJsonText] = useState('{\n  "name": "Kim",\n  "age": 30,\n  "email": "kim@example.com"\n}')
+export default function AjvDemoPage() {
+  const [jsonText, setJsonText] = useState(
+    '{\n  "name": "Kim",\n  "age": 30,\n  "email": "kim@example.com"\n}',
+  );
   const validate = useMemo(() => {
-    const ajv = new Ajv({ allErrors: true })
-    return ajv.compile(schema)
-  }, [])
+    const ajv = new Ajv({ allErrors: true });
+    return ajv.compile(schema);
+  }, []);
 
   const result = useMemo(() => {
     try {
-      const data = JSON.parse(jsonText)
-      const ok = validate(data)
+      const data = JSON.parse(jsonText);
+      const ok = validate(data);
       return ok
         ? { ok: true, message: '유효한 JSON입니다.' }
-        : { ok: false, message: JSON.stringify(validate.errors, null, 2) }
+        : { ok: false, message: JSON.stringify(validate.errors, null, 2) };
     } catch (err) {
-      return { ok: false, message: `JSON 파싱 오류: ${err.message}` }
+      return { ok: false, message: `JSON 파싱 오류: ${err.message}` };
     }
-  }, [jsonText, validate])
+  }, [jsonText, validate]);
 
   return (
     <DemoLayout
@@ -45,12 +47,14 @@ export default function AjvDemoPage () {
     >
       <DemoBlock
         title="스키마"
-        code={wrapPageExample(`<pre tabIndex={0} className="lib-demo-pre">{JSON.stringify(schema, null, 2)}</pre>`, {
-          name: 'AjvSchemaExample',
-          reactImports: [],
-          compImports: [],
-          extraImports: [
-            `const schema = {
+        code={wrapPageExample(
+          `<pre tabIndex={0} className="lib-demo-pre">{JSON.stringify(schema, null, 2)}</pre>`,
+          {
+            name: 'AjvSchemaExample',
+            reactImports: [],
+            compImports: [],
+            extraImports: [
+              `const schema = {
   type: 'object',
   properties: {
     name: { type: 'string', minLength: 1 },
@@ -59,15 +63,22 @@ export default function AjvDemoPage () {
   },
   required: ['name', 'age'],
   additionalProperties: false
-}`
-          ]
-        })}
+}`,
+            ],
+          },
+        )}
       >
-        <pre tabIndex={0} className="lib-demo-pre">{JSON.stringify(schema, null, 2)}</pre>
+        <pre
+          tabIndex={0}
+          className="lib-demo-pre"
+        >
+          {JSON.stringify(schema, null, 2)}
+        </pre>
       </DemoBlock>
       <DemoBlock
         title="입력 JSON"
-        code={wrapPageExample(`const [jsonText, setJsonText] = useState('{ "name": "Kim", "age": 30 }')
+        code={wrapPageExample(
+          `const [jsonText, setJsonText] = useState('{ "name": "Kim", "age": 30 }')
 const validate = useMemo(() => new Ajv({ allErrors: true }).compile(schema), [])
 
 const result = useMemo(() => {
@@ -91,13 +102,14 @@ const result = useMemo(() => {
   <pre tabIndex={0} className="lib-demo-pre">
     {result.ok ? 'OK — ' + result.message : 'FAIL\\n' + result.message}
   </pre>
-</div>`, {
-          name: 'AjvExample',
-          reactImports: ['useMemo', 'useState'],
-          compImports: [],
-          extraImports: [
-            "import Ajv from 'ajv'",
-            `
+</div>`,
+          {
+            name: 'AjvExample',
+            reactImports: ['useMemo', 'useState'],
+            compImports: [],
+            extraImports: [
+              "import Ajv from 'ajv'",
+              `
 const schema = {
   type: 'object',
   properties: {
@@ -105,9 +117,10 @@ const schema = {
     age: { type: 'integer', minimum: 0 }
   },
   required: ['name', 'age']
-}`
-          ]
-        })}
+}`,
+            ],
+          },
+        )}
       >
         <div className="demo-stack">
           <textarea
@@ -117,11 +130,14 @@ const schema = {
             onChange={(e) => setJsonText(e.target.value)}
             aria-label="검증할 JSON"
           />
-          <pre tabIndex={0} className="lib-demo-pre">
+          <pre
+            tabIndex={0}
+            className="lib-demo-pre"
+          >
             {result.ok ? `OK — ${result.message}` : `FAIL\n${result.message}`}
           </pre>
         </div>
       </DemoBlock>
     </DemoLayout>
-  )
+  );
 }

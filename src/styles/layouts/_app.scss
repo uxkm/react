@@ -11,7 +11,9 @@
     color: var(--color-text);
     transform: translateY(-180%);
 
-    &:focus { transform: none; }
+    &:focus {
+      transform: none;
+    }
   }
   display: flex;
   flex-direction: column;
@@ -50,11 +52,16 @@
   background: var(--app-header-current-bg);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  transition: transform 0.22s ease, background-color 0.22s ease;
+  transition:
+    transform 0.22s ease,
+    background-color 0.22s ease;
   will-change: transform;
 
   &.is-scrolled {
-    --app-header-current-bg: var(--app-header-bg-scrolled, var(--app-header-bg, var(--color-header-bg)));
+    --app-header-current-bg: var(
+      --app-header-bg-scrolled,
+      var(--app-header-bg, var(--color-header-bg))
+    );
   }
 
   // inline(기본 한 줄): 스크롤 시 헤더 전체 숨김
@@ -237,4 +244,8 @@
   border: 0 !important;
 }
 
-a.app-header_brand { display: inline-flex; align-items: center; min-height: var(--size-24); }
+a.app-header_brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--size-24);
+}

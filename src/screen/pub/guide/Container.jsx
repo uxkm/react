@@ -1,39 +1,40 @@
-'use client'
+'use client';
 
-import { Container } from '@/comp' // Container 컴포넌트
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
-import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
-import { containerApiSections } from '@/screen/pub/data/guide/containerApiSections' // container Api Sections
+import { Container } from '@/comp'; // Container 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'; // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'; // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout'; // Guide Layout 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'; // wrap Page Example
+import { containerApiSections } from '@/screen/pub/data/guide/containerApiSections'; // container Api Sections
 
 const SIZE_LABELS = {
   '': '기본 · 72rem',
   sm: 'Small · 36rem',
   md: 'Medium · 48rem',
   lg: 'Large · 64rem',
-  xl: 'Extra Large · 80rem'
-}
+  xl: 'Extra Large · 80rem',
+};
 
-const Fill = ({ children }) => (
-  <div className="container_demo-fill">{children}</div>
-)
+const Fill = ({ children }) => <div className="container_demo-fill">{children}</div>;
 
 const SECTIONS = [
   {
     title: '기본',
-    code: wrapPageExample(`<Container>
+    code: wrapPageExample(
+      `<Container>
   <div className="container_demo-fill">기본 Container · 최대 72rem</div>
-</Container>`, {
-      name: 'ContainerExample',
-      reactImports: [],
-      compImports: ['Container']
-    }),
+</Container>`,
+      {
+        name: 'ContainerExample',
+        reactImports: [],
+        compImports: ['Container'],
+      },
+    ),
     preview: (
       <Container>
         <Fill>기본 Container · 최대 72rem</Fill>
       </Container>
-    )
+    ),
   },
   {
     title: '최대 너비',
@@ -42,64 +43,79 @@ const SECTIONS = [
         <code>size</code>로 최대 너비를 바꿉니다. sm · md · lg · xl.
       </>
     ),
-    code: wrapPageExample(`<div className="container_demo-sizes">
+    code: wrapPageExample(
+      `<div className="container_demo-sizes">
   <Container><div className="container_demo-fill">기본 · 72rem</div></Container>
   <Container size="sm">…</Container>
   <Container size="md">…</Container>
   <Container size="lg">…</Container>
   <Container size="xl">…</Container>
-</div>`, {
-      name: 'ContainerSizeExample',
-      reactImports: [],
-      compImports: ['Container']
-    }),
+</div>`,
+      {
+        name: 'ContainerSizeExample',
+        reactImports: [],
+        compImports: ['Container'],
+      },
+    ),
     preview: (
       <div className="container_demo-sizes">
-        {(['', 'sm', 'md', 'lg', 'xl']).map((size) => (
-          <Container key={size || 'default'} size={size || undefined}>
+        {['', 'sm', 'md', 'lg', 'xl'].map((size) => (
+          <Container
+            key={size || 'default'}
+            size={size || undefined}
+          >
             <Fill>{SIZE_LABELS[size]}</Fill>
           </Container>
         ))}
       </div>
-    )
+    ),
   },
   {
     title: 'Fluid',
-    code: wrapPageExample(`<Container fluid>
+    code: wrapPageExample(
+      `<Container fluid>
   <div className="container_demo-fill">Fluid · 최대 너비 제한 없음</div>
-</Container>`, {
-      name: 'ContainerFluidExample',
-      reactImports: [],
-      compImports: ['Container']
-    }),
+</Container>`,
+      {
+        name: 'ContainerFluidExample',
+        reactImports: [],
+        compImports: ['Container'],
+      },
+    ),
     preview: (
       <Container fluid>
         <Fill>Fluid · 최대 너비 제한 없음</Fill>
       </Container>
-    )
+    ),
   },
   {
     title: '시맨틱 루트',
-    code: wrapPageExample(`<Container as="article" size="lg">
+    code: wrapPageExample(
+      `<Container as="article" size="lg">
   <div className="container_demo-fill">article 요소로 렌더링</div>
-</Container>`, {
-      name: 'ContainerAsExample',
-      reactImports: [],
-      compImports: ['Container']
-    }),
+</Container>`,
+      {
+        name: 'ContainerAsExample',
+        reactImports: [],
+        compImports: ['Container'],
+      },
+    ),
     preview: (
-      <Container as="article" size="lg">
+      <Container
+        as="article"
+        size="lg"
+      >
         <Fill>article 요소로 렌더링</Fill>
       </Container>
-    )
-  }
-]
+    ),
+  },
+];
 
 /**
  * Container 가이드 화면.
  * size·fluid와 API 문서를 한 페이지에 모은다.
  */
-export default function ContainerGuide () {
+export default function ContainerGuide() {
   return (
     <GuideLayout
       category="레이아웃"
@@ -120,5 +136,5 @@ export default function ContainerGuide () {
 
       <GuideApiDocs sections={containerApiSections} />
     </GuideLayout>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 /**
  * 상단 내비게이션 바.
@@ -11,52 +11,52 @@ import {
   type AnchorHTMLAttributes, // AnchorHTMLAttributes 타입
   type HTMLAttributes, // HTMLAttributes 타입
   type MouseEvent, // MouseEvent 타입
-  type ReactNode // ReactNode 타입
-} from 'react' // React
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
-import { hasNodes } from '@/utils/react' // has Nodes
-import { Icon } from './Icon' // Icon 컴포넌트
+  type ReactNode, // ReactNode 타입
+} from 'react'; // React
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
+import { hasNodes } from '@/utils/react'; // has Nodes
+import { Icon } from './Icon'; // Icon 컴포넌트
 
 /** 내비게이션 링크 한 줄 */
 export interface NavbarItem {
-  key: string
-  label: ReactNode
-  href?: string
-  active?: boolean
+  key: string;
+  label: ReactNode;
+  href?: string;
+  active?: boolean;
 }
 
 /** 상단 바가 받는 값 */
 export interface NavbarProps extends Omit<HTMLAttributes<HTMLElement>, 'onSelect'> {
   /** 브랜드(로고) 문구. 기본 Logo */
-  brand?: ReactNode
-  brandHref?: string
-  items?: NavbarItem[]
+  brand?: ReactNode;
+  brandHref?: string;
+  items?: NavbarItem[];
   /** navbar_actions 영역 */
-  actions?: ReactNode
-  sticky?: boolean
-  borderless?: boolean
-  dark?: boolean
-  size?: 'sm' | 'md' | 'lg'
+  actions?: ReactNode;
+  sticky?: boolean;
+  borderless?: boolean;
+  dark?: boolean;
+  size?: 'sm' | 'md' | 'lg';
   /** 모바일 메뉴 열림(제어). 생략 시 내부 상태 */
-  open?: boolean
-  defaultOpen?: boolean
-  onOpenChange?: (open: boolean) => void
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
   /** 링크 클릭 시 호출. 페이지에서 라우팅·선택을 제어한다 */
-  onSelect?: (key: string, item: NavbarItem, event: MouseEvent<HTMLAnchorElement>) => void
+  onSelect?: (key: string, item: NavbarItem, event: MouseEvent<HTMLAnchorElement>) => void;
   /** 선택 키(제어). 넘기면 해당 링크에 is-active */
-  selectedKey?: string | null
+  selectedKey?: string | null;
   /** 비제어 초기 선택 키 */
-  defaultSelectedKey?: string | null
-  toggleLabel?: string
+  defaultSelectedKey?: string | null;
+  toggleLabel?: string;
   /** collapse 안을 직접 넣을 때 items 대신 사용 */
-  children?: ReactNode
+  children?: ReactNode;
 }
 
 /**
  * 화면 위 메뉴 막대.
  * brand 로고, items 메뉴 링크, actions 우측 액션.
  */
-export function Navbar ({
+export function Navbar({
   brand = 'Logo',
   brandHref = '#',
   items = [],
@@ -76,41 +76,38 @@ export function Navbar ({
   children,
   ...rest
 }: NavbarProps) {
-  const collapseId = useId()
-  const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen)
-  const isControlled = openProp !== undefined
-  const isOpen = isControlled ? openProp : uncontrolledOpen
-  const selectedControlled = selectedKeyProp !== undefined
-  const [innerSelectedKey, setInnerSelectedKey] = useState(defaultSelectedKey)
-  const selectedKey = selectedControlled ? selectedKeyProp : innerSelectedKey
+  const collapseId = useId();
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
+  const isControlled = openProp !== undefined;
+  const isOpen = isControlled ? openProp : uncontrolledOpen;
+  const selectedControlled = selectedKeyProp !== undefined;
+  const [innerSelectedKey, setInnerSelectedKey] = useState(defaultSelectedKey);
+  const selectedKey = selectedControlled ? selectedKeyProp : innerSelectedKey;
 
   const setOpen = (next: boolean) => {
-    if (!isControlled) setUncontrolledOpen(next)
-    onOpenChange?.(next)
-  }
+    if (!isControlled) setUncontrolledOpen(next);
+    onOpenChange?.(next);
+  };
 
-  const handleSelect = (
-    item: NavbarItem,
-    event: MouseEvent<HTMLAnchorElement>
-  ) => {
-    if (!selectedControlled) setInnerSelectedKey(item.key)
-    onSelect?.(item.key, item, event)
-    if (isOpen) setOpen(false)
-  }
+  const handleSelect = (item: NavbarItem, event: MouseEvent<HTMLAnchorElement>) => {
+    if (!selectedControlled) setInnerSelectedKey(item.key);
+    onSelect?.(item.key, item, event);
+    if (isOpen) setOpen(false);
+  };
 
-  const hasActions = hasNodes(actions)
-  const hasNav = hasNodes(children) || items.length > 0
+  const hasActions = hasNodes(actions);
+  const hasNav = hasNodes(children) || items.length > 0;
 
   return (
     <header
       {...rest}
       onKeyDown={(event) => {
-        rest.onKeyDown?.(event)
-        if (event.defaultPrevented || event.key !== 'Escape' || !isOpen) return
-        event.preventDefault()
-        event.stopPropagation()
-        setOpen(false)
-        event.currentTarget.querySelector<HTMLButtonElement>('.navbar_toggle')?.focus()
+        rest.onKeyDown?.(event);
+        if (event.defaultPrevented || event.key !== 'Escape' || !isOpen) return;
+        event.preventDefault();
+        event.stopPropagation();
+        setOpen(false);
+        event.currentTarget.querySelector<HTMLButtonElement>('.navbar_toggle')?.focus();
       }}
       className={classNames(
         'navbar',
@@ -120,12 +117,15 @@ export function Navbar ({
         size === 'sm' && 'navbar_sm',
         size === 'lg' && 'navbar_lg',
         isOpen && 'is-open',
-        className
+        className,
       )}
     >
       <div className="navbar_container">
         {hasNodes(brand) && (
-          <a href={brandHref} className="navbar_brand">
+          <a
+            href={brandHref}
+            className="navbar_brand"
+          >
             {brand}
           </a>
         )}
@@ -163,14 +163,19 @@ export function Navbar ({
           ) : (
             <>
               {items.length > 0 && (
-                <nav className="navbar_nav" aria-label="주요 메뉴">
+                <nav
+                  className="navbar_nav"
+                  aria-label="주요 메뉴"
+                >
                   <ul className="navbar_list">
                     {items.map((item) => {
                       const active =
-                        item.active ||
-                        (selectedKey != null && selectedKey === item.key)
+                        item.active || (selectedKey != null && selectedKey === item.key);
                       return (
-                        <li className="navbar_item" key={item.key}>
+                        <li
+                          className="navbar_item"
+                          key={item.key}
+                        >
                           <a
                             href={item.href || '#'}
                             className={classNames('navbar_link', active && 'is-active')}
@@ -180,7 +185,7 @@ export function Navbar ({
                             {item.label}
                           </a>
                         </li>
-                      )
+                      );
                     })}
                   </ul>
                 </nav>
@@ -191,9 +196,9 @@ export function Navbar ({
         </div>
       </div>
     </header>
-  )
+  );
 }
 
-export type NavbarLinkProps = AnchorHTMLAttributes<HTMLAnchorElement>
+export type NavbarLinkProps = AnchorHTMLAttributes<HTMLAnchorElement>;
 
-export default Navbar
+export default Navbar;

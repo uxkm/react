@@ -1,19 +1,19 @@
-'use client'
+'use client';
 
-import { useState } from 'react' // 상태 훅
-import { Button, Icon, Snackbar, PageSnackbar } from '@/comp' // comp
-import { LoadOpenOverlayDemo } from '@/screen/pub/widgets/preview/LoadOpenOverlayDemo' // Load Open Overlay Demo 컴포넌트
-import { TimedOverlayDemo } from '@/screen/pub/widgets/preview/TimedOverlayDemo' // Timed Overlay Demo 컴포넌트
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
-import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs' // Guide Api Docs 컴포넌트
-import { GuideLayout } from '@/screen/pub/layout' // Guide Layout 컴포넌트
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
-import { snackbarApiSections } from '@/screen/pub/data/guide/snackbarApiSections' // snackbar Api Sections
-import { Link } from '@/lib/router'
+import { useState } from 'react'; // 상태 훅
+import { Button, Icon, Snackbar, PageSnackbar } from '@/comp'; // comp
+import { LoadOpenOverlayDemo } from '@/screen/pub/widgets/preview/LoadOpenOverlayDemo'; // Load Open Overlay Demo 컴포넌트
+import { TimedOverlayDemo } from '@/screen/pub/widgets/preview/TimedOverlayDemo'; // Timed Overlay Demo 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'; // Demo Block 컴포넌트
+import { GuideApiDocs } from '@/screen/pub/widgets/docs/GuideApiDocs'; // Guide Api Docs 컴포넌트
+import { GuideLayout } from '@/screen/pub/layout'; // Guide Layout 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'; // wrap Page Example
+import { snackbarApiSections } from '@/screen/pub/data/guide/snackbarApiSections'; // snackbar Api Sections
+import { Link } from '@/lib/router';
 
 /** open · onOpenChange 로 표시를 제어하는 예시 */
-function ControlledDemo () {
-  const [open, setOpen] = useState(true)
+function ControlledDemo() {
+  const [open, setOpen] = useState(true);
 
   return (
     <div className="demo-stack">
@@ -32,15 +32,18 @@ function ControlledDemo () {
         onClose={() => {}}
       />
     </div>
-  )
+  );
 }
 
 /** 공통 하단 영역은 어느 페이지에서든 명시적으로 호출한다. */
-function PageSnackbarDemo () {
-  const [open, setOpen] = useState(false)
+function PageSnackbarDemo() {
+  const [open, setOpen] = useState(false);
   return (
     <>
-      <Button label="공통 스낵바 호출" onClick={() => setOpen(true)} />
+      <Button
+        label="공통 스낵바 호출"
+        onClick={() => setOpen(true)}
+      />
       <PageSnackbar
         open={open}
         onOpenChange={setOpen}
@@ -49,14 +52,16 @@ function PageSnackbarDemo () {
         closable
       />
     </>
-  )
+  );
 }
 
 const SECTIONS = [
   {
     title: '홍보 안내형 · 메인 문의 스낵바',
-    description: '메인에서 사용하는 promotion 유형입니다. 문구는 children, 링크·버튼은 action으로 지정합니다. Icon의 name을 바꿔 액션 아이콘을 교체할 수 있습니다. 하단 고정이 필요하면 Snackbar 대신 PageSnackbar를 사용하고 openOnLoad를 지정합니다.',
-    code: wrapPageExample(`<Snackbar
+    description:
+      '메인에서 사용하는 promotion 유형입니다. 문구는 children, 링크·버튼은 action으로 지정합니다. Icon의 name을 바꿔 액션 아이콘을 교체할 수 있습니다. 하단 고정이 필요하면 Snackbar 대신 PageSnackbar를 사용하고 openOnLoad를 지정합니다.',
+    code: wrapPageExample(
+      `<Snackbar
   variant="promotion"
   aria-label="기업교육 문의 안내"
   closable
@@ -68,26 +73,37 @@ const SECTIONS = [
   )}
 >
   대기업의 <strong>96%</strong>가 함께하는 멀티캠퍼스 기업교육
-</Snackbar>`, { name: 'PromotionSnackbarExample', reactImports: [], compImports: ['Snackbar', 'Icon'], extraImports: ["import { Link } from '@/lib/router'"] }),
+</Snackbar>`,
+      {
+        name: 'PromotionSnackbarExample',
+        reactImports: [],
+        compImports: ['Snackbar', 'Icon'],
+        extraImports: ["import { Link } from '@/lib/router'"],
+      },
+    ),
     preview: (
       <Snackbar
         variant="promotion"
         aria-label="기업교육 문의 안내"
         closable
-        action={(
+        action={
           <Link to="/b2b/contact/education">
             지금 바로 문의하기
-            <Icon name="chevron-right" size={16} />
+            <Icon
+              name="chevron-right"
+              size={16}
+            />
           </Link>
-        )}
+        }
       >
         대기업의 <strong>96%</strong>가 함께하는 멀티캠퍼스 기업교육
       </Snackbar>
-    )
+    ),
   },
   {
     title: '페이지 공통 호출 · 초점 순서',
-    description: 'PageSnackbar는 호출 위치와 관계없이 레이아웃 마지막의 하단 중앙 영역에 표시합니다. 표시할 때 초점을 이동하지 않습니다. Tab은 기존 페이지 요소 다음에 스낵바 내부의 링크·버튼 순서로 이동합니다. 스낵바 안에서 닫으면 들어오기 전 요소로 초점을 복원합니다. 페이지 이동 시 정리되며, 한 페이지에는 하나만 호출합니다. 일반 상태 알림은 기본 status, 홍보 안내는 role="region"과 aria-label을 사용합니다.',
+    description:
+      'PageSnackbar는 호출 위치와 관계없이 레이아웃 마지막의 하단 중앙 영역에 표시합니다. 표시할 때 초점을 이동하지 않습니다. Tab은 기존 페이지 요소 다음에 스낵바 내부의 링크·버튼 순서로 이동합니다. 스낵바 안에서 닫으면 들어오기 전 요소로 초점을 복원합니다. 페이지 이동 시 정리되며, 한 페이지에는 하나만 호출합니다. 일반 상태 알림은 기본 status, 홍보 안내는 role="region"과 aria-label을 사용합니다.',
     code: `import { PageSnackbar } from '@/comp'
 
 <PageSnackbar openOnLoad reserveFooterSpace message="저장되었습니다." closable />
@@ -95,19 +111,27 @@ const SECTIONS = [
 // 기업교육 문의 시안은 B2B 공통 위젯으로 호출합니다.
 import InquirySnackbar from '@/widgets/b2b/common/InquirySnackbar'
 <InquirySnackbar />`,
-    preview: <PageSnackbarDemo />
+    preview: <PageSnackbarDemo />,
   },
   {
     title: '페이지 로드 시 열림 · 자동 닫힘 없음',
-    description: 'openOnLoad 만 지정하여 페이지 로드 시 열립니다. autoCloseDelay 를 생략하므로 시간 경과로 닫히지 않습니다. 각 컴포넌트의 기본 닫기 동작은 유지됩니다. 예시 다시 불러오기로 초기 상태를 다시 확인할 수 있습니다.',
-    code: wrapPageExample(`<Snackbar openOnLoad closable message="로드 시 열리며 자동으로 닫히지 않습니다." />`, { compImports: ['Snackbar'] }),
-    preview: <LoadOpenOverlayDemo component="Snackbar" />
+    description:
+      'openOnLoad 만 지정하여 페이지 로드 시 열립니다. autoCloseDelay 를 생략하므로 시간 경과로 닫히지 않습니다. 각 컴포넌트의 기본 닫기 동작은 유지됩니다. 예시 다시 불러오기로 초기 상태를 다시 확인할 수 있습니다.',
+    code: wrapPageExample(
+      `<Snackbar openOnLoad closable message="로드 시 열리며 자동으로 닫히지 않습니다." />`,
+      { compImports: ['Snackbar'] },
+    ),
+    preview: <LoadOpenOverlayDemo component="Snackbar" />,
   },
   {
     title: '페이지 진입 시 자동 열림 · 지정 시간 후 닫기',
-    description: '호출부에 openOnLoad 와 autoCloseDelay={5000} 을 지정하면 마운트 시 열리고 5초 후 닫힙니다. 시간은 밀리초이며 생략하거나 0 이하이면 자동으로 닫히지 않습니다. 아래 실행 버튼은 페이지 진입을 대신해 예시를 새로 마운트합니다. open 을 직접 제어할 때는 open={open} onOpenChange={setOpen} 으로 연결하고 초기 상태를 true 로 지정하세요.',
-    code: wrapPageExample(`<Snackbar openOnLoad autoCloseDelay={5000} closable message="5초 후 닫힙니다." />`, { compImports: ['Snackbar'] }),
-    preview: <TimedOverlayDemo component="Snackbar" />
+    description:
+      '호출부에 openOnLoad 와 autoCloseDelay={5000} 을 지정하면 마운트 시 열리고 5초 후 닫힙니다. 시간은 밀리초이며 생략하거나 0 이하이면 자동으로 닫히지 않습니다. 아래 실행 버튼은 페이지 진입을 대신해 예시를 새로 마운트합니다. open 을 직접 제어할 때는 open={open} onOpenChange={setOpen} 으로 연결하고 초기 상태를 true 로 지정하세요.',
+    code: wrapPageExample(
+      `<Snackbar openOnLoad autoCloseDelay={5000} closable message="5초 후 닫힙니다." />`,
+      { compImports: ['Snackbar'] },
+    ),
+    preview: <TimedOverlayDemo component="Snackbar" />,
   },
   {
     title: '유형',
@@ -117,22 +141,37 @@ import InquirySnackbar from '@/widgets/b2b/common/InquirySnackbar'
         <code>danger</code>는 <code>error</code>와 같습니다. 기본은 <code>info</code>입니다.
       </>
     ),
-    code: wrapPageExample(`<Snackbar color="info" message="정보를 저장했습니다." />
+    code: wrapPageExample(
+      `<Snackbar color="info" message="정보를 저장했습니다." />
 <Snackbar color="success" message="업로드가 완료되었습니다." />
 <Snackbar color="warning" message="연결이 불안정합니다." />
-<Snackbar color="error" message="요청을 처리하지 못했습니다." />`, {
-  name: 'SnackbarExample1',
-  reactImports: [],
-  compImports: ['Snackbar']
-}),
+<Snackbar color="error" message="요청을 처리하지 못했습니다." />`,
+      {
+        name: 'SnackbarExample1',
+        reactImports: [],
+        compImports: ['Snackbar'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
-        <Snackbar color="info" message="정보를 저장했습니다." />
-        <Snackbar color="success" message="업로드가 완료되었습니다." />
-        <Snackbar color="warning" message="연결이 불안정합니다." />
-        <Snackbar color="error" message="요청을 처리하지 못했습니다." />
+        <Snackbar
+          color="info"
+          message="정보를 저장했습니다."
+        />
+        <Snackbar
+          color="success"
+          message="업로드가 완료되었습니다."
+        />
+        <Snackbar
+          color="warning"
+          message="연결이 불안정합니다."
+        />
+        <Snackbar
+          color="error"
+          message="요청을 처리하지 못했습니다."
+        />
       </div>
-    )
+    ),
   },
   {
     title: '문구',
@@ -142,14 +181,17 @@ import InquirySnackbar from '@/widgets/b2b/common/InquirySnackbar'
         <code>children</code>이 있으면 <code>message</code>보다 우선합니다.
       </>
     ),
-    code: wrapPageExample(`<Snackbar message="message 로 전달한 문구" />
+    code: wrapPageExample(
+      `<Snackbar message="message 로 전달한 문구" />
 <Snackbar color="success">
   <strong>children</strong> 으로 전달한 문구
-</Snackbar>`, {
-  name: 'SnackbarExample2',
-  reactImports: [],
-  compImports: ['Snackbar']
-}),
+</Snackbar>`,
+      {
+        name: 'SnackbarExample2',
+        reactImports: [],
+        compImports: ['Snackbar'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
         <Snackbar message="message 로 전달한 문구" />
@@ -157,7 +199,7 @@ import InquirySnackbar from '@/widgets/b2b/common/InquirySnackbar'
           <strong>children</strong> 으로 전달한 문구
         </Snackbar>
       </div>
-    )
+    ),
   },
   {
     title: '둥근 모양',
@@ -166,18 +208,30 @@ import InquirySnackbar from '@/widgets/b2b/common/InquirySnackbar'
         <code>round</code>는 모서리를 알약(pill) 모양으로 만듭니다.
       </>
     ),
-    code: wrapPageExample(`<Snackbar round color="warning" message="연결이 불안정합니다." />
-<Snackbar round color="success" message="저장되었습니다." closable />`, {
-  name: 'SnackbarExample3',
-  reactImports: [],
-  compImports: ['Snackbar']
-}),
+    code: wrapPageExample(
+      `<Snackbar round color="warning" message="연결이 불안정합니다." />
+<Snackbar round color="success" message="저장되었습니다." closable />`,
+      {
+        name: 'SnackbarExample3',
+        reactImports: [],
+        compImports: ['Snackbar'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
-        <Snackbar round color="warning" message="연결이 불안정합니다." />
-        <Snackbar round color="success" message="저장되었습니다." closable />
+        <Snackbar
+          round
+          color="warning"
+          message="연결이 불안정합니다."
+        />
+        <Snackbar
+          round
+          color="success"
+          message="저장되었습니다."
+          closable
+        />
       </div>
-    )
+    ),
   },
   {
     title: '아이콘',
@@ -187,28 +241,46 @@ import InquirySnackbar from '@/widgets/b2b/common/InquirySnackbar'
         <code>showIcon={'{false}'}</code>로 숨기거나 <code>icon</code>으로 바꿉니다.
       </>
     ),
-    code: wrapPageExample(`<Snackbar color="error" showIcon={false} message="아이콘 없는 오류 알림" />
-<Snackbar color="success" icon={<Icon name="star" size="100%" />} message="사용자 정의 아이콘" />`, {
-  name: 'SnackbarIconExample',
-  reactImports: [],
-  compImports: ['Icon', 'Snackbar']
-}),
+    code: wrapPageExample(
+      `<Snackbar color="error" showIcon={false} message="아이콘 없는 오류 알림" />
+<Snackbar color="success" icon={<Icon name="star" size="100%" />} message="사용자 정의 아이콘" />`,
+      {
+        name: 'SnackbarIconExample',
+        reactImports: [],
+        compImports: ['Icon', 'Snackbar'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
-        <Snackbar color="error" showIcon={false} message="아이콘 없는 오류 알림" />
-        <Snackbar color="success" icon={<Icon name="star" size="100%" />} message="사용자 정의 아이콘" />
+        <Snackbar
+          color="error"
+          showIcon={false}
+          message="아이콘 없는 오류 알림"
+        />
+        <Snackbar
+          color="success"
+          icon={
+            <Icon
+              name="star"
+              size="100%"
+            />
+          }
+          message="사용자 정의 아이콘"
+        />
       </div>
-    )
+    ),
   },
   {
     title: '닫기',
     description: (
       <>
         <code>closable</code>이면 닫기 버튼이 표시됩니다.
-        <code>open</code> · <code>onOpenChange</code>로 표시를 페이지에서 제어하고, <code>onClose</code>로 닫힘 이후 동작을 처리합니다.
+        <code>open</code> · <code>onOpenChange</code>로 표시를 페이지에서 제어하고,{' '}
+        <code>onClose</code>로 닫힘 이후 동작을 처리합니다.
       </>
     ),
-    code: wrapPageExample(`const [open, setOpen] = useState(true)
+    code: wrapPageExample(
+      `const [open, setOpen] = useState(true)
 
 <Snackbar
   color="info"
@@ -217,40 +289,52 @@ import InquirySnackbar from '@/widgets/b2b/common/InquirySnackbar'
   open={open}
   onOpenChange={setOpen}
   onClose={() => console.log('closed')}
-/>`, {
-      name: 'SnackbarExample',
-      reactImports: ['useState'],
-      compImports: ['Snackbar']
-    }),
-    preview: <ControlledDemo />
+/>`,
+      {
+        name: 'SnackbarExample',
+        reactImports: ['useState'],
+        compImports: ['Snackbar'],
+      },
+    ),
+    preview: <ControlledDemo />,
   },
   {
     title: '접근성',
     description: (
       <>
-        <code>role</code>은 <code>error</code>(<code>danger</code>)이면 <code>alert</code>, 그 외에는 <code>status</code>로 자동 지정됩니다.
+        <code>role</code>은 <code>error</code>(<code>danger</code>)이면 <code>alert</code>, 그
+        외에는 <code>status</code>로 자동 지정됩니다.
       </>
     ),
-    code: wrapPageExample(`<Snackbar color="error" message="필수 항목을 입력해 주세요." />   {/* role="alert" */}
-<Snackbar color="info" message="자동 저장되었습니다." />       {/* role="status" */}`, {
-  name: 'SnackbarA11yExample',
-  reactImports: [],
-  compImports: ['Snackbar']
-}),
+    code: wrapPageExample(
+      `<Snackbar color="error" message="필수 항목을 입력해 주세요." />   {/* role="alert" */}
+<Snackbar color="info" message="자동 저장되었습니다." />       {/* role="status" */}`,
+      {
+        name: 'SnackbarA11yExample',
+        reactImports: [],
+        compImports: ['Snackbar'],
+      },
+    ),
     preview: (
       <div className="demo-stack">
-        <Snackbar color="error" message="필수 항목을 입력해 주세요." />
-        <Snackbar color="info" message="자동 저장되었습니다." />
+        <Snackbar
+          color="error"
+          message="필수 항목을 입력해 주세요."
+        />
+        <Snackbar
+          color="info"
+          message="자동 저장되었습니다."
+        />
       </div>
-    )
-  }
-]
+    ),
+  },
+];
 
 /**
  * Snackbar 가이드 화면.
  * 유형·문구·둥근 모양·아이콘·닫기 예시와 API 문서를 모은다.
  */
-export default function SnackbarGuide () {
+export default function SnackbarGuide() {
   return (
     <GuideLayout
       category="피드백"
@@ -271,5 +355,5 @@ export default function SnackbarGuide () {
 
       <GuideApiDocs sections={snackbarApiSections} />
     </GuideLayout>
-  )
+  );
 }

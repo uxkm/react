@@ -1,24 +1,24 @@
-'use client'
+'use client';
 
-import { Icon } from '@/comp/ui/Icon'
-import { Accordion, AccordionItem, AccordionPanel } from '@/comp/ui/Accordion'
-import { b2bMenu } from './menuData'
-import { MenuGroup } from './fullMenuShared'
+import { Icon } from '@/comp/ui/Icon';
+import { Accordion, AccordionItem, AccordionPanel } from '@/comp/ui/Accordion';
+import { b2bMenu } from './menuData';
+import { MenuGroup } from './fullMenuShared';
 
 /** 기존 원본(typeA) 전체메뉴. 기업교육·회사소개 아코디언 구성. */
-export default function FullMenuTypeA ({
+export default function FullMenuTypeA({
   initialSection = 'business',
-  onNavigate
+  onNavigate,
 }: Readonly<{
-  initialSection?: 'business' | 'company'
-  onNavigate?: () => void
+  initialSection?: 'business' | 'company';
+  onNavigate?: () => void;
 }>) {
   return (
     <nav
       className="full-menu-content full-menu-content_default full-menu-content_typeA"
       aria-label="전체메뉴"
       onClick={(event) => {
-        if ((event.target as HTMLElement).closest('a')) onNavigate?.()
+        if ((event.target as HTMLElement).closest('a')) onNavigate?.();
       }}
     >
       <Accordion
@@ -31,7 +31,10 @@ export default function FullMenuTypeA ({
         renderItem={(item) => (
           <>
             <span>{item.label}</span>
-            <Icon name="chevron-down" size={20} />
+            <Icon
+              name="chevron-down"
+              size={20}
+            />
           </>
         )}
       >
@@ -54,7 +57,10 @@ export default function FullMenuTypeA ({
           <div className="full-menu-content_education">
             <h2>기업교육</h2>
             {b2bMenu.education.map((group) => (
-              <MenuGroup key={group.label} group={group} />
+              <MenuGroup
+                key={group.label}
+                group={group}
+              />
             ))}
           </div>
           <div className="full-menu-content_secondary">
@@ -63,7 +69,10 @@ export default function FullMenuTypeA ({
               <MenuGroup group={b2bMenu.services[0]} />
               <div className="full-menu-content_service-links">
                 {b2bMenu.services.slice(1).map((group) => (
-                  <MenuGroup key={group.label} group={group} />
+                  <MenuGroup
+                    key={group.label}
+                    group={group}
+                  />
                 ))}
               </div>
             </div>
@@ -71,7 +80,10 @@ export default function FullMenuTypeA ({
               <h2>HR인사이트</h2>
               <div>
                 {b2bMenu.insights.map((group) => (
-                  <MenuGroup key={group.label} group={group} />
+                  <MenuGroup
+                    key={group.label}
+                    group={group}
+                  />
                 ))}
               </div>
             </div>
@@ -81,16 +93,23 @@ export default function FullMenuTypeA ({
             </div>
           </div>
         </AccordionPanel>
-        <AccordionItem value="company" label="회사소개" className="full-menu-content_panel" />
+        <AccordionItem
+          value="company"
+          label="회사소개"
+          className="full-menu-content_panel"
+        />
         <AccordionPanel value="company">
           <div className="full-menu-content_company">
             <h2>회사소개</h2>
             {b2bMenu.company.map((group) => (
-              <MenuGroup key={group.label} group={group} />
+              <MenuGroup
+                key={group.label}
+                group={group}
+              />
             ))}
           </div>
         </AccordionPanel>
       </Accordion>
     </nav>
-  )
+  );
 }

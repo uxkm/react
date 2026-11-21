@@ -28,7 +28,6 @@
   --slider-step-size-lg: 2.5rem;
   --slider-step-gap: var(--space-sm);
   --slider-step-icon-size: 1rem;
-
 }
 
 // Slider — OOCSS: 구조(.slider) / 크기(.slider_sm) / 색상(.color_*)
@@ -283,7 +282,10 @@
     &::-webkit-slider-runnable-track {
       height: var(--slider-track-height);
       border-radius: var(--slider-radius);
-      @include slider-track-fill(var(--slider-thumb-color, var(--color-accent)), var(--color-border));
+      @include slider-track-fill(
+        var(--slider-thumb-color, var(--color-accent)),
+        var(--color-border)
+      );
     }
 
     &::-webkit-slider-thumb {

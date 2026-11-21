@@ -1,61 +1,64 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from 'react' // React
-import { Lottie, Select } from '@/comp' // comp
-import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { useEffect, useState } from 'react'; // React
+import { Lottie, Select } from '@/comp'; // comp
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'; // Demo Layout 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'; // Demo Block 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'; // wrap Page Example
 
-const LOTTIE_LIST_SRC = '/data/pub/lottie.json'
+const LOTTIE_LIST_SRC = '/data/pub/lottie.json';
 
 /** public/images/lottie 목록을 Select로 고르며 미리보기 */
-function LottieFolderPreview () {
-  const [files, setFiles] = useState([])
-  const [name, setName] = useState('')
-  const [listError, setListError] = useState(false)
+function LottieFolderPreview() {
+  const [files, setFiles] = useState([]);
+  const [name, setName] = useState('');
+  const [listError, setListError] = useState(false);
 
   useEffect(() => {
-    let cancelled = false
+    let cancelled = false;
 
-    function loadList () {
+    function loadList() {
       fetch(`${LOTTIE_LIST_SRC}?t=${Date.now()}`, { cache: 'no-store' })
         .then((res) => {
-          if (!res.ok) throw new Error(`Failed to load ${LOTTIE_LIST_SRC}`)
-          return res.json()
+          if (!res.ok) throw new Error(`Failed to load ${LOTTIE_LIST_SRC}`);
+          return res.json();
         })
         .then((data) => {
-          if (cancelled) return
-          const list = Array.isArray(data?.files) ? data.files : []
-          setFiles(list)
-          setName((prev) => (prev && list.includes(prev) ? prev : (list[0] || '')))
-          setListError(false)
+          if (cancelled) return;
+          const list = Array.isArray(data?.files) ? data.files : [];
+          setFiles(list);
+          setName((prev) => (prev && list.includes(prev) ? prev : list[0] || ''));
+          setListError(false);
         })
         .catch((err) => {
-          console.error(err)
-          if (!cancelled) setListError(true)
-        })
+          console.error(err);
+          if (!cancelled) setListError(true);
+        });
     }
 
-    loadList()
+    loadList();
     // 폴더 추가·삭제 반영: 포커스 복귀 + 짧은 폴링 (서버 재시작 불필요)
     const onVisible = () => {
-      if (document.visibilityState === 'visible') loadList()
-    }
-    const timer = window.setInterval(loadList, 2000)
-    window.addEventListener('focus', loadList)
-    document.addEventListener('visibilitychange', onVisible)
+      if (document.visibilityState === 'visible') loadList();
+    };
+    const timer = window.setInterval(loadList, 2000);
+    window.addEventListener('focus', loadList);
+    document.addEventListener('visibilitychange', onVisible);
     return () => {
-      cancelled = true
-      window.clearInterval(timer)
-      window.removeEventListener('focus', loadList)
-      document.removeEventListener('visibilitychange', onVisible)
-    }
-  }, [])
+      cancelled = true;
+      window.clearInterval(timer);
+      window.removeEventListener('focus', loadList);
+      document.removeEventListener('visibilitychange', onVisible);
+    };
+  }, []);
 
   return (
     <div className="lib-demo-lottie-picker">
       <div className="form_field lib-demo-lottie-picker_field">
-        <label className="form_field-label" htmlFor="lottie-file-select">
+        <label
+          className="form_field-label"
+          htmlFor="lottie-file-select"
+        >
           Lottie 파일
         </label>
         <Select
@@ -68,35 +71,36 @@ function LottieFolderPreview () {
           onChange={(event) => setName(event.target.value)}
           aria-describedby="lottie-file-hint"
         />
-        <p id="lottie-file-hint" className="form_field-hint">
+        <p
+          id="lottie-file-hint"
+          className="form_field-hint"
+        >
           public/images/lottie 폴더의 JSON을 감지합니다. name=&quot;{name || '…'}&quot;
         </p>
       </div>
 
-      {name
-        ? (
-          <Lottie
-            key={name}
-            name={name}
-            loop
-            controls
-            width={320}
-            height={320}
-            ariaLabel={`${name} 애니메이션`}
-            className="lib-demo-lottie-fireworks"
-          />
-          )
-        : (
-          <p className="lib-demo-lottie-picker_empty">
-            {listError ? '목록을 불러오지 못했습니다.' : '선택 가능한 Lottie 파일이 없습니다.'}
-          </p>
-          )}
+      {name ? (
+        <Lottie
+          key={name}
+          name={name}
+          loop
+          controls
+          width={320}
+          height={320}
+          ariaLabel={`${name} 애니메이션`}
+          className="lib-demo-lottie-fireworks"
+        />
+      ) : (
+        <p className="lib-demo-lottie-picker_empty">
+          {listError ? '목록을 불러오지 못했습니다.' : '선택 가능한 Lottie 파일이 없습니다.'}
+        </p>
+      )}
     </div>
-  )
+  );
 }
 
 /** Lottie 컴포넌트 데모 — 폴더 목록 Select · controls */
-export default function LottieDemoPage () {
+export default function LottieDemoPage() {
   return (
     <DemoLayout
       title="Lottie"
@@ -106,7 +110,8 @@ export default function LottieDemoPage () {
       <DemoBlock
         title="폴더 미리보기"
         description="public/images/lottie JSON 목록을 Select로 고르면 해당 애니메이션을 확인합니다."
-        code={wrapPageExample(`const [files, setFiles] = useState([])
+        code={wrapPageExample(
+          `const [files, setFiles] = useState([])
 const [name, setName] = useState('')
 
 useEffect(() => {
@@ -130,11 +135,13 @@ return (
       <Lottie name={name} loop controls width={320} height={320} />
     ) : null}
   </>
-)`, {
-          name: 'LottiePickerExample',
-          reactImports: ['useEffect', 'useState'],
-          compImports: ['Lottie', 'Select']
-        })}
+)`,
+          {
+            name: 'LottiePickerExample',
+            reactImports: ['useEffect', 'useState'],
+            compImports: ['Lottie', 'Select'],
+          },
+        )}
       >
         <LottieFolderPreview />
       </DemoBlock>
@@ -142,7 +149,8 @@ return (
       <DemoBlock
         title="controls — 재생·정지"
         description="name으로 파일을 지정하고 controls로 재생·정지를 켭니다."
-        code={wrapPageExample(`<Lottie
+        code={wrapPageExample(
+          `<Lottie
   name="demo_fireworks"
   loop
   controls
@@ -150,11 +158,13 @@ return (
   height={400}
   ariaLabel="폭죽 애니메이션"
   className="lib-demo-lottie-fireworks"
-/>`, {
-          name: 'LottieControlsExample',
-          reactImports: [],
-          compImports: ['Lottie']
-        })}
+/>`,
+          {
+            name: 'LottieControlsExample',
+            reactImports: [],
+            compImports: ['Lottie'],
+          },
+        )}
       >
         <Lottie
           name="demo_fireworks"
@@ -170,17 +180,20 @@ return (
       <DemoBlock
         title="기본 — controls 없음"
         description="controls를 끄면(기본값) 재생·정지 버튼 없이 자동 재생만 합니다."
-        code={wrapPageExample(`<Lottie
+        code={wrapPageExample(
+          `<Lottie
   name="demo_fresh"
   loop
   width={180}
   height={180}
   ariaLabel="fresh 애니메이션"
-/>`, {
-          name: 'LottieBasicExample',
-          reactImports: [],
-          compImports: ['Lottie']
-        })}
+/>`,
+          {
+            name: 'LottieBasicExample',
+            reactImports: [],
+            compImports: ['Lottie'],
+          },
+        )}
       >
         <Lottie
           name="demo_fresh"
@@ -194,18 +207,21 @@ return (
       <DemoBlock
         title="loop={false} — 일회 재생"
         description="루프를 끄면 한 번만 재생합니다. controls로 다시 재생할 수 있습니다."
-        code={wrapPageExample(`<Lottie
+        code={wrapPageExample(
+          `<Lottie
   name="demo_check"
   loop={false}
   controls
   width={200}
   height={200}
   ariaLabel="체크 애니메이션"
-/>`, {
-          name: 'LottieOnceExample',
-          reactImports: [],
-          compImports: ['Lottie']
-        })}
+/>`,
+          {
+            name: 'LottieOnceExample',
+            reactImports: [],
+            compImports: ['Lottie'],
+          },
+        )}
       >
         <Lottie
           name="demo_check"
@@ -217,5 +233,5 @@ return (
         />
       </DemoBlock>
     </DemoLayout>
-  )
+  );
 }

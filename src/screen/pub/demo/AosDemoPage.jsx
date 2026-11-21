@@ -1,28 +1,32 @@
-'use client'
+'use client';
 
-import { useEffect } from 'react' // effect 훅
-import { loadAos } from '@/lib/vendor/aos' // AOS 공통 초기화
-import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { useEffect } from 'react'; // effect 훅
+import { loadAos } from '@/lib/vendor/aos'; // AOS 공통 초기화
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'; // Demo Layout 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'; // Demo Block 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'; // wrap Page Example
 
 const cards = [
   { anim: 'fade-up', label: 'fade-up' },
   { anim: 'fade-left', label: 'fade-left' },
   { anim: 'zoom-in', label: 'zoom-in' },
-  { anim: 'flip-up', label: 'flip-up' }
-]
+  { anim: 'flip-up', label: 'flip-up' },
+];
 
 /** aos 스크롤 등장 데모 */
-export default function AosDemoPage () {
+export default function AosDemoPage() {
   useEffect(() => {
-    let cancelled = false
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
-    loadAos().then(AOS => {
-      if (!cancelled) AOS.refreshHard()
-    }).catch(() => {})
-    return () => { cancelled = true }
-  }, [])
+    let cancelled = false;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    loadAos()
+      .then((AOS) => {
+        if (!cancelled) AOS.refreshHard();
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return (
     <DemoLayout
@@ -32,7 +36,8 @@ export default function AosDemoPage () {
     >
       <DemoBlock
         title="스크롤하여 확인"
-        code={wrapPageExample(`useEffect(() => {
+        code={wrapPageExample(
+          `useEffect(() => {
   AOS.init({ duration: 700, once: false, easing: 'ease-out-cubic', disable: () => window.matchMedia('(prefers-reduced-motion: reduce)').matches })
   AOS.refresh()
 }, [])
@@ -48,25 +53,30 @@ export default function AosDemoPage () {
       {card.label}
     </div>
   ))}
-</div>`, {
-          name: 'AosExample',
-          reactImports: ['useEffect'],
-          compImports: [],
-          extraImports: [
-            "import AOS from 'aos'",
-            `import 'aos/dist/aos.css'
+</div>`,
+          {
+            name: 'AosExample',
+            reactImports: ['useEffect'],
+            compImports: [],
+            extraImports: [
+              "import AOS from 'aos'",
+              `import 'aos/dist/aos.css'
 
 const cards = [
   { anim: 'fade-up', label: 'fade-up' },
   { anim: 'zoom-in', label: 'zoom-in' }
-]`
-          ]
-        })}
+]`,
+            ],
+          },
+        )}
       >
         <p style={{ margin: '0 0 16px', fontSize: 13, color: 'var(--color-text-muted)' }}>
           아래로 스크롤하면 카드가 차례로 나타납니다.
         </p>
-        <div className="lib-demo-aos-stack" style={{ paddingBottom: 120 }}>
+        <div
+          className="lib-demo-aos-stack"
+          style={{ paddingBottom: 120 }}
+        >
           {cards.map((card, index) => (
             <div
               key={card.anim}
@@ -77,12 +87,18 @@ const cards = [
               {card.label}
             </div>
           ))}
-          <div style={{ height: 240 }} aria-hidden="true" />
-          <div className="lib-demo-aos-card" data-aos="fade-up">
+          <div
+            style={{ height: 240 }}
+            aria-hidden="true"
+          />
+          <div
+            className="lib-demo-aos-card"
+            data-aos="fade-up"
+          >
             마지막 카드
           </div>
         </div>
       </DemoBlock>
     </DemoLayout>
-  )
+  );
 }

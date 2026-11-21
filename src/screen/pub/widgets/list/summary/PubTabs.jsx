@@ -3,21 +3,19 @@
  * - B2B / WEB / MOBILE 등 퍼블리시 데이터 탭 전환
  * - 탭이 1개 이하면 전체 숨김 (컴포넌트 가이드는 상단 헤더에서 새 창으로 제공)
  */
-import { classNames } from '@/utils/style/classNames' // 조건부 className 조합
+import { classNames } from '@/utils/style/classNames'; // 조건부 className 조합
 
-export default function PubTabs ({
-  tabs,
-  activeTab,
-  ariaLabel,
-  labelOf,
-  onSelect
-}) {
-  const showTabs = (tabs || []).length > 1
-  if (!showTabs) return null
+export default function PubTabs({ tabs, activeTab, ariaLabel, labelOf, onSelect }) {
+  const showTabs = (tabs || []).length > 1;
+  if (!showTabs) return null;
 
   return (
     <div className="wbs-tabs-bar">
-      <div className="wbs-tabs-bar_tabs" role="group" aria-label={ariaLabel}>
+      <div
+        className="wbs-tabs-bar_tabs"
+        role="group"
+        aria-label={ariaLabel}
+      >
         {tabs.map((tab) => (
           <button
             key={tab.id}
@@ -25,9 +23,11 @@ export default function PubTabs ({
             className={classNames('wbs-tab', { 'is-active': activeTab === tab.id })}
             aria-pressed={activeTab === tab.id}
             onClick={() => onSelect(tab.id)}
-          >{labelOf(tab)}</button>
+          >
+            {labelOf(tab)}
+          </button>
         ))}
       </div>
     </div>
-  )
+  );
 }

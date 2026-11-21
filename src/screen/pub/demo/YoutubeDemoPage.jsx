@@ -1,17 +1,17 @@
-'use client'
+'use client';
 
-import { useState } from 'react' // 상태 훅
-import { YouTube } from '@/lib/vendor/youtube' // You Tube 컴포넌트
-import { DemoLayout } from '@/screen/pub/layout/DemoLayout' // Demo Layout 컴포넌트
-import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock' // Demo Block 컴포넌트
-import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode' // wrap Page Example
+import { useState } from 'react'; // 상태 훅
+import { YouTube } from '@/lib/vendor/youtube'; // You Tube 컴포넌트
+import { DemoLayout } from '@/screen/pub/layout/DemoLayout'; // Demo Layout 컴포넌트
+import { DemoBlock } from '@/screen/pub/widgets/preview/DemoBlock'; // Demo Block 컴포넌트
+import { wrapPageExample } from '@/screen/pub/lib/pageExampleCode'; // wrap Page Example
 
 /** Google IFrame API 샘플 영상 */
-const SAMPLE_ID = 'M7lc1UVf-VE'
+const SAMPLE_ID = 'M7lc1UVf-VE';
 
 /** react-youtube 데모 */
-export default function YoutubeDemoPage () {
-  const [status, setStatus] = useState('대기')
+export default function YoutubeDemoPage() {
+  const [status, setStatus] = useState('대기');
 
   return (
     <DemoLayout
@@ -21,7 +21,8 @@ export default function YoutubeDemoPage () {
     >
       <DemoBlock
         title="임베드 플레이어"
-        code={wrapPageExample(`const [status, setStatus] = useState('대기')
+        code={wrapPageExample(
+          `const [status, setStatus] = useState('대기')
 
 <>
   <p>상태: {status}</p>
@@ -37,12 +38,14 @@ export default function YoutubeDemoPage () {
     onPause={() => setStatus('paused')}
     onEnd={() => setStatus('ended')}
   />
-</>`, {
-          name: 'YoutubeExample',
-          reactImports: ['useState'],
-          compImports: [],
-          extraImports: ["import { YouTube } from '@/lib/vendor/youtube'"]
-        })}
+</>`,
+          {
+            name: 'YoutubeExample',
+            reactImports: ['useState'],
+            compImports: [],
+            extraImports: ["import { YouTube } from '@/lib/vendor/youtube'"],
+          },
+        )}
       >
         <p style={{ margin: '0 0 12px', fontSize: 13, color: 'var(--color-text-muted)' }}>
           상태: {status}
@@ -52,7 +55,7 @@ export default function YoutubeDemoPage () {
           opts={{
             width: '100%',
             height: '360',
-            playerVars: { rel: 0 }
+            playerVars: { rel: 0 },
           }}
           onReady={() => setStatus('ready')}
           onPlay={() => setStatus('playing')}
@@ -61,5 +64,5 @@ export default function YoutubeDemoPage () {
         />
       </DemoBlock>
     </DemoLayout>
-  )
+  );
 }

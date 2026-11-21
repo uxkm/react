@@ -1,49 +1,54 @@
-'use client'
+'use client';
 
-import { useRef } from 'react'
-import { useModalDialog } from '@/hooks/interaction/useModalDialog'
-import { Icon } from '@/comp/ui/Icon'
-import { B2bLogo } from './fullMenuShared'
-import FullMenuTypeA from './FullMenuTypeA'
-import FullMenuTypeB from './FullMenuTypeB'
+import { useRef } from 'react';
+import { useModalDialog } from '@/hooks/interaction/useModalDialog';
+import { Icon } from '@/comp/ui/Icon';
+import { B2bLogo } from './fullMenuShared';
+import FullMenuTypeA from './FullMenuTypeA';
+import FullMenuTypeB from './FullMenuTypeB';
 
-export { B2bLogo } from './fullMenuShared'
+export { B2bLogo } from './fullMenuShared';
 
 /** 전체메뉴·회사소개 프리뷰와 헤더 레이어에서 같은 메뉴 구성을 사용합니다. */
-export function FullMenuContent ({
+export function FullMenuContent({
   designType = 'typeB',
   initialSection = 'business',
-  onNavigate
+  onNavigate,
 }: Readonly<{
-  designType?: 'typeA' | 'typeB'
-  initialSection?: 'business' | 'company'
-  onNavigate?: () => void
+  designType?: 'typeA' | 'typeB';
+  initialSection?: 'business' | 'company';
+  onNavigate?: () => void;
 }>) {
   if (designType === 'typeA') {
-    return <FullMenuTypeA initialSection={initialSection} onNavigate={onNavigate} />
+    return (
+      <FullMenuTypeA
+        initialSection={initialSection}
+        onNavigate={onNavigate}
+      />
+    );
   }
 
-  return <FullMenuTypeB onNavigate={onNavigate} />
+  return <FullMenuTypeB onNavigate={onNavigate} />;
 }
 
 /**
  * 네이티브 모달로 초점 이동·Tab 순환·Escape 닫기를 제공합니다.
  * 기존 원본은 typeA(아코디언), 현재 시안은 typeB(3단 메가메뉴)입니다.
  */
-export function FullMenu ({
+export function FullMenu({
   open,
   onClose,
   designType = 'typeB',
-  initialSection = 'business'
+  initialSection = 'business',
 }: Readonly<{
-  open: boolean
-  onClose: () => void
-  designType?: 'typeA' | 'typeB'
-  initialSection?: 'business' | 'company'
+  open: boolean;
+  onClose: () => void;
+  designType?: 'typeA' | 'typeB';
+  initialSection?: 'business' | 'company';
 }>) {
-  const dialog = useRef<HTMLDialogElement>(null)
+  const dialog = useRef<HTMLDialogElement>(null);
 
-  const handleKeyDown = useModalDialog(dialog, open)
+  const handleKeyDown = useModalDialog(dialog, open);
 
   return (
     <dialog
@@ -52,18 +57,22 @@ export function FullMenu ({
       aria-label="전체메뉴"
       onKeyDown={handleKeyDown}
       onCancel={(event) => {
-        event.preventDefault()
-        onClose()
+        event.preventDefault();
+        onClose();
       }}
       onClick={(event) => {
-        if (event.target === event.currentTarget) onClose()
+        if (event.target === event.currentTarget) onClose();
       }}
     >
-      <div className="full-menu_surface" data-dialog-panel="" tabIndex={-1}>
+      <div
+        className="full-menu_surface"
+        data-dialog-panel=""
+        tabIndex={-1}
+      >
         <div className="full-menu_header">
           <div
             onClick={(event) => {
-              if ((event.target as HTMLElement).closest('a')) onClose()
+              if ((event.target as HTMLElement).closest('a')) onClose();
             }}
           >
             <B2bLogo />
@@ -76,7 +85,10 @@ export function FullMenu ({
                 aria-label="통합검색"
                 disabled
               >
-                <Icon name="search" size={24} />
+                <Icon
+                  name="search"
+                  size={24}
+                />
               </button>
             )}
             <button
@@ -85,7 +97,10 @@ export function FullMenu ({
               aria-label="전체메뉴 닫기"
               onClick={onClose}
             >
-              <Icon name="close" size={24} />
+              <Icon
+                name="close"
+                size={24}
+              />
             </button>
           </div>
         </div>
@@ -98,5 +113,5 @@ export function FullMenu ({
         )}
       </div>
     </dialog>
-  )
+  );
 }

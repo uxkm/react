@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 /**
  * PageHeader
@@ -10,5 +10,5 @@
 export {
   Header as PageHeader,
   Header as default,
-  type HeaderProps as PageHeaderProps
-} from './Header'
+  type HeaderProps as PageHeaderProps,
+} from './Header';
