@@ -575,7 +575,7 @@ export const SKELETON_PAGE_MODE: Record<string, SkeletonMode> = {
 | `Spin` 사용 | 최초 로딩은 본문 대신 스피너를 표시하고, 다시 불러올 때는 기존 본문 위에 겹쳐 표시할 수 있습니다. | 본문을 표시합니다. |
 | `PageLoading`도 생략함 | 이 컴포넌트에서 처리하는 로딩 상태가 없습니다. | 본문을 직접 렌더링합니다. |
 
-**페이지 전용 스켈레톤을 사용하는 경우**
+##### 페이지 전용 스켈레톤을 사용하는 경우
 
 ```tsx
 import { PageLoading } from '@/comp';
@@ -595,7 +595,7 @@ import HistorySkeleton from './skeleton/indexSkeleton';
 
 `skeletonMode` prop이 있으면 그 값을 우선합니다. 생략하면 `skeletonId`에 해당하는 설정을 조회하고, 별도 설정이 없으면 `auto`를 사용합니다. `auto` 모드에 `skeleton`을 넘기면 측정 결과가 없을 때 해당 스켈레톤을 폴백으로 사용합니다.
 
-**페이지 전용 스켈레톤만 생략하는 경우**
+##### 페이지 전용 스켈레톤만 생략하는 경우
 
 전용 스켈레톤 import와 `skeleton` prop을 제거합니다. 페이지에서 `resolveSkeletonMode`를 호출해 그 결과를 `skeletonMode`로 그대로 전달하고 있었다면, 해당 import와 변수, prop도 생략할 수 있습니다.
 
@@ -610,7 +610,7 @@ import HistorySkeleton from './skeleton/indexSkeleton';
 </PageLoading>
 ```
 
-**스피너로 로딩을 표시하는 경우**
+##### 스피너로 로딩을 표시하는 경우
 
 첫 로딩에서 본문을 교체하려면 같은 컨테이너 안에서 `loading` 값으로 스피너와 본문을 전환합니다.
 
@@ -637,7 +637,7 @@ import { Spin } from '@/comp';
 </Spin>
 ```
 
-**페이지 자체에서 로딩 처리가 필요 없는 경우**
+##### 페이지 자체에서 로딩 처리가 필요 없는 경우
 
 `PageLoading`을 일반 컨테이너로 바꾸고 기존 클래스와 본문을 유지합니다. 이 경우 `PageLoading` import와 페이지의 스켈레톤 관련 코드도 정리합니다.
 
