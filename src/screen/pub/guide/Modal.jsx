@@ -70,6 +70,26 @@ function SizeDemo () {
   )
 }
 
+/** 뷰포트를 채우는 모달 예시 */
+function FullscreenDemo () {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <>
+      <Button label="전체 화면 모달 열기" onClick={() => setOpen(true)} />
+      <Modal
+        open={open}
+        className="modal_fullscreen"
+        title="전체 화면 모달"
+        onOpenChange={setOpen}
+        footer={<Button label="닫기" onClick={() => setOpen(false)} />}
+      >
+        브라우저의 표시 영역을 가로와 세로로 채웁니다.
+      </Modal>
+    </>
+  )
+}
+
 /** adaptive: ≥1440 가운데 lg / 미만 바텀시트 */
 function AdaptiveDemo () {
   const [open, setOpen] = useState(false)
@@ -238,6 +258,27 @@ const close = () => {
   compImports: ['Modal']
 }),
     preview: <SizeDemo />
+  },
+  {
+    title: '전체 화면',
+    description: <><code>className=&quot;modal_fullscreen&quot;</code>을 지정하면 모달이 뷰포트를 채웁니다.</>,
+    code: wrapPageExample(`const [open, setOpen] = useState(false)
+
+<Button label="전체 화면 모달 열기" onClick={() => setOpen(true)} />
+<Modal
+  open={open}
+  className="modal_fullscreen"
+  title="전체 화면 모달"
+  onOpenChange={setOpen}
+  footer={<Button label="닫기" onClick={() => setOpen(false)} />}
+>
+  브라우저의 표시 영역을 가로와 세로로 채웁니다.
+</Modal>`, {
+      name: 'FullscreenModalExample',
+      reactImports: ['useState'],
+      compImports: ['Button', 'Modal']
+    }),
+    preview: <FullscreenDemo />
   },
   {
     title: '반응형 · adaptive',
